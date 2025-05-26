@@ -1,7 +1,4 @@
 node_modules
-bun.lock
-bun.lockb
-package-lock.json
 
 # Environment files in any folder
 **/.env
