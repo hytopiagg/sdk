@@ -5,9 +5,12 @@ import archiver from 'archiver';
 import fs from 'fs';
 import path from 'path';
 import readline from 'readline';
+import { fileURLToPath } from 'url';
 
 // Store command-line flags
 const flags = {};
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Main function to handle command execution
 (async () => {
