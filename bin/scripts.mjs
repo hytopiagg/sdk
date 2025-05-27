@@ -40,8 +40,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 function parseCommandLineFlags() {
   for (let i = 3; i < process.argv.length; i += 2) {
     if (i % 2 === 1) { // Odd indices are flags
-      const flag = process.argv[i].replace('--', '');
-      const value = process.argv[i + 1];
+      let flag = process.argv[i].replace('--', '');
+      let value = process.argv[i + 1];
+
+      if (flag.includes('=')) {
+        [ flag, value ] = flag.split('=');
+      }
+
       flags[flag] = value;
     }
   }
