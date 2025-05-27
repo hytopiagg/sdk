@@ -12,7 +12,7 @@
     }
   },
   "bin": {
-    "hytopia": "bin/scripts.js"
+    "hytopia": "bin/scripts.mjs"
   },
   "directories": {
     "doc": "docs",
@@ -67,6 +67,6 @@
     "sharp"
   ],
   "scripts": {
-    "prepublishOnly": "node ./bin/writeVersion.js"
+    "prepublishOnly": "node ./bin/writeVersion.mjs"
   }
 }

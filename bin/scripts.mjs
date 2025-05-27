@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const { execSync } = require('child_process');
-const archiver = require('archiver');
-const fs = require('fs');
-const path = require('path');
-const readline = require('readline');
+import { execSync } from 'child_process';
+import archiver from 'archiver';
+import fs from 'fs';
+import path from 'path';
+import readline from 'readline';
 
 // Store command-line flags
 const flags = {};
