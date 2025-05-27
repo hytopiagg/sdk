@@ -6,8 +6,15 @@
   "main": "./node-server.mjs",
   "exports": {
     ".": {
-      "bun": "./bun-server.mjs",
-      "node": "./node-server.mjs",
+      "bun": {
+        "types": "./server.d.ts",
+        "default": "./bun-server.mjs"
+      },
+      "node": {
+        "types": "./server.d.ts",
+        "default": "./node-server.mjs"
+      },
+      "types": "./server.d.ts",
       "default": "./node-server.mjs"
     }
   },
