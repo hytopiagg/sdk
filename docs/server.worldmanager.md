@@ -169,4 +169,18 @@ Gets all worlds with a specific tag.
 
 
 </td></tr>
+<tr><td>
+
+[setDefaultWorld(world)](./server.worldmanager.setdefaultworld.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the default world. This is the world players automatically join when they connect to the game.
+
+
+</td></tr>
 </tbody></table>

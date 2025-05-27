@@ -170,6 +170,25 @@ The unique ID of the world.
 </td></tr>
 <tr><td>
 
+[map?](./server.worldoptions.map.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[WorldMap](./server.worldmap.md)
+
+
+</td><td>
+
+_(Optional)_ The map of the world.
+
+
+</td></tr>
+<tr><td>
+
 [name](./server.worldoptions.name.md)
 
 
@@ -184,6 +203,25 @@ string
 </td><td>
 
 The name of the world.
+
+
+</td></tr>
+<tr><td>
+
+[skyboxIntensity?](./server.worldoptions.skyboxintensity.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The intensity of the skybox brightness for the world. 0 is black, 1 is full brightness, 1+ is brighter.
 
 
 </td></tr>

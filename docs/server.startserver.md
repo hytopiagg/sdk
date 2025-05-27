@@ -9,7 +9,7 @@ The entry point for running game setup and starting the game server.
 **Signature:**
 
 ```typescript
-export declare function startServer(init: (world: World) => void): void;
+export declare function startServer(init: ((() => void) | ((world: World) => void))): void;
 ```
 
 ## Parameters
@@ -37,12 +37,12 @@ init
 
 </td><td>
 
-(world: [World](./server.world.md)<!-- -->) =&gt; void
+((() =&gt; void) \| ((world: [World](./server.world.md)<!-- -->) =&gt; void))
 
 
 </td><td>
 
-A function that initializes the world.
+A function that initializes the game. The function can take no parameters to just initialize game logic, or it can accept a world parameter. If it accepts a world parameter, a default world will be automatically created and passed to the function.
 
 
 </td></tr>

@@ -5088,11 +5088,13 @@ export declare interface SpdMatrix3 extends SdpMatrix3 {
  * and other systems required systems. All of your game setup logic
  * should be executed in the init function.
  *
- * @param init - A function that initializes the world.
+ * @param init - A function that initializes the game. The function can take no parameters
+ * to just initialize game logic, or it can accept a world parameter. If it accepts a world
+ * parameter, a default world will be automatically created and passed to the function.
  *
  * @public
  */
-export declare function startServer(init: (world: World) => void): void;
+export declare function startServer(init: ((() => void) | ((world: World) => void))): void;
 
 /** The input keys that are included in the PlayerInput. @public */
 export declare const SUPPORTED_INPUT_KEYS: readonly ["w", "a", "s", "d", "sp", "sh", "tb", "ml", "mr", "q", "e", "r", "f", "z", "x", "c", "v", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
@@ -5699,6 +5701,7 @@ export declare class World extends EventRouter implements protocol.Serializable 
 
 
 
+
     /**
      * @param options - The options for the world.
      */
@@ -5717,6 +5720,8 @@ export declare class World extends EventRouter implements protocol.Serializable 
     get directionalLightPosition(): Vector3Like;
     /** The name of the world. */
     get name(): string;
+    /** The intensity of the world's skybox brightness. */
+    get skyboxIntensity(): number;
     /** The URI of the skybox cubemap for the world. */
     get skyboxUri(): string;
     /** The audio manager for the world. */
@@ -5771,6 +5776,11 @@ export declare class World extends EventRouter implements protocol.Serializable 
      */
     setDirectionalLightPosition(position: Vector3Like): void;
     /**
+     * Sets the intensity of the world's skybox brightness.
+     * @param intensity - The intensity.
+     */
+    setSkyboxIntensity(intensity: number): void;
+    /**
      * Starts the world loop, which begins ticking physics, entities, etc.
      */
     start(): void;
@@ -5788,6 +5798,7 @@ export declare enum WorldEvent {
     SET_DIRECTIONAL_LIGHT_COLOR = "WORLD.SET_DIRECTIONAL_LIGHT_COLOR",
     SET_DIRECTIONAL_LIGHT_INTENSITY = "WORLD.SET_DIRECTIONAL_LIGHT_INTENSITY",
     SET_DIRECTIONAL_LIGHT_POSITION = "WORLD.SET_DIRECTIONAL_LIGHT_POSITION",
+    SET_SKYBOX_INTENSITY = "WORLD.SET_SKYBOX_INTENSITY",
     START = "WORLD.START",
     STOP = "WORLD.STOP"
 }
@@ -5818,6 +5829,11 @@ export declare interface WorldEventPayloads {
     [WorldEvent.SET_DIRECTIONAL_LIGHT_POSITION]: {
         world: World;
         position: Vector3Like;
+    };
+    /** Emitted when the intensity of the world's skybox brightness is set. */
+    [WorldEvent.SET_SKYBOX_INTENSITY]: {
+        world: World;
+        intensity: number;
     };
     /** Emitted when the world starts. */
     [WorldEvent.START]: {
@@ -5943,6 +5959,7 @@ export declare class WorldManager {
     static readonly instance: WorldManager;
 
 
+
     /**
      * Creates a new world.
      * @param options - The options for the world.
@@ -5972,6 +5989,12 @@ export declare class WorldManager {
      * @returns The world with the provided id, or undefined if no world is found.
      */
     getWorld(id: number): World | undefined;
+    /**
+     * Sets the default world. This is the world players
+     * automatically join when they connect to the game.
+     * @param world - The world to set as the default.
+     */
+    setDefaultWorld(world: World): void;
 }
 
 /** Event types a WorldManager instance can emit to the global event router. See {@link WorldManagerEventPayloads} for the payloads. @public */
@@ -6021,8 +6044,12 @@ export declare interface WorldOptions {
     directionalLightIntensity?: number;
     /** The position the directional light originates from for the world. */
     directionalLightPosition?: Vector3Like;
+    /** The map of the world. */
+    map?: WorldMap;
     /** The name of the world. */
     name: string;
+    /** The intensity of the skybox brightness for the world. 0 is black, 1 is full brightness, 1+ is brighter. */
+    skyboxIntensity?: number;
     /** The URI of the skybox cubemap for the world. */
     skyboxUri: string;
     /** An arbitrary identifier tag of the world. Useful for your own logic */

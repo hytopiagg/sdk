@@ -429,6 +429,27 @@ The simulation for the world.
 </td></tr>
 <tr><td>
 
+[skyboxIntensity](./server.world.skyboxintensity.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+The intensity of the world's skybox brightness.
+
+
+</td></tr>
+<tr><td>
+
 [skyboxUri](./server.world.skyboxuri.md)
 
 
@@ -570,6 +591,20 @@ Sets the intensity of the world's directional light.
 </td><td>
 
 Sets the position the world's directional light originates from.
+
+
+</td></tr>
+<tr><td>
+
+[setSkyboxIntensity(intensity)](./server.world.setskyboxintensity.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the intensity of the world's skybox brightness.
 
 
 </td></tr>

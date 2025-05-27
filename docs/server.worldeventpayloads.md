@@ -132,6 +132,25 @@ Emitted when the position of the world's directional light is set.
 </td></tr>
 <tr><td>
 
+["WORLD.SET\_SKYBOX\_INTENSITY"](./server.worldeventpayloads._world.set_skybox_intensity_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ world: [World](./server.world.md)<!-- -->; intensity: number; }
+
+
+</td><td>
+
+Emitted when the intensity of the world's skybox brightness is set.
+
+
+</td></tr>
+<tr><td>
+
 ["WORLD.START"](./server.worldeventpayloads._world.start_.md)
 
 

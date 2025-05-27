@@ -102,6 +102,20 @@ SET\_DIRECTIONAL\_LIGHT\_POSITION
 </td></tr>
 <tr><td>
 
+SET\_SKYBOX\_INTENSITY
+
+
+</td><td>
+
+`"WORLD.SET_SKYBOX_INTENSITY"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 START
 
 

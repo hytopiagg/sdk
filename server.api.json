@@ -39440,7 +39440,7 @@
         {
           "kind": "Function",
           "canonicalReference": "server!startServer:function(1)",
-          "docComment": "/**\n * The entry point for running game setup and starting the game server.\n *\n * @remarks\n *\n * This function should always be called first when initializing your game. It will internally handle initialization of the physics engine and other systems required systems. All of your game setup logic should be executed in the init function.\n *\n * @param init - A function that initializes the world.\n *\n * @public\n */\n",
+          "docComment": "/**\n * The entry point for running game setup and starting the game server.\n *\n * @remarks\n *\n * This function should always be called first when initializing your game. It will internally handle initialization of the physics engine and other systems required systems. All of your game setup logic should be executed in the init function.\n *\n * @param init - A function that initializes the game. The function can take no parameters to just initialize game logic, or it can accept a world parameter. If it accepts a world parameter, a default world will be automatically created and passed to the function.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -39448,7 +39448,7 @@
             },
             {
               "kind": "Content",
-              "text": "(world: "
+              "text": "((() => void) | ((world: "
             },
             {
               "kind": "Reference",
@@ -39457,7 +39457,7 @@
             },
             {
               "kind": "Content",
-              "text": ") => void"
+              "text": ") => void))"
             },
             {
               "kind": "Content",
@@ -44448,6 +44448,54 @@
               "name": "setDirectionalLightPosition"
             },
             {
+              "kind": "Method",
+              "canonicalReference": "server!World#setSkyboxIntensity:member(1)",
+              "docComment": "/**\n * Sets the intensity of the world's skybox brightness.\n *\n * @param intensity - The intensity.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setSkyboxIntensity(intensity: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "intensity",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setSkyboxIntensity"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "server!World#simulation:member",
               "docComment": "/**\n * The simulation for the world.\n */\n",
@@ -44470,6 +44518,36 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "simulation",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!World#skyboxIntensity:member",
+              "docComment": "/**\n * The intensity of the world's skybox brightness.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get skyboxIntensity(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "skyboxIntensity",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -44731,6 +44809,27 @@
               },
               "releaseTag": "Public",
               "name": "SET_DIRECTIONAL_LIGHT_POSITION"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!WorldEvent.SET_SKYBOX_INTENSITY:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_SKYBOX_INTENSITY = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"WORLD.SET_SKYBOX_INTENSITY\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_SKYBOX_INTENSITY"
             },
             {
               "kind": "EnumMember",
@@ -45041,6 +45140,51 @@
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!WorldEventPayloads#\"WORLD.SET_SKYBOX_INTENSITY\":member",
+              "docComment": "/**\n * Emitted when the intensity of the world's skybox brightness is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorldEvent.SET_SKYBOX_INTENSITY",
+                  "canonicalReference": "server!WorldEvent.SET_SKYBOX_INTENSITY:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        world: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "World",
+                  "canonicalReference": "server!World:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        intensity: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"WORLD.SET_SKYBOX_INTENSITY\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
               }
             },
             {
@@ -45946,6 +46090,55 @@
               "isStatic": true,
               "isProtected": false,
               "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!WorldManager#setDefaultWorld:member(1)",
+              "docComment": "/**\n * Sets the default world. This is the world players automatically join when they connect to the game.\n *\n * @param world - The world to set as the default.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setDefaultWorld(world: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "World",
+                  "canonicalReference": "server!World:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "world",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setDefaultWorld"
             }
           ],
           "implementsTokenRanges": []
@@ -46410,6 +46603,34 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "server!WorldOptions#map:member",
+              "docComment": "/**\n * The map of the world.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "map?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorldMap",
+                  "canonicalReference": "server!WorldMap:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "map",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "server!WorldOptions#name:member",
               "docComment": "/**\n * The name of the world.\n */\n",
               "excerptTokens": [
@@ -46430,6 +46651,33 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "name",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!WorldOptions#skyboxIntensity:member",
+              "docComment": "/**\n * The intensity of the skybox brightness for the world. 0 is black, 1 is full brightness, 1+ is brighter.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "skyboxIntensity?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "skyboxIntensity",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
