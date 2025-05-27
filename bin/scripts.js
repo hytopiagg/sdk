@@ -115,12 +115,12 @@ function installProjectDependencies() {
 function initFromTemplate(destDir) {
   console.log(`🖨️  Initializing project with examples template "${flags.template}"...`);
 
-  execSync('bun add hytopia-examples@latest --force');
+  execSync('bun add @hytopia.com/examples@latest --force');
 
-  const templateDir = path.join(destDir, 'node_modules', 'hytopia-examples', flags.template);
+  const templateDir = path.join(destDir, 'node_modules', '@hytopia.com', 'examples', flags.template);
 
   if (!fs.existsSync(templateDir)) {
-    console.error(`❌ Examples template ${flags.template} does not exist in the hytopia-examples package, could not initialize project!`);
+    console.error(`❌ Examples template ${flags.template} does not exist in the @hytopia.com/examples package, could not initialize project!`);
     console.error(`   Tried directory: ${templateDir}`);
     return;
   }
