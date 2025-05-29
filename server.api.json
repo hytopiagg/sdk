@@ -10894,6 +10894,36 @@
               ]
             },
             {
+              "kind": "Property",
+              "canonicalReference": "server!DefaultPlayerEntityController#applyDirectionalMovementRotations:member",
+              "docComment": "/**\n * Whether to apply directional rotations to the entity while moving, defaults to true.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "applyDirectionalMovementRotations: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "applyDirectionalMovementRotations",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
               "kind": "Method",
               "canonicalReference": "server!DefaultPlayerEntityController#attach:member(1)",
               "docComment": "/**\n * Called when the controller is attached to an entity.\n *\n * @param entity - The entity to attach the controller to.\n */\n",
@@ -11280,6 +11310,66 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!DefaultPlayerEntityController#jumpLandHeavyOneshotAnimations:member",
+              "docComment": "/**\n * The oneshot animation(s) that will play when the entity lands with a high velocity.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "jumpLandHeavyOneshotAnimations: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "jumpLandHeavyOneshotAnimations",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!DefaultPlayerEntityController#jumpLandLightOneshotAnimations:member",
+              "docComment": "/**\n * The oneshot animation(s) that will play when the entity lands after jumping or being airborne.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "jumpLandLightOneshotAnimations: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "jumpLandLightOneshotAnimations",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!DefaultPlayerEntityController#jumpOneshotAnimations:member",
               "docComment": "/**\n * The oneshot animation(s) that will play when the entity is jumping.\n */\n",
               "excerptTokens": [
@@ -11574,8 +11664,38 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!DefaultPlayerEntityController#swimIdleLoopedAnimations:member",
+              "docComment": "/**\n * The looped animation(s) that will play when the entity is not moving while swimming.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "swimIdleLoopedAnimations: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "swimIdleLoopedAnimations",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!DefaultPlayerEntityController#swimLoopedAnimations:member",
-              "docComment": "/**\n * The looped animation(s) that will play when the entity is swimming.\n */\n",
+              "docComment": "/**\n * The looped animation(s) that will play when the entity is swimming in any direction.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -11875,6 +11995,33 @@
           "members": [
             {
               "kind": "PropertySignature",
+              "canonicalReference": "server!DefaultPlayerEntityControllerOptions#applyDirectionalMovementRotations:member",
+              "docComment": "/**\n * Whether to apply directional rotations to the entity while moving, defaults to true.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "applyDirectionalMovementRotations?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "applyDirectionalMovementRotations",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "server!DefaultPlayerEntityControllerOptions#autoCancelMouseLeftClick:member",
               "docComment": "/**\n * Whether to automatically cancel left click input after first processed tick, defaults to true.\n */\n",
               "excerptTokens": [
@@ -12057,6 +12204,60 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "interactOneshotAnimations",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!DefaultPlayerEntityControllerOptions#jumpLandHeavyOneshotAnimations:member",
+              "docComment": "/**\n * Overrides the animation(s) that will play when the entity lands with a high velocity.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "jumpLandHeavyOneshotAnimations?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "jumpLandHeavyOneshotAnimations",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!DefaultPlayerEntityControllerOptions#jumpLandLightOneshotAnimations:member",
+              "docComment": "/**\n * Overrides the animation(s) that will play when the entity lands after jumping or being airborne.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "jumpLandLightOneshotAnimations?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "jumpLandLightOneshotAnimations",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -12253,8 +12454,35 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "server!DefaultPlayerEntityControllerOptions#swimIdleLoopedAnimations:member",
+              "docComment": "/**\n * The looped animation(s) that will play when the entity is not moving while swimming.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "swimIdleLoopedAnimations?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "swimIdleLoopedAnimations",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "server!DefaultPlayerEntityControllerOptions#swimLoopedAnimations:member",
-              "docComment": "/**\n * The looped animation(s) that will play when the entity is swimming.\n */\n",
+              "docComment": "/**\n * The looped animation(s) that will play when the entity is swimming in any direction.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -13384,7 +13612,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "number | undefined"
+                  "text": "number"
                 },
                 {
                   "kind": "Content",
@@ -14089,6 +14317,150 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "startModelOneshotAnimations"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Entity#stopAllModelAnimations:member(1)",
+              "docComment": "/**\n * Stops all looped and oneshot animations for the entity, optionally excluded the provided animations from stopping.\n *\n * @param excludedAnimations - The animations to exclude from being stopped.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "stopAllModelAnimations(excludedAnimations?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "excludedAnimations",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "stopAllModelAnimations"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Entity#stopAllModelLoopedAnimations:member(1)",
+              "docComment": "/**\n * Stops all looped animations for the entity, optionally excluded the provided animations from stopping.\n *\n * @param excludedAnimations - The animations to exclude from being stopped.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "stopAllModelLoopedAnimations(excludedAnimations?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "excludedAnimations",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "stopAllModelLoopedAnimations"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Entity#stopAllModelOneshotAnimations:member(1)",
+              "docComment": "/**\n * Stops all oneshot animations for the entity, optionally excluded the provided animations from stopping.\n *\n * @param excludedAnimations - The animations to exclude from being stopped.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "stopAllModelOneshotAnimations(excludedAnimations?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "excludedAnimations",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "stopAllModelOneshotAnimations"
             },
             {
               "kind": "Method",
@@ -25860,7 +26232,7 @@
             },
             {
               "kind": "Content",
-              "text": ";\n    moveIgnoreAxes?: {\n        x?: boolean;\n        y?: boolean;\n        z?: boolean;\n    };\n}"
+              "text": ";\n    moveIgnoreAxes?: {\n        x?: boolean;\n        y?: boolean;\n        z?: boolean;\n    };\n    moveStartIdleAnimationsOnCompletion?: boolean;\n}"
             },
             {
               "kind": "Content",
@@ -38431,6 +38803,66 @@
               "name": "face"
             },
             {
+              "kind": "Property",
+              "canonicalReference": "server!SimpleEntityController#idleLoopedAnimations:member",
+              "docComment": "/**\n * The animations to loop when the entity is idle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "idleLoopedAnimations: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "idleLoopedAnimations",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!SimpleEntityController#idleLoopedAnimationsSpeed:member",
+              "docComment": "/**\n * The speed at which to loop the idle animations.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "idleLoopedAnimationsSpeed: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "idleLoopedAnimationsSpeed",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
               "kind": "Method",
               "canonicalReference": "server!SimpleEntityController#jump:member(1)",
               "docComment": "/**\n * Applies an upwards impulse to the entity to simulate a jump, only supported for entities with dynamic rigid body types.\n *\n * @param height - The height to jump to.\n */\n",
@@ -38477,6 +38909,36 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "jump"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!SimpleEntityController#jumpOneshotAnimations:member",
+              "docComment": "/**\n * The animations to play when the entity jumps.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "jumpOneshotAnimations: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "jumpOneshotAnimations",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -38559,6 +39021,145 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "move"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!SimpleEntityController#moveLoopedAnimations:member",
+              "docComment": "/**\n * The animations to loop when the entity is moving.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "moveLoopedAnimations: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "moveLoopedAnimations",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!SimpleEntityController#moveLoopedAnimationsSpeed:member",
+              "docComment": "/**\n * The speed at which to loop the move animations.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "moveLoopedAnimationsSpeed: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "moveLoopedAnimationsSpeed",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!SimpleEntityController#moveSpeed:member",
+              "docComment": "/**\n * The speed at which to move the entity. Can be altered while moving.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "moveSpeed: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "moveSpeed",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!SimpleEntityController#spawn:member(1)",
+              "docComment": "/**\n * Override of the {@link BaseEntityController.spawn} method. Starts the set idle animations (if any) when the entity is spawned.\n *\n * @param entity - The entity that was spawned.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "spawn(entity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Entity",
+                  "canonicalReference": "server!Entity:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "entity",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "spawn"
             }
           ],
           "extendsTokenRange": {

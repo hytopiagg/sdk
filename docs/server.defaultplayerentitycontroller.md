@@ -91,6 +91,25 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[applyDirectionalMovementRotations](./server.defaultplayerentitycontroller.applydirectionalmovementrotations.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether to apply directional rotations to the entity while moving, defaults to true.
+
+
+</td></tr>
+<tr><td>
+
 [autoCancelMouseLeftClick](./server.defaultplayerentitycontroller.autocancelmouseleftclick.md)
 
 
@@ -287,6 +306,44 @@ Whether the entity is swimming, this is determined by if the entity is in a liqu
 </td></tr>
 <tr><td>
 
+[jumpLandHeavyOneshotAnimations](./server.defaultplayerentitycontroller.jumplandheavyoneshotanimations.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+The oneshot animation(s) that will play when the entity lands with a high velocity.
+
+
+</td></tr>
+<tr><td>
+
+[jumpLandLightOneshotAnimations](./server.defaultplayerentitycontroller.jumplandlightoneshotanimations.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+The oneshot animation(s) that will play when the entity lands after jumping or being airborne.
+
+
+</td></tr>
+<tr><td>
+
 [jumpOneshotAnimations](./server.defaultplayerentitycontroller.jumponeshotanimations.md)
 
 
@@ -441,6 +498,25 @@ The gravity modifier applied to the entity when swimming.
 </td></tr>
 <tr><td>
 
+[swimIdleLoopedAnimations](./server.defaultplayerentitycontroller.swimidleloopedanimations.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+The looped animation(s) that will play when the entity is not moving while swimming.
+
+
+</td></tr>
+<tr><td>
+
 [swimLoopedAnimations](./server.defaultplayerentitycontroller.swimloopedanimations.md)
 
 
@@ -454,7 +530,7 @@ string\[\]
 
 </td><td>
 
-The looped animation(s) that will play when the entity is swimming.
+The looped animation(s) that will play when the entity is swimming in any direction.
 
 
 </td></tr>

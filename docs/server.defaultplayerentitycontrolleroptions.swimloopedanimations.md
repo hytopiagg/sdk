@@ -4,7 +4,7 @@
 
 ## DefaultPlayerEntityControllerOptions.swimLoopedAnimations property
 
-The looped animation(s) that will play when the entity is swimming.
+The looped animation(s) that will play when the entity is swimming in any direction.
 
 **Signature:**
 

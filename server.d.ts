@@ -1470,6 +1470,19 @@ export declare class DefaultPlayerEntity extends PlayerEntity {
  * @public
  */
 export declare class DefaultPlayerEntityController extends BaseEntityController {
+    private static readonly BASE_ENTITY_HEIGHT;
+    private static readonly GROUND_SENSOR_HEIGHT_SCALE;
+    private static readonly GROUND_SENSOR_RADIUS_SCALE;
+    private static readonly JUMP_LAND_HEAVY_VELOCITY_THRESHOLD;
+    private static readonly WALL_COLLIDER_HEIGHT_SCALE;
+    private static readonly WALL_COLLIDER_RADIUS_SCALE;
+    private static readonly MOVEMENT_ROTATIONS;
+    private static readonly SWIM_UPWARD_COOLDOWN_MS;
+    private static readonly SWIMMING_DRAG_FACTOR;
+    private static readonly WATER_ENTRY_SINKING_FACTOR;
+    private static readonly WATER_ENTRY_SINKING_MS;
+    /** Whether to apply directional rotations to the entity while moving, defaults to true. */
+    applyDirectionalMovementRotations: boolean;
     /** Whether to automatically cancel left click input after first processed tick, defaults to true. */
     autoCancelMouseLeftClick: boolean;
     /**
@@ -1500,6 +1513,10 @@ export declare class DefaultPlayerEntityController extends BaseEntityController 
     idleLoopedAnimations: string[];
     /** The oneshot animation(s) that will play when the entity interacts (left click) */
     interactOneshotAnimations: string[];
+    /** The oneshot animation(s) that will play when the entity lands with a high velocity. */
+    jumpLandHeavyOneshotAnimations: string[];
+    /** The oneshot animation(s) that will play when the entity lands after jumping or being airborne. */
+    jumpLandLightOneshotAnimations: string[];
     /** The oneshot animation(s) that will play when the entity is jumping. */
     jumpOneshotAnimations: string[];
     /** The upward velocity applied to the entity when it jumps. */
@@ -1514,7 +1531,9 @@ export declare class DefaultPlayerEntityController extends BaseEntityController 
     swimFastVelocity: number;
     /** The gravity modifier applied to the entity when swimming. */
     swimGravity: number;
-    /** The looped animation(s) that will play when the entity is swimming. */
+    /** The looped animation(s) that will play when the entity is not moving while swimming. */
+    swimIdleLoopedAnimations: string[];
+    /** The looped animation(s) that will play when the entity is swimming in any direction. */
     swimLoopedAnimations: string[];
     /** The maximum downward velocity that the entity can reach when affected by gravity while swimming. */
     swimMaxGravityVelocity: number;
@@ -1526,6 +1545,12 @@ export declare class DefaultPlayerEntityController extends BaseEntityController 
     walkLoopedAnimations: string[];
     /** The normalized horizontal velocity applied to the entity when it walks. */
     walkVelocity: number;
+
+
+
+
+
+
 
 
 
@@ -1571,6 +1596,8 @@ export declare class DefaultPlayerEntityController extends BaseEntityController 
 
 /** Options for creating a DefaultPlayerEntityController instance. @public */
 export declare interface DefaultPlayerEntityControllerOptions {
+    /** Whether to apply directional rotations to the entity while moving, defaults to true. */
+    applyDirectionalMovementRotations?: boolean;
     /** Whether to automatically cancel left click input after first processed tick, defaults to true. */
     autoCancelMouseLeftClick?: boolean;
     /** A function allowing custom logic to determine if the entity can jump. */
@@ -1587,6 +1614,10 @@ export declare interface DefaultPlayerEntityControllerOptions {
     interactOneshotAnimations?: string[];
     /** Overrides the animation(s) that will play when the entity is jumping. */
     jumpOneshotAnimations?: string[];
+    /** Overrides the animation(s) that will play when the entity lands with a high velocity. */
+    jumpLandHeavyOneshotAnimations?: string[];
+    /** Overrides the animation(s) that will play when the entity lands after jumping or being airborne. */
+    jumpLandLightOneshotAnimations?: string[];
     /** The upward velocity applied to the entity when it jumps. */
     jumpVelocity?: number;
     /** The normalized horizontal velocity applied to the entity when it runs. */
@@ -1601,8 +1632,10 @@ export declare interface DefaultPlayerEntityControllerOptions {
     swimGravity?: number;
     /** The maximum downward velocity that the entity can reach when affected by gravity while swimming. */
     swimMaxGravityVelocity?: number;
-    /** The looped animation(s) that will play when the entity is swimming. */
+    /** The looped animation(s) that will play when the entity is swimming in any direction. */
     swimLoopedAnimations?: string[];
+    /** The looped animation(s) that will play when the entity is not moving while swimming. */
+    swimIdleLoopedAnimations?: string[];
     /** The normalized horizontal velocity applied to the entity when it swims slowly (equivalent to walking). */
     swimSlowVelocity?: number;
     /** The upward velocity applied to the entity when swimming. */
@@ -1734,7 +1767,7 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     /** The preferred shape of the entity's model when automatically generating its collider when no explicit colliders are provided. */
     get modelPreferredShape(): ColliderShape | undefined;
     /** The scale of the entity's model. */
-    get modelScale(): number | undefined;
+    get modelScale(): number;
     /** The URI or path to the .gltf model asset to be used for the entity. */
     get modelUri(): string | undefined;
     /** The name of the entity. */
@@ -1841,6 +1874,27 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      */
     startModelOneshotAnimations(animations: string[]): void;
     /**
+     * Stops all looped and oneshot animations for the entity,
+     * optionally excluded the provided animations from stopping.
+     *
+     * @param excludedAnimations - The animations to exclude from being stopped.
+     */
+    stopAllModelAnimations(excludedAnimations?: string[]): void;
+    /**
+     * Stops all looped animations for the entity, optionally
+     * excluded the provided animations from stopping.
+     *
+     * @param excludedAnimations - The animations to exclude from being stopped.
+     */
+    stopAllModelLoopedAnimations(excludedAnimations?: string[]): void;
+    /**
+     * Stops all oneshot animations for the entity, optionally
+     * excluded the provided animations from stopping.
+     *
+     * @param excludedAnimations - The animations to exclude from being stopped.
+     */
+    stopAllModelOneshotAnimations(excludedAnimations?: string[]): void;
+    /**
      * Stops the provided model animations for the entity.
      *
      * @remarks
@@ -1850,6 +1904,7 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * @param animations - The animations to stop.
      */
     stopModelAnimations(animations: string[]): void;
+
 
 
 
@@ -3298,6 +3353,8 @@ export declare type MoveOptions = {
         y?: boolean;
         z?: boolean;
     };
+    /** Whether to start the idle animations when the entity finishes moving. Defaults to true. */
+    moveStartIdleAnimationsOnCompletion?: boolean;
 };
 
 /** The options for an error type "none" collider. @public */
@@ -4902,6 +4959,20 @@ export declare interface SceneUIOptions {
  * @public
  */
 export declare class SimpleEntityController extends BaseEntityController {
+    /** The speed at which to rotate to the target coordinate when facing. Can be altered while facing. */
+    private faceSpeed;
+    /** The animations to loop when the entity is idle. */
+    idleLoopedAnimations: string[];
+    /** The speed at which to loop the idle animations. */
+    idleLoopedAnimationsSpeed: number | undefined;
+    /** The animations to play when the entity jumps. */
+    jumpOneshotAnimations: string[];
+    /** The animations to loop when the entity is moving. */
+    moveLoopedAnimations: string[];
+    /** The speed at which to loop the move animations. */
+    moveLoopedAnimationsSpeed: number | undefined;
+    /** The speed at which to move the entity. Can be altered while moving. */
+    moveSpeed: number;
 
 
 
@@ -4912,6 +4983,12 @@ export declare class SimpleEntityController extends BaseEntityController {
 
 
 
+    /**
+     * Override of the {@link BaseEntityController.spawn} method. Starts
+     * the set idle animations (if any) when the entity is spawned.
+     * @param entity - The entity that was spawned.
+     */
+    spawn(entity: Entity): void;
     /**
      * Rotates the entity at a given speed to face a target coordinate.
      *
@@ -4945,6 +5022,9 @@ export declare class SimpleEntityController extends BaseEntityController {
      * @param options - Additional options for the move operation, such as callbacks.
      */
     move(target: Vector3Like, speed: number, options?: MoveOptions): void;
+
+
+
 
 }
 

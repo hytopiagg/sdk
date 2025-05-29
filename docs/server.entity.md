@@ -370,7 +370,7 @@ The preferred shape of the entity's model when automatically generating its coll
 
 </td><td>
 
-number \| undefined
+number
 
 
 </td><td>
@@ -704,6 +704,48 @@ Starts looped animations for the entity, blending with other animations currentl
 </td><td>
 
 Starts a oneshot animation for the entity, blending with other animations currently playing.
+
+
+</td></tr>
+<tr><td>
+
+[stopAllModelAnimations(excludedAnimations)](./server.entity.stopallmodelanimations.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Stops all looped and oneshot animations for the entity, optionally excluded the provided animations from stopping.
+
+
+</td></tr>
+<tr><td>
+
+[stopAllModelLoopedAnimations(excludedAnimations)](./server.entity.stopallmodelloopedanimations.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Stops all looped animations for the entity, optionally excluded the provided animations from stopping.
+
+
+</td></tr>
+<tr><td>
+
+[stopAllModelOneshotAnimations(excludedAnimations)](./server.entity.stopallmodeloneshotanimations.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Stops all oneshot animations for the entity, optionally excluded the provided animations from stopping.
 
 
 </td></tr>

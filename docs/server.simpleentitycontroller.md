@@ -37,6 +37,145 @@ myEntity.controller.move({ x: 10, y: 1, z: 10 }, 4, {
 });
 ```
 
+## Properties
+
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[idleLoopedAnimations](./server.simpleentitycontroller.idleloopedanimations.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+The animations to loop when the entity is idle.
+
+
+</td></tr>
+<tr><td>
+
+[idleLoopedAnimationsSpeed](./server.simpleentitycontroller.idleloopedanimationsspeed.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number \| undefined
+
+
+</td><td>
+
+The speed at which to loop the idle animations.
+
+
+</td></tr>
+<tr><td>
+
+[jumpOneshotAnimations](./server.simpleentitycontroller.jumponeshotanimations.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+The animations to play when the entity jumps.
+
+
+</td></tr>
+<tr><td>
+
+[moveLoopedAnimations](./server.simpleentitycontroller.moveloopedanimations.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+The animations to loop when the entity is moving.
+
+
+</td></tr>
+<tr><td>
+
+[moveLoopedAnimationsSpeed](./server.simpleentitycontroller.moveloopedanimationsspeed.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number \| undefined
+
+
+</td><td>
+
+The speed at which to loop the move animations.
+
+
+</td></tr>
+<tr><td>
+
+[moveSpeed](./server.simpleentitycontroller.movespeed.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+The speed at which to move the entity. Can be altered while moving.
+
+
+</td></tr>
+</tbody></table>
+
 ## Methods
 
 <table><thead><tr><th>
@@ -94,6 +233,20 @@ Applies an upwards impulse to the entity to simulate a jump, only supported for 
 </td><td>
 
 Moves the entity at a given speed in a straight line to a target coordinate.
+
+
+</td></tr>
+<tr><td>
+
+[spawn(entity)](./server.simpleentitycontroller.spawn.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Override of the [BaseEntityController.spawn()](./server.baseentitycontroller.spawn.md) method. Starts the set idle animations (if any) when the entity is spawned.
 
 
 </td></tr>

@@ -17,6 +17,7 @@ export type MoveOptions = {
         y?: boolean;
         z?: boolean;
     };
+    moveStartIdleAnimationsOnCompletion?: boolean;
 };
 ```
 **References:** [MoveCallback](./server.movecallback.md)<!-- -->, [MoveCompleteCallback](./server.movecompletecallback.md)
