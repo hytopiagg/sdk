@@ -363,6 +363,7 @@ function packageProject() {
   
   // Files/directories to exclude
   const excludeItems = [
+    '.git',
     'node_modules',
     'package-lock.json',
     'bun.lock',
