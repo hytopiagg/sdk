@@ -187,7 +187,7 @@ Enables or disables debug raycasting for the simulation. This will render lines 
 </td></tr>
 <tr><td>
 
-[enableDebugRendering(enabled)](./server.simulation.enabledebugrendering.md)
+[enableDebugRendering(enabled, filterFlags)](./server.simulation.enabledebugrendering.md)
 
 
 </td><td>

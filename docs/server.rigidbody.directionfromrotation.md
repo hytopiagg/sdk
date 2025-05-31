@@ -4,7 +4,7 @@
 
 ## RigidBody.directionFromRotation property
 
-The direction from the rotation of the rigid body.
+The direction from the rotation of the rigid body. (-Z identity)
 
 **Signature:**
 

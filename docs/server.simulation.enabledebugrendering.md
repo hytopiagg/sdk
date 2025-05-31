@@ -9,7 +9,7 @@ Enables or disables debug rendering for the simulation. When enabled, all collid
 **Signature:**
 
 ```typescript
-enableDebugRendering(enabled: boolean): void;
+enableDebugRendering(enabled: boolean, filterFlags?: RAPIER.QueryFilterFlags): void;
 ```
 
 ## Parameters
@@ -43,6 +43,22 @@ boolean
 </td><td>
 
 Whether to enable debug rendering.
+
+
+</td></tr>
+<tr><td>
+
+filterFlags
+
+
+</td><td>
+
+RAPIER.QueryFilterFlags
+
+
+</td><td>
+
+_(Optional)_
 
 
 </td></tr>

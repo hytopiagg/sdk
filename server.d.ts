@@ -1477,6 +1477,7 @@ export declare class DefaultPlayerEntityController extends BaseEntityController 
     private static readonly WALL_COLLIDER_HEIGHT_SCALE;
     private static readonly WALL_COLLIDER_RADIUS_SCALE;
     private static readonly MOVEMENT_ROTATIONS;
+    private static readonly EXTERNAL_IMPULSE_DECAY_RATE;
     private static readonly SWIM_UPWARD_COOLDOWN_MS;
     private static readonly SWIMMING_DRAG_FACTOR;
     private static readonly WATER_ENTRY_SINKING_FACTOR;
@@ -1556,10 +1557,16 @@ export declare class DefaultPlayerEntityController extends BaseEntityController 
 
 
 
+
+
+
+
     /**
      * @param options - Options for the controller.
      */
     constructor(options?: DefaultPlayerEntityControllerOptions);
+    /** Whether the entity is moving from player inputs. */
+    get isActivelyMoving(): boolean;
     /** Whether the entity is grounded. */
     get isGrounded(): boolean;
     /** Whether the entity is on a platform, a platform is any entity with a kinematic rigid body. */
@@ -4395,7 +4402,7 @@ export declare class RigidBody extends EventRouter {
     get colliders(): Set<Collider>;
     /** The dominance group of the rigid body. */
     get dominanceGroup(): number;
-    /** The direction from the rotation of the rigid body. */
+    /** The direction from the rotation of the rigid body. (-Z identity) */
     get directionFromRotation(): Vector3Like;
     /** The effective angular inertia of the rigid body. */
     get effectiveAngularInertia(): SpdMatrix3 | undefined;
@@ -4624,10 +4631,15 @@ export declare class RigidBody extends EventRouter {
     createAndAddChildCollider(colliderOptions: ColliderOptions): Collider | null;
     /**
      * Creates and adds multiple child colliders to the rigid body for the simulation it belongs to.
+     *
+     * @remarks
+     * If the rigid body is not simulated, the colliders will be added to the rigid body as pending child colliders
+     * and also simulated when the rigid body is simulated.
+     *
      * @param colliderOptions - The options for the child colliders to add to the rigid body.
      * @returns The child colliders that were added to the rigid body.
      */
-    createAndAddChildCollidersToSimulation(colliderOptions: ColliderOptions[]): Collider[];
+    createAndAddChildColliders(colliderOptions: ColliderOptions[]): Collider[];
     /**
      * Gets the colliders of the rigid body by tag.
      * @param tag - The tag to filter by.
@@ -5053,6 +5065,7 @@ export declare class Simulation extends EventRouter {
 
 
 
+
     /** Whether the simulation has debug raycasting enabled */
     get isDebugRaycastingEnabled(): boolean;
     /** Whether the simulation has debug rendering enabled. */
@@ -5093,7 +5106,7 @@ export declare class Simulation extends EventRouter {
      * In large worlds enabling this can cause noticable lag and RTT spikes.
      * @param enabled - Whether to enable debug rendering.
      */
-    enableDebugRendering(enabled: boolean): void;
+    enableDebugRendering(enabled: boolean, filterFlags?: RAPIER.QueryFilterFlags): void;
     /**
      * Gets the contact manifolds for a pair of colliders.
      *

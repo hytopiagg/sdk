@@ -243,6 +243,27 @@ The oneshot animation(s) that will play when the entity interacts (left click)
 </td></tr>
 <tr><td>
 
+[isActivelyMoving](./server.defaultplayerentitycontroller.isactivelymoving.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the entity is moving from player inputs.
+
+
+</td></tr>
+<tr><td>
+
 [isGrounded](./server.defaultplayerentitycontroller.isgrounded.md)
 
 

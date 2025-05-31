@@ -196,7 +196,7 @@ The colliders of the rigid body.
 
 </td><td>
 
-The direction from the rotation of the rigid body.
+The direction from the rotation of the rigid body. (-Z identity)
 
 
 </td></tr>
@@ -1069,7 +1069,7 @@ Creates and adds a child collider to the rigid body for the simulation it belong
 </td></tr>
 <tr><td>
 
-[createAndAddChildCollidersToSimulation(colliderOptions)](./server.rigidbody.createandaddchildcolliderstosimulation.md)
+[createAndAddChildColliders(colliderOptions)](./server.rigidbody.createandaddchildcolliders.md)
 
 
 </td><td>
