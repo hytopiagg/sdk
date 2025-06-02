@@ -1,7 +1,7 @@
 # HYTOPIA SDK
 
 ## Quick Links
-[Quickstart (Start Here)](#quickstart-start-here) • [Developer Docs](https://dev.hytopia.com/) • [API Reference](./docs/server.md) • [Examples](./examples) • [Join Our Developer Discord](https://discord.gg/hytopia-developers) • [Report Bugs or Request Features](https://github.com/hytopiagg/sdk/issues)
+[Quickstart (Start Here)](#quickstart-start-here) • [Developer Docs](https://dev.hytopia.com/) • [API Reference](./docs/server.md) • [Examples](https://github.com/hytopiagg/sdk-examples) • [Join Our Developer Discord](https://discord.gg/hytopia-developers) • [Report Bugs or Request Features](https://github.com/hytopiagg/sdk/issues)
 
 ## What is HYTOPIA?
 
@@ -36,7 +36,7 @@ With these resources, you can quickly build and share immersive, voxel-style mul
 
 Once you're up and running, here's some other resources to go further:
 - [Developer Docs](https://dev.hytopia.com/)
-- [Game Examples](./examples)
+- [Game Examples](https://github.com/hytopiagg/sdk-examples)
 - [API Reference](./docs/server.md)
 
 ## Architecture & Motivation
