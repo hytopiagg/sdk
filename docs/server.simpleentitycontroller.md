@@ -37,6 +37,40 @@ myEntity.controller.move({ x: 10, y: 1, z: 10 }, 4, {
 });
 ```
 
+## Constructors
+
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(options)](./server.simpleentitycontroller._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `SimpleEntityController` class
+
+
+</td></tr>
+</tbody></table>
+
 ## Properties
 
 <table><thead><tr><th>
@@ -247,6 +281,34 @@ Moves the entity at a given speed in a straight line to a target coordinate.
 </td><td>
 
 Override of the [BaseEntityController.spawn()](./server.baseentitycontroller.spawn.md) method. Starts the set idle animations (if any) when the entity is spawned.
+
+
+</td></tr>
+<tr><td>
+
+[stopFace()](./server.simpleentitycontroller.stopface.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Stops the entity from attempting to face a target coordinate.
+
+
+</td></tr>
+<tr><td>
+
+[stopMove()](./server.simpleentitycontroller.stopmove.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Stops the entity from continuing to move it's current target coordinate.
 
 
 </td></tr>

@@ -172,6 +172,20 @@ SET\_OFFSET
 </td></tr>
 <tr><td>
 
+SET\_SHOULDER\_ANGLE
+
+
+</td><td>
+
+`"PLAYER_CAMERA.SET_SHOULDER_ANGLE"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 SET\_TRACKED\_ENTITY
 
 

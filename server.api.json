@@ -9816,6 +9816,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!CollisionGroup.ENVIRONMENT_ENTITY:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "ENVIRONMENT_ENTITY = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "8"
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "ENVIRONMENT_ENTITY"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!CollisionGroup.GROUP_1:member",
               "docComment": "",
               "excerptTokens": [
@@ -9825,7 +9846,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "16"
+                  "text": "32"
                 }
               ],
               "initializerTokenRange": {
@@ -9846,7 +9867,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "8192"
+                  "text": "16384"
                 }
               ],
               "initializerTokenRange": {
@@ -9867,27 +9888,6 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "16384"
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "GROUP_11"
-            },
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "server!CollisionGroup.GROUP_12:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "GROUP_12 = "
-                },
-                {
-                  "kind": "Content",
                   "text": "32768"
                 }
               ],
@@ -9896,7 +9896,7 @@
                 "endIndex": 2
               },
               "releaseTag": "Public",
-              "name": "GROUP_12"
+              "name": "GROUP_11"
             },
             {
               "kind": "EnumMember",
@@ -9909,7 +9909,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "32"
+                  "text": "64"
                 }
               ],
               "initializerTokenRange": {
@@ -9930,7 +9930,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "64"
+                  "text": "128"
                 }
               ],
               "initializerTokenRange": {
@@ -9951,7 +9951,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "128"
+                  "text": "256"
                 }
               ],
               "initializerTokenRange": {
@@ -9972,7 +9972,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "256"
+                  "text": "512"
                 }
               ],
               "initializerTokenRange": {
@@ -9993,7 +9993,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "512"
+                  "text": "1024"
                 }
               ],
               "initializerTokenRange": {
@@ -10014,7 +10014,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "1024"
+                  "text": "2048"
                 }
               ],
               "initializerTokenRange": {
@@ -10035,7 +10035,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "2048"
+                  "text": "4096"
                 }
               ],
               "initializerTokenRange": {
@@ -10056,7 +10056,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "4096"
+                  "text": "8192"
                 }
               ],
               "initializerTokenRange": {
@@ -10077,7 +10077,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "8"
+                  "text": "16"
                 }
               ],
               "initializerTokenRange": {
@@ -26262,7 +26262,7 @@
             },
             {
               "kind": "Content",
-              "text": ";\n    moveIgnoreAxes?: {\n        x?: boolean;\n        y?: boolean;\n        z?: boolean;\n    };\n    moveStartIdleAnimationsOnCompletion?: boolean;\n}"
+              "text": ";\n    moveIgnoreAxes?: {\n        x?: boolean;\n        y?: boolean;\n        z?: boolean;\n    };\n    moveStartIdleAnimationsOnCompletion?: boolean;\n    moveStoppingDistance?: number;\n}"
             },
             {
               "kind": "Content",
@@ -26414,6 +26414,39 @@
           "name": "PathfindingEntityController",
           "preserveMemberOrder": false,
           "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "server!PathfindingEntityController:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `PathfindingEntityController` class\n *\n * @param options - Options for the controller.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(options?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PathfindingEntityControllerOptions",
+                  "canonicalReference": "server!~PathfindingEntityControllerOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ]
+            },
             {
               "kind": "Property",
               "canonicalReference": "server!PathfindingEntityController#debug:member",
@@ -28607,6 +28640,54 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "server!PlayerCamera#setShoulderAngle:member(1)",
+              "docComment": "/**\n * Only used in third-person mode. Sets the shoulder angle of the camera in degrees. A positive value shifts the camera to the right, a negative value shifts it to the left.\n *\n * @param shoulderAngle - The shoulder angle to set in degrees.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setShoulderAngle(shoulderAngle: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "shoulderAngle",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setShoulderAngle"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "server!PlayerCamera#setTrackedEntity:member(1)",
               "docComment": "/**\n * Sets the entity the camera will constantly look at, even if the camera attached or tracked entity moves.\n *\n * @param entity - The entity to track or undefined to stop tracking.\n */\n",
               "excerptTokens": [
@@ -28758,6 +28839,36 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "setZoom"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!PlayerCamera#shoulderAngle:member",
+              "docComment": "/**\n * The shoulder angle of the camera in degrees.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get shoulderAngle(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "shoulderAngle",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -29095,6 +29206,27 @@
               },
               "releaseTag": "Public",
               "name": "SET_OFFSET"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!PlayerCameraEvent.SET_SHOULDER_ANGLE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_SHOULDER_ANGLE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PLAYER_CAMERA.SET_SHOULDER_ANGLE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_SHOULDER_ANGLE"
             },
             {
               "kind": "EnumMember",
@@ -29687,6 +29819,51 @@
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!PlayerCameraEventPayloads#\"PLAYER_CAMERA.SET_SHOULDER_ANGLE\":member",
+              "docComment": "/**\n * Emitted when the shoulder angle of the camera is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PlayerCameraEvent.SET_SHOULDER_ANGLE",
+                  "canonicalReference": "server!PlayerCameraEvent.SET_SHOULDER_ANGLE:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        playerCamera: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PlayerCamera",
+                  "canonicalReference": "server!PlayerCamera:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        shoulderAngle: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PLAYER_CAMERA.SET_SHOULDER_ANGLE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
               }
             },
             {
@@ -38751,6 +38928,39 @@
           "preserveMemberOrder": false,
           "members": [
             {
+              "kind": "Constructor",
+              "canonicalReference": "server!SimpleEntityController:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `SimpleEntityController` class\n *\n * @param options - Options for the controller.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(options?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SimpleEntityControllerOptions",
+                  "canonicalReference": "server!~SimpleEntityControllerOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ]
+            },
+            {
               "kind": "Method",
               "canonicalReference": "server!SimpleEntityController#face:member(1)",
               "docComment": "/**\n * Rotates the entity at a given speed to face a target coordinate.\n *\n * @remarks\n *\n * If this method is called while the entity is already attempting to face another target, the previous target will be ignored and the entity will start attempting to face the new target.\n *\n * @param target - The target coordinate to face.\n *\n * @param speed - The speed at which to rotate to the target coordinate.\n *\n * @param options - Additional options for the face operation, such as callbacks.\n */\n",
@@ -39190,6 +39400,68 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "spawn"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!SimpleEntityController#stopFace:member(1)",
+              "docComment": "/**\n * Stops the entity from attempting to face a target coordinate.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "stopFace(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "stopFace"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!SimpleEntityController#stopMove:member(1)",
+              "docComment": "/**\n * Stops the entity from continuing to move it's current target coordinate.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "stopMove(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "stopMove"
             }
           ],
           "extendsTokenRange": {
@@ -40150,7 +40422,7 @@
             },
             {
               "kind": "Content",
-              "text": "readonly [\"w\", \"a\", \"s\", \"d\", \"sp\", \"sh\", \"tb\", \"ml\", \"mr\", \"q\", \"e\", \"r\", \"f\", \"z\", \"x\", \"c\", \"v\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"0\"]"
+              "text": "readonly [\"w\", \"a\", \"s\", \"d\", \"sp\", \"sh\", \"tb\", \"ml\", \"mr\", \"q\", \"e\", \"r\", \"f\", \"z\", \"x\", \"c\", \"v\", \"u\", \"i\", \"o\", \"j\", \"k\", \"l\", \"n\", \"m\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"0\"]"
             }
           ],
           "fileUrlPath": "src/players/Player.ts",

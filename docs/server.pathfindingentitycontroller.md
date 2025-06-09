@@ -17,6 +17,40 @@ export default class PathfindingEntityController extends SimpleEntityController
 
 This class implements pathfinding using the A\* algorithm. Pathfinding when frequently called can cause performance issues, use it sparingly. The .pathfind() method should only need to be called once in nearly all cases when attempting to move an entity to a target coordinate.
 
+## Constructors
+
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(options)](./server.pathfindingentitycontroller._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `PathfindingEntityController` class
+
+
+</td></tr>
+</tbody></table>
+
 ## Properties
 
 <table><thead><tr><th>

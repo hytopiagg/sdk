@@ -227,6 +227,25 @@ Emitted when the offset of the camera is set.
 </td></tr>
 <tr><td>
 
+["PLAYER\_CAMERA.SET\_SHOULDER\_ANGLE"](./server.playercameraeventpayloads._player_camera.set_shoulder_angle_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ playerCamera: [PlayerCamera](./server.playercamera.md)<!-- -->; shoulderAngle: number; }
+
+
+</td><td>
+
+Emitted when the shoulder angle of the camera is set.
+
+
+</td></tr>
+<tr><td>
+
 ["PLAYER\_CAMERA.SET\_TRACKED\_ENTITY"](./server.playercameraeventpayloads._player_camera.set_tracked_entity_.md)
 
 

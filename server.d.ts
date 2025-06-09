@@ -1287,19 +1287,19 @@ export declare enum CollisionGroup {
     BLOCK = 1,
     ENTITY = 2,
     ENTITY_SENSOR = 4,
-    PLAYER = 8,
-    GROUP_1 = 16,
-    GROUP_2 = 32,
-    GROUP_3 = 64,
-    GROUP_4 = 128,
-    GROUP_5 = 256,
-    GROUP_6 = 512,
-    GROUP_7 = 1024,
-    GROUP_8 = 2048,
-    GROUP_9 = 4096,
-    GROUP_10 = 8192,
-    GROUP_11 = 16384,
-    GROUP_12 = 32768,
+    ENVIRONMENT_ENTITY = 8,
+    PLAYER = 16,
+    GROUP_1 = 32,
+    GROUP_2 = 64,
+    GROUP_3 = 128,
+    GROUP_4 = 256,
+    GROUP_5 = 512,
+    GROUP_6 = 1024,
+    GROUP_7 = 2048,
+    GROUP_8 = 4096,
+    GROUP_9 = 8192,
+    GROUP_10 = 16384,
+    GROUP_11 = 32768,
     ALL = 65535
 }
 
@@ -3362,6 +3362,8 @@ export declare type MoveOptions = {
     };
     /** Whether to start the idle animations when the entity finishes moving. Defaults to true. */
     moveStartIdleAnimationsOnCompletion?: boolean;
+    /** The distance from the target at which the entity will stop moving and consider movement complete. Defaults to 0.316~ blocks away from target. */
+    moveStoppingDistance?: number;
 };
 
 /** The options for an error type "none" collider. @public */
@@ -3409,6 +3411,10 @@ export declare class PathfindingEntityController extends SimpleEntityController 
 
 
 
+    /**
+     * @param options - Options for the controller.
+     */
+    constructor(options?: PathfindingEntityControllerOptions);
     /** Whether to enable debug mode or not. When debug mode is enabled, the pathfinding algorithm will log debug information to the console. Defaults to false. */
     get debug(): boolean;
     /** The maximum fall distance the entity can fall. */
@@ -3446,7 +3452,10 @@ export declare class PathfindingEntityController extends SimpleEntityController 
 
 
 
+}
 
+/** Options for creating a PathfindingEntityController instance. @public */
+declare interface PathfindingEntityControllerOptions extends SimpleEntityControllerOptions {
 }
 
 /**
@@ -3646,6 +3655,7 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
 
 
 
+
     /** The entity the camera is attached to. */
     get attachedToEntity(): Entity | undefined;
     /** The position the camera is attached to. */
@@ -3666,6 +3676,8 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
     get offset(): Vector3Like;
     /** The current orientation of the camera. */
     get orientation(): PlayerCameraOrientation;
+    /** The shoulder angle of the camera in degrees. */
+    get shoulderAngle(): number;
     /** The entity the camera will constantly look at, even if the camera attached or tracked entity moves. */
     get trackedEntity(): Entity | undefined;
     /** The position the camera will constantly look at, even if the camera attached entity moves. */
@@ -3740,6 +3752,14 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
 
 
     /**
+     * Only used in third-person mode. Sets the shoulder angle
+     * of the camera in degrees. A positive value shifts the
+     * camera to the right, a negative value shifts it to the
+     * left.
+     * @param shoulderAngle - The shoulder angle to set in degrees.
+     */
+    setShoulderAngle(shoulderAngle: number): void;
+    /**
      * Sets the entity the camera will constantly look at,
      * even if the camera attached or tracked entity moves.
      * @param entity - The entity to track or undefined to stop tracking.
@@ -3772,6 +3792,7 @@ export declare enum PlayerCameraEvent {
     SET_MODEL_HIDDEN_NODES = "PLAYER_CAMERA.SET_MODEL_HIDDEN_NODES",
     SET_MODE = "PLAYER_CAMERA.SET_MODE",
     SET_OFFSET = "PLAYER_CAMERA.SET_OFFSET",
+    SET_SHOULDER_ANGLE = "PLAYER_CAMERA.SET_SHOULDER_ANGLE",
     SET_TRACKED_ENTITY = "PLAYER_CAMERA.SET_TRACKED_ENTITY",
     SET_TRACKED_POSITION = "PLAYER_CAMERA.SET_TRACKED_POSITION",
     SET_ZOOM = "PLAYER_CAMERA.SET_ZOOM"
@@ -3828,6 +3849,11 @@ export declare interface PlayerCameraEventPayloads {
     [PlayerCameraEvent.SET_OFFSET]: {
         playerCamera: PlayerCamera;
         offset: Vector3Like;
+    };
+    /** Emitted when the shoulder angle of the camera is set. */
+    [PlayerCameraEvent.SET_SHOULDER_ANGLE]: {
+        playerCamera: PlayerCamera;
+        shoulderAngle: number;
     };
     /** Emitted when the tracked entity of the camera is set. */
     [PlayerCameraEvent.SET_TRACKED_ENTITY]: {
@@ -4995,6 +5021,13 @@ export declare class SimpleEntityController extends BaseEntityController {
 
 
 
+
+
+
+    /**
+     * @param options - Options for the controller.
+     */
+    constructor(options?: SimpleEntityControllerOptions);
     /**
      * Override of the {@link BaseEntityController.spawn} method. Starts
      * the set idle animations (if any) when the entity is spawned.
@@ -5034,10 +5067,32 @@ export declare class SimpleEntityController extends BaseEntityController {
      * @param options - Additional options for the move operation, such as callbacks.
      */
     move(target: Vector3Like, speed: number, options?: MoveOptions): void;
+    /**
+     * Stops the entity from attempting to face a target coordinate.
+     */
+    stopFace(): void;
+    /**
+     * Stops the entity from continuing to move it's current target coordinate.
+     */
+    stopMove(): void;
 
 
 
 
+}
+
+/** Options for creating a SimpleEntityController instance. @public */
+declare interface SimpleEntityControllerOptions {
+    /** The animations to loop when the entity is idle. */
+    idleLoopedAnimations?: string[];
+    /** The speed at which to loop the idle animations. */
+    idleLoopedAnimationsSpeed?: number;
+    /** The animations to play when the entity jumps. */
+    jumpOneshotAnimations?: string[];
+    /** The animations to loop when the entity is moving. */
+    moveLoopedAnimations?: string[];
+    /** The speed at which to loop the move animations. */
+    moveLoopedAnimationsSpeed?: number;
 }
 
 /**
@@ -5190,7 +5245,7 @@ export declare interface SpdMatrix3 extends SdpMatrix3 {
 export declare function startServer(init: ((() => void) | ((world: World) => void))): void;
 
 /** The input keys that are included in the PlayerInput. @public */
-export declare const SUPPORTED_INPUT_KEYS: readonly ["w", "a", "s", "d", "sp", "sh", "tb", "ml", "mr", "q", "e", "r", "f", "z", "x", "c", "v", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+export declare const SUPPORTED_INPUT_KEYS: readonly ["w", "a", "s", "d", "sp", "sh", "tb", "ml", "mr", "q", "e", "r", "f", "z", "x", "c", "v", "u", "i", "o", "j", "k", "l", "n", "m", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 
 /** The options for a trimesh collider. @public */
 export declare interface TrimeshColliderOptions extends BaseColliderOptions {

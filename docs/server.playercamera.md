@@ -288,6 +288,27 @@ The player that the camera belongs to.
 </td></tr>
 <tr><td>
 
+[shoulderAngle](./server.playercamera.shoulderangle.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+The shoulder angle of the camera in degrees.
+
+
+</td></tr>
+<tr><td>
+
 [trackedEntity](./server.playercamera.trackedentity.md)
 
 
@@ -520,6 +541,20 @@ Sets the nodes of the model the camera is attached to that will not be rendered 
 </td><td>
 
 Sets the relative offset of the camera from the entity or position it is attached to.
+
+
+</td></tr>
+<tr><td>
+
+[setShoulderAngle(shoulderAngle)](./server.playercamera.setshoulderangle.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Only used in third-person mode. Sets the shoulder angle of the camera in degrees. A positive value shifts the camera to the right, a negative value shifts it to the left.
 
 
 </td></tr>
