@@ -381,6 +381,27 @@ The scale of the entity's model.
 </td></tr>
 <tr><td>
 
+[modelTextureUri](./server.entity.modeltextureuri.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+The URI or path to the texture that overrides the model entity's default texture.
+
+
+</td></tr>
+<tr><td>
+
 [modelUri](./server.entity.modeluri.md)
 
 
@@ -620,6 +641,20 @@ Sets the playback rate of all animations on the entity's model.
 </td><td>
 
 Sets the nodes to hide on the entity's model. Matched nodes will be hidden for all players. Uses case insensitive substring matching.
+
+
+</td></tr>
+<tr><td>
+
+[setModelTextureUri(modelTextureUri)](./server.entity.setmodeltextureuri.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the texture uri of the entity's model. Setting this overrides the model's default texture.
 
 
 </td></tr>

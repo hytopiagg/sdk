@@ -133,6 +133,25 @@ _(Optional)_ The scale of the entity's model.
 </td></tr>
 <tr><td>
 
+[modelTextureUri?](./server.modelentityoptions.modeltextureuri.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ The texture uri of the entity's model. Setting this overrides the model's default texture.
+
+
+</td></tr>
+<tr><td>
+
 [modelUri?](./server.modelentityoptions.modeluri.md)
 
 

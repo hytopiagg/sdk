@@ -170,6 +170,25 @@ Emitted when the nodes of the entity's model are set to be hidden.
 </td></tr>
 <tr><td>
 
+["ENTITY.SET\_MODEL\_TEXTURE\_URI"](./server.entityeventpayloads._entity.set_model_texture_uri_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ entity: [Entity](./server.entity.md)<!-- -->; modelTextureUri: string \| undefined; }
+
+
+</td><td>
+
+Emitted when the texture uri of the entity's model is set.
+
+
+</td></tr>
+<tr><td>
+
 ["ENTITY.SET\_OPACITY"](./server.entityeventpayloads._entity.set_opacity_.md)
 
 

@@ -13663,6 +13663,36 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!Entity#modelTextureUri:member",
+              "docComment": "/**\n * The URI or path to the texture that overrides the model entity's default texture.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get modelTextureUri(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "modelTextureUri",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!Entity#modelUri:member",
               "docComment": "/**\n * The URI or path to the .gltf model asset to be used for the entity.\n */\n",
               "excerptTokens": [
@@ -13964,6 +13994,54 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "setModelHiddenNodes"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Entity#setModelTextureUri:member(1)",
+              "docComment": "/**\n * Sets the texture uri of the entity's model. Setting this overrides the model's default texture.\n *\n * @param modelTextureUri - The texture uri of the entity's model.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setModelTextureUri(modelTextureUri: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "modelTextureUri",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setModelTextureUri"
             },
             {
               "kind": "Method",
@@ -14816,6 +14894,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!EntityEvent.SET_MODEL_TEXTURE_URI:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_MODEL_TEXTURE_URI = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"ENTITY.SET_MODEL_TEXTURE_URI\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_MODEL_TEXTURE_URI"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!EntityEvent.SET_OPACITY:member",
               "docComment": "",
               "excerptTokens": [
@@ -15417,6 +15516,51 @@
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!EntityEventPayloads#\"ENTITY.SET_MODEL_TEXTURE_URI\":member",
+              "docComment": "/**\n * Emitted when the texture uri of the entity's model is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "EntityEvent.SET_MODEL_TEXTURE_URI",
+                  "canonicalReference": "server!EntityEvent.SET_MODEL_TEXTURE_URI:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        entity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Entity",
+                  "canonicalReference": "server!Entity:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        modelTextureUri: string | undefined;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"ENTITY.SET_MODEL_TEXTURE_URI\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
               }
             },
             {
@@ -25634,6 +25778,33 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "modelScale",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ModelEntityOptions#modelTextureUri:member",
+              "docComment": "/**\n * The texture uri of the entity's model. Setting this overrides the model's default texture.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "modelTextureUri?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "modelTextureUri",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

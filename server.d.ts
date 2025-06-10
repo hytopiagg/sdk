@@ -1751,6 +1751,7 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
 
 
 
+
     /**
      * @param options - The options for the entity.
      */
@@ -1775,6 +1776,8 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     get modelPreferredShape(): ColliderShape | undefined;
     /** The scale of the entity's model. */
     get modelScale(): number;
+    /** The URI or path to the texture that overrides the model entity's default texture. */
+    get modelTextureUri(): string | undefined;
     /** The URI or path to the .gltf model asset to be used for the entity. */
     get modelUri(): string | undefined;
     /** The name of the entity. */
@@ -1809,6 +1812,11 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      */
     despawn(): void;
     /**
+     * Sets the controller for the entity.
+     * @param controller - The controller to set.
+     */
+    setController(controller: BaseEntityController | undefined): void;
+    /**
      * Sets the playback rate of all animations on the entity's model.
      *
      * @remarks
@@ -1820,17 +1828,18 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      */
     setModelAnimationsPlaybackRate(playbackRate: number): void;
     /**
-     * Sets the controller for the entity.
-     * @param controller - The controller to set.
-     */
-    setController(controller: BaseEntityController | undefined): void;
-    /**
      * Sets the nodes to hide on the entity's model. Matched nodes
      * will be hidden for all players. Uses case insensitive
      * substring matching.
      * @param modelHiddenNodes - The nodes to hide on the entity's model.
      */
     setModelHiddenNodes(modelHiddenNodes: string[]): void;
+    /**
+     * Sets the texture uri of the entity's model. Setting
+     * this overrides the model's default texture.
+     * @param modelTextureUri - The texture uri of the entity's model.
+     */
+    setModelTextureUri(modelTextureUri: string | undefined): void;
     /**
      * Sets the opacity of the entity.
      * @param opacity - The opacity of the entity between 0 and 1. 0 is fully transparent, 1 is fully opaque.
@@ -1929,6 +1938,7 @@ export declare enum EntityEvent {
     ENTITY_CONTACT_FORCE = "ENTITY.ENTITY_CONTACT_FORCE",
     SET_MODEL_ANIMATIONS_PLAYBACK_RATE = "ENTITY.SET_MODEL_ANIMATIONS_PLAYBACK_RATE",
     SET_MODEL_HIDDEN_NODES = "ENTITY.SET_MODEL_HIDDEN_NODES",
+    SET_MODEL_TEXTURE_URI = "ENTITY.SET_MODEL_TEXTURE_URI",
     SET_OPACITY = "ENTITY.SET_OPACITY",
     SET_PARENT = "ENTITY.SET_PARENT",
     SET_TINT_COLOR = "ENTITY.SET_TINT_COLOR",
@@ -1984,6 +1994,11 @@ export declare interface EntityEventPayloads {
     [EntityEvent.SET_MODEL_HIDDEN_NODES]: {
         entity: Entity;
         modelHiddenNodes: Set<string>;
+    };
+    /** Emitted when the texture uri of the entity's model is set. */
+    [EntityEvent.SET_MODEL_TEXTURE_URI]: {
+        entity: Entity;
+        modelTextureUri: string | undefined;
     };
     /** Emitted when the opacity of the entity is set. */
     [EntityEvent.SET_OPACITY]: {
@@ -3230,6 +3245,8 @@ export declare interface ModelEntityOptions extends BaseEntityOptions {
     modelPreferredShape?: ColliderShape;
     /** The scale of the entity's model. */
     modelScale?: number;
+    /** The texture uri of the entity's model. Setting this overrides the model's default texture. */
+    modelTextureUri?: string;
     /** The URI or path to the .gltf model asset to be used for the entity. */
     modelUri?: string;
 }

@@ -130,6 +130,20 @@ SET\_MODEL\_HIDDEN\_NODES
 </td></tr>
 <tr><td>
 
+SET\_MODEL\_TEXTURE\_URI
+
+
+</td><td>
+
+`"ENTITY.SET_MODEL_TEXTURE_URI"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 SET\_OPACITY
 
 
