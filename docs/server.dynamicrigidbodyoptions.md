@@ -304,7 +304,7 @@ _(Optional)_ The soft continuous collision detection prediction of the rigid bod
 </td></tr>
 <tr><td>
 
-[type?](./server.dynamicrigidbodyoptions.type.md)
+[type](./server.dynamicrigidbodyoptions.type.md)
 
 
 </td><td>
@@ -316,8 +316,6 @@ _(Optional)_ The soft continuous collision detection prediction of the rigid bod
 
 
 </td><td>
-
-_(Optional)_
 
 
 </td></tr>

@@ -7,5 +7,5 @@
 **Signature:**
 
 ```typescript
-type?: RigidBodyType.DYNAMIC;
+type: RigidBodyType.DYNAMIC;
 ```

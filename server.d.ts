@@ -1658,7 +1658,7 @@ export declare type DefaultPlayerEntityOptions = {} & PlayerEntityOptions;
 
 /** The options for a dynamic rigid body, also the default type. @public */
 export declare interface DynamicRigidBodyOptions extends BaseRigidBodyOptions {
-    type?: RigidBodyType.DYNAMIC;
+    type: RigidBodyType.DYNAMIC;
     /** The additional mass of the rigid body. */
     additionalMass?: number;
     /** The additional mass properties of the rigid body. */

@@ -13119,7 +13119,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "type?: "
+                  "text": "type: "
                 },
                 {
                   "kind": "Reference",
@@ -13132,7 +13132,7 @@
                 }
               ],
               "isReadonly": false,
-              "isOptional": true,
+              "isOptional": false,
               "releaseTag": "Public",
               "name": "type",
               "propertyTypeTokenRange": {
