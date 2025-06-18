@@ -205,6 +205,25 @@ A function allowing custom logic to determine if the entity can walk.
 </td></tr>
 <tr><td>
 
+[faceForwardOnStop](./server.defaultplayerentitycontroller.faceforwardonstop.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether to face forward when the entity stops moving.
+
+
+</td></tr>
+<tr><td>
+
 [idleLoopedAnimations](./server.defaultplayerentitycontroller.idleloopedanimations.md)
 
 

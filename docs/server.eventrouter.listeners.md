@@ -9,7 +9,7 @@ Get all listeners for a specific event type.
 **Signature:**
 
 ```typescript
-listeners(eventType: keyof EventPayloads): EventEmitter.EventListener<any, string>[];
+listeners<TEventType extends keyof EventPayloads>(eventType: TEventType): EventEmitter.EventListener<any, string>[];
 ```
 
 ## Parameters
@@ -37,7 +37,7 @@ eventType
 
 </td><td>
 
-keyof [EventPayloads](./server.eventpayloads.md)
+TEventType
 
 
 </td><td>

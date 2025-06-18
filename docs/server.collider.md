@@ -296,12 +296,33 @@ The parent rigid body of the collider.
 
 </td><td>
 
-RAPIER.Collider \| undefined
+[RawCollider](./server.rawcollider.md) \| undefined
 
 
 </td><td>
 
 The raw collider object from the Rapier physics engine.
+
+
+</td></tr>
+<tr><td>
+
+[rawShape](./server.collider.rawshape.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[RawShape](./server.rawshape.md) \| undefined
+
+
+</td><td>
+
+The raw shape object from the Rapier physics engine.
 
 
 </td></tr>

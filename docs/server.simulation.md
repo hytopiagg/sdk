@@ -215,6 +215,20 @@ Gets the contact manifolds for a pair of colliders.
 </td></tr>
 <tr><td>
 
+[intersectionsWithRawShape(rawShape, position, rotation, options)](./server.simulation.intersectionswithrawshape.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Gets the intersections with a raw shape.
+
+
+</td></tr>
+<tr><td>
+
 [raycast(origin, direction, length, options)](./server.simulation.raycast.md)
 
 

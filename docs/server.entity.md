@@ -381,6 +381,27 @@ The scale of the entity's model.
 </td></tr>
 <tr><td>
 
+[modelShownNodes](./server.entity.modelshownnodes.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+ReadonlySet&lt;string&gt;
+
+
+</td><td>
+
+The nodes to show on the entity's model, overriding hidden nodes.
+
+
+</td></tr>
+<tr><td>
+
 [modelTextureUri](./server.entity.modeltextureuri.md)
 
 
@@ -641,6 +662,20 @@ Sets the playback rate of all animations on the entity's model.
 </td><td>
 
 Sets the nodes to hide on the entity's model. Matched nodes will be hidden for all players. Uses case insensitive substring matching.
+
+
+</td></tr>
+<tr><td>
+
+[setModelShownNodes(modelShownNodes)](./server.entity.setmodelshownnodes.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the nodes to show on the entity's model, overriding hidden nodes. Matched nodes will be shown for all players. Uses case insensitive substring matching.
 
 
 </td></tr>

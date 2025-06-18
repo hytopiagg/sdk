@@ -9,5 +9,5 @@ The raw collider object from the Rapier physics engine.
 **Signature:**
 
 ```typescript
-get rawCollider(): RAPIER.Collider | undefined;
+get rawCollider(): RawCollider | undefined;
 ```

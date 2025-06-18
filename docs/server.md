@@ -1572,6 +1572,28 @@ Options for the [SimpleEntityController.face()](./server.simpleentitycontroller.
 </td></tr>
 <tr><td>
 
+[FilterOptions](./server.filteroptions.md)
+
+
+</td><td>
+
+Filter options for various operations like raycasting and intersections.
+
+
+</td></tr>
+<tr><td>
+
+[IntersectionResult](./server.intersectionresult.md)
+
+
+</td><td>
+
+A intersection result.
+
+
+</td></tr>
+<tr><td>
+
 [ModelBoundingBox](./server.modelboundingbox.md)
 
 
@@ -1693,12 +1715,34 @@ The input state of a Player; keys from SUPPORTED\_INPUT\_KEYS.
 </td></tr>
 <tr><td>
 
+[RawCollider](./server.rawcollider.md)
+
+
+</td><td>
+
+A raw collider object from the Rapier physics engine.
+
+
+</td></tr>
+<tr><td>
+
 [RawCollisionGroups](./server.rawcollisiongroups.md)
 
 
 </td><td>
 
 A raw set of collision groups represented as a 32-bit number.
+
+
+</td></tr>
+<tr><td>
+
+[RawShape](./server.rawshape.md)
+
+
+</td><td>
+
+A raw shape object from the Rapier physics engine.
 
 
 </td></tr>

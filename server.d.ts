@@ -1122,7 +1122,9 @@ export declare class Collider extends EventRouter {
     /** The parent rigid body of the collider. */
     get parentRigidBody(): RigidBody | undefined;
     /** The raw collider object from the Rapier physics engine. */
-    get rawCollider(): RAPIER.Collider | undefined;
+    get rawCollider(): RawCollider | undefined;
+    /** The raw shape object from the Rapier physics engine. */
+    get rawShape(): RawShape | undefined;
     /** The relative position of the collider to its parent rigid body. */
     get relativePosition(): Vector3Like;
     /** The relative rotation of the collider. */
@@ -1510,6 +1512,8 @@ export declare class DefaultPlayerEntityController extends BaseEntityController 
      * @returns Whether the entity of the entity controller can walk.
      */
     canWalk: (controller: DefaultPlayerEntityController) => boolean;
+    /** Whether to face forward when the entity stops moving. */
+    faceForwardOnStop: boolean;
     /** The looped animation(s) that will play when the entity is idle. */
     idleLoopedAnimations: string[];
     /** The oneshot animation(s) that will play when the entity interacts (left click) */
@@ -1615,6 +1619,8 @@ export declare interface DefaultPlayerEntityControllerOptions {
     canSwim?: () => boolean;
     /** A function allowing custom logic to determine if the entity can walk. */
     canWalk?: () => boolean;
+    /** Whether to face forward when the entity stops moving. */
+    faceForwardOnStop?: boolean;
     /** Overrides the animation(s) that will play when the entity is idle. */
     idleLoopedAnimations?: string[];
     /** Overrides the animation(s) that will play when the entity interacts (left click) */
@@ -1752,6 +1758,7 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
 
 
 
+
     /**
      * @param options - The options for the entity.
      */
@@ -1776,6 +1783,8 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     get modelPreferredShape(): ColliderShape | undefined;
     /** The scale of the entity's model. */
     get modelScale(): number;
+    /** The nodes to show on the entity's model, overriding hidden nodes. */
+    get modelShownNodes(): ReadonlySet<string>;
     /** The URI or path to the texture that overrides the model entity's default texture. */
     get modelTextureUri(): string | undefined;
     /** The URI or path to the .gltf model asset to be used for the entity. */
@@ -1834,6 +1843,13 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * @param modelHiddenNodes - The nodes to hide on the entity's model.
      */
     setModelHiddenNodes(modelHiddenNodes: string[]): void;
+    /**
+     * Sets the nodes to show on the entity's model, overriding hidden nodes.
+     * Matched nodes will be shown for all players. Uses case insensitive
+     * substring matching.
+     * @param modelShownNodes - The nodes to show on the entity's model.
+     */
+    setModelShownNodes(modelShownNodes: string[]): void;
     /**
      * Sets the texture uri of the entity's model. Setting
      * this overrides the model's default texture.
@@ -1938,6 +1954,7 @@ export declare enum EntityEvent {
     ENTITY_CONTACT_FORCE = "ENTITY.ENTITY_CONTACT_FORCE",
     SET_MODEL_ANIMATIONS_PLAYBACK_RATE = "ENTITY.SET_MODEL_ANIMATIONS_PLAYBACK_RATE",
     SET_MODEL_HIDDEN_NODES = "ENTITY.SET_MODEL_HIDDEN_NODES",
+    SET_MODEL_SHOWN_NODES = "ENTITY.SET_MODEL_SHOWN_NODES",
     SET_MODEL_TEXTURE_URI = "ENTITY.SET_MODEL_TEXTURE_URI",
     SET_OPACITY = "ENTITY.SET_OPACITY",
     SET_PARENT = "ENTITY.SET_PARENT",
@@ -1990,10 +2007,15 @@ export declare interface EntityEventPayloads {
         entity: Entity;
         playbackRate: number;
     };
-    /** Emitted when the nodes of the entity's model are set to be hidden. */
+    /** Emitted when nodes of the entity's model are set to be hidden. */
     [EntityEvent.SET_MODEL_HIDDEN_NODES]: {
         entity: Entity;
         modelHiddenNodes: Set<string>;
+    };
+    /** Emitted when nodes of the entity's model are set to be shown. */
+    [EntityEvent.SET_MODEL_SHOWN_NODES]: {
+        entity: Entity;
+        modelShownNodes: Set<string>;
     };
     /** Emitted when the texture uri of the entity's model is set. */
     [EntityEvent.SET_MODEL_TEXTURE_URI]: {
@@ -2172,7 +2194,9 @@ export declare interface EventPayloads extends AudioEventPayloads, BaseEntityCon
  * @public
  */
 export declare class EventRouter {
-    private _emitter;
+    /** The global event router instance. */
+    static readonly globalInstance: EventRouter;
+
     private _finalListeners;
     /**
      * Emit an event, invoking all registered listeners for the event type.
@@ -2183,6 +2207,7 @@ export declare class EventRouter {
      * @returns `true` if any listeners were found and invoked, `false` otherwise.
      */
     emit<TEventType extends keyof EventPayloads>(eventType: TEventType, payload: EventPayloads[TEventType]): boolean;
+    emit(eventType: string, payload: any): boolean;
     /**
      * Emits an event to the local and global server instance event routers.
      *
@@ -2190,6 +2215,7 @@ export declare class EventRouter {
      * @param payload - The payload to emit.
      */
     emitWithGlobal<TEventType extends keyof EventPayloads>(eventType: TEventType, payload: EventPayloads[TEventType]): void;
+    emitWithGlobal(eventType: string, payload: any): void;
     /**
      * Emits an event to local and provided world event routers.
      *
@@ -2198,7 +2224,9 @@ export declare class EventRouter {
      * @param payload - The payload to broadcast.
      */
     emitWithWorld<TEventType extends keyof EventPayloads>(world: World, eventType: TEventType, payload: EventPayloads[TEventType]): void;
+    emitWithWorld(world: World, eventType: string, payload: any): void;
 
+    final(eventType: string, listener: (payload: any) => void): void;
     /**
      * Check if there are listeners for a specific event type.
      *
@@ -2206,7 +2234,8 @@ export declare class EventRouter {
      *
      * @returns `true` if listeners are found, `false` otherwise.
      */
-    hasListeners(eventType: keyof EventPayloads): boolean;
+    hasListeners<TEventType extends keyof EventPayloads>(eventType: TEventType): boolean;
+    hasListeners(eventType: string): boolean;
     /**
      * Get all listeners for a specific event type.
      *
@@ -2214,7 +2243,8 @@ export declare class EventRouter {
      *
      * @returns All listeners for the event type.
      */
-    listeners(eventType: keyof EventPayloads): EventEmitter.EventListener<any, string>[];
+    listeners<TEventType extends keyof EventPayloads>(eventType: TEventType): EventEmitter.EventListener<any, string>[];
+    listeners(eventType: string): EventEmitter.EventListener<any, string>[];
     /**
      * Get the number of listeners for a specific event type.
      *
@@ -2222,7 +2252,8 @@ export declare class EventRouter {
      *
      * @returns The number of listeners for the event type.
      */
-    listenerCount(eventType: keyof EventPayloads): number;
+    listenerCount<TEventType extends keyof EventPayloads>(eventType: TEventType): number;
+    listenerCount(eventType: string): number;
     /**
      * Remove a listener for a specific event type.
      *
@@ -2230,12 +2261,14 @@ export declare class EventRouter {
      * @param listener - The listener function to remove.
      */
     off<TEventType extends keyof EventPayloads>(eventType: TEventType, listener: (payload: EventPayloads[TEventType]) => void): void;
+    off(eventType: string, listener: (payload: any) => void): void;
     /**
      * Remove all listeners or all listeners for a provided event type.
      *
      * @param eventType - The type of event to remove all listeners from.
      */
-    offAll(eventType?: keyof EventPayloads): void;
+    offAll<TEventType extends keyof EventPayloads>(eventType?: TEventType): void;
+    offAll(eventType?: string): void;
     /**
      * Register a listener for a specific event type.
      *
@@ -2246,6 +2279,7 @@ export declare class EventRouter {
      * @param listener - The listener function to invoke when the event is emitted.
      */
     on<TEventType extends keyof EventPayloads>(eventType: TEventType, listener: (payload: EventPayloads[TEventType]) => void): void;
+    on(eventType: string, listener: (payload: any) => void): void;
     /**
      * Register a listener for a specific event type that will be invoked once.
      *
@@ -2253,6 +2287,7 @@ export declare class EventRouter {
      * @param listener - The listener function to invoke when the event is emitted.
      */
     once<TEventType extends keyof EventPayloads>(eventType: TEventType, listener: (payload: EventPayloads[TEventType]) => void): void;
+    once(eventType: string, listener: (payload: any) => void): void;
 }
 
 /**
@@ -2281,6 +2316,20 @@ export declare type FaceCompleteCallback = (endRotation: QuaternionLike) => void
 export declare type FaceOptions = {
     faceCallback?: FaceCallback;
     faceCompleteCallback?: FaceCompleteCallback;
+};
+
+/** Filter options for various operations like raycasting and intersections. @public */
+export declare type FilterOptions = {
+    /** The query filter flags. */
+    filterFlags?: RAPIER.QueryFilterFlags;
+    /** The collision group to filter by. */
+    filterGroups?: number;
+    /** The collider to exclude. */
+    filterExcludeCollider?: RawCollider;
+    /** The rigid body to exclude. */
+    filterExcludeRigidBody?: RAPIER.RigidBody;
+    /** The predicate to filter by. */
+    filterPredicate?: (collider: RawCollider) => boolean;
 };
 
 /** The options for a fixed rigid body. @public */
@@ -2336,6 +2385,14 @@ export declare interface GameServerEventPayloads {
         stoppedAtMs: number;
     };
 }
+
+/** A intersection result. @public */
+export declare type IntersectionResult = {
+    /** The block type that was intersected. */
+    intersectedBlockType?: BlockType;
+    /** The entity that was intersected. */
+    intersectedEntity?: Entity;
+};
 
 /** The options for a kinematic position rigid body. @public */
 export declare interface KinematicPositionRigidBodyOptions extends BaseRigidBodyOptions {
@@ -3245,6 +3302,8 @@ export declare interface ModelEntityOptions extends BaseEntityOptions {
     modelPreferredShape?: ColliderShape;
     /** The scale of the entity's model. */
     modelScale?: number;
+    /** The nodes to show on the entity's model, overriding hidden nodes. */
+    modelShownNodes?: string[];
     /** The texture uri of the entity's model. Setting this overrides the model's default texture. */
     modelTextureUri?: string;
     /** The URI or path to the .gltf model asset to be used for the entity. */
@@ -3381,6 +3440,8 @@ export declare type MoveOptions = {
     moveStartIdleAnimationsOnCompletion?: boolean;
     /** The distance from the target at which the entity will stop moving and consider movement complete. Defaults to 0.316~ blocks away from target. */
     moveStoppingDistance?: number;
+    /** Whether to stop moving and consider movement complete when the entity is stuck, such as pushing into a block. Defaults to false. */
+    moveCompletesWhenStuck?: boolean;
 };
 
 /** The options for an error type "none" collider. @public */
@@ -3413,6 +3474,7 @@ export declare type PathfindCompleteCallback = () => void;
  * @public
  */
 export declare class PathfindingEntityController extends SimpleEntityController {
+
 
 
 
@@ -3498,6 +3560,8 @@ export declare type PathfindingOptions = {
     waypointMoveCompleteCallback?: WaypointMoveCompleteCallback;
     /** Callback called when the entity associated with the PathfindingEntityController skips a waypoint because it took too long to reach. */
     waypointMoveSkippedCallback?: WaypointMoveSkippedCallback;
+    /** The distance in blocks from the waypoint that the entity will stop moving and consider the waypoint reached. */
+    waypointStoppingDistance?: number;
     /** The timeout in milliseconds for a waypoint to be considered reached. Defaults to 2000ms divided by the speed of the entity. */
     waypointTimeoutMs?: number;
 };
@@ -3673,12 +3737,15 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
 
 
 
+
     /** The entity the camera is attached to. */
     get attachedToEntity(): Entity | undefined;
     /** The position the camera is attached to. */
     get attachedToPosition(): Vector3Like | undefined;
     /** The facing direction vector of the camera based on its current orientation. */
     get facingDirection(): Vector3Like;
+    /** The quaternion representing the camera's facing direction. */
+    get facingQuaternion(): QuaternionLike;
     /** The film offset of the camera. A positive value shifts the camera right, a negative value shifts it left. */
     get filmOffset(): number;
     /** Only used in first-person mode. The forward offset of the camera. A positive number shifts the camera forward, a negative number shifts it backward. */
@@ -3687,6 +3754,8 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
     get fov(): number;
     /** The nodes of the model the camera is attached to that will not be rendered for the player. Uses case insensitive substring matching. */
     get modelHiddenNodes(): Set<string>;
+    /** The nodes of the model the camera is attached to that will be rendered for the player, overriding hidden nodes. Uses case insensitive substring matching. */
+    get modelShownNodes(): Set<string>;
     /** The mode of the camera. */
     get mode(): PlayerCameraMode;
     /** The relative offset of the camera from the entity or position it is attached to. */
@@ -3756,6 +3825,13 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
      */
     setModelHiddenNodes(modelHiddenNodes: string[]): void;
     /**
+     * Sets the nodes of the model the camera is attached to
+     * that will be rendered for the player, overriding hidden
+     * nodes. Uses case insensitive substring matching.
+     * @param modelShownNodes - Determines nodes to show that match these case insensitive substrings.
+     */
+    setModelShownNodes(modelShownNodes: string[]): void;
+    /**
      * Sets the mode of the camera.
      * @param mode - The mode to set.
      */
@@ -3807,6 +3883,7 @@ export declare enum PlayerCameraEvent {
     SET_FORWARD_OFFSET = "PLAYER_CAMERA.SET_FORWARD_OFFSET",
     SET_FOV = "PLAYER_CAMERA.SET_FOV",
     SET_MODEL_HIDDEN_NODES = "PLAYER_CAMERA.SET_MODEL_HIDDEN_NODES",
+    SET_MODEL_SHOWN_NODES = "PLAYER_CAMERA.SET_MODEL_SHOWN_NODES",
     SET_MODE = "PLAYER_CAMERA.SET_MODE",
     SET_OFFSET = "PLAYER_CAMERA.SET_OFFSET",
     SET_SHOULDER_ANGLE = "PLAYER_CAMERA.SET_SHOULDER_ANGLE",
@@ -3856,6 +3933,11 @@ export declare interface PlayerCameraEventPayloads {
     [PlayerCameraEvent.SET_MODEL_HIDDEN_NODES]: {
         playerCamera: PlayerCamera;
         modelHiddenNodes: Set<string>;
+    };
+    /** Emitted when the nodes of the model the camera is attached to are set to be shown. */
+    [PlayerCameraEvent.SET_MODEL_SHOWN_NODES]: {
+        playerCamera: PlayerCamera;
+        modelShownNodes: Set<string>;
     };
     /** Emitted when the mode of the camera is set. */
     [PlayerCameraEvent.SET_MODE]: {
@@ -4019,6 +4101,8 @@ export declare type PlayerInput = Partial<Record<keyof InputSchema, boolean>>;
 export declare class PlayerManager {
     /** The global PlayerManager instance as a singleton. */
     static readonly instance: PlayerManager;
+    /** Optional handler for selecting the world a newly connected player joins. Returning no world results in the player joining the default WorldManager world. */
+    worldSelectionHandler?: (player: Player) => Promise<World | undefined>;
 
 
     /** The number of players currently connected to the server. */
@@ -4371,8 +4455,14 @@ export declare interface QuaternionLike {
     w: number;
 }
 
+/** A raw collider object from the Rapier physics engine. @public */
+export declare type RawCollider = RAPIER.Collider;
+
 /** A raw set of collision groups represented as a 32-bit number. @public */
 export declare type RawCollisionGroups = RAPIER.InteractionGroups;
+
+/** A raw shape object from the Rapier physics engine. @public */
+export declare type RawShape = RAPIER.Shape;
 
 /** A hit result from a raycast. @public */
 export declare type RaycastHit = {
@@ -4388,19 +4478,9 @@ export declare type RaycastHit = {
 
 /** Options for raycasting. @public */
 export declare type RaycastOptions = {
-    /** Whether to ignore sensor colliders. */
-    ignoresSensors?: boolean;
-    /** The query filter flags. */
-    filterFlags?: RAPIER.QueryFilterFlags;
-    /** The collision group to filter by. */
-    filterGroups?: number;
-    /** The collider to exclude. */
-    filterExcludeCollider?: RAPIER.Collider;
-    /** The rigid body to exclude. */
-    filterExcludeRigidBody?: RAPIER.RigidBody;
-    /** The predicate to filter by. */
-    filterPredicate?: (collider: RAPIER.Collider) => boolean;
-};
+    /** Whether to use solid mode for the raycast, defaults to true. */
+    solidMode?: boolean;
+} & FilterOptions;
 
 /** A RGB color. @public */
 export declare interface RgbColor {
@@ -5041,6 +5121,9 @@ export declare class SimpleEntityController extends BaseEntityController {
 
 
 
+
+
+
     /**
      * @param options - Options for the controller.
      */
@@ -5148,20 +5231,6 @@ export declare class Simulation extends EventRouter {
     get timestepS(): number;
     /** The world the simulation is for. */
     get world(): World;
-    /**
-     * Casts a ray through the simulation.
-     *
-     * @remarks
-     * The cast ray will stop at the the first block or
-     * entity hit within the length of the ray.
-     *
-     * @param origin - The origin of the ray.
-     * @param direction - The direction of the ray.
-     * @param length - The length of the ray.
-     * @param options - The options for the raycast.
-     * @returns A RaycastHit object containing the first block or entity hit by the ray, or null if no hit.
-     */
-    raycast(origin: RAPIER.Vector3, direction: RAPIER.Vector3, length: number, options?: RaycastOptions): RaycastHit | null;
 
 
     /**
@@ -5191,6 +5260,34 @@ export declare class Simulation extends EventRouter {
      * @returns The contact manifolds, or an empty array if no contact.
      */
     getContactManifolds(colliderHandleA: RAPIER.ColliderHandle, colliderHandleB: RAPIER.ColliderHandle): ContactManifold[];
+    /**
+     * Gets the intersections with a raw shape.
+     *
+     * @remarks
+     * rawShape can be retrieved from a simulated or
+     * unsimulated collider using {@link Collider.rawShape}.
+     *
+     * @param rawShape - The raw shape to get intersections with.
+     * @param position - The position of the shape.
+     * @param rotation - The rotation of the shape.
+     * @param options - The options for the intersections.
+     * @returns The intersections.
+     */
+    intersectionsWithRawShape(rawShape: RawShape, position: Vector3Like, rotation: QuaternionLike, options?: FilterOptions): IntersectionResult[];
+    /**
+     * Casts a ray through the simulation.
+     *
+     * @remarks
+     * The cast ray will stop at the the first block or
+     * entity hit within the length of the ray.
+     *
+     * @param origin - The origin of the ray.
+     * @param direction - The direction of the ray.
+     * @param length - The length of the ray.
+     * @param options - The options for the raycast.
+     * @returns A RaycastHit object containing the first block or entity hit by the ray, or null if no hit.
+     */
+    raycast(origin: RAPIER.Vector3, direction: RAPIER.Vector3, length: number, options?: RaycastOptions): RaycastHit | null;
 
 
     /**

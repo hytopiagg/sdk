@@ -99,6 +99,25 @@ The number of players currently connected to the server.
 
 
 </td></tr>
+<tr><td>
+
+[worldSelectionHandler?](./server.playermanager.worldselectionhandler.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(player: [Player](./server.player.md)<!-- -->) =&gt; Promise&lt;[World](./server.world.md) \| undefined&gt;
+
+
+</td><td>
+
+_(Optional)_ Optional handler for selecting the world a newly connected player joins. Returning no world results in the player joining the default WorldManager world.
+
+
+</td></tr>
 </tbody></table>
 
 ## Methods

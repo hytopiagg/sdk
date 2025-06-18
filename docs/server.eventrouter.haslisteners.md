@@ -9,7 +9,7 @@ Check if there are listeners for a specific event type.
 **Signature:**
 
 ```typescript
-hasListeners(eventType: keyof EventPayloads): boolean;
+hasListeners<TEventType extends keyof EventPayloads>(eventType: TEventType): boolean;
 ```
 
 ## Parameters
@@ -37,7 +37,7 @@ eventType
 
 </td><td>
 
-keyof [EventPayloads](./server.eventpayloads.md)
+TEventType
 
 
 </td><td>

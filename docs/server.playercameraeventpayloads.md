@@ -208,6 +208,25 @@ Emitted when the nodes of the model the camera is attached to are set to be hidd
 </td></tr>
 <tr><td>
 
+["PLAYER\_CAMERA.SET\_MODEL\_SHOWN\_NODES"](./server.playercameraeventpayloads._player_camera.set_model_shown_nodes_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ playerCamera: [PlayerCamera](./server.playercamera.md)<!-- -->; modelShownNodes: Set&lt;string&gt;; }
+
+
+</td><td>
+
+Emitted when the nodes of the model the camera is attached to are set to be shown.
+
+
+</td></tr>
+<tr><td>
+
 ["PLAYER\_CAMERA.SET\_OFFSET"](./server.playercameraeventpayloads._player_camera.set_offset_.md)
 
 

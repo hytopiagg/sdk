@@ -151,6 +151,25 @@ _(Optional)_ A function allowing custom logic to determine if the entity can wal
 </td></tr>
 <tr><td>
 
+[faceForwardOnStop?](./server.defaultplayerentitycontrolleroptions.faceforwardonstop.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ Whether to face forward when the entity stops moving.
+
+
+</td></tr>
+<tr><td>
+
 [idleLoopedAnimations?](./server.defaultplayerentitycontrolleroptions.idleloopedanimations.md)
 
 

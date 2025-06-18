@@ -10,11 +10,8 @@ Options for raycasting.
 
 ```typescript
 export type RaycastOptions = {
-    ignoresSensors?: boolean;
-    filterFlags?: RAPIER.QueryFilterFlags;
-    filterGroups?: number;
-    filterExcludeCollider?: RAPIER.Collider;
-    filterExcludeRigidBody?: RAPIER.RigidBody;
-    filterPredicate?: (collider: RAPIER.Collider) => boolean;
-};
+    solidMode?: boolean;
+} & FilterOptions;
 ```
+**References:** [FilterOptions](./server.filteroptions.md)
+

@@ -133,6 +133,25 @@ _(Optional)_ The scale of the entity's model.
 </td></tr>
 <tr><td>
 
+[modelShownNodes?](./server.modelentityoptions.modelshownnodes.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+_(Optional)_ The nodes to show on the entity's model, overriding hidden nodes.
+
+
+</td></tr>
+<tr><td>
+
 [modelTextureUri?](./server.modelentityoptions.modeltextureuri.md)
 
 

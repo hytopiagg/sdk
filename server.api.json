@@ -8577,8 +8577,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "RAPIER.Collider",
-                  "canonicalReference": "@dimforge/rapier3d-simd-compat!Collider:class"
+                  "text": "RawCollider",
+                  "canonicalReference": "server!RawCollider:type"
                 },
                 {
                   "kind": "Content",
@@ -8593,6 +8593,41 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "rawCollider",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!Collider#rawShape:member",
+              "docComment": "/**\n * The raw shape object from the Rapier physics engine.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get rawShape(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RawShape",
+                  "canonicalReference": "server!RawShape:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "rawShape",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
@@ -11160,6 +11195,36 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!DefaultPlayerEntityController#faceForwardOnStop:member",
+              "docComment": "/**\n * Whether to face forward when the entity stops moving.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "faceForwardOnStop: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "faceForwardOnStop",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!DefaultPlayerEntityController#idleLoopedAnimations:member",
               "docComment": "/**\n * The looped animation(s) that will play when the entity is idle.\n */\n",
               "excerptTokens": [
@@ -12180,6 +12245,33 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "canWalk",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!DefaultPlayerEntityControllerOptions#faceForwardOnStop:member",
+              "docComment": "/**\n * Whether to face forward when the entity stops moving.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "faceForwardOnStop?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "faceForwardOnStop",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -13663,6 +13755,41 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!Entity#modelShownNodes:member",
+              "docComment": "/**\n * The nodes to show on the entity's model, overriding hidden nodes.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get modelShownNodes(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ReadonlySet",
+                  "canonicalReference": "!ReadonlySet:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "modelShownNodes",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!Entity#modelTextureUri:member",
               "docComment": "/**\n * The URI or path to the texture that overrides the model entity's default texture.\n */\n",
               "excerptTokens": [
@@ -13994,6 +14121,54 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "setModelHiddenNodes"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Entity#setModelShownNodes:member(1)",
+              "docComment": "/**\n * Sets the nodes to show on the entity's model, overriding hidden nodes. Matched nodes will be shown for all players. Uses case insensitive substring matching.\n *\n * @param modelShownNodes - The nodes to show on the entity's model.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setModelShownNodes(modelShownNodes: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "modelShownNodes",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setModelShownNodes"
             },
             {
               "kind": "Method",
@@ -14894,6 +15069,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!EntityEvent.SET_MODEL_SHOWN_NODES:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_MODEL_SHOWN_NODES = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"ENTITY.SET_MODEL_SHOWN_NODES\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_MODEL_SHOWN_NODES"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!EntityEvent.SET_MODEL_TEXTURE_URI:member",
               "docComment": "",
               "excerptTokens": [
@@ -15467,7 +15663,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "server!EntityEventPayloads#\"ENTITY.SET_MODEL_HIDDEN_NODES\":member",
-              "docComment": "/**\n * Emitted when the nodes of the entity's model are set to be hidden.\n */\n",
+              "docComment": "/**\n * Emitted when nodes of the entity's model are set to be hidden.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -15513,6 +15709,60 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "\"ENTITY.SET_MODEL_HIDDEN_NODES\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!EntityEventPayloads#\"ENTITY.SET_MODEL_SHOWN_NODES\":member",
+              "docComment": "/**\n * Emitted when nodes of the entity's model are set to be shown.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "EntityEvent.SET_MODEL_SHOWN_NODES",
+                  "canonicalReference": "server!EntityEvent.SET_MODEL_SHOWN_NODES:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        entity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Entity",
+                  "canonicalReference": "server!Entity:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        modelShownNodes: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Set",
+                  "canonicalReference": "!Set:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string>;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"ENTITY.SET_MODEL_SHOWN_NODES\"",
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 8
@@ -17166,6 +17416,70 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "server!EventRouter#emit:member(2)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "emit(eventType: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", payload: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 2,
+              "parameters": [
+                {
+                  "parameterName": "eventType",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "payload",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "emit"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "server!EventRouter#emitWithGlobal:member(1)",
               "docComment": "/**\n * Emits an event to the local and global server instance event routers.\n *\n * @param eventType - The type of event to emit.\n *\n * @param payload - The payload to emit.\n */\n",
               "excerptTokens": [
@@ -17251,6 +17565,70 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 6,
                     "endIndex": 8
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "emitWithGlobal"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!EventRouter#emitWithGlobal:member(2)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "emitWithGlobal(eventType: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", payload: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 2,
+              "parameters": [
+                {
+                  "parameterName": "eventType",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "payload",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
                   },
                   "isOptional": false
                 }
@@ -17373,12 +17751,188 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "server!EventRouter#emitWithWorld:member(2)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "emitWithWorld(world: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "World",
+                  "canonicalReference": "server!World:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", eventType: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", payload: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 7,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 2,
+              "parameters": [
+                {
+                  "parameterName": "world",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "eventType",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "payload",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 6
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "emitWithWorld"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!EventRouter#final:member(2)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "final(eventType: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", listener: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(payload: any) => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 2,
+              "parameters": [
+                {
+                  "parameterName": "eventType",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "listener",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "final"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!EventRouter.globalInstance:member",
+              "docComment": "/**\n * The global event router instance.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static readonly globalInstance: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "EventRouter",
+                  "canonicalReference": "server!EventRouter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "globalInstance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": true,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "server!EventRouter#hasListeners:member(1)",
               "docComment": "/**\n * Check if there are listeners for a specific event type.\n *\n * @param eventType - The type of event to check for listeners.\n *\n * @returns `true` if listeners are found, `false` otherwise.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "hasListeners(eventType: "
+                  "text": "hasListeners<TEventType extends "
                 },
                 {
                   "kind": "Content",
@@ -17388,6 +17942,75 @@
                   "kind": "Reference",
                   "text": "EventPayloads",
                   "canonicalReference": "server!EventPayloads:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(eventType: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "TEventType"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "TEventType",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "eventType",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "hasListeners"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!EventRouter#hasListeners:member(2)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "hasListeners(eventType: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
                 },
                 {
                   "kind": "Content",
@@ -17404,18 +18027,18 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               },
               "releaseTag": "Public",
               "isProtected": false,
-              "overloadIndex": 1,
+              "overloadIndex": 2,
               "parameters": [
                 {
                   "parameterName": "eventType",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "isOptional": false
                 }
@@ -17431,7 +18054,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "listenerCount(eventType: "
+                  "text": "listenerCount<TEventType extends "
                 },
                 {
                   "kind": "Content",
@@ -17441,6 +18064,75 @@
                   "kind": "Reference",
                   "text": "EventPayloads",
                   "canonicalReference": "server!EventPayloads:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(eventType: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "TEventType"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "TEventType",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "eventType",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "listenerCount"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!EventRouter#listenerCount:member(2)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "listenerCount(eventType: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
                 },
                 {
                   "kind": "Content",
@@ -17457,18 +18149,18 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 3,
+                "endIndex": 4
               },
               "releaseTag": "Public",
               "isProtected": false,
-              "overloadIndex": 1,
+              "overloadIndex": 2,
               "parameters": [
                 {
                   "parameterName": "eventType",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "isOptional": false
                 }
@@ -17484,7 +18176,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "listeners(eventType: "
+                  "text": "listeners<TEventType extends "
                 },
                 {
                   "kind": "Content",
@@ -17494,6 +18186,80 @@
                   "kind": "Reference",
                   "text": "EventPayloads",
                   "canonicalReference": "server!EventPayloads:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(eventType: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "TEventType"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "EventEmitter.EventListener",
+                  "canonicalReference": "eventemitter3!EventEmitter.EventListener:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<any, string>[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "TEventType",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "eventType",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "listeners"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!EventRouter#listeners:member(2)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "listeners(eventType: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
                 },
                 {
                   "kind": "Content",
@@ -17515,18 +18281,18 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 6
+                "startIndex": 3,
+                "endIndex": 5
               },
               "releaseTag": "Public",
               "isProtected": false,
-              "overloadIndex": 1,
+              "overloadIndex": 2,
               "parameters": [
                 {
                   "parameterName": "eventType",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "isOptional": false
                 }
@@ -17636,21 +18402,24 @@
             },
             {
               "kind": "Method",
-              "canonicalReference": "server!EventRouter#offAll:member(1)",
-              "docComment": "/**\n * Remove all listeners or all listeners for a provided event type.\n *\n * @param eventType - The type of event to remove all listeners from.\n */\n",
+              "canonicalReference": "server!EventRouter#off:member(2)",
+              "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "offAll(eventType?: "
+                  "text": "off(eventType: "
                 },
                 {
                   "kind": "Content",
-                  "text": "keyof "
+                  "text": "string"
                 },
                 {
-                  "kind": "Reference",
-                  "text": "EventPayloads",
-                  "canonicalReference": "server!EventPayloads:interface"
+                  "kind": "Content",
+                  "text": ", listener: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(payload: any) => void"
                 },
                 {
                   "kind": "Content",
@@ -17667,8 +18436,90 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 2,
+              "parameters": [
+                {
+                  "parameterName": "eventType",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "listener",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "off"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!EventRouter#offAll:member(1)",
+              "docComment": "/**\n * Remove all listeners or all listeners for a provided event type.\n *\n * @param eventType - The type of event to remove all listeners from.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "offAll<TEventType extends "
+                },
+                {
+                  "kind": "Content",
+                  "text": "keyof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "EventPayloads",
+                  "canonicalReference": "server!EventPayloads:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(eventType?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "TEventType"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "TEventType",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -17677,8 +18528,56 @@
                 {
                   "parameterName": "eventType",
                   "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "offAll"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!EventRouter#offAll:member(2)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "offAll(eventType?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 2,
+              "parameters": [
+                {
+                  "parameterName": "eventType",
+                  "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 3
+                    "endIndex": 2
                   },
                   "isOptional": true
                 }
@@ -17788,6 +18687,70 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "server!EventRouter#on:member(2)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "on(eventType: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", listener: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(payload: any) => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 2,
+              "parameters": [
+                {
+                  "parameterName": "eventType",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "listener",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "on"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "server!EventRouter#once:member(1)",
               "docComment": "/**\n * Register a listener for a specific event type that will be invoked once.\n *\n * @param eventType - The type of event to listen for.\n *\n * @param listener - The listener function to invoke when the event is emitted.\n */\n",
               "excerptTokens": [
@@ -17877,6 +18840,70 @@
                   "parameterTypeTokenRange": {
                     "startIndex": 6,
                     "endIndex": 9
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "once"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!EventRouter#once:member(2)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "once(eventType: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", listener: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(payload: any) => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 2,
+              "parameters": [
+                {
+                  "parameterName": "eventType",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "listener",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
                   },
                   "isOptional": false
                 }
@@ -18009,6 +19036,68 @@
           "typeTokenRange": {
             "startIndex": 1,
             "endIndex": 6
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "server!FilterOptions:type",
+          "docComment": "/**\n * Filter options for various operations like raycasting and intersections.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type FilterOptions = "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    filterFlags?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "RAPIER.QueryFilterFlags",
+              "canonicalReference": "@dimforge/rapier3d-simd-compat!QueryFilterFlags:enum"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    filterGroups?: number;\n    filterExcludeCollider?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "RawCollider",
+              "canonicalReference": "server!RawCollider:type"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    filterExcludeRigidBody?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "RAPIER.RigidBody",
+              "canonicalReference": "@dimforge/rapier3d-simd-compat!RigidBody:class"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    filterPredicate?: (collider: "
+            },
+            {
+              "kind": "Reference",
+              "text": "RawCollider",
+              "canonicalReference": "server!RawCollider:type"
+            },
+            {
+              "kind": "Content",
+              "text": ") => boolean;\n}"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "fileUrlPath": "src/worlds/physics/Simulation.ts",
+          "releaseTag": "Public",
+          "name": "FilterOptions",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 10
           }
         },
         {
@@ -18393,6 +19482,50 @@
             }
           ],
           "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "server!IntersectionResult:type",
+          "docComment": "/**\n * A intersection result.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type IntersectionResult = "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    intersectedBlockType?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "BlockType",
+              "canonicalReference": "server!BlockType:class"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    intersectedEntity?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Entity",
+              "canonicalReference": "server!Entity:class"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n}"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "fileUrlPath": "src/worlds/physics/Simulation.ts",
+          "releaseTag": "Public",
+          "name": "IntersectionResult",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 6
+          }
         },
         {
           "kind": "Interface",
@@ -25785,6 +26918,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "server!ModelEntityOptions#modelShownNodes:member",
+              "docComment": "/**\n * The nodes to show on the entity's model, overriding hidden nodes.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "modelShownNodes?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "modelShownNodes",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "server!ModelEntityOptions#modelTextureUri:member",
               "docComment": "/**\n * The texture uri of the entity's model. Setting this overrides the model's default texture.\n */\n",
               "excerptTokens": [
@@ -26433,7 +27593,7 @@
             },
             {
               "kind": "Content",
-              "text": ";\n    moveIgnoreAxes?: {\n        x?: boolean;\n        y?: boolean;\n        z?: boolean;\n    };\n    moveStartIdleAnimationsOnCompletion?: boolean;\n    moveStoppingDistance?: number;\n}"
+              "text": ";\n    moveIgnoreAxes?: {\n        x?: boolean;\n        y?: boolean;\n        z?: boolean;\n    };\n    moveStartIdleAnimationsOnCompletion?: boolean;\n    moveStoppingDistance?: number;\n    moveCompletesWhenStuck?: boolean;\n}"
             },
             {
               "kind": "Content",
@@ -27064,7 +28224,7 @@
             },
             {
               "kind": "Content",
-              "text": ";\n    waypointTimeoutMs?: number;\n}"
+              "text": ";\n    waypointStoppingDistance?: number;\n    waypointTimeoutMs?: number;\n}"
             },
             {
               "kind": "Content",
@@ -28045,6 +29205,37 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!PlayerCamera#facingQuaternion:member",
+              "docComment": "/**\n * The quaternion representing the camera's facing direction.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get facingQuaternion(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QuaternionLike",
+                  "canonicalReference": "server!QuaternionLike:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "facingQuaternion",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!PlayerCamera#filmOffset:member",
               "docComment": "/**\n * The film offset of the camera. A positive value shifts the camera right, a negative value shifts it left.\n */\n",
               "excerptTokens": [
@@ -28289,6 +29480,41 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "modelHiddenNodes",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!PlayerCamera#modelShownNodes:member",
+              "docComment": "/**\n * The nodes of the model the camera is attached to that will be rendered for the player, overriding hidden nodes. Uses case insensitive substring matching.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get modelShownNodes(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Set",
+                  "canonicalReference": "!Set:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "modelShownNodes",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
@@ -28759,6 +29985,54 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "setModelHiddenNodes"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!PlayerCamera#setModelShownNodes:member(1)",
+              "docComment": "/**\n * Sets the nodes of the model the camera is attached to that will be rendered for the player, overriding hidden nodes. Uses case insensitive substring matching.\n *\n * @param modelShownNodes - Determines nodes to show that match these case insensitive substrings.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setModelShownNodes(modelShownNodes: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "modelShownNodes",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setModelShownNodes"
             },
             {
               "kind": "Method",
@@ -29359,6 +30633,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!PlayerCameraEvent.SET_MODEL_SHOWN_NODES:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_MODEL_SHOWN_NODES = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PLAYER_CAMERA.SET_MODEL_SHOWN_NODES\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_MODEL_SHOWN_NODES"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!PlayerCameraEvent.SET_OFFSET:member",
               "docComment": "",
               "excerptTokens": [
@@ -29933,6 +31228,60 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "\"PLAYER_CAMERA.SET_MODEL_HIDDEN_NODES\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!PlayerCameraEventPayloads#\"PLAYER_CAMERA.SET_MODEL_SHOWN_NODES\":member",
+              "docComment": "/**\n * Emitted when the nodes of the model the camera is attached to are set to be shown.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PlayerCameraEvent.SET_MODEL_SHOWN_NODES",
+                  "canonicalReference": "server!PlayerCameraEvent.SET_MODEL_SHOWN_NODES:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        playerCamera: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PlayerCamera",
+                  "canonicalReference": "server!PlayerCamera:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        modelShownNodes: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Set",
+                  "canonicalReference": "!Set:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string>;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PLAYER_CAMERA.SET_MODEL_SHOWN_NODES\"",
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 8
@@ -31122,6 +32471,63 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!PlayerManager#worldSelectionHandler:member",
+              "docComment": "/**\n * Optional handler for selecting the world a newly connected player joins. Returning no world results in the player joining the default WorldManager world.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "worldSelectionHandler?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(player: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Player",
+                  "canonicalReference": "server!Player:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ") => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "World",
+                  "canonicalReference": "server!World:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "worldSelectionHandler",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 8
               },
               "isStatic": false,
               "isProtected": false,
@@ -33611,6 +35017,33 @@
         },
         {
           "kind": "TypeAlias",
+          "canonicalReference": "server!RawCollider:type",
+          "docComment": "/**\n * A raw collider object from the Rapier physics engine.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type RawCollider = "
+            },
+            {
+              "kind": "Reference",
+              "text": "RAPIER.Collider",
+              "canonicalReference": "@dimforge/rapier3d-simd-compat!Collider:class"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "fileUrlPath": "src/worlds/physics/Collider.ts",
+          "releaseTag": "Public",
+          "name": "RawCollider",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
+          "kind": "TypeAlias",
           "canonicalReference": "server!RawCollisionGroups:type",
           "docComment": "/**\n * A raw set of collision groups represented as a 32-bit number.\n *\n * @public\n */\n",
           "excerptTokens": [
@@ -33631,6 +35064,33 @@
           "fileUrlPath": "src/worlds/physics/CollisionGroupsBuilder.ts",
           "releaseTag": "Public",
           "name": "RawCollisionGroups",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "server!RawShape:type",
+          "docComment": "/**\n * A raw shape object from the Rapier physics engine.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type RawShape = "
+            },
+            {
+              "kind": "Reference",
+              "text": "RAPIER.Shape",
+              "canonicalReference": "@dimforge/rapier3d-simd-compat!Shape:class"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "fileUrlPath": "src/worlds/physics/Collider.ts",
+          "releaseTag": "Public",
+          "name": "RawShape",
           "typeTokenRange": {
             "startIndex": 1,
             "endIndex": 2
@@ -33700,43 +35160,12 @@
             },
             {
               "kind": "Content",
-              "text": "{\n    ignoresSensors?: boolean;\n    filterFlags?: "
+              "text": "{\n    solidMode?: boolean;\n} & "
             },
             {
               "kind": "Reference",
-              "text": "RAPIER.QueryFilterFlags",
-              "canonicalReference": "@dimforge/rapier3d-simd-compat!QueryFilterFlags:enum"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n    filterGroups?: number;\n    filterExcludeCollider?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "RAPIER.Collider",
-              "canonicalReference": "@dimforge/rapier3d-simd-compat!Collider:class"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n    filterExcludeRigidBody?: "
-            },
-            {
-              "kind": "Reference",
-              "text": "RAPIER.RigidBody",
-              "canonicalReference": "@dimforge/rapier3d-simd-compat!RigidBody:class"
-            },
-            {
-              "kind": "Content",
-              "text": ";\n    filterPredicate?: (collider: "
-            },
-            {
-              "kind": "Reference",
-              "text": "RAPIER.Collider",
-              "canonicalReference": "@dimforge/rapier3d-simd-compat!Collider:class"
-            },
-            {
-              "kind": "Content",
-              "text": ") => boolean;\n}"
+              "text": "FilterOptions",
+              "canonicalReference": "server!FilterOptions:type"
             },
             {
               "kind": "Content",
@@ -33748,7 +35177,7 @@
           "name": "RaycastOptions",
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 10
+            "endIndex": 3
           }
         },
         {
@@ -39880,6 +41309,111 @@
               "isStatic": false,
               "isProtected": false,
               "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Simulation#intersectionsWithRawShape:member(1)",
+              "docComment": "/**\n * Gets the intersections with a raw shape.\n *\n * @remarks\n *\n * rawShape can be retrieved from a simulated or unsimulated collider using {@link Collider.rawShape}.\n *\n * @param rawShape - The raw shape to get intersections with.\n *\n * @param position - The position of the shape.\n *\n * @param rotation - The rotation of the shape.\n *\n * @param options - The options for the intersections.\n *\n * @returns The intersections.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "intersectionsWithRawShape(rawShape: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RawShape",
+                  "canonicalReference": "server!RawShape:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", position: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", rotation: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QuaternionLike",
+                  "canonicalReference": "server!QuaternionLike:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", options?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FilterOptions",
+                  "canonicalReference": "server!FilterOptions:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IntersectionResult",
+                  "canonicalReference": "server!IntersectionResult:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 9,
+                "endIndex": 11
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "rawShape",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "position",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "rotation",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 6
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 7,
+                    "endIndex": 8
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "intersectionsWithRawShape"
             },
             {
               "kind": "Property",

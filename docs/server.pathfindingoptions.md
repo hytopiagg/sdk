@@ -19,6 +19,7 @@ export type PathfindingOptions = {
     verticalPenalty?: number;
     waypointMoveCompleteCallback?: WaypointMoveCompleteCallback;
     waypointMoveSkippedCallback?: WaypointMoveSkippedCallback;
+    waypointStoppingDistance?: number;
     waypointTimeoutMs?: number;
 };
 ```

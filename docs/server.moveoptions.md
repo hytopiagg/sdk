@@ -19,6 +19,7 @@ export type MoveOptions = {
     };
     moveStartIdleAnimationsOnCompletion?: boolean;
     moveStoppingDistance?: number;
+    moveCompletesWhenStuck?: boolean;
 };
 ```
 **References:** [MoveCallback](./server.movecallback.md)<!-- -->, [MoveCompleteCallback](./server.movecompletecallback.md)

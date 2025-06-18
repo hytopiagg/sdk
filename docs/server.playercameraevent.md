@@ -158,6 +158,20 @@ SET\_MODEL\_HIDDEN\_NODES
 </td></tr>
 <tr><td>
 
+SET\_MODEL\_SHOWN\_NODES
+
+
+</td><td>
+
+`"PLAYER_CAMERA.SET_MODEL_SHOWN_NODES"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 SET\_OFFSET
 
 

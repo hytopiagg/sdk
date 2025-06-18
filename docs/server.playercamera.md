@@ -120,6 +120,27 @@ The facing direction vector of the camera based on its current orientation.
 </td></tr>
 <tr><td>
 
+[facingQuaternion](./server.playercamera.facingquaternion.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[QuaternionLike](./server.quaternionlike.md)
+
+
+</td><td>
+
+The quaternion representing the camera's facing direction.
+
+
+</td></tr>
+<tr><td>
+
 [filmOffset](./server.playercamera.filmoffset.md)
 
 
@@ -220,6 +241,27 @@ Set&lt;string&gt;
 </td><td>
 
 The nodes of the model the camera is attached to that will not be rendered for the player. Uses case insensitive substring matching.
+
+
+</td></tr>
+<tr><td>
+
+[modelShownNodes](./server.playercamera.modelshownnodes.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+Set&lt;string&gt;
+
+
+</td><td>
+
+The nodes of the model the camera is attached to that will be rendered for the player, overriding hidden nodes. Uses case insensitive substring matching.
 
 
 </td></tr>
@@ -527,6 +569,20 @@ Sets the mode of the camera.
 </td><td>
 
 Sets the nodes of the model the camera is attached to that will not be rendered for the player. Uses case insensitive substring matching.
+
+
+</td></tr>
+<tr><td>
+
+[setModelShownNodes(modelShownNodes)](./server.playercamera.setmodelshownnodes.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the nodes of the model the camera is attached to that will be rendered for the player, overriding hidden nodes. Uses case insensitive substring matching.
 
 
 </td></tr>

@@ -164,7 +164,26 @@ Emitted when the playback rate of the entity's model animations is set.
 
 </td><td>
 
-Emitted when the nodes of the entity's model are set to be hidden.
+Emitted when nodes of the entity's model are set to be hidden.
+
+
+</td></tr>
+<tr><td>
+
+["ENTITY.SET\_MODEL\_SHOWN\_NODES"](./server.entityeventpayloads._entity.set_model_shown_nodes_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ entity: [Entity](./server.entity.md)<!-- -->; modelShownNodes: Set&lt;string&gt;; }
+
+
+</td><td>
+
+Emitted when nodes of the entity's model are set to be shown.
 
 
 </td></tr>

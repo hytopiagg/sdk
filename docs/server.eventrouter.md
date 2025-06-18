@@ -12,6 +12,54 @@ Manages event emission and assigned listener callbacks.
 export default class EventRouter 
 ```
 
+## Properties
+
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[globalInstance](./server.eventrouter.globalinstance.md)
+
+
+</td><td>
+
+`static`
+
+`readonly`
+
+
+</td><td>
+
+[EventRouter](./server.eventrouter.md)
+
+
+</td><td>
+
+The global event router instance.
+
+
+</td></tr>
+</tbody></table>
+
 ## Methods
 
 <table><thead><tr><th>
@@ -46,6 +94,18 @@ Emit an event, invoking all registered listeners for the event type.
 </td></tr>
 <tr><td>
 
+[emit(eventType, payload)](./server.eventrouter.emit_1.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [emitWithGlobal(eventType, payload)](./server.eventrouter.emitwithglobal.md)
 
 
@@ -55,6 +115,18 @@ Emit an event, invoking all registered listeners for the event type.
 </td><td>
 
 Emits an event to the local and global server instance event routers.
+
+
+</td></tr>
+<tr><td>
+
+[emitWithGlobal(eventType, payload)](./server.eventrouter.emitwithglobal_1.md)
+
+
+</td><td>
+
+
+</td><td>
 
 
 </td></tr>
@@ -74,6 +146,30 @@ Emits an event to local and provided world event routers.
 </td></tr>
 <tr><td>
 
+[emitWithWorld(world, eventType, payload)](./server.eventrouter.emitwithworld_1.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[final(eventType, listener)](./server.eventrouter.final_1.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [hasListeners(eventType)](./server.eventrouter.haslisteners.md)
 
 
@@ -83,6 +179,18 @@ Emits an event to local and provided world event routers.
 </td><td>
 
 Check if there are listeners for a specific event type.
+
+
+</td></tr>
+<tr><td>
+
+[hasListeners(eventType)](./server.eventrouter.haslisteners_1.md)
+
+
+</td><td>
+
+
+</td><td>
 
 
 </td></tr>
@@ -102,6 +210,18 @@ Get the number of listeners for a specific event type.
 </td></tr>
 <tr><td>
 
+[listenerCount(eventType)](./server.eventrouter.listenercount_1.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [listeners(eventType)](./server.eventrouter.listeners.md)
 
 
@@ -111,6 +231,18 @@ Get the number of listeners for a specific event type.
 </td><td>
 
 Get all listeners for a specific event type.
+
+
+</td></tr>
+<tr><td>
+
+[listeners(eventType)](./server.eventrouter.listeners_1.md)
+
+
+</td><td>
+
+
+</td><td>
 
 
 </td></tr>
@@ -130,6 +262,18 @@ Remove a listener for a specific event type.
 </td></tr>
 <tr><td>
 
+[off(eventType, listener)](./server.eventrouter.off_1.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [offAll(eventType)](./server.eventrouter.offall.md)
 
 
@@ -139,6 +283,18 @@ Remove a listener for a specific event type.
 </td><td>
 
 Remove all listeners or all listeners for a provided event type.
+
+
+</td></tr>
+<tr><td>
+
+[offAll(eventType)](./server.eventrouter.offall_1.md)
+
+
+</td><td>
+
+
+</td><td>
 
 
 </td></tr>
@@ -158,6 +314,18 @@ Register a listener for a specific event type.
 </td></tr>
 <tr><td>
 
+[on(eventType, listener)](./server.eventrouter.on_1.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [once(eventType, listener)](./server.eventrouter.once.md)
 
 
@@ -167,6 +335,18 @@ Register a listener for a specific event type.
 </td><td>
 
 Register a listener for a specific event type that will be invoked once.
+
+
+</td></tr>
+<tr><td>
+
+[once(eventType, listener)](./server.eventrouter.once_1.md)
+
+
+</td><td>
+
+
+</td><td>
 
 
 </td></tr>

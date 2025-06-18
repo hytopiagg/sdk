@@ -9,7 +9,7 @@ Remove all listeners or all listeners for a provided event type.
 **Signature:**
 
 ```typescript
-offAll(eventType?: keyof EventPayloads): void;
+offAll<TEventType extends keyof EventPayloads>(eventType?: TEventType): void;
 ```
 
 ## Parameters
@@ -37,7 +37,7 @@ eventType
 
 </td><td>
 
-keyof [EventPayloads](./server.eventpayloads.md)
+TEventType
 
 
 </td><td>

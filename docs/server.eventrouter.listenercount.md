@@ -9,7 +9,7 @@ Get the number of listeners for a specific event type.
 **Signature:**
 
 ```typescript
-listenerCount(eventType: keyof EventPayloads): number;
+listenerCount<TEventType extends keyof EventPayloads>(eventType: TEventType): number;
 ```
 
 ## Parameters
@@ -37,7 +37,7 @@ eventType
 
 </td><td>
 
-keyof [EventPayloads](./server.eventpayloads.md)
+TEventType
 
 
 </td><td>
