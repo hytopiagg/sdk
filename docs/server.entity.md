@@ -234,6 +234,27 @@ Whether the entity is a block entity.
 </td></tr>
 <tr><td>
 
+[isEnvironmental](./server.entity.isenvironmental.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the entity is environmental, if true it will not invoke its tick function or change position.
+
+
+</td></tr>
+<tr><td>
+
 [isModelEntity](./server.entity.ismodelentity.md)
 
 

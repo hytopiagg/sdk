@@ -56,6 +56,25 @@ _(Optional)_ The entity controller to use for the entity.
 </td></tr>
 <tr><td>
 
+[isEnvironmental?](./server.baseentityoptions.isenvironmental.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ Whether the entity is environmental, if true it will not invoke its tick function or change position. Defaults to false.
+
+
+</td></tr>
+<tr><td>
+
 [name?](./server.baseentityoptions.name.md)
 
 

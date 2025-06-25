@@ -491,6 +491,8 @@ export declare interface BaseEntityOptions {
     controller?: BaseEntityController;
     /** The opacity of the entity between 0 and 1. 0 is fully transparent, 1 is fully opaque. */
     opacity?: number;
+    /** Whether the entity is environmental, if true it will not invoke its tick function or change position. Defaults to false. */
+    isEnvironmental?: boolean;
     /** The parent entity of the entity, entities with a parent will ignore creating their own colliders. */
     parent?: Entity;
     /** The name of the parent's node (if parent is a model entity) to attach the entity to. */
@@ -1759,6 +1761,7 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
 
 
 
+
     /**
      * @param options - The options for the entity.
      */
@@ -1803,6 +1806,8 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     get tintColor(): RgbColor | undefined;
     /** Whether the entity is a block entity. */
     get isBlockEntity(): boolean;
+    /** Whether the entity is environmental, if true it will not invoke its tick function or change position. */
+    get isEnvironmental(): boolean;
     /** Whether the entity is a model entity. */
     get isModelEntity(): boolean;
     /** Whether the entity is spawned. */
@@ -2093,6 +2098,7 @@ export declare interface EntityEventPayloads {
  * @public
  */
 export declare class EntityManager {
+
 
 
 
@@ -2393,6 +2399,108 @@ export declare type IntersectionResult = {
     /** The entity that was intersected. */
     intersectedEntity?: Entity;
 };
+
+/**
+ * A high-performance Map-like data structure optimized for frequent iteration.
+ *
+ * @remarks
+ * IterationMap maintains both a Map for O(1) lookups and an Array for fast iteration,
+ * eliminating the need for Array.from() calls and providing ~2x faster iteration
+ * than Map.values(). Optimized for "build up, iterate, clear" usage patterns
+ * common in game loops.
+ *
+ * @example
+ * ```typescript
+ * const iterationMap = new IterationMap<number, string>();
+ * iterationMap.set(1, 'hello');
+ * iterationMap.set(2, 'world');
+ *
+ * // Fast O(1) lookup
+ * const value = iterationMap.get(1);
+ *
+ * // Fast array iteration (no Map.values() overhead)
+ * for (const item of iterationMap.valuesArray) {
+ *   console.log(item);
+ * }
+ *
+ * // Efficient bulk clear
+ * iterationMap.clear();
+ * ```
+ *
+ * @public
+ */
+export declare class IterationMap<K, V> {
+
+
+
+    /**
+     * Returns the number of key-value pairs in the IterationMap.
+     */
+    get size(): number;
+    /**
+     * Returns a readonly array of all values for fast iteration.
+     * This is the key performance feature - use this instead of .values() for iteration.
+     */
+    get valuesArray(): readonly V[];
+    /**
+     * Returns the value associated with the key, or undefined if the key doesn't exist.
+     * @param key - The key to look up.
+     * @returns The value associated with the key, or undefined.
+     */
+    get(key: K): V | undefined;
+    /**
+     * Sets the value for the key in the IterationMap.
+     * @param key - The key to set.
+     * @param value - The value to set.
+     * @returns The IterationMap instance for chaining.
+     */
+    set(key: K, value: V): this;
+    /**
+     * Returns true if the key exists in the IterationMap.
+     * @param key - The key to check.
+     * @returns True if the key exists, false otherwise.
+     */
+    has(key: K): boolean;
+    /**
+     * Removes the key-value pair from the IterationMap.
+     * @param key - The key to delete.
+     * @returns True if the key existed and was deleted, false otherwise.
+     */
+    delete(key: K): boolean;
+    /**
+     * Removes all key-value pairs from the IterationMap.
+     * Highly optimized for the common "build up, iterate, clear" pattern.
+     */
+    clear(): void;
+    /**
+     * Executes a provided function once for each key-value pair.
+     * @param callbackfn - Function to execute for each element.
+     * @param thisArg - Value to use as this when executing callback.
+     */
+    forEach(callbackfn: (value: V, key: K, map: IterationMap<K, V>) => void, thisArg?: any): void;
+    /**
+     * Returns an iterator for the keys in the IterationMap.
+     * @returns An iterator for the keys.
+     */
+    keys(): IterableIterator<K>;
+    /**
+     * Returns an iterator for the values in the IterationMap.
+     * Note: For performance-critical iteration, use .valuesArray instead.
+     * @returns An iterator for the values.
+     */
+    values(): IterableIterator<V>;
+    /**
+     * Returns an iterator for the key-value pairs in the IterationMap.
+     * @returns An iterator for the entries.
+     */
+    entries(): IterableIterator<[K, V]>;
+    /**
+     * Returns an iterator for the key-value pairs in the IterationMap.
+     * @returns An iterator for the entries.
+     */
+    [Symbol.iterator](): IterableIterator<[K, V]>;
+
+}
 
 /** The options for a kinematic position rigid body. @public */
 export declare interface KinematicPositionRigidBodyOptions extends BaseRigidBodyOptions {

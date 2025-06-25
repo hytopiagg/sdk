@@ -4154,6 +4154,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "server!BaseEntityOptions#isEnvironmental:member",
+              "docComment": "/**\n * Whether the entity is environmental, if true it will not invoke its tick function or change position. Defaults to false.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "isEnvironmental?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "isEnvironmental",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "server!BaseEntityOptions#name:member",
               "docComment": "/**\n * The name of the entity.\n */\n",
               "excerptTokens": [
@@ -13530,6 +13557,36 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!Entity#isEnvironmental:member",
+              "docComment": "/**\n * Whether the entity is environmental, if true it will not invoke its tick function or change position.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isEnvironmental(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isEnvironmental",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!Entity#isModelEntity:member",
               "docComment": "/**\n * Whether the entity is a model entity.\n */\n",
               "excerptTokens": [
@@ -19526,6 +19583,574 @@
             "startIndex": 1,
             "endIndex": 6
           }
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "server!IterationMap:class",
+          "docComment": "/**\n * A high-performance Map-like data structure optimized for frequent iteration.\n *\n * @remarks\n *\n * IterationMap maintains both a Map for O(1) lookups and an Array for fast iteration, eliminating the need for Array.from() calls and providing ~2x faster iteration than Map.values(). Optimized for \"build up, iterate, clear\" usage patterns common in game loops.\n *\n * @example\n * ```typescript\n * const iterationMap = new IterationMap<number, string>();\n * iterationMap.set(1, 'hello');\n * iterationMap.set(2, 'world');\n *\n * // Fast O(1) lookup\n * const value = iterationMap.get(1);\n *\n * // Fast array iteration (no Map.values() overhead)\n * for (const item of iterationMap.valuesArray) {\n *   console.log(item);\n * }\n *\n * // Efficient bulk clear\n * iterationMap.clear();\n * ```\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export default class IterationMap<K, V> "
+            }
+          ],
+          "fileUrlPath": "src/shared/classes/IterationMap.ts",
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "K",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            },
+            {
+              "typeParameterName": "V",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "isAbstract": false,
+          "name": "IterationMap",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "server!IterationMap#[Symbol.iterator]:member(1)",
+              "docComment": "/**\n * Returns an iterator for the key-value pairs in the IterationMap.\n *\n * @returns An iterator for the entries.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Symbol.iterator",
+                  "canonicalReference": "!SymbolConstructor#iterator"
+                },
+                {
+                  "kind": "Content",
+                  "text": "](): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IterableIterator",
+                  "canonicalReference": "!IterableIterator:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<[K, V]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "[Symbol.iterator]"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!IterationMap#clear:member(1)",
+              "docComment": "/**\n * Removes all key-value pairs from the IterationMap. Highly optimized for the common \"build up, iterate, clear\" pattern.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "clear(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "clear"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!IterationMap#delete:member(1)",
+              "docComment": "/**\n * Removes the key-value pair from the IterationMap.\n *\n * @param key - The key to delete.\n *\n * @returns True if the key existed and was deleted, false otherwise.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "delete(key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "K"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "delete"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!IterationMap#entries:member(1)",
+              "docComment": "/**\n * Returns an iterator for the key-value pairs in the IterationMap.\n *\n * @returns An iterator for the entries.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "entries(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IterableIterator",
+                  "canonicalReference": "!IterableIterator:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<[K, V]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "entries"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!IterationMap#forEach:member(1)",
+              "docComment": "/**\n * Executes a provided function once for each key-value pair.\n *\n * @param callbackfn - Function to execute for each element.\n *\n * @param thisArg - Value to use as this when executing callback.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "forEach(callbackfn: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "(value: V, key: K, map: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IterationMap",
+                  "canonicalReference": "server!IterationMap:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<K, V>) => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", thisArg?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 7,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "callbackfn",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "thisArg",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 6
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "forEach"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!IterationMap#get:member(1)",
+              "docComment": "/**\n * Returns the value associated with the key, or undefined if the key doesn't exist.\n *\n * @param key - The key to look up.\n *\n * @returns The value associated with the key, or undefined.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get(key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "K"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "V | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "get"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!IterationMap#has:member(1)",
+              "docComment": "/**\n * Returns true if the key exists in the IterationMap.\n *\n * @param key - The key to check.\n *\n * @returns True if the key exists, false otherwise.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "has(key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "K"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "has"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!IterationMap#keys:member(1)",
+              "docComment": "/**\n * Returns an iterator for the keys in the IterationMap.\n *\n * @returns An iterator for the keys.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "keys(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IterableIterator",
+                  "canonicalReference": "!IterableIterator:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<K>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "keys"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!IterationMap#set:member(1)",
+              "docComment": "/**\n * Sets the value for the key in the IterationMap.\n *\n * @param key - The key to set.\n *\n * @param value - The value to set.\n *\n * @returns The IterationMap instance for chaining.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "set(key: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "K"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", value: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "V"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "this"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "value",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "set"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!IterationMap#size:member",
+              "docComment": "/**\n * Returns the number of key-value pairs in the IterationMap.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get size(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "size",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!IterationMap#values:member(1)",
+              "docComment": "/**\n * Returns an iterator for the values in the IterationMap. Note: For performance-critical iteration, use .valuesArray instead.\n *\n * @returns An iterator for the values.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "values(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IterableIterator",
+                  "canonicalReference": "!IterableIterator:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<V>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "values"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!IterationMap#valuesArray:member",
+              "docComment": "/**\n * Returns a readonly array of all values for fast iteration. This is the key performance feature - use this instead of .values() for iteration.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get valuesArray(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "readonly V[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "valuesArray",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            }
+          ],
+          "implementsTokenRanges": []
         },
         {
           "kind": "Interface",

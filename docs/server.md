@@ -206,6 +206,17 @@ Manages the game and associated worlds and systems.
 </td></tr>
 <tr><td>
 
+[IterationMap](./server.iterationmap.md)
+
+
+</td><td>
+
+A high-performance Map-like data structure optimized for frequent iteration.
+
+
+</td></tr>
+<tr><td>
+
 [Light](./server.light.md)
 
 
