@@ -162,6 +162,20 @@ Retrieves the bounding box of a model.
 </td></tr>
 <tr><td>
 
+[getDepth(modelUri)](./server.modelregistry.getdepth.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Retrieves the Z-axis depth of a model for a scale of 1.
+
+
+</td></tr>
+<tr><td>
+
 [getHeight(modelUri)](./server.modelregistry.getheight.md)
 
 
@@ -199,6 +213,20 @@ Retrieves the names of all nodes in a model.
 </td><td>
 
 Retrieves the trimesh of a model.
+
+
+</td></tr>
+<tr><td>
+
+[getWidth(modelUri)](./server.modelregistry.getwidth.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Retrieves the X-axis width of a model for a scale of 1.
 
 
 </td></tr>

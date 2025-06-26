@@ -81,6 +81,27 @@ The current tick of the world loop.
 </td></tr>
 <tr><td>
 
+[isStarted](./server.worldloop.isstarted.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the world loop is started.
+
+
+</td></tr>
+<tr><td>
+
 [nextTickMs](./server.worldloop.nexttickms.md)
 
 

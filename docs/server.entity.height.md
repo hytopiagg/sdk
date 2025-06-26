@@ -4,7 +4,7 @@
 
 ## Entity.height property
 
-The height of the entity's model or block entity's y\*2 half extents.
+The height (y-axis) of the entity's model with scale consideration or block entity's y\*2 half extents.
 
 **Signature:**
 

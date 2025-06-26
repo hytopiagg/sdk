@@ -1762,6 +1762,8 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
 
 
 
+
+
     /**
      * @param options - The options for the entity.
      */
@@ -1774,7 +1776,9 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     get blockTextureUri(): string | undefined;
     /** The controller for the entity. */
     get controller(): BaseEntityController | undefined;
-    /** The height of the entity's model or block entity's y*2 half extents. */
+    /** The depth (z-axis) of the entity's model with scale consideration or block entity's y*2 half extents. */
+    get depth(): number;
+    /** The height (y-axis) of the entity's model with scale consideration or block entity's y*2 half extents. */
     get height(): number;
     /** The playback rate of the entity's model animations. */
     get modelAnimationsPlaybackRate(): number;
@@ -1812,6 +1816,8 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     get isModelEntity(): boolean;
     /** Whether the entity is spawned. */
     get isSpawned(): boolean;
+    /** The width (x-axis) of the entity's model with scale consideration or block entity's x*2 half extents. */
+    get width(): number;
     /** The world the entity is in. */
     get world(): World | undefined;
     /**
@@ -3464,6 +3470,13 @@ export declare class ModelRegistry {
      */
     getBoundingBox(modelUri: string): ModelBoundingBox;
     /**
+     * Retrieves the Z-axis depth of a model for a scale of 1.
+     *
+     * @param modelUri - The URI of the model to retrieve the depth for.
+     * @returns The depth of the model.
+     */
+    getDepth(modelUri: string): number;
+    /**
      * Retrieves the Y-axis height of a model for a scale of 1.
      *
      * @param modelUri - The URI of the model to retrieve the height for.
@@ -3485,6 +3498,13 @@ export declare class ModelRegistry {
      * @returns The trimesh of the model.
      */
     getTrimesh(modelUri: string, scale?: number): ModelTrimesh | undefined;
+    /**
+     * Retrieves the X-axis width of a model for a scale of 1.
+     *
+     * @param modelUri - The URI of the model to retrieve the width for.
+     * @returns The width of the model.
+     */
+    getWidth(modelUri: string): number;
     /**
      * Checks if a model has a node with the given name.
      *
@@ -6250,6 +6270,8 @@ export declare class WorldLoop extends EventRouter {
 
     /** The current tick of the world loop. */
     get currentTick(): number;
+    /** Whether the world loop is started. */
+    get isStarted(): boolean;
     /** The next tick time in milliseconds. */
     get nextTickMs(): number;
     /** The fixed timestep of the world loop in seconds. */

@@ -171,6 +171,27 @@ The controller for the entity.
 </td></tr>
 <tr><td>
 
+[depth](./server.entity.depth.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+The depth (z-axis) of the entity's model with scale consideration or block entity's y\*2 half extents.
+
+
+</td></tr>
+<tr><td>
+
 [height](./server.entity.height.md)
 
 
@@ -186,7 +207,7 @@ number
 
 </td><td>
 
-The height of the entity's model or block entity's y\*2 half extents.
+The height (y-axis) of the entity's model with scale consideration or block entity's y\*2 half extents.
 
 
 </td></tr>
@@ -586,6 +607,27 @@ An arbitrary identifier tag of the entity. Useful for your own logic.
 </td><td>
 
 The tint color of the entity.
+
+
+</td></tr>
+<tr><td>
+
+[width](./server.entity.width.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+The width (x-axis) of the entity's model with scale consideration or block entity's x\*2 half extents.
 
 
 </td></tr>

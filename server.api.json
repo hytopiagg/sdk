@@ -13435,6 +13435,36 @@
               "isAbstract": false
             },
             {
+              "kind": "Property",
+              "canonicalReference": "server!Entity#depth:member",
+              "docComment": "/**\n * The depth (z-axis) of the entity's model with scale consideration or block entity's y*2 half extents.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get depth(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "depth",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
               "kind": "Method",
               "canonicalReference": "server!Entity#despawn:member(1)",
               "docComment": "/**\n * Despawns the entity and all children from the world.\n */\n",
@@ -13468,7 +13498,7 @@
             {
               "kind": "Property",
               "canonicalReference": "server!Entity#height:member",
-              "docComment": "/**\n * The height of the entity's model or block entity's y*2 half extents.\n */\n",
+              "docComment": "/**\n * The height (y-axis) of the entity's model with scale consideration or block entity's y*2 half extents.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -14910,6 +14940,36 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!Entity#width:member",
+              "docComment": "/**\n * The width (x-axis) of the entity's model with scale consideration or block entity's x*2 half extents.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get width(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "width",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
               },
               "isStatic": false,
               "isProtected": false,
@@ -27745,6 +27805,54 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "server!ModelRegistry#getDepth:member(1)",
+              "docComment": "/**\n * Retrieves the Z-axis depth of a model for a scale of 1.\n *\n * @param modelUri - The URI of the model to retrieve the depth for.\n *\n * @returns The depth of the model.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getDepth(modelUri: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "modelUri",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "getDepth"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "server!ModelRegistry#getHeight:member(1)",
               "docComment": "/**\n * Retrieves the Y-axis height of a model for a scale of 1.\n *\n * @param modelUri - The URI of the model to retrieve the height for.\n *\n * @returns The height of the model.\n */\n",
               "excerptTokens": [
@@ -27907,6 +28015,54 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "getTrimesh"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ModelRegistry#getWidth:member(1)",
+              "docComment": "/**\n * Retrieves the X-axis width of a model for a scale of 1.\n *\n * @param modelUri - The URI of the model to retrieve the width for.\n *\n * @returns The width of the model.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getWidth(modelUri: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "modelUri",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "getWidth"
             },
             {
               "kind": "Property",
@@ -48577,6 +48733,36 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "currentTick",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!WorldLoop#isStarted:member",
+              "docComment": "/**\n * Whether the world loop is started.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isStarted(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isStarted",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
