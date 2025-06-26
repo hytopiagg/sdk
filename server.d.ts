@@ -3770,6 +3770,7 @@ export declare class Player extends EventRouter implements protocol.Serializable
 
 
 
+
     /** The current {@link PlayerInput} of the player. */
     get input(): PlayerInput;
     /** The current {@link World} the player is in. */
