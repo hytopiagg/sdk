@@ -4188,7 +4188,7 @@ export declare interface PlayerEventPayloads {
         player: Player;
         world: World;
     };
-    /** Emitted when a player reconnects to a world after a disconnect. */
+    /** Emitted when a player reconnects to a world after a unintentional disconnect. */
     [PlayerEvent.RECONNECTED_WORLD]: {
         player: Player;
         world: World;
@@ -4272,11 +4272,11 @@ export declare interface PlayerManagerEventPayloads {
     [PlayerManagerEvent.PLAYER_CONNECTED]: {
         player: Player;
     };
-    /** Emitted when a player disconnects from the server. */
+    /** Emitted when a player disconnects from the server for any reason (lost connection, kick, world switch, etc). */
     [PlayerManagerEvent.PLAYER_DISCONNECTED]: {
         player: Player;
     };
-    /** Emitted when a player reconnects to the server. */
+    /** Emitted when a player reconnects to the server for any reason (reconnection, world switch, etc). */
     [PlayerManagerEvent.PLAYER_RECONNECTED]: {
         player: Player;
     };

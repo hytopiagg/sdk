@@ -107,7 +107,7 @@ Emitted when a player leaves a world.
 
 </td><td>
 
-Emitted when a player reconnects to a world after a disconnect.
+Emitted when a player reconnects to a world after a unintentional disconnect.
 
 
 </td></tr>

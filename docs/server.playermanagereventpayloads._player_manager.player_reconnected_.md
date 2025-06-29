@@ -4,7 +4,7 @@
 
 ## PlayerManagerEventPayloads."PLAYER\_MANAGER.PLAYER\_RECONNECTED" property
 
-Emitted when a player reconnects to the server.
+Emitted when a player reconnects to the server for any reason (reconnection, world switch, etc).
 
 **Signature:**
 

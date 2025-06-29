@@ -69,7 +69,7 @@ Emitted when a player connects to the server.
 
 </td><td>
 
-Emitted when a player disconnects from the server.
+Emitted when a player disconnects from the server for any reason (lost connection, kick, world switch, etc).
 
 
 </td></tr>
@@ -88,7 +88,7 @@ Emitted when a player disconnects from the server.
 
 </td><td>
 
-Emitted when a player reconnects to the server.
+Emitted when a player reconnects to the server for any reason (reconnection, world switch, etc).
 
 
 </td></tr>

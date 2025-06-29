@@ -32889,7 +32889,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "server!PlayerEventPayloads#\"PLAYER.RECONNECTED_WORLD\":member",
-              "docComment": "/**\n * Emitted when a player reconnects to a world after a disconnect.\n */\n",
+              "docComment": "/**\n * Emitted when a player reconnects to a world after a unintentional disconnect.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -33460,7 +33460,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "server!PlayerManagerEventPayloads#\"PLAYER_MANAGER.PLAYER_DISCONNECTED\":member",
-              "docComment": "/**\n * Emitted when a player disconnects from the server.\n */\n",
+              "docComment": "/**\n * Emitted when a player disconnects from the server for any reason (lost connection, kick, world switch, etc).\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -33505,7 +33505,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "server!PlayerManagerEventPayloads#\"PLAYER_MANAGER.PLAYER_RECONNECTED\":member",
-              "docComment": "/**\n * Emitted when a player reconnects to the server.\n */\n",
+              "docComment": "/**\n * Emitted when a player reconnects to the server for any reason (reconnection, world switch, etc).\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

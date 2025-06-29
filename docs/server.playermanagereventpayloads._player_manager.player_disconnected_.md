@@ -4,7 +4,7 @@
 
 ## PlayerManagerEventPayloads."PLAYER\_MANAGER.PLAYER\_DISCONNECTED" property
 
-Emitted when a player disconnects from the server.
+Emitted when a player disconnects from the server for any reason (lost connection, kick, world switch, etc).
 
 **Signature:**
 
