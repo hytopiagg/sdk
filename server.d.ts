@@ -3771,6 +3771,7 @@ export declare class Player extends EventRouter implements protocol.Serializable
 
 
 
+
     /** The current {@link PlayerInput} of the player. */
     get input(): PlayerInput;
     /** The current {@link World} the player is in. */
@@ -3783,12 +3784,11 @@ export declare class Player extends EventRouter implements protocol.Serializable
      * Get the persisted data for the player.
      *
      * @remarks
-     * This method is asynchronous and returns a promise that
-     * resolves to the player data.
+     * This method returns the player persisted data.
      *
      * @returns The persisted data for the player.
      */
-    getPersistedData(): Promise<Record<string, unknown> | void>;
+    getPersistedData(): Record<string, unknown> | undefined;
     /**
      * Joins a player to a world.
      *
@@ -3800,6 +3800,7 @@ export declare class Player extends EventRouter implements protocol.Serializable
      * @param world - The world to join the player to.
      */
     joinWorld(world: World): void;
+
 
     /**
      * Resets all inputs keys
@@ -3818,7 +3819,7 @@ export declare class Player extends EventRouter implements protocol.Serializable
      * @param data - The data to set.
      * @returns The persisted data for the player.
      */
-    setPersistedData(data: Record<string, unknown>): Promise<Record<string, unknown> | void>;
+    setPersistedData(data: Record<string, unknown>): Record<string, unknown>;
 
 
 

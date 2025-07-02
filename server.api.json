@@ -29461,20 +29461,11 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Player#getPersistedData:member(1)",
-              "docComment": "/**\n * Get the persisted data for the player.\n *\n * @remarks\n *\n * This method is asynchronous and returns a promise that resolves to the player data.\n *\n * @returns The persisted data for the player.\n */\n",
+              "docComment": "/**\n * Get the persisted data for the player.\n *\n * @remarks\n *\n * This method returns the player persisted data.\n *\n * @returns The persisted data for the player.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
                   "text": "getPersistedData(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Promise",
-                  "canonicalReference": "!Promise:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
                 },
                 {
                   "kind": "Reference",
@@ -29483,7 +29474,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<string, unknown> | void>"
+                  "text": "<string, unknown> | undefined"
                 },
                 {
                   "kind": "Content",
@@ -29493,7 +29484,7 @@
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 5
+                "endIndex": 3
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -29698,21 +29689,12 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Promise",
-                  "canonicalReference": "!Promise:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
                   "text": "Record",
                   "canonicalReference": "!Record:type"
                 },
                 {
                   "kind": "Content",
-                  "text": "<string, unknown> | void>"
+                  "text": "<string, unknown>"
                 },
                 {
                   "kind": "Content",
@@ -29722,7 +29704,7 @@
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 4,
-                "endIndex": 8
+                "endIndex": 6
               },
               "releaseTag": "Public",
               "isProtected": false,

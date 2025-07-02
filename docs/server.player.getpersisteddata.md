@@ -9,15 +9,15 @@ Get the persisted data for the player.
 **Signature:**
 
 ```typescript
-getPersistedData(): Promise<Record<string, unknown> | void>;
+getPersistedData(): Record<string, unknown> | undefined;
 ```
 **Returns:**
 
-Promise&lt;Record&lt;string, unknown&gt; \| void&gt;
+Record&lt;string, unknown&gt; \| undefined
 
 The persisted data for the player.
 
 ## Remarks
 
-This method is asynchronous and returns a promise that resolves to the player data.
+This method returns the player persisted data.
 
