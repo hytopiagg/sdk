@@ -3713,12 +3713,7 @@ export declare class PersistenceManager {
      * @returns The data from the persistence layer.
      */
     getGlobalData(key: string): Promise<Record<string, unknown> | void>;
-    /**
-     * Get player data from the data persistence service.
-     * @param player - The player to get the data from.
-     * @returns The data from the persistence layer.
-     */
-    getPlayerData(player: Player): Promise<Record<string, unknown> | void>;
+
     /**
      * Set global data in the data persistence service. This
      * data is available and shared by all lobbies of your game.
@@ -3726,15 +3721,7 @@ export declare class PersistenceManager {
      * @param data - The data to set.
      */
     setGlobalData(key: string, data: Record<string, unknown>): Promise<Record<string, unknown> | void>;
-    /**
-     * Set player data in the data persistence service. This
-     * data is persisted even after a player disconnects, and
-     * is retrievable no matter the lobby for your game that
-     * they join.
-     * @param player - The player to set the data to.
-     * @param data - The data to set.
-     */
-    setPlayerData(player: Player, data: Record<string, unknown>): Promise<Record<string, unknown> | void>;
+
 
 }
 

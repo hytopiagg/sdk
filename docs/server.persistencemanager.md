@@ -98,20 +98,6 @@ Get global data from the data persistence service.
 </td></tr>
 <tr><td>
 
-[getPlayerData(player)](./server.persistencemanager.getplayerdata.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Get player data from the data persistence service.
-
-
-</td></tr>
-<tr><td>
-
 [setGlobalData(key, data)](./server.persistencemanager.setglobaldata.md)
 
 
@@ -121,20 +107,6 @@ Get player data from the data persistence service.
 </td><td>
 
 Set global data in the data persistence service. This data is available and shared by all lobbies of your game.
-
-
-</td></tr>
-<tr><td>
-
-[setPlayerData(player, data)](./server.persistencemanager.setplayerdata.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Set player data in the data persistence service. This data is persisted even after a player disconnects, and is retrievable no matter the lobby for your game that they join.
 
 
 </td></tr>
