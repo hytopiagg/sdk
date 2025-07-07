@@ -130,6 +130,20 @@ SET\_MODEL\_HIDDEN\_NODES
 </td></tr>
 <tr><td>
 
+SET\_MODEL\_SCALE
+
+
+</td><td>
+
+`"ENTITY.SET_MODEL_SCALE"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 SET\_MODEL\_SHOWN\_NODES
 
 

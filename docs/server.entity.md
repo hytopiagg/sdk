@@ -730,6 +730,20 @@ Sets the nodes to hide on the entity's model. Matched nodes will be hidden for a
 </td></tr>
 <tr><td>
 
+[setModelScale(modelScale)](./server.entity.setmodelscale.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the scale of the entity's model and proportionally scales its colliders.
+
+
+</td></tr>
+<tr><td>
+
 [setModelShownNodes(modelShownNodes)](./server.entity.setmodelshownnodes.md)
 
 

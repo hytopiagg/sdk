@@ -8758,6 +8758,54 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "server!Collider#scale:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "scale(scalar: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "scalar",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "scale"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "server!Collider#setBounciness:member(1)",
               "docComment": "/**\n * Sets the bounciness of the collider.\n *\n * @param bounciness - The bounciness of the collider.\n */\n",
               "excerptTokens": [
@@ -14211,6 +14259,54 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "server!Entity#setModelScale:member(1)",
+              "docComment": "/**\n * Sets the scale of the entity's model and proportionally scales its colliders.\n *\n * @param modelScale - The scale of the entity's model.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setModelScale(modelScale: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "modelScale",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setModelScale"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "server!Entity#setModelShownNodes:member(1)",
               "docComment": "/**\n * Sets the nodes to show on the entity's model, overriding hidden nodes. Matched nodes will be shown for all players. Uses case insensitive substring matching.\n *\n * @param modelShownNodes - The nodes to show on the entity's model.\n */\n",
               "excerptTokens": [
@@ -15186,6 +15282,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!EntityEvent.SET_MODEL_SCALE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_MODEL_SCALE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"ENTITY.SET_MODEL_SCALE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_MODEL_SCALE"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!EntityEvent.SET_MODEL_SHOWN_NODES:member",
               "docComment": "",
               "excerptTokens": [
@@ -15829,6 +15946,51 @@
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!EntityEventPayloads#\"ENTITY.SET_MODEL_SCALE\":member",
+              "docComment": "/**\n * Emitted when the scale of the entity's model is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "EntityEvent.SET_MODEL_SCALE",
+                  "canonicalReference": "server!EntityEvent.SET_MODEL_SCALE:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        entity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Entity",
+                  "canonicalReference": "server!Entity:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        modelScale: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"ENTITY.SET_MODEL_SCALE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
               }
             },
             {

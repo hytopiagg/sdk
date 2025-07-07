@@ -520,6 +520,18 @@ Removes the collider from the simulation.
 </td></tr>
 <tr><td>
 
+[scale(scalar)](./server.collider.scale.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [setBounciness(bounciness)](./server.collider.setbounciness.md)
 
 

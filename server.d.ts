@@ -1083,6 +1083,8 @@ export declare class Collider extends EventRouter {
 
 
 
+    private _relativeRotation;
+
 
 
     /**
@@ -1211,6 +1213,7 @@ export declare class Collider extends EventRouter {
      * @param parentRigidBody - The parent rigid body of the collider.
      */
     addToSimulation(simulation: Simulation, parentRigidBody?: RigidBody): void;
+    scale(scalar: number): void;
     /**
      * Enables or disables collision events for the collider.
      * This is automatically enabled if an on collision callback is set.
@@ -1855,6 +1858,12 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      */
     setModelHiddenNodes(modelHiddenNodes: string[]): void;
     /**
+     * Sets the scale of the entity's model and proportionally
+     * scales its colliders.
+     * @param modelScale - The scale of the entity's model.
+     */
+    setModelScale(modelScale: number): void;
+    /**
      * Sets the nodes to show on the entity's model, overriding hidden nodes.
      * Matched nodes will be shown for all players. Uses case insensitive
      * substring matching.
@@ -1965,6 +1974,7 @@ export declare enum EntityEvent {
     ENTITY_CONTACT_FORCE = "ENTITY.ENTITY_CONTACT_FORCE",
     SET_MODEL_ANIMATIONS_PLAYBACK_RATE = "ENTITY.SET_MODEL_ANIMATIONS_PLAYBACK_RATE",
     SET_MODEL_HIDDEN_NODES = "ENTITY.SET_MODEL_HIDDEN_NODES",
+    SET_MODEL_SCALE = "ENTITY.SET_MODEL_SCALE",
     SET_MODEL_SHOWN_NODES = "ENTITY.SET_MODEL_SHOWN_NODES",
     SET_MODEL_TEXTURE_URI = "ENTITY.SET_MODEL_TEXTURE_URI",
     SET_OPACITY = "ENTITY.SET_OPACITY",
@@ -2022,6 +2032,11 @@ export declare interface EntityEventPayloads {
     [EntityEvent.SET_MODEL_HIDDEN_NODES]: {
         entity: Entity;
         modelHiddenNodes: Set<string>;
+    };
+    /** Emitted when the scale of the entity's model is set. */
+    [EntityEvent.SET_MODEL_SCALE]: {
+        entity: Entity;
+        modelScale: number;
     };
     /** Emitted when nodes of the entity's model are set to be shown. */
     [EntityEvent.SET_MODEL_SHOWN_NODES]: {

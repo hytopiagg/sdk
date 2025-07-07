@@ -170,6 +170,25 @@ Emitted when nodes of the entity's model are set to be hidden.
 </td></tr>
 <tr><td>
 
+["ENTITY.SET\_MODEL\_SCALE"](./server.entityeventpayloads._entity.set_model_scale_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ entity: [Entity](./server.entity.md)<!-- -->; modelScale: number; }
+
+
+</td><td>
+
+Emitted when the scale of the entity's model is set.
+
+
+</td></tr>
+<tr><td>
+
 ["ENTITY.SET\_MODEL\_SHOWN\_NODES"](./server.entityeventpayloads._entity.set_model_shown_nodes_.md)
 
 
