@@ -221,11 +221,11 @@ function initMcp() {
     if ([1, 2, 3].includes(selection)) { logDivider(); }
 
     if (selection === 1 || selection === 3) {
-      initEditorMcp('Cursor', 'cursor');
+      initCursorLocalMcp();
     }
 
     if (selection === 2 || selection === 3) {
-      initEditorMcp('Claude Code', 'claude');
+      initClaudeCodeMcp();
     }
     
     rl.close();
@@ -237,13 +237,43 @@ function initMcp() {
   });
 }
 
-/**
- * Initializes MCP for a specific editor
- */
-function initEditorMcp(editorName, editorFlag) {
-  console.log(`🔧 Initializing HYTOPIA MCP for ${editorName}...`);
-  execSync(`bunx topia-mcp@latest init ${editorFlag}`);
-  console.log(`✅ ${editorName} MCP initialized successfully!`);
+function initClaudeCodeMcp() {
+  console.log('🔧 Initializing HYTOPIA MCP for Claude Code...');
+  try {
+    execSync('claude mcp add hytopia-mcp -s project --transport http https://ai.hytopia.com/mcp');
+  } catch (err) {
+    console.log('⚠️ Could not add MCP via claude CLI, falling back to manual config...');
+    const claudeDir = path.join(process.cwd(), '.claude');
+    if (!fs.existsSync(claudeDir)) {
+      fs.mkdirSync(claudeDir);
+    }
+    fs.writeFileSync(path.join(claudeDir, '.mcp.json'), JSON.stringify({
+      mcpServers: {
+        'hytopia-mcp': {
+          url: 'https://ai.hytopia.com/mcp'
+        }
+      }
+    }, null, 2));
+  }
+  console.log(`✅ Claude Code MCP initialized successfully!`);
+  logDivider();
+}
+
+function initCursorLocalMcp() {
+  console.log('🔧 Initializing HYTOPIA MCP for Cursor...');
+  const cursorDir = path.join(process.cwd(), '.cursor');
+  if (!fs.existsSync(cursorDir)) {
+    fs.mkdirSync(cursorDir);
+  }
+  fs.writeFileSync(path.join(cursorDir, 'mcp.json'), JSON.stringify({
+    mcpServers: {
+      'hytopia-mcp': {
+        url: 'https://ai.hytopia.com/mcp'
+      }
+    }
+  }, null, 2));
+
+  console.log(`✅ Cursor MCP initialized successfully!`);
   logDivider();
 }
 
