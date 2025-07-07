@@ -6081,6 +6081,9 @@ export declare class World extends EventRouter implements protocol.Serializable 
 
 
 
+
+
+
     /**
      * @param options - The options for the world.
      */
@@ -6097,6 +6100,12 @@ export declare class World extends EventRouter implements protocol.Serializable 
     get directionalLightIntensity(): number;
     /** The position the directional light originates from. */
     get directionalLightPosition(): Vector3Like;
+    /** The color of the fog, if not explicitly set, defaults to ambient light color. */
+    get fogColor(): RgbColor | undefined;
+    /** The maximum distance from the camera at which fog stops being applied. */
+    get fogFar(): number;
+    /** The minimum distance from the camera to start applying fog. */
+    get fogNear(): number;
     /** The name of the world. */
     get name(): string;
     /** The intensity of the world's skybox brightness. */
@@ -6155,6 +6164,21 @@ export declare class World extends EventRouter implements protocol.Serializable 
      */
     setDirectionalLightPosition(position: Vector3Like): void;
     /**
+     * Sets the color of the world's fog.
+     * @param color - The color of the fog, or undefined to reset to ambient light color.
+     */
+    setFogColor(color: RgbColor | undefined): void;
+    /**
+     * Sets the maximum distance from the camera at which fog stops being applied.
+     * @param far - The far distance.
+     */
+    setFogFar(far: number): void;
+    /**
+     * Sets the minimum distance from the camera to start applying fog.
+     * @param near - The near distance.
+     */
+    setFogNear(near: number): void;
+    /**
      * Sets the intensity of the world's skybox brightness.
      * @param intensity - The intensity.
      */
@@ -6177,6 +6201,9 @@ export declare enum WorldEvent {
     SET_DIRECTIONAL_LIGHT_COLOR = "WORLD.SET_DIRECTIONAL_LIGHT_COLOR",
     SET_DIRECTIONAL_LIGHT_INTENSITY = "WORLD.SET_DIRECTIONAL_LIGHT_INTENSITY",
     SET_DIRECTIONAL_LIGHT_POSITION = "WORLD.SET_DIRECTIONAL_LIGHT_POSITION",
+    SET_FOG_COLOR = "WORLD.SET_FOG_COLOR",
+    SET_FOG_FAR = "WORLD.SET_FOG_FAR",
+    SET_FOG_NEAR = "WORLD.SET_FOG_NEAR",
     SET_SKYBOX_INTENSITY = "WORLD.SET_SKYBOX_INTENSITY",
     START = "WORLD.START",
     STOP = "WORLD.STOP"
@@ -6208,6 +6235,21 @@ export declare interface WorldEventPayloads {
     [WorldEvent.SET_DIRECTIONAL_LIGHT_POSITION]: {
         world: World;
         position: Vector3Like;
+    };
+    /** Emitted when the color of the world's fog is set. */
+    [WorldEvent.SET_FOG_COLOR]: {
+        world: World;
+        color: RgbColor;
+    };
+    /** Emitted when the density of the world's fog is set. */
+    [WorldEvent.SET_FOG_FAR]: {
+        world: World;
+        far: number;
+    };
+    /** Emitted when the density of the world's fog is set. */
+    [WorldEvent.SET_FOG_NEAR]: {
+        world: World;
+        near: number;
     };
     /** Emitted when the intensity of the world's skybox brightness is set. */
     [WorldEvent.SET_SKYBOX_INTENSITY]: {
@@ -6425,6 +6467,12 @@ export declare interface WorldOptions {
     directionalLightIntensity?: number;
     /** The position the directional light originates from for the world. */
     directionalLightPosition?: Vector3Like;
+    /** The color of the fog for the world. Defaults to ambient light color. */
+    fogColor?: RgbColor;
+    /** The maximum distance from the camera at which fog stops being applied.  */
+    fogFar?: number;
+    /** The minimum distance from the camera to start applying fog. */
+    fogNear?: number;
     /** The map of the world. */
     map?: WorldMap;
     /** The name of the world. */

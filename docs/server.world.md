@@ -303,6 +303,69 @@ The entity manager for the world.
 </td></tr>
 <tr><td>
 
+[fogColor](./server.world.fogcolor.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[RgbColor](./server.rgbcolor.md) \| undefined
+
+
+</td><td>
+
+The color of the fog, if not explicitly set, defaults to ambient light color.
+
+
+</td></tr>
+<tr><td>
+
+[fogFar](./server.world.fogfar.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+The maximum distance from the camera at which fog stops being applied.
+
+
+</td></tr>
+<tr><td>
+
+[fogNear](./server.world.fognear.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+The minimum distance from the camera to start applying fog.
+
+
+</td></tr>
+<tr><td>
+
 [id](./server.world.id.md)
 
 
@@ -591,6 +654,48 @@ Sets the intensity of the world's directional light.
 </td><td>
 
 Sets the position the world's directional light originates from.
+
+
+</td></tr>
+<tr><td>
+
+[setFogColor(color)](./server.world.setfogcolor.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the color of the world's fog.
+
+
+</td></tr>
+<tr><td>
+
+[setFogFar(far)](./server.world.setfogfar.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the maximum distance from the camera at which fog stops being applied.
+
+
+</td></tr>
+<tr><td>
+
+[setFogNear(near)](./server.world.setfognear.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the minimum distance from the camera to start applying fog.
 
 
 </td></tr>

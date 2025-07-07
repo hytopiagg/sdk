@@ -132,6 +132,63 @@ Emitted when the position of the world's directional light is set.
 </td></tr>
 <tr><td>
 
+["WORLD.SET\_FOG\_COLOR"](./server.worldeventpayloads._world.set_fog_color_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ world: [World](./server.world.md)<!-- -->; color: [RgbColor](./server.rgbcolor.md)<!-- -->; }
+
+
+</td><td>
+
+Emitted when the color of the world's fog is set.
+
+
+</td></tr>
+<tr><td>
+
+["WORLD.SET\_FOG\_FAR"](./server.worldeventpayloads._world.set_fog_far_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ world: [World](./server.world.md)<!-- -->; far: number; }
+
+
+</td><td>
+
+Emitted when the density of the world's fog is set.
+
+
+</td></tr>
+<tr><td>
+
+["WORLD.SET\_FOG\_NEAR"](./server.worldeventpayloads._world.set_fog_near_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ world: [World](./server.world.md)<!-- -->; near: number; }
+
+
+</td><td>
+
+Emitted when the density of the world's fog is set.
+
+
+</td></tr>
+<tr><td>
+
 ["WORLD.SET\_SKYBOX\_INTENSITY"](./server.worldeventpayloads._world.set_skybox_intensity_.md)
 
 

@@ -132,6 +132,63 @@ _(Optional)_ The position the directional light originates from for the world.
 </td></tr>
 <tr><td>
 
+[fogColor?](./server.worldoptions.fogcolor.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[RgbColor](./server.rgbcolor.md)
+
+
+</td><td>
+
+_(Optional)_ The color of the fog for the world. Defaults to ambient light color.
+
+
+</td></tr>
+<tr><td>
+
+[fogFar?](./server.worldoptions.fogfar.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The maximum distance from the camera at which fog stops being applied.
+
+
+</td></tr>
+<tr><td>
+
+[fogNear?](./server.worldoptions.fognear.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The minimum distance from the camera to start applying fog.
+
+
+</td></tr>
+<tr><td>
+
 [gravity?](./server.worldoptions.gravity.md)
 
 

@@ -47245,6 +47245,101 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!World#fogColor:member",
+              "docComment": "/**\n * The color of the fog, if not explicitly set, defaults to ambient light color.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get fogColor(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "fogColor",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!World#fogFar:member",
+              "docComment": "/**\n * The maximum distance from the camera at which fog stops being applied.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get fogFar(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "fogFar",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!World#fogNear:member",
+              "docComment": "/**\n * The minimum distance from the camera to start applying fog.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get fogNear(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "fogNear",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!World#id:member",
               "docComment": "/**\n * The unique ID of the world.\n */\n",
               "excerptTokens": [
@@ -47690,6 +47785,155 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "server!World#setFogColor:member(1)",
+              "docComment": "/**\n * Sets the color of the world's fog.\n *\n * @param color - The color of the fog, or undefined to reset to ambient light color.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setFogColor(color: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "color",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setFogColor"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!World#setFogFar:member(1)",
+              "docComment": "/**\n * Sets the maximum distance from the camera at which fog stops being applied.\n *\n * @param far - The far distance.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setFogFar(far: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "far",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setFogFar"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!World#setFogNear:member(1)",
+              "docComment": "/**\n * Sets the minimum distance from the camera to start applying fog.\n *\n * @param near - The near distance.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setFogNear(near: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "near",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setFogNear"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "server!World#setSkyboxIntensity:member(1)",
               "docComment": "/**\n * Sets the intensity of the world's skybox brightness.\n *\n * @param intensity - The intensity.\n */\n",
               "excerptTokens": [
@@ -48053,6 +48297,69 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!WorldEvent.SET_FOG_COLOR:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_FOG_COLOR = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"WORLD.SET_FOG_COLOR\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_FOG_COLOR"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!WorldEvent.SET_FOG_FAR:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_FOG_FAR = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"WORLD.SET_FOG_FAR\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_FOG_FAR"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!WorldEvent.SET_FOG_NEAR:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_FOG_NEAR = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"WORLD.SET_FOG_NEAR\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_FOG_NEAR"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!WorldEvent.SET_SKYBOX_INTENSITY:member",
               "docComment": "",
               "excerptTokens": [
@@ -48381,6 +48688,150 @@
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!WorldEventPayloads#\"WORLD.SET_FOG_COLOR\":member",
+              "docComment": "/**\n * Emitted when the color of the world's fog is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorldEvent.SET_FOG_COLOR",
+                  "canonicalReference": "server!WorldEvent.SET_FOG_COLOR:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        world: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "World",
+                  "canonicalReference": "server!World:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        color: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"WORLD.SET_FOG_COLOR\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!WorldEventPayloads#\"WORLD.SET_FOG_FAR\":member",
+              "docComment": "/**\n * Emitted when the density of the world's fog is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorldEvent.SET_FOG_FAR",
+                  "canonicalReference": "server!WorldEvent.SET_FOG_FAR:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        world: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "World",
+                  "canonicalReference": "server!World:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        far: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"WORLD.SET_FOG_FAR\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!WorldEventPayloads#\"WORLD.SET_FOG_NEAR\":member",
+              "docComment": "/**\n * Emitted when the density of the world's fog is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorldEvent.SET_FOG_NEAR",
+                  "canonicalReference": "server!WorldEvent.SET_FOG_NEAR:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        world: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "World",
+                  "canonicalReference": "server!World:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        near: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"WORLD.SET_FOG_NEAR\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
               }
             },
             {
@@ -49812,6 +50263,88 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "directionalLightPosition",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!WorldOptions#fogColor:member",
+              "docComment": "/**\n * The color of the fog for the world. Defaults to ambient light color.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fogColor?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "fogColor",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!WorldOptions#fogFar:member",
+              "docComment": "/**\n * The maximum distance from the camera at which fog stops being applied.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fogFar?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "fogFar",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!WorldOptions#fogNear:member",
+              "docComment": "/**\n * The minimum distance from the camera to start applying fog.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fogNear?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "fogNear",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
