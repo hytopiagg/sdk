@@ -3596,6 +3596,11 @@ export declare interface NoneColliderOptions extends BaseColliderOptions {
  * Represents a particle emitter in the world. Particle emitters emit 2D
  * particles in a world that always face the camera.
  *
+ * @remarks
+ * Particle emitters are created directly as instances. They support a
+ * variety of configuration options through the {@link ParticleEmitterOptions}
+ * constructor argument.
+ *
  * <h2>Events</h2>
  *
  * This class is an EventRouter, and instance of it emit

@@ -290,10 +290,6 @@ Manages model data for all known models of the game.
 
 Represents a particle emitter in the world. Particle emitters emit 2D particles in a world that always face the camera.
 
-<h2>Events</h2>
-
-This class is an EventRouter, and instance of it emit events with payloads listed under [ParticleEmitterEventPayloads](./server.particleemittereventpayloads.md)<!-- -->.
-
 
 </td></tr>
 <tr><td>
