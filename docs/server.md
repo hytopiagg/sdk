@@ -288,7 +288,7 @@ Manages model data for all known models of the game.
 
 </td><td>
 
-Represents a particle emitter in the world. Particle emitters emit 2D particles in a world that always face the camera.
+Represents a particle emitter in the world. Emit 2D particles that always face the camera.
 
 
 </td></tr>

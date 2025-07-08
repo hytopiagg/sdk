@@ -28627,7 +28627,7 @@
         {
           "kind": "Class",
           "canonicalReference": "server!ParticleEmitter:class",
-          "docComment": "/**\n * Represents a particle emitter in the world. Particle emitters emit 2D particles in a world that always face the camera.\n *\n * @remarks\n *\n * Particle emitters are created directly as instances. They support a variety of configuration options through the {@link ParticleEmitterOptions} constructor argument.\n *\n * <h2>Events</h2>\n *\n * This class is an EventRouter, and instance of it emit events with payloads listed under {@link ParticleEmitterEventPayloads}.\n *\n * @example\n * ```typescript\n * const particleEmitter = new ParticleEmitter({\n *   textureUri: 'textures/particles/smoke.png',\n * });\n *\n * particleEmitter.spawn(world);\n * ```\n *\n * @public\n */\n",
+          "docComment": "/**\n * Represents a particle emitter in the world. Emit 2D particles that always face the camera.\n *\n * @remarks\n *\n * Particle emitters are created directly as instances. They support a variety of configuration options through the {@link ParticleEmitterOptions} constructor argument.\n *\n * <h2>Events</h2>\n *\n * This class is an EventRouter, and instance of it emit events with payloads listed under {@link ParticleEmitterEventPayloads}.\n *\n * @example\n * ```typescript\n * const particleEmitter = new ParticleEmitter({\n *   textureUri: 'textures/particles/smoke.png',\n * });\n *\n * particleEmitter.spawn(world);\n * ```\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
