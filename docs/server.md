@@ -283,6 +283,30 @@ Manages model data for all known models of the game.
 </td></tr>
 <tr><td>
 
+[ParticleEmitter](./server.particleemitter.md)
+
+
+</td><td>
+
+Represents a particle emitter in the world. Particle emitters emit 2D particles in a world that always face the camera.
+
+<h2>Events</h2>
+
+This class is an EventRouter, and instance of it emit events with payloads listed under [ParticleEmitterEventPayloads](./server.particleemittereventpayloads.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[ParticleEmitterManager](./server.particleemittermanager.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [PathfindingEntityController](./server.pathfindingentitycontroller.md)
 
 
@@ -660,6 +684,17 @@ Event types a Light instance can emit. See [LightEventPayloads](./server.lightev
 </td><td>
 
 The types a Light can be.
+
+
+</td></tr>
+<tr><td>
+
+[ParticleEmitterEvent](./server.particleemitterevent.md)
+
+
+</td><td>
+
+Event types a ParticleEmitter instance can emit. See [ParticleEmitterEventPayloads](./server.particleemittereventpayloads.md)
 
 
 </td></tr>
@@ -1141,6 +1176,26 @@ The options for creating a model entity.
 </td><td>
 
 The options for an error type "none" collider.
+
+
+</td></tr>
+<tr><td>
+
+[ParticleEmitterEventPayloads](./server.particleemittereventpayloads.md)
+
+
+</td><td>
+
+Event payloads for ParticleEmitter emitted events.
+
+
+</td></tr>
+<tr><td>
+
+[ParticleEmitterOptions](./server.particleemitteroptions.md)
+
+
+</td><td>
 
 
 </td></tr>

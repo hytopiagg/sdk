@@ -17383,6 +17383,15 @@
             },
             {
               "kind": "Reference",
+              "text": "ParticleEmitterEventPayloads",
+              "canonicalReference": "server!ParticleEmitterEventPayloads:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
               "text": "PlayerCameraEventPayloads",
               "canonicalReference": "server!PlayerCameraEventPayloads:interface"
             },
@@ -17579,6 +17588,10 @@
             {
               "startIndex": 41,
               "endIndex": 42
+            },
+            {
+              "startIndex": 43,
+              "endIndex": 44
             }
           ]
         },
@@ -21453,7 +21466,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Light#spawn:member(1)",
-              "docComment": "/**\n * Spawns the Light into the world.\n *\n * @param world - The world to spawn the Light into.\n */\n",
+              "docComment": "/**\n * Spawns the Light in the world.\n *\n * @param world - The world to spawn the Light in.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -28610,6 +28623,5128 @@
               "endIndex": 2
             }
           ]
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "server!ParticleEmitter:class",
+          "docComment": "/**\n * Represents a particle emitter in the world. Particle emitters emit 2D particles in a world that always face the camera.\n *\n * <h2>Events</h2>\n *\n * This class is an EventRouter, and instance of it emit events with payloads listed under {@link ParticleEmitterEventPayloads}.\n *\n * @example\n * ```typescript\n * const particleEmitter = new ParticleEmitter({\n *   textureUri: 'textures/particles/smoke.png',\n * });\n *\n * particleEmitter.spawn(world);\n * ```\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export default class ParticleEmitter extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "EventRouter",
+              "canonicalReference": "server!EventRouter:class"
+            },
+            {
+              "kind": "Content",
+              "text": " implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "protocol.Serializable",
+              "canonicalReference": "@hytopia.com/server-protocol!Serializable:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "fileUrlPath": "src/worlds/particles/ParticleEmitter.ts",
+          "releaseTag": "Public",
+          "isAbstract": false,
+          "name": "ParticleEmitter",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "server!ParticleEmitter:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `ParticleEmitter` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(options: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterOptions",
+                  "canonicalReference": "server!ParticleEmitterOptions:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "options",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#alphaTest:member",
+              "docComment": "/**\n * The alpha test value, discards particle texture pixels with alpha opacity less than this value.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get alphaTest(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "alphaTest",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#attachedToEntity:member",
+              "docComment": "/**\n * The entity to which the ParticleEmitter is attached if explicitly set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get attachedToEntity(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Entity",
+                  "canonicalReference": "server!Entity:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "attachedToEntity",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#colorEnd:member",
+              "docComment": "/**\n * The color of an emitted particle at the end of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get colorEnd(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "colorEnd",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#colorEndVariance:member",
+              "docComment": "/**\n * The color variance of an emitted particle at the end of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get colorEndVariance(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "colorEndVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#colorStart:member",
+              "docComment": "/**\n * The color of an emitted particle at the start of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get colorStart(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "colorStart",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#colorStartVariance:member",
+              "docComment": "/**\n * The color variance of an emitted particle at the start of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get colorStartVariance(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "colorStartVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#despawn:member(1)",
+              "docComment": "/**\n * Despawns the ParticleEmitter from the world.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "despawn(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "despawn"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#gravity:member",
+              "docComment": "/**\n * The gravity vector for an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get gravity(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "gravity",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#id:member",
+              "docComment": "/**\n * The unique identifier for the ParticlEmitter.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get id(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "id",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#isSpawned:member",
+              "docComment": "/**\n * Whether the ParticleEmitter is spawned in the world.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isSpawned(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isSpawned",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#isStopped:member",
+              "docComment": "/**\n * Whether the ParticleEmitter is stopped.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isStopped(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isStopped",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#lifetime:member",
+              "docComment": "/**\n * The lifetime of an emitted particle in seconds.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get lifetime(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "lifetime",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#lifetimeVariance:member",
+              "docComment": "/**\n * The lifetime variance of an emitted particle in seconds.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get lifetimeVariance(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "lifetimeVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#maxParticles:member",
+              "docComment": "/**\n * The maximum number of live particles.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get maxParticles(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "maxParticles",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#offset:member",
+              "docComment": "/**\n * The offset of the particle emitter from the attached entity or position.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get offset(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "offset",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#opacityEnd:member",
+              "docComment": "/**\n * The opacity of an emitted particle at the end of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get opacityEnd(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "opacityEnd",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#opacityEndVariance:member",
+              "docComment": "/**\n * The opacity variance of an emitted particle at the end of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get opacityEndVariance(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "opacityEndVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#opacityStart:member",
+              "docComment": "/**\n * The opacity of an emitted particle at the start of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get opacityStart(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "opacityStart",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#opacityStartVariance:member",
+              "docComment": "/**\n * The opacity variance of an emitted particle at the start of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get opacityStartVariance(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "opacityStartVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#position:member",
+              "docComment": "/**\n * The position of the particle emitter in the world if explicitly set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get position(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "position",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#positionVariance:member",
+              "docComment": "/**\n * The position variance of an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get positionVariance(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "positionVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#rate:member",
+              "docComment": "/**\n * The rate per second at which particles are emitted.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get rate(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "rate",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#rateVariance:member",
+              "docComment": "/**\n * The rate per second variance of the particle emission rate.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get rateVariance(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "rateVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#restart:member(1)",
+              "docComment": "/**\n * Restarts the particle emission if it was previously stopped. Internally, this sets the rate to the value it was before being stopped.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "restart(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "restart"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setAlphaTest:member(1)",
+              "docComment": "/**\n * Sets the alpha test value, discards particle texture pixels with alpha opacity less than this value.\n *\n * @param alphaTest - The alpha test value, discards particle texture pixels with alpha opacity less than this value.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setAlphaTest(alphaTest: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "alphaTest",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setAlphaTest"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setAttachedToEntity:member(1)",
+              "docComment": "/**\n * Sets the entity to which the ParticleEmitter is attached.\n *\n * @param entity - The entity to attach the ParticleEmitter to.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setAttachedToEntity(entity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Entity",
+                  "canonicalReference": "server!Entity:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "entity",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setAttachedToEntity"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setColorEnd:member(1)",
+              "docComment": "/**\n * Sets the color of an emitted particle at the end of its lifetime.\n *\n * @param colorEnd - The color of an emitted particle at the end of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setColorEnd(colorEnd: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "colorEnd",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setColorEnd"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setColorEndVariance:member(1)",
+              "docComment": "/**\n * Sets the color variance of an emitted particle at the end of its lifetime.\n *\n * @param colorEndVariance - The color variance of an emitted particle at the end of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setColorEndVariance(colorEndVariance: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "colorEndVariance",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setColorEndVariance"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setColorStart:member(1)",
+              "docComment": "/**\n * Sets the color of an emitted particle at the start of its lifetime.\n *\n * @param colorStart - The color of an emitted particle at the start of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setColorStart(colorStart: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "colorStart",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setColorStart"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setColorStartVariance:member(1)",
+              "docComment": "/**\n * Sets the color variance of an emitted particle at the start of its lifetime.\n *\n * @param colorStartVariance - The color variance of an emitted particle at the start of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setColorStartVariance(colorStartVariance: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "colorStartVariance",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setColorStartVariance"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setGravity:member(1)",
+              "docComment": "/**\n * Sets the gravity vector for an emitted particle.\n *\n * @param gravity - The gravity vector for an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setGravity(gravity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "gravity",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setGravity"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setLifetime:member(1)",
+              "docComment": "/**\n * Sets the lifetime of an emitted particle in seconds.\n *\n * @param lifetime - The lifetime of an emitted particle in seconds.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setLifetime(lifetime: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "lifetime",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setLifetime"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setLifetimeVariance:member(1)",
+              "docComment": "/**\n * Sets the lifetime variance of an emitted particle in seconds.\n *\n * @param lifetimeVariance - The lifetime variance of an emitted particle in seconds.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setLifetimeVariance(lifetimeVariance: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "lifetimeVariance",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setLifetimeVariance"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setMaxParticles:member(1)",
+              "docComment": "/**\n * Sets the maximum number of live particles.\n *\n * @param maxParticles - The maximum number of live particles.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setMaxParticles(maxParticles: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "maxParticles",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setMaxParticles"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setOffset:member(1)",
+              "docComment": "/**\n * Sets the offset of the particle emitter from the attached entity or position.\n *\n * @param offset - The offset of the particle emitter from the attached entity or position.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setOffset(offset: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "offset",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setOffset"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setOpacityEnd:member(1)",
+              "docComment": "/**\n * Sets the opacity of an emitted particle at the end of its lifetime.\n *\n * @param opacityEnd - The opacity of an emitted particle at the end of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setOpacityEnd(opacityEnd: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "opacityEnd",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setOpacityEnd"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setOpacityEndVariance:member(1)",
+              "docComment": "/**\n * Sets the opacity variance of an emitted particle at the end of its lifetime.\n *\n * @param opacityEndVariance - The opacity variance of an emitted particle at the end of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setOpacityEndVariance(opacityEndVariance: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "opacityEndVariance",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setOpacityEndVariance"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setOpacityStart:member(1)",
+              "docComment": "/**\n * Sets the opacity of an emitted particle at the start of its lifetime.\n *\n * @param opacityStart - The opacity of an emitted particle at the start of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setOpacityStart(opacityStart: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "opacityStart",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setOpacityStart"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setOpacityStartVariance:member(1)",
+              "docComment": "/**\n * Sets the opacity variance of an emitted particle at the start of its lifetime.\n *\n * @param opacityStartVariance - The opacity variance of an emitted particle at the start of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setOpacityStartVariance(opacityStartVariance: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "opacityStartVariance",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setOpacityStartVariance"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setPosition:member(1)",
+              "docComment": "/**\n * Sets the position of the particle emitter.\n *\n * @param position - The position of the particle emitter.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setPosition(position: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "position",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setPosition"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setPositionVariance:member(1)",
+              "docComment": "/**\n * Sets the position variance of an emitted particle.\n *\n * @param positionVariance - The position variance of an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setPositionVariance(positionVariance: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "positionVariance",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setPositionVariance"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setRate:member(1)",
+              "docComment": "/**\n * Sets the rate per second at which particles are emitted.\n *\n * @param rate - The rate per second at which particles are emitted.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setRate(rate: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "rate",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setRate"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setRateVariance:member(1)",
+              "docComment": "/**\n * Sets the rate variance of the particle emission rate.\n *\n * @param rateVariance - The rate variance of the particle emission rate.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setRateVariance(rateVariance: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "rateVariance",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setRateVariance"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setSize:member(1)",
+              "docComment": "/**\n * Sets the size of an emitted particle.\n *\n * @param size - The size of an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setSize(size: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "size",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setSize"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setSizeVariance:member(1)",
+              "docComment": "/**\n * Sets the size variance of an emitted particle.\n *\n * @param sizeVariance - The size variance of an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setSizeVariance(sizeVariance: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "sizeVariance",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setSizeVariance"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setTextureUri:member(1)",
+              "docComment": "/**\n * Sets the texture URI of the particles emitted.\n *\n * @param textureUri - The texture URI of the particles emitted.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setTextureUri(textureUri: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "textureUri",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setTextureUri"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setTransparent:member(1)",
+              "docComment": "/**\n * Sets the transparency of the particle emitter.\n *\n * @param transparent - The transparency of the particle emitter.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setTransparent(transparent: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "transparent",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setTransparent"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setVelocity:member(1)",
+              "docComment": "/**\n * Sets the velocity of an emitted particle.\n *\n * @param velocity - The velocity of an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setVelocity(velocity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "velocity",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setVelocity"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setVelocityVariance:member(1)",
+              "docComment": "/**\n * Sets the velocity variance of an emitted particle.\n *\n * @param velocityVariance - The velocity variance of an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setVelocityVariance(velocityVariance: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "velocityVariance",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setVelocityVariance"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#size:member",
+              "docComment": "/**\n * The size of an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get size(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "size",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#sizeVariance:member",
+              "docComment": "/**\n * The size variance of an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get sizeVariance(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "sizeVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#spawn:member(1)",
+              "docComment": "/**\n * Spawns the ParticleEmitter in the world.\n *\n * @param world - The world to spawn the ParticleEmitter in.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "spawn(world: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "World",
+                  "canonicalReference": "server!World:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "world",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "spawn"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#stop:member(1)",
+              "docComment": "/**\n * Stops the particle emission if it was previously started. Internally, this sets the rate to 0.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "stop(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "stop"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#textureUri:member",
+              "docComment": "/**\n * The URI or path to the texture to be used for the particles.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get textureUri(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "textureUri",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#transparent:member",
+              "docComment": "/**\n * Whether an emitted particle is transparent, resulting in smoother transparency blending.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get transparent(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "transparent",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#velocity:member",
+              "docComment": "/**\n * The velocity of an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get velocity(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "velocity",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#velocityVariance:member",
+              "docComment": "/**\n * The velocity variance of an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get velocityVariance(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "velocityVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#world:member",
+              "docComment": "/**\n * The world the ParticleEmitter is in.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get world(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "World",
+                  "canonicalReference": "server!World:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "world",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "implementsTokenRanges": [
+            {
+              "startIndex": 3,
+              "endIndex": 4
+            }
+          ]
+        },
+        {
+          "kind": "Enum",
+          "canonicalReference": "server!ParticleEmitterEvent:enum",
+          "docComment": "/**\n * Event types a ParticleEmitter instance can emit. See {@link ParticleEmitterEventPayloads}\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum ParticleEmitterEvent "
+            }
+          ],
+          "fileUrlPath": "src/worlds/particles/ParticleEmitter.ts",
+          "releaseTag": "Public",
+          "name": "ParticleEmitterEvent",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.DESPAWN:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "DESPAWN = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.DESPAWN\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "DESPAWN"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_ALPHA_TEST:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_ALPHA_TEST = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_ALPHA_TEST\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_ALPHA_TEST"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_ATTACHED_TO_ENTITY:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_ATTACHED_TO_ENTITY = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_ATTACHED_TO_ENTITY\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_ATTACHED_TO_ENTITY"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_COLOR_END:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_COLOR_END = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_COLOR_END\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_COLOR_END"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_COLOR_END_VARIANCE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_COLOR_END_VARIANCE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_COLOR_END_VARIANCE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_COLOR_END_VARIANCE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_COLOR_START:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_COLOR_START = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_COLOR_START\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_COLOR_START"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_COLOR_START_VARIANCE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_COLOR_START_VARIANCE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_COLOR_START_VARIANCE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_COLOR_START_VARIANCE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_GRAVITY:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_GRAVITY = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_GRAVITY\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_GRAVITY"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_LIFETIME:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_LIFETIME = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_LIFETIME\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_LIFETIME"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_LIFETIME_VARIANCE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_LIFETIME_VARIANCE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_LIFETIME_VARIANCE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_LIFETIME_VARIANCE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_MAX_PARTICLES:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_MAX_PARTICLES = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_MAX_PARTICLES\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_MAX_PARTICLES"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_OFFSET:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_OFFSET = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_OFFSET\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_OFFSET"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_OPACITY_END:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_OPACITY_END = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_OPACITY_END\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_OPACITY_END"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_OPACITY_END_VARIANCE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_OPACITY_END_VARIANCE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_OPACITY_END_VARIANCE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_OPACITY_END_VARIANCE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_OPACITY_START:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_OPACITY_START = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_OPACITY_START\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_OPACITY_START"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_OPACITY_START_VARIANCE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_OPACITY_START_VARIANCE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_OPACITY_START_VARIANCE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_OPACITY_START_VARIANCE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_POSITION:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_POSITION = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_POSITION\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_POSITION"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_POSITION_VARIANCE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_POSITION_VARIANCE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_POSITION_VARIANCE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_POSITION_VARIANCE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_RATE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_RATE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_RATE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_RATE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_RATE_VARIANCE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_RATE_VARIANCE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_RATE_VARIANCE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_RATE_VARIANCE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_SIZE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_SIZE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_SIZE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_SIZE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_SIZE_VARIANCE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_SIZE_VARIANCE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_SIZE_VARIANCE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_SIZE_VARIANCE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_TEXTURE_URI:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_TEXTURE_URI = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_TEXTURE_URI\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_TEXTURE_URI"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_TRANSPARENT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_TRANSPARENT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_TRANSPARENT\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_TRANSPARENT"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_VELOCITY:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_VELOCITY = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_VELOCITY\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_VELOCITY"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_VELOCITY_VARIANCE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_VELOCITY_VARIANCE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_VELOCITY_VARIANCE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_VELOCITY_VARIANCE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SPAWN:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SPAWN = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SPAWN\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SPAWN"
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "server!ParticleEmitterEventPayloads:interface",
+          "docComment": "/**\n * Event payloads for ParticleEmitter emitted events.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ParticleEmitterEventPayloads "
+            }
+          ],
+          "fileUrlPath": "src/worlds/particles/ParticleEmitter.ts",
+          "releaseTag": "Public",
+          "name": "ParticleEmitterEventPayloads",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.DESPAWN\":member",
+              "docComment": "/**\n * Emitted when a ParticleEmitter is despawned.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.DESPAWN",
+                  "canonicalReference": "server!ParticleEmitterEvent.DESPAWN:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.DESPAWN\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_ALPHA_TEST\":member",
+              "docComment": "/**\n * Emitted when the alpha test value is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_ALPHA_TEST",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_ALPHA_TEST:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        alphaTest: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_ALPHA_TEST\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_ATTACHED_TO_ENTITY\":member",
+              "docComment": "/**\n * Emitted when the ParticleEmitter is attached to an entity.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_ATTACHED_TO_ENTITY",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_ATTACHED_TO_ENTITY:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        entity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Entity",
+                  "canonicalReference": "server!Entity:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_ATTACHED_TO_ENTITY\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_COLOR_END_VARIANCE\":member",
+              "docComment": "/**\n * Emitted when the color variance of an emitted particle at the end of its lifetime is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_COLOR_END_VARIANCE",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_COLOR_END_VARIANCE:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        colorEndVariance: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_COLOR_END_VARIANCE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_COLOR_END\":member",
+              "docComment": "/**\n * Emitted when the color of an emitted particle at the end of its lifetime is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_COLOR_END",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_COLOR_END:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        colorEnd: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_COLOR_END\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_COLOR_START_VARIANCE\":member",
+              "docComment": "/**\n * Emitted when the color variance of an emitted particle at the start of its lifetime is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_COLOR_START_VARIANCE",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_COLOR_START_VARIANCE:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        colorStartVariance: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_COLOR_START_VARIANCE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_COLOR_START\":member",
+              "docComment": "/**\n * Emitted when the color of an emitted particle at the start of its lifetime is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_COLOR_START",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_COLOR_START:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        colorStart: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_COLOR_START\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_GRAVITY\":member",
+              "docComment": "/**\n * Emitted when the gravity vector for an emitted particle is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_GRAVITY",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_GRAVITY:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        gravity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_GRAVITY\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_LIFETIME_VARIANCE\":member",
+              "docComment": "/**\n * Emitted when the lifetime variance of an emitted particle is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_LIFETIME_VARIANCE",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_LIFETIME_VARIANCE:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        lifetimeVariance: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_LIFETIME_VARIANCE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_LIFETIME\":member",
+              "docComment": "/**\n * Emitted when the lifetime of an emitted particle is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_LIFETIME",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_LIFETIME:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        lifetime: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_LIFETIME\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_MAX_PARTICLES\":member",
+              "docComment": "/**\n * Emitted when the maximum number of live particles is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_MAX_PARTICLES",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_MAX_PARTICLES:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        maxParticles: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_MAX_PARTICLES\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_OFFSET\":member",
+              "docComment": "/**\n * Emitted when the offset of the particle emitter is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_OFFSET",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_OFFSET:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        offset: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_OFFSET\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_OPACITY_END_VARIANCE\":member",
+              "docComment": "/**\n * Emitted when the opacity variance of an emitted particle at the end of its lifetime is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_OPACITY_END_VARIANCE",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_OPACITY_END_VARIANCE:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        opacityEndVariance: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_OPACITY_END_VARIANCE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_OPACITY_END\":member",
+              "docComment": "/**\n * Emitted when the opacity of an emitted particle at the end of its lifetime is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_OPACITY_END",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_OPACITY_END:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        opacityEnd: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_OPACITY_END\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_OPACITY_START_VARIANCE\":member",
+              "docComment": "/**\n * Emitted when the opacity variance of an emitted particle at the start of its lifetime is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_OPACITY_START_VARIANCE",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_OPACITY_START_VARIANCE:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        opacityStartVariance: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_OPACITY_START_VARIANCE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_OPACITY_START\":member",
+              "docComment": "/**\n * Emitted when the opacity of an emitted particle at the start of its lifetime is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_OPACITY_START",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_OPACITY_START:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        opacityStart: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_OPACITY_START\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_POSITION_VARIANCE\":member",
+              "docComment": "/**\n * Emitted when the position variance of an emitted particle is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_POSITION_VARIANCE",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_POSITION_VARIANCE:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        positionVariance: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_POSITION_VARIANCE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_POSITION\":member",
+              "docComment": "/**\n * Emitted when the position of the particle emitter is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_POSITION",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_POSITION:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        position: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_POSITION\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_RATE_VARIANCE\":member",
+              "docComment": "/**\n * Emitted when the rate per second variance of the particle emission rate is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_RATE_VARIANCE",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_RATE_VARIANCE:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        rateVariance: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_RATE_VARIANCE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_RATE\":member",
+              "docComment": "/**\n * Emitted when the rate per second at which particles are emitted is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_RATE",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_RATE:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        rate: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_RATE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_SIZE_VARIANCE\":member",
+              "docComment": "/**\n * Emitted when the size variance of an emitted particle is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_SIZE_VARIANCE",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_SIZE_VARIANCE:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        sizeVariance: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_SIZE_VARIANCE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_SIZE\":member",
+              "docComment": "/**\n * Emitted when the size of an emitted particle is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_SIZE",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_SIZE:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        size: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_SIZE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_TEXTURE_URI\":member",
+              "docComment": "/**\n * Emitted when the texture URI is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_TEXTURE_URI",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_TEXTURE_URI:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        textureUri: string;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_TEXTURE_URI\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_TRANSPARENT\":member",
+              "docComment": "/**\n * Emitted when the transparency of an emitted particle is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_TRANSPARENT",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_TRANSPARENT:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        transparent: boolean;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_TRANSPARENT\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_VELOCITY_VARIANCE\":member",
+              "docComment": "/**\n * Emitted when the velocity variance of an emitted particle is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_VELOCITY_VARIANCE",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_VELOCITY_VARIANCE:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        velocityVariance: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_VELOCITY_VARIANCE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_VELOCITY\":member",
+              "docComment": "/**\n * Emitted when the velocity of an emitted particle is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_VELOCITY",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_VELOCITY:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        velocity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_VELOCITY\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SPAWN\":member",
+              "docComment": "/**\n * Emitted when a ParticleEmitter is spawned.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SPAWN",
+                  "canonicalReference": "server!ParticleEmitterEvent.SPAWN:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SPAWN\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "server!ParticleEmitterManager:class",
+          "docComment": "/**\n * @remarks\n *\n * The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `ParticleEmitterManager` class.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export default class ParticleEmitterManager "
+            }
+          ],
+          "fileUrlPath": "src/worlds/particles/ParticleEmitterManager.ts",
+          "releaseTag": "Public",
+          "isAbstract": false,
+          "name": "ParticleEmitterManager",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitterManager#getAllEntityAttachedParticleEmitters:member(1)",
+              "docComment": "/**\n * Retrieves all spawned ParticleEmitter instances attached to a specific entity.\n *\n * @param entity - The entity to get attached ParticleEmitter instances for.\n *\n * @returns An array of ParticleEmitter instances.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getAllEntityAttachedParticleEmitters(entity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Entity",
+                  "canonicalReference": "server!Entity:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "entity",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "getAllEntityAttachedParticleEmitters"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitterManager#getAllParticleEmitters:member(1)",
+              "docComment": "/**\n * Retrieves all spawned ParticleEmitter instances for the world.\n *\n * @returns An array of ParticleEmitter instances.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getAllParticleEmitters(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "getAllParticleEmitters"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitterManager#world:member",
+              "docComment": "/**\n * The world the ParticleEmitterManager is for.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get world(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "World",
+                  "canonicalReference": "server!World:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "world",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            }
+          ],
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "server!ParticleEmitterOptions:interface",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ParticleEmitterOptions "
+            }
+          ],
+          "fileUrlPath": "src/worlds/particles/ParticleEmitter.ts",
+          "releaseTag": "Public",
+          "name": "ParticleEmitterOptions",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#alphaTest:member",
+              "docComment": "/**\n * The alpha test value, discards particle texture pixels with alpha opacity less than this value. Defaults to 0.5.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "alphaTest?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "alphaTest",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#attachedToEntity:member",
+              "docComment": "/**\n * If set, the ParticleEmitter will be attached to this entity.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "attachedToEntity?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Entity",
+                  "canonicalReference": "server!Entity:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "attachedToEntity",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#colorEnd:member",
+              "docComment": "/**\n * The color of an emitted particle at the end of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "colorEnd?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "colorEnd",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#colorEndVariance:member",
+              "docComment": "/**\n * The color variance of an emitted particle at the end of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "colorEndVariance?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "colorEndVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#colorStart:member",
+              "docComment": "/**\n * The color of an emitted particle at the start of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "colorStart?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "colorStart",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#colorStartVariance:member",
+              "docComment": "/**\n * The color variance of an emitted particle at the start of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "colorStartVariance?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "colorStartVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#gravity:member",
+              "docComment": "/**\n * The gravity vector for an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "gravity?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "gravity",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#lifetime:member",
+              "docComment": "/**\n * The lifetime of an emitted particle in seconds.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "lifetime?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "lifetime",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#lifetimeVariance:member",
+              "docComment": "/**\n * The lifetime variance of an emitted particle in seconds.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "lifetimeVariance?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "lifetimeVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#maxParticles:member",
+              "docComment": "/**\n * The maximum number of live particles.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "maxParticles?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "maxParticles",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#offset:member",
+              "docComment": "/**\n * The offset of the particle emitter from the attached entity or position.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "offset?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "offset",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#opacityEnd:member",
+              "docComment": "/**\n * The opacity of an emitted particle at the end of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "opacityEnd?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "opacityEnd",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#opacityEndVariance:member",
+              "docComment": "/**\n * The opacity variance of an emitted particle at the end of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "opacityEndVariance?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "opacityEndVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#opacityStart:member",
+              "docComment": "/**\n * The opacity of an emitted particle at the start of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "opacityStart?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "opacityStart",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#opacityStartVariance:member",
+              "docComment": "/**\n * The opacity variance of an emitted particle at the start of its lifetime.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "opacityStartVariance?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "opacityStartVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#position:member",
+              "docComment": "/**\n * The position of the particle emitter in the world if explicitly set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "position?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "position",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#positionVariance:member",
+              "docComment": "/**\n * The position variance of an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "positionVariance?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "positionVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#rate:member",
+              "docComment": "/**\n * The rate per second at which particles are emitted.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "rate?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "rate",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#rateVariance:member",
+              "docComment": "/**\n * The rate per second variance of the particle emission rate.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "rateVariance?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "rateVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#size:member",
+              "docComment": "/**\n * The size of an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "size?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "size",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#sizeVariance:member",
+              "docComment": "/**\n * The size variance of an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "sizeVariance?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "sizeVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#textureUri:member",
+              "docComment": "/**\n * The URI or path to the texture to be used for the particles.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "textureUri: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "textureUri",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#transparent:member",
+              "docComment": "/**\n * Whether an emitted particle is transparent, resulting in smoother transparency blending.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "transparent?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "transparent",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#velocity:member",
+              "docComment": "/**\n * The velocity of an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "velocity?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "velocity",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#velocityVariance:member",
+              "docComment": "/**\n * The velocity variance of an emitted particle.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "velocityVariance?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "velocityVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
         },
         {
           "kind": "TypeAlias",
@@ -47663,6 +52798,37 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "name",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!World#particleEmitterManager:member",
+              "docComment": "/**\n * The particle emitter manager for the world.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get particleEmitterManager(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterManager",
+                  "canonicalReference": "server!ParticleEmitterManager:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "particleEmitterManager",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

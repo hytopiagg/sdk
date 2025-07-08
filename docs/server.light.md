@@ -572,7 +572,7 @@ Sets the position the spotlight will constantly point at if the light type is sp
 
 </td><td>
 
-Spawns the Light into the world.
+Spawns the Light in the world.
 
 
 </td></tr>

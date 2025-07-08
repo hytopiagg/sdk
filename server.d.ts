@@ -2212,7 +2212,7 @@ export declare class ErrorHandler {
  *
  * @public
  */
-export declare interface EventPayloads extends AudioEventPayloads, BaseEntityControllerEventPayloads, BlockTypeEventPayloads, BlockTypeRegistryEventPayloads, ChatEventPayloads, ChunkEventPayloads, ConnectionEventPayloads, EntityEventPayloads, GameServerEventPayloads, PlayerCameraEventPayloads, PlayerEventPayloads, PlayerManagerEventPayloads, PlayerUIEventPayloads, SceneUIEventPayloads, SimulationEventPayloads, SocketEventPayloads, LightEventPayloads, WebServerEventPayloads, WorldEventPayloads, WorldLoopEventPayloads, WorldManagerEventPayloads {
+export declare interface EventPayloads extends AudioEventPayloads, BaseEntityControllerEventPayloads, BlockTypeEventPayloads, BlockTypeRegistryEventPayloads, ChatEventPayloads, ChunkEventPayloads, ConnectionEventPayloads, EntityEventPayloads, GameServerEventPayloads, ParticleEmitterEventPayloads, PlayerCameraEventPayloads, PlayerEventPayloads, PlayerManagerEventPayloads, PlayerUIEventPayloads, SceneUIEventPayloads, SimulationEventPayloads, SocketEventPayloads, LightEventPayloads, WebServerEventPayloads, WorldEventPayloads, WorldLoopEventPayloads, WorldManagerEventPayloads {
 }
 
 /**
@@ -2676,9 +2676,9 @@ export declare class Light extends EventRouter implements protocol.Serializable 
      */
     despawn(): void;
     /**
-     * Spawns the Light into the world.
+     * Spawns the Light in the world.
      *
-     * @param world - The world to spawn the Light into.
+     * @param world - The world to spawn the Light in.
      */
     spawn(world: World): void;
 
@@ -3590,6 +3590,533 @@ export declare type MoveOptions = {
 /** The options for an error type "none" collider. @public */
 export declare interface NoneColliderOptions extends BaseColliderOptions {
     shape: ColliderShape.NONE;
+}
+
+/**
+ * Represents a particle emitter in the world. Particle emitters emit 2D
+ * particles in a world that always face the camera.
+ *
+ * <h2>Events</h2>
+ *
+ * This class is an EventRouter, and instance of it emit
+ * events with payloads listed under {@link ParticleEmitterEventPayloads}.
+ *
+ * @example
+ * ```typescript
+ * const particleEmitter = new ParticleEmitter({
+ *   textureUri: 'textures/particles/smoke.png',
+ * });
+ *
+ * particleEmitter.spawn(world);
+ * ```
+ *
+ * @public
+ */
+export declare class ParticleEmitter extends EventRouter implements protocol.Serializable {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    constructor(options: ParticleEmitterOptions);
+    /** The unique identifier for the ParticlEmitter. */
+    get id(): number | undefined;
+    /** The alpha test value, discards particle texture pixels with alpha opacity less than this value. */
+    get alphaTest(): number | undefined;
+    /** The entity to which the ParticleEmitter is attached if explicitly set. */
+    get attachedToEntity(): Entity | undefined;
+    /** The color of an emitted particle at the end of its lifetime. */
+    get colorEnd(): RgbColor | undefined;
+    /** The color variance of an emitted particle at the end of its lifetime. */
+    get colorEndVariance(): RgbColor | undefined;
+    /** The color of an emitted particle at the start of its lifetime. */
+    get colorStart(): RgbColor | undefined;
+    /** The color variance of an emitted particle at the start of its lifetime. */
+    get colorStartVariance(): RgbColor | undefined;
+    /** The gravity vector for an emitted particle. */
+    get gravity(): Vector3Like | undefined;
+    /** Whether the ParticleEmitter is spawned in the world. */
+    get isSpawned(): boolean;
+    /** Whether the ParticleEmitter is stopped. */
+    get isStopped(): boolean;
+    /** The lifetime of an emitted particle in seconds. */
+    get lifetime(): number | undefined;
+    /** The lifetime variance of an emitted particle in seconds. */
+    get lifetimeVariance(): number | undefined;
+    /** The maximum number of live particles. */
+    get maxParticles(): number | undefined;
+    /** The offset of the particle emitter from the attached entity or position. */
+    get offset(): Vector3Like | undefined;
+    /** The opacity of an emitted particle at the end of its lifetime. */
+    get opacityEnd(): number | undefined;
+    /** The opacity variance of an emitted particle at the end of its lifetime. */
+    get opacityEndVariance(): number | undefined;
+    /** The opacity of an emitted particle at the start of its lifetime. */
+    get opacityStart(): number | undefined;
+    /** The opacity variance of an emitted particle at the start of its lifetime. */
+    get opacityStartVariance(): number | undefined;
+    /** The position of the particle emitter in the world if explicitly set. */
+    get position(): Vector3Like | undefined;
+    /** The position variance of an emitted particle. */
+    get positionVariance(): Vector3Like | undefined;
+    /** The rate per second at which particles are emitted. */
+    get rate(): number | undefined;
+    /** The rate per second variance of the particle emission rate. */
+    get rateVariance(): number | undefined;
+    /** The size of an emitted particle. */
+    get size(): number | undefined;
+    /** The size variance of an emitted particle. */
+    get sizeVariance(): number | undefined;
+    /** The URI or path to the texture to be used for the particles. */
+    get textureUri(): string;
+    /** Whether an emitted particle is transparent, resulting in smoother transparency blending. */
+    get transparent(): boolean | undefined;
+    /** The velocity of an emitted particle. */
+    get velocity(): Vector3Like | undefined;
+    /** The velocity variance of an emitted particle. */
+    get velocityVariance(): Vector3Like | undefined;
+    /** The world the ParticleEmitter is in. */
+    get world(): World | undefined;
+    /**
+     * Sets the alpha test value, discards particle texture pixels with alpha opacity less than this value.
+     *
+     * @param alphaTest - The alpha test value, discards particle texture pixels with alpha opacity less than this value.
+     */
+    setAlphaTest(alphaTest: number): void;
+    /**
+     * Sets the entity to which the ParticleEmitter is attached.
+     *
+     * @param entity - The entity to attach the ParticleEmitter to.
+     */
+    setAttachedToEntity(entity: Entity): void;
+    /**
+     * Sets the color of an emitted particle at the end of its lifetime.
+     *
+     * @param colorEnd - The color of an emitted particle at the end of its lifetime.
+     */
+    setColorEnd(colorEnd: RgbColor): void;
+    /**
+     * Sets the color variance of an emitted particle at the end of its lifetime.
+     *
+     * @param colorEndVariance - The color variance of an emitted particle at the end of its lifetime.
+     */
+    setColorEndVariance(colorEndVariance: RgbColor): void;
+    /**
+     * Sets the color of an emitted particle at the start of its lifetime.
+     *
+     * @param colorStart - The color of an emitted particle at the start of its lifetime.
+     */
+    setColorStart(colorStart: RgbColor): void;
+    /**
+     * Sets the color variance of an emitted particle at the start of its lifetime.
+     *
+     * @param colorStartVariance - The color variance of an emitted particle at the start of its lifetime.
+     */
+    setColorStartVariance(colorStartVariance: RgbColor): void;
+    /**
+     * Sets the gravity vector for an emitted particle.
+     *
+     * @param gravity - The gravity vector for an emitted particle.
+     */
+    setGravity(gravity: Vector3Like): void;
+    /**
+     * Sets the lifetime of an emitted particle in seconds.
+     *
+     * @param lifetime - The lifetime of an emitted particle in seconds.
+     */
+    setLifetime(lifetime: number): void;
+    /**
+     * Sets the lifetime variance of an emitted particle in seconds.
+     *
+     * @param lifetimeVariance - The lifetime variance of an emitted particle in seconds.
+     */
+    setLifetimeVariance(lifetimeVariance: number): void;
+    /**
+     * Sets the maximum number of live particles.
+     *
+     * @param maxParticles - The maximum number of live particles.
+     */
+    setMaxParticles(maxParticles: number): void;
+    /**
+     * Sets the offset of the particle emitter from the attached entity or position.
+     *
+     * @param offset - The offset of the particle emitter from the attached entity or position.
+     */
+    setOffset(offset: Vector3Like): void;
+    /**
+     * Sets the opacity of an emitted particle at the end of its lifetime.
+     *
+     * @param opacityEnd - The opacity of an emitted particle at the end of its lifetime.
+     */
+    setOpacityEnd(opacityEnd: number): void;
+    /**
+     * Sets the opacity variance of an emitted particle at the end of its lifetime.
+     *
+     * @param opacityEndVariance - The opacity variance of an emitted particle at the end of its lifetime.
+     */
+    setOpacityEndVariance(opacityEndVariance: number): void;
+    /**
+     * Sets the opacity of an emitted particle at the start of its lifetime.
+     *
+     * @param opacityStart - The opacity of an emitted particle at the start of its lifetime.
+     */
+    setOpacityStart(opacityStart: number): void;
+    /**
+     * Sets the opacity variance of an emitted particle at the start of its lifetime.
+     *
+     * @param opacityStartVariance - The opacity variance of an emitted particle at the start of its lifetime.
+     */
+    setOpacityStartVariance(opacityStartVariance: number): void;
+    /**
+     * Sets the position of the particle emitter.
+     *
+     * @param position - The position of the particle emitter.
+     */
+    setPosition(position: Vector3Like): void;
+    /**
+     * Sets the position variance of an emitted particle.
+     *
+     * @param positionVariance - The position variance of an emitted particle.
+     */
+    setPositionVariance(positionVariance: Vector3Like): void;
+    /**
+     * Sets the rate per second at which particles are emitted.
+     *
+     * @param rate - The rate per second at which particles are emitted.
+     */
+    setRate(rate: number): void;
+    /**
+     * Sets the rate variance of the particle emission rate.
+     *
+     * @param rateVariance - The rate variance of the particle emission rate.
+     */
+    setRateVariance(rateVariance: number): void;
+    /**
+     * Sets the size of an emitted particle.
+     *
+     * @param size - The size of an emitted particle.
+     */
+    setSize(size: number): void;
+    /**
+     * Sets the size variance of an emitted particle.
+     *
+     * @param sizeVariance - The size variance of an emitted particle.
+     */
+    setSizeVariance(sizeVariance: number): void;
+    /**
+     * Sets the texture URI of the particles emitted.
+     *
+     * @param textureUri - The texture URI of the particles emitted.
+     */
+    setTextureUri(textureUri: string): void;
+    /**
+     * Sets the transparency of the particle emitter.
+     *
+     * @param transparent - The transparency of the particle emitter.
+     */
+    setTransparent(transparent: boolean): void;
+    /**
+     * Sets the velocity of an emitted particle.
+     *
+     * @param velocity - The velocity of an emitted particle.
+     */
+    setVelocity(velocity: Vector3Like): void;
+    /**
+     * Sets the velocity variance of an emitted particle.
+     *
+     * @param velocityVariance - The velocity variance of an emitted particle.
+     */
+    setVelocityVariance(velocityVariance: Vector3Like): void;
+    /**
+     * Despawns the ParticleEmitter from the world.
+     */
+    despawn(): void;
+    /**
+     * Restarts the particle emission if it was previously stopped.
+     * Internally, this sets the rate to the value it was before being stopped.
+     */
+    restart(): void;
+    /**
+     * Stops the particle emission if it was previously started.
+     * Internally, this sets the rate to 0.
+     */
+    stop(): void;
+    /**
+     * Spawns the ParticleEmitter in the world.
+     *
+     * @param world - The world to spawn the ParticleEmitter in.
+     */
+    spawn(world: World): void;
+
+}
+
+/** Event types a ParticleEmitter instance can emit. See {@link ParticleEmitterEventPayloads} */
+export declare enum ParticleEmitterEvent {
+    DESPAWN = "PARTICLE_EMITTER.DESPAWN",
+    SET_ALPHA_TEST = "PARTICLE_EMITTER.SET_ALPHA_TEST",
+    SET_ATTACHED_TO_ENTITY = "PARTICLE_EMITTER.SET_ATTACHED_TO_ENTITY",
+    SET_COLOR_END = "PARTICLE_EMITTER.SET_COLOR_END",
+    SET_COLOR_END_VARIANCE = "PARTICLE_EMITTER.SET_COLOR_END_VARIANCE",
+    SET_COLOR_START = "PARTICLE_EMITTER.SET_COLOR_START",
+    SET_COLOR_START_VARIANCE = "PARTICLE_EMITTER.SET_COLOR_START_VARIANCE",
+    SET_GRAVITY = "PARTICLE_EMITTER.SET_GRAVITY",
+    SET_LIFETIME = "PARTICLE_EMITTER.SET_LIFETIME",
+    SET_LIFETIME_VARIANCE = "PARTICLE_EMITTER.SET_LIFETIME_VARIANCE",
+    SET_MAX_PARTICLES = "PARTICLE_EMITTER.SET_MAX_PARTICLES",
+    SET_OFFSET = "PARTICLE_EMITTER.SET_OFFSET",
+    SET_OPACITY_END = "PARTICLE_EMITTER.SET_OPACITY_END",
+    SET_OPACITY_END_VARIANCE = "PARTICLE_EMITTER.SET_OPACITY_END_VARIANCE",
+    SET_OPACITY_START = "PARTICLE_EMITTER.SET_OPACITY_START",
+    SET_OPACITY_START_VARIANCE = "PARTICLE_EMITTER.SET_OPACITY_START_VARIANCE",
+    SET_POSITION = "PARTICLE_EMITTER.SET_POSITION",
+    SET_POSITION_VARIANCE = "PARTICLE_EMITTER.SET_POSITION_VARIANCE",
+    SET_RATE = "PARTICLE_EMITTER.SET_RATE",
+    SET_RATE_VARIANCE = "PARTICLE_EMITTER.SET_RATE_VARIANCE",
+    SET_SIZE = "PARTICLE_EMITTER.SET_SIZE",
+    SET_SIZE_VARIANCE = "PARTICLE_EMITTER.SET_SIZE_VARIANCE",
+    SET_TEXTURE_URI = "PARTICLE_EMITTER.SET_TEXTURE_URI",
+    SET_TRANSPARENT = "PARTICLE_EMITTER.SET_TRANSPARENT",
+    SET_VELOCITY = "PARTICLE_EMITTER.SET_VELOCITY",
+    SET_VELOCITY_VARIANCE = "PARTICLE_EMITTER.SET_VELOCITY_VARIANCE",
+    SPAWN = "PARTICLE_EMITTER.SPAWN"
+}
+
+/** Event payloads for ParticleEmitter emitted events. @public */
+export declare interface ParticleEmitterEventPayloads {
+    /** Emitted when a ParticleEmitter is despawned. */
+    [ParticleEmitterEvent.DESPAWN]: {
+        particleEmitter: ParticleEmitter;
+    };
+    /** Emitted when the alpha test value is set. */
+    [ParticleEmitterEvent.SET_ALPHA_TEST]: {
+        particleEmitter: ParticleEmitter;
+        alphaTest: number;
+    };
+    /** Emitted when the ParticleEmitter is attached to an entity. */
+    [ParticleEmitterEvent.SET_ATTACHED_TO_ENTITY]: {
+        particleEmitter: ParticleEmitter;
+        entity: Entity;
+    };
+    /** Emitted when the color of an emitted particle at the end of its lifetime is set. */
+    [ParticleEmitterEvent.SET_COLOR_END]: {
+        particleEmitter: ParticleEmitter;
+        colorEnd: RgbColor;
+    };
+    /** Emitted when the color variance of an emitted particle at the end of its lifetime is set. */
+    [ParticleEmitterEvent.SET_COLOR_END_VARIANCE]: {
+        particleEmitter: ParticleEmitter;
+        colorEndVariance: RgbColor;
+    };
+    /** Emitted when the color of an emitted particle at the start of its lifetime is set. */
+    [ParticleEmitterEvent.SET_COLOR_START]: {
+        particleEmitter: ParticleEmitter;
+        colorStart: RgbColor;
+    };
+    /** Emitted when the color variance of an emitted particle at the start of its lifetime is set. */
+    [ParticleEmitterEvent.SET_COLOR_START_VARIANCE]: {
+        particleEmitter: ParticleEmitter;
+        colorStartVariance: RgbColor;
+    };
+    /** Emitted when the gravity vector for an emitted particle is set. */
+    [ParticleEmitterEvent.SET_GRAVITY]: {
+        particleEmitter: ParticleEmitter;
+        gravity: Vector3Like;
+    };
+    /** Emitted when the lifetime of an emitted particle is set. */
+    [ParticleEmitterEvent.SET_LIFETIME]: {
+        particleEmitter: ParticleEmitter;
+        lifetime: number;
+    };
+    /** Emitted when the lifetime variance of an emitted particle is set. */
+    [ParticleEmitterEvent.SET_LIFETIME_VARIANCE]: {
+        particleEmitter: ParticleEmitter;
+        lifetimeVariance: number;
+    };
+    /** Emitted when the maximum number of live particles is set. */
+    [ParticleEmitterEvent.SET_MAX_PARTICLES]: {
+        particleEmitter: ParticleEmitter;
+        maxParticles: number;
+    };
+    /** Emitted when the offset of the particle emitter is set. */
+    [ParticleEmitterEvent.SET_OFFSET]: {
+        particleEmitter: ParticleEmitter;
+        offset: Vector3Like;
+    };
+    /** Emitted when the opacity of an emitted particle at the end of its lifetime is set. */
+    [ParticleEmitterEvent.SET_OPACITY_END]: {
+        particleEmitter: ParticleEmitter;
+        opacityEnd: number;
+    };
+    /** Emitted when the opacity variance of an emitted particle at the end of its lifetime is set. */
+    [ParticleEmitterEvent.SET_OPACITY_END_VARIANCE]: {
+        particleEmitter: ParticleEmitter;
+        opacityEndVariance: number;
+    };
+    /** Emitted when the opacity of an emitted particle at the start of its lifetime is set. */
+    [ParticleEmitterEvent.SET_OPACITY_START]: {
+        particleEmitter: ParticleEmitter;
+        opacityStart: number;
+    };
+    /** Emitted when the opacity variance of an emitted particle at the start of its lifetime is set. */
+    [ParticleEmitterEvent.SET_OPACITY_START_VARIANCE]: {
+        particleEmitter: ParticleEmitter;
+        opacityStartVariance: number;
+    };
+    /** Emitted when the position of the particle emitter is set. */
+    [ParticleEmitterEvent.SET_POSITION]: {
+        particleEmitter: ParticleEmitter;
+        position: Vector3Like;
+    };
+    /** Emitted when the position variance of an emitted particle is set. */
+    [ParticleEmitterEvent.SET_POSITION_VARIANCE]: {
+        particleEmitter: ParticleEmitter;
+        positionVariance: Vector3Like;
+    };
+    /** Emitted when the rate per second at which particles are emitted is set. */
+    [ParticleEmitterEvent.SET_RATE]: {
+        particleEmitter: ParticleEmitter;
+        rate: number;
+    };
+    /** Emitted when the rate per second variance of the particle emission rate is set. */
+    [ParticleEmitterEvent.SET_RATE_VARIANCE]: {
+        particleEmitter: ParticleEmitter;
+        rateVariance: number;
+    };
+    /** Emitted when the size of an emitted particle is set. */
+    [ParticleEmitterEvent.SET_SIZE]: {
+        particleEmitter: ParticleEmitter;
+        size: number;
+    };
+    /** Emitted when the size variance of an emitted particle is set. */
+    [ParticleEmitterEvent.SET_SIZE_VARIANCE]: {
+        particleEmitter: ParticleEmitter;
+        sizeVariance: number;
+    };
+    /** Emitted when the texture URI is set. */
+    [ParticleEmitterEvent.SET_TEXTURE_URI]: {
+        particleEmitter: ParticleEmitter;
+        textureUri: string;
+    };
+    /** Emitted when the transparency of an emitted particle is set. */
+    [ParticleEmitterEvent.SET_TRANSPARENT]: {
+        particleEmitter: ParticleEmitter;
+        transparent: boolean;
+    };
+    /** Emitted when the velocity of an emitted particle is set. */
+    [ParticleEmitterEvent.SET_VELOCITY]: {
+        particleEmitter: ParticleEmitter;
+        velocity: Vector3Like;
+    };
+    /** Emitted when the velocity variance of an emitted particle is set. */
+    [ParticleEmitterEvent.SET_VELOCITY_VARIANCE]: {
+        particleEmitter: ParticleEmitter;
+        velocityVariance: Vector3Like;
+    };
+    /** Emitted when a ParticleEmitter is spawned. */
+    [ParticleEmitterEvent.SPAWN]: {
+        particleEmitter: ParticleEmitter;
+    };
+}
+
+export declare class ParticleEmitterManager {
+
+
+
+
+    /** The world the ParticleEmitterManager is for. */
+    get world(): World;
+
+    /**
+     * Retrieves all spawned ParticleEmitter instances for the world.
+     *
+     * @returns An array of ParticleEmitter instances.
+     */
+    getAllParticleEmitters(): ParticleEmitter[];
+    /**
+     * Retrieves all spawned ParticleEmitter instances attached to a specific entity.
+     *
+     * @param entity - The entity to get attached ParticleEmitter instances for.
+     * @returns An array of ParticleEmitter instances.
+     */
+    getAllEntityAttachedParticleEmitters(entity: Entity): ParticleEmitter[];
+
+
+}
+
+export declare interface ParticleEmitterOptions {
+    /** The URI or path to the texture to be used for the particles. */
+    textureUri: string;
+    /** The alpha test value, discards particle texture pixels with alpha opacity less than this value. Defaults to 0.5. */
+    alphaTest?: number;
+    /** If set, the ParticleEmitter will be attached to this entity. */
+    attachedToEntity?: Entity;
+    /** The color of an emitted particle at the end of its lifetime. */
+    colorEnd?: RgbColor;
+    /** The color variance of an emitted particle at the end of its lifetime. */
+    colorEndVariance?: RgbColor;
+    /** The color of an emitted particle at the start of its lifetime. */
+    colorStart?: RgbColor;
+    /** The color variance of an emitted particle at the start of its lifetime. */
+    colorStartVariance?: RgbColor;
+    /** The gravity vector for an emitted particle. */
+    gravity?: Vector3Like;
+    /** The lifetime of an emitted particle in seconds. */
+    lifetime?: number;
+    /** The lifetime variance of an emitted particle in seconds. */
+    lifetimeVariance?: number;
+    /** The maximum number of live particles. */
+    maxParticles?: number;
+    /** The offset of the particle emitter from the attached entity or position. */
+    offset?: Vector3Like;
+    /** The opacity of an emitted particle at the end of its lifetime. */
+    opacityEnd?: number;
+    /** The opacity variance of an emitted particle at the end of its lifetime. */
+    opacityEndVariance?: number;
+    /** The opacity of an emitted particle at the start of its lifetime. */
+    opacityStart?: number;
+    /** The opacity variance of an emitted particle at the start of its lifetime. */
+    opacityStartVariance?: number;
+    /** The position of the particle emitter in the world if explicitly set. */
+    position?: Vector3Like;
+    /** The position variance of an emitted particle. */
+    positionVariance?: Vector3Like;
+    /** The rate per second at which particles are emitted. */
+    rate?: number;
+    /** The rate per second variance of the particle emission rate. */
+    rateVariance?: number;
+    /** The size of an emitted particle. */
+    size?: number;
+    /** The size variance of an emitted particle. */
+    sizeVariance?: number;
+    /** Whether an emitted particle is transparent, resulting in smoother transparency blending. */
+    transparent?: boolean;
+    /** The velocity of an emitted particle. */
+    velocity?: Vector3Like;
+    /** The velocity variance of an emitted particle. */
+    velocityVariance?: Vector3Like;
 }
 
 /**
@@ -6099,6 +6626,7 @@ export declare class World extends EventRouter implements protocol.Serializable 
 
 
 
+
     /**
      * @param options - The options for the world.
      */
@@ -6144,6 +6672,8 @@ export declare class World extends EventRouter implements protocol.Serializable 
     /** The world loop for the world. */
     get loop(): WorldLoop;
 
+    /** The particle emitter manager for the world. */
+    get particleEmitterManager(): ParticleEmitterManager;
     /** The scene UI manager for the world. */
     get sceneUIManager(): SceneUIManager;
     /** The simulation for the world. */

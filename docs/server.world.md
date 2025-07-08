@@ -450,6 +450,27 @@ The name of the world.
 </td></tr>
 <tr><td>
 
+[particleEmitterManager](./server.world.particleemittermanager.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[ParticleEmitterManager](./server.particleemittermanager.md)
+
+
+</td><td>
+
+The particle emitter manager for the world.
+
+
+</td></tr>
+<tr><td>
+
 [sceneUIManager](./server.world.sceneuimanager.md)
 
 

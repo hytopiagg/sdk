@@ -4,7 +4,7 @@
 
 ## Light.spawn() method
 
-Spawns the Light into the world.
+Spawns the Light in the world.
 
 **Signature:**
 
@@ -42,7 +42,7 @@ world
 
 </td><td>
 
-The world to spawn the Light into.
+The world to spawn the Light in.
 
 
 </td></tr>
