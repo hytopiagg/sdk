@@ -32905,7 +32905,7 @@
         {
           "kind": "Class",
           "canonicalReference": "server!ParticleEmitterManager:class",
-          "docComment": "/**\n * @remarks\n *\n * The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `ParticleEmitterManager` class.\n */\n",
+          "docComment": "/**\n * Manages ParticleEmitter instances in a world.\n *\n * @remarks\n *\n * The ParticleEmitterManager is created internally as a singleton for each {@link World} instance in a game server. It allows retrieval of all loaded ParticleEmitter instances, entity attached ParticleEmitter instances, and more.\n *\n * The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `ParticleEmitterManager` class.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",

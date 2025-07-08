@@ -4046,6 +4046,17 @@ export declare interface ParticleEmitterEventPayloads {
     };
 }
 
+/**
+ * Manages ParticleEmitter instances in a world.
+ *
+ * @remarks
+ * The ParticleEmitterManager is created internally as a singleton
+ * for each {@link World} instance in a game server.
+ * It allows retrieval of all loaded ParticleEmitter instances,
+ * entity attached ParticleEmitter instances, and more.
+ *
+ * @public
+ */
 export declare class ParticleEmitterManager {
 
 

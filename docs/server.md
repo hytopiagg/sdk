@@ -299,6 +299,8 @@ Represents a particle emitter in the world. Particle emitters emit 2D particles 
 
 </td><td>
 
+Manages ParticleEmitter instances in a world.
+
 
 </td></tr>
 <tr><td>

@@ -4,6 +4,8 @@
 
 ## ParticleEmitterManager class
 
+Manages ParticleEmitter instances in a world.
+
 **Signature:**
 
 ```typescript
@@ -11,6 +13,8 @@ export default class ParticleEmitterManager
 ```
 
 ## Remarks
+
+The ParticleEmitterManager is created internally as a singleton for each [World](./server.world.md) instance in a game server. It allows retrieval of all loaded ParticleEmitter instances, entity attached ParticleEmitter instances, and more.
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `ParticleEmitterManager` class.
 
