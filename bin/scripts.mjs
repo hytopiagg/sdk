@@ -82,6 +82,8 @@ function createReadlineInterface() {
 function init() {
   const destDir = process.cwd();
 
+  console.log('⚙️ Installing core dependencies...');
+
   // Install dependencies
   installProjectDependencies();
 
