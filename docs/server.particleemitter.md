@@ -135,6 +135,27 @@ The entity to which the ParticleEmitter is attached if explicitly set.
 </td></tr>
 <tr><td>
 
+[attachedToEntityNodeName](./server.particleemitter.attachedtoentitynodename.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+The name of the node of the attached entity (if the attached entity is a model entity) to attach the particle emitter to.
+
+
+</td></tr>
+<tr><td>
+
 [colorEnd](./server.particleemitter.colorend.md)
 
 
@@ -773,6 +794,20 @@ Sets the alpha test value, discards particle texture pixels with alpha opacity l
 </td><td>
 
 Sets the entity to which the ParticleEmitter is attached.
+
+
+</td></tr>
+<tr><td>
+
+[setAttachedToEntityNodeName(attachedToEntityNodeName)](./server.particleemitter.setattachedtoentitynodename.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the name of the node of the attached entity (if the attached entity is a model entity) to attach the particle emitter to.
 
 
 </td></tr>

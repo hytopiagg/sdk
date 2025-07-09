@@ -74,6 +74,20 @@ SET\_ATTACHED\_TO\_ENTITY
 </td></tr>
 <tr><td>
 
+SET\_ATTACHED\_TO\_ENTITY\_NODE\_NAME
+
+
+</td><td>
+
+`"PARTICLE_EMITTER.SET_ATTACHED_TO_ENTITY_NODE_NAME"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 SET\_COLOR\_END
 
 

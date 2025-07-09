@@ -3646,6 +3646,7 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
 
 
 
+
     constructor(options: ParticleEmitterOptions);
     /** The unique identifier for the ParticlEmitter. */
     get id(): number | undefined;
@@ -3653,6 +3654,8 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
     get alphaTest(): number | undefined;
     /** The entity to which the ParticleEmitter is attached if explicitly set. */
     get attachedToEntity(): Entity | undefined;
+    /** The name of the node of the attached entity (if the attached entity is a model entity) to attach the particle emitter to. */
+    get attachedToEntityNodeName(): string | undefined;
     /** The color of an emitted particle at the end of its lifetime. */
     get colorEnd(): RgbColor | undefined;
     /** The color variance of an emitted particle at the end of its lifetime. */
@@ -3717,6 +3720,12 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
      * @param entity - The entity to attach the ParticleEmitter to.
      */
     setAttachedToEntity(entity: Entity): void;
+    /**
+     * Sets the name of the node of the attached entity (if the attached entity is a model entity) to attach the particle emitter to.
+     *
+     * @param attachedToEntityNodeName - The name of the node of the attached entity (if the attached entity is a model entity) to attach the particle emitter to.
+     */
+    setAttachedToEntityNodeName(attachedToEntityNodeName: string): void;
     /**
      * Sets the color of an emitted particle at the end of its lifetime.
      *
@@ -3883,6 +3892,7 @@ export declare enum ParticleEmitterEvent {
     DESPAWN = "PARTICLE_EMITTER.DESPAWN",
     SET_ALPHA_TEST = "PARTICLE_EMITTER.SET_ALPHA_TEST",
     SET_ATTACHED_TO_ENTITY = "PARTICLE_EMITTER.SET_ATTACHED_TO_ENTITY",
+    SET_ATTACHED_TO_ENTITY_NODE_NAME = "PARTICLE_EMITTER.SET_ATTACHED_TO_ENTITY_NODE_NAME",
     SET_COLOR_END = "PARTICLE_EMITTER.SET_COLOR_END",
     SET_COLOR_END_VARIANCE = "PARTICLE_EMITTER.SET_COLOR_END_VARIANCE",
     SET_COLOR_START = "PARTICLE_EMITTER.SET_COLOR_START",
@@ -3924,6 +3934,11 @@ export declare interface ParticleEmitterEventPayloads {
     [ParticleEmitterEvent.SET_ATTACHED_TO_ENTITY]: {
         particleEmitter: ParticleEmitter;
         entity: Entity;
+    };
+    /** Emitted when the name of the node of the attached entity the particle emitter is attached to is set. */
+    [ParticleEmitterEvent.SET_ATTACHED_TO_ENTITY_NODE_NAME]: {
+        particleEmitter: ParticleEmitter;
+        attachedToEntityNodeName: string;
     };
     /** Emitted when the color of an emitted particle at the end of its lifetime is set. */
     [ParticleEmitterEvent.SET_COLOR_END]: {
@@ -4089,6 +4104,8 @@ export declare interface ParticleEmitterOptions {
     alphaTest?: number;
     /** If set, the ParticleEmitter will be attached to this entity. */
     attachedToEntity?: Entity;
+    /** The name of the node of the attached entity (if the attached entity is a model entity) to attach the particle emitter to. */
+    attachedToEntityNodeName?: string;
     /** The color of an emitted particle at the end of its lifetime. */
     colorEnd?: RgbColor;
     /** The color variance of an emitted particle at the end of its lifetime. */

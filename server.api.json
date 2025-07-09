@@ -28758,6 +28758,36 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#attachedToEntityNodeName:member",
+              "docComment": "/**\n * The name of the node of the attached entity (if the attached entity is a model entity) to attach the particle emitter to.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get attachedToEntityNodeName(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "attachedToEntityNodeName",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!ParticleEmitter#colorEnd:member",
               "docComment": "/**\n * The color of an emitted particle at the end of its lifetime.\n */\n",
               "excerptTokens": [
@@ -29554,6 +29584,54 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "setAttachedToEntity"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setAttachedToEntityNodeName:member(1)",
+              "docComment": "/**\n * Sets the name of the node of the attached entity (if the attached entity is a model entity) to attach the particle emitter to.\n *\n * @param attachedToEntityNodeName - The name of the node of the attached entity (if the attached entity is a model entity) to attach the particle emitter to.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setAttachedToEntityNodeName(attachedToEntityNodeName: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "attachedToEntityNodeName",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setAttachedToEntityNodeName"
             },
             {
               "kind": "Method",
@@ -31066,6 +31144,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_ATTACHED_TO_ENTITY_NODE_NAME:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_ATTACHED_TO_ENTITY_NODE_NAME = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_ATTACHED_TO_ENTITY_NODE_NAME\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_ATTACHED_TO_ENTITY_NODE_NAME"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!ParticleEmitterEvent.SET_COLOR_END:member",
               "docComment": "",
               "excerptTokens": [
@@ -31670,6 +31769,51 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "\"PARTICLE_EMITTER.SET_ALPHA_TEST\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_ATTACHED_TO_ENTITY_NODE_NAME\":member",
+              "docComment": "/**\n * Emitted when the name of the node of the attached entity the particle emitter is attached to is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_ATTACHED_TO_ENTITY_NODE_NAME",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_ATTACHED_TO_ENTITY_NODE_NAME:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        attachedToEntityNodeName: string;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_ATTACHED_TO_ENTITY_NODE_NAME\"",
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 6
@@ -33107,6 +33251,33 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "attachedToEntity",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#attachedToEntityNodeName:member",
+              "docComment": "/**\n * The name of the node of the attached entity (if the attached entity is a model entity) to attach the particle emitter to.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "attachedToEntityNodeName?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "attachedToEntityNodeName",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

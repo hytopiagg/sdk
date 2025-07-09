@@ -75,6 +75,25 @@ Emitted when the alpha test value is set.
 </td></tr>
 <tr><td>
 
+["PARTICLE\_EMITTER.SET\_ATTACHED\_TO\_ENTITY\_NODE\_NAME"](./server.particleemittereventpayloads._particle_emitter.set_attached_to_entity_node_name_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ particleEmitter: [ParticleEmitter](./server.particleemitter.md)<!-- -->; attachedToEntityNodeName: string; }
+
+
+</td><td>
+
+Emitted when the name of the node of the attached entity the particle emitter is attached to is set.
+
+
+</td></tr>
+<tr><td>
+
 ["PARTICLE\_EMITTER.SET\_ATTACHED\_TO\_ENTITY"](./server.particleemittereventpayloads._particle_emitter.set_attached_to_entity_.md)
 
 

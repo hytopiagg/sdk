@@ -73,6 +73,25 @@ _(Optional)_ If set, the ParticleEmitter will be attached to this entity.
 </td></tr>
 <tr><td>
 
+[attachedToEntityNodeName?](./server.particleemitteroptions.attachedtoentitynodename.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ The name of the node of the attached entity (if the attached entity is a model entity) to attach the particle emitter to.
+
+
+</td></tr>
+<tr><td>
+
 [colorEnd?](./server.particleemitteroptions.colorend.md)
 
 
