@@ -4,7 +4,7 @@
 
 ## ChunkLattice.clear() method
 
-Despawns and clears all chunks in the lattice.
+Removes and clears all chunks and their blocks from the lattice.
 
 **Signature:**
 

@@ -674,7 +674,7 @@ Sets the intensity of the world's directional light.
 
 </td><td>
 
-Sets the position the world's directional light originates from.
+Sets the position the world's directional light originates from relative to a player's camera position.
 
 
 </td></tr>

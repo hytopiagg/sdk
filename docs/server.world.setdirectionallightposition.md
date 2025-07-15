@@ -4,7 +4,7 @@
 
 ## World.setDirectionalLightPosition() method
 
-Sets the position the world's directional light originates from.
+Sets the position the world's directional light originates from relative to a player's camera position.
 
 **Signature:**
 
@@ -42,7 +42,7 @@ position
 
 </td><td>
 
-The position in the world.
+The position the directional light originates from relative to the player's camera position.
 
 
 </td></tr>

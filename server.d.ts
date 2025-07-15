@@ -602,6 +602,7 @@ export declare class BlockType extends EventRouter implements protocol.Serializa
 
 
 
+
     /**
      * Creates a new block type instance.
      * @param world - The world the block type is for.
@@ -611,13 +612,17 @@ export declare class BlockType extends EventRouter implements protocol.Serializa
     /** The unique identifier for the block type. */
     get id(): number;
     /** The collider options for the block type. */
-    get colliderOptions(): TrimeshColliderOptions;
+    get colliderOptions(): VoxelsColliderOptions;
+    /** The half extents size of the block type. */
+    get halfExtents(): Vector3Like;
     /** Whether the block type is a liquid. */
     get isLiquid(): boolean;
     /** Whether the block type is meshable. */
     get isMeshable(): boolean;
     /** The name of the block type. */
     get name(): string;
+    /** The size of the block type. */
+    get size(): Vector3Like;
     /** The URI of the texture for the block type. */
     get textureUri(): string;
 
@@ -653,7 +658,9 @@ export declare interface BlockTypeOptions {
     /** The unique numeric identifier for the block type. */
     id: number;
     /** The custom collider options for the block type. */
-    customColliderOptions?: TrimeshColliderOptions;
+    customColliderOptions?: VoxelsColliderOptions;
+    /** The half extents size of the block type. */
+    halfExtents?: Vector3Like;
     /** Whether the block type is a liquid. */
     isLiquid?: boolean;
     /** The name of the block type. */
@@ -845,58 +852,24 @@ export declare class ChatManager extends EventRouter {
  * @remarks
  * Chunks make up the bulk of the terrain in a world. Chunks are
  * fixed size, each containing 16^3 possible blocks as
- * a 16x16x16 cube. Chunks can be spawned, despawned, have their
- * unique blocks set or removed, and more. Chunks represent their
- * internal block coordinates in local space, meaning only coordinates
- * x: 0...15, y: 0...15, z: 0...15 are valid.
- *
- * The Chunk follows a spawn and despawn lifecycle pattern.
- * When you create a chunk, when you're ready to load it in your
- * world you use .spawn(). To remove it, you use .despawn().
- *
- * Use .setBlock() to set the block type id at a specific local cooridnate.
- * Block type ids are ones that have been registered in the {@link BlockTypeRegistry}
- * associated with the {@link World} the chunk belongs to. A block type id of 0
- * is used to represent no block. Removing a block is done by .setBlock(localCoordinate, 0).
- *
- * <h2>Events</h2>
- *
- * This class is an EventRouter, and instances of it emit
- * events with payloads listed under {@link ChunkEventPayloads}
- *
- * @example
- * ```typescript
- * // Assume we previously registered a stone block with type id of 10..
- *
- * const chunk = new Chunk();
- *
- * chunk.setBlock({ x: 0, y: 0, z: 0 }, 10); // Set the block at 0, 0, 0 to stone
- * chunk.spawn(world, { x: 16, y: 0, z: 16 }); // Spawn the chunk at global coordinate 16, 0, 16
- * ```
+ * a 16x16x16 cube. Chunks are primarily a data structure used by
+ * {@link ChunkLattice} to represent a world's terrain.
+ * Chunks store their internal block coordinates in local
+ * space, meaning local coordinates x: 0...15, y: 0...15, z: 0...15.
  *
  * @public
  */
-export declare class Chunk extends EventRouter implements protocol.Serializable {
-
-
-
+export declare class Chunk implements protocol.Serializable {
 
 
     /**
      * Creates a new chunk instance.
      */
-    constructor();
+    constructor(originCoordinate: Vector3Like);
     /** The blocks in the chunk as a flat Uint8Array[4096], each index as 0 or a block type id. */
     get blocks(): Readonly<Uint8Array>;
-
-    /** Whether the chunk is actively simulated in the internal physics engine. */
-    get isSimulated(): boolean;
-    /** Whether the chunk has been spawned. */
-    get isSpawned(): boolean;
     /** The origin coordinate of the chunk. */
-    get originCoordinate(): Vector3Like | undefined;
-    /** The world the chunk belongs to. */
-    get world(): World | undefined;
+    get originCoordinate(): Vector3Like;
     /**
      * Convert a block index to a local coordinate.
      * @param index - The index of the block to convert.
@@ -916,22 +889,6 @@ export declare class Chunk extends EventRouter implements protocol.Serializable 
      */
     static globalCoordinateToOriginCoordinate(globalCoordinate: Vector3Like): Vector3Like;
     /**
-     * Check if an origin coordinate is valid.
-     * @param coordinate - The coordinate to check.
-     * @returns Whether the coordinate is valid.
-     */
-    static isValidOriginCoordinate(coordinate: Vector3Like): boolean;
-    /**
-     * Spawn the chunk in the world.
-     * @param world - The world to spawn the chunk in.
-     * @param originCoordinate - The origin coordinate of the chunk.
-     */
-    spawn(world: World, originCoordinate: Vector3Like): void;
-    /**
-     * Despawn the chunk from the world.
-     */
-    despawn(): void;
-    /**
      * Get the block type id at a specific local coordinate.
      * @param localCoordinate - The local coordinate of the block to get.
      * @returns The block type id.
@@ -943,46 +900,10 @@ export declare class Chunk extends EventRouter implements protocol.Serializable 
      * @returns Whether a block exists.
      */
     hasBlock(localCoordinate: Vector3Like): boolean;
-    /**
-     * Set the block at a specific local coordinate by block type id.
-     * @param localCoordinate - The local coordinate of the block to set.
-     * @param blockTypeId - The block type id to set.
-     */
-    setBlock(localCoordinate: Vector3Like, blockTypeId: number): void;
-
-
-
-    private _meshColliders;
 
 
 
 
-}
-
-/** Event types a Chunk instance can emit. See {@link ChunkEventPayloads} for the payloads. @public */
-export declare enum ChunkEvent {
-    DESPAWN = "CHUNK.DESPAWN",
-    SET_BLOCK = "CHUNK.SET_BLOCK",
-    SPAWN = "CHUNK.SPAWN"
-}
-
-/** Event payloads for Chunk emitted events. @public */
-export declare interface ChunkEventPayloads {
-    /** Emitted when a chunk is despawned. */
-    [ChunkEvent.DESPAWN]: {
-        chunk: Chunk;
-    };
-    /** Emitted when a block is set in a chunk. */
-    [ChunkEvent.SET_BLOCK]: {
-        chunk: Chunk;
-        globalCoordinate: Vector3Like;
-        localCoordinate: Vector3Like;
-        blockTypeId: number;
-    };
-    /** Emitted when a chunk is spawned. */
-    [ChunkEvent.SPAWN]: {
-        chunk: Chunk;
-    };
 }
 
 /**
@@ -994,7 +915,10 @@ export declare interface ChunkEventPayloads {
  *
  * @public
  */
-export declare class ChunkLattice {
+export declare class ChunkLattice extends EventRouter {
+
+
+
 
 
     /**
@@ -1004,10 +928,8 @@ export declare class ChunkLattice {
     constructor(world: World);
     /** The number of chunks in the lattice. */
     get chunkCount(): number;
-
-
     /**
-     * Despawns and clears all chunks in the lattice.
+     * Removes and clears all chunks and their blocks from the lattice.
      */
     clear(): void;
     /**
@@ -1016,6 +938,7 @@ export declare class ChunkLattice {
      * @returns The block type id, 0 if no block is set.
      */
     getBlockId(globalCoordinate: Vector3Like): number;
+
     /**
      * Get the block type at a specific global coordinate.
      * @param globalCoordinate - The global coordinate of the block to get.
@@ -1023,11 +946,24 @@ export declare class ChunkLattice {
      */
     getBlockType(globalCoordinate: Vector3Like): BlockType | null;
     /**
-     * Get a chunk by its origin coordinate.
-     * @param originCoordinate - The origin coordinate of the chunk to get.
-     * @returns The chunk at the given origin coordinate or undefined if not found.
+     * Get the number of blocks of a specific block type in the lattice.
+     * @param blockTypeId - The block type id to get the count of.
+     * @returns The number of blocks of the block type.
      */
-    getChunk(originCoordinate: Vector3Like): Chunk | undefined;
+    getBlockTypeCount(blockTypeId: number): number;
+    /**
+     * Get the chunk that contains the given global coordinate.
+     * @param globalCoordinate - The global coordinate to get the chunk for.
+     * @returns The chunk that contains the given global coordinate or undefined if not found.
+     */
+    getChunk(globalCoordinate: Vector3Like): Chunk | undefined;
+
+    /**
+     * Get the chunk for a given global coordinate.
+     * @param globalCoordinate - The global coordinate of the chunk to get.
+     * @returns The chunk at the given global coordinate or undefined if not found.
+     */
+    getOrCreateChunk(globalCoordinate: Vector3Like): Chunk;
     /**
      * Get all chunks in the lattice.
      * @returns An array of all chunks in the lattice.
@@ -1040,20 +976,44 @@ export declare class ChunkLattice {
      */
     hasBlock(globalCoordinate: Vector3Like): boolean;
     /**
-     * Check if a chunk exists by its origin coordinate.
-     * @param originCoordinate - The origin coordinate of the chunk to check.
+     * Check if a chunk exists for a given global coordinate.
+     * @param globalCoordinate - The global coordinate of the chunk to check.
      * @returns Whether the chunk exists.
      */
-    hasChunk(originCoordinate: Vector3Like): boolean;
+    hasChunk(globalCoordinate: Vector3Like): boolean;
     /**
      * Set the block at a global coordinate by block type id, automatically
-     * creating a chunk if it doesn't exist. Use block type id 0 for air.
+     * creating a chunk if it doesn't exist. Use block type id 0 for air (to remove a block).
      * @param globalCoordinate - The global coordinate of the block to set.
      * @param blockTypeId - The block type id to set. Use 0 to remove the block and replace with air.
      */
     setBlock(globalCoordinate: Vector3Like, blockTypeId: number): void;
 
 
+
+}
+
+/** Event types a ChunkLattice instance can emit. See {@link ChunkLatticeEventPayloads} for the payloads. @public */
+export declare enum ChunkLatticeEvent {
+    REMOVE_CHUNK = "CHUNK_LATTICE.REMOVE_CHUNK",
+    SET_BLOCK = "CHUNK_LATTICE.SET_BLOCK"
+}
+
+/** Event payloads for ChunkLattice emitted events. @public */
+export declare interface ChunkLatticeEventPayloads {
+    /** Emitted when a chunk is removed from the lattice. */
+    [ChunkLatticeEvent.REMOVE_CHUNK]: {
+        chunkLattice: ChunkLattice;
+        chunk: Chunk;
+    };
+    /** Emitted when a block is set in the lattice. */
+    [ChunkLatticeEvent.SET_BLOCK]: {
+        chunkLattice: ChunkLattice;
+        chunk: Chunk;
+        globalCoordinate: Vector3Like;
+        localCoordinate: Vector3Like;
+        blockTypeId: number;
+    };
 }
 
 /** The coefficient for friction or bounciness combine rule. @public */
@@ -1208,12 +1168,18 @@ export declare class Collider extends EventRouter {
      */
     setTag(tag: string): void;
     /**
+     * Sets the voxel at the given coordinate as filled or not filled.
+     * @param coordinate - The coordinate of the voxel to set.
+     * @param filled - True if the voxel at the coordinate should be filled, false if it should be removed.
+     */
+    setVoxel(coordinate: Vector3Like, filled: boolean): void;
+    /**
      * Adds the collider to the simulation.
      * @param simulation - The simulation to add the collider to.
      * @param parentRigidBody - The parent rigid body of the collider.
      */
     addToSimulation(simulation: Simulation, parentRigidBody?: RigidBody): void;
-    scale(scalar: number): void;
+
     /**
      * Enables or disables collision events for the collider.
      * This is automatically enabled if an on collision callback is set.
@@ -1226,10 +1192,18 @@ export declare class Collider extends EventRouter {
      * @param enabled - Whether contact force events are enabled.
      */
     enableContactForceEvents(enabled: boolean): void;
+
     /**
      * Removes the collider from the simulation.
      */
     removeFromSimulation(): void;
+    /**
+     * Scales the collider by the given scalar. Only
+     * ball, block, capsule, cone, cylinder, round cylinder
+     * are supported.
+     * @param scalar - The scalar to scale the collider by.
+     */
+    scale(scalar: number): void;
 
 
     private _buildWedgeConvexHullVertices;
@@ -1238,10 +1212,11 @@ export declare class Collider extends EventRouter {
 
 
 
+
 }
 
 /** The options for a collider. @public */
-export declare type ColliderOptions = BallColliderOptions | BlockColliderOptions | CapsuleColliderOptions | ConeColliderOptions | CylinderColliderOptions | RoundCylinderColliderOptions | TrimeshColliderOptions | WedgeColliderOptions | NoneColliderOptions;
+export declare type ColliderOptions = BallColliderOptions | BlockColliderOptions | CapsuleColliderOptions | ConeColliderOptions | CylinderColliderOptions | RoundCylinderColliderOptions | TrimeshColliderOptions | VoxelsColliderOptions | WedgeColliderOptions | NoneColliderOptions;
 
 /** The shapes a collider can be. @public */
 export declare enum ColliderShape {
@@ -1253,6 +1228,7 @@ export declare enum ColliderShape {
     CYLINDER = "cylinder",
     ROUND_CYLINDER = "round-cylinder",
     TRIMESH = "trimesh",
+    VOXELS = "voxels",
     WEDGE = "wedge"
 }
 
@@ -2212,7 +2188,7 @@ export declare class ErrorHandler {
  *
  * @public
  */
-export declare interface EventPayloads extends AudioEventPayloads, BaseEntityControllerEventPayloads, BlockTypeEventPayloads, BlockTypeRegistryEventPayloads, ChatEventPayloads, ChunkEventPayloads, ConnectionEventPayloads, EntityEventPayloads, GameServerEventPayloads, ParticleEmitterEventPayloads, PlayerCameraEventPayloads, PlayerEventPayloads, PlayerManagerEventPayloads, PlayerUIEventPayloads, SceneUIEventPayloads, SimulationEventPayloads, SocketEventPayloads, LightEventPayloads, WebServerEventPayloads, WorldEventPayloads, WorldLoopEventPayloads, WorldManagerEventPayloads {
+export declare interface EventPayloads extends AudioEventPayloads, BaseEntityControllerEventPayloads, BlockTypeEventPayloads, BlockTypeRegistryEventPayloads, ChatEventPayloads, ChunkLatticeEventPayloads, ConnectionEventPayloads, EntityEventPayloads, GameServerEventPayloads, ParticleEmitterEventPayloads, PlayerCameraEventPayloads, PlayerEventPayloads, PlayerManagerEventPayloads, PlayerUIEventPayloads, SceneUIEventPayloads, SimulationEventPayloads, SocketEventPayloads, LightEventPayloads, WebServerEventPayloads, WorldEventPayloads, WorldLoopEventPayloads, WorldManagerEventPayloads {
 }
 
 /**
@@ -3887,7 +3863,7 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
 
 }
 
-/** Event types a ParticleEmitter instance can emit. See {@link ParticleEmitterEventPayloads} */
+/** Event types a ParticleEmitter instance can emit. See {@link ParticleEmitterEventPayloads} @public */
 export declare enum ParticleEmitterEvent {
     DESPAWN = "PARTICLE_EMITTER.DESPAWN",
     SET_ALPHA_TEST = "PARTICLE_EMITTER.SET_ALPHA_TEST",
@@ -4097,6 +4073,7 @@ export declare class ParticleEmitterManager {
 
 }
 
+/** Options for creating a ParticleEmitter instance. @public */
 export declare interface ParticleEmitterOptions {
     /** The URI or path to the texture to be used for the particles. */
     textureUri: string;
@@ -6578,6 +6555,15 @@ export declare interface Vector3Like {
     z: number;
 }
 
+/** The options for a voxels collider. @public */
+export declare interface VoxelsColliderOptions extends BaseColliderOptions {
+    shape: ColliderShape.VOXELS;
+    /** The coordinate of each voxel in the collider. */
+    coordinates?: Vector3Like[];
+    /** The size of each voxel in the collider. */
+    size?: Vector3Like;
+}
+
 /**
  * A callback function called when the entity associated with the
  * PathfindingEntityController finishes moving to a calculate waypoint
@@ -6737,8 +6723,9 @@ export declare class World extends EventRouter implements protocol.Serializable 
      */
     setDirectionalLightIntensity(intensity: number): void;
     /**
-     * Sets the position the world's directional light originates from.
-     * @param position - The position in the world.
+     * Sets the position the world's directional light originates
+     * from relative to a player's camera position.
+     * @param position - The position the directional light originates from relative to the player's camera position.
      */
     setDirectionalLightPosition(position: Vector3Like): void;
     /**

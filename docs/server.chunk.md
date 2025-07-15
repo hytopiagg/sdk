@@ -9,35 +9,13 @@ A 16^3 chunk of blocks. Used to represent a world's terrain.
 **Signature:**
 
 ```typescript
-export default class Chunk extends EventRouter implements protocol.Serializable 
+export default class Chunk implements protocol.Serializable 
 ```
-**Extends:** [EventRouter](./server.eventrouter.md)
-
 **Implements:** protocol.Serializable
 
 ## Remarks
 
-Chunks make up the bulk of the terrain in a world. Chunks are fixed size, each containing 16^3 possible blocks as a 16x16x16 cube. Chunks can be spawned, despawned, have their unique blocks set or removed, and more. Chunks represent their internal block coordinates in local space, meaning only coordinates x: 0...15, y: 0...15, z: 0...15 are valid.
-
-The Chunk follows a spawn and despawn lifecycle pattern. When you create a chunk, when you're ready to load it in your world you use .spawn(). To remove it, you use .despawn().
-
-Use .setBlock() to set the block type id at a specific local cooridnate. Block type ids are ones that have been registered in the [BlockTypeRegistry](./server.blocktyperegistry.md) associated with the [World](./server.world.md) the chunk belongs to. A block type id of 0 is used to represent no block. Removing a block is done by .setBlock(localCoordinate, 0).
-
-<h2>Events</h2>
-
-This class is an EventRouter, and instances of it emit events with payloads listed under [ChunkEventPayloads](./server.chunkeventpayloads.md)
-
-## Example
-
-
-```typescript
-// Assume we previously registered a stone block with type id of 10..
-
-const chunk = new Chunk();
-
-chunk.setBlock({ x: 0, y: 0, z: 0 }, 10); // Set the block at 0, 0, 0 to stone
-chunk.spawn(world, { x: 16, y: 0, z: 16 }); // Spawn the chunk at global coordinate 16, 0, 16
-```
+Chunks make up the bulk of the terrain in a world. Chunks are fixed size, each containing 16^3 possible blocks as a 16x16x16 cube. Chunks are primarily a data structure used by [ChunkLattice](./server.chunklattice.md) to represent a world's terrain. Chunks store their internal block coordinates in local space, meaning local coordinates x: 0...15, y: 0...15, z: 0...15.
 
 ## Constructors
 
@@ -59,7 +37,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[(constructor)()](./server.chunk._constructor_.md)
+[(constructor)(originCoordinate)](./server.chunk._constructor_.md)
 
 
 </td><td>
@@ -119,48 +97,6 @@ The blocks in the chunk as a flat Uint8Array\[4096\], each index as 0 or a block
 </td></tr>
 <tr><td>
 
-[isSimulated](./server.chunk.issimulated.md)
-
-
-</td><td>
-
-`readonly`
-
-
-</td><td>
-
-boolean
-
-
-</td><td>
-
-Whether the chunk is actively simulated in the internal physics engine.
-
-
-</td></tr>
-<tr><td>
-
-[isSpawned](./server.chunk.isspawned.md)
-
-
-</td><td>
-
-`readonly`
-
-
-</td><td>
-
-boolean
-
-
-</td><td>
-
-Whether the chunk has been spawned.
-
-
-</td></tr>
-<tr><td>
-
 [originCoordinate](./server.chunk.origincoordinate.md)
 
 
@@ -171,33 +107,12 @@ Whether the chunk has been spawned.
 
 </td><td>
 
-[Vector3Like](./server.vector3like.md) \| undefined
+[Vector3Like](./server.vector3like.md)
 
 
 </td><td>
 
 The origin coordinate of the chunk.
-
-
-</td></tr>
-<tr><td>
-
-[world](./server.chunk.world.md)
-
-
-</td><td>
-
-`readonly`
-
-
-</td><td>
-
-[World](./server.world.md) \| undefined
-
-
-</td><td>
-
-The world the chunk belongs to.
 
 
 </td></tr>
@@ -234,20 +149,6 @@ Description
 </td><td>
 
 Convert a block index to a local coordinate.
-
-
-</td></tr>
-<tr><td>
-
-[despawn()](./server.chunk.despawn.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Despawn the chunk from the world.
 
 
 </td></tr>
@@ -308,50 +209,6 @@ Convert a global coordinate to an origin coordinate.
 </td><td>
 
 Check if a block exists at a specific local coordinate.
-
-
-</td></tr>
-<tr><td>
-
-[isValidOriginCoordinate(coordinate)](./server.chunk.isvalidorigincoordinate.md)
-
-
-</td><td>
-
-`static`
-
-
-</td><td>
-
-Check if an origin coordinate is valid.
-
-
-</td></tr>
-<tr><td>
-
-[setBlock(localCoordinate, blockTypeId)](./server.chunk.setblock.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Set the block at a specific local coordinate by block type id.
-
-
-</td></tr>
-<tr><td>
-
-[spawn(world, originCoordinate)](./server.chunk.spawn.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Spawn the chunk in the world.
 
 
 </td></tr>

@@ -4,7 +4,7 @@
 
 ## ChunkLattice.setBlock() method
 
-Set the block at a global coordinate by block type id, automatically creating a chunk if it doesn't exist. Use block type id 0 for air.
+Set the block at a global coordinate by block type id, automatically creating a chunk if it doesn't exist. Use block type id 0 for air (to remove a block).
 
 **Signature:**
 

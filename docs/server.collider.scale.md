@@ -4,6 +4,8 @@
 
 ## Collider.scale() method
 
+Scales the collider by the given scalar. Only ball, block, capsule, cone, cylinder, round cylinder are supported.
+
 **Signature:**
 
 ```typescript
@@ -39,6 +41,8 @@ number
 
 
 </td><td>
+
+The scalar to scale the collider by.
 
 
 </td></tr>

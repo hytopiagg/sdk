@@ -528,6 +528,8 @@ Removes the collider from the simulation.
 
 </td><td>
 
+Scales the collider by the given scalar. Only ball, block, capsule, cone, cylinder, round cylinder are supported.
+
 
 </td></tr>
 <tr><td>
@@ -695,6 +697,20 @@ Sets whether the collider is a sensor.
 </td><td>
 
 Sets the tag of the collider.
+
+
+</td></tr>
+<tr><td>
+
+[setVoxel(coordinate, filled)](./server.collider.setvoxel.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the voxel at the given coordinate as filled or not filled.
 
 
 </td></tr>

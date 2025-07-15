@@ -9,8 +9,9 @@ A lattice of chunks that represent a world's terrain.
 **Signature:**
 
 ```typescript
-export default class ChunkLattice 
+export default class ChunkLattice extends EventRouter 
 ```
+**Extends:** [EventRouter](./server.eventrouter.md)
 
 ## Remarks
 
@@ -124,7 +125,7 @@ Description
 
 </td><td>
 
-Despawns and clears all chunks in the lattice.
+Removes and clears all chunks and their blocks from the lattice.
 
 
 </td></tr>
@@ -172,7 +173,7 @@ Get the block type at a specific global coordinate.
 </td></tr>
 <tr><td>
 
-[getChunk(originCoordinate)](./server.chunklattice.getchunk.md)
+[getBlockTypeCount(blockTypeId)](./server.chunklattice.getblocktypecount.md)
 
 
 </td><td>
@@ -180,7 +181,35 @@ Get the block type at a specific global coordinate.
 
 </td><td>
 
-Get a chunk by its origin coordinate.
+Get the number of blocks of a specific block type in the lattice.
+
+
+</td></tr>
+<tr><td>
+
+[getChunk(globalCoordinate)](./server.chunklattice.getchunk.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Get the chunk that contains the given global coordinate.
+
+
+</td></tr>
+<tr><td>
+
+[getOrCreateChunk(globalCoordinate)](./server.chunklattice.getorcreatechunk.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Get the chunk for a given global coordinate.
 
 
 </td></tr>
@@ -200,7 +229,7 @@ Check if a block exists at a specific global coordinate.
 </td></tr>
 <tr><td>
 
-[hasChunk(originCoordinate)](./server.chunklattice.haschunk.md)
+[hasChunk(globalCoordinate)](./server.chunklattice.haschunk.md)
 
 
 </td><td>
@@ -208,7 +237,7 @@ Check if a block exists at a specific global coordinate.
 
 </td><td>
 
-Check if a chunk exists by its origin coordinate.
+Check if a chunk exists for a given global coordinate.
 
 
 </td></tr>
@@ -222,7 +251,7 @@ Check if a chunk exists by its origin coordinate.
 
 </td><td>
 
-Set the block at a global coordinate by block type id, automatically creating a chunk if it doesn't exist. Use block type id 0 for air.
+Set the block at a global coordinate by block type id, automatically creating a chunk if it doesn't exist. Use block type id 0 for air (to remove a block).
 
 
 </td></tr>

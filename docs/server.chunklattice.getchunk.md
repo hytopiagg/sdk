@@ -4,12 +4,12 @@
 
 ## ChunkLattice.getChunk() method
 
-Get a chunk by its origin coordinate.
+Get the chunk that contains the given global coordinate.
 
 **Signature:**
 
 ```typescript
-getChunk(originCoordinate: Vector3Like): Chunk | undefined;
+getChunk(globalCoordinate: Vector3Like): Chunk | undefined;
 ```
 
 ## Parameters
@@ -32,7 +32,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-originCoordinate
+globalCoordinate
 
 
 </td><td>
@@ -42,7 +42,7 @@ originCoordinate
 
 </td><td>
 
-The origin coordinate of the chunk to get.
+The global coordinate to get the chunk for.
 
 
 </td></tr>
@@ -51,5 +51,5 @@ The origin coordinate of the chunk to get.
 
 [Chunk](./server.chunk.md) \| undefined
 
-The chunk at the given origin coordinate or undefined if not found.
+The chunk that contains the given global coordinate or undefined if not found.
 

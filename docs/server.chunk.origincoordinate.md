@@ -9,5 +9,5 @@ The origin coordinate of the chunk.
 **Signature:**
 
 ```typescript
-get originCoordinate(): Vector3Like | undefined;
+get originCoordinate(): Vector3Like;
 ```

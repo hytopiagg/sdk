@@ -4,6 +4,8 @@
 
 ## ParticleEmitterOptions interface
 
+Options for creating a ParticleEmitter instance.
+
 **Signature:**
 
 ```typescript

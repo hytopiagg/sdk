@@ -9,5 +9,39 @@ Creates a new chunk instance.
 **Signature:**
 
 ```typescript
-constructor();
+constructor(originCoordinate: Vector3Like);
 ```
+
+## Parameters
+
+<table><thead><tr><th>
+
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+originCoordinate
+
+
+</td><td>
+
+[Vector3Like](./server.vector3like.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

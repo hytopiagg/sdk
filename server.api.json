@@ -4947,8 +4947,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "TrimeshColliderOptions",
-                  "canonicalReference": "server!TrimeshColliderOptions:interface"
+                  "text": "VoxelsColliderOptions",
+                  "canonicalReference": "server!VoxelsColliderOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -4959,6 +4959,37 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "colliderOptions",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!BlockType#halfExtents:member",
+              "docComment": "/**\n * The half extents size of the block type.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get halfExtents(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "halfExtents",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -5079,6 +5110,37 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "name",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!BlockType#size:member",
+              "docComment": "/**\n * The size of the block type.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get size(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "size",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -5349,8 +5411,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "TrimeshColliderOptions",
-                  "canonicalReference": "server!TrimeshColliderOptions:interface"
+                  "text": "VoxelsColliderOptions",
+                  "canonicalReference": "server!VoxelsColliderOptions:interface"
                 },
                 {
                   "kind": "Content",
@@ -5361,6 +5423,34 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "customColliderOptions",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!BlockTypeOptions#halfExtents:member",
+              "docComment": "/**\n * The half extents size of the block type.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "halfExtents?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "halfExtents",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -6422,20 +6512,11 @@
         {
           "kind": "Class",
           "canonicalReference": "server!Chunk:class",
-          "docComment": "/**\n * A 16^3 chunk of blocks. Used to represent a world's terrain.\n *\n * @remarks\n *\n * Chunks make up the bulk of the terrain in a world. Chunks are fixed size, each containing 16^3 possible blocks as a 16x16x16 cube. Chunks can be spawned, despawned, have their unique blocks set or removed, and more. Chunks represent their internal block coordinates in local space, meaning only coordinates x: 0...15, y: 0...15, z: 0...15 are valid.\n *\n * The Chunk follows a spawn and despawn lifecycle pattern. When you create a chunk, when you're ready to load it in your world you use .spawn(). To remove it, you use .despawn().\n *\n * Use .setBlock() to set the block type id at a specific local cooridnate. Block type ids are ones that have been registered in the {@link BlockTypeRegistry} associated with the {@link World} the chunk belongs to. A block type id of 0 is used to represent no block. Removing a block is done by .setBlock(localCoordinate, 0).\n *\n * <h2>Events</h2>\n *\n * This class is an EventRouter, and instances of it emit events with payloads listed under {@link ChunkEventPayloads}\n *\n * @example\n * ```typescript\n * // Assume we previously registered a stone block with type id of 10..\n *\n * const chunk = new Chunk();\n *\n * chunk.setBlock({ x: 0, y: 0, z: 0 }, 10); // Set the block at 0, 0, 0 to stone\n * chunk.spawn(world, { x: 16, y: 0, z: 16 }); // Spawn the chunk at global coordinate 16, 0, 16\n * ```\n *\n * @public\n */\n",
+          "docComment": "/**\n * A 16^3 chunk of blocks. Used to represent a world's terrain.\n *\n * @remarks\n *\n * Chunks make up the bulk of the terrain in a world. Chunks are fixed size, each containing 16^3 possible blocks as a 16x16x16 cube. Chunks are primarily a data structure used by {@link ChunkLattice} to represent a world's terrain. Chunks store their internal block coordinates in local space, meaning local coordinates x: 0...15, y: 0...15, z: 0...15.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export default class Chunk extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "EventRouter",
-              "canonicalReference": "server!EventRouter:class"
-            },
-            {
-              "kind": "Content",
-              "text": " implements "
+              "text": "export default class Chunk implements "
             },
             {
               "kind": "Reference",
@@ -6460,13 +6541,31 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "constructor();"
+                  "text": "constructor(originCoordinate: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
                 }
               ],
               "releaseTag": "Public",
               "isProtected": false,
               "overloadIndex": 1,
-              "parameters": []
+              "parameters": [
+                {
+                  "parameterName": "originCoordinate",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ]
             },
             {
               "kind": "Method",
@@ -6560,37 +6659,6 @@
               "isStatic": false,
               "isProtected": false,
               "isAbstract": false
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "server!Chunk#despawn:member(1)",
-              "docComment": "/**\n * Despawn the chunk from the world.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "despawn(): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [],
-              "isOptional": false,
-              "isAbstract": false,
-              "name": "despawn"
             },
             {
               "kind": "Method",
@@ -6792,115 +6860,6 @@
             },
             {
               "kind": "Property",
-              "canonicalReference": "server!Chunk#isSimulated:member",
-              "docComment": "/**\n * Whether the chunk is actively simulated in the internal physics engine.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get isSimulated(): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "isSimulated",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isStatic": false,
-              "isProtected": false,
-              "isAbstract": false
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "server!Chunk#isSpawned:member",
-              "docComment": "/**\n * Whether the chunk has been spawned.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get isSpawned(): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "isSpawned",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isStatic": false,
-              "isProtected": false,
-              "isAbstract": false
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "server!Chunk.isValidOriginCoordinate:member(1)",
-              "docComment": "/**\n * Check if an origin coordinate is valid.\n *\n * @param coordinate - The coordinate to check.\n *\n * @returns Whether the coordinate is valid.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "static isValidOriginCoordinate(coordinate: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Vector3Like",
-                  "canonicalReference": "server!Vector3Like:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": true,
-              "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "coordinate",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "isAbstract": false,
-              "name": "isValidOriginCoordinate"
-            },
-            {
-              "kind": "Property",
               "canonicalReference": "server!Chunk#originCoordinate:member",
               "docComment": "/**\n * The origin coordinate of the chunk.\n */\n",
               "excerptTokens": [
@@ -6915,10 +6874,6 @@
                 },
                 {
                   "kind": "Content",
-                  "text": " | undefined"
-                },
-                {
-                  "kind": "Content",
                   "text": ";"
                 }
               ],
@@ -6928,440 +6883,19 @@
               "name": "originCoordinate",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
-              },
-              "isStatic": false,
-              "isProtected": false,
-              "isAbstract": false
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "server!Chunk#setBlock:member(1)",
-              "docComment": "/**\n * Set the block at a specific local coordinate by block type id.\n *\n * @param localCoordinate - The local coordinate of the block to set.\n *\n * @param blockTypeId - The block type id to set.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "setBlock(localCoordinate: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Vector3Like",
-                  "canonicalReference": "server!Vector3Like:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", blockTypeId: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "number"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 6
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "localCoordinate",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                },
-                {
-                  "parameterName": "blockTypeId",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 4
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "isAbstract": false,
-              "name": "setBlock"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "server!Chunk#spawn:member(1)",
-              "docComment": "/**\n * Spawn the chunk in the world.\n *\n * @param world - The world to spawn the chunk in.\n *\n * @param originCoordinate - The origin coordinate of the chunk.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "spawn(world: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "World",
-                  "canonicalReference": "server!World:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", originCoordinate: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Vector3Like",
-                  "canonicalReference": "server!Vector3Like:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 6
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "world",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                },
-                {
-                  "parameterName": "originCoordinate",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 4
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "isAbstract": false,
-              "name": "spawn"
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "server!Chunk#world:member",
-              "docComment": "/**\n * The world the chunk belongs to.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get world(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "World",
-                  "canonicalReference": "server!World:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": " | undefined"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "world",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               },
               "isStatic": false,
               "isProtected": false,
               "isAbstract": false
             }
           ],
-          "extendsTokenRange": {
-            "startIndex": 1,
-            "endIndex": 2
-          },
           "implementsTokenRanges": [
             {
-              "startIndex": 3,
-              "endIndex": 4
+              "startIndex": 1,
+              "endIndex": 2
             }
           ]
-        },
-        {
-          "kind": "Enum",
-          "canonicalReference": "server!ChunkEvent:enum",
-          "docComment": "/**\n * Event types a Chunk instance can emit. See {@link ChunkEventPayloads} for the payloads.\n *\n * @public\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export declare enum ChunkEvent "
-            }
-          ],
-          "fileUrlPath": "src/worlds/blocks/Chunk.ts",
-          "releaseTag": "Public",
-          "name": "ChunkEvent",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "server!ChunkEvent.DESPAWN:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "DESPAWN = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"CHUNK.DESPAWN\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "DESPAWN"
-            },
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "server!ChunkEvent.SET_BLOCK:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "SET_BLOCK = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"CHUNK.SET_BLOCK\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "SET_BLOCK"
-            },
-            {
-              "kind": "EnumMember",
-              "canonicalReference": "server!ChunkEvent.SPAWN:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "SPAWN = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"CHUNK.SPAWN\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "SPAWN"
-            }
-          ]
-        },
-        {
-          "kind": "Interface",
-          "canonicalReference": "server!ChunkEventPayloads:interface",
-          "docComment": "/**\n * Event payloads for Chunk emitted events.\n *\n * @public\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface ChunkEventPayloads "
-            }
-          ],
-          "fileUrlPath": "src/worlds/blocks/Chunk.ts",
-          "releaseTag": "Public",
-          "name": "ChunkEventPayloads",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "server!ChunkEventPayloads#\"CHUNK.DESPAWN\":member",
-              "docComment": "/**\n * Emitted when a chunk is despawned.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "["
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ChunkEvent.DESPAWN",
-                  "canonicalReference": "server!ChunkEvent.DESPAWN:member"
-                },
-                {
-                  "kind": "Content",
-                  "text": "]: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "{\n        chunk: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Chunk",
-                  "canonicalReference": "server!Chunk:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n    }"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "\"CHUNK.DESPAWN\"",
-              "propertyTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 6
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "server!ChunkEventPayloads#\"CHUNK.SET_BLOCK\":member",
-              "docComment": "/**\n * Emitted when a block is set in a chunk.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "["
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ChunkEvent.SET_BLOCK",
-                  "canonicalReference": "server!ChunkEvent.SET_BLOCK:member"
-                },
-                {
-                  "kind": "Content",
-                  "text": "]: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "{\n        chunk: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Chunk",
-                  "canonicalReference": "server!Chunk:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n        globalCoordinate: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Vector3Like",
-                  "canonicalReference": "server!Vector3Like:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n        localCoordinate: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Vector3Like",
-                  "canonicalReference": "server!Vector3Like:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n        blockTypeId: number;\n    }"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "\"CHUNK.SET_BLOCK\"",
-              "propertyTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 10
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "server!ChunkEventPayloads#\"CHUNK.SPAWN\":member",
-              "docComment": "/**\n * Emitted when a chunk is spawned.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "["
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ChunkEvent.SPAWN",
-                  "canonicalReference": "server!ChunkEvent.SPAWN:member"
-                },
-                {
-                  "kind": "Content",
-                  "text": "]: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "{\n        chunk: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Chunk",
-                  "canonicalReference": "server!Chunk:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";\n    }"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "\"CHUNK.SPAWN\"",
-              "propertyTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 6
-              }
-            }
-          ],
-          "extendsTokenRanges": []
         },
         {
           "kind": "Class",
@@ -7370,7 +6904,16 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export default class ChunkLattice "
+              "text": "export default class ChunkLattice extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "EventRouter",
+              "canonicalReference": "server!EventRouter:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
             }
           ],
           "fileUrlPath": "src/worlds/blocks/ChunkLattice.ts",
@@ -7445,7 +6988,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!ChunkLattice#clear:member(1)",
-              "docComment": "/**\n * Despawns and clears all chunks in the lattice.\n */\n",
+              "docComment": "/**\n * Removes and clears all chunks and their blocks from the lattice.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7614,12 +7157,60 @@
             },
             {
               "kind": "Method",
-              "canonicalReference": "server!ChunkLattice#getChunk:member(1)",
-              "docComment": "/**\n * Get a chunk by its origin coordinate.\n *\n * @param originCoordinate - The origin coordinate of the chunk to get.\n *\n * @returns The chunk at the given origin coordinate or undefined if not found.\n */\n",
+              "canonicalReference": "server!ChunkLattice#getBlockTypeCount:member(1)",
+              "docComment": "/**\n * Get the number of blocks of a specific block type in the lattice.\n *\n * @param blockTypeId - The block type id to get the count of.\n *\n * @returns The number of blocks of the block type.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "getChunk(originCoordinate: "
+                  "text": "getBlockTypeCount(blockTypeId: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "blockTypeId",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "getBlockTypeCount"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ChunkLattice#getChunk:member(1)",
+              "docComment": "/**\n * Get the chunk that contains the given global coordinate.\n *\n * @param globalCoordinate - The global coordinate to get the chunk for.\n *\n * @returns The chunk that contains the given global coordinate or undefined if not found.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getChunk(globalCoordinate: "
                 },
                 {
                   "kind": "Reference",
@@ -7654,7 +7245,7 @@
               "overloadIndex": 1,
               "parameters": [
                 {
-                  "parameterName": "originCoordinate",
+                  "parameterName": "globalCoordinate",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
@@ -7665,6 +7256,56 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "getChunk"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ChunkLattice#getOrCreateChunk:member(1)",
+              "docComment": "/**\n * Get the chunk for a given global coordinate.\n *\n * @param globalCoordinate - The global coordinate of the chunk to get.\n *\n * @returns The chunk at the given global coordinate or undefined if not found.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getOrCreateChunk(globalCoordinate: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Chunk",
+                  "canonicalReference": "server!Chunk:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "globalCoordinate",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "getOrCreateChunk"
             },
             {
               "kind": "Method",
@@ -7718,11 +7359,11 @@
             {
               "kind": "Method",
               "canonicalReference": "server!ChunkLattice#hasChunk:member(1)",
-              "docComment": "/**\n * Check if a chunk exists by its origin coordinate.\n *\n * @param originCoordinate - The origin coordinate of the chunk to check.\n *\n * @returns Whether the chunk exists.\n */\n",
+              "docComment": "/**\n * Check if a chunk exists for a given global coordinate.\n *\n * @param globalCoordinate - The global coordinate of the chunk to check.\n *\n * @returns Whether the chunk exists.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "hasChunk(originCoordinate: "
+                  "text": "hasChunk(globalCoordinate: "
                 },
                 {
                   "kind": "Reference",
@@ -7752,7 +7393,7 @@
               "overloadIndex": 1,
               "parameters": [
                 {
-                  "parameterName": "originCoordinate",
+                  "parameterName": "globalCoordinate",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
@@ -7767,7 +7408,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!ChunkLattice#setBlock:member(1)",
-              "docComment": "/**\n * Set the block at a global coordinate by block type id, automatically creating a chunk if it doesn't exist. Use block type id 0 for air.\n *\n * @param globalCoordinate - The global coordinate of the block to set.\n *\n * @param blockTypeId - The block type id to set. Use 0 to remove the block and replace with air.\n */\n",
+              "docComment": "/**\n * Set the block at a global coordinate by block type id, automatically creating a chunk if it doesn't exist. Use block type id 0 for air (to remove a block).\n *\n * @param globalCoordinate - The global coordinate of the block to set.\n *\n * @param blockTypeId - The block type id to set. Use 0 to remove the block and replace with air.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7830,7 +7471,214 @@
               "name": "setBlock"
             }
           ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
           "implementsTokenRanges": []
+        },
+        {
+          "kind": "Enum",
+          "canonicalReference": "server!ChunkLatticeEvent:enum",
+          "docComment": "/**\n * Event types a ChunkLattice instance can emit. See {@link ChunkLatticeEventPayloads} for the payloads.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum ChunkLatticeEvent "
+            }
+          ],
+          "fileUrlPath": "src/worlds/blocks/ChunkLattice.ts",
+          "releaseTag": "Public",
+          "name": "ChunkLatticeEvent",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ChunkLatticeEvent.REMOVE_CHUNK:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "REMOVE_CHUNK = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"CHUNK_LATTICE.REMOVE_CHUNK\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "REMOVE_CHUNK"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ChunkLatticeEvent.SET_BLOCK:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_BLOCK = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"CHUNK_LATTICE.SET_BLOCK\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_BLOCK"
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "server!ChunkLatticeEventPayloads:interface",
+          "docComment": "/**\n * Event payloads for ChunkLattice emitted events.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface ChunkLatticeEventPayloads "
+            }
+          ],
+          "fileUrlPath": "src/worlds/blocks/ChunkLattice.ts",
+          "releaseTag": "Public",
+          "name": "ChunkLatticeEventPayloads",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ChunkLatticeEventPayloads#\"CHUNK_LATTICE.REMOVE_CHUNK\":member",
+              "docComment": "/**\n * Emitted when a chunk is removed from the lattice.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ChunkLatticeEvent.REMOVE_CHUNK",
+                  "canonicalReference": "server!ChunkLatticeEvent.REMOVE_CHUNK:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        chunkLattice: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ChunkLattice",
+                  "canonicalReference": "server!ChunkLattice:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        chunk: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Chunk",
+                  "canonicalReference": "server!Chunk:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"CHUNK_LATTICE.REMOVE_CHUNK\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ChunkLatticeEventPayloads#\"CHUNK_LATTICE.SET_BLOCK\":member",
+              "docComment": "/**\n * Emitted when a block is set in the lattice.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ChunkLatticeEvent.SET_BLOCK",
+                  "canonicalReference": "server!ChunkLatticeEvent.SET_BLOCK:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        chunkLattice: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ChunkLattice",
+                  "canonicalReference": "server!ChunkLattice:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        chunk: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Chunk",
+                  "canonicalReference": "server!Chunk:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        globalCoordinate: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        localCoordinate: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        blockTypeId: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"CHUNK_LATTICE.SET_BLOCK\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 12
+              }
+            }
+          ],
+          "extendsTokenRanges": []
         },
         {
           "kind": "Enum",
@@ -8759,7 +8607,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Collider#scale:member(1)",
-              "docComment": "",
+              "docComment": "/**\n * Scales the collider by the given scalar. Only ball, block, capsule, cone, cylinder, round cylinder are supported.\n *\n * @param scalar - The scalar to scale the collider by.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -9391,6 +9239,71 @@
               "name": "setTag"
             },
             {
+              "kind": "Method",
+              "canonicalReference": "server!Collider#setVoxel:member(1)",
+              "docComment": "/**\n * Sets the voxel at the given coordinate as filled or not filled.\n *\n * @param coordinate - The coordinate of the voxel to set.\n *\n * @param filled - True if the voxel at the coordinate should be filled, false if it should be removed.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setVoxel(coordinate: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", filled: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "coordinate",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "filled",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setVoxel"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "server!Collider#shape:member",
               "docComment": "/**\n * The shape of the collider.\n */\n",
@@ -9532,6 +9445,15 @@
             },
             {
               "kind": "Reference",
+              "text": "VoxelsColliderOptions",
+              "canonicalReference": "server!VoxelsColliderOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
               "text": "WedgeColliderOptions",
               "canonicalReference": "server!WedgeColliderOptions:interface"
             },
@@ -9554,7 +9476,7 @@
           "name": "ColliderOptions",
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 18
+            "endIndex": 20
           }
         },
         {
@@ -9739,6 +9661,27 @@
               },
               "releaseTag": "Public",
               "name": "TRIMESH"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ColliderShape.VOXELS:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "VOXELS = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"voxels\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "VOXELS"
             },
             {
               "kind": "EnumMember",
@@ -17347,8 +17290,8 @@
             },
             {
               "kind": "Reference",
-              "text": "ChunkEventPayloads",
-              "canonicalReference": "server!ChunkEventPayloads:interface"
+              "text": "ChunkLatticeEventPayloads",
+              "canonicalReference": "server!ChunkLatticeEventPayloads:interface"
             },
             {
               "kind": "Content",
@@ -31067,7 +31010,7 @@
         {
           "kind": "Enum",
           "canonicalReference": "server!ParticleEmitterEvent:enum",
-          "docComment": "/**\n * Event types a ParticleEmitter instance can emit. See {@link ParticleEmitterEventPayloads}\n */\n",
+          "docComment": "/**\n * Event types a ParticleEmitter instance can emit. See {@link ParticleEmitterEventPayloads}\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -33189,7 +33132,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "server!ParticleEmitterOptions:interface",
-          "docComment": "",
+          "docComment": "/**\n * Options for creating a ParticleEmitter instance.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -52179,6 +52122,126 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "server!VoxelsColliderOptions:interface",
+          "docComment": "/**\n * The options for a voxels collider.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface VoxelsColliderOptions extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "BaseColliderOptions",
+              "canonicalReference": "server!BaseColliderOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "fileUrlPath": "src/worlds/physics/Collider.ts",
+          "releaseTag": "Public",
+          "name": "VoxelsColliderOptions",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!VoxelsColliderOptions#coordinates:member",
+              "docComment": "/**\n * The coordinate of each voxel in the collider.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "coordinates?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "coordinates",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!VoxelsColliderOptions#shape:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "shape: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ColliderShape.VOXELS",
+                  "canonicalReference": "server!ColliderShape.VOXELS:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "shape",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!VoxelsColliderOptions#size:member",
+              "docComment": "/**\n * The size of each voxel in the collider.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "size?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "size",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 1,
+              "endIndex": 2
+            }
+          ]
+        },
+        {
           "kind": "TypeAlias",
           "canonicalReference": "server!WaypointMoveCompleteCallback:type",
           "docComment": "/**\n * A callback function called when the entity associated with the PathfindingEntityController finishes moving to a calculate waypoint of its current path.\n *\n * @param waypoint - The waypoint that the entity has finished moving to.\n *\n * @param waypointIndex - The index of the waypoint that the entity has finished moving to.\n *\n * @public\n */\n",
@@ -53236,7 +53299,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!World#setDirectionalLightPosition:member(1)",
-              "docComment": "/**\n * Sets the position the world's directional light originates from.\n *\n * @param position - The position in the world.\n */\n",
+              "docComment": "/**\n * Sets the position the world's directional light originates from relative to a player's camera position.\n *\n * @param position - The position the directional light originates from relative to the player's camera position.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

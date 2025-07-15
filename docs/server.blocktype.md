@@ -107,12 +107,33 @@ Description
 
 </td><td>
 
-[TrimeshColliderOptions](./server.trimeshcollideroptions.md)
+[VoxelsColliderOptions](./server.voxelscollideroptions.md)
 
 
 </td><td>
 
 The collider options for the block type.
+
+
+</td></tr>
+<tr><td>
+
+[halfExtents](./server.blocktype.halfextents.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[Vector3Like](./server.vector3like.md)
+
+
+</td><td>
+
+The half extents size of the block type.
 
 
 </td></tr>
@@ -197,6 +218,27 @@ string
 </td><td>
 
 The name of the block type.
+
+
+</td></tr>
+<tr><td>
+
+[size](./server.blocktype.size.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[Vector3Like](./server.vector3like.md)
+
+
+</td><td>
+
+The size of the block type.
 
 
 </td></tr>

@@ -599,12 +599,12 @@ Event types a ChatManager instance can emit. See [ChatEventPayloads](./server.ch
 </td></tr>
 <tr><td>
 
-[ChunkEvent](./server.chunkevent.md)
+[ChunkLatticeEvent](./server.chunklatticeevent.md)
 
 
 </td><td>
 
-Event types a Chunk instance can emit. See [ChunkEventPayloads](./server.chunkeventpayloads.md) for the payloads.
+Event types a ChunkLattice instance can emit. See [ChunkLatticeEventPayloads](./server.chunklatticeeventpayloads.md) for the payloads.
 
 
 </td></tr>
@@ -1014,12 +1014,12 @@ Event payloads for ChatManager emitted events.
 </td></tr>
 <tr><td>
 
-[ChunkEventPayloads](./server.chunkeventpayloads.md)
+[ChunkLatticeEventPayloads](./server.chunklatticeeventpayloads.md)
 
 
 </td><td>
 
-Event payloads for Chunk emitted events.
+Event payloads for ChunkLattice emitted events.
 
 
 </td></tr>
@@ -1194,6 +1194,8 @@ Event payloads for ParticleEmitter emitted events.
 
 
 </td><td>
+
+Options for creating a ParticleEmitter instance.
 
 
 </td></tr>
@@ -1370,6 +1372,17 @@ A 3-dimensional vector of boolean values.
 </td><td>
 
 A 3-dimensional vector.
+
+
+</td></tr>
+<tr><td>
+
+[VoxelsColliderOptions](./server.voxelscollideroptions.md)
+
+
+</td><td>
+
+The options for a voxels collider.
 
 
 </td></tr>

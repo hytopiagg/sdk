@@ -4,12 +4,12 @@
 
 ## ChunkLattice.hasChunk() method
 
-Check if a chunk exists by its origin coordinate.
+Check if a chunk exists for a given global coordinate.
 
 **Signature:**
 
 ```typescript
-hasChunk(originCoordinate: Vector3Like): boolean;
+hasChunk(globalCoordinate: Vector3Like): boolean;
 ```
 
 ## Parameters
@@ -32,7 +32,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-originCoordinate
+globalCoordinate
 
 
 </td><td>
@@ -42,7 +42,7 @@ originCoordinate
 
 </td><td>
 
-The origin coordinate of the chunk to check.
+The global coordinate of the chunk to check.
 
 
 </td></tr>
