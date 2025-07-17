@@ -9,7 +9,7 @@ Creates a new block type instance.
 **Signature:**
 
 ```typescript
-constructor(options?: BlockTypeOptions);
+constructor(blockTypeRegistry: BlockTypeRegistry, options?: BlockTypeOptions);
 ```
 
 ## Parameters
@@ -31,6 +31,20 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
+
+blockTypeRegistry
+
+
+</td><td>
+
+[BlockTypeRegistry](./server.blocktyperegistry.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
 
 options
 

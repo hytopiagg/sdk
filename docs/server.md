@@ -448,6 +448,17 @@ Represents the physics simulation for a world.
 </td></tr>
 <tr><td>
 
+[TickAllocator](./server.tickallocator.md)
+
+
+</td><td>
+
+High-performance tick-scoped allocator for temporary objects, arrays, and buffers. All allocations are automatically bulk-released when reset() is called.
+
+
+</td></tr>
+<tr><td>
+
 [Vector2](./server.vector2.md)
 
 
@@ -1516,6 +1527,28 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
+
+[Array3Number](./server.array3number.md)
+
+
+</td><td>
+
+A 3-element number array.
+
+
+</td></tr>
+<tr><td>
+
+[Array4Number](./server.array4number.md)
+
+
+</td><td>
+
+A 4-element number array.
+
+
+</td></tr>
+<tr><td>
 
 [ColliderOptions](./server.collideroptions.md)
 

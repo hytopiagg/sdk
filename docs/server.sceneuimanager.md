@@ -98,7 +98,7 @@ Retrieves all loaded SceneUI instances attached to a specific entity.
 </td></tr>
 <tr><td>
 
-[getAllSceneUIs()](./server.sceneuimanager.getallsceneuis.md)
+[getAllSceneUIs(tickAllocated)](./server.sceneuimanager.getallsceneuis.md)
 
 
 </td><td>

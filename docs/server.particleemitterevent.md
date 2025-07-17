@@ -270,6 +270,20 @@ SET\_OPACITY\_START\_VARIANCE
 </td></tr>
 <tr><td>
 
+SET\_PAUSED
+
+
+</td><td>
+
+`"PARTICLE_EMITTER.SET_PAUSED"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 SET\_POSITION
 
 
@@ -326,12 +340,12 @@ SET\_RATE\_VARIANCE
 </td></tr>
 <tr><td>
 
-SET\_SIZE
+SET\_SIZE\_END
 
 
 </td><td>
 
-`"PARTICLE_EMITTER.SET_SIZE"`
+`"PARTICLE_EMITTER.SET_SIZE_END"`
 
 
 </td><td>
@@ -340,12 +354,40 @@ SET\_SIZE
 </td></tr>
 <tr><td>
 
-SET\_SIZE\_VARIANCE
+SET\_SIZE\_END\_VARIANCE
 
 
 </td><td>
 
-`"PARTICLE_EMITTER.SET_SIZE_VARIANCE"`
+`"PARTICLE_EMITTER.SET_SIZE_END_VARIANCE"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+SET\_SIZE\_START
+
+
+</td><td>
+
+`"PARTICLE_EMITTER.SET_SIZE_START"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+SET\_SIZE\_START\_VARIANCE
+
+
+</td><td>
+
+`"PARTICLE_EMITTER.SET_SIZE_START_VARIANCE"`
 
 
 </td><td>

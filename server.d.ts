@@ -12,6 +12,12 @@ import { SdpMatrix3 } from '@dimforge/rapier3d-simd-compat';
 import type { Socket } from 'net';
 import { WebSocket as WebSocket_2 } from 'ws';
 
+/** A 3-element number array. @public */
+export declare type Array3Number = [number, number, number];
+
+/** A 4-element number array. @public */
+export declare type Array4Number = [number, number, number, number];
+
 /**
  * Represents a audio playback in a world.
  *
@@ -272,9 +278,14 @@ export declare class AudioManager {
     /**
      * Retrieves all loaded audio instances for the world.
      *
+     * @param tickAllocated - Whether to use the tick allocator to allocate the
+     * returned array of Audio instances. The allocated array will be collected
+     * and released at the end of the current tick if true. Only use this if
+     * you know what you're doing.
+     *
      * @returns An array of audio instances.
      */
-    getAllAudios(): Audio[];
+    getAllAudios(tickAllocated?: boolean): Audio[];
     /**
      * Retrieves all loaded audio instances attached to a specific entity.
      *
@@ -603,14 +614,17 @@ export declare class BlockType extends EventRouter implements protocol.Serializa
 
 
 
+
     /**
      * Creates a new block type instance.
      * @param world - The world the block type is for.
      * @param options - The options for the block type.
      */
-    constructor(options?: BlockTypeOptions);
+    constructor(blockTypeRegistry: BlockTypeRegistry, options?: BlockTypeOptions);
     /** The unique identifier for the block type. */
     get id(): number;
+    /** The block type registry that the block type belongs to. */
+    get blockTypeRegistry(): BlockTypeRegistry;
     /** The collider options for the block type. */
     get colliderOptions(): VoxelsColliderOptions;
     /** The half extents size of the block type. */
@@ -702,9 +716,15 @@ export declare class BlockTypeRegistry extends EventRouter implements protocol.S
     get world(): World;
     /**
      * Get all registered block types.
+     *
+     * @param tickAllocated - Whether to use the tick allocator to allocate the
+     * returned array of BlockType instances. The allocated array will be collected
+     * and released at the end of the current tick if true. Only use this if
+     * you know what you're doing.
+     *
      * @returns An array of all registered block types.
      */
-    getAllBlockTypes(): BlockType[];
+    getAllBlockTypes(tickAllocated?: boolean): BlockType[];
     /**
      * Get a registered block type by its id.
      * @param id - The id of the block type to get.
@@ -862,12 +882,15 @@ export declare class ChatManager extends EventRouter {
 export declare class Chunk implements protocol.Serializable {
 
 
+
     /**
      * Creates a new chunk instance.
      */
-    constructor(originCoordinate: Vector3Like);
+    constructor(chunkLattice: ChunkLattice, originCoordinate: Vector3Like);
     /** The blocks in the chunk as a flat Uint8Array[4096], each index as 0 or a block type id. */
     get blocks(): Readonly<Uint8Array>;
+    /** The chunk lattice that the chunk belongs to. */
+    get chunkLattice(): ChunkLattice;
     /** The origin coordinate of the chunk. */
     get originCoordinate(): Vector3Like;
     /**
@@ -928,6 +951,8 @@ export declare class ChunkLattice extends EventRouter {
     constructor(world: World);
     /** The number of chunks in the lattice. */
     get chunkCount(): number;
+    /** The world that the chunk lattice belongs to. */
+    get world(): World;
     /**
      * Removes and clears all chunks and their blocks from the lattice.
      */
@@ -966,9 +991,15 @@ export declare class ChunkLattice extends EventRouter {
     getOrCreateChunk(globalCoordinate: Vector3Like): Chunk;
     /**
      * Get all chunks in the lattice.
+     *
+     * @param tickAllocated - Whether to use the tick allocator to allocate the
+     * returned array of Chunk instances. The allocated array will be collected
+     * and released at the end of the current tick if true. Only use this if
+     * you know what you're doing.
+     *
      * @returns An array of all chunks in the lattice.
      */
-    getAllChunks(): Chunk[];
+    getAllChunks(tickAllocated?: boolean): Chunk[];
     /**
      * Check if a block exists at a specific global coordinate.
      * @param globalCoordinate - The global coordinate of the block to check.
@@ -2108,9 +2139,15 @@ export declare class EntityManager {
 
     /**
      * Gets all spawned entities in the world.
+     *
+     * @param tickAllocated - Whether to use the tick allocator to allocate the
+     * returned array of Entity instances. The allocated array will be collected
+     * and released at the end of the current tick if true. Only use this if
+     * you know what you're doing.
+     *
      * @returns All spawned entities in the world.
      */
-    getAllEntities(): Entity[];
+    getAllEntities(tickAllocated?: boolean): Entity[];
     /**
      * Gets all spawned player entities in the world.
      * @returns All spawned player entities in the world.
@@ -2760,9 +2797,14 @@ export declare class LightManager {
     /**
      * Retrieves all spawned Light instances for the world.
      *
+     * @param tickAllocated - Whether to use the tick allocator to allocate the
+     * returned array of Light instances. The allocated array will be collected
+     * and released at the end of the current tick if true. Only use this if
+     * you know what you're doing.
+     *
      * @returns An array of Light instances.
      */
-    getAllLights(): Light[];
+    getAllLights(tickAllocated?: boolean): Light[];
     /**
      * Retrieves all spawned Light instances attached to a specific entity.
      *
@@ -3623,6 +3665,9 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
 
 
 
+
+
+
     constructor(options: ParticleEmitterOptions);
     /** The unique identifier for the ParticlEmitter. */
     get id(): number | undefined;
@@ -3644,8 +3689,6 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
     get gravity(): Vector3Like | undefined;
     /** Whether the ParticleEmitter is spawned in the world. */
     get isSpawned(): boolean;
-    /** Whether the ParticleEmitter is stopped. */
-    get isStopped(): boolean;
     /** The lifetime of an emitted particle in seconds. */
     get lifetime(): number | undefined;
     /** The lifetime variance of an emitted particle in seconds. */
@@ -3662,6 +3705,8 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
     get opacityStart(): number | undefined;
     /** The opacity variance of an emitted particle at the start of its lifetime. */
     get opacityStartVariance(): number | undefined;
+    /** Whether an emitted particle is being paused. */
+    get paused(): boolean | undefined;
     /** The position of the particle emitter in the world if explicitly set. */
     get position(): Vector3Like | undefined;
     /** The position variance of an emitted particle. */
@@ -3670,8 +3715,14 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
     get rate(): number | undefined;
     /** The rate per second variance of the particle emission rate. */
     get rateVariance(): number | undefined;
-    /** The size of an emitted particle. */
-    get size(): number | undefined;
+    /** The size at the end of an emitted particle's lifetime. */
+    get sizeEnd(): number | undefined;
+    /** The size variance at the end of an emitted particle's lifetime. */
+    get sizeEndVariance(): number | undefined;
+    /** The size at the start of an emitted particle's lifetime. */
+    get sizeStart(): number | undefined;
+    /** The size variance at the start of an emitted particle's lifetime. */
+    get sizeStartVariance(): number | undefined;
     /** The size variance of an emitted particle. */
     get sizeVariance(): number | undefined;
     /** The URI or path to the texture to be used for the particles. */
@@ -3805,17 +3856,29 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
      */
     setRateVariance(rateVariance: number): void;
     /**
-     * Sets the size of an emitted particle.
+     * Sets the size at the end of an emitted particle's lifetime.
      *
-     * @param size - The size of an emitted particle.
+     * @param sizeEnd - The size at the end of an emitted particle's lifetime.
      */
-    setSize(size: number): void;
+    setSizeEnd(sizeEnd: number): void;
     /**
-     * Sets the size variance of an emitted particle.
+     * Sets the size variance at the end of an emitted particle's lifetime.
      *
-     * @param sizeVariance - The size variance of an emitted particle.
+     * @param sizeEndVariance - The size variance at the end of an emitted particle's lifetime.
      */
-    setSizeVariance(sizeVariance: number): void;
+    setSizeEndVariance(sizeEndVariance: number): void;
+    /**
+     * Sets the size at the start of an emitted particle's lifetime.
+     *
+     * @param sizeStart - The size at the start of an emitted particle's lifetime.
+     */
+    setSizeStart(sizeStart: number): void;
+    /**
+     * Sets the size variance at the start of an emitted particle's lifetime.
+     *
+     * @param sizeStartVariance - The size variance at the start of an emitted particle's lifetime.
+     */
+    setSizeStartVariance(sizeStartVariance: number): void;
     /**
      * Sets the texture URI of the particles emitted.
      *
@@ -3846,12 +3909,10 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
     despawn(): void;
     /**
      * Restarts the particle emission if it was previously stopped.
-     * Internally, this sets the rate to the value it was before being stopped.
      */
     restart(): void;
     /**
-     * Stops the particle emission if it was previously started.
-     * Internally, this sets the rate to 0.
+     * Stops the particle emission.
      */
     stop(): void;
     /**
@@ -3882,12 +3943,15 @@ export declare enum ParticleEmitterEvent {
     SET_OPACITY_END_VARIANCE = "PARTICLE_EMITTER.SET_OPACITY_END_VARIANCE",
     SET_OPACITY_START = "PARTICLE_EMITTER.SET_OPACITY_START",
     SET_OPACITY_START_VARIANCE = "PARTICLE_EMITTER.SET_OPACITY_START_VARIANCE",
+    SET_PAUSED = "PARTICLE_EMITTER.SET_PAUSED",
     SET_POSITION = "PARTICLE_EMITTER.SET_POSITION",
     SET_POSITION_VARIANCE = "PARTICLE_EMITTER.SET_POSITION_VARIANCE",
     SET_RATE = "PARTICLE_EMITTER.SET_RATE",
     SET_RATE_VARIANCE = "PARTICLE_EMITTER.SET_RATE_VARIANCE",
-    SET_SIZE = "PARTICLE_EMITTER.SET_SIZE",
-    SET_SIZE_VARIANCE = "PARTICLE_EMITTER.SET_SIZE_VARIANCE",
+    SET_SIZE_END = "PARTICLE_EMITTER.SET_SIZE_END",
+    SET_SIZE_END_VARIANCE = "PARTICLE_EMITTER.SET_SIZE_END_VARIANCE",
+    SET_SIZE_START = "PARTICLE_EMITTER.SET_SIZE_START",
+    SET_SIZE_START_VARIANCE = "PARTICLE_EMITTER.SET_SIZE_START_VARIANCE",
     SET_TEXTURE_URI = "PARTICLE_EMITTER.SET_TEXTURE_URI",
     SET_TRANSPARENT = "PARTICLE_EMITTER.SET_TRANSPARENT",
     SET_VELOCITY = "PARTICLE_EMITTER.SET_VELOCITY",
@@ -3981,6 +4045,11 @@ export declare interface ParticleEmitterEventPayloads {
         particleEmitter: ParticleEmitter;
         opacityStartVariance: number;
     };
+    /** Emitted when the paused state of an emitted particle is set. */
+    [ParticleEmitterEvent.SET_PAUSED]: {
+        particleEmitter: ParticleEmitter;
+        paused: boolean;
+    };
     /** Emitted when the position of the particle emitter is set. */
     [ParticleEmitterEvent.SET_POSITION]: {
         particleEmitter: ParticleEmitter;
@@ -4001,15 +4070,25 @@ export declare interface ParticleEmitterEventPayloads {
         particleEmitter: ParticleEmitter;
         rateVariance: number;
     };
-    /** Emitted when the size of an emitted particle is set. */
-    [ParticleEmitterEvent.SET_SIZE]: {
+    /** Emitted when the size at the end of an emitted particle's lifetime is set. */
+    [ParticleEmitterEvent.SET_SIZE_END]: {
         particleEmitter: ParticleEmitter;
-        size: number;
+        sizeEnd: number;
     };
-    /** Emitted when the size variance of an emitted particle is set. */
-    [ParticleEmitterEvent.SET_SIZE_VARIANCE]: {
+    /** Emitted when the size variance at the end of an emitted particle's lifetime is set. */
+    [ParticleEmitterEvent.SET_SIZE_END_VARIANCE]: {
         particleEmitter: ParticleEmitter;
-        sizeVariance: number;
+        sizeEndVariance: number;
+    };
+    /** Emitted when the size at the start of an emitted particle's lifetime is set. */
+    [ParticleEmitterEvent.SET_SIZE_START]: {
+        particleEmitter: ParticleEmitter;
+        sizeStart: number;
+    };
+    /** Emitted when the size variance at the start of an emitted particle's lifetime is set. */
+    [ParticleEmitterEvent.SET_SIZE_START_VARIANCE]: {
+        particleEmitter: ParticleEmitter;
+        sizeStartVariance: number;
     };
     /** Emitted when the texture URI is set. */
     [ParticleEmitterEvent.SET_TEXTURE_URI]: {
@@ -4059,9 +4138,14 @@ export declare class ParticleEmitterManager {
     /**
      * Retrieves all spawned ParticleEmitter instances for the world.
      *
+     * @param tickAllocated - Whether to use the tick allocator to allocate the
+     * returned array of ParticleEmitter instances. The allocated array will be collected
+     * and released at the end of the current tick if true. Only use this if
+     * you know what you're doing.
+     *
      * @returns An array of ParticleEmitter instances.
      */
-    getAllParticleEmitters(): ParticleEmitter[];
+    getAllParticleEmitters(tickAllocated?: boolean): ParticleEmitter[];
     /**
      * Retrieves all spawned ParticleEmitter instances attached to a specific entity.
      *
@@ -4117,10 +4201,14 @@ export declare interface ParticleEmitterOptions {
     rate?: number;
     /** The rate per second variance of the particle emission rate. */
     rateVariance?: number;
-    /** The size of an emitted particle. */
-    size?: number;
-    /** The size variance of an emitted particle. */
-    sizeVariance?: number;
+    /** The size at the end of an emitted particle's lifetime. */
+    sizeEnd?: number;
+    /** The size variance at the end of an emitted particle's lifetime. */
+    sizeEndVariance?: number;
+    /** The size at the start of an emitted particle's lifetime. */
+    sizeStart?: number;
+    /** The size variance at the start of an emitted particle's lifetime. */
+    sizeStartVariance?: number;
     /** Whether an emitted particle is transparent, resulting in smoother transparency blending. */
     transparent?: boolean;
     /** The velocity of an emitted particle. */
@@ -5688,9 +5776,14 @@ export declare class SceneUIManager {
     /**
      * Retrieves all loaded SceneUI instances for the world.
      *
+     * @param tickAllocated - Whether to use the tick allocator to allocate the
+     * returned array of SceneUI instances. The allocated array will be collected
+     * and released at the end of the current tick if true. Only use this if
+     * you know what you're doing.
+     *
      * @returns An array of SceneUI instances.
      */
-    getAllSceneUIs(): SceneUI[];
+    getAllSceneUIs(tickAllocated?: boolean): SceneUI[];
     /**
      * Retrieves all loaded SceneUI instances attached to a specific entity.
      *
@@ -6029,6 +6122,88 @@ export declare function startServer(init: ((() => void) | ((world: World) => voi
 
 /** The input keys that are included in the PlayerInput. @public */
 export declare const SUPPORTED_INPUT_KEYS: readonly ["w", "a", "s", "d", "sp", "sh", "tb", "ml", "mr", "q", "e", "r", "f", "z", "x", "c", "v", "u", "i", "o", "j", "k", "l", "n", "m", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+
+/**
+ * High-performance tick-scoped allocator for temporary objects, arrays, and buffers.
+ * All allocations are automatically bulk-released when reset() is called.
+ *
+ * @remarks
+ * TickAllocator maintains separate pools for different data types and tracks all
+ * allocations made during a tick cycle. Objects are reused across ticks to eliminate
+ * garbage collection overhead in hot paths like network synchronization.
+ *
+ * @example
+ * ```typescript
+ * // Allocate during tick
+ * const position = tickAllocator.getArray3Number();
+ * const rotation = tickAllocator.getArray4Number();
+ * const data = tickAllocator.getObject<EntitySchema>();
+ *
+ * // At end of tick - bulk release everything
+ * tickAllocator.reset();
+ * ```
+ *
+ * @public
+ */
+export declare class TickAllocator {
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Gets a generic array from the pool.
+     * Array is reset to empty state and ready for use.
+     * @typeParam T - The array type.
+     * @returns A reusable array.
+     */
+    getArray<T extends unknown[] = unknown[]>(copyFromA?: Iterable<unknown>, copyFromB?: Iterable<unknown>): T;
+    /**
+     * Gets a 3-element number array from the pool.
+     * Array is reset to [0, 0, 0] and ready for use.
+     * @returns A reusable 3-element array.
+     */
+    getArray3Number(copyFrom?: Array3Number | Set<number>): Array3Number;
+    /**
+     * Gets a 4-element number array from the pool.
+     * Array is reset to [0, 0, 0, 0] and ready for use.
+     * @returns A reusable 4-element array.
+     */
+    getArray4Number(copyFrom?: Array4Number | Set<number>): Array4Number;
+    /**
+     * Gets a plain object from the pool.
+     * Object is reset to empty state and ready for use.
+     * @typeParam T - The type interface for the object.
+     * @returns A reusable plain object.
+     */
+    getObject<T extends Record<string, unknown> = Record<string, unknown>>(copyFromA?: T, copyFromB?: T): T;
+    /**
+     * Gets a set from the pool.
+     * Set is reset to empty state and ready for use.
+     * @typeParam T - The type of the set.
+     * @returns A reusable set.
+     */
+    getSet<T>(copyFromA?: Set<T> | T[], copyFromB?: Set<T> | T[]): Set<T>;
+    /**
+     * Maps an array to a new array using a callback function.
+     * @typeParam T - The type of the array.
+     * @typeParam U - The type of the resulting array.
+     * @param array - The array to map.
+     * @param callback - The callback function to map the array.
+     * @returns A new array with the mapped values.
+     */
+    map<T, U>(array: T[], callback: (value: T, index: number, array: T[]) => U): U[];
+    /**
+     * Releases all allocated objects back to their respective pools.
+     * This is intended to be called at the end of a tick.
+     */
+    reset(): void;
+}
 
 /** The options for a trimesh collider. @public */
 export declare interface TrimeshColliderOptions extends BaseColliderOptions {
@@ -6646,6 +6821,7 @@ export declare class World extends EventRouter implements protocol.Serializable 
 
 
 
+
     /**
      * @param options - The options for the world.
      */
@@ -6656,20 +6832,39 @@ export declare class World extends EventRouter implements protocol.Serializable 
     get ambientLightColor(): RgbColor;
     /** The intensity of the ambient light. */
     get ambientLightIntensity(): number;
+    /** The block type registry for the world. */
+    get blockTypeRegistry(): BlockTypeRegistry;
+    /** The chat manager for the world. */
+    get chatManager(): ChatManager;
+    /** The chunk lattice for the world. */
+    get chunkLattice(): ChunkLattice;
     /** The color of the directional light. */
     get directionalLightColor(): RgbColor;
     /** The intensity of the directional light. */
     get directionalLightIntensity(): number;
     /** The position the directional light originates from. */
     get directionalLightPosition(): Vector3Like;
+    /** The entity manager for the world. */
+    get entityManager(): EntityManager;
     /** The color of the fog, if not explicitly set, defaults to ambient light color. */
     get fogColor(): RgbColor | undefined;
     /** The maximum distance from the camera at which fog stops being applied. */
     get fogFar(): number;
     /** The minimum distance from the camera to start applying fog. */
     get fogNear(): number;
+    /** The light manager for the world. */
+    get lightManager(): LightManager;
+    /** The world loop for the world. */
+    get loop(): WorldLoop;
     /** The name of the world. */
     get name(): string;
+
+    /** The particle emitter manager for the world. */
+    get particleEmitterManager(): ParticleEmitterManager;
+    /** The scene UI manager for the world. */
+    get sceneUIManager(): SceneUIManager;
+    /** The simulation for the world. */
+    get simulation(): Simulation;
     /** The intensity of the world's skybox brightness. */
     get skyboxIntensity(): number;
     /** The URI of the skybox cubemap for the world. */
@@ -6678,25 +6873,8 @@ export declare class World extends EventRouter implements protocol.Serializable 
     get audioManager(): AudioManager;
     /** An arbitrary identifier tag of the world. Useful for your own logic. */
     get tag(): string | undefined;
-    /** The block type registry for the world. */
-    get blockTypeRegistry(): BlockTypeRegistry;
-    /** The chat manager for the world. */
-    get chatManager(): ChatManager;
-    /** The chunk lattice for the world. */
-    get chunkLattice(): ChunkLattice;
-    /** The entity manager for the world. */
-    get entityManager(): EntityManager;
-    /** The light manager for the world. */
-    get lightManager(): LightManager;
-    /** The world loop for the world. */
-    get loop(): WorldLoop;
-
-    /** The particle emitter manager for the world. */
-    get particleEmitterManager(): ParticleEmitterManager;
-    /** The scene UI manager for the world. */
-    get sceneUIManager(): SceneUIManager;
-    /** The simulation for the world. */
-    get simulation(): Simulation;
+    /** The tick allocator for the world. */
+    get tickAllocator(): TickAllocator;
     /**
      * Loads a map into the world, clearing any prior map.
      * @param map - The map to load.

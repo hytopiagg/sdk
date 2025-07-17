@@ -9,8 +9,44 @@ Gets all spawned entities in the world.
 **Signature:**
 
 ```typescript
-getAllEntities(): Entity[];
+getAllEntities(tickAllocated?: boolean): Entity[];
 ```
+
+## Parameters
+
+<table><thead><tr><th>
+
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+tickAllocated
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ Whether to use the tick allocator to allocate the returned array of Entity instances. The allocated array will be collected and released at the end of the current tick if true. Only use this if you know what you're doing.
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 [Entity](./server.entity.md)<!-- -->\[\]

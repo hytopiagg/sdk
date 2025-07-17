@@ -95,6 +95,27 @@ The number of chunks in the lattice.
 
 
 </td></tr>
+<tr><td>
+
+[world](./server.chunklattice.world.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[World](./server.world.md)
+
+
+</td><td>
+
+The world that the chunk lattice belongs to.
+
+
+</td></tr>
 </tbody></table>
 
 ## Methods
@@ -131,7 +152,7 @@ Removes and clears all chunks and their blocks from the lattice.
 </td></tr>
 <tr><td>
 
-[getAllChunks()](./server.chunklattice.getallchunks.md)
+[getAllChunks(tickAllocated)](./server.chunklattice.getallchunks.md)
 
 
 </td><td>

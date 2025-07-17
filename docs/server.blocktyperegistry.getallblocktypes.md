@@ -9,8 +9,44 @@ Get all registered block types.
 **Signature:**
 
 ```typescript
-getAllBlockTypes(): BlockType[];
+getAllBlockTypes(tickAllocated?: boolean): BlockType[];
 ```
+
+## Parameters
+
+<table><thead><tr><th>
+
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+tickAllocated
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ Whether to use the tick allocator to allocate the returned array of BlockType instances. The allocated array will be collected and released at the end of the current tick if true. Only use this if you know what you're doing.
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 [BlockType](./server.blocktype.md)<!-- -->\[\]

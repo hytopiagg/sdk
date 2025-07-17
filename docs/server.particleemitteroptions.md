@@ -417,7 +417,7 @@ _(Optional)_ The rate per second variance of the particle emission rate.
 </td></tr>
 <tr><td>
 
-[size?](./server.particleemitteroptions.size.md)
+[sizeEnd?](./server.particleemitteroptions.sizeend.md)
 
 
 </td><td>
@@ -430,13 +430,13 @@ number
 
 </td><td>
 
-_(Optional)_ The size of an emitted particle.
+_(Optional)_ The size at the end of an emitted particle's lifetime.
 
 
 </td></tr>
 <tr><td>
 
-[sizeVariance?](./server.particleemitteroptions.sizevariance.md)
+[sizeEndVariance?](./server.particleemitteroptions.sizeendvariance.md)
 
 
 </td><td>
@@ -449,7 +449,45 @@ number
 
 </td><td>
 
-_(Optional)_ The size variance of an emitted particle.
+_(Optional)_ The size variance at the end of an emitted particle's lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[sizeStart?](./server.particleemitteroptions.sizestart.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The size at the start of an emitted particle's lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[sizeStartVariance?](./server.particleemitteroptions.sizestartvariance.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The size variance at the start of an emitted particle's lifetime.
 
 
 </td></tr>

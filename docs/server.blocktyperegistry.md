@@ -102,7 +102,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[getAllBlockTypes()](./server.blocktyperegistry.getallblocktypes.md)
+[getAllBlockTypes(tickAllocated)](./server.blocktyperegistry.getallblocktypes.md)
 
 
 </td><td>

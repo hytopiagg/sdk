@@ -114,7 +114,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[getAllEntities()](./server.entitymanager.getallentities.md)
+[getAllEntities(tickAllocated)](./server.entitymanager.getallentities.md)
 
 
 </td><td>

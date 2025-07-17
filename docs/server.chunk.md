@@ -37,7 +37,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[(constructor)(originCoordinate)](./server.chunk._constructor_.md)
+[(constructor)(chunkLattice, originCoordinate)](./server.chunk._constructor_.md)
 
 
 </td><td>
@@ -92,6 +92,27 @@ Readonly&lt;Uint8Array&gt;
 </td><td>
 
 The blocks in the chunk as a flat Uint8Array\[4096\], each index as 0 or a block type id.
+
+
+</td></tr>
+<tr><td>
+
+[chunkLattice](./server.chunk.chunklattice.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[ChunkLattice](./server.chunklattice.md)
+
+
+</td><td>
+
+The chunk lattice that the chunk belongs to.
 
 
 </td></tr>

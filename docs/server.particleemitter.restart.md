@@ -4,7 +4,7 @@
 
 ## ParticleEmitter.restart() method
 
-Restarts the particle emission if it was previously stopped. Internally, this sets the rate to the value it was before being stopped.
+Restarts the particle emission if it was previously stopped.
 
 **Signature:**
 

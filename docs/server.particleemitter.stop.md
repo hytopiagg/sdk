@@ -4,7 +4,7 @@
 
 ## ParticleEmitter.stop() method
 
-Stops the particle emission if it was previously started. Internally, this sets the rate to 0.
+Stops the particle emission.
 
 **Signature:**
 

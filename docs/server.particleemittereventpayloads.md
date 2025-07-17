@@ -360,6 +360,25 @@ Emitted when the opacity of an emitted particle at the start of its lifetime is 
 </td></tr>
 <tr><td>
 
+["PARTICLE\_EMITTER.SET\_PAUSED"](./server.particleemittereventpayloads._particle_emitter.set_paused_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ particleEmitter: [ParticleEmitter](./server.particleemitter.md)<!-- -->; paused: boolean; }
+
+
+</td><td>
+
+Emitted when the paused state of an emitted particle is set.
+
+
+</td></tr>
+<tr><td>
+
 ["PARTICLE\_EMITTER.SET\_POSITION\_VARIANCE"](./server.particleemittereventpayloads._particle_emitter.set_position_variance_.md)
 
 
@@ -436,7 +455,7 @@ Emitted when the rate per second at which particles are emitted is set.
 </td></tr>
 <tr><td>
 
-["PARTICLE\_EMITTER.SET\_SIZE\_VARIANCE"](./server.particleemittereventpayloads._particle_emitter.set_size_variance_.md)
+["PARTICLE\_EMITTER.SET\_SIZE\_END\_VARIANCE"](./server.particleemittereventpayloads._particle_emitter.set_size_end_variance_.md)
 
 
 </td><td>
@@ -444,18 +463,18 @@ Emitted when the rate per second at which particles are emitted is set.
 
 </td><td>
 
-{ particleEmitter: [ParticleEmitter](./server.particleemitter.md)<!-- -->; sizeVariance: number; }
+{ particleEmitter: [ParticleEmitter](./server.particleemitter.md)<!-- -->; sizeEndVariance: number; }
 
 
 </td><td>
 
-Emitted when the size variance of an emitted particle is set.
+Emitted when the size variance at the end of an emitted particle's lifetime is set.
 
 
 </td></tr>
 <tr><td>
 
-["PARTICLE\_EMITTER.SET\_SIZE"](./server.particleemittereventpayloads._particle_emitter.set_size_.md)
+["PARTICLE\_EMITTER.SET\_SIZE\_END"](./server.particleemittereventpayloads._particle_emitter.set_size_end_.md)
 
 
 </td><td>
@@ -463,12 +482,50 @@ Emitted when the size variance of an emitted particle is set.
 
 </td><td>
 
-{ particleEmitter: [ParticleEmitter](./server.particleemitter.md)<!-- -->; size: number; }
+{ particleEmitter: [ParticleEmitter](./server.particleemitter.md)<!-- -->; sizeEnd: number; }
 
 
 </td><td>
 
-Emitted when the size of an emitted particle is set.
+Emitted when the size at the end of an emitted particle's lifetime is set.
+
+
+</td></tr>
+<tr><td>
+
+["PARTICLE\_EMITTER.SET\_SIZE\_START\_VARIANCE"](./server.particleemittereventpayloads._particle_emitter.set_size_start_variance_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ particleEmitter: [ParticleEmitter](./server.particleemitter.md)<!-- -->; sizeStartVariance: number; }
+
+
+</td><td>
+
+Emitted when the size variance at the start of an emitted particle's lifetime is set.
+
+
+</td></tr>
+<tr><td>
+
+["PARTICLE\_EMITTER.SET\_SIZE\_START"](./server.particleemittereventpayloads._particle_emitter.set_size_start_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ particleEmitter: [ParticleEmitter](./server.particleemitter.md)<!-- -->; sizeStart: number; }
+
+
+</td><td>
+
+Emitted when the size at the start of an emitted particle's lifetime is set.
 
 
 </td></tr>

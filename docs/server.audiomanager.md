@@ -93,7 +93,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[getAllAudios()](./server.audiomanager.getallaudios.md)
+[getAllAudios(tickAllocated)](./server.audiomanager.getallaudios.md)
 
 
 </td><td>

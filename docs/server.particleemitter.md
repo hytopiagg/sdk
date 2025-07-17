@@ -303,27 +303,6 @@ Whether the ParticleEmitter is spawned in the world.
 </td></tr>
 <tr><td>
 
-[isStopped](./server.particleemitter.isstopped.md)
-
-
-</td><td>
-
-`readonly`
-
-
-</td><td>
-
-boolean
-
-
-</td><td>
-
-Whether the ParticleEmitter is stopped.
-
-
-</td></tr>
-<tr><td>
-
 [lifetime](./server.particleemitter.lifetime.md)
 
 
@@ -492,6 +471,27 @@ The opacity variance of an emitted particle at the start of its lifetime.
 </td></tr>
 <tr><td>
 
+[paused](./server.particleemitter.paused.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean \| undefined
+
+
+</td><td>
+
+Whether an emitted particle is being paused.
+
+
+</td></tr>
+<tr><td>
+
 [position](./server.particleemitter.position.md)
 
 
@@ -576,7 +576,7 @@ The rate per second variance of the particle emission rate.
 </td></tr>
 <tr><td>
 
-[size](./server.particleemitter.size.md)
+[sizeEnd](./server.particleemitter.sizeend.md)
 
 
 </td><td>
@@ -591,7 +591,70 @@ number \| undefined
 
 </td><td>
 
-The size of an emitted particle.
+The size at the end of an emitted particle's lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[sizeEndVariance](./server.particleemitter.sizeendvariance.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number \| undefined
+
+
+</td><td>
+
+The size variance at the end of an emitted particle's lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[sizeStart](./server.particleemitter.sizestart.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number \| undefined
+
+
+</td><td>
+
+The size at the start of an emitted particle's lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[sizeStartVariance](./server.particleemitter.sizestartvariance.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number \| undefined
+
+
+</td><td>
+
+The size variance at the start of an emitted particle's lifetime.
 
 
 </td></tr>
@@ -765,7 +828,7 @@ Despawns the ParticleEmitter from the world.
 
 </td><td>
 
-Restarts the particle emission if it was previously stopped. Internally, this sets the rate to the value it was before being stopped.
+Restarts the particle emission if it was previously stopped.
 
 
 </td></tr>
@@ -1051,7 +1114,7 @@ Sets the rate variance of the particle emission rate.
 </td></tr>
 <tr><td>
 
-[setSize(size)](./server.particleemitter.setsize.md)
+[setSizeEnd(sizeEnd)](./server.particleemitter.setsizeend.md)
 
 
 </td><td>
@@ -1059,13 +1122,13 @@ Sets the rate variance of the particle emission rate.
 
 </td><td>
 
-Sets the size of an emitted particle.
+Sets the size at the end of an emitted particle's lifetime.
 
 
 </td></tr>
 <tr><td>
 
-[setSizeVariance(sizeVariance)](./server.particleemitter.setsizevariance.md)
+[setSizeEndVariance(sizeEndVariance)](./server.particleemitter.setsizeendvariance.md)
 
 
 </td><td>
@@ -1073,7 +1136,35 @@ Sets the size of an emitted particle.
 
 </td><td>
 
-Sets the size variance of an emitted particle.
+Sets the size variance at the end of an emitted particle's lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[setSizeStart(sizeStart)](./server.particleemitter.setsizestart.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the size at the start of an emitted particle's lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[setSizeStartVariance(sizeStartVariance)](./server.particleemitter.setsizestartvariance.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the size variance at the start of an emitted particle's lifetime.
 
 
 </td></tr>
@@ -1157,7 +1248,7 @@ Spawns the ParticleEmitter in the world.
 
 </td><td>
 
-Stops the particle emission if it was previously started. Internally, this sets the rate to 0.
+Stops the particle emission.
 
 
 </td></tr>

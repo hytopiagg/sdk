@@ -9,7 +9,7 @@ Creates a new chunk instance.
 **Signature:**
 
 ```typescript
-constructor(originCoordinate: Vector3Like);
+constructor(chunkLattice: ChunkLattice, originCoordinate: Vector3Like);
 ```
 
 ## Parameters
@@ -31,6 +31,20 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
+
+chunkLattice
+
+
+</td><td>
+
+[ChunkLattice](./server.chunklattice.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
 
 originCoordinate
 

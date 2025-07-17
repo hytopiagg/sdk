@@ -9,8 +9,44 @@ Retrieves all loaded SceneUI instances for the world.
 **Signature:**
 
 ```typescript
-getAllSceneUIs(): SceneUI[];
+getAllSceneUIs(tickAllocated?: boolean): SceneUI[];
 ```
+
+## Parameters
+
+<table><thead><tr><th>
+
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+tickAllocated
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ Whether to use the tick allocator to allocate the returned array of SceneUI instances. The allocated array will be collected and released at the end of the current tick if true. Only use this if you know what you're doing.
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 [SceneUI](./server.sceneui.md)<!-- -->\[\]

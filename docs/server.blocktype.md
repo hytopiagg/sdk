@@ -58,7 +58,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[(constructor)(options)](./server.blocktype._constructor_.md)
+[(constructor)(blockTypeRegistry, options)](./server.blocktype._constructor_.md)
 
 
 </td><td>
@@ -96,6 +96,27 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
+
+[blockTypeRegistry](./server.blocktype.blocktyperegistry.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[BlockTypeRegistry](./server.blocktyperegistry.md)
+
+
+</td><td>
+
+The block type registry that the block type belongs to.
+
+
+</td></tr>
+<tr><td>
 
 [colliderOptions](./server.blocktype.collideroptions.md)
 

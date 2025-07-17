@@ -98,7 +98,7 @@ Retrieves all spawned Light instances attached to a specific entity.
 </td></tr>
 <tr><td>
 
-[getAllLights()](./server.lightmanager.getalllights.md)
+[getAllLights(tickAllocated)](./server.lightmanager.getalllights.md)
 
 
 </td><td>
