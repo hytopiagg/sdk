@@ -6161,7 +6161,7 @@ export declare const SUPPORTED_INPUT_KEYS: readonly ["w", "a", "s", "d", "sp", "
  */
 export declare class Telemetry {
     /**
-     * Gets current Node.js process memory and performance statistics.
+     * Gets current process memory and performance statistics.
      *
      * @param asMeasurement - Whether to return data in Sentry measurement format with units.
      * @returns Process statistics including heap usage, RSS memory, and capacity metrics.

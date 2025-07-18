@@ -48921,7 +48921,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Telemetry.getProcessStats:member(1)",
-              "docComment": "/**\n * Gets current Node.js process memory and performance statistics.\n *\n * @param asMeasurement - Whether to return data in Sentry measurement format with units.\n *\n * @returns Process statistics including heap usage, RSS memory, and capacity metrics.\n */\n",
+              "docComment": "/**\n * Gets current process memory and performance statistics.\n *\n * @param asMeasurement - Whether to return data in Sentry measurement format with units.\n *\n * @returns Process statistics including heap usage, RSS memory, and capacity metrics.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

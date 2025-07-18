@@ -4,7 +4,7 @@
 
 ## Telemetry.getProcessStats() method
 
-Gets current Node.js process memory and performance statistics.
+Gets current process memory and performance statistics.
 
 **Signature:**
 

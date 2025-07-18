@@ -70,7 +70,7 @@ Description
 
 </td><td>
 
-Gets current Node.js process memory and performance statistics.
+Gets current process memory and performance statistics.
 
 
 </td></tr>
