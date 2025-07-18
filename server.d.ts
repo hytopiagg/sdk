@@ -9,6 +9,7 @@ import mediasoup from 'mediasoup';
 import protocol from '@hytopia.com/server-protocol';
 import RAPIER from '@dimforge/rapier3d-simd-compat';
 import { SdpMatrix3 } from '@dimforge/rapier3d-simd-compat';
+import * as Sentry from '@sentry/node';
 import type { Socket } from 'net';
 import { WebSocket as WebSocket_2 } from 'ws';
 
@@ -6122,6 +6123,131 @@ export declare function startServer(init: ((() => void) | ((world: World) => voi
 
 /** The input keys that are included in the PlayerInput. @public */
 export declare const SUPPORTED_INPUT_KEYS: readonly ["w", "a", "s", "d", "sp", "sh", "tb", "ml", "mr", "q", "e", "r", "f", "z", "x", "c", "v", "u", "i", "o", "j", "k", "l", "n", "m", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+
+/**
+ * Manages performance telemetry and error tracking through your Sentry.io account.
+ *
+ * @remarks
+ * The Telemetry class provides low-overhead performance monitoring
+ * and error tracking through Sentry (https://sentry.io) integration
+ * and your provided Sentry DSN. It automatically tracks critical game loop
+ * operations like physics simulation, entity updates, network synchronization,
+ * and more. The system only sends telemetry data when errors or slow-tick
+ * performance issues are detected, minimizing bandwidth and storage costs.
+ *
+ * @example
+ * ```typescript
+ * // Initialize Sentry for production telemetry
+ * Telemetry.initializeSentry('MY_SENTRY_PROJECT_DSN');
+ *
+ * // Wrap performance-critical code in spans
+ * Telemetry.startSpan({
+ *   operation: TelemetrySpanOperation.CUSTOM_OPERATION,
+ *   attributes: { // any arbitrary attributes you want to attach to the span
+ *     playerCount: world.playerManager.connectedPlayers.length,
+ *     entityCount: world.entityManager.entityCount,
+ *   },
+ * }, () => {
+ *   // Your performance-critical code here
+ *   performExpensiveOperation();
+ * });
+ *
+ * // Get current process statistics
+ * const stats = Telemetry.getProcessStats();
+ * console.log(`Heap usage: ${stats.jsHeapUsagePercent * 100}%`);
+ * ```
+ *
+ * @public
+ */
+export declare class Telemetry {
+    /**
+     * Gets current Node.js process memory and performance statistics.
+     *
+     * @param asMeasurement - Whether to return data in Sentry measurement format with units.
+     * @returns Process statistics including heap usage, RSS memory, and capacity metrics.
+     */
+    static getProcessStats(asMeasurement?: boolean): Record<string, any>;
+    /**
+     * Initializes Sentry telemetry with the provided DSN.
+     *
+     * @remarks
+     * This method configures Sentry for error tracking and performance monitoring.
+     * It sets up filtering to only send performance spans that exceed the
+     * provided threshold duration, reducing noise and costs. The initialization
+     * includes game-specific tags and process statistics attachment.
+     *
+     * @param sentryDsn - The Sentry Data Source Name (DSN) for your project.
+     * @param tickTimeMsThreshold - The tick duration that must be exceeded to
+     * send a performance span to Sentry for a given tick. Defaults to 50ms.
+     */
+    static initializeSentry(sentryDsn: string, tickTimeMsThreshold?: number): void;
+    /**
+     * Executes a callback function within a performance monitoring span.
+     *
+     * @remarks
+     * This method provides zero-overhead performance monitoring in development
+     * environments. In production with Sentry enabled and `SENTRY_ENABLE_TRACING=true`,
+     * it creates performance spans for monitoring. The span data is only transmitted
+     * to Sentry when performance issues are detected.
+     *
+     * @param options - Configuration for the telemetry span including operation type and attributes.
+     * @param callback - The function to execute within the performance span.
+     * @returns The return value of the callback function.
+     *
+     * @example
+     * ```typescript
+     * const result = Telemetry.startSpan({
+     *   operation: TelemetrySpanOperation.ENTITIES_TICK,
+     *   attributes: {
+     *     entityCount: entities.length,
+     *     worldId: world.id,
+     *   },
+     * }, () => {
+     *   return processEntities(entities);
+     * });
+     * ```
+     */
+    static startSpan<T>(options: TelemetrySpanOptions, callback: (span?: Sentry.Span) => T): T;
+    /**
+     * Gets the Sentry SDK instance for advanced telemetry operations.
+     *
+     * @remarks
+     * This method provides direct access to the Sentry SDK for operations
+     * not covered by the Telemetry wrapper, such as custom error reporting,
+     * user context setting, or advanced span manipulation.
+     *
+     * @returns The Sentry SDK instance.
+     */
+    static sentry(): typeof Sentry;
+}
+
+/** Performance telemetry span operation types. @public */
+export declare enum TelemetrySpanOperation {
+    BUILD_PACKETS = "build_packets",
+    ENTITIES_EMIT_UPDATES = "entities_emit_updates",
+    ENTITIES_TICK = "entities_tick",
+    NETWORK_SYNCHRONIZE = "network_synchronize",
+    NETWORK_SYNCHRONIZE_CLEANUP = "network_synchronize_cleanup",
+    PHYSICS_CLEANUP = "physics_cleanup",
+    PHYSICS_STEP = "physics_step",
+    RELEASE_TICK_ALLOCATION = "release_tick_allocation",
+    SEND_ALL_PACKETS = "send_all_packets",
+    SEND_PACKETS = "send_packets",
+    SERIALIZE_FREE_BUFFERS = "serialize_free_buffers",
+    SERIALIZE_PACKETS = "serialize_packets",
+    SERIALIZE_PACKETS_ENCODE = "serialize_packets_encode",
+    SIMULATION_STEP = "simulation_step",
+    TICKER_TICK = "ticker_tick",
+    WORLD_TICK = "world_tick"
+}
+
+/** Options for creating a telemetry span. @public */
+export declare type TelemetrySpanOptions = {
+    /** The operation being measured. */
+    operation: TelemetrySpanOperation | string;
+    /** Additional attributes to attach to the span for context. */
+    attributes?: Record<string, string | number>;
+};
 
 /**
  * High-performance tick-scoped allocator for temporary objects, arrays, and buffers.

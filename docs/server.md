@@ -448,6 +448,17 @@ Represents the physics simulation for a world.
 </td></tr>
 <tr><td>
 
+[Telemetry](./server.telemetry.md)
+
+
+</td><td>
+
+Manages performance telemetry and error tracking through your Sentry.io account.
+
+
+</td></tr>
+<tr><td>
+
 [TickAllocator](./server.tickallocator.md)
 
 
@@ -792,6 +803,17 @@ Event types a SceneUI instance can emit. See [SceneUIEventPayloads](./server.sce
 </td><td>
 
 Event types a Simulation instance can emit. See [SimulationEventPayloads](./server.simulationeventpayloads.md) for the payloads.
+
+
+</td></tr>
+<tr><td>
+
+[TelemetrySpanOperation](./server.telemetryspanoperation.md)
+
+
+</td><td>
+
+Performance telemetry span operation types.
 
 
 </td></tr>
@@ -1897,6 +1919,17 @@ Additional mass properties for a RigidBody.
 </td><td>
 
 The options for a rigid body.
+
+
+</td></tr>
+<tr><td>
+
+[TelemetrySpanOptions](./server.telemetryspanoptions.md)
+
+
+</td><td>
+
+Options for creating a telemetry span.
 
 
 </td></tr>
