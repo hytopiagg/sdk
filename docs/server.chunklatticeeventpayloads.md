@@ -37,6 +37,25 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+["CHUNK\_LATTICE.ADD\_CHUNK"](./server.chunklatticeeventpayloads._chunk_lattice.add_chunk_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ chunkLattice: [ChunkLattice](./server.chunklattice.md)<!-- -->; chunk: [Chunk](./server.chunk.md)<!-- -->; }
+
+
+</td><td>
+
+Emitted when a chunk is added to the lattice.
+
+
+</td></tr>
+<tr><td>
+
 ["CHUNK\_LATTICE.REMOVE\_CHUNK"](./server.chunklatticeeventpayloads._chunk_lattice.remove_chunk_.md)
 
 

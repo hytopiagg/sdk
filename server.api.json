@@ -7724,6 +7724,27 @@
           "members": [
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!ChunkLatticeEvent.ADD_CHUNK:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "ADD_CHUNK = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"CHUNK_LATTICE.ADD_CHUNK\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "ADD_CHUNK"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!ChunkLatticeEvent.REMOVE_CHUNK:member",
               "docComment": "",
               "excerptTokens": [
@@ -7781,6 +7802,60 @@
           "name": "ChunkLatticeEventPayloads",
           "preserveMemberOrder": false,
           "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ChunkLatticeEventPayloads#\"CHUNK_LATTICE.ADD_CHUNK\":member",
+              "docComment": "/**\n * Emitted when a chunk is added to the lattice.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ChunkLatticeEvent.ADD_CHUNK",
+                  "canonicalReference": "server!ChunkLatticeEvent.ADD_CHUNK:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        chunkLattice: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ChunkLattice",
+                  "canonicalReference": "server!ChunkLattice:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        chunk: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Chunk",
+                  "canonicalReference": "server!Chunk:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"CHUNK_LATTICE.ADD_CHUNK\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
             {
               "kind": "PropertySignature",
               "canonicalReference": "server!ChunkLatticeEventPayloads#\"CHUNK_LATTICE.REMOVE_CHUNK\":member",

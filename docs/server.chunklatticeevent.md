@@ -32,6 +32,20 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+ADD\_CHUNK
+
+
+</td><td>
+
+`"CHUNK_LATTICE.ADD_CHUNK"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 REMOVE\_CHUNK
 
 

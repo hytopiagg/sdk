@@ -1027,12 +1027,18 @@ export declare class ChunkLattice extends EventRouter {
 
 /** Event types a ChunkLattice instance can emit. See {@link ChunkLatticeEventPayloads} for the payloads. @public */
 export declare enum ChunkLatticeEvent {
+    ADD_CHUNK = "CHUNK_LATTICE.ADD_CHUNK",
     REMOVE_CHUNK = "CHUNK_LATTICE.REMOVE_CHUNK",
     SET_BLOCK = "CHUNK_LATTICE.SET_BLOCK"
 }
 
 /** Event payloads for ChunkLattice emitted events. @public */
 export declare interface ChunkLatticeEventPayloads {
+    /** Emitted when a chunk is added to the lattice. */
+    [ChunkLatticeEvent.ADD_CHUNK]: {
+        chunkLattice: ChunkLattice;
+        chunk: Chunk;
+    };
     /** Emitted when a chunk is removed from the lattice. */
     [ChunkLatticeEvent.REMOVE_CHUNK]: {
         chunkLattice: ChunkLattice;
