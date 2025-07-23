@@ -115,6 +115,8 @@ function installProjectDependencies() {
   execSync('bun init --yes');
   execSync('bun add hytopia@latest --force');
   execSync('bun add @hytopia.com/assets --force');
+  try { execSync('bun pm trust mediasoup'); } catch {  console.log('Failed to install optional dependency "mediasoup", skipping for local development...'); }
+  try { execSync('bun pm trust sharp'); } catch {  console.log('Failed to install optional dependency "sharp", skipping for local development...'); }
 }
 
 /**
