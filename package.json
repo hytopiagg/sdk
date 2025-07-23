@@ -1,6 +1,6 @@
 {
   "name": "hytopia",
-  "version": "0.7.9",
+  "version": "0.7.10",
   "description": "The HYTOPIA SDK makes it easy for developers to create massively multiplayer games using JavaScript or TypeScript.",
   "type": "module",
   "main": "./node-server.mjs",
@@ -65,9 +65,11 @@
   "dependencies": {
     "@gltf-transform/cli": "4.1.1",
     "archiver": "^7.0.1",
-    "mediasoup": "3.15.7",
     "sharp": "0.33.5",
     "ws": "^8.18.2"
+  },
+  "optionalDependencies": {
+    "mediasoup": "3.15.7"
   },
   "trustedDependencies": [
     "mediasoup",

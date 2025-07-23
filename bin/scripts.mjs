@@ -115,8 +115,6 @@ function installProjectDependencies() {
   execSync('bun init --yes');
   execSync('bun add hytopia@latest --force');
   execSync('bun add @hytopia.com/assets --force');
-  execSync('bun pm trust mediasoup');
-  execSync('bun pm trust sharp');
 }
 
 /**
