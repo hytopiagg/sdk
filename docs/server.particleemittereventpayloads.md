@@ -37,6 +37,25 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+["PARTICLE\_EMITTER.BURST"](./server.particleemittereventpayloads._particle_emitter.burst_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ particleEmitter: [ParticleEmitter](./server.particleemitter.md)<!-- -->; count: number; }
+
+
+</td><td>
+
+Emitted when a ParticleEmitter bursts the specified number of particles.
+
+
+</td></tr>
+<tr><td>
+
 ["PARTICLE\_EMITTER.DESPAWN"](./server.particleemittereventpayloads._particle_emitter.despawn_.md)
 
 

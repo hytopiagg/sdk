@@ -806,6 +806,20 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[burst(count)](./server.particleemitter.burst.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Creates a burst of particles, regardless of pause state.
+
+
+</td></tr>
+<tr><td>
+
 [despawn()](./server.particleemitter.despawn.md)
 
 

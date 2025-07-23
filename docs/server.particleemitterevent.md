@@ -32,6 +32,20 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+BURST
+
+
+</td><td>
+
+`"PARTICLE_EMITTER.BURST"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 DESPAWN
 
 

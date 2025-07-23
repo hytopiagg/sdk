@@ -29119,6 +29119,54 @@
               "isAbstract": false
             },
             {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#burst:member(1)",
+              "docComment": "/**\n * Creates a burst of particles, regardless of pause state.\n *\n * @param count - The number of particles to burst.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "burst(count: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "count",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "burst"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "server!ParticleEmitter#colorEnd:member",
               "docComment": "/**\n * The color of an emitted particle at the end of its lifetime.\n */\n",
@@ -31599,6 +31647,27 @@
           "members": [
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.BURST:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BURST = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.BURST\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "BURST"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!ParticleEmitterEvent.DESPAWN:member",
               "docComment": "",
               "excerptTokens": [
@@ -32265,6 +32334,51 @@
           "name": "ParticleEmitterEventPayloads",
           "preserveMemberOrder": false,
           "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.BURST\":member",
+              "docComment": "/**\n * Emitted when a ParticleEmitter bursts the specified number of particles.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.BURST",
+                  "canonicalReference": "server!ParticleEmitterEvent.BURST:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        count: number;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.BURST\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
             {
               "kind": "PropertySignature",
               "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.DESPAWN\":member",

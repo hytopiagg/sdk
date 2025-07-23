@@ -3918,6 +3918,12 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
      */
     setVelocityVariance(velocityVariance: Vector3Like): void;
     /**
+     * Creates a burst of particles, regardless of pause state.
+     *
+     * @param count - The number of particles to burst.
+     */
+    burst(count: number): void;
+    /**
      * Despawns the ParticleEmitter from the world.
      */
     despawn(): void;
@@ -3940,6 +3946,7 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
 
 /** Event types a ParticleEmitter instance can emit. See {@link ParticleEmitterEventPayloads} @public */
 export declare enum ParticleEmitterEvent {
+    BURST = "PARTICLE_EMITTER.BURST",
     DESPAWN = "PARTICLE_EMITTER.DESPAWN",
     SET_ALPHA_TEST = "PARTICLE_EMITTER.SET_ALPHA_TEST",
     SET_ATTACHED_TO_ENTITY = "PARTICLE_EMITTER.SET_ATTACHED_TO_ENTITY",
@@ -3975,6 +3982,11 @@ export declare enum ParticleEmitterEvent {
 
 /** Event payloads for ParticleEmitter emitted events. @public */
 export declare interface ParticleEmitterEventPayloads {
+    /** Emitted when a ParticleEmitter bursts the specified number of particles. */
+    [ParticleEmitterEvent.BURST]: {
+        particleEmitter: ParticleEmitter;
+        count: number;
+    };
     /** Emitted when a ParticleEmitter is despawned. */
     [ParticleEmitterEvent.DESPAWN]: {
         particleEmitter: ParticleEmitter;
