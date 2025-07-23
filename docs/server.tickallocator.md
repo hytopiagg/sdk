@@ -49,6 +49,20 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[filter(array, callback)](./server.tickallocator.filter.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Filters an array using a callback function.
+
+
+</td></tr>
+<tr><td>
+
 [getArray(copyFromA, copyFromB)](./server.tickallocator.getarray.md)
 
 

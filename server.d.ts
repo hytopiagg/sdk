@@ -279,10 +279,8 @@ export declare class AudioManager {
     /**
      * Retrieves all loaded audio instances for the world.
      *
-     * @param tickAllocated - Whether to use the tick allocator to allocate the
-     * returned array of Audio instances. The allocated array will be collected
-     * and released at the end of the current tick if true. Only use this if
-     * you know what you're doing.
+     * @param tickAllocated - If true, uses the tick allocator and frees
+     * the allocated array at the end of the current tick. false by default.
      *
      * @returns An array of audio instances.
      */
@@ -291,21 +289,30 @@ export declare class AudioManager {
      * Retrieves all loaded audio instances attached to a specific entity.
      *
      * @param entity - The entity to get attached audio instances for.
+     * @param tickAllocated - If true, uses the tick allocator and frees
+     * the allocated array at the end of the current tick. false by default.
+
      * @returns An array of audio instances.
      */
-    getAllEntityAttachedAudios(entity: Entity): Audio[];
+    getAllEntityAttachedAudios(entity: Entity, tickAllocated?: boolean): Audio[];
     /**
      * Retrieves all looped audio instances for the world.
      *
-     * @returns An array of audio instances.
-     */
-    getAllLoopedAudios(): Audio[];
-    /**
-     * Retrieves all oneshot (non-looped) audio instances for the world.
+     * @param tickAllocated - If true, uses the tick allocator and frees
+     * the allocated array at the end of the current tick. false by default.
      *
      * @returns An array of audio instances.
      */
-    getAllOneshotAudios(): Audio[];
+    getAllLoopedAudios(tickAllocated?: boolean): Audio[];
+    /**
+     * Retrieves all oneshot (non-looped) audio instances for the world.
+     *
+     * @param tickAllocated - If true, uses the tick allocator and frees
+     * the allocated array at the end of the current tick. false by default.
+     *
+     * @returns An array of audio instances.
+     */
+    getAllOneshotAudios(tickAllocated?: boolean): Audio[];
 
     /**
      * Unregisters and stops an audio instance from the audio manager.
@@ -6288,6 +6295,14 @@ export declare class TickAllocator {
 
 
 
+    /**
+     * Filters an array using a callback function.
+     * @typeParam T - The type of the array.
+     * @param array - The array to filter.
+     * @param callback - The callback function to filter the array.
+     * @returns A new array with the filtered values.
+     */
+    filter<T>(array: T[], callback: (value: T, index: number, array: T[]) => boolean): T[];
     /**
      * Gets a generic array from the pool.
      * Array is reset to empty state and ready for use.

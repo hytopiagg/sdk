@@ -9,7 +9,7 @@ Retrieves all loaded audio instances attached to a specific entity.
 **Signature:**
 
 ```typescript
-getAllEntityAttachedAudios(entity: Entity): Audio[];
+getAllEntityAttachedAudios(entity: Entity, tickAllocated?: boolean): Audio[];
 ```
 
 ## Parameters
@@ -43,6 +43,22 @@ entity
 </td><td>
 
 The entity to get attached audio instances for.
+
+
+</td></tr>
+<tr><td>
+
+tickAllocated
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ If true, uses the tick allocator and frees the allocated array at the end of the current tick. false by default.
 
 
 </td></tr>

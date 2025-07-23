@@ -42,7 +42,7 @@ boolean
 
 </td><td>
 
-_(Optional)_ Whether to use the tick allocator to allocate the returned array of Audio instances. The allocated array will be collected and released at the end of the current tick if true. Only use this if you know what you're doing.
+_(Optional)_ If true, uses the tick allocator and frees the allocated array at the end of the current tick. false by default.
 
 
 </td></tr>

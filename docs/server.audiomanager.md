@@ -107,7 +107,7 @@ Retrieves all loaded audio instances for the world.
 </td></tr>
 <tr><td>
 
-[getAllEntityAttachedAudios(entity)](./server.audiomanager.getallentityattachedaudios.md)
+[getAllEntityAttachedAudios(entity, tickAllocated)](./server.audiomanager.getallentityattachedaudios.md)
 
 
 </td><td>
@@ -121,7 +121,7 @@ Retrieves all loaded audio instances attached to a specific entity.
 </td></tr>
 <tr><td>
 
-[getAllLoopedAudios()](./server.audiomanager.getallloopedaudios.md)
+[getAllLoopedAudios(tickAllocated)](./server.audiomanager.getallloopedaudios.md)
 
 
 </td><td>
@@ -135,7 +135,7 @@ Retrieves all looped audio instances for the world.
 </td></tr>
 <tr><td>
 
-[getAllOneshotAudios()](./server.audiomanager.getalloneshotaudios.md)
+[getAllOneshotAudios(tickAllocated)](./server.audiomanager.getalloneshotaudios.md)
 
 
 </td><td>
