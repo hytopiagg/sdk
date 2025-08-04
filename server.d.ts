@@ -5265,7 +5265,7 @@ export declare type RaycastOptions = {
     solidMode?: boolean;
 } & FilterOptions;
 
-/** A RGB color. @public */
+/** A RGB color. r, g and b expect a value between 0 and 255. @public */
 export declare interface RgbColor {
     r: number;
     g: number;

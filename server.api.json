@@ -42168,7 +42168,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "server!RgbColor:interface",
-          "docComment": "/**\n * A RGB color.\n *\n * @public\n */\n",
+          "docComment": "/**\n * A RGB color. r, g and b expect a value between 0 and 255.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
