@@ -47,6 +47,7 @@ The global coordinate of the block to get.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 number

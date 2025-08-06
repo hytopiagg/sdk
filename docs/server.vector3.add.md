@@ -47,6 +47,7 @@ The vector to add to the current vector.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Vector3](./server.vector3.md)

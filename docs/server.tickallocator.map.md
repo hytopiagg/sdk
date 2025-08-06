@@ -63,6 +63,7 @@ The callback function to map the array.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 U\[\]

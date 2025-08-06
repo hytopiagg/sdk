@@ -47,6 +47,7 @@ The matrix4 to transform the vector by.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Vector2](./server.vector2.md)

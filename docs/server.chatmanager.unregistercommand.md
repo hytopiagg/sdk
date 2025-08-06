@@ -47,6 +47,7 @@ The command to unregister.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

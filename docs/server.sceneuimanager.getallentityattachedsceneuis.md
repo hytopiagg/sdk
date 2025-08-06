@@ -47,6 +47,7 @@ The entity to get attached SceneUI instances for.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [SceneUI](./server.sceneui.md)<!-- -->\[\]

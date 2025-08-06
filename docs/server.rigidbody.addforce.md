@@ -47,6 +47,7 @@ The force to add to the rigid body.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

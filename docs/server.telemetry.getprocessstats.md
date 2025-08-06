@@ -47,6 +47,7 @@ _(Optional)_ Whether to return data in Sentry measurement format with units.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 Record&lt;string, any&gt;

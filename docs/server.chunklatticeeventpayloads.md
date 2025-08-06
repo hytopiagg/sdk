@@ -93,3 +93,4 @@ Emitted when a block is set in the lattice.
 
 </td></tr>
 </tbody></table>
+

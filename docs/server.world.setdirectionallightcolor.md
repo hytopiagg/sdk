@@ -47,6 +47,7 @@ The color of the light.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

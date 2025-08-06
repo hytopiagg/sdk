@@ -47,6 +47,7 @@ The view distance in the world.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

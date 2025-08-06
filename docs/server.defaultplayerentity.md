@@ -59,3 +59,4 @@ Constructs a new instance of the `DefaultPlayerEntity` class
 
 </td></tr>
 </tbody></table>
+

@@ -47,6 +47,7 @@ The texture URI of the particles emitted.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

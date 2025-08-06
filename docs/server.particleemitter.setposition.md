@@ -47,6 +47,7 @@ The position of the particle emitter.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

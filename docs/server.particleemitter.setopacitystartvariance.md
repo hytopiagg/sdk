@@ -47,6 +47,7 @@ The opacity variance of an emitted particle at the start of its lifetime.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

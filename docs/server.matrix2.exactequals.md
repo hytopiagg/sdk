@@ -47,6 +47,7 @@ The matrix to compare to the current matrix.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 boolean

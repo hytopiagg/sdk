@@ -47,6 +47,7 @@ The options for the block type.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [BlockType](./server.blocktype.md)

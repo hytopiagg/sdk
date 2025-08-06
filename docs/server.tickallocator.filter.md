@@ -63,6 +63,7 @@ The callback function to filter the array.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 T\[\]

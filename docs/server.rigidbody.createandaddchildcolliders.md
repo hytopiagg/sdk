@@ -47,6 +47,7 @@ The options for the child colliders to add to the rigid body.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Collider](./server.collider.md)<!-- -->\[\]

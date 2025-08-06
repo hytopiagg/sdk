@@ -63,6 +63,7 @@ The callback function to execute when the command is used.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

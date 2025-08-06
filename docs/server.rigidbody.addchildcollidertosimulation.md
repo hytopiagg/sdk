@@ -47,6 +47,7 @@ The child collider to add to the rigid body for the simulation it belongs to.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

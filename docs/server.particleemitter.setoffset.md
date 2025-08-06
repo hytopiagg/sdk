@@ -47,6 +47,7 @@ The offset of the particle emitter from the attached entity or position.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

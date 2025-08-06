@@ -47,6 +47,7 @@ The `Vector3Like` object to create the `Vector3` instance from.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Vector3](./server.vector3.md)

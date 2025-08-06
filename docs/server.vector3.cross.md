@@ -47,6 +47,7 @@ The vector to calculate the cross product with.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Vector3](./server.vector3.md)

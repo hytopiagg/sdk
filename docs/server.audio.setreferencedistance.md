@@ -47,6 +47,7 @@ The reference distance.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

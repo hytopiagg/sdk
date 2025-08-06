@@ -47,6 +47,7 @@ The rate variance of the particle emission rate.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

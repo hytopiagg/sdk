@@ -47,6 +47,7 @@ The entity to attach the SceneUI to.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

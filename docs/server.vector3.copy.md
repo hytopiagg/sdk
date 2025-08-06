@@ -47,6 +47,7 @@ The vector to copy the components from.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Vector3](./server.vector3.md)

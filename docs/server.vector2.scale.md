@@ -47,6 +47,7 @@ The scalar value to scale the vector by.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Vector2](./server.vector2.md)

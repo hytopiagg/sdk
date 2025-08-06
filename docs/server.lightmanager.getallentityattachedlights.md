@@ -47,6 +47,7 @@ The entity to get attached Light instances for.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Light](./server.light.md)<!-- -->\[\]

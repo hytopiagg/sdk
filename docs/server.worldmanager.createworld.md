@@ -47,6 +47,7 @@ The options for the world.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [World](./server.world.md)

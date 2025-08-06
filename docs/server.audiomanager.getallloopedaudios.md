@@ -47,6 +47,7 @@ _(Optional)_ If true, uses the tick allocator and frees the allocated array at t
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Audio](./server.audio.md)<!-- -->\[\]

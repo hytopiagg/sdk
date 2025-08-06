@@ -92,3 +92,4 @@ _(Optional)_ The vertices of the trimesh collider.
 
 </td></tr>
 </tbody></table>
+

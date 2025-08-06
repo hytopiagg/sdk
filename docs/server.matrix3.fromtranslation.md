@@ -47,6 +47,7 @@ The translation of the matrix.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Matrix3](./server.matrix3.md)

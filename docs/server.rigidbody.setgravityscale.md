@@ -47,6 +47,7 @@ The gravity scale of the rigid body.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

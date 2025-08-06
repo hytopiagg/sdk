@@ -47,6 +47,7 @@ _(Optional)_ The scale of the resulting vector.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Vector2](./server.vector2.md)

@@ -63,6 +63,7 @@ _(Optional)_ If true, the audio will restart from the beginning if it is already
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

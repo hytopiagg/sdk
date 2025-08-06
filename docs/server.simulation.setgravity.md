@@ -47,6 +47,7 @@ The gravity vector.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

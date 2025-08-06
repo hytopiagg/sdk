@@ -47,6 +47,7 @@ The torque to add to the rigid body.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

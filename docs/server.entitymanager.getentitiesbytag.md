@@ -47,6 +47,7 @@ The tag to get the entities for.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Entity](./server.entity.md)<!-- -->\[\]

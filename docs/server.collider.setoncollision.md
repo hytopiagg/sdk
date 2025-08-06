@@ -47,6 +47,7 @@ The on collision callback for the collider.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

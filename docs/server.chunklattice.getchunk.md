@@ -47,6 +47,7 @@ The global coordinate to get the chunk for.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Chunk](./server.chunk.md) \| undefined

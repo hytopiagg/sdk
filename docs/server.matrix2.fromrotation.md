@@ -47,6 +47,7 @@ The angle in radians to rotate the matrix by.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Matrix2](./server.matrix2.md)

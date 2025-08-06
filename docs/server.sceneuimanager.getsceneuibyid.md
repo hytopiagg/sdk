@@ -47,6 +47,7 @@ The unique identifier (id) of the SceneUI to retrieve.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [SceneUI](./server.sceneui.md) \| undefined

@@ -47,6 +47,7 @@ _(Optional)_ Whether to use the tick allocator to allocate the returned array of
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Chunk](./server.chunk.md)<!-- -->\[\]

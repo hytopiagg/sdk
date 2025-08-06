@@ -47,6 +47,7 @@ The maximum number of live particles.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

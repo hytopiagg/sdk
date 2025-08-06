@@ -63,6 +63,7 @@ _(Optional)_ The color of the message as a hex color code, excluding \#.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

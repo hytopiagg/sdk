@@ -47,6 +47,7 @@ The playback rate of the entity's model animations.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

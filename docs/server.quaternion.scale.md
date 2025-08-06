@@ -47,6 +47,7 @@ The scalar value to scale the quaternion by.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Quaternion](./server.quaternion.md)

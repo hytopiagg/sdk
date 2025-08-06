@@ -47,6 +47,7 @@ The cutoff distance.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

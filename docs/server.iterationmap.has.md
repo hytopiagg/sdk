@@ -47,6 +47,7 @@ The key to check.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 boolean

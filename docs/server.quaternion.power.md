@@ -47,6 +47,7 @@ The exponent to raise the quaternion to.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Quaternion](./server.quaternion.md)

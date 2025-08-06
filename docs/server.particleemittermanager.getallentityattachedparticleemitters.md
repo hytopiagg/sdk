@@ -47,6 +47,7 @@ The entity to get attached ParticleEmitter instances for.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [ParticleEmitter](./server.particleemitter.md)<!-- -->\[\]
