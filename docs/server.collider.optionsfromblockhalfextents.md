@@ -47,7 +47,6 @@ The half extents of the block.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [ColliderOptions](./server.collideroptions.md)

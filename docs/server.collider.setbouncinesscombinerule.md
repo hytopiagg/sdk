@@ -47,7 +47,6 @@ The bounciness combine rule of the collider.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

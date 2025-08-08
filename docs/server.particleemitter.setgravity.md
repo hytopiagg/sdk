@@ -47,7 +47,6 @@ The gravity vector for an emitted particle.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

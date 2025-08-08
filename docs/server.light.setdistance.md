@@ -47,7 +47,6 @@ The maximum distance the light will illuminate.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

@@ -47,7 +47,6 @@ The nodes to show on the entity's model.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

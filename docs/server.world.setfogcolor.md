@@ -47,7 +47,6 @@ The color of the fog, or undefined to reset to ambient light color.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

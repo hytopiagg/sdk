@@ -79,7 +79,6 @@ _(Optional)_ The preferred shape to use for the collider.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [ColliderOptions](./server.collideroptions.md)

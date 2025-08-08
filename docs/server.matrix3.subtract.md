@@ -47,7 +47,6 @@ The matrix to subtract from the current matrix.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Matrix3](./server.matrix3.md)

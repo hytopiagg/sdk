@@ -13,12 +13,6 @@ import type { Socket } from 'net';
 import type { types } from 'mediasoup';
 import { WebSocket as WebSocket_2 } from 'ws';
 
-/** A 3-element number array. @public */
-export declare type Array3Number = [number, number, number];
-
-/** A 4-element number array. @public */
-export declare type Array4Number = [number, number, number, number];
-
 /**
  * Represents a audio playback in a world.
  *
@@ -279,40 +273,28 @@ export declare class AudioManager {
     /**
      * Retrieves all loaded audio instances for the world.
      *
-     * @param tickAllocated - If true, uses the tick allocator and frees
-     * the allocated array at the end of the current tick. false by default.
-     *
      * @returns An array of audio instances.
      */
-    getAllAudios(tickAllocated?: boolean): Audio[];
+    getAllAudios(): Audio[];
     /**
      * Retrieves all loaded audio instances attached to a specific entity.
      *
      * @param entity - The entity to get attached audio instances for.
-     * @param tickAllocated - If true, uses the tick allocator and frees
-     * the allocated array at the end of the current tick. false by default.
-
      * @returns An array of audio instances.
      */
-    getAllEntityAttachedAudios(entity: Entity, tickAllocated?: boolean): Audio[];
+    getAllEntityAttachedAudios(entity: Entity): Audio[];
     /**
      * Retrieves all looped audio instances for the world.
      *
-     * @param tickAllocated - If true, uses the tick allocator and frees
-     * the allocated array at the end of the current tick. false by default.
-     *
      * @returns An array of audio instances.
      */
-    getAllLoopedAudios(tickAllocated?: boolean): Audio[];
+    getAllLoopedAudios(): Audio[];
     /**
      * Retrieves all oneshot (non-looped) audio instances for the world.
      *
-     * @param tickAllocated - If true, uses the tick allocator and frees
-     * the allocated array at the end of the current tick. false by default.
-     *
      * @returns An array of audio instances.
      */
-    getAllOneshotAudios(tickAllocated?: boolean): Audio[];
+    getAllOneshotAudios(): Audio[];
 
     /**
      * Unregisters and stops an audio instance from the audio manager.
@@ -622,17 +604,14 @@ export declare class BlockType extends EventRouter implements protocol.Serializa
 
 
 
-
     /**
      * Creates a new block type instance.
      * @param world - The world the block type is for.
      * @param options - The options for the block type.
      */
-    constructor(blockTypeRegistry: BlockTypeRegistry, options?: BlockTypeOptions);
+    constructor(options?: BlockTypeOptions);
     /** The unique identifier for the block type. */
     get id(): number;
-    /** The block type registry that the block type belongs to. */
-    get blockTypeRegistry(): BlockTypeRegistry;
     /** The collider options for the block type. */
     get colliderOptions(): VoxelsColliderOptions;
     /** The half extents size of the block type. */
@@ -724,15 +703,9 @@ export declare class BlockTypeRegistry extends EventRouter implements protocol.S
     get world(): World;
     /**
      * Get all registered block types.
-     *
-     * @param tickAllocated - Whether to use the tick allocator to allocate the
-     * returned array of BlockType instances. The allocated array will be collected
-     * and released at the end of the current tick if true. Only use this if
-     * you know what you're doing.
-     *
      * @returns An array of all registered block types.
      */
-    getAllBlockTypes(tickAllocated?: boolean): BlockType[];
+    getAllBlockTypes(): BlockType[];
     /**
      * Get a registered block type by its id.
      * @param id - The id of the block type to get.
@@ -890,15 +863,12 @@ export declare class ChatManager extends EventRouter {
 export declare class Chunk implements protocol.Serializable {
 
 
-
     /**
      * Creates a new chunk instance.
      */
-    constructor(chunkLattice: ChunkLattice, originCoordinate: Vector3Like);
+    constructor(originCoordinate: Vector3Like);
     /** The blocks in the chunk as a flat Uint8Array[4096], each index as 0 or a block type id. */
     get blocks(): Readonly<Uint8Array>;
-    /** The chunk lattice that the chunk belongs to. */
-    get chunkLattice(): ChunkLattice;
     /** The origin coordinate of the chunk. */
     get originCoordinate(): Vector3Like;
     /**
@@ -959,8 +929,6 @@ export declare class ChunkLattice extends EventRouter {
     constructor(world: World);
     /** The number of chunks in the lattice. */
     get chunkCount(): number;
-    /** The world that the chunk lattice belongs to. */
-    get world(): World;
     /**
      * Removes and clears all chunks and their blocks from the lattice.
      */
@@ -999,15 +967,9 @@ export declare class ChunkLattice extends EventRouter {
     getOrCreateChunk(globalCoordinate: Vector3Like): Chunk;
     /**
      * Get all chunks in the lattice.
-     *
-     * @param tickAllocated - Whether to use the tick allocator to allocate the
-     * returned array of Chunk instances. The allocated array will be collected
-     * and released at the end of the current tick if true. Only use this if
-     * you know what you're doing.
-     *
      * @returns An array of all chunks in the lattice.
      */
-    getAllChunks(tickAllocated?: boolean): Chunk[];
+    getAllChunks(): Chunk[];
     /**
      * Check if a block exists at a specific global coordinate.
      * @param globalCoordinate - The global coordinate of the block to check.
@@ -2153,15 +2115,9 @@ export declare class EntityManager {
 
     /**
      * Gets all spawned entities in the world.
-     *
-     * @param tickAllocated - Whether to use the tick allocator to allocate the
-     * returned array of Entity instances. The allocated array will be collected
-     * and released at the end of the current tick if true. Only use this if
-     * you know what you're doing.
-     *
      * @returns All spawned entities in the world.
      */
-    getAllEntities(tickAllocated?: boolean): Entity[];
+    getAllEntities(): Entity[];
     /**
      * Gets all spawned player entities in the world.
      * @returns All spawned player entities in the world.
@@ -2811,14 +2767,9 @@ export declare class LightManager {
     /**
      * Retrieves all spawned Light instances for the world.
      *
-     * @param tickAllocated - Whether to use the tick allocator to allocate the
-     * returned array of Light instances. The allocated array will be collected
-     * and released at the end of the current tick if true. Only use this if
-     * you know what you're doing.
-     *
      * @returns An array of Light instances.
      */
-    getAllLights(tickAllocated?: boolean): Light[];
+    getAllLights(): Light[];
     /**
      * Retrieves all spawned Light instances attached to a specific entity.
      *
@@ -4164,14 +4115,9 @@ export declare class ParticleEmitterManager {
     /**
      * Retrieves all spawned ParticleEmitter instances for the world.
      *
-     * @param tickAllocated - Whether to use the tick allocator to allocate the
-     * returned array of ParticleEmitter instances. The allocated array will be collected
-     * and released at the end of the current tick if true. Only use this if
-     * you know what you're doing.
-     *
      * @returns An array of ParticleEmitter instances.
      */
-    getAllParticleEmitters(tickAllocated?: boolean): ParticleEmitter[];
+    getAllParticleEmitters(): ParticleEmitter[];
     /**
      * Retrieves all spawned ParticleEmitter instances attached to a specific entity.
      *
@@ -5802,14 +5748,9 @@ export declare class SceneUIManager {
     /**
      * Retrieves all loaded SceneUI instances for the world.
      *
-     * @param tickAllocated - Whether to use the tick allocator to allocate the
-     * returned array of SceneUI instances. The allocated array will be collected
-     * and released at the end of the current tick if true. Only use this if
-     * you know what you're doing.
-     *
      * @returns An array of SceneUI instances.
      */
-    getAllSceneUIs(tickAllocated?: boolean): SceneUI[];
+    getAllSceneUIs(): SceneUI[];
     /**
      * Retrieves all loaded SceneUI instances attached to a specific entity.
      *
@@ -6255,7 +6196,6 @@ export declare enum TelemetrySpanOperation {
     NETWORK_SYNCHRONIZE_CLEANUP = "network_synchronize_cleanup",
     PHYSICS_CLEANUP = "physics_cleanup",
     PHYSICS_STEP = "physics_step",
-    RELEASE_TICK_ALLOCATION = "release_tick_allocation",
     SEND_ALL_PACKETS = "send_all_packets",
     SEND_PACKETS = "send_packets",
     SERIALIZE_FREE_BUFFERS = "serialize_free_buffers",
@@ -6273,96 +6213,6 @@ export declare type TelemetrySpanOptions = {
     /** Additional attributes to attach to the span for context. */
     attributes?: Record<string, string | number>;
 };
-
-/**
- * High-performance tick-scoped allocator for temporary objects, arrays, and buffers.
- * All allocations are automatically bulk-released when reset() is called.
- *
- * @remarks
- * TickAllocator maintains separate pools for different data types and tracks all
- * allocations made during a tick cycle. Objects are reused across ticks to eliminate
- * garbage collection overhead in hot paths like network synchronization.
- *
- * @example
- * ```typescript
- * // Allocate during tick
- * const position = tickAllocator.getArray3Number();
- * const rotation = tickAllocator.getArray4Number();
- * const data = tickAllocator.getObject<EntitySchema>();
- *
- * // At end of tick - bulk release everything
- * tickAllocator.reset();
- * ```
- *
- * @public
- */
-export declare class TickAllocator {
-
-
-
-
-
-
-
-
-
-
-    /**
-     * Filters an array using a callback function.
-     * @typeParam T - The type of the array.
-     * @param array - The array to filter.
-     * @param callback - The callback function to filter the array.
-     * @returns A new array with the filtered values.
-     */
-    filter<T>(array: T[], callback: (value: T, index: number, array: T[]) => boolean): T[];
-    /**
-     * Gets a generic array from the pool.
-     * Array is reset to empty state and ready for use.
-     * @typeParam T - The array type.
-     * @returns A reusable array.
-     */
-    getArray<T extends unknown[] = unknown[]>(copyFromA?: Iterable<unknown>, copyFromB?: Iterable<unknown>): T;
-    /**
-     * Gets a 3-element number array from the pool.
-     * Array is reset to [0, 0, 0] and ready for use.
-     * @returns A reusable 3-element array.
-     */
-    getArray3Number(copyFrom?: Array3Number | Set<number>): Array3Number;
-    /**
-     * Gets a 4-element number array from the pool.
-     * Array is reset to [0, 0, 0, 0] and ready for use.
-     * @returns A reusable 4-element array.
-     */
-    getArray4Number(copyFrom?: Array4Number | Set<number>): Array4Number;
-    /**
-     * Gets a plain object from the pool.
-     * Object is reset to empty state and ready for use.
-     * @typeParam T - The type interface for the object.
-     * @returns A reusable plain object.
-     */
-    getObject<T extends Record<string, unknown> = Record<string, unknown>>(copyFromA?: T, copyFromB?: T): T;
-    /**
-     * Gets a set from the pool.
-     * Set is reset to empty state and ready for use.
-     * @typeParam T - The type of the set.
-     * @returns A reusable set.
-     */
-    getSet<T>(copyFromA?: Set<T> | T[], copyFromB?: Set<T> | T[]): Set<T>;
-    /**
-     * Maps an array to a new array using a callback function.
-     * @typeParam T - The type of the array.
-     * @typeParam U - The type of the resulting array.
-     * @param array - The array to map.
-     * @param callback - The callback function to map the array.
-     * @returns A new array with the mapped values.
-     */
-    map<T, U>(array: T[], callback: (value: T, index: number, array: T[]) => U): U[];
-    /**
-     * Releases all allocated objects back to their respective pools.
-     * This is intended to be called at the end of a tick.
-     */
-    reset(): void;
-}
 
 /** The options for a trimesh collider. @public */
 export declare interface TrimeshColliderOptions extends BaseColliderOptions {
@@ -6980,7 +6830,6 @@ export declare class World extends EventRouter implements protocol.Serializable 
 
 
 
-
     /**
      * @param options - The options for the world.
      */
@@ -7032,8 +6881,6 @@ export declare class World extends EventRouter implements protocol.Serializable 
     get audioManager(): AudioManager;
     /** An arbitrary identifier tag of the world. Useful for your own logic. */
     get tag(): string | undefined;
-    /** The tick allocator for the world. */
-    get tickAllocator(): TickAllocator;
     /**
      * Loads a map into the world, clearing any prior map.
      * @param map - The map to load.

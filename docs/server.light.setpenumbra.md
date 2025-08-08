@@ -47,7 +47,6 @@ The penumbra of the spotlight.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

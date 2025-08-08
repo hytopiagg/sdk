@@ -574,27 +574,6 @@ An arbitrary identifier tag of the world. Useful for your own logic.
 
 
 </td></tr>
-<tr><td>
-
-[tickAllocator](./server.world.tickallocator.md)
-
-
-</td><td>
-
-`readonly`
-
-
-</td><td>
-
-[TickAllocator](./server.tickallocator.md)
-
-
-</td><td>
-
-The tick allocator for the world.
-
-
-</td></tr>
 </tbody></table>
 
 ## Methods
@@ -784,4 +763,3 @@ Stops the world loop, which stops ticking physics, entities, etc.
 
 </td></tr>
 </tbody></table>
-

@@ -79,7 +79,6 @@ _(Optional)_ The pathfinding options.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 boolean

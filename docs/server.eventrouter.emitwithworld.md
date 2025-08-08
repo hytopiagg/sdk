@@ -79,7 +79,6 @@ The payload to broadcast.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

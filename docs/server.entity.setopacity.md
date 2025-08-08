@@ -47,7 +47,6 @@ The opacity of the entity between 0 and 1. 0 is fully transparent, 1 is fully op
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

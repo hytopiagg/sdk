@@ -47,7 +47,6 @@ The entity to despawn.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

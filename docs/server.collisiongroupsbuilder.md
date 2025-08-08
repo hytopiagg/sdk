@@ -99,4 +99,3 @@ Checks if the collision groups are the default collision groups.
 
 </td></tr>
 </tbody></table>
-

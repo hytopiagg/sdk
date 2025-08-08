@@ -47,7 +47,6 @@ The entity to attach the ParticleEmitter to.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

@@ -130,20 +130,6 @@ PHYSICS\_STEP
 </td></tr>
 <tr><td>
 
-RELEASE\_TICK\_ALLOCATION
-
-
-</td><td>
-
-`"release_tick_allocation"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
 SEND\_ALL\_PACKETS
 
 
@@ -255,4 +241,3 @@ WORLD\_TICK
 
 </td></tr>
 </tbody></table>
-

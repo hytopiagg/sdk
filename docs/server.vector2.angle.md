@@ -47,7 +47,6 @@ The vector to compare to the current vector.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 number

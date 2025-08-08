@@ -63,7 +63,6 @@ _(Optional)_ The tick duration that must be exceeded to send a performance span 
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

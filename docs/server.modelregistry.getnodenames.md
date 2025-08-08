@@ -47,7 +47,6 @@ The URI of the model to retrieve the node names for.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 string\[\]

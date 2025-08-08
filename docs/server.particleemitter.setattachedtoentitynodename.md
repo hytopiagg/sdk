@@ -47,7 +47,6 @@ The name of the node of the attached entity (if the attached entity is a model e
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

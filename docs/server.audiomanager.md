@@ -93,7 +93,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[getAllAudios(tickAllocated)](./server.audiomanager.getallaudios.md)
+[getAllAudios()](./server.audiomanager.getallaudios.md)
 
 
 </td><td>
@@ -107,7 +107,7 @@ Retrieves all loaded audio instances for the world.
 </td></tr>
 <tr><td>
 
-[getAllEntityAttachedAudios(entity, tickAllocated)](./server.audiomanager.getallentityattachedaudios.md)
+[getAllEntityAttachedAudios(entity)](./server.audiomanager.getallentityattachedaudios.md)
 
 
 </td><td>
@@ -121,7 +121,7 @@ Retrieves all loaded audio instances attached to a specific entity.
 </td></tr>
 <tr><td>
 
-[getAllLoopedAudios(tickAllocated)](./server.audiomanager.getallloopedaudios.md)
+[getAllLoopedAudios()](./server.audiomanager.getallloopedaudios.md)
 
 
 </td><td>
@@ -135,7 +135,7 @@ Retrieves all looped audio instances for the world.
 </td></tr>
 <tr><td>
 
-[getAllOneshotAudios(tickAllocated)](./server.audiomanager.getalloneshotaudios.md)
+[getAllOneshotAudios()](./server.audiomanager.getalloneshotaudios.md)
 
 
 </td><td>
@@ -176,4 +176,3 @@ Unregisters and stops all audio instances attached to a specific entity.
 
 </td></tr>
 </tbody></table>
-

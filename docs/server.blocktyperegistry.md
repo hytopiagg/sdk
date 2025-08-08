@@ -102,7 +102,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[getAllBlockTypes(tickAllocated)](./server.blocktyperegistry.getallblocktypes.md)
+[getAllBlockTypes()](./server.blocktyperegistry.getallblocktypes.md)
 
 
 </td><td>
@@ -157,4 +157,3 @@ Register a generic block type.
 
 </td></tr>
 </tbody></table>
-

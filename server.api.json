@@ -1,7 +1,7 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.52.10",
+    "toolVersion": "7.52.5",
     "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
@@ -173,58 +173,6 @@
       "name": "",
       "preserveMemberOrder": false,
       "members": [
-        {
-          "kind": "TypeAlias",
-          "canonicalReference": "server!Array3Number:type",
-          "docComment": "/**\n * A 3-element number array.\n *\n * @public\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export type Array3Number = "
-            },
-            {
-              "kind": "Content",
-              "text": "[number, number, number]"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "fileUrlPath": "src/shared/classes/TickAllocator.ts",
-          "releaseTag": "Public",
-          "name": "Array3Number",
-          "typeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 2
-          }
-        },
-        {
-          "kind": "TypeAlias",
-          "canonicalReference": "server!Array4Number:type",
-          "docComment": "/**\n * A 4-element number array.\n *\n * @public\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export type Array4Number = "
-            },
-            {
-              "kind": "Content",
-              "text": "[number, number, number, number]"
-            },
-            {
-              "kind": "Content",
-              "text": ";"
-            }
-          ],
-          "fileUrlPath": "src/shared/classes/TickAllocator.ts",
-          "releaseTag": "Public",
-          "name": "Array4Number",
-          "typeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 2
-          }
-        },
         {
           "kind": "Class",
           "canonicalReference": "server!Audio:class",
@@ -2139,19 +2087,11 @@
             {
               "kind": "Method",
               "canonicalReference": "server!AudioManager#getAllAudios:member(1)",
-              "docComment": "/**\n * Retrieves all loaded audio instances for the world.\n *\n * @param tickAllocated - If true, uses the tick allocator and frees the allocated array at the end of the current tick. false by default.\n *\n * @returns An array of audio instances.\n */\n",
+              "docComment": "/**\n * Retrieves all loaded audio instances for the world.\n *\n * @returns An array of audio instances.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "getAllAudios(tickAllocated?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
+                  "text": "getAllAudios(): "
                 },
                 {
                   "kind": "Reference",
@@ -2169,22 +2109,13 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 5
+                "startIndex": 1,
+                "endIndex": 3
               },
               "releaseTag": "Public",
               "isProtected": false,
               "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "tickAllocated",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": true
-                }
-              ],
+              "parameters": [],
               "isOptional": false,
               "isAbstract": false,
               "name": "getAllAudios"
@@ -2192,7 +2123,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!AudioManager#getAllEntityAttachedAudios:member(1)",
-              "docComment": "/**\n * Retrieves all loaded audio instances attached to a specific entity.\n *\n * @param entity - The entity to get attached audio instances for.\n *\n * @param tickAllocated - If true, uses the tick allocator and frees the allocated array at the end of the current tick. false by default.\n *\n * @returns An array of audio instances.\n */\n",
+              "docComment": "/**\n * Retrieves all loaded audio instances attached to a specific entity.\n *\n * @param entity - The entity to get attached audio instances for.\n *\n * @returns An array of audio instances.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2205,14 +2136,6 @@
                 },
                 {
                   "kind": "Content",
-                  "text": ", tickAllocated?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
                   "text": "): "
                 },
                 {
@@ -2231,8 +2154,8 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 7
+                "startIndex": 3,
+                "endIndex": 5
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -2245,14 +2168,6 @@
                     "endIndex": 2
                   },
                   "isOptional": false
-                },
-                {
-                  "parameterName": "tickAllocated",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 4
-                  },
-                  "isOptional": true
                 }
               ],
               "isOptional": false,
@@ -2262,19 +2177,11 @@
             {
               "kind": "Method",
               "canonicalReference": "server!AudioManager#getAllLoopedAudios:member(1)",
-              "docComment": "/**\n * Retrieves all looped audio instances for the world.\n *\n * @param tickAllocated - If true, uses the tick allocator and frees the allocated array at the end of the current tick. false by default.\n *\n * @returns An array of audio instances.\n */\n",
+              "docComment": "/**\n * Retrieves all looped audio instances for the world.\n *\n * @returns An array of audio instances.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "getAllLoopedAudios(tickAllocated?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
+                  "text": "getAllLoopedAudios(): "
                 },
                 {
                   "kind": "Reference",
@@ -2292,22 +2199,13 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 5
+                "startIndex": 1,
+                "endIndex": 3
               },
               "releaseTag": "Public",
               "isProtected": false,
               "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "tickAllocated",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": true
-                }
-              ],
+              "parameters": [],
               "isOptional": false,
               "isAbstract": false,
               "name": "getAllLoopedAudios"
@@ -2315,19 +2213,11 @@
             {
               "kind": "Method",
               "canonicalReference": "server!AudioManager#getAllOneshotAudios:member(1)",
-              "docComment": "/**\n * Retrieves all oneshot (non-looped) audio instances for the world.\n *\n * @param tickAllocated - If true, uses the tick allocator and frees the allocated array at the end of the current tick. false by default.\n *\n * @returns An array of audio instances.\n */\n",
+              "docComment": "/**\n * Retrieves all oneshot (non-looped) audio instances for the world.\n *\n * @returns An array of audio instances.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "getAllOneshotAudios(tickAllocated?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
+                  "text": "getAllOneshotAudios(): "
                 },
                 {
                   "kind": "Reference",
@@ -2345,22 +2235,13 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 5
+                "startIndex": 1,
+                "endIndex": 3
               },
               "releaseTag": "Public",
               "isProtected": false,
               "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "tickAllocated",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": true
-                }
-              ],
+              "parameters": [],
               "isOptional": false,
               "isAbstract": false,
               "name": "getAllOneshotAudios"
@@ -5029,16 +4910,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "constructor(blockTypeRegistry: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "BlockTypeRegistry",
-                  "canonicalReference": "server!BlockTypeRegistry:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", options?: "
+                  "text": "constructor(options?: "
                 },
                 {
                   "kind": "Reference",
@@ -5055,53 +4927,14 @@
               "overloadIndex": 1,
               "parameters": [
                 {
-                  "parameterName": "blockTypeRegistry",
+                  "parameterName": "options",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
                   },
-                  "isOptional": false
-                },
-                {
-                  "parameterName": "options",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 4
-                  },
                   "isOptional": true
                 }
               ]
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "server!BlockType#blockTypeRegistry:member",
-              "docComment": "/**\n * The block type registry that the block type belongs to.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get blockTypeRegistry(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "BlockTypeRegistry",
-                  "canonicalReference": "server!BlockTypeRegistry:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "blockTypeRegistry",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isStatic": false,
-              "isProtected": false,
-              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -5771,19 +5604,11 @@
             {
               "kind": "Method",
               "canonicalReference": "server!BlockTypeRegistry#getAllBlockTypes:member(1)",
-              "docComment": "/**\n * Get all registered block types.\n *\n * @param tickAllocated - Whether to use the tick allocator to allocate the returned array of BlockType instances. The allocated array will be collected and released at the end of the current tick if true. Only use this if you know what you're doing.\n *\n * @returns An array of all registered block types.\n */\n",
+              "docComment": "/**\n * Get all registered block types.\n *\n * @returns An array of all registered block types.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "getAllBlockTypes(tickAllocated?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
+                  "text": "getAllBlockTypes(): "
                 },
                 {
                   "kind": "Reference",
@@ -5801,22 +5626,13 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 5
+                "startIndex": 1,
+                "endIndex": 3
               },
               "releaseTag": "Public",
               "isProtected": false,
               "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "tickAllocated",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": true
-                }
-              ],
+              "parameters": [],
               "isOptional": false,
               "isAbstract": false,
               "name": "getAllBlockTypes"
@@ -6725,16 +6541,7 @@
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "constructor(chunkLattice: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ChunkLattice",
-                  "canonicalReference": "server!ChunkLattice:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", originCoordinate: "
+                  "text": "constructor(originCoordinate: "
                 },
                 {
                   "kind": "Reference",
@@ -6751,18 +6558,10 @@
               "overloadIndex": 1,
               "parameters": [
                 {
-                  "parameterName": "chunkLattice",
+                  "parameterName": "originCoordinate",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
                     "endIndex": 2
-                  },
-                  "isOptional": false
-                },
-                {
-                  "parameterName": "originCoordinate",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 4
                   },
                   "isOptional": false
                 }
@@ -6856,37 +6655,6 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 5
-              },
-              "isStatic": false,
-              "isProtected": false,
-              "isAbstract": false
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "server!Chunk#chunkLattice:member",
-              "docComment": "/**\n * The chunk lattice that the chunk belongs to.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get chunkLattice(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ChunkLattice",
-                  "canonicalReference": "server!ChunkLattice:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "chunkLattice",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
               },
               "isStatic": false,
               "isProtected": false,
@@ -7251,19 +7019,11 @@
             {
               "kind": "Method",
               "canonicalReference": "server!ChunkLattice#getAllChunks:member(1)",
-              "docComment": "/**\n * Get all chunks in the lattice.\n *\n * @param tickAllocated - Whether to use the tick allocator to allocate the returned array of Chunk instances. The allocated array will be collected and released at the end of the current tick if true. Only use this if you know what you're doing.\n *\n * @returns An array of all chunks in the lattice.\n */\n",
+              "docComment": "/**\n * Get all chunks in the lattice.\n *\n * @returns An array of all chunks in the lattice.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "getAllChunks(tickAllocated?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
+                  "text": "getAllChunks(): "
                 },
                 {
                   "kind": "Reference",
@@ -7281,22 +7041,13 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 5
+                "startIndex": 1,
+                "endIndex": 3
               },
               "releaseTag": "Public",
               "isProtected": false,
               "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "tickAllocated",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": true
-                }
-              ],
+              "parameters": [],
               "isOptional": false,
               "isAbstract": false,
               "name": "getAllChunks"
@@ -7718,37 +7469,6 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "setBlock"
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "server!ChunkLattice#world:member",
-              "docComment": "/**\n * The world that the chunk lattice belongs to.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get world(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "World",
-                  "canonicalReference": "server!World:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "world",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isStatic": false,
-              "isProtected": false,
-              "isAbstract": false
             }
           ],
           "extendsTokenRange": {
@@ -16955,19 +16675,11 @@
             {
               "kind": "Method",
               "canonicalReference": "server!EntityManager#getAllEntities:member(1)",
-              "docComment": "/**\n * Gets all spawned entities in the world.\n *\n * @param tickAllocated - Whether to use the tick allocator to allocate the returned array of Entity instances. The allocated array will be collected and released at the end of the current tick if true. Only use this if you know what you're doing.\n *\n * @returns All spawned entities in the world.\n */\n",
+              "docComment": "/**\n * Gets all spawned entities in the world.\n *\n * @returns All spawned entities in the world.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "getAllEntities(tickAllocated?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
+                  "text": "getAllEntities(): "
                 },
                 {
                   "kind": "Reference",
@@ -16985,22 +16697,13 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 5
+                "startIndex": 1,
+                "endIndex": 3
               },
               "releaseTag": "Public",
               "isProtected": false,
               "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "tickAllocated",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": true
-                }
-              ],
+              "parameters": [],
               "isOptional": false,
               "isAbstract": false,
               "name": "getAllEntities"
@@ -22929,19 +22632,11 @@
             {
               "kind": "Method",
               "canonicalReference": "server!LightManager#getAllLights:member(1)",
-              "docComment": "/**\n * Retrieves all spawned Light instances for the world.\n *\n * @param tickAllocated - Whether to use the tick allocator to allocate the returned array of Light instances. The allocated array will be collected and released at the end of the current tick if true. Only use this if you know what you're doing.\n *\n * @returns An array of Light instances.\n */\n",
+              "docComment": "/**\n * Retrieves all spawned Light instances for the world.\n *\n * @returns An array of Light instances.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "getAllLights(tickAllocated?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
+                  "text": "getAllLights(): "
                 },
                 {
                   "kind": "Reference",
@@ -22959,22 +22654,13 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 5
+                "startIndex": 1,
+                "endIndex": 3
               },
               "releaseTag": "Public",
               "isProtected": false,
               "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "tickAllocated",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": true
-                }
-              ],
+              "parameters": [],
               "isOptional": false,
               "isAbstract": false,
               "name": "getAllLights"
@@ -33949,19 +33635,11 @@
             {
               "kind": "Method",
               "canonicalReference": "server!ParticleEmitterManager#getAllParticleEmitters:member(1)",
-              "docComment": "/**\n * Retrieves all spawned ParticleEmitter instances for the world.\n *\n * @param tickAllocated - Whether to use the tick allocator to allocate the returned array of ParticleEmitter instances. The allocated array will be collected and released at the end of the current tick if true. Only use this if you know what you're doing.\n *\n * @returns An array of ParticleEmitter instances.\n */\n",
+              "docComment": "/**\n * Retrieves all spawned ParticleEmitter instances for the world.\n *\n * @returns An array of ParticleEmitter instances.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "getAllParticleEmitters(tickAllocated?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
+                  "text": "getAllParticleEmitters(): "
                 },
                 {
                   "kind": "Reference",
@@ -33979,22 +33657,13 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 5
+                "startIndex": 1,
+                "endIndex": 3
               },
               "releaseTag": "Public",
               "isProtected": false,
               "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "tickAllocated",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": true
-                }
-              ],
+              "parameters": [],
               "isOptional": false,
               "isAbstract": false,
               "name": "getAllParticleEmitters"
@@ -47135,19 +46804,11 @@
             {
               "kind": "Method",
               "canonicalReference": "server!SceneUIManager#getAllSceneUIs:member(1)",
-              "docComment": "/**\n * Retrieves all loaded SceneUI instances for the world.\n *\n * @param tickAllocated - Whether to use the tick allocator to allocate the returned array of SceneUI instances. The allocated array will be collected and released at the end of the current tick if true. Only use this if you know what you're doing.\n *\n * @returns An array of SceneUI instances.\n */\n",
+              "docComment": "/**\n * Retrieves all loaded SceneUI instances for the world.\n *\n * @returns An array of SceneUI instances.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "getAllSceneUIs(tickAllocated?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
+                  "text": "getAllSceneUIs(): "
                 },
                 {
                   "kind": "Reference",
@@ -47165,22 +46826,13 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 5
+                "startIndex": 1,
+                "endIndex": 3
               },
               "releaseTag": "Public",
               "isProtected": false,
               "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "tickAllocated",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": true
-                }
-              ],
+              "parameters": [],
               "isOptional": false,
               "isAbstract": false,
               "name": "getAllSceneUIs"
@@ -49564,27 +49216,6 @@
             },
             {
               "kind": "EnumMember",
-              "canonicalReference": "server!TelemetrySpanOperation.RELEASE_TICK_ALLOCATION:member",
-              "docComment": "",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "RELEASE_TICK_ALLOCATION = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "\"release_tick_allocation\""
-                }
-              ],
-              "initializerTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "name": "RELEASE_TICK_ALLOCATION"
-            },
-            {
-              "kind": "EnumMember",
               "canonicalReference": "server!TelemetrySpanOperation.SEND_ALL_PACKETS:member",
               "docComment": "",
               "excerptTokens": [
@@ -49796,645 +49427,6 @@
             "startIndex": 1,
             "endIndex": 6
           }
-        },
-        {
-          "kind": "Class",
-          "canonicalReference": "server!TickAllocator:class",
-          "docComment": "/**\n * High-performance tick-scoped allocator for temporary objects, arrays, and buffers. All allocations are automatically bulk-released when reset() is called.\n *\n * @remarks\n *\n * TickAllocator maintains separate pools for different data types and tracks all allocations made during a tick cycle. Objects are reused across ticks to eliminate garbage collection overhead in hot paths like network synchronization.\n *\n * @example\n * ```typescript\n * // Allocate during tick\n * const position = tickAllocator.getArray3Number();\n * const rotation = tickAllocator.getArray4Number();\n * const data = tickAllocator.getObject<EntitySchema>();\n *\n * // At end of tick - bulk release everything\n * tickAllocator.reset();\n * ```\n *\n * @public\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export default class TickAllocator "
-            }
-          ],
-          "fileUrlPath": "src/shared/classes/TickAllocator.ts",
-          "releaseTag": "Public",
-          "isAbstract": false,
-          "name": "TickAllocator",
-          "preserveMemberOrder": false,
-          "members": [
-            {
-              "kind": "Method",
-              "canonicalReference": "server!TickAllocator#filter:member(1)",
-              "docComment": "/**\n * Filters an array using a callback function.\n *\n * @param array - The array to filter.\n *\n * @param callback - The callback function to filter the array.\n *\n * @typeParam T - The type of the array.\n *\n * @returns A new array with the filtered values.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "filter<T>(array: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "T[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", callback: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(value: T, index: number, array: T[]) => boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "T[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "typeParameters": [
-                {
-                  "typeParameterName": "T",
-                  "constraintTokenRange": {
-                    "startIndex": 0,
-                    "endIndex": 0
-                  },
-                  "defaultTypeTokenRange": {
-                    "startIndex": 0,
-                    "endIndex": 0
-                  }
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 6
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "array",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                },
-                {
-                  "parameterName": "callback",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 4
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "isAbstract": false,
-              "name": "filter"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "server!TickAllocator#getArray:member(1)",
-              "docComment": "/**\n * Gets a generic array from the pool. Array is reset to empty state and ready for use.\n *\n * @typeParam T - The array type.\n *\n * @returns A reusable array.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "getArray<T extends "
-                },
-                {
-                  "kind": "Content",
-                  "text": "unknown[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": " = "
-                },
-                {
-                  "kind": "Content",
-                  "text": "unknown[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">(copyFromA?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Iterable",
-                  "canonicalReference": "!Iterable:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<unknown>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", copyFromB?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Iterable",
-                  "canonicalReference": "!Iterable:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<unknown>"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "T"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "typeParameters": [
-                {
-                  "typeParameterName": "T",
-                  "constraintTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "defaultTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 4
-                  }
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 12
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "copyFromA",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 5,
-                    "endIndex": 7
-                  },
-                  "isOptional": true
-                },
-                {
-                  "parameterName": "copyFromB",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 8,
-                    "endIndex": 10
-                  },
-                  "isOptional": true
-                }
-              ],
-              "isOptional": false,
-              "isAbstract": false,
-              "name": "getArray"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "server!TickAllocator#getArray3Number:member(1)",
-              "docComment": "/**\n * Gets a 3-element number array from the pool. Array is reset to [0, 0, 0] and ready for use.\n *\n * @returns A reusable 3-element array.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "getArray3Number(copyFrom?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Array3Number",
-                  "canonicalReference": "server!Array3Number:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": " | "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Set",
-                  "canonicalReference": "!Set:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<number>"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Array3Number",
-                  "canonicalReference": "server!Array3Number:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "copyFrom",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 5
-                  },
-                  "isOptional": true
-                }
-              ],
-              "isOptional": false,
-              "isAbstract": false,
-              "name": "getArray3Number"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "server!TickAllocator#getArray4Number:member(1)",
-              "docComment": "/**\n * Gets a 4-element number array from the pool. Array is reset to [0, 0, 0, 0] and ready for use.\n *\n * @returns A reusable 4-element array.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "getArray4Number(copyFrom?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Array4Number",
-                  "canonicalReference": "server!Array4Number:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": " | "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Set",
-                  "canonicalReference": "!Set:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<number>"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Array4Number",
-                  "canonicalReference": "server!Array4Number:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 7
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "copyFrom",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 5
-                  },
-                  "isOptional": true
-                }
-              ],
-              "isOptional": false,
-              "isAbstract": false,
-              "name": "getArray4Number"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "server!TickAllocator#getObject:member(1)",
-              "docComment": "/**\n * Gets a plain object from the pool. Object is reset to empty state and ready for use.\n *\n * @typeParam T - The type interface for the object.\n *\n * @returns A reusable plain object.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "getObject<T extends "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Record",
-                  "canonicalReference": "!Record:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<string, unknown>"
-                },
-                {
-                  "kind": "Content",
-                  "text": " = "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Record",
-                  "canonicalReference": "!Record:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<string, unknown>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">(copyFromA?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "T"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", copyFromB?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "T"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "T"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "typeParameters": [
-                {
-                  "typeParameterName": "T",
-                  "constraintTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 3
-                  },
-                  "defaultTypeTokenRange": {
-                    "startIndex": 4,
-                    "endIndex": 6
-                  }
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 11,
-                "endIndex": 12
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "copyFromA",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 7,
-                    "endIndex": 8
-                  },
-                  "isOptional": true
-                },
-                {
-                  "parameterName": "copyFromB",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 9,
-                    "endIndex": 10
-                  },
-                  "isOptional": true
-                }
-              ],
-              "isOptional": false,
-              "isAbstract": false,
-              "name": "getObject"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "server!TickAllocator#getSet:member(1)",
-              "docComment": "/**\n * Gets a set from the pool. Set is reset to empty state and ready for use.\n *\n * @typeParam T - The type of the set.\n *\n * @returns A reusable set.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "getSet<T>(copyFromA?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Set",
-                  "canonicalReference": "!Set:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<T> | T[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", copyFromB?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Set",
-                  "canonicalReference": "!Set:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<T> | T[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Set",
-                  "canonicalReference": "!Set:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<T>"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "typeParameters": [
-                {
-                  "typeParameterName": "T",
-                  "constraintTokenRange": {
-                    "startIndex": 0,
-                    "endIndex": 0
-                  },
-                  "defaultTypeTokenRange": {
-                    "startIndex": 0,
-                    "endIndex": 0
-                  }
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 7,
-                "endIndex": 9
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "copyFromA",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 3
-                  },
-                  "isOptional": true
-                },
-                {
-                  "parameterName": "copyFromB",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 4,
-                    "endIndex": 6
-                  },
-                  "isOptional": true
-                }
-              ],
-              "isOptional": false,
-              "isAbstract": false,
-              "name": "getSet"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "server!TickAllocator#map:member(1)",
-              "docComment": "/**\n * Maps an array to a new array using a callback function.\n *\n * @param array - The array to map.\n *\n * @param callback - The callback function to map the array.\n *\n * @typeParam T - The type of the array.\n *\n * @typeParam U - The type of the resulting array.\n *\n * @returns A new array with the mapped values.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "map<T, U>(array: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "T[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ", callback: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "(value: T, index: number, array: T[]) => U"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "U[]"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "typeParameters": [
-                {
-                  "typeParameterName": "T",
-                  "constraintTokenRange": {
-                    "startIndex": 0,
-                    "endIndex": 0
-                  },
-                  "defaultTypeTokenRange": {
-                    "startIndex": 0,
-                    "endIndex": 0
-                  }
-                },
-                {
-                  "typeParameterName": "U",
-                  "constraintTokenRange": {
-                    "startIndex": 0,
-                    "endIndex": 0
-                  },
-                  "defaultTypeTokenRange": {
-                    "startIndex": 0,
-                    "endIndex": 0
-                  }
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 6
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "array",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                },
-                {
-                  "parameterName": "callback",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 4
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "isAbstract": false,
-              "name": "map"
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "server!TickAllocator#reset:member(1)",
-              "docComment": "/**\n * Releases all allocated objects back to their respective pools. This is intended to be called at the end of a tick.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "reset(): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [],
-              "isOptional": false,
-              "isAbstract": false,
-              "name": "reset"
-            }
-          ],
-          "implementsTokenRanges": []
         },
         {
           "kind": "Interface",
@@ -55987,37 +54979,6 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "tag",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isStatic": false,
-              "isProtected": false,
-              "isAbstract": false
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "server!World#tickAllocator:member",
-              "docComment": "/**\n * The tick allocator for the world.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get tickAllocator(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "TickAllocator",
-                  "canonicalReference": "server!TickAllocator:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "tickAllocator",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

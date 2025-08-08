@@ -47,7 +47,6 @@ The additional mass properties of the rigid body.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

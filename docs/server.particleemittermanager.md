@@ -98,7 +98,7 @@ Retrieves all spawned ParticleEmitter instances attached to a specific entity.
 </td></tr>
 <tr><td>
 
-[getAllParticleEmitters(tickAllocated)](./server.particleemittermanager.getallparticleemitters.md)
+[getAllParticleEmitters()](./server.particleemittermanager.getallparticleemitters.md)
 
 
 </td><td>
@@ -111,4 +111,3 @@ Retrieves all spawned ParticleEmitter instances for the world.
 
 </td></tr>
 </tbody></table>
-

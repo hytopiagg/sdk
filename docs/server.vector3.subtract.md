@@ -47,7 +47,6 @@ The vector to subtract from the current vector.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Vector3](./server.vector3.md)

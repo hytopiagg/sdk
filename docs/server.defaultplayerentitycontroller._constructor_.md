@@ -47,4 +47,3 @@ _(Optional)_ Options for the controller.
 
 </td></tr>
 </tbody></table>
-

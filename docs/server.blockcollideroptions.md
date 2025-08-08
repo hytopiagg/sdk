@@ -73,4 +73,3 @@ _(Optional)_ The half extents of the block collider.
 
 </td></tr>
 </tbody></table>
-

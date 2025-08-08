@@ -63,7 +63,6 @@ _(Optional)_ Optional context information about the warning
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

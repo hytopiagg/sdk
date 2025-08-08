@@ -47,7 +47,6 @@ The id of the block type to get.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [BlockType](./server.blocktype.md)

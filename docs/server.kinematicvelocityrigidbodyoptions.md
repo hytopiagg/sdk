@@ -92,4 +92,3 @@ _(Optional)_ The linear velocity of the rigid body.
 
 </td></tr>
 </tbody></table>
-

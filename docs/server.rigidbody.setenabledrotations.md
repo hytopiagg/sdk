@@ -47,7 +47,6 @@ Whether the rigid body has enabled rotations.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

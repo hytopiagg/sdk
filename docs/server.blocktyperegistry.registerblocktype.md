@@ -47,7 +47,6 @@ The block type to register.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

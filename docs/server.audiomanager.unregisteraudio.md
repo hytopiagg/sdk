@@ -47,7 +47,6 @@ The audio instance to pause and unregister.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

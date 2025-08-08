@@ -79,4 +79,3 @@ Logs a formatted warning message to alert about potential issues
 
 </td></tr>
 </tbody></table>
-

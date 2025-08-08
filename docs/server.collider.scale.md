@@ -47,7 +47,6 @@ The scalar to scale the collider by.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

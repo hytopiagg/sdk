@@ -127,7 +127,6 @@ The far bound of the projection.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Matrix4](./server.matrix4.md)

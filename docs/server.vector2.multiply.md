@@ -47,7 +47,6 @@ The vector to multiply the current vector by.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Vector2](./server.vector2.md)

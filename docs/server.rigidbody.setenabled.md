@@ -47,7 +47,6 @@ Whether the rigid body is enabled.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

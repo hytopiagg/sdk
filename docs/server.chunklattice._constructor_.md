@@ -47,4 +47,3 @@ The world the chunk lattice is for.
 
 </td></tr>
 </tbody></table>
-

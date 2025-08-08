@@ -47,7 +47,6 @@ The additional mass of the rigid body.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

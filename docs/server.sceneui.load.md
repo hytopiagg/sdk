@@ -47,7 +47,6 @@ The world to load the SceneUI into.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

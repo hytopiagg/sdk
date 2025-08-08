@@ -63,7 +63,6 @@ The point at which to apply the impulse.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

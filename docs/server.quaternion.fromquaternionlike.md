@@ -47,7 +47,6 @@ The `QuaternionLike` object to create the quaternion from.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Quaternion](./server.quaternion.md)

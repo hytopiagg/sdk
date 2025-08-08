@@ -264,4 +264,3 @@ Emitted when a light is spawned.
 
 </td></tr>
 </tbody></table>
-

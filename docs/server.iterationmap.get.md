@@ -47,7 +47,6 @@ The key to look up.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 V \| undefined

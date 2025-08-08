@@ -45,4 +45,3 @@ REGISTER\_BLOCK\_TYPE
 
 </td></tr>
 </tbody></table>
-

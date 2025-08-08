@@ -63,7 +63,6 @@ The listener function to remove.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

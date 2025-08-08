@@ -47,7 +47,6 @@ The volume level.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

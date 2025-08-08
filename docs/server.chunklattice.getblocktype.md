@@ -47,7 +47,6 @@ The global coordinate of the block to get.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [BlockType](./server.blocktype.md) \| null

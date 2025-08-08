@@ -47,4 +47,3 @@ The options for the SceneUI instance.
 
 </td></tr>
 </tbody></table>
-

@@ -47,7 +47,6 @@ The entity to attach the Light to.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

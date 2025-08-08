@@ -47,7 +47,6 @@ The size variance at the end of an emitted particle's lifetime.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

@@ -63,7 +63,6 @@ The interpolation factor.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Quaternion](./server.quaternion.md)

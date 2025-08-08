@@ -47,7 +47,6 @@ The position the spotlight will constantly point at.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

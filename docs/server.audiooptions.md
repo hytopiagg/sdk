@@ -264,4 +264,3 @@ _(Optional)_ The volume level of the audio. Defaults to 0.5.
 
 </td></tr>
 </tbody></table>
-

@@ -47,7 +47,6 @@ The distortion amount.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

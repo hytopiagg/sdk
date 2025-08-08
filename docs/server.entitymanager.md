@@ -114,7 +114,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[getAllEntities(tickAllocated)](./server.entitymanager.getallentities.md)
+[getAllEntities()](./server.entitymanager.getallentities.md)
 
 
 </td><td>
@@ -211,4 +211,3 @@ Gets all spawned entities in the world assigned to the provided player.
 
 </td></tr>
 </tbody></table>
-

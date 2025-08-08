@@ -9,45 +9,8 @@ Retrieves all looped audio instances for the world.
 **Signature:**
 
 ```typescript
-getAllLoopedAudios(tickAllocated?: boolean): Audio[];
+getAllLoopedAudios(): Audio[];
 ```
-
-## Parameters
-
-<table><thead><tr><th>
-
-Parameter
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-tickAllocated
-
-
-</td><td>
-
-boolean
-
-
-</td><td>
-
-_(Optional)_ If true, uses the tick allocator and frees the allocated array at the end of the current tick. false by default.
-
-
-</td></tr>
-</tbody></table>
-
 **Returns:**
 
 [Audio](./server.audio.md)<!-- -->\[\]

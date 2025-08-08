@@ -47,7 +47,6 @@ The entity to unload and unregister SceneUI instances for.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

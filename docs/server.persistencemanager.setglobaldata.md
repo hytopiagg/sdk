@@ -63,7 +63,6 @@ The data to set.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 Promise&lt;Record&lt;string, unknown&gt; \| void&gt;
