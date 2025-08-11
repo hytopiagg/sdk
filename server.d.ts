@@ -604,6 +604,7 @@ export declare class BlockType extends EventRouter implements protocol.Serializa
 
 
 
+
     /**
      * Creates a new block type instance.
      * @param world - The world the block type is for.
@@ -620,6 +621,8 @@ export declare class BlockType extends EventRouter implements protocol.Serializa
     get isLiquid(): boolean;
     /** Whether the block type is meshable. */
     get isMeshable(): boolean;
+    /** The light emission level. */
+    get lightLevel(): number;
     /** The name of the block type. */
     get name(): string;
     /** The size of the block type. */
@@ -664,6 +667,8 @@ export declare interface BlockTypeOptions {
     halfExtents?: Vector3Like;
     /** Whether the block type is a liquid. */
     isLiquid?: boolean;
+    /** The light emission level. */
+    lightLevel?: number;
     /** The name of the block type. */
     name: string;
     /** The URI of the texture asset for the block type. */

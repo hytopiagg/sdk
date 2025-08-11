@@ -202,6 +202,27 @@ Whether the block type is meshable.
 </td></tr>
 <tr><td>
 
+[lightLevel](./server.blocktype.lightlevel.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+The light emission level.
+
+
+</td></tr>
+<tr><td>
+
 [name](./server.blocktype.name.md)
 
 

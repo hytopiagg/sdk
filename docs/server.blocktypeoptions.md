@@ -113,6 +113,25 @@ _(Optional)_ Whether the block type is a liquid.
 </td></tr>
 <tr><td>
 
+[lightLevel?](./server.blocktypeoptions.lightlevel.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The light emission level.
+
+
+</td></tr>
+<tr><td>
+
 [name](./server.blocktypeoptions.name.md)
 
 

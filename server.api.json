@@ -5090,6 +5090,36 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!BlockType#lightLevel:member",
+              "docComment": "/**\n * The light emission level.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get lightLevel(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "lightLevel",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!BlockType#name:member",
               "docComment": "/**\n * The name of the block type.\n */\n",
               "excerptTokens": [
@@ -5505,6 +5535,33 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "isLiquid",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!BlockTypeOptions#lightLevel:member",
+              "docComment": "/**\n * The light emission level.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "lightLevel?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "lightLevel",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
