@@ -150,7 +150,23 @@ function installProjectDependencies() {
   Deno.removeSync('main_test.ts');
 
   // create deno.json with nodeModulesDir set to auto
-  Deno.writeTextFile('deno.json', JSON.stringify({ nodeModulesDir: "auto" }, null, 2));
+  Deno.writeTextFile('deno.json', JSON.stringify({
+    nodeModulesDir: "auto",
+  }, null, 2));
+
+  // create tsconfig.json, used by validation bundler
+  Deno.writeTextFile('tsconfig.json', JSON.stringify({
+    compilerOptions: {
+      lib: ["ESNext"],
+      target: "ESNext",
+      module: "Preserve",
+      moduleResolution: "bundler",
+      types: ["deno.ns"],
+      verbatimModuleSyntax: true,
+      strict: true,
+      skipLibCheck: true
+    }
+  }, null, 2))
 
   // create package.json
   Deno.writeTextFile('package.json', JSON.stringify({
