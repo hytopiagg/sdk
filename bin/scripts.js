@@ -626,7 +626,7 @@ function displayHelp() {
   console.log('  start                       Start a HYTOPIA project server (Deno compat & watch)');
   console.log('  init [--template NAME]      Initialize a new project');
   console.log('  init-mcp                    Setup MCP integrations');
-  console.log('  package                     Create a zip of the project');
+  console.log('  package                     Create a zip of the project for uploading to the HYTOPIA create portal.');
   console.log('  upgrade-cli                 Upgrade the HYTOPIA CLI');
   console.log('  upgrade-project [VERSION]   Upgrade project SDK dep (default: latest)');
   console.log('');
