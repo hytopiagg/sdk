@@ -47,6 +47,7 @@ The set of collision groups to decode.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [DecodedCollisionGroups](./server.decodedcollisiongroups.md)

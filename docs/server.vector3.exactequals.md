@@ -47,6 +47,7 @@ The vector to compare to.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 boolean

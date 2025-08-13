@@ -47,6 +47,7 @@ The global coordinate of the chunk to get.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Chunk](./server.chunk.md)

@@ -47,6 +47,7 @@ The world to get connected players for.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Player](./server.player.md)<!-- -->\[\]

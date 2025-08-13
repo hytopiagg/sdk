@@ -1,17 +1,12 @@
 import type { AnyPacket } from '@hytopia.com/server-protocol';
-import type { ErrorEvent as ErrorEvent_2 } from 'ws';
 import EventEmitter from 'eventemitter3';
-import http from 'http';
-import type { IncomingMessage } from 'http';
 import type { InputSchema } from '@hytopia.com/server-protocol';
 import type { LobbyMembershipDto } from '@hytopia.com/creative-lib/dist/impl/getSession';
 import protocol from '@hytopia.com/server-protocol';
 import RAPIER from '@dimforge/rapier3d-simd-compat';
 import { SdpMatrix3 } from '@dimforge/rapier3d-simd-compat';
 import * as Sentry from '@sentry/node';
-import type { Socket } from 'net';
 import type { types } from 'mediasoup';
-import { WebSocket as WebSocket_2 } from 'ws';
 
 /**
  * Represents a audio playback in a world.
@@ -2200,7 +2195,7 @@ export declare class ErrorHandler {
  *
  * @public
  */
-export declare interface EventPayloads extends AudioEventPayloads, BaseEntityControllerEventPayloads, BlockTypeEventPayloads, BlockTypeRegistryEventPayloads, ChatEventPayloads, ChunkLatticeEventPayloads, ConnectionEventPayloads, EntityEventPayloads, GameServerEventPayloads, ParticleEmitterEventPayloads, PlayerCameraEventPayloads, PlayerEventPayloads, PlayerManagerEventPayloads, PlayerUIEventPayloads, SceneUIEventPayloads, SimulationEventPayloads, SocketEventPayloads, LightEventPayloads, WebServerEventPayloads, WorldEventPayloads, WorldLoopEventPayloads, WorldManagerEventPayloads {
+export declare interface EventPayloads extends AudioEventPayloads, BaseEntityControllerEventPayloads, BlockTypeEventPayloads, BlockTypeRegistryEventPayloads, ChatEventPayloads, ChunkLatticeEventPayloads, ConnectionEventPayloads, EntityEventPayloads, GameServerEventPayloads, ParticleEmitterEventPayloads, PlayerCameraEventPayloads, PlayerEventPayloads, PlayerManagerEventPayloads, PlayerUIEventPayloads, SceneUIEventPayloads, SimulationEventPayloads, LightEventPayloads, WebServerEventPayloads, WorldEventPayloads, WorldLoopEventPayloads, WorldManagerEventPayloads {
 }
 
 /**
@@ -4967,7 +4962,7 @@ export declare interface PlayerUIEventPayloads {
  *
  * @public
  */
-export declare const PORT: string | 8080;
+export declare const PORT: number;
 
 /**
  * Represents a quaternion.

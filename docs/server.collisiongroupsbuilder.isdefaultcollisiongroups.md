@@ -47,6 +47,7 @@ The set of collision groups to check.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 boolean

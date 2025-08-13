@@ -63,6 +63,7 @@ The scalar value to scale the current vector by.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Vector3](./server.vector3.md)

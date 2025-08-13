@@ -150,3 +150,4 @@ _(Optional)_ The type of the rigid body, defaults to [RigidBodyType.DYNAMIC](./s
 
 </td></tr>
 </tbody></table>
+

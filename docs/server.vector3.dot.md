@@ -47,6 +47,7 @@ the other vector
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 number

@@ -1,25 +1,18 @@
 {
   "name": "hytopia",
-  "version": "0.8.12",
+  "version": "0.9.0-prerelease-8",
   "description": "The HYTOPIA SDK makes it easy for developers to create massively multiplayer games using JavaScript or TypeScript.",
   "type": "module",
-  "main": "./node-server.mjs",
+  "main": "./server.js",
   "exports": {
     ".": {
-      "bun": {
-        "types": "./server.d.ts",
-        "default": "./bun-server.mjs"
-      },
-      "node": {
-        "types": "./server.d.ts",
-        "default": "./node-server.mjs"
-      },
       "types": "./server.d.ts",
-      "default": "./node-server.mjs"
+      "default": "./server.js"
     }
   },
   "bin": {
-    "hytopia": "bin/scripts.mjs"
+    "hytopia": "bin/scripts.js",
+    "hyx": "bin/scripts.js"
   },
   "directories": {
     "doc": "docs",
@@ -76,6 +69,6 @@
     "sharp"
   ],
   "scripts": {
-    "prepublishOnly": "node ./bin/writeVersion.mjs"
+    "prepublishOnly": "node ./bin/writeVersion.js"
   }
 }

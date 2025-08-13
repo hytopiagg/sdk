@@ -47,6 +47,7 @@ The entity to spawn.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

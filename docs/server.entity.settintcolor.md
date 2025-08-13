@@ -47,6 +47,7 @@ The tint color of the entity.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

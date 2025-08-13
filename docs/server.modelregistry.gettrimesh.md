@@ -63,6 +63,7 @@ _(Optional)_ Optional uniform scaling to apply to the trimesh. Defaults to 1, wh
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [ModelTrimesh](./server.modeltrimesh.md) \| undefined

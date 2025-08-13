@@ -47,6 +47,7 @@ _(Optional)_ The type of event to remove all listeners from.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

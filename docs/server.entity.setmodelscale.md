@@ -47,6 +47,7 @@ The scale of the entity's model.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

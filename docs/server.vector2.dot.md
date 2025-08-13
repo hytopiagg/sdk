@@ -47,6 +47,7 @@ The vector to calculate the dot product with.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 number

@@ -63,6 +63,7 @@ _(Optional)_ Optional context information about the error
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

@@ -95,6 +95,7 @@ _(Optional)_ The options for the intersections.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [IntersectionResult](./server.intersectionresult.md)<!-- -->\[\]

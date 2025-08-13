@@ -245,3 +245,4 @@ _(Optional)_ The type of light. Defaults to point light.
 
 </td></tr>
 </tbody></table>
+

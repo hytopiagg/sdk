@@ -47,6 +47,7 @@ The alpha test value, discards particle texture pixels with alpha opacity less t
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

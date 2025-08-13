@@ -47,6 +47,7 @@ The scalar value to multiply the current matrix elements by.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Matrix4](./server.matrix4.md)

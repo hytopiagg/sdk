@@ -95,6 +95,7 @@ _(Optional)_ The options for the raycast.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [RaycastHit](./server.raycasthit.md) \| null

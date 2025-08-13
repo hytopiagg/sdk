@@ -47,6 +47,7 @@ The type of event to check for listeners.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 boolean

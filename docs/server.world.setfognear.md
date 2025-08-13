@@ -47,6 +47,7 @@ The near distance.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

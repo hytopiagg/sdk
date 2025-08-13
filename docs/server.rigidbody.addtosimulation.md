@@ -47,6 +47,7 @@ The simulation to add the rigid body to.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

@@ -47,6 +47,7 @@ The type of event to get listeners for.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 EventEmitter.EventListener&lt;any, string&gt;\[\]

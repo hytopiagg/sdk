@@ -47,6 +47,7 @@ The angular damping of the rigid body.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

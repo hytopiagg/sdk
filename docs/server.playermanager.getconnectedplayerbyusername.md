@@ -47,6 +47,7 @@ The username of the player to get.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Player](./server.player.md) \| undefined

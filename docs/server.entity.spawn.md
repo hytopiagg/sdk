@@ -79,6 +79,7 @@ _(Optional)_ The optional rotation to spawn the entity with.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

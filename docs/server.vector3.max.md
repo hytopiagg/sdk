@@ -47,6 +47,7 @@ The vector to compare to.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Vector3](./server.vector3.md)

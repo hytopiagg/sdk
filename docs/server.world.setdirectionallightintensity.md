@@ -47,6 +47,7 @@ The intensity.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

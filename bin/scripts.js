@@ -1,0 +1,636 @@
+#!/usr/bin/env node
+
+// install is deno install --reload --global --force -A npm:hytopia@dev
+
+import { execSync } from 'child_process';
+import archiver from 'archiver';
+import fs from 'fs';
+import path from 'path';
+import readline from 'readline';
+import { fileURLToPath } from 'url';
+
+if (!('Deno' in globalThis)) {
+  console.error('❌ Error: HYTOPIA scripts must be run with Deno as of version SDK 0.9.0.');
+  process.exit(1);
+}
+
+// Store command-line flags
+const flags = {};
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Main function to handle command execution
+(async () => {
+  const command = process.argv[2];
+  
+  // Check for version flags first (before parsing other flags)
+  if (command === '-v' || command === '--version') {
+    displayVersion();
+    return;
+  }
+  
+  // Help command/flags
+  if (command === '-h' || command === '--help') {
+    displayHelp();
+    return;
+  }
+  
+  // Fire-and-forget update check (non-blocking, prints notice only)
+  checkForUpdateNotice();
+  
+  // Parse command-line flags
+  parseCommandLineFlags();
+  
+  // Execute the appropriate command
+  const commandHandlers = {
+    'help': displayHelp,
+    'init': init,
+    'init-mcp': initMcp,
+    'package': packageProject,
+    'start': start,
+    'upgrade-cli': upgradeCli,
+    'upgrade-project': upgradeProject,
+    'version': displayVersion,
+  };
+  
+  const handler = commandHandlers[command];
+  
+  if (handler) {
+    handler();
+  } else {
+    displayAvailableCommands(command);
+  }
+})();
+
+// ================================================================================
+// COMMAND IMPLEMENTATIONS
+// ================================================================================
+
+/**
+ * Runs a hytopia project's index file using 
+ * deno compatibility mode, allow-all permissions,
+ * and watches for changes.
+ */
+function start() {
+  execSync('deno run -A --watch index.ts', {
+    stdio: 'inherit',
+    env: { ...process.env, DENO_COMPAT: '1' },
+  });
+}
+
+/**
+ * Version command
+ * 
+ * Displays the version of the HYTOPIA SDK by reading
+ * from the package.json file.
+ * 
+ * @example
+ * `hytopia version`
+ * `hytopia -v`
+ * `hytopia --version`
+ */
+function displayVersion() {
+  const localVersion = getLocalVersion();
+
+  if (localVersion) {
+    console.log(localVersion);
+  } else {
+    console.error('❌ Error: Could not read package version');
+    process.exit(1);
+  }
+}
+
+/**
+ * Init command
+ * 
+ * Initializes a new HYTOPIA project. Accepting an optional
+ * project name as an argument.
+ * 
+ * @example
+ * `hytopia init my-project-name`
+ */
+function init() {
+  const destDir = process.cwd();
+
+  console.log('⚙️ Installing core dependencies...');
+
+  // Install dependencies
+  installProjectDependencies();
+
+  // Initialize project with latest HYTOPIA SDK
+  console.log('🔧 Initializing project with latest HYTOPIA SDK...');
+ 
+  if (flags.template) {
+    initFromTemplate(destDir);
+  } else {
+    initFromBoilerplate(destDir);
+  }
+
+  // Copy assets into project, not overwriting existing files
+  copyAssets(destDir);
+
+  // Display success message
+  displayInitSuccessMessage();
+
+  // Prompt for MCP setup
+  promptForMcpSetup();
+
+  return;
+}
+
+/**
+ * Installs required dependencies for a new project
+ */
+function installProjectDependencies() {
+  // init project
+  execSync('deno init --quiet', { stdio: 'inherit' });
+ 
+  // remove deno boilerplate
+  Deno.removeSync('main.ts');
+  Deno.removeSync('main_test.ts');
+
+  // create deno.json with nodeModulesDir set to auto
+  Deno.writeTextFile('deno.json', JSON.stringify({ nodeModulesDir: "auto" }, null, 2));
+
+  // create package.json
+  Deno.writeTextFile('package.json', JSON.stringify({
+    name: 'hytopia-project',
+    version: '1.0.0',
+    description: 'My HYTOPIA project',
+    main: 'index.ts',
+    scripts: {
+      dev: 'hytopia dev'
+    }
+  }, null, 2));  
+
+  // install hytopia sdk and hytopia assets
+  denoAddPackage('hytopia@latest', '--quiet');
+  denoAddPackage('@hytopia.com/assets@latest', '--quiet');
+}
+
+/**
+ * Initializes a project from a template
+ */
+function initFromTemplate(destDir) {
+  console.log(`🖨️  Initializing project with examples template "${flags.template}"...`);
+
+  denoAddPackage('@hytopia.com/examples@latest');
+
+  const templateDir = path.join(destDir, 'node_modules', '@hytopia.com', 'examples', flags.template);
+
+  if (!copyDirectoryContents(templateDir, destDir)) {
+    console.error(`❌ Examples template ${flags.template} does not exist in the @hytopia.com/examples package, could not initialize project!`);
+    console.error(`   Tried directory: ${templateDir}`);
+    return;
+  }
+
+  execSync('deno install', { stdio: 'inherit' });
+}
+
+/**
+ * Initializes a project from the default boilerplate
+ */
+function initFromBoilerplate(destDir) {
+  console.log('🧑‍💻 Initializing project with boilerplate...');
+  const srcDir = path.join(__dirname, '..', 'boilerplate');
+  
+  if (!copyDirectoryContents(srcDir, destDir)) {
+    console.error('❌ Error: Could not copy boilerplate files');
+    process.exit(1);
+  }
+}
+
+/**
+ * Copies assets to the project directory
+ */
+function copyAssets(destDir) {
+  const assetsSource = path.join(destDir, 'node_modules', '@hytopia.com', 'assets');
+  const assetsDest = path.join(destDir, 'assets');
+  
+  if (!copyDirectoryContents(assetsSource, assetsDest, { recursive: true, force: false })) {
+    console.error('❌ Error: Could not copy assets from @hytopia.com/assets package');
+  }
+}
+
+/**
+ * Displays success message after project initialization
+ */
+function displayInitSuccessMessage() {
+  logDivider();
+  console.log('✅ HYTOPIA PROJECT INITIALIZED SUCCESSFULLY!');
+  console.log(' ');
+  console.log('💡 1. Start your development server by running the command `hytopia dev`');
+  console.log('🎮 2. Play your game by opening: https://hytopia.com/play/?join=localhost:8080');
+  logDivider();
+}
+
+/**
+ * Prompts the user to set up MCP
+ */
+function promptForMcpSetup() {
+  console.log('📋 OPTIONAL: HYTOPIA MCP SETUP');
+  console.log(' ');
+  console.log('The HYTOPIA MCP enables Cursor and Claude Code editors to access');
+  console.log('HYTOPIA-specific capabilities, providing significantly better AI');
+  console.log('assistance and development experience for this HYTOPIA project.');
+  console.log(' ');
+
+  const rl = createReadlineInterface();
+  
+  rl.question('Would you like to initialize the HYTOPIA MCP for this project? (y/n): ', (answer) => {
+    rl.close();
+
+    if (answer.trim().toLowerCase() === 'y') {
+      initMcp();
+    } else {
+      logDivider();
+      console.log('🎉 You\'re all set! Your HYTOPIA project is ready to use.');
+      console.log('You can start your project server by running the command: hytopia start');
+      logDivider();
+    }
+  });
+}
+
+/**
+ * Initializes the MCP for the selected editors
+ */
+function initMcp() {
+  const rl = createReadlineInterface();
+
+  logDivider();
+  console.log('🤖 HYTOPIA MCP SETUP');
+  console.log('Please select your code editor:');
+  console.log('  1. Cursor');
+  console.log('  2. Claude Code');
+  console.log('  3. Both');
+  console.log('  4. None / Cancel');
+
+  rl.question('Enter your selection (1-4): ', (answer) => {
+    const selection = parseInt(answer.trim());
+    
+    if (isNaN(selection) || selection < 1 || selection > 4) {
+      console.log('❌ Invalid selection. Please run `hytopia init-mcp` again and select a number between 1 and 4.');
+      rl.close();
+      return;
+    }
+    
+    if ([1, 2, 3].includes(selection)) { logDivider(); }
+
+    if (selection === 1 || selection === 3) {
+      initCursorLocalMcp();
+    }
+
+    if (selection === 2 || selection === 3) {
+      initClaudeCodeMcp();
+    }
+    
+    rl.close();
+    
+    if ([1, 2, 3].includes(selection)) {
+      console.log('🎉 You\'re all set! Your HYTOPIA project is ready to use.');
+      console.log('You can start your project server by running the command: hytopia start');
+      logDivider();
+    }
+  });
+}
+
+function initClaudeCodeMcp() {
+  console.log('🔧 Initializing HYTOPIA MCP for Claude Code...');
+  try {
+    execSync('claude mcp add hytopia-mcp -s project --transport http https://ai.hytopia.com/mcp', { stdio: 'inherit' });
+  } catch (err) {
+    console.log('⚠️ Could not add MCP via claude CLI, falling back to manual config...');
+    const claudeDir = path.join(process.cwd(), '.claude');
+    if (!fs.existsSync(claudeDir)) {
+      fs.mkdirSync(claudeDir);
+    }
+    fs.writeFileSync(path.join(claudeDir, '.mcp.json'), JSON.stringify({
+      mcpServers: {
+        'hytopia-mcp': {
+          url: 'https://ai.hytopia.com/mcp'
+        }
+      }
+    }, null, 2));
+  }
+  console.log(`✅ Claude Code MCP initialized successfully!`);
+  logDivider();
+}
+
+function initCursorLocalMcp() {
+  console.log('🔧 Initializing HYTOPIA MCP for Cursor...');
+  const cursorDir = path.join(process.cwd(), '.cursor');
+  if (!fs.existsSync(cursorDir)) {
+    fs.mkdirSync(cursorDir);
+  }
+  fs.writeFileSync(path.join(cursorDir, 'mcp.json'), JSON.stringify({
+    mcpServers: {
+      'hytopia-mcp': {
+        url: 'https://ai.hytopia.com/mcp'
+      }
+    }
+  }, null, 2));
+
+  console.log(`✅ Cursor MCP initialized successfully!`);
+  logDivider();
+}
+
+/**
+ * Package command
+ * 
+ * Creates a zip file of the project directory, excluding node_modules,
+ * package-lock.json, deno.lock, and deno.json files.
+ * 
+ * @example
+ * `hytopia package`
+ */
+function packageProject() {
+  const sourceDir = process.cwd();
+  const projectName = path.basename(sourceDir);
+  const packageJsonPath = path.join(sourceDir, 'package.json');
+  
+  // Check if package.json exists
+  if (!fs.existsSync(packageJsonPath)) {
+    console.error('❌ Error: package.json not found. This directory does not appear to be a HYTOPIA project.');
+    console.error('   Please run this command in a valid HYTOPIA project directory.');
+    return;
+  }
+  
+  // Check if package.json contains "hytopia"
+  try {
+    const packageJsonContent = fs.readFileSync(packageJsonPath, 'utf8');
+    if (!packageJsonContent.includes('hytopia')) {
+      console.error('❌ Error: This directory does not appear to be a HYTOPIA project.');
+      console.error('   The package.json file does not contain a reference to HYTOPIA.');
+      return;
+    }
+  } catch (err) {
+    console.error('❌ Error: Could not read package.json file:', err.message);
+    return;
+  }
+
+  // Make sure assets exist and the model optimizer has been ran
+  const assetsDir = path.join(sourceDir, 'assets');
+  let hasOptimizedDir = false;
+  
+  if (fs.existsSync(assetsDir)) {
+    // Function to recursively check for .optimized directories
+    const checkForOptimizedDir = (dir) => {
+      const items = fs.readdirSync(dir);
+      
+      for (const item of items) {
+        const itemPath = path.join(dir, item);
+        const stats = fs.statSync(itemPath);
+        
+        if (stats.isDirectory()) {
+          if (item === '.optimized') {
+            hasOptimizedDir = true;
+            return true;
+          }
+          
+          // Check subdirectories
+          if (checkForOptimizedDir(itemPath)) {
+            return true;
+          }
+        }
+      }
+      
+      return false;
+    };
+    
+    checkForOptimizedDir(assetsDir);
+    
+    if (!hasOptimizedDir) {
+      console.warn('❌ Error: No .optimized directories found in the assets folder.');
+      console.warn('   Make sure your server has ran the optimizer for your models.');
+      console.warn('   This can be done by running your server with the command `hytopia dev`');
+      return;
+    }
+  } else {
+    console.warn('❌ Error: No assets directory found in the project.');
+    return;
+  }
+  
+  // Prepare to package
+  const outputFile = path.join(sourceDir, `${projectName}.zip`);
+  
+  console.log(`📦 Packaging project "${projectName}"...`);
+  
+  // Create a file to stream archive data to
+  const output = fs.createWriteStream(outputFile);
+  const archive = archiver('zip', {
+    zlib: { level: 9 } // Sets the compression level
+  });
+  
+  // Listen for all archive data to be written
+  output.on('close', function() {
+    console.log(`✅ Project packaged successfully! (${(archive.pointer() / 1024 / 1024).toFixed(2)} MB)`);
+    console.log(`📁 Package saved to: ${outputFile}`);
+  });
+  
+  // Good practice to catch warnings (ie stat failures and other non-blocking errors)
+  archive.on('warning', function(err) {
+    if (err.code === 'ENOENT') {
+      console.warn('⚠️ Warning:', err);
+    } else {
+      throw err;
+    }
+  });
+  
+  // Catch errors
+  archive.on('error', function(err) {
+    console.error('❌ Error during packaging:', err);
+    throw err;
+  });
+  
+  // Pipe archive data to the file
+  archive.pipe(output);
+  
+  // Get all files and directories in the source directory
+  const items = fs.readdirSync(sourceDir);
+  
+  // Files/directories to exclude
+  const excludeItems = [
+    '.git',
+    'node_modules',
+    'package-lock.json',
+    'deno.lock',
+    'deno.json',
+    `${projectName}.zip` // Exclude the output file itself
+  ];
+  
+  // Add each item to the archive, excluding the ones in the exclude list
+  items.forEach(item => {
+    const itemPath = path.join(sourceDir, item);
+    
+    if (!excludeItems.includes(item)) {
+      const stats = fs.statSync(itemPath);
+      
+      if (stats.isDirectory()) {
+        archive.directory(itemPath, item);
+      } else {
+        archive.file(itemPath, { name: item });
+      }
+    }
+  });
+  
+  // Finalize the archive
+  archive.finalize();
+}
+
+// ================================================================================
+// UTILITY FUNCTIONS
+// ================================================================================
+
+// set priority level for takahiro tickets
+
+/**
+ * Parses command-line flags in the format --flag value
+ */
+function parseCommandLineFlags() {
+  for (let i = 3; i < process.argv.length; i += 2) {
+    if (i % 2 === 1) { // Odd indices are flags
+      let flag = process.argv[i].replace('--', '');
+      let value = process.argv[i + 1];
+
+      if (flag.includes('=')) {
+        [ flag, value ] = flag.split('=');
+      }
+
+      flags[flag] = value;
+    }
+  }
+}
+
+/**
+ * Copies directory contents (cross-platform compatible)
+ */
+function copyDirectoryContents(srcDir, destDir, options = { recursive: true }) {
+  if (!fs.existsSync(srcDir)) return false;
+  
+  try {
+    fs.readdirSync(srcDir).forEach(item => {
+      fs.cpSync(path.join(srcDir, item), path.join(destDir, item), options);
+    });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Creates a readline interface for user input
+ */
+function createReadlineInterface() {
+  return readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+}
+
+/**
+ * Prints a divider line for better console output readability
+ */
+function logDivider() {
+  console.log('--------------------------------');
+}
+
+/**
+ * Displays available commands when an unknown command is entered
+ */
+function displayAvailableCommands(command) {
+  console.log('Unknown command: ' + command);
+  console.log('');
+  displayHelp();
+}
+
+/**
+ * Adds a package using deno add command
+ */
+function denoAddPackage(packageName, flags = '') {
+  execSync(`deno add --allow-scripts --npm ${flags} ${packageName}`, { stdio: 'inherit' });
+}
+
+// ================================================================================
+// VERSION CHECK AND UPGRADE
+// ================================================================================
+
+function checkForUpdateNotice() {
+  (async () => {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 800);
+      const latestVersion = await fetchLatestVersion(controller.signal).finally(() => clearTimeout(timeout));
+      const localVersion = getLocalVersion();
+      if (!localVersion || !latestVersion) return;
+      if (localVersion !== latestVersion) {
+        console.log(`Update available: ${localVersion} → ${latestVersion}. Run: hytopia upgrade-cli`);
+      }
+    } catch {
+      // Silently ignore
+    }
+  })();
+}
+
+function getLocalVersion() {
+  try {
+    const packageJsonPath = path.join(__dirname, '..', 'package.json');
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    return packageJson.version;
+  } catch {
+    return undefined;
+  }
+}
+
+async function fetchLatestVersion(signal) {
+  try {
+    const res = await fetch('https://registry.npmjs.org/hytopia/latest', {
+      headers: { 'Accept': 'application/vnd.npm.install-v1+json' },
+      signal,
+    });
+    if (!res.ok) return undefined;
+    const data = await res.json();
+    return data?.version;
+  } catch {
+    return undefined;
+  }
+}
+
+function upgradeCli() {
+  const versionArg = (process.argv[3] || 'latest').trim();
+  console.log(`🔄 Upgrading HYTOPIA CLI to: hytopia@${versionArg} ...`);
+  execSync(`deno install --reload --global --force -A npm:hytopia@${versionArg}`, { stdio: 'inherit' });
+  console.log('✅ Upgrade complete. You may need to restart your shell for changes to take effect.');
+}
+
+function upgradeProject() {
+  const versionArg = (process.argv[3] || 'latest').trim();
+  const spec = `hytopia@${versionArg}`;
+  console.log(`🔄 Upgrading project HYTOPIA SDK to: ${spec} ...`);
+  execSync(`deno add --allow-scripts --npm ${spec}`, { stdio: 'inherit' });
+  console.log('✅ Project dependency upgraded.');
+}
+
+// ==============================================================================
+// HELP
+// ==============================================================================
+
+function displayHelp() {
+  console.log('HYTOPIA CLI');
+  console.log('');
+  console.log('Usage:');
+  console.log('  hytopia [command] [options]');
+  console.log('');
+  console.log('Commands:');
+  console.log('  help, -h, --help            Show this help');
+  console.log('  version, -v, --version      Show CLI version');
+  console.log('  start                       Start a HYTOPIA project server (Deno compat & watch)');
+  console.log('  init [--template NAME]      Initialize a new project');
+  console.log('  init-mcp                    Setup MCP integrations');
+  console.log('  package                     Create a zip of the project');
+  console.log('  upgrade-cli                 Upgrade the HYTOPIA CLI');
+  console.log('  upgrade-project [VERSION]   Upgrade project SDK dep (default: latest)');
+  console.log('');
+  console.log('Examples:');
+  console.log('  hytopia init --template zombies-fps');
+  console.log('  hytopia upgrade-project 0.8.12');
+}

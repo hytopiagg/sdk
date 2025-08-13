@@ -189,3 +189,4 @@ _(Optional)_ The URI or path to the .gltf model asset to be used for the entity.
 
 </td></tr>
 </tbody></table>
+

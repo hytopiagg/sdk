@@ -47,6 +47,7 @@ The angle in radians to rotate the current matrix by.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Matrix4](./server.matrix4.md)

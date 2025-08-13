@@ -63,6 +63,7 @@ The angle to rotate in radians.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Quaternion](./server.quaternion.md)

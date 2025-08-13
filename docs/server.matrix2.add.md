@@ -47,6 +47,7 @@ The matrix to add to the current matrix.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Matrix2](./server.matrix2.md)

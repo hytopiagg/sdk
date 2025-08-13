@@ -47,6 +47,7 @@ The entity to get attached audio instances for.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Audio](./server.audio.md)<!-- -->\[\]

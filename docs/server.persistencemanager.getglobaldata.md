@@ -47,6 +47,7 @@ The key to get the data from.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 Promise&lt;Record&lt;string, unknown&gt; \| void&gt;

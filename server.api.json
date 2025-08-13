@@ -1,7 +1,7 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.52.5",
+    "toolVersion": "7.52.10",
     "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
@@ -17521,15 +17521,6 @@
             },
             {
               "kind": "Reference",
-              "text": "SocketEventPayloads",
-              "canonicalReference": "server!~SocketEventPayloads:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", "
-            },
-            {
-              "kind": "Reference",
               "text": "LightEventPayloads",
               "canonicalReference": "server!LightEventPayloads:interface"
             },
@@ -17663,10 +17654,6 @@
             {
               "startIndex": 41,
               "endIndex": 42
-            },
-            {
-              "startIndex": 43,
-              "endIndex": 44
             }
           ]
         },
@@ -40015,7 +40002,7 @@
             },
             {
               "kind": "Content",
-              "text": "string | 8080"
+              "text": "number"
             }
           ],
           "fileUrlPath": "src/networking/WebServer.ts",

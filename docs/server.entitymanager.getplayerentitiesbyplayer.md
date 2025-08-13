@@ -47,6 +47,7 @@ The player to get the entities for.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [PlayerEntity](./server.playerentity.md)<!-- -->\[\]

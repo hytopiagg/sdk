@@ -47,6 +47,7 @@ The position to track or undefined to stop tracking.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

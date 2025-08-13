@@ -47,6 +47,7 @@ The global coordinate of the chunk to check.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 boolean

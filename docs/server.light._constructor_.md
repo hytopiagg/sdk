@@ -47,3 +47,4 @@ The options for the Light instance.
 
 </td></tr>
 </tbody></table>
+

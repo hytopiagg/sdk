@@ -47,6 +47,7 @@ The transparency of the particle emitter.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

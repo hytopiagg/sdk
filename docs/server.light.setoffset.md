@@ -47,6 +47,7 @@ The offset of the light.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

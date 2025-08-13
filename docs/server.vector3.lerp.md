@@ -63,6 +63,7 @@ The interpolation factor. A value between 0 and 1.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Vector3](./server.vector3.md)

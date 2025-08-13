@@ -47,6 +47,7 @@ Whether the rigid body is sleeping.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

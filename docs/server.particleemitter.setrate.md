@@ -47,6 +47,7 @@ The rate per second at which particles are emitted.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

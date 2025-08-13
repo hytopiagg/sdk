@@ -43,6 +43,7 @@ string
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 EventEmitter.EventListener&lt;any, string&gt;\[\]

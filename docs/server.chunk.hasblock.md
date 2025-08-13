@@ -47,6 +47,7 @@ The local coordinate of the block to check.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 boolean

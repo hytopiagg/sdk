@@ -47,6 +47,7 @@ The entity to detach.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 void

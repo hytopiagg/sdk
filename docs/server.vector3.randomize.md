@@ -47,6 +47,7 @@ _(Optional)_ Length of the resulting vector, if omitted a unit vector is set.
 
 </td></tr>
 </tbody></table>
+
 **Returns:**
 
 [Vector3](./server.vector3.md)
