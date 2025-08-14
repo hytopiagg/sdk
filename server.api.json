@@ -17521,6 +17521,15 @@
             },
             {
               "kind": "Reference",
+              "text": "SocketEventPayloads",
+              "canonicalReference": "server!~SocketEventPayloads:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
               "text": "LightEventPayloads",
               "canonicalReference": "server!LightEventPayloads:interface"
             },
@@ -17654,6 +17663,10 @@
             {
               "startIndex": 41,
               "endIndex": 42
+            },
+            {
+              "startIndex": 43,
+              "endIndex": 44
             }
           ]
         },
@@ -40002,7 +40015,7 @@
             },
             {
               "kind": "Content",
-              "text": "number"
+              "text": "string | 8080"
             }
           ],
           "fileUrlPath": "src/networking/WebServer.ts",

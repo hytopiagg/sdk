@@ -1,18 +1,11 @@
 #!/usr/bin/env node
 
-// install is deno install --reload --global --force -A npm:hytopia@dev
-
 import { execSync } from 'child_process';
 import archiver from 'archiver';
 import fs from 'fs';
 import path from 'path';
 import readline from 'readline';
 import { fileURLToPath } from 'url';
-
-if (!('Deno' in globalThis)) {
-  console.error('❌ Error: HYTOPIA scripts must be run with Deno as of version SDK 0.9.0.');
-  process.exit(1);
-}
 
 // Store command-line flags
 const flags = {};
@@ -43,6 +36,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
   
   // Execute the appropriate command
   const commandHandlers = {
+    'build': build,
     'help': displayHelp,
     'init': init,
     'init-mcp': initMcp,
@@ -67,15 +61,25 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // ================================================================================
 
 /**
- * Runs a hytopia project's index file using 
- * deno compatibility mode, allow-all permissions,
+ * Build command
+ * 
+ * Builds the server and client code for node.js
+ * 
+ * @example
+ */
+function build() {
+  execSync('npx bun build --format=esm --target=node --outfile=./index.js index.ts', { stdio: 'inherit' });
+}
+
+/**
+ * Runs a hytopia project's index file using node.js
  * and watches for changes.
  */
 function start() {
-  execSync('deno run -A --watch index.ts', {
-    stdio: 'inherit',
-    env: { ...process.env, DENO_COMPAT: '1' },
-  });
+  execSync(`
+    nodemon -q -w index.ts
+      -x "npx bun build --format=esm --target=node --outfile=./index.js index.ts && node index.js"
+  `, { stdio: 'inherit'});
 }
 
 /**
@@ -146,45 +150,23 @@ function init() {
  */
 function installProjectDependencies() {
   // init project
-  execSync('deno init --quiet', { stdio: 'inherit' });
- 
-  // remove deno boilerplate
-  Deno.removeSync('main.ts');
-  Deno.removeSync('main_test.ts');
-
-  // create deno.json with nodeModulesDir set to auto
-  Deno.writeTextFile('deno.json', JSON.stringify({
-    nodeModulesDir: "auto",
-  }, null, 2));
+  execSync('npm init --yes', { stdio: 'inherit' });
 
   // create tsconfig.json, used by validation bundler
-  Deno.writeTextFile('tsconfig.json', JSON.stringify({
+  fs.writeFileSync('tsconfig.json', JSON.stringify({
     compilerOptions: {
       lib: ["ESNext"],
       target: "ESNext",
       module: "Preserve",
-      moduleResolution: "bundler",
-      types: ["deno.ns"],
+      moduleResolution: "node",
       verbatimModuleSyntax: true,
       strict: true,
       skipLibCheck: true
     }
   }, null, 2))
 
-  // create package.json
-  Deno.writeTextFile('package.json', JSON.stringify({
-    name: 'hytopia-project',
-    version: '1.0.0',
-    description: 'My HYTOPIA project',
-    main: 'index.ts',
-    scripts: {
-      start: 'hytopia start'
-    }
-  }, null, 2));  
-
   // install hytopia sdk and hytopia assets
-  denoAddPackage('hytopia@latest', '--quiet');
-  denoAddPackage('@hytopia.com/assets@latest', '--quiet');
+  execSync('npm install hytopia@latest @hytopia.com/assets@latest', { stdio: 'inherit' });
 }
 
 /**
@@ -193,7 +175,7 @@ function installProjectDependencies() {
 function initFromTemplate(destDir) {
   console.log(`🖨️  Initializing project with examples template "${flags.template}"...`);
 
-  denoAddPackage('@hytopia.com/examples@latest');
+  execSync('npm install @hytopia.com/examples@latest', { stdio: 'inherit' });
 
   const templateDir = path.join(destDir, 'node_modules', '@hytopia.com', 'examples', flags.template);
 
@@ -203,7 +185,7 @@ function initFromTemplate(destDir) {
     return;
   }
 
-  execSync('deno install', { stdio: 'inherit' });
+  execSync('npm install', { stdio: 'inherit' });
 }
 
 /**
@@ -356,8 +338,8 @@ function initCursorLocalMcp() {
 /**
  * Package command
  * 
- * Creates a zip file of the project directory, excluding node_modules,
- * package-lock.json, deno.lock, and deno.json files.
+ * Creates a zip file of the project directory, excluding node_modules
+ * and package-lock.json files.
  * 
  * @example
  * `hytopia package`
@@ -472,8 +454,6 @@ function packageProject() {
     '.git',
     'node_modules',
     'package-lock.json',
-    'deno.lock',
-    'deno.json',
     `${projectName}.zip` // Exclude the output file itself
   ];
   
@@ -576,13 +556,6 @@ function displayAvailableCommands(command) {
   displayHelp();
 }
 
-/**
- * Adds a package using deno add command
- */
-function denoAddPackage(packageName, flags = '') {
-  execSync(`deno add --allow-scripts --npm ${flags} ${packageName}`, { stdio: 'inherit' });
-}
-
 // ================================================================================
 // VERSION CHECK AND UPGRADE
 // ================================================================================
@@ -631,7 +604,7 @@ async function fetchLatestVersion(signal) {
 function upgradeCli() {
   const versionArg = (process.argv[3] || 'latest').trim();
   console.log(`🔄 Upgrading HYTOPIA CLI to: hytopia@${versionArg} ...`);
-  execSync(`deno install --reload --global --force -A npm:hytopia@${versionArg}`, { stdio: 'inherit' });
+  execSync(`npm install -g hytopia@${versionArg}`, { stdio: 'inherit' });
   console.log('✅ Upgrade complete. You may need to restart your shell for changes to take effect.');
 }
 
@@ -639,7 +612,7 @@ function upgradeProject() {
   const versionArg = (process.argv[3] || 'latest').trim();
   const spec = `hytopia@${versionArg}`;
   console.log(`🔄 Upgrading project HYTOPIA SDK to: ${spec} ...`);
-  execSync(`deno add --allow-scripts --npm ${spec}`, { stdio: 'inherit' });
+  execSync(`npm install ${spec}`, { stdio: 'inherit' });
   console.log('✅ Project dependency upgraded.');
 }
 
@@ -656,7 +629,7 @@ function displayHelp() {
   console.log('Commands:');
   console.log('  help, -h, --help            Show this help');
   console.log('  version, -v, --version      Show CLI version');
-  console.log('  start                       Start a HYTOPIA project server (Deno compat & watch)');
+  console.log('  start                       Start a HYTOPIA project server (Node.js & watch)');
   console.log('  init [--template NAME]      Initialize a new project');
   console.log('  init-mcp                    Setup MCP integrations');
   console.log('  package                     Create a zip of the project for uploading to the HYTOPIA create portal.');

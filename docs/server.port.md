@@ -9,5 +9,5 @@ The port the server will run on. You can override this in your .env by setting P
 **Signature:**
 
 ```typescript
-PORT: number
+PORT: string | 8080
 ```
