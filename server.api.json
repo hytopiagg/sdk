@@ -5543,7 +5543,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "server!BlockTypeOptions#lightLevel:member",
-              "docComment": "/**\n * The light emission level.\n */\n",
+              "docComment": "/**\n * The light emission level, between 0 and 15.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

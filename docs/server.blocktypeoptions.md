@@ -126,7 +126,7 @@ number
 
 </td><td>
 
-_(Optional)_ The light emission level.
+_(Optional)_ The light emission level, between 0 and 15.
 
 
 </td></tr>

@@ -662,7 +662,7 @@ export declare interface BlockTypeOptions {
     halfExtents?: Vector3Like;
     /** Whether the block type is a liquid. */
     isLiquid?: boolean;
-    /** The light emission level. */
+    /** The light emission level, between 0 and 15. */
     lightLevel?: number;
     /** The name of the block type. */
     name: string;

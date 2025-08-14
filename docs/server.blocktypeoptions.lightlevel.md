@@ -4,7 +4,7 @@
 
 ## BlockTypeOptions.lightLevel property
 
-The light emission level.
+The light emission level, between 0 and 15.
 
 **Signature:**
 

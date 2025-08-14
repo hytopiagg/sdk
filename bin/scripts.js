@@ -126,6 +126,9 @@ function init() {
     initFromBoilerplate(destDir);
   }
 
+  // Update SDK to latest (sets package.json requirement)
+  upgradeProject();
+
   // Copy assets into project, not overwriting existing files
   copyAssets(destDir);
 
@@ -175,7 +178,7 @@ function installProjectDependencies() {
     description: 'My HYTOPIA project',
     main: 'index.ts',
     scripts: {
-      dev: 'hytopia dev'
+      start: 'hytopia start'
     }
   }, null, 2));  
 
@@ -235,7 +238,7 @@ function displayInitSuccessMessage() {
   logDivider();
   console.log('✅ HYTOPIA PROJECT INITIALIZED SUCCESSFULLY!');
   console.log(' ');
-  console.log('💡 1. Start your development server by running the command `hytopia dev`');
+  console.log('💡 1. Start your development server by running the command `hytopia start`');
   console.log('🎮 2. Play your game by opening: https://hytopia.com/play/?join=localhost:8080');
   logDivider();
 }
@@ -524,9 +527,23 @@ function copyDirectoryContents(srcDir, destDir, options = { recursive: true }) {
   if (!fs.existsSync(srcDir)) return false;
   
   try {
-    fs.readdirSync(srcDir).forEach(item => {
-      fs.cpSync(path.join(srcDir, item), path.join(destDir, item), options);
-    });
+    if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
+
+    const copyInto = (srcPath, destPath) => {
+      const stat = fs.statSync(srcPath);
+      if (stat.isDirectory()) {
+        if (!fs.existsSync(destPath)) fs.mkdirSync(destPath, { recursive: true });
+        for (const entry of fs.readdirSync(srcPath)) {
+          copyInto(path.join(srcPath, entry), path.join(destPath, entry));
+        }
+      } else {
+        fs.cpSync(srcPath, destPath, { recursive: false, force: false });
+      }
+    };
+
+    for (const item of fs.readdirSync(srcDir)) {
+      copyInto(path.join(srcDir, item), path.join(destDir, item));
+    }
     return true;
   } catch {
     return false;
