@@ -4,10 +4,10 @@
 import fs from 'fs';
 
 const sdkPackage = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
-const server = fs.readFileSync('./server.js', 'utf8');
+const server = fs.readFileSync('./server.mjs', 'utf8');
 
 if (!server.includes('__DEV_SDK_VERSION__')) {
-  throw new Error('__DEV_SDK_VERSION__ not found in server.js. Please create a fresh build before publishing! You can do this by running: cd ../server && bun run build.');
+  throw new Error('__DEV_SDK_VERSION__ not found in server.mjs. Please create a fresh build before publishing! You can do this by running: cd ../server && npm run build.');
 }
 
-fs.writeFileSync('./server.js', server.replace(/__DEV_SDK_VERSION__/g, sdkPackage.version));
+fs.writeFileSync('./server.mjs', server.replace(/__DEV_SDK_VERSION__/g, sdkPackage.version));

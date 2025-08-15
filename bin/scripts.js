@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
-import { execSync } from 'child_process';
+import { execSync, spawn } from 'child_process';
 import archiver from 'archiver';
 import fs from 'fs';
 import path from 'path';
 import readline from 'readline';
 import { fileURLToPath } from 'url';
+import * as esbuild from 'esbuild';
 
 // Store command-line flags
 const flags = {};
@@ -42,15 +43,15 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
     'init-mcp': initMcp,
     'package': packageProject,
     'start': start,
-    'upgrade-cli': upgradeCli,
-    'upgrade-project': upgradeProject,
+    'upgrade-cli': () => upgradeCli(process.argv[3] || 'latest'),
+    'upgrade-project': () => upgradeProject(process.argv[3] || 'latest'),
     'version': displayVersion,
   };
   
   const handler = commandHandlers[command];
   
   if (handler) {
-    handler();
+    await Promise.resolve(handler());
   } else {
     displayAvailableCommands(command);
   }
@@ -67,8 +68,24 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  * 
  * @example
  */
-function build() {
-  execSync('npx bun build --format=esm --target=node --outfile=./index.js index.ts', { stdio: 'inherit' });
+async function build() {
+  console.log('🔧 Building project...');
+
+  await esbuild.build({
+    entryPoints: ['index.ts'],
+    outfile: './index.mjs',
+    bundle: true,
+    format: 'esm',
+    platform: 'node',
+    target: 'node24',
+    sourcemap: 'inline',
+    packages: 'external',
+    mainFields: ['module', 'main'],
+    conditions: ['import', 'node'],
+    banner: {
+      js: 'import { createRequire as __cr } from "module"; const require = __cr(import.meta.url);'
+    }
+  });
 }
 
 /**
@@ -76,10 +93,61 @@ function build() {
  * and watches for changes.
  */
 function start() {
-  execSync(`
-    nodemon -q -w index.ts
-      -x "npx bun build --format=esm --target=node --outfile=./index.js index.ts && node index.js"
-  `, { stdio: 'inherit'});
+  (async () => {
+    let child = null;
+    let restartTimer = null;
+
+    const stopNode = () => {
+      if (child && !child.killed) {
+        try { child.kill(); } catch {}
+      }
+    };
+
+    const restartNode = () => {
+      stopNode();
+      child = spawn(process.execPath, ['--enable-source-maps', 'index.mjs'], { stdio: 'inherit', shell: false });
+    };
+
+    const ctx = await esbuild.context({
+      entryPoints: ['index.ts'],
+      outfile: './index.mjs',
+      bundle: true,
+      format: 'esm',
+      platform: 'node',
+      target: 'node24',
+      sourcemap: 'inline',
+      packages: 'external',
+      mainFields: ['module', 'main'],
+      conditions: ['import', 'node'],
+      banner: {
+        js: 'import { createRequire as __cr } from "module"; const require = __cr(import.meta.url);'
+      },
+      plugins: [{
+        name: 'restart-after-build',
+        setup(build) {
+          build.onStart(() => {
+            if (restartTimer) { clearTimeout(restartTimer); restartTimer = null; }
+          });
+          build.onEnd((result) => {
+            if (result.errors?.length) return;
+            restartTimer = setTimeout(restartNode, 150);
+          });
+        }
+      }]
+    });
+
+    await ctx.watch();
+
+    const cleanup = async () => {
+      if (restartTimer) clearTimeout(restartTimer);
+      stopNode();
+      try { await ctx.dispose(); } catch {}
+      process.exit(0);
+    };
+
+    process.on('SIGINT', cleanup);
+    process.on('SIGTERM', cleanup);
+  })();
 }
 
 /**
@@ -150,9 +218,9 @@ function init() {
  */
 function installProjectDependencies() {
   // init project
-  execSync('npm init --yes', { stdio: 'inherit' });
+  execSync('npm init -y --silent --loglevel silent', { stdio: ['ignore', 'ignore', 'inherit'] });
 
-  // create tsconfig.json, used by validation bundler
+  // create tsconfig.json, used by build
   fs.writeFileSync('tsconfig.json', JSON.stringify({
     compilerOptions: {
       lib: ["ESNext"],
@@ -166,7 +234,7 @@ function installProjectDependencies() {
   }, null, 2))
 
   // install hytopia sdk and hytopia assets
-  execSync('npm install hytopia@latest @hytopia.com/assets@latest', { stdio: 'inherit' });
+  execSync('npm install --force hytopia@latest @hytopia.com/assets@latest', { stdio: 'inherit' });
 }
 
 /**
@@ -175,7 +243,7 @@ function installProjectDependencies() {
 function initFromTemplate(destDir) {
   console.log(`🖨️  Initializing project with examples template "${flags.template}"...`);
 
-  execSync('npm install @hytopia.com/examples@latest', { stdio: 'inherit' });
+  execSync('npm install --force @hytopia.com/examples@latest', { stdio: 'inherit' });
 
   const templateDir = path.join(destDir, 'node_modules', '@hytopia.com', 'examples', flags.template);
 
@@ -344,7 +412,7 @@ function initCursorLocalMcp() {
  * @example
  * `hytopia package`
  */
-function packageProject() {
+async function packageProject() {
   const sourceDir = process.cwd();
   const projectName = path.basename(sourceDir);
   const packageJsonPath = path.join(sourceDir, 'package.json');
@@ -416,6 +484,9 @@ function packageProject() {
   
   console.log(`📦 Packaging project "${projectName}"...`);
   
+  // Build the project
+  await build();
+
   // Create a file to stream archive data to
   const output = fs.createWriteStream(outputFile);
   const archive = archiver('zip', {
@@ -601,18 +672,18 @@ async function fetchLatestVersion(signal) {
   }
 }
 
-function upgradeCli() {
-  const versionArg = (process.argv[3] || 'latest').trim();
-  console.log(`🔄 Upgrading HYTOPIA CLI to: hytopia@${versionArg} ...`);
-  execSync(`npm install -g hytopia@${versionArg}`, { stdio: 'inherit' });
+function upgradeCli(versionArg = 'latest') {
+  const version = versionArg.trim();
+  console.log(`🔄 Upgrading HYTOPIA CLI to: hytopia@${version} ...`);
+  execSync(`npm install -g --force hytopia@${version}`, { stdio: 'inherit' });
   console.log('✅ Upgrade complete. You may need to restart your shell for changes to take effect.');
 }
 
-function upgradeProject() {
-  const versionArg = (process.argv[3] || 'latest').trim();
-  const spec = `hytopia@${versionArg}`;
+function upgradeProject(versionArg = 'latest') {
+  const version = versionArg.trim();
+  const spec = `hytopia@${version}`;
   console.log(`🔄 Upgrading project HYTOPIA SDK to: ${spec} ...`);
-  execSync(`npm install ${spec}`, { stdio: 'inherit' });
+  execSync(`npm install --force ${spec}`, { stdio: 'inherit' });
   console.log('✅ Project dependency upgraded.');
 }
 
@@ -629,6 +700,7 @@ function displayHelp() {
   console.log('Commands:');
   console.log('  help, -h, --help            Show this help');
   console.log('  version, -v, --version      Show CLI version');
+  console.log('  build                       Build the project (Generates ESM index.js)');
   console.log('  start                       Start a HYTOPIA project server (Node.js & watch)');
   console.log('  init [--template NAME]      Initialize a new project');
   console.log('  init-mcp                    Setup MCP integrations');
