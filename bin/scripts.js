@@ -28,10 +28,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
     displayHelp();
     return;
   }
-  
-  // Fire-and-forget update check (non-blocking, prints notice only)
-  checkForUpdateNotice();
-  
+    
   // Parse command-line flags
   parseCommandLineFlags();
   
@@ -630,23 +627,6 @@ function displayAvailableCommands(command) {
 // ================================================================================
 // VERSION CHECK AND UPGRADE
 // ================================================================================
-
-function checkForUpdateNotice() {
-  (async () => {
-    try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 800);
-      const latestVersion = await fetchLatestVersion(controller.signal).finally(() => clearTimeout(timeout));
-      const localVersion = getLocalVersion();
-      if (!localVersion || !latestVersion) return;
-      if (localVersion !== latestVersion) {
-        console.log(`Update available: ${localVersion} → ${latestVersion}. Run: hytopia upgrade-cli`);
-      }
-    } catch {
-      // Silently ignore
-    }
-  })();
-}
 
 function getLocalVersion() {
   try {
