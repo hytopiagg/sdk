@@ -30,7 +30,7 @@ import {
   PlayerEvent,
 } from 'hytopia';
 
-import worldMap from './assets/map.json' with { type: 'json' };
+import worldMap from './assets/map.json';
 
 /**
  * startServer is always the entry point for our game.
