@@ -71,6 +71,27 @@ The camera for the player.
 </td></tr>
 <tr><td>
 
+[cosmetics](./server.player.cosmetics.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+Promise&lt;[PlayerCosmetics](./server.playercosmetics.md) \| void&gt;
+
+
+</td><td>
+
+The cosmetics for the player
+
+
+</td></tr>
+<tr><td>
+
 [id](./server.player.id.md)
 
 

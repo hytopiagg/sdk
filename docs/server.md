@@ -1792,6 +1792,28 @@ The camera orientation state of a Player.
 </td></tr>
 <tr><td>
 
+[PlayerCosmetics](./server.playercosmetics.md)
+
+
+</td><td>
+
+The cosmetics of a player.
+
+
+</td></tr>
+<tr><td>
+
+[PlayerCosmeticsEquippedItem](./server.playercosmeticsequippeditem.md)
+
+
+</td><td>
+
+An equipped item of a player's cosmetics.
+
+
+</td></tr>
+<tr><td>
+
 [PlayerEntityOptions](./server.playerentityoptions.md)
 
 

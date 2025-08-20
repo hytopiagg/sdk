@@ -9,7 +9,9 @@ Options for creating a DefaultPlayerEntity instance.
 **Signature:**
 
 ```typescript
-export type DefaultPlayerEntityOptions = {} & PlayerEntityOptions;
+export type DefaultPlayerEntityOptions = {
+    cosmeticHiddenSlots?: PlayerCosmeticSlot[];
+} & PlayerEntityOptions;
 ```
 **References:** [PlayerEntityOptions](./server.playerentityoptions.md)
 

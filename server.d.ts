@@ -1435,7 +1435,11 @@ export declare const DEFAULT_ENTITY_RIGID_BODY_OPTIONS: RigidBodyOptions;
  * @public
  */
 export declare class DefaultPlayerEntity extends PlayerEntity {
+    private _cosmeticHiddenSlots;
     constructor(options: DefaultPlayerEntityOptions);
+    /** The cosmetic slots that are hidden. @public */
+    get cosmeticHiddenSlots(): PlayerCosmeticSlot[];
+
 }
 
 /**
@@ -1653,7 +1657,9 @@ export declare interface DefaultPlayerEntityControllerOptions {
 }
 
 /** Options for creating a DefaultPlayerEntity instance. @public */
-export declare type DefaultPlayerEntityOptions = {} & PlayerEntityOptions;
+export declare type DefaultPlayerEntityOptions = {
+    cosmeticHiddenSlots?: PlayerCosmeticSlot[];
+} & PlayerEntityOptions;
 
 /** The options for a dynamic rigid body, also the default type. @public */
 export declare interface DynamicRigidBodyOptions extends BaseRigidBodyOptions {
@@ -4368,6 +4374,8 @@ export declare class Player extends EventRouter implements protocol.Serializable
     /** The camera for the player. */
     readonly camera: PlayerCamera;
 
+    /** The cosmetics for the player */
+    readonly cosmetics: Promise<PlayerCosmetics | void>;
     /** The UI for the player. */
     readonly ui: PlayerUI;
 
@@ -4717,6 +4725,27 @@ export declare type PlayerCameraOrientation = {
     pitch: number;
     yaw: number;
 };
+
+/** The cosmetics of a player. @public */
+export declare type PlayerCosmetics = {
+    equippedItems: {
+        slot: string;
+        item: PlayerCosmeticsEquippedItem;
+    }[];
+    hairStyle: number;
+    skinTextureUri: string;
+};
+
+/** An equipped item of a player's cosmetics. @public */
+export declare type PlayerCosmeticsEquippedItem = {
+    flags: string[];
+    type: string;
+    modelUrl: string;
+    textureUrl?: string;
+};
+
+/** The slots used for player cosmetics. @public */
+declare type PlayerCosmeticSlot = 'ALL' | 'BACK' | 'HEAD' | 'LEFT_ARM' | 'LEFT_FOOT' | 'LEFT_HAND' | 'LEFT_ITEM' | 'LEFT_LEG' | 'RIGHT_ARM' | 'RIGHT_FOOT' | 'RIGHT_HAND' | 'RIGHT_ITEM' | 'RIGHT_LEG' | 'TORSO';
 
 /**
  * Represents an entity controlled by a player in a world.
