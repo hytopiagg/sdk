@@ -89,9 +89,9 @@ startServer(world => {
 
     // Send a nice welcome message that only the player who joined will see ;)
     world.chatManager.sendPlayerMessage(player, 'Welcome to the game!', '00FF00');
-    world.chatManager.sendPlayerMessage(player, 'Use WASD to move around.');
-    world.chatManager.sendPlayerMessage(player, 'Press space to jump.');
+    world.chatManager.sendPlayerMessage(player, 'Use WASD to move around & space to jump.');
     world.chatManager.sendPlayerMessage(player, 'Hold shift to sprint.');
+    world.chatManager.sendPlayerMessage(player, 'Random cosmetic items are enabled for testing!');
     world.chatManager.sendPlayerMessage(player, 'Press \\ to enter or exit debug view.');
   });
 
