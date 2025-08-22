@@ -112,6 +112,7 @@ function start() {
       platform: 'node',
       target: 'node24',
       sourcemap: 'inline',
+      external: [ 'mediasoup' ], // prevent pathing issues in dev env, prod sets the bin path so no issue bundling in prod build/package.
       mainFields: ['module', 'main'],
       conditions: ['import', 'node'],
       banner: {
