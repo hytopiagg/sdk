@@ -76,7 +76,6 @@ async function build() {
     platform: 'node',
     target: 'node24',
     sourcemap: 'inline',
-    packages: 'external',
     mainFields: ['module', 'main'],
     conditions: ['import', 'node'],
     banner: {
@@ -113,7 +112,6 @@ function start() {
       platform: 'node',
       target: 'node24',
       sourcemap: 'inline',
-      packages: 'external',
       mainFields: ['module', 'main'],
       conditions: ['import', 'node'],
       banner: {
