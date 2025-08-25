@@ -79,7 +79,7 @@ async function build() {
     mainFields: ['module', 'main'],
     conditions: ['import', 'node'],
     banner: {
-      js: 'import { createRequire as __cr } from "module"; import { fileURLToPath } from "url"; import { dirname } from "path"; const require = __cr(import.meta.url); const __filename = fileURLToPath(import.meta.url); const __dirname = dirname(__filename);'
+      js: 'import { createRequire as __cr } from "module"; import { fileURLToPath } from "url"; import { dirname as __bundlerDirname } from "path"; const require = __cr(import.meta.url); const __filename = fileURLToPath(import.meta.url); const __dirname = __bundlerDirname(__filename);'
     }
   });
 }
@@ -433,55 +433,33 @@ async function packageProject() {
     return;
   }
 
-  // Make sure assets exist and the model optimizer has been ran
-  const assetsDir = path.join(sourceDir, 'assets');
-  let hasOptimizedDir = false;
+  // Build the project
+  await build();
+
+  // Test server startup & make sure optimizer has ran
+  console.log('🧪 Testing server startup and making sure optimizer has ran...');
   
-  if (fs.existsSync(assetsDir)) {
-    // Function to recursively check for .optimized directories
-    const checkForOptimizedDir = (dir) => {
-      const items = fs.readdirSync(dir);
-      
-      for (const item of items) {
-        const itemPath = path.join(dir, item);
-        const stats = fs.statSync(itemPath);
-        
-        if (stats.isDirectory()) {
-          if (item === '.optimized') {
-            hasOptimizedDir = true;
-            return true;
-          }
-          
-          // Check subdirectories
-          if (checkForOptimizedDir(itemPath)) {
-            return true;
-          }
-        }
+  logDivider();
+  
+  const child = spawn(process.execPath, ['--enable-source-maps', 'index.mjs'], { stdio: 'pipe' });
+
+  await new Promise(resolve => {
+    child.stdout.on('data', data => {
+      process.stdout.write(data);
+
+      if (data.toString().includes('Server running')) {
+        child.kill();
+        resolve();
       }
-      
-      return false;
-    };
-    
-    checkForOptimizedDir(assetsDir);
-    
-    if (!hasOptimizedDir) {
-      console.warn('❌ Error: No .optimized directories found in the assets folder.');
-      console.warn('   Make sure your server has ran the optimizer for your models.');
-      console.warn('   This can be done by running your server with the command `hytopia dev`');
-      return;
-    }
-  } else {
-    console.warn('❌ Error: No assets directory found in the project.');
-    return;
-  }
-  
+    });
+  });
+
+  logDivider();
+
   // Prepare to package
   const outputFile = path.join(sourceDir, `${projectName}.zip`);
   
   console.log(`📦 Packaging project "${projectName}"...`);
-  
-  // Build the project
-  await build();
 
   // Create a file to stream archive data to
   const output = fs.createWriteStream(outputFile);
