@@ -441,7 +441,7 @@ async function packageProject() {
   
   logDivider();
   
-  const child = spawn(process.execPath, ['--enable-source-maps', 'index.mjs'], { stdio: 'pipe' });
+  const child = spawn(process.execPath, ['--enable-source-maps', 'index.mjs'], { stdio: 'pipe', shell: false });
 
   await new Promise(resolve => {
     child.stdout.on('data', data => {
