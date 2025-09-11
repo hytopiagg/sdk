@@ -60,6 +60,20 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[handleCommand(player, message)](./server.chatmanager.handlecommand.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Handle a command if it exists.
+
+
+</td></tr>
+<tr><td>
+
 [registerCommand(command, callback)](./server.chatmanager.registercommand.md)
 
 

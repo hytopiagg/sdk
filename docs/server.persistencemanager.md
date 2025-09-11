@@ -84,7 +84,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[getGlobalData(key)](./server.persistencemanager.getglobaldata.md)
+[getGlobalData(key, maxRetries)](./server.persistencemanager.getglobaldata.md)
 
 
 </td><td>

@@ -837,6 +837,13 @@ export declare class ChatManager extends EventRouter {
      */
     sendBroadcastMessage(message: string, color?: string): void;
     /**
+     * Handle a command if it exists.
+     * @param player - The player that sent the command.
+     * @param message - The full message.
+     * @returns True if a command was handled, false otherwise.
+     */
+    handleCommand(player: Player, message: string): boolean;
+    /**
      * Send a system message to a specific player, only visible to them.
      * @param player - The player to send the message to.
      * @param message - The message to send.
@@ -4333,9 +4340,10 @@ export declare class PersistenceManager {
     /**
      * Get global data from the data persistence service.
      * @param key - The key to get the data from.
+     * @param maxRetries - The maximum number of retries to attempt in the event of failure.
      * @returns The data from the persistence layer.
      */
-    getGlobalData(key: string): Promise<Record<string, unknown> | void>;
+    getGlobalData(key: string, maxRetries?: number): Promise<Record<string, unknown> | undefined>;
 
     /**
      * Set global data in the data persistence service. This
@@ -4343,7 +4351,7 @@ export declare class PersistenceManager {
      * @param key - The key to set the data to.
      * @param data - The data to set.
      */
-    setGlobalData(key: string, data: Record<string, unknown>): Promise<Record<string, unknown> | void>;
+    setGlobalData(key: string, data: Record<string, unknown>): Promise<Record<string, unknown> | undefined>;
 
 
 }
@@ -4396,7 +4404,9 @@ export declare class Player extends EventRouter implements protocol.Serializable
      * Get the persisted data for the player.
      *
      * @remarks
-     * This method returns the player persisted data.
+     * This method returns the player persisted data. If it returns
+     * undefined, the player data failed to load and your game
+     * logic should handle this case appropriately.
      *
      * @returns The persisted data for the player.
      */
@@ -4426,7 +4436,11 @@ export declare class Player extends EventRouter implements protocol.Serializable
      *
      * @remarks
      * This method is asynchronous and returns a promise that
-     * resolves to the player data.
+     * resolves to the player data. Data is set using shallow
+     * merge of the existing data. It is recommended that you
+     * provide a changed data object for your saved data structure
+     * rather than the entire data object to avoid edge cases with
+     * data persistence or overwrites.
      *
      * @param data - The data to set.
      * @returns The persisted data for the player.

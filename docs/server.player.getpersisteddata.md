@@ -19,5 +19,5 @@ The persisted data for the player.
 
 ## Remarks
 
-This method returns the player persisted data.
+This method returns the player persisted data. If it returns undefined, the player data failed to load and your game logic should handle this case appropriately.
 

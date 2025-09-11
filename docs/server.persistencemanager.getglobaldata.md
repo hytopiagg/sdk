@@ -9,7 +9,7 @@ Get global data from the data persistence service.
 **Signature:**
 
 ```typescript
-getGlobalData(key: string): Promise<Record<string, unknown> | void>;
+getGlobalData(key: string, maxRetries?: number): Promise<Record<string, unknown> | undefined>;
 ```
 
 ## Parameters
@@ -46,11 +46,27 @@ The key to get the data from.
 
 
 </td></tr>
+<tr><td>
+
+maxRetries
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The maximum number of retries to attempt in the event of failure.
+
+
+</td></tr>
 </tbody></table>
 
 **Returns:**
 
-Promise&lt;Record&lt;string, unknown&gt; \| void&gt;
+Promise&lt;Record&lt;string, unknown&gt; \| undefined&gt;
 
 The data from the persistence layer.
 
