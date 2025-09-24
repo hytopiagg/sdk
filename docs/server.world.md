@@ -736,6 +736,20 @@ Sets the intensity of the world's skybox brightness.
 </td></tr>
 <tr><td>
 
+[setSkyboxUri(skyboxUri)](./server.world.setskyboxuri.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the cubemap URI of the world's skybox.
+
+
+</td></tr>
+<tr><td>
+
 [start()](./server.world.start.md)
 
 

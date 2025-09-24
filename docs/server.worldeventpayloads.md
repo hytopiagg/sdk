@@ -208,6 +208,25 @@ Emitted when the intensity of the world's skybox brightness is set.
 </td></tr>
 <tr><td>
 
+["WORLD.SET\_SKYBOX\_URI"](./server.worldeventpayloads._world.set_skybox_uri_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ world: [World](./server.world.md)<!-- -->; uri: string; }
+
+
+</td><td>
+
+Emitted when the URI of the world's skybox is set.
+
+
+</td></tr>
+<tr><td>
+
 ["WORLD.START"](./server.worldeventpayloads._world.start_.md)
 
 

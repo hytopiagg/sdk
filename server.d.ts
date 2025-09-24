@@ -6983,6 +6983,11 @@ export declare class World extends EventRouter implements protocol.Serializable 
      */
     setSkyboxIntensity(intensity: number): void;
     /**
+     * Sets the cubemap URI of the world's skybox.
+     * @param skyboxUri - The cubemap URI of the skybox.
+     */
+    setSkyboxUri(skyboxUri: string): void;
+    /**
      * Starts the world loop, which begins ticking physics, entities, etc.
      */
     start(): void;
@@ -7004,6 +7009,7 @@ export declare enum WorldEvent {
     SET_FOG_FAR = "WORLD.SET_FOG_FAR",
     SET_FOG_NEAR = "WORLD.SET_FOG_NEAR",
     SET_SKYBOX_INTENSITY = "WORLD.SET_SKYBOX_INTENSITY",
+    SET_SKYBOX_URI = "WORLD.SET_SKYBOX_URI",
     START = "WORLD.START",
     STOP = "WORLD.STOP"
 }
@@ -7054,6 +7060,11 @@ export declare interface WorldEventPayloads {
     [WorldEvent.SET_SKYBOX_INTENSITY]: {
         world: World;
         intensity: number;
+    };
+    /** Emitted when the URI of the world's skybox is set. */
+    [WorldEvent.SET_SKYBOX_URI]: {
+        world: World;
+        uri: string;
     };
     /** Emitted when the world starts. */
     [WorldEvent.START]: {

@@ -158,6 +158,20 @@ SET\_SKYBOX\_INTENSITY
 </td></tr>
 <tr><td>
 
+SET\_SKYBOX\_URI
+
+
+</td><td>
+
+`"WORLD.SET_SKYBOX_URI"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 START
 
 

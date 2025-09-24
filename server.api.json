@@ -55092,6 +55092,54 @@
               "name": "setSkyboxIntensity"
             },
             {
+              "kind": "Method",
+              "canonicalReference": "server!World#setSkyboxUri:member(1)",
+              "docComment": "/**\n * Sets the cubemap URI of the world's skybox.\n *\n * @param skyboxUri - The cubemap URI of the skybox.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setSkyboxUri(skyboxUri: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "skyboxUri",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setSkyboxUri"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "server!World#simulation:member",
               "docComment": "/**\n * The simulation for the world.\n */\n",
@@ -55489,6 +55537,27 @@
               },
               "releaseTag": "Public",
               "name": "SET_SKYBOX_INTENSITY"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!WorldEvent.SET_SKYBOX_URI:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_SKYBOX_URI = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"WORLD.SET_SKYBOX_URI\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_SKYBOX_URI"
             },
             {
               "kind": "EnumMember",
@@ -55985,6 +56054,51 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "\"WORLD.SET_SKYBOX_INTENSITY\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!WorldEventPayloads#\"WORLD.SET_SKYBOX_URI\":member",
+              "docComment": "/**\n * Emitted when the URI of the world's skybox is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "WorldEvent.SET_SKYBOX_URI",
+                  "canonicalReference": "server!WorldEvent.SET_SKYBOX_URI:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        world: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "World",
+                  "canonicalReference": "server!World:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        uri: string;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"WORLD.SET_SKYBOX_URI\"",
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 6
