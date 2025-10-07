@@ -35578,7 +35578,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Player#getPersistedData:member(1)",
-              "docComment": "/**\n * Get the persisted data for the player.\n *\n * @remarks\n *\n * This method returns the player persisted data. If it returns undefined, the player data failed to load and your game logic should handle this case appropriately. If it returns an empty object {}, the player data loaded successfully but no prior data has been set.\n *\n * @returns The persisted data for the player.\n */\n",
+              "docComment": "/**\n * Get the persisted data for the player.\n *\n * @remarks\n *\n * This method returns the player persisted data. If it returns undefined, the player data failed to load and your game logic should handle this case appropriately. If it returns an empty object, the player data loaded successfully but no prior data has been set.\n *\n * @returns The persisted data for the player.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

@@ -4407,7 +4407,7 @@ export declare class Player extends EventRouter implements protocol.Serializable
      * This method returns the player persisted data. If it returns
      * undefined, the player data failed to load and your game
      * logic should handle this case appropriately. If it returns
-     * an empty object {}, the player data loaded successfully but
+     * an empty object, the player data loaded successfully but
      * no prior data has been set.
      *
      * @returns The persisted data for the player.
