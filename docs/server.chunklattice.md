@@ -243,6 +243,20 @@ Check if a chunk exists for a given global coordinate.
 </td></tr>
 <tr><td>
 
+[initializeBlocks(blocks)](./server.chunklattice.initializeblocks.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Initialize all blocks in the lattice in bulk, removing all previously existing blocks. This is much more efficient than setting each block individually.
+
+
+</td></tr>
+<tr><td>
+
 [setBlock(globalCoordinate, blockTypeId)](./server.chunklattice.setblock.md)
 
 

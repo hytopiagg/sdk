@@ -7529,6 +7529,63 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "server!ChunkLattice#initializeBlocks:member(1)",
+              "docComment": "/**\n * Initialize all blocks in the lattice in bulk, removing all previously existing blocks. This is much more efficient than setting each block individually.\n *\n * @param blocks - The blocks to initialize.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "initializeBlocks(blocks: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        [blockTypeId: number]: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[];\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "blocks",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "initializeBlocks"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "server!ChunkLattice#setBlock:member(1)",
               "docComment": "/**\n * Set the block at a global coordinate by block type id, automatically creating a chunk if it doesn't exist. Use block type id 0 for air (to remove a block).\n *\n * @param globalCoordinate - The global coordinate of the block to set.\n *\n * @param blockTypeId - The block type id to set. Use 0 to remove the block and replace with air.\n */\n",
               "excerptTokens": [
@@ -43048,41 +43105,6 @@
             },
             {
               "kind": "Property",
-              "canonicalReference": "server!RigidBody#effectiveWorldInversePrincipalAngularInertiaSqrt:member",
-              "docComment": "/**\n * The effective world inverse principal angular inertia square root of the rigid body.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get effectiveWorldInversePrincipalAngularInertiaSqrt(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "SpdMatrix3",
-                  "canonicalReference": "server!SpdMatrix3:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": " | undefined"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "effectiveWorldInversePrincipalAngularInertiaSqrt",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
-              },
-              "isStatic": false,
-              "isProtected": false,
-              "isAbstract": false
-            },
-            {
-              "kind": "Property",
               "canonicalReference": "server!RigidBody#enabledPositions:member",
               "docComment": "/**\n * The enabled axes of positional movement of the rigid body.\n */\n",
               "excerptTokens": [
@@ -43251,41 +43273,6 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              },
-              "isStatic": false,
-              "isProtected": false,
-              "isAbstract": false
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "server!RigidBody#inversePrincipalAngularInertiaSqrt:member",
-              "docComment": "/**\n * The inverse principal angular inertia square root of the rigid body.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get inversePrincipalAngularInertiaSqrt(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Vector3Like",
-                  "canonicalReference": "server!Vector3Like:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": " | undefined"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "inversePrincipalAngularInertiaSqrt",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 3
               },
               "isStatic": false,
               "isProtected": false,

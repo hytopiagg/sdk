@@ -995,6 +995,15 @@ export declare class ChunkLattice extends EventRouter {
      */
     hasChunk(globalCoordinate: Vector3Like): boolean;
     /**
+     * Initialize all blocks in the lattice in bulk, removing
+     * all previously existing blocks. This is much more
+     * efficient than setting each block individually.
+     * @param blocks - The blocks to initialize.
+     */
+    initializeBlocks(blocks: {
+        [blockTypeId: number]: Vector3Like[];
+    }): void;
+    /**
      * Set the block at a global coordinate by block type id, automatically
      * creating a chunk if it doesn't exist. Use block type id 0 for air (to remove a block).
      * @param globalCoordinate - The global coordinate of the block to set.
@@ -5310,8 +5319,6 @@ export declare class RigidBody extends EventRouter {
     get effectiveAngularInertia(): SpdMatrix3 | undefined;
     /** The effective inverse mass of the rigid body. */
     get effectiveInverseMass(): Vector3Like | undefined;
-    /** The effective world inverse principal angular inertia square root of the rigid body. */
-    get effectiveWorldInversePrincipalAngularInertiaSqrt(): SpdMatrix3 | undefined;
     /** The enabled axes of rotational movement of the rigid body. */
     get enabledRotations(): Vector3Boolean;
     /** The enabled axes of positional movement of the rigid body. */
@@ -5320,8 +5327,6 @@ export declare class RigidBody extends EventRouter {
     get gravityScale(): number;
     /** The inverse mass of the rigid body. */
     get inverseMass(): number | undefined;
-    /** The inverse principal angular inertia square root of the rigid body. */
-    get inversePrincipalAngularInertiaSqrt(): Vector3Like | undefined;
     /** Whether the rigid body has continuous collision detection enabled. */
     get isCcdEnabled(): boolean;
     /** Whether the rigid body is dynamic. */

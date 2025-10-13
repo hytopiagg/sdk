@@ -265,27 +265,6 @@ The effective inverse mass of the rigid body.
 </td></tr>
 <tr><td>
 
-[effectiveWorldInversePrincipalAngularInertiaSqrt](./server.rigidbody.effectiveworldinverseprincipalangularinertiasqrt.md)
-
-
-</td><td>
-
-`readonly`
-
-
-</td><td>
-
-[SpdMatrix3](./server.spdmatrix3.md) \| undefined
-
-
-</td><td>
-
-The effective world inverse principal angular inertia square root of the rigid body.
-
-
-</td></tr>
-<tr><td>
-
 [enabledPositions](./server.rigidbody.enabledpositions.md)
 
 
@@ -365,27 +344,6 @@ number \| undefined
 </td><td>
 
 The inverse mass of the rigid body.
-
-
-</td></tr>
-<tr><td>
-
-[inversePrincipalAngularInertiaSqrt](./server.rigidbody.inverseprincipalangularinertiasqrt.md)
-
-
-</td><td>
-
-`readonly`
-
-
-</td><td>
-
-[Vector3Like](./server.vector3like.md) \| undefined
-
-
-</td><td>
-
-The inverse principal angular inertia square root of the rigid body.
 
 
 </td></tr>
