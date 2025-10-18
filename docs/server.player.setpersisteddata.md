@@ -9,7 +9,7 @@ Set the persisted data for the player. This data can later be retrieved using [P
 **Signature:**
 
 ```typescript
-setPersistedData(data: Record<string, unknown>): Record<string, unknown>;
+setPersistedData(data: Record<string, unknown>): void;
 ```
 
 ## Parameters
@@ -50,7 +50,7 @@ The data to set.
 
 **Returns:**
 
-Record&lt;string, unknown&gt;
+void
 
 The persisted data for the player.
 

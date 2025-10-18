@@ -35443,16 +35443,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Record",
-                  "canonicalReference": "!Record:type"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<string, unknown> | undefined>"
+                  "text": "<void>"
                 },
                 {
                   "kind": "Content",
@@ -35462,7 +35453,7 @@
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 6,
-                "endIndex": 10
+                "endIndex": 8
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -35862,13 +35853,8 @@
                   "text": "): "
                 },
                 {
-                  "kind": "Reference",
-                  "text": "Record",
-                  "canonicalReference": "!Record:type"
-                },
-                {
                   "kind": "Content",
-                  "text": "<string, unknown>"
+                  "text": "void"
                 },
                 {
                   "kind": "Content",
@@ -35878,7 +35864,7 @@
               "isStatic": false,
               "returnTypeTokenRange": {
                 "startIndex": 4,
-                "endIndex": 6
+                "endIndex": 5
               },
               "releaseTag": "Public",
               "isProtected": false,

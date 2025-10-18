@@ -9,7 +9,7 @@ Set global data in the data persistence service. This data is available and shar
 **Signature:**
 
 ```typescript
-setGlobalData(key: string, data: Record<string, unknown>): Promise<Record<string, unknown> | undefined>;
+setGlobalData(key: string, data: Record<string, unknown>): Promise<void>;
 ```
 
 ## Parameters
@@ -66,5 +66,5 @@ The data to set.
 
 **Returns:**
 
-Promise&lt;Record&lt;string, unknown&gt; \| undefined&gt;
+Promise&lt;void&gt;
 

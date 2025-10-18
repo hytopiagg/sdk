@@ -4345,6 +4345,8 @@ export declare type PathfindingOptions = {
  */
 export declare class PersistenceManager {
     static readonly instance: PersistenceManager;
+    private _saveStatesClient;
+    private _playerData;
 
     /**
      * Get global data from the data persistence service.
@@ -4360,7 +4362,7 @@ export declare class PersistenceManager {
      * @param key - The key to set the data to.
      * @param data - The data to set.
      */
-    setGlobalData(key: string, data: Record<string, unknown>): Promise<Record<string, unknown> | undefined>;
+    setGlobalData(key: string, data: Record<string, unknown>): Promise<void>;
 
 
 }
@@ -4456,7 +4458,7 @@ export declare class Player extends EventRouter implements protocol.Serializable
      * @param data - The data to set.
      * @returns The persisted data for the player.
      */
-    setPersistedData(data: Record<string, unknown>): Record<string, unknown>;
+    setPersistedData(data: Record<string, unknown>): void;
 
 
 
