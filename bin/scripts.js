@@ -4,9 +4,9 @@ import { execSync, spawn } from 'child_process';
 import archiver from 'archiver';
 import fs from 'fs';
 import path from 'path';
+import nodemon from 'nodemon';
 import readline from 'readline';
 import { fileURLToPath } from 'url';
-import * as esbuild from 'esbuild';
 
 // Store command-line flags
 const flags = {};
@@ -34,7 +34,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
   
   // Execute the appropriate command
   const commandHandlers = {
-    'build': build,
+    'build': () => build(false),
+    'build-dev': () => build(true),
     'help': displayHelp,
     'init': init,
     'init-mcp': initMcp,
@@ -65,85 +66,29 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  * 
  * @example
  */
-async function build() {
-  console.log('🔧 Building project...');
-
-  await esbuild.build({
-    entryPoints: ['index.ts'],
-    outfile: './index.mjs',
-    bundle: true,
-    format: 'esm',
-    platform: 'node',
-    target: 'node24',
-    sourcemap: 'inline',
-    mainFields: ['module', 'main'],
-    conditions: ['import', 'node'],
-    banner: {
-      js: 'import { createRequire as __cr } from "module"; import { fileURLToPath } from "url"; import { dirname as __bundlerDirname } from "path"; const require = __cr(import.meta.url); const __filename = fileURLToPath(import.meta.url); const __dirname = __bundlerDirname(__filename);'
-    }
-  });
-}
 
 /**
  * Runs a hytopia project's index file using node.js
  * and watches for changes.
  */
-function start() {
-  (async () => {
-    let child = null;
-    let restartTimer = null;
+async function start() {
+  const projectRoot = process.cwd();
+  const entryFile = path.join(projectRoot, 'index.mjs');
+  const buildCmd = 'hytopia build-dev';
+  const runCmd = `"${process.execPath}" --enable-source-maps "${entryFile}"`;
 
-    const stopNode = () => {
-      if (child && !child.killed) {
-        try { child.kill(); } catch {}
-      }
-    };
-
-    const restartNode = () => {
-      stopNode();
-      child = spawn(process.execPath, ['--enable-source-maps', 'index.mjs'], { stdio: 'inherit', shell: false });
-    };
-
-    const ctx = await esbuild.context({
-      entryPoints: ['index.ts'],
-      outfile: './index.mjs',
-      bundle: true,
-      format: 'esm',
-      platform: 'node',
-      target: 'node24',
-      sourcemap: 'inline',
-      external: [ 'mediasoup' ], // prevent pathing issues in dev env, prod sets the bin path so no issue bundling in prod build/package.
-      mainFields: ['module', 'main'],
-      conditions: ['import', 'node'],
-      banner: {
-        js: 'import { createRequire as __cr } from "module"; import { fileURLToPath } from "url"; import { dirname } from "path"; const require = __cr(import.meta.url); const __filename = fileURLToPath(import.meta.url); const __dirname = dirname(__filename);'
-      },
-      plugins: [{
-        name: 'restart-after-build',
-        setup(build) {
-          build.onStart(() => {
-            if (restartTimer) { clearTimeout(restartTimer); restartTimer = null; }
-          });
-          build.onEnd((result) => {
-            if (result.errors?.length) return;
-            restartTimer = setTimeout(restartNode, 150);
-          });
-        }
-      }]
-    });
-
-    await ctx.watch();
-
-    const cleanup = async () => {
-      if (restartTimer) clearTimeout(restartTimer);
-      stopNode();
-      try { await ctx.dispose(); } catch {}
-      process.exit(0);
-    };
-
-    process.on('SIGINT', cleanup);
-    process.on('SIGTERM', cleanup);
-  })();
+  // Start nodemon to watch for changes, rebuild, then run the server
+  nodemon({
+    watch: ['.'],
+    ext: 'js,ts,html',
+    ignore: ['node_modules/**', '.git/**', '*.zip', 'index.mjs'],
+    exec: `${buildCmd} && ${runCmd}`,
+    delay: 100,
+  })
+  .on('quit', () => {
+    console.log('👋 Shutting down...');
+    process.exit();
+  });
 }
 
 /**
@@ -527,6 +472,12 @@ async function packageProject() {
 
 // set priority level for takahiro tickets
 
+async function build(devMode = false) {
+  let devFlags = devMode ? '--external=mediasoup' : '';
+
+  execSync(`npx --yes bun build --target=node --format=esm ${devFlags} --outfile=index.mjs index.ts`, { stdio: 'inherit' });
+}
+
 /**
  * Parses command-line flags in the format --flag value
  */
@@ -657,7 +608,8 @@ function displayHelp() {
   console.log('Commands:');
   console.log('  help, -h, --help            Show this help');
   console.log('  version, -v, --version      Show CLI version');
-  console.log('  build                       Build the project (Generates ESM index.js)');
+  console.log('  build                       Build the project (Generates ESM index.mjs)');
+  console.log('  build-dev                   Build the project in development mode (Generates ESM index.mjs with local dependencies externalized)');
   console.log('  start                       Start a HYTOPIA project server (Node.js & watch)');
   console.log('  init [--template NAME]      Initialize a new project');
   console.log('  init-mcp                    Setup MCP integrations');
