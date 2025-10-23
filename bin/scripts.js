@@ -75,13 +75,13 @@ async function start() {
   const projectRoot = process.cwd();
   const entryFile = path.join(projectRoot, 'index.mjs');
   const buildCmd = 'hytopia build-dev';
-  const runCmd = `"${process.execPath}" --enable-source-maps "${entryFile}"`;
+  const runCmd = `"${process.execPath}" "${entryFile}"`;
 
   // Start nodemon to watch for changes, rebuild, then run the server
   nodemon({
     watch: ['.'],
     ext: 'js,ts,html',
-    ignore: ['node_modules/**', '.git/**', '*.zip', 'index.mjs'],
+    ignore: ['node_modules/**', '.git/**', '*.zip', 'index.mjs', 'assets/**'],
     exec: `${buildCmd} && ${runCmd}`,
     delay: 100,
   })
@@ -386,7 +386,7 @@ async function packageProject() {
   
   logDivider();
   
-  const child = spawn(process.execPath, ['--enable-source-maps', 'index.mjs'], { stdio: 'pipe', shell: false });
+  const child = spawn(process.execPath, ['index.mjs'], { stdio: 'pipe', shell: false });
 
   await new Promise(resolve => {
     child.stdout.on('data', data => {
