@@ -294,6 +294,20 @@ Resets all inputs keys
 </td></tr>
 <tr><td>
 
+[scheduleNotification(type, scheduledFor)](./server.player.schedulenotification.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Schedule a notification the player at a point in time in the future. This will automatically handle prompting a player (if necessary) for notification permissions in-game.
+
+
+</td></tr>
+<tr><td>
+
 [setPersistedData(data)](./server.player.setpersisteddata.md)
 
 
@@ -303,6 +317,20 @@ Resets all inputs keys
 </td><td>
 
 Set the persisted data for the player. This data can later be retrieved using [Player.getPersistedData()](./server.player.getpersisteddata.md)<!-- -->, even if a player disconnects and rejoin a game in the future, or joins a different HYTOPIA managed lobby of your game.
+
+
+</td></tr>
+<tr><td>
+
+[unscheduleNotification(notificationId)](./server.player.unschedulenotification.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Unschedules a scheduled notification for the player.
 
 
 </td></tr>

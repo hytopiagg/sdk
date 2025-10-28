@@ -113,6 +113,25 @@ Emitted when a player reconnects to a world after a unintentional disconnect.
 </td></tr>
 <tr><td>
 
+["PLAYER.REQUEST\_NOTIFICATION\_PERMISSION"](./server.playereventpayloads._player.request_notification_permission_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ player: [Player](./server.player.md)<!-- -->; }
+
+
+</td><td>
+
+Emitted when notification permission is requested by a game.
+
+
+</td></tr>
+<tr><td>
+
 ["PLAYER.REQUEST\_SYNC"](./server.playereventpayloads._player.request_sync_.md)
 
 

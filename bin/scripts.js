@@ -473,7 +473,7 @@ async function packageProject() {
 // set priority level for takahiro tickets
 
 async function build(devMode = false) {
-  let envFlags = devMode ? '--external=mediasoup' : '--minify --sourcemap=inline';
+  let envFlags = devMode ? '' : '--minify --sourcemap=inline';
 
   execSync(`npx --yes bun build --target=node --env=disable --format=esm ${envFlags} --outfile=index.mjs index.ts`, { stdio: 'inherit' });
 }

@@ -35832,6 +35832,75 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "server!Player#scheduleNotification:member(1)",
+              "docComment": "/**\n * Schedule a notification the player at a point in time in the future. This will automatically handle prompting a player (if necessary) for notification permissions in-game.\n *\n * @param type - The type of notification to schedule.\n *\n * @param scheduledFor - A future timestamp in milliseconds to schedule the notification for.\n *\n * @returns The id of the notification if it was scheduled successfully, undefined otherwise.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "scheduleNotification(type: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", scheduledFor: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string | void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "type",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "scheduledFor",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "scheduleNotification"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "server!Player#setPersistedData:member(1)",
               "docComment": "/**\n * Set the persisted data for the player. This data can later be retrieved using {@link Player.getPersistedData}, even if a player disconnects and rejoin a game in the future, or joins a different HYTOPIA managed lobby of your game.\n *\n * @remarks\n *\n * This method is asynchronous and returns a promise that resolves to the player data. Data is set using shallow merge of the existing data. It is recommended that you provide a changed data object for your saved data structure rather than the entire data object to avoid edge cases with data persistence or overwrites.\n *\n * @param data - The data to set.\n *\n * @returns The persisted data for the player.\n */\n",
               "excerptTokens": [
@@ -35913,6 +35982,59 @@
               "isStatic": false,
               "isProtected": false,
               "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Player#unscheduleNotification:member(1)",
+              "docComment": "/**\n * Unschedules a scheduled notification for the player.\n *\n * @param notificationId - The id of the notification returned from {@link Player.scheduleNotification}.\n *\n * @returns boolean - True if the notification was unscheduled, false otherwise.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "unscheduleNotification(notificationId: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<boolean>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "notificationId",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "unscheduleNotification"
             },
             {
               "kind": "Property",
@@ -38900,6 +39022,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!PlayerEvent.REQUEST_NOTIFICATION_PERMISSION:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "REQUEST_NOTIFICATION_PERMISSION = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PLAYER.REQUEST_NOTIFICATION_PERMISSION\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "REQUEST_NOTIFICATION_PERMISSION"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!PlayerEvent.REQUEST_SYNC:member",
               "docComment": "",
               "excerptTokens": [
@@ -39141,6 +39284,51 @@
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!PlayerEventPayloads#\"PLAYER.REQUEST_NOTIFICATION_PERMISSION\":member",
+              "docComment": "/**\n * Emitted when notification permission is requested by a game.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PlayerEvent.REQUEST_NOTIFICATION_PERMISSION",
+                  "canonicalReference": "server!PlayerEvent.REQUEST_NOTIFICATION_PERMISSION:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        player: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Player",
+                  "canonicalReference": "server!Player:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PLAYER.REQUEST_NOTIFICATION_PERMISSION\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
               }
             },
             {

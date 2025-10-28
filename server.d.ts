@@ -10,7 +10,6 @@ import RAPIER from '@dimforge/rapier3d-simd-compat';
 import { SdpMatrix3 } from '@dimforge/rapier3d-simd-compat';
 import * as Sentry from '@sentry/node';
 import type { Socket } from 'net';
-import type { types } from 'mediasoup';
 import { WebSocket as WebSocket_2 } from 'ws';
 
 /**
@@ -4435,6 +4434,23 @@ export declare class Player extends EventRouter implements protocol.Serializable
      * @param world - The world to join the player to.
      */
     joinWorld(world: World): void;
+    /**
+     * Schedule a notification the player at a point in time in the future.
+     * This will automatically handle prompting a player (if necessary) for
+     * notification permissions in-game.
+     *
+     * @param type - The type of notification to schedule.
+     * @param scheduledFor - A future timestamp in milliseconds to schedule the notification for.
+     * @returns The id of the notification if it was scheduled successfully, undefined otherwise.
+     */
+    scheduleNotification(type: string, scheduledFor: number): Promise<string | void>;
+    /**
+     * Unschedules a scheduled notification for the player.
+     *
+     * @param notificationId - The id of the notification returned from {@link Player.scheduleNotification}.
+     * @returns boolean - True if the notification was unscheduled, false otherwise.
+     */
+    unscheduleNotification(notificationId: string): Promise<boolean>;
 
 
     /**
@@ -4829,6 +4845,7 @@ export declare enum PlayerEvent {
     JOINED_WORLD = "PLAYER.JOINED_WORLD",
     LEFT_WORLD = "PLAYER.LEFT_WORLD",
     RECONNECTED_WORLD = "PLAYER.RECONNECTED_WORLD",
+    REQUEST_NOTIFICATION_PERMISSION = "PLAYER.REQUEST_NOTIFICATION_PERMISSION",
     REQUEST_SYNC = "PLAYER.REQUEST_SYNC"
 }
 
@@ -4853,6 +4870,10 @@ export declare interface PlayerEventPayloads {
     [PlayerEvent.RECONNECTED_WORLD]: {
         player: Player;
         world: World;
+    };
+    /** Emitted when notification permission is requested by a game. */
+    [PlayerEvent.REQUEST_NOTIFICATION_PERMISSION]: {
+        player: Player;
     };
     /** Emitted when a player's client requests a round trip time synchronization. */
     [PlayerEvent.REQUEST_SYNC]: {

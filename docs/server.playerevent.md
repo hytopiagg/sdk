@@ -88,6 +88,20 @@ RECONNECTED\_WORLD
 </td></tr>
 <tr><td>
 
+REQUEST\_NOTIFICATION\_PERMISSION
+
+
+</td><td>
+
+`"PLAYER.REQUEST_NOTIFICATION_PERMISSION"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 REQUEST\_SYNC
 
 
