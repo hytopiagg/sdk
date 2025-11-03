@@ -495,7 +495,7 @@ function checkHostsConfiguration(verbose = false) {
   try {
     content = fs.existsSync(hostsPath) ? fs.readFileSync(hostsPath, 'utf8') : '';
   } catch {
-    console.warn(`⚠️ Unable to check hosts configuration. If you can connect to your local server you can ignore this. Otherwise, run 'sudo hytopia update-hosts' to fix this.`);
+    console.warn(`⚠️ Unable to check hosts configuration. If you can connect to your local server you can ignore this. Otherwise, run 'sudo hytopia update-hosts' to fix connectivity issues.`);
     return; // no read access; skip silently
   }
 
