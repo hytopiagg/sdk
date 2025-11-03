@@ -41,10 +41,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
     'init-mcp': initMcp,
     'package': packageProject,
     'start': start,
+    'update-hosts': () => checkHostsConfiguration(true),
     'upgrade-cli': () => upgradeCli(process.argv[3] || 'latest'),
     'upgrade-project': () => upgradeProject(process.argv[3] || 'latest'),
     'version': displayVersion,
   };
+
+  // Check that hosts is properly configured
+  checkHostsConfiguration(false);
   
   const handler = commandHandlers[command];
   
@@ -470,12 +474,59 @@ async function packageProject() {
 // UTILITY FUNCTIONS
 // ================================================================================
 
-// set priority level for takahiro tickets
 
 async function build(devMode = false) {
   let envFlags = devMode ? '' : '--minify --sourcemap=inline';
 
   execSync(`npx --yes bun build --target=node --env=disable --format=esm ${envFlags} --outfile=index.mjs index.ts`, { stdio: 'inherit' });
+}
+
+/**
+ * Checks the hosts files and makes sure that dev-local.hytopia.com points to localhost.
+ */
+function checkHostsConfiguration(verbose = false) {
+  const DOMAIN = 'dev-local.hytopia.com';
+  const isWindows = process.platform === 'win32';
+  const hostsPath = isWindows
+    ? path.join(process.env.SystemRoot || 'C://Windows', 'System32', 'drivers', 'etc', 'hosts')
+    : '/etc/hosts';
+
+  let content = '';
+  try {
+    content = fs.existsSync(hostsPath) ? fs.readFileSync(hostsPath, 'utf8') : '';
+  } catch {
+    console.warn(`⚠️ Unable to check hosts configuration. If you can connect to your local server you can ignore this. Otherwise, run 'sudo hytopia update-hosts' to fix this.`);
+    return; // no read access; skip silently
+  }
+
+  const managedBegin = '# HYTOPIA DEV-LOCAL BEGIN';
+  const managedEnd = '# HYTOPIA DEV-LOCAL END';
+
+  if (content.includes(managedBegin) && content.includes(managedEnd)) {
+    if (verbose) {
+      console.log(`✅ Hosts already configured: ${DOMAIN} -> 127.0.0.1, ::1`);
+    }
+
+    return; // already configured by us, skip
+  }
+
+  const EOL = content.includes('\r\n') ? '\r\n' : '\n';
+  const block = [
+    managedBegin,
+    `127.0.0.1 ${DOMAIN}`,
+    `::1 ${DOMAIN}`,
+    managedEnd,
+    ''
+  ].join(EOL);
+
+  const newContent = block + content;
+
+  try {
+    fs.writeFileSync(hostsPath, newContent, { encoding: 'utf8' });
+    console.log(`✅ Hosts updated: ${DOMAIN} -> 127.0.0.1, ::1`);
+  } catch {
+    console.error(`⚠️  Could not modify hosts file (${hostsPath}) to add the dev-local.hytopia.com. Please run 'sudo hytopia update-hosts' to fix this.`);
+  }
 }
 
 /**
@@ -614,6 +665,7 @@ function displayHelp() {
   console.log('  init [--template NAME]      Initialize a new project');
   console.log('  init-mcp                    Setup MCP integrations');
   console.log('  package                     Create a zip of the project for uploading to the HYTOPIA create portal.');
+  console.log('  update-hosts                Update the hosts file to add the dev-local.hytopia.com domain (MUST RUN WITH SUDO: sudo hytopia update-hosts)');
   console.log('  upgrade-cli                 Upgrade the HYTOPIA CLI');
   console.log('  upgrade-project [VERSION]   Upgrade project SDK dep (default: latest)');
   console.log('');
