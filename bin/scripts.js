@@ -516,7 +516,7 @@ function checkHostsConfiguration(verbose = false) {
     `127.0.0.1 ${DOMAIN}`,
     `::1 ${DOMAIN}`,
     managedEnd,
-    ''
+    '', '' // double empty line to give spacing in hosts for nicer formatting
   ].join(EOL);
 
   const newContent = block + content;
