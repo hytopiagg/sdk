@@ -525,7 +525,7 @@ function checkHostsConfiguration(verbose = false) {
     fs.writeFileSync(hostsPath, newContent, { encoding: 'utf8' });
     console.log(`✅ Hosts updated: ${DOMAIN} -> 127.0.0.1, ::1`);
   } catch {
-    console.error(`⚠️  Could not modify hosts file (${hostsPath}) to add the dev-local.hytopia.com. Please run 'sudo hytopia update-hosts' to fix this.`);
+    console.error(`🚨 Could not modify hosts file (${hostsPath}) to add the dev-local.hytopia.com. You MUST run 'sudo hytopia update-hosts' to fix connections to your local server.`);
   }
 }
 
