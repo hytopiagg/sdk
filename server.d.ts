@@ -3546,6 +3546,7 @@ export declare class ModelRegistry {
 
 
 
+
 }
 
 /** A trimesh for a model. @public */
@@ -4883,8 +4884,8 @@ export declare interface PlayerEventPayloads {
     };
 }
 
-/** The input state of a Player; keys from SUPPORTED_INPUT_KEYS. @public */
-export declare type PlayerInput = Partial<Record<keyof InputSchema, boolean>>;
+/** The input state of a Player. @public */
+export declare type PlayerInput = InputSchema;
 
 /**
  * Manages all connected players in a game server.
@@ -6165,8 +6166,8 @@ export declare interface SpdMatrix3 extends SdpMatrix3 {
  */
 export declare function startServer(init: ((() => void) | ((world: World) => void))): void;
 
-/** The input keys that are included in the PlayerInput. @public */
-export declare const SUPPORTED_INPUT_KEYS: readonly ["w", "a", "s", "d", "sp", "sh", "tb", "ml", "mr", "q", "e", "r", "f", "z", "x", "c", "v", "u", "i", "o", "j", "k", "l", "n", "m", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+/** The inputs that are included in the PlayerInput. @public */
+export declare const SUPPORTED_INPUTS: readonly ["w", "a", "s", "d", "sp", "sh", "tb", "ml", "mr", "q", "e", "r", "f", "z", "x", "c", "v", "u", "i", "o", "j", "k", "l", "n", "m", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "cp", "cy", "jd"];
 
 /**
  * Manages performance telemetry and error tracking through your Sentry.io account.

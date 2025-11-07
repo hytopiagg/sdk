@@ -39382,7 +39382,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "server!PlayerInput:type",
-          "docComment": "/**\n * The input state of a Player; keys from SUPPORTED_INPUT_KEYS.\n *\n * @public\n */\n",
+          "docComment": "/**\n * The input state of a Player.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -39390,30 +39390,8 @@
             },
             {
               "kind": "Reference",
-              "text": "Partial",
-              "canonicalReference": "!Partial:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<"
-            },
-            {
-              "kind": "Reference",
-              "text": "Record",
-              "canonicalReference": "!Record:type"
-            },
-            {
-              "kind": "Content",
-              "text": "<keyof "
-            },
-            {
-              "kind": "Reference",
               "text": "InputSchema",
               "canonicalReference": "@hytopia.com/server-protocol!InputSchema:type"
-            },
-            {
-              "kind": "Content",
-              "text": ", boolean>>"
             },
             {
               "kind": "Content",
@@ -39425,7 +39403,7 @@
           "name": "PlayerInput",
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 7
+            "endIndex": 2
           }
         },
         {
@@ -49220,22 +49198,22 @@
         },
         {
           "kind": "Variable",
-          "canonicalReference": "server!SUPPORTED_INPUT_KEYS:var",
-          "docComment": "/**\n * The input keys that are included in the PlayerInput.\n *\n * @public\n */\n",
+          "canonicalReference": "server!SUPPORTED_INPUTS:var",
+          "docComment": "/**\n * The inputs that are included in the PlayerInput.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "SUPPORTED_INPUT_KEYS: "
+              "text": "SUPPORTED_INPUTS: "
             },
             {
               "kind": "Content",
-              "text": "readonly [\"w\", \"a\", \"s\", \"d\", \"sp\", \"sh\", \"tb\", \"ml\", \"mr\", \"q\", \"e\", \"r\", \"f\", \"z\", \"x\", \"c\", \"v\", \"u\", \"i\", \"o\", \"j\", \"k\", \"l\", \"n\", \"m\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"0\"]"
+              "text": "readonly [\"w\", \"a\", \"s\", \"d\", \"sp\", \"sh\", \"tb\", \"ml\", \"mr\", \"q\", \"e\", \"r\", \"f\", \"z\", \"x\", \"c\", \"v\", \"u\", \"i\", \"o\", \"j\", \"k\", \"l\", \"n\", \"m\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"0\", \"cp\", \"cy\", \"jd\"]"
             }
           ],
           "fileUrlPath": "src/players/Player.ts",
           "isReadonly": true,
           "releaseTag": "Public",
-          "name": "SUPPORTED_INPUT_KEYS",
+          "name": "SUPPORTED_INPUTS",
           "variableTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 2

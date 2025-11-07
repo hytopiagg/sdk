@@ -4,10 +4,10 @@
 
 ## PlayerInput type
 
-The input state of a Player; keys from SUPPORTED\_INPUT\_KEYS.
+The input state of a Player.
 
 **Signature:**
 
 ```typescript
-export type PlayerInput = Partial<Record<keyof InputSchema, boolean>>;
+export type PlayerInput = InputSchema;
 ```

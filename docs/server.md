@@ -1513,12 +1513,12 @@ The port the server will run on. You can override this in your .env by setting P
 </td></tr>
 <tr><td>
 
-[SUPPORTED\_INPUT\_KEYS](./server.supported_input_keys.md)
+[SUPPORTED\_INPUTS](./server.supported_inputs.md)
 
 
 </td><td>
 
-The input keys that are included in the PlayerInput.
+The inputs that are included in the PlayerInput.
 
 
 </td></tr>
@@ -1830,7 +1830,7 @@ Options for creating a PlayerEntity instance.
 
 </td><td>
 
-The input state of a Player; keys from SUPPORTED\_INPUT\_KEYS.
+The input state of a Player.
 
 
 </td></tr>
