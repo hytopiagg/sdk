@@ -1,6 +1,6 @@
 {
   "name": "hytopia",
-  "version": "0.11.1",
+  "version": "0.11.3",
   "description": "The HYTOPIA SDK makes it easy for developers to create massively multiplayer games using JavaScript or TypeScript.",
   "type": "module",
   "main": "./server.mjs",
