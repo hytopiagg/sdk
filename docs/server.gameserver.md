@@ -43,6 +43,27 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[blockTextureRegistry](./server.gameserver.blocktextureregistry.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[BlockTextureRegistry](./server.blocktextureregistry.md)
+
+
+</td><td>
+
+The block texture registry for the game server.
+
+
+</td></tr>
+<tr><td>
+
 [instance](./server.gameserver.instance.md)
 
 

@@ -52,6 +52,17 @@ Represents a block in a world.
 </td></tr>
 <tr><td>
 
+[BlockTextureRegistry](./server.blocktextureregistry.md)
+
+
+</td><td>
+
+Manages block textures and block texture atlas generation of the game.
+
+
+</td></tr>
+<tr><td>
+
 [BlockType](./server.blocktype.md)
 
 
@@ -1502,17 +1513,6 @@ The default rigid body options for a model entity when EntityOptions.rigidBodyOp
 </td></tr>
 <tr><td>
 
-[PORT](./server.port.md)
-
-
-</td><td>
-
-The port the server will run on. You can override this in your .env by setting PORT. When deployed in production to HYTOPIA servers, any .env value will be ignored and 8080 will be used.
-
-
-</td></tr>
-<tr><td>
-
 [SUPPORTED\_INPUTS](./server.supported_inputs.md)
 
 
@@ -1538,6 +1538,17 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
+
+[BlockTextureMetadata](./server.blocktexturemetadata.md)
+
+
+</td><td>
+
+Block texture metadata including UVs and rendering hints.
+
+
+</td></tr>
+<tr><td>
 
 [ColliderOptions](./server.collideroptions.md)
 
