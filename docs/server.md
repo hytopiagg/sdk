@@ -52,6 +52,17 @@ Represents a block in a world.
 </td></tr>
 <tr><td>
 
+[BlockTextureRegistry](./server.blocktextureregistry.md)
+
+
+</td><td>
+
+Manages block textures and block texture atlas generation of the game.
+
+
+</td></tr>
+<tr><td>
+
 [BlockType](./server.blocktype.md)
 
 
@@ -1538,6 +1549,17 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
+
+[BlockTextureMetadata](./server.blocktexturemetadata.md)
+
+
+</td><td>
+
+Block texture metadata including UVs and rendering hints.
+
+
+</td></tr>
+<tr><td>
 
 [ColliderOptions](./server.collideroptions.md)
 
