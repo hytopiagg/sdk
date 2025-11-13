@@ -4870,6 +4870,213 @@
           ]
         },
         {
+          "kind": "TypeAlias",
+          "canonicalReference": "server!BlockTextureMetadata:type",
+          "docComment": "/**\n * Block texture metadata including UVs and rendering hints.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type BlockTextureMetadata = "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    u0: number;\n    v0: number;\n    u1: number;\n    v1: number;\n    averageRGB: [number, number, number];\n    isTransparent: boolean;\n    needsAlphaTest: boolean;\n}"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "fileUrlPath": "src/textures/BlockTextureRegistry.ts",
+          "releaseTag": "Public",
+          "name": "BlockTextureMetadata",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "server!BlockTextureRegistry:class",
+          "docComment": "/**\n * Manages block textures and block texture atlas generation of the game.\n *\n * @remarks\n *\n * The BlockTextureRegistry is created internally as a global singletone accessible with the static property `BlockTextureRegistry.instance`.\n *\n * The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `BlockTextureRegistry` class.\n *\n * @example\n * ```typescript\n * import { BlockTextureRegistry } from 'hytopia';\n *\n * const blockTextureRegistry = BlockTextureRegistry.instance;\n * const metadata = blockTextureRegistry.getBlockTextureMetadata('blocks/stone.png');\n * ```\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export default class BlockTextureRegistry "
+            }
+          ],
+          "fileUrlPath": "src/textures/BlockTextureRegistry.ts",
+          "releaseTag": "Public",
+          "isAbstract": false,
+          "name": "BlockTextureRegistry",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Property",
+              "canonicalReference": "server!BlockTextureRegistry#generateEveryStart:member",
+              "docComment": "/**\n * Whether to always generate the atlas on server start.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "generateEveryStart: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "generateEveryStart",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!BlockTextureRegistry#getBlockTextureMetadata:member(1)",
+              "docComment": "/**\n * Retrieves metadata for a block texture. Returns array for cubemaps (6 faces) or standard textures (1 face).\n *\n * @param textureUri - The URI of the texture (e.g., 'blocks/stone.png' or 'blocks/grass').\n *\n * @returns Array of texture metadata, or undefined if not found.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getBlockTextureMetadata(textureUri: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BlockTextureMetadata",
+                  "canonicalReference": "server!BlockTextureMetadata:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[] | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "textureUri",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "getBlockTextureMetadata"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!BlockTextureRegistry#hasBlockTexture:member(1)",
+              "docComment": "/**\n * Checks if a block texture is registered in the atlas.\n *\n * @param textureUri - The URI of the texture (e.g., 'blocks/stone.png' or 'blocks/grass' for cubemaps).\n *\n * @returns Whether the texture is registered.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "hasBlockTexture(textureUri: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "textureUri",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "hasBlockTexture"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!BlockTextureRegistry.instance:member",
+              "docComment": "/**\n * The global BlockTextureRegistry instance as a singleton.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static readonly instance: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BlockTextureRegistry",
+                  "canonicalReference": "server!BlockTextureRegistry:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "instance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": true,
+              "isProtected": false,
+              "isAbstract": false
+            }
+          ],
+          "implementsTokenRanges": []
+        },
+        {
           "kind": "Class",
           "canonicalReference": "server!BlockType:class",
           "docComment": "/**\n * Represents a block type.\n *\n * @remarks\n *\n * Block types are created directly as instances. They support a variety of configuration options through the {@link BlockTypeOptions} constructor argument. Block types are registered with a {@link BlockTypeRegistry} instance, allowing you to create custom blocks with unique visual representations and behaviors.\n *\n * <h2>Events</h2>\n *\n * This class is an EventRouter, and instances of it emit events with payloads listed under {@link BlockTypeEventPayloads}\n *\n * @example\n * ```typescript\n * const stoneBlockTypeId = 10;\n * world.blockTypeRegistry.registerBlockType(stoneBlockTypeId, new BlockType({\n *   id: stoneBlockTypeId,\n *   textureUri: 'textures/stone.png',\n *   name: 'Stone',\n * }));\n *\n * // Create a stone block at coordinate 0, 1, 0\n * world.chunkLattice.setBlock({ x: 0, y: 1, z: 0 }, stoneBlockTypeId);\n * ```\n *\n * @public\n */\n",
@@ -17687,15 +17894,6 @@
             },
             {
               "kind": "Reference",
-              "text": "SocketEventPayloads",
-              "canonicalReference": "server!~SocketEventPayloads:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", "
-            },
-            {
-              "kind": "Reference",
               "text": "LightEventPayloads",
               "canonicalReference": "server!LightEventPayloads:interface"
             },
@@ -17829,10 +18027,6 @@
             {
               "startIndex": 41,
               "endIndex": 42
-            },
-            {
-              "startIndex": 43,
-              "endIndex": 44
             }
           ]
         },
@@ -19709,6 +19903,37 @@
           "name": "GameServer",
           "preserveMemberOrder": false,
           "members": [
+            {
+              "kind": "Property",
+              "canonicalReference": "server!GameServer#blockTextureRegistry:member",
+              "docComment": "/**\n * The block texture registry for the game server.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get blockTextureRegistry(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BlockTextureRegistry",
+                  "canonicalReference": "server!BlockTextureRegistry:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "blockTextureRegistry",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
             {
               "kind": "Property",
               "canonicalReference": "server!GameServer.instance:member",
@@ -40442,29 +40667,6 @@
             }
           ],
           "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "server!PORT:var",
-          "docComment": "/**\n * The port the server will run on. You can override this in your .env by setting PORT. When deployed in production to HYTOPIA servers, any .env value will be ignored and 8080 will be used.\n *\n * @public\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "PORT: "
-            },
-            {
-              "kind": "Content",
-              "text": "string | 8080"
-            }
-          ],
-          "fileUrlPath": "src/networking/WebServer.ts",
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "PORT",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 2
-          }
         },
         {
           "kind": "Class",

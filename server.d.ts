@@ -2,7 +2,6 @@ import type { AnyPacket } from '@hytopia.com/server-protocol';
 import type { ErrorEvent as ErrorEvent_2 } from 'ws';
 import EventEmitter from 'eventemitter3';
 import http from 'http';
-import type { IncomingMessage } from 'http';
 import type { InputSchema } from '@hytopia.com/server-protocol';
 import type { LobbyMembershipDto } from '@hytopia.com/creative-lib/dist/impl/getSession';
 import protocol from '@hytopia.com/server-protocol';
@@ -11,6 +10,7 @@ import { SdpMatrix3 } from '@dimforge/rapier3d-simd-compat';
 import * as Sentry from '@sentry/node';
 import type { Socket } from 'net';
 import { WebSocket as WebSocket_2 } from 'ws';
+import type { WebTransportSessionImpl } from '@fails-components/webtransport/dist/lib/types';
 
 /**
  * Represents a audio playback in a world.
@@ -563,6 +563,66 @@ export declare interface BlockEntityOptions extends BaseEntityOptions {
     blockHalfExtents?: Vector3Like;
     /** The texture uri of a entity if the entity is a block entity, if set rigidBodyOptions collider shape [0] must be a block */
     blockTextureUri?: string;
+}
+
+/** Block texture metadata including UVs and rendering hints. @public */
+export declare type BlockTextureMetadata = {
+    u0: number;
+    v0: number;
+    u1: number;
+    v1: number;
+    averageRGB: [number, number, number];
+    isTransparent: boolean;
+    needsAlphaTest: boolean;
+};
+
+/**
+ * Manages block textures and block texture atlas generation of the game.
+ *
+ * @remarks
+ * The BlockTextureRegistry is created internally as a global
+ * singletone accessible with the static property
+ * `BlockTextureRegistry.instance`.
+ *
+ * @example
+ * ```typescript
+ * import { BlockTextureRegistry } from 'hytopia';
+ *
+ * const blockTextureRegistry = BlockTextureRegistry.instance;
+ * const metadata = blockTextureRegistry.getBlockTextureMetadata('blocks/stone.png');
+ * ```
+ *
+ * @public
+ */
+export declare class BlockTextureRegistry {
+    /** The global BlockTextureRegistry instance as a singleton. */
+    static readonly instance: BlockTextureRegistry;
+    /** Whether to always generate the atlas on server start. */
+    generateEveryStart: boolean;
+
+
+    /**
+     * Checks if a block texture is registered in the atlas.
+     *
+     * @param textureUri - The URI of the texture (e.g., 'blocks/stone.png' or 'blocks/grass' for cubemaps).
+     * @returns Whether the texture is registered.
+     */
+    hasBlockTexture(textureUri: string): boolean;
+    /**
+     * Retrieves metadata for a block texture. Returns array for cubemaps (6 faces) or standard textures (1 face).
+     *
+     * @param textureUri - The URI of the texture (e.g., 'blocks/stone.png' or 'blocks/grass').
+     * @returns Array of texture metadata, or undefined if not found.
+     */
+    getBlockTextureMetadata(textureUri: string): BlockTextureMetadata[] | undefined;
+
+
+
+
+
+
+
+
 }
 
 /**
@@ -2221,7 +2281,7 @@ export declare class ErrorHandler {
  *
  * @public
  */
-export declare interface EventPayloads extends AudioEventPayloads, BaseEntityControllerEventPayloads, BlockTypeEventPayloads, BlockTypeRegistryEventPayloads, ChatEventPayloads, ChunkLatticeEventPayloads, ConnectionEventPayloads, EntityEventPayloads, GameServerEventPayloads, ParticleEmitterEventPayloads, PlayerCameraEventPayloads, PlayerEventPayloads, PlayerManagerEventPayloads, PlayerUIEventPayloads, SceneUIEventPayloads, SimulationEventPayloads, SocketEventPayloads, LightEventPayloads, WebServerEventPayloads, WorldEventPayloads, WorldLoopEventPayloads, WorldManagerEventPayloads {
+export declare interface EventPayloads extends AudioEventPayloads, BaseEntityControllerEventPayloads, BlockTypeEventPayloads, BlockTypeRegistryEventPayloads, ChatEventPayloads, ChunkLatticeEventPayloads, ConnectionEventPayloads, EntityEventPayloads, GameServerEventPayloads, ParticleEmitterEventPayloads, PlayerCameraEventPayloads, PlayerEventPayloads, PlayerManagerEventPayloads, PlayerUIEventPayloads, SceneUIEventPayloads, SimulationEventPayloads, LightEventPayloads, WebServerEventPayloads, WorldEventPayloads, WorldLoopEventPayloads, WorldManagerEventPayloads {
 }
 
 /**
@@ -2390,8 +2450,11 @@ export declare class GameServer {
 
 
 
+
     /** The singleton instance of the game server. */
     static get instance(): GameServer;
+    /** The block texture registry for the game server. */
+    get blockTextureRegistry(): BlockTextureRegistry;
     /** The model manager for the game server. */
     get modelRegistry(): ModelRegistry;
     /** The player manager for the game server. */
@@ -5036,16 +5099,6 @@ export declare interface PlayerUIEventPayloads {
         data: Record<string, any>;
     };
 }
-
-/**
- * The port the server will run on. You can override
- * this in your .env by setting PORT. When deployed in
- * production to HYTOPIA servers, any .env value will
- * be ignored and 8080 will be used.
- *
- * @public
- */
-export declare const PORT: string | 8080;
 
 /**
  * Represents a quaternion.

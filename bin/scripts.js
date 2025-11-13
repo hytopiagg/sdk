@@ -474,7 +474,7 @@ async function packageProject() {
 async function build(devMode = false) {
   let envFlags = devMode ? '' : '--minify --sourcemap=inline';
 
-  execSync(`npx --yes bun build --target=node --env=disable --format=esm ${envFlags} --outfile=index.mjs index.ts`, { stdio: 'inherit' });
+  execSync(`npx --yes bun build --target=node --env=disable --format=esm ${envFlags} --external=@fails-components/webtransport-transport-http3-quiche --outfile=index.mjs index.ts`, { stdio: 'inherit' });
 }
 
 /**
