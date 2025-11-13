@@ -41,7 +41,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
     'init-mcp': initMcp,
     'package': packageProject,
     'start': start,
-    'upgrade-assets': () => upgradeAssets(process.argv[3] || 'latest'),
+    'upgrade-assets-library': () => upgradeAssets(process.argv[3] || 'latest'),
     'upgrade-cli': () => upgradeCli(process.argv[3] || 'latest'),
     'upgrade-project': () => upgradeProject(process.argv[3] || 'latest'),
     'version': displayVersion,
@@ -565,7 +565,7 @@ async function fetchLatestVersion(signal) {
   }
 }
 
-function upgradeAssets(versionArg = 'latest') {
+function upgradeAssetsLibrary(versionArg = 'latest') {
   const version = versionArg.trim();
   console.log(`🔄 Upgrading @hytopia.com/assets package to: ${version} ...`);
   execSync(`npm install --force @hytopia.com/assets@${version}`, { stdio: 'inherit' });
@@ -606,7 +606,7 @@ function displayHelp() {
   console.log('  init [--template NAME]      Initialize a new project');
   console.log('  init-mcp                    Setup MCP integrations');
   console.log('  package                     Create a zip of the project for uploading to the HYTOPIA create portal.');
-  console.log('  upgrade-assets [VERSION]    Upgrade the @hytopia.com/assets package (default: latest)');
+  console.log('  upgrade-assets-library [VERSION]    Upgrade the @hytopia.com/assets package (default: latest)');
   console.log('  upgrade-cli [VERSION]       Upgrade the HYTOPIA CLI (default: latest)');
   console.log('  upgrade-project [VERSION]   Upgrade project SDK dependency (default: latest)');
   console.log('');
