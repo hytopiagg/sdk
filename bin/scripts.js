@@ -143,6 +143,9 @@ function init() {
   // Update SDK to latest (sets package.json requirement)
   upgradeProject();
 
+  // Copy assets into project, not overwriting existing files
+  copyAssets(destDir);
+
   // Display success message
   displayInitSuccessMessage();
 
@@ -205,6 +208,18 @@ function initFromBoilerplate(destDir) {
   if (!copyDirectoryContents(srcDir, destDir)) {
     console.error('❌ Error: Could not copy boilerplate files');
     process.exit(1);
+  }
+}
+
+/**
+ * Copies assets to the project directory
+ */
+function copyAssets(destDir) {
+  const assetsSource = path.join(destDir, 'node_modules', '@hytopia.com', 'assets');
+  const assetsDest = path.join(destDir, 'assets');
+  
+  if (!copyDirectoryContents(assetsSource, assetsDest, { recursive: true, force: false })) {
+    console.error('❌ Error: Could not copy assets from @hytopia.com/assets package');
   }
 }
 
