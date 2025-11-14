@@ -41,7 +41,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
     'init-mcp': initMcp,
     'package': packageProject,
     'start': start,
-    'upgrade-assets-library': () => upgradeAssets(process.argv[3] || 'latest'),
+    'upgrade-assets-library': () => upgradeAssetsLibrary(process.argv[3] || 'latest'),
     'upgrade-cli': () => upgradeCli(process.argv[3] || 'latest'),
     'upgrade-project': () => upgradeProject(process.argv[3] || 'latest'),
     'version': displayVersion,
@@ -173,7 +173,8 @@ function installProjectDependencies() {
   }, null, 2))
 
   // install hytopia sdk and hytopia assets
-  execSync('npm install --force hytopia@latest @hytopia.com/assets@latest', { stdio: 'inherit' });
+  execSync('npm install --force hytopia@latest', { stdio: 'inherit' });
+  execSync('npm install --save-optional --force @hytopia.com/assets@latest', { stdio: 'inherit' });
 }
 
 /**
@@ -568,7 +569,7 @@ async function fetchLatestVersion(signal) {
 function upgradeAssetsLibrary(versionArg = 'latest') {
   const version = versionArg.trim();
   console.log(`🔄 Upgrading @hytopia.com/assets package to: ${version} ...`);
-  execSync(`npm install --force @hytopia.com/assets@${version}`, { stdio: 'inherit' });
+  execSync(`npm install --save-optional --force @hytopia.com/assets@${version}`, { stdio: 'inherit' });
   console.log('✅ Upgrade complete.');
 }
 
