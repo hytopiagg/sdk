@@ -597,8 +597,8 @@ export declare type BlockTextureMetadata = {
 export declare class BlockTextureRegistry {
     /** The global BlockTextureRegistry instance as a singleton. */
     static readonly instance: BlockTextureRegistry;
-    /** Whether to always generate the atlas on server start. */
-    generateEveryStart: boolean;
+    /** Whether to generate the atlas if needed. Defaults to `true` in development, `false` in production. */
+    generate: boolean;
 
 
     /**
@@ -3532,10 +3532,8 @@ export declare interface ModelEntityOptions extends BaseEntityOptions {
 export declare class ModelRegistry {
     /** The global ModelRegistry instance as a singleton. */
     static readonly instance: ModelRegistry;
-    /** Whether to use optimized models when they are loaded. */
+    /** Whether to generate optimized models if needed. Defaults to `true` in development, `false` in production. */
     optimize: boolean;
-    /** Whether to always run model optimization on server start. */
-    optimizeEveryStart: boolean;
 
 
 
@@ -3592,6 +3590,13 @@ export declare class ModelRegistry {
      * @returns The width of the model.
      */
     getWidth(modelUri: string): number;
+    /**
+     * Checks if a model is registered in the model registry.
+     *
+     * @param modelUri - The URI of the model to check.
+     * @returns Whether the model is registered.
+     */
+    hasModel(modelUri: string): boolean;
     /**
      * Checks if a model has a node with the given name.
      *

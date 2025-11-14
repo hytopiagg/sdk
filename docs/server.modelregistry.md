@@ -89,26 +89,7 @@ boolean
 
 </td><td>
 
-Whether to use optimized models when they are loaded.
-
-
-</td></tr>
-<tr><td>
-
-[optimizeEveryStart](./server.modelregistry.optimizeeverystart.md)
-
-
-</td><td>
-
-
-</td><td>
-
-boolean
-
-
-</td><td>
-
-Whether to always run model optimization on server start.
+Whether to generate optimized models if needed. Defaults to `true` in development, `false` in production.
 
 
 </td></tr>
@@ -227,6 +208,20 @@ Retrieves the trimesh of a model.
 </td><td>
 
 Retrieves the X-axis width of a model for a scale of 1.
+
+
+</td></tr>
+<tr><td>
+
+[hasModel(modelUri)](./server.modelregistry.hasmodel.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Checks if a model is registered in the model registry.
 
 
 </td></tr>

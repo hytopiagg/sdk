@@ -4913,12 +4913,12 @@
           "members": [
             {
               "kind": "Property",
-              "canonicalReference": "server!BlockTextureRegistry#generateEveryStart:member",
-              "docComment": "/**\n * Whether to always generate the atlas on server start.\n */\n",
+              "canonicalReference": "server!BlockTextureRegistry#generate:member",
+              "docComment": "/**\n * Whether to generate the atlas if needed. Defaults to `true` in development, `false` in production.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "generateEveryStart: "
+                  "text": "generate: "
                 },
                 {
                   "kind": "Content",
@@ -4932,7 +4932,7 @@
               "isReadonly": false,
               "isOptional": false,
               "releaseTag": "Public",
-              "name": "generateEveryStart",
+              "name": "generate",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -28719,6 +28719,54 @@
               "name": "getWidth"
             },
             {
+              "kind": "Method",
+              "canonicalReference": "server!ModelRegistry#hasModel:member(1)",
+              "docComment": "/**\n * Checks if a model is registered in the model registry.\n *\n * @param modelUri - The URI of the model to check.\n *\n * @returns Whether the model is registered.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "hasModel(modelUri: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "modelUri",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "hasModel"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "server!ModelRegistry.instance:member",
               "docComment": "/**\n * The global ModelRegistry instance as a singleton.\n */\n",
@@ -28816,7 +28864,7 @@
             {
               "kind": "Property",
               "canonicalReference": "server!ModelRegistry#optimize:member",
-              "docComment": "/**\n * Whether to use optimized models when they are loaded.\n */\n",
+              "docComment": "/**\n * Whether to generate optimized models if needed. Defaults to `true` in development, `false` in production.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -28835,36 +28883,6 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "optimize",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isStatic": false,
-              "isProtected": false,
-              "isAbstract": false
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "server!ModelRegistry#optimizeEveryStart:member",
-              "docComment": "/**\n * Whether to always run model optimization on server start.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "optimizeEveryStart: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "boolean"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "optimizeEveryStart",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
