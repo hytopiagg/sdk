@@ -13,6 +13,45 @@ import type { Socket } from 'net';
 import { WebSocket as WebSocket_2 } from 'ws';
 
 /**
+ * Manages the assets library and synchronization of assets
+ * to the local assets directory in development.
+ *
+ * @remarks
+ * The AssetsLibrary is created internally as a global
+ * singletone accessible with the static property
+ * `AssetsLibrary.instance`.
+ *
+ * Please note: Assets will automatically sync to local assets in
+ * development mode the first time an asset in the library is requested
+ * by the client. This means you do not need to explicitly handle
+ * calling syncAsset() yourself unless you have a specific reason to.
+ *
+ * @example
+ * ```typescript
+ * import { AssetsLibrary } from 'hytopia';
+ *
+ * const assetsLibrary = AssetsLibrary.instance;
+ * assetsLibrary.syncAsset('assets/models/player.gltf');
+ * ```
+ */
+export declare class AssetsLibrary {
+    /** The global AssetsLibrary instance as a singleton. */
+    static readonly instance: AssetsLibrary;
+    /** The path to the assets library package. Null if assets library is not available. */
+    readonly assetsLibraryPath: string | null;
+    /**
+     * Synchronizes an asset from the assets library to the local assets directory.
+     *
+     * @remarks
+     * Syncs an asset from the assets library to local assets in development.
+     * The assets library is unavailable in production, so assets must be local to the project.
+     *
+     * @param assetPath - The path of the asset to copy to local assets.
+     */
+    syncAsset(assetPath: string): void;
+}
+
+/**
  * Represents a audio playback in a world.
  *
  * @remarks

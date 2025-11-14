@@ -19,6 +19,17 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[AssetsLibrary](./server.assetslibrary.md)
+
+
+</td><td>
+
+Manages the assets library and synchronization of assets to the local assets directory in development.
+
+
+</td></tr>
+<tr><td>
+
 [Audio](./server.audio.md)
 
 
