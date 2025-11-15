@@ -4,7 +4,7 @@
 
 ## ModelRegistry.optimize property
 
-Whether to use optimized models when they are loaded.
+Whether to generate optimized models if needed. Defaults to `true` in development, `false` in production.
 
 **Signature:**
 

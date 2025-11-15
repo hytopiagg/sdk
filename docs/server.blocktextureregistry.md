@@ -53,7 +53,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[generateEveryStart](./server.blocktextureregistry.generateeverystart.md)
+[generate](./server.blocktextureregistry.generate.md)
 
 
 </td><td>
@@ -66,7 +66,7 @@ boolean
 
 </td><td>
 
-Whether to always generate the atlas on server start.
+Whether to generate the atlas if needed. Defaults to `true` in development, `false` in production.
 
 
 </td></tr>

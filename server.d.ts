@@ -13,6 +13,45 @@ import { WebSocket as WebSocket_2 } from 'ws';
 import type { WebTransportSessionImpl } from '@fails-components/webtransport/dist/lib/types';
 
 /**
+ * Manages the assets library and synchronization of assets
+ * to the local assets directory in development.
+ *
+ * @remarks
+ * The AssetsLibrary is created internally as a global
+ * singletone accessible with the static property
+ * `AssetsLibrary.instance`.
+ *
+ * Please note: Assets will automatically sync to local assets in
+ * development mode the first time an asset in the library is requested
+ * by the client. This means you do not need to explicitly handle
+ * calling syncAsset() yourself unless you have a specific reason to.
+ *
+ * @example
+ * ```typescript
+ * import { AssetsLibrary } from 'hytopia';
+ *
+ * const assetsLibrary = AssetsLibrary.instance;
+ * assetsLibrary.syncAsset('assets/models/player.gltf');
+ * ```
+ */
+export declare class AssetsLibrary {
+    /** The global AssetsLibrary instance as a singleton. */
+    static readonly instance: AssetsLibrary;
+    /** The path to the assets library package. Null if assets library is not available. */
+    readonly assetsLibraryPath: string | null;
+    /**
+     * Synchronizes an asset from the assets library to the local assets directory.
+     *
+     * @remarks
+     * Syncs an asset from the assets library to local assets in development.
+     * The assets library is unavailable in production, so assets must be local to the project.
+     *
+     * @param assetPath - The path of the asset to copy to local assets.
+     */
+    syncAsset(assetPath: string): void;
+}
+
+/**
  * Represents a audio playback in a world.
  *
  * @remarks
@@ -597,8 +636,8 @@ export declare type BlockTextureMetadata = {
 export declare class BlockTextureRegistry {
     /** The global BlockTextureRegistry instance as a singleton. */
     static readonly instance: BlockTextureRegistry;
-    /** Whether to always generate the atlas on server start. */
-    generateEveryStart: boolean;
+    /** Whether to generate the atlas if needed. Defaults to `true` in development, `false` in production. */
+    generate: boolean;
 
 
     /**
@@ -3532,10 +3571,8 @@ export declare interface ModelEntityOptions extends BaseEntityOptions {
 export declare class ModelRegistry {
     /** The global ModelRegistry instance as a singleton. */
     static readonly instance: ModelRegistry;
-    /** Whether to use optimized models when they are loaded. */
+    /** Whether to generate optimized models if needed. Defaults to `true` in development, `false` in production. */
     optimize: boolean;
-    /** Whether to always run model optimization on server start. */
-    optimizeEveryStart: boolean;
 
 
 
@@ -3592,6 +3629,13 @@ export declare class ModelRegistry {
      * @returns The width of the model.
      */
     getWidth(modelUri: string): number;
+    /**
+     * Checks if a model is registered in the model registry.
+     *
+     * @param modelUri - The URI of the model to check.
+     * @returns Whether the model is registered.
+     */
+    hasModel(modelUri: string): boolean;
     /**
      * Checks if a model has a node with the given name.
      *

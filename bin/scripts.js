@@ -41,6 +41,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
     'init-mcp': initMcp,
     'package': packageProject,
     'start': start,
+    'upgrade-assets-library': () => upgradeAssetsLibrary(process.argv[3] || 'latest'),
     'upgrade-cli': () => upgradeCli(process.argv[3] || 'latest'),
     'upgrade-project': () => upgradeProject(process.argv[3] || 'latest'),
     'version': displayVersion,
@@ -142,9 +143,6 @@ function init() {
   // Update SDK to latest (sets package.json requirement)
   upgradeProject();
 
-  // Copy assets into project, not overwriting existing files
-  copyAssets(destDir);
-
   // Display success message
   displayInitSuccessMessage();
 
@@ -175,7 +173,8 @@ function installProjectDependencies() {
   }, null, 2))
 
   // install hytopia sdk and hytopia assets
-  execSync('npm install --force hytopia@latest @hytopia.com/assets@latest', { stdio: 'inherit' });
+  execSync('npm install --force hytopia@latest', { stdio: 'inherit' });
+  execSync('npm install --save-optional --force @hytopia.com/assets@latest', { stdio: 'inherit' });
 }
 
 /**
@@ -207,18 +206,6 @@ function initFromBoilerplate(destDir) {
   if (!copyDirectoryContents(srcDir, destDir)) {
     console.error('❌ Error: Could not copy boilerplate files');
     process.exit(1);
-  }
-}
-
-/**
- * Copies assets to the project directory
- */
-function copyAssets(destDir) {
-  const assetsSource = path.join(destDir, 'node_modules', '@hytopia.com', 'assets');
-  const assetsDest = path.join(destDir, 'assets');
-  
-  if (!copyDirectoryContents(assetsSource, assetsDest, { recursive: true, force: false })) {
-    console.error('❌ Error: Could not copy assets from @hytopia.com/assets package');
   }
 }
 
@@ -579,6 +566,13 @@ async function fetchLatestVersion(signal) {
   }
 }
 
+function upgradeAssetsLibrary(versionArg = 'latest') {
+  const version = versionArg.trim();
+  console.log(`🔄 Upgrading @hytopia.com/assets package to: ${version} ...`);
+  execSync(`npm install --save-optional --force @hytopia.com/assets@${version}`, { stdio: 'inherit' });
+  console.log('✅ Upgrade complete.');
+}
+
 function upgradeCli(versionArg = 'latest') {
   const version = versionArg.trim();
   console.log(`🔄 Upgrading HYTOPIA CLI to: hytopia@${version} ...`);
@@ -613,8 +607,9 @@ function displayHelp() {
   console.log('  init [--template NAME]      Initialize a new project');
   console.log('  init-mcp                    Setup MCP integrations');
   console.log('  package                     Create a zip of the project for uploading to the HYTOPIA create portal.');
-  console.log('  upgrade-cli                 Upgrade the HYTOPIA CLI');
-  console.log('  upgrade-project [VERSION]   Upgrade project SDK dep (default: latest)');
+  console.log('  upgrade-assets-library [VERSION]    Upgrade the @hytopia.com/assets package (default: latest)');
+  console.log('  upgrade-cli [VERSION]       Upgrade the HYTOPIA CLI (default: latest)');
+  console.log('  upgrade-project [VERSION]   Upgrade project SDK dependency (default: latest)');
   console.log('');
   console.log('Examples:');
   console.log('  hytopia init --template zombies-fps');
