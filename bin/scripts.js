@@ -373,7 +373,12 @@ async function packageProject() {
   
   logDivider();
   
-  const child = spawn(process.execPath, ['index.mjs'], { stdio: 'pipe', shell: false });
+  const entryFile = path.join(sourceDir, 'index.mjs');
+  const child = spawn(process.execPath, [entryFile], {
+    stdio: 'pipe',
+    shell: false,
+    cwd: sourceDir,
+  });
 
   await new Promise(resolve => {
     child.stdout.on('data', data => {
