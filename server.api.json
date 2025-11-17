@@ -18022,15 +18022,6 @@
             },
             {
               "kind": "Reference",
-              "text": "SocketEventPayloads",
-              "canonicalReference": "server!~SocketEventPayloads:interface"
-            },
-            {
-              "kind": "Content",
-              "text": ", "
-            },
-            {
-              "kind": "Reference",
               "text": "LightEventPayloads",
               "canonicalReference": "server!LightEventPayloads:interface"
             },
@@ -18164,10 +18155,6 @@
             {
               "startIndex": 41,
               "endIndex": 42
-            },
-            {
-              "startIndex": 43,
-              "endIndex": 44
             }
           ]
         },
@@ -40826,29 +40813,6 @@
             }
           ],
           "extendsTokenRanges": []
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "server!PORT:var",
-          "docComment": "/**\n * The port the server will run on. You can override this in your .env by setting PORT. When deployed in production to HYTOPIA servers, any .env value will be ignored and 8080 will be used.\n *\n * @public\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "PORT: "
-            },
-            {
-              "kind": "Content",
-              "text": "string | 8080"
-            }
-          ],
-          "fileUrlPath": "src/networking/WebServer.ts",
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "PORT",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 2
-          }
         },
         {
           "kind": "Class",

@@ -1524,17 +1524,6 @@ The default rigid body options for a model entity when EntityOptions.rigidBodyOp
 </td></tr>
 <tr><td>
 
-[PORT](./server.port.md)
-
-
-</td><td>
-
-The port the server will run on. You can override this in your .env by setting PORT. When deployed in production to HYTOPIA servers, any .env value will be ignored and 8080 will be used.
-
-
-</td></tr>
-<tr><td>
-
 [SUPPORTED\_INPUTS](./server.supported_inputs.md)
 
 

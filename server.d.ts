@@ -2,7 +2,6 @@ import type { AnyPacket } from '@hytopia.com/server-protocol';
 import type { ErrorEvent as ErrorEvent_2 } from 'ws';
 import EventEmitter from 'eventemitter3';
 import http from 'http';
-import type { IncomingMessage } from 'http';
 import type { InputSchema } from '@hytopia.com/server-protocol';
 import type { LobbyMembershipDto } from '@hytopia.com/creative-lib/dist/impl/getSession';
 import protocol from '@hytopia.com/server-protocol';
@@ -11,6 +10,7 @@ import { SdpMatrix3 } from '@dimforge/rapier3d-simd-compat';
 import * as Sentry from '@sentry/node';
 import type { Socket } from 'net';
 import { WebSocket as WebSocket_2 } from 'ws';
+import type { WebTransportSessionImpl } from '@fails-components/webtransport/dist/lib/types';
 
 /**
  * Manages the assets library and synchronization of assets
@@ -2320,7 +2320,7 @@ export declare class ErrorHandler {
  *
  * @public
  */
-export declare interface EventPayloads extends AudioEventPayloads, BaseEntityControllerEventPayloads, BlockTypeEventPayloads, BlockTypeRegistryEventPayloads, ChatEventPayloads, ChunkLatticeEventPayloads, ConnectionEventPayloads, EntityEventPayloads, GameServerEventPayloads, ParticleEmitterEventPayloads, PlayerCameraEventPayloads, PlayerEventPayloads, PlayerManagerEventPayloads, PlayerUIEventPayloads, SceneUIEventPayloads, SimulationEventPayloads, SocketEventPayloads, LightEventPayloads, WebServerEventPayloads, WorldEventPayloads, WorldLoopEventPayloads, WorldManagerEventPayloads {
+export declare interface EventPayloads extends AudioEventPayloads, BaseEntityControllerEventPayloads, BlockTypeEventPayloads, BlockTypeRegistryEventPayloads, ChatEventPayloads, ChunkLatticeEventPayloads, ConnectionEventPayloads, EntityEventPayloads, GameServerEventPayloads, ParticleEmitterEventPayloads, PlayerCameraEventPayloads, PlayerEventPayloads, PlayerManagerEventPayloads, PlayerUIEventPayloads, SceneUIEventPayloads, SimulationEventPayloads, LightEventPayloads, WebServerEventPayloads, WorldEventPayloads, WorldLoopEventPayloads, WorldManagerEventPayloads {
 }
 
 /**
@@ -5143,16 +5143,6 @@ export declare interface PlayerUIEventPayloads {
         data: Record<string, any>;
     };
 }
-
-/**
- * The port the server will run on. You can override
- * this in your .env by setting PORT. When deployed in
- * production to HYTOPIA servers, any .env value will
- * be ignored and 8080 will be used.
- *
- * @public
- */
-export declare const PORT: string | 8080;
 
 /**
  * Represents a quaternion.
