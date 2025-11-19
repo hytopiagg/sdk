@@ -2,53 +2,12 @@
 
 [Home](./index.md) &gt; [server](./server.md) &gt; [Collider](./server.collider.md) &gt; [scale](./server.collider.scale.md)
 
-## Collider.scale() method
+## Collider.scale property
 
-Scales the collider by the given scalar. Only ball, block, capsule, cone, cylinder, round cylinder are supported.
+The scale of the collider.
 
 **Signature:**
 
 ```typescript
-scale(scalar: number): void;
+get scale(): Vector3Like;
 ```
-
-## Parameters
-
-<table><thead><tr><th>
-
-Parameter
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-scalar
-
-
-</td><td>
-
-number
-
-
-</td><td>
-
-The scalar to scale the collider by.
-
-
-</td></tr>
-</tbody></table>
-
-**Returns:**
-
-void
-

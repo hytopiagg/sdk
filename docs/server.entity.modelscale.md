@@ -9,5 +9,5 @@ The scale of the entity's model.
 **Signature:**
 
 ```typescript
-get modelScale(): number;
+get modelScale(): Vector3Like;
 ```

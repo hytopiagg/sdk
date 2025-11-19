@@ -8931,8 +8931,9 @@
                   "text": ", scale?: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "number"
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
                 },
                 {
                   "kind": "Content",
@@ -9194,52 +9195,35 @@
               "name": "removeFromSimulation"
             },
             {
-              "kind": "Method",
-              "canonicalReference": "server!Collider#scale:member(1)",
-              "docComment": "/**\n * Scales the collider by the given scalar. Only ball, block, capsule, cone, cylinder, round cylinder are supported.\n *\n * @param scalar - The scalar to scale the collider by.\n */\n",
+              "kind": "Property",
+              "canonicalReference": "server!Collider#scale:member",
+              "docComment": "/**\n * The scale of the collider.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "scale(scalar: "
+                  "text": "get scale(): "
                 },
                 {
-                  "kind": "Content",
-                  "text": "number"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "void"
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
                 },
                 {
                   "kind": "Content",
                   "text": ";"
                 }
               ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "scalar",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  },
-                  "isOptional": false
-                }
-              ],
+              "isReadonly": true,
               "isOptional": false,
-              "isAbstract": false,
-              "name": "scale"
+              "releaseTag": "Public",
+              "name": "scale",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Method",
@@ -9534,6 +9518,103 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "server!Collider#setHalfExtents:member(1)",
+              "docComment": "/**\n * Sets the half extents of a simulated block collider.\n *\n * @param halfExtents - The half extents of the block collider.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setHalfExtents(halfExtents: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "halfExtents",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setHalfExtents"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Collider#setHalfHeight:member(1)",
+              "docComment": "/**\n * Sets the half height of a simulated capsule, cone, cylinder, or round cylinder collider.\n *\n * @param halfHeight - The half height of the capsule, cone, cylinder, or round cylinder collider.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setHalfHeight(halfHeight: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "halfHeight",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setHalfHeight"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "server!Collider#setMass:member(1)",
               "docComment": "/**\n * Sets the mass of the collider.\n *\n * @param mass - The mass of the collider.\n */\n",
               "excerptTokens": [
@@ -9635,6 +9716,54 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "server!Collider#setRadius:member(1)",
+              "docComment": "/**\n * Sets the radius of a simulated ball, capsule, cylinder, or round cylinder collider.\n *\n * @param radius - The radius of the collider.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setRadius(radius: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "radius",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setRadius"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "server!Collider#setRelativePosition:member(1)",
               "docComment": "/**\n * Sets the position of the collider relative to its parent rigid body or the world origin.\n *\n * @remarks\n *\n * Colliders can be added as a child of a rigid body, or to the world directly. This position is relative to the parent rigid body or the world origin.\n *\n * @param position - The relative position of the collider.\n */\n",
               "excerptTokens": [
@@ -9730,6 +9859,55 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "setRelativeRotation"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Collider#setScale:member(1)",
+              "docComment": "/**\n * Scales the collider by the given scalar. Only ball, block, capsule, cone, cylinder, round cylinder are supported.\n *\n * @param scalar - The scalar to scale the collider by.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setScale(scale: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "scale",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setScale"
             },
             {
               "kind": "Method",
@@ -14444,8 +14622,9 @@
                   "text": "get modelScale(): "
                 },
                 {
-                  "kind": "Content",
-                  "text": "number"
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
                 },
                 {
                   "kind": "Content",
@@ -14836,15 +15015,20 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Entity#setModelScale:member(1)",
-              "docComment": "/**\n * Sets the scale of the entity's model and proportionally scales its colliders.\n *\n * @param modelScale - The scale of the entity's model.\n */\n",
+              "docComment": "/**\n * Sets the scale of the entity's model and proportionally scales its colliders.\n *\n * @param modelScale - The scale of the entity's model. Can be a vector or a number for uniform scaling.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
                   "text": "setModelScale(modelScale: "
                 },
                 {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
                   "kind": "Content",
-                  "text": "number"
+                  "text": " | number"
                 },
                 {
                   "kind": "Content",
@@ -14861,8 +15045,8 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 4
+                "startIndex": 4,
+                "endIndex": 5
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -14872,7 +15056,7 @@
                   "parameterName": "modelScale",
                   "parameterTypeTokenRange": {
                     "startIndex": 1,
-                    "endIndex": 2
+                    "endIndex": 3
                   },
                   "isOptional": false
                 }
@@ -16553,7 +16737,16 @@
                 },
                 {
                   "kind": "Content",
-                  "text": ";\n        modelScale: number;\n    }"
+                  "text": ";\n        modelScale: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
                 },
                 {
                   "kind": "Content",
@@ -16566,7 +16759,7 @@
               "name": "\"ENTITY.SET_MODEL_SCALE\"",
               "propertyTypeTokenRange": {
                 "startIndex": 3,
-                "endIndex": 6
+                "endIndex": 8
               }
             },
             {
@@ -28346,15 +28539,20 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "server!ModelEntityOptions#modelScale:member",
-              "docComment": "/**\n * The scale of the entity's model.\n */\n",
+              "docComment": "/**\n * The scale of the entity's model. Can be a vector3 for per-axis scaling, or a number for uniform scaling.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
                   "text": "modelScale?: "
                 },
                 {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
                   "kind": "Content",
-                  "text": "number"
+                  "text": " | number"
                 },
                 {
                   "kind": "Content",
@@ -28367,7 +28565,7 @@
               "name": "modelScale",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 2
+                "endIndex": 3
               }
             },
             {
@@ -28719,7 +28917,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!ModelRegistry#getTrimesh:member(1)",
-              "docComment": "/**\n * Retrieves the trimesh of a model.\n *\n * @param modelUri - The URI of the model to retrieve the trimesh for.\n *\n * @param scale - Optional uniform scaling to apply to the trimesh. Defaults to 1, which is no scaling.\n *\n * @returns The trimesh of the model.\n */\n",
+              "docComment": "/**\n * Retrieves the trimesh of a model.\n *\n * @param modelUri - The URI of the model to retrieve the trimesh for.\n *\n * @param scale - Optional scaling to apply to the trimesh. Defaults to 1 for all axes (no scaling).\n *\n * @returns The trimesh of the model.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -28734,8 +28932,9 @@
                   "text": ", scale?: "
                 },
                 {
-                  "kind": "Content",
-                  "text": "number"
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
                 },
                 {
                   "kind": "Content",

@@ -9,7 +9,7 @@ Retrieves the trimesh of a model.
 **Signature:**
 
 ```typescript
-getTrimesh(modelUri: string, scale?: number): ModelTrimesh | undefined;
+getTrimesh(modelUri: string, scale?: Vector3Like): ModelTrimesh | undefined;
 ```
 
 ## Parameters
@@ -53,12 +53,12 @@ scale
 
 </td><td>
 
-number
+[Vector3Like](./server.vector3like.md)
 
 
 </td><td>
 
-_(Optional)_ Optional uniform scaling to apply to the trimesh. Defaults to 1, which is no scaling.
+_(Optional)_ Optional scaling to apply to the trimesh. Defaults to 1 for all axes (no scaling).
 
 
 </td></tr>

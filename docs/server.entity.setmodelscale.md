@@ -9,7 +9,7 @@ Sets the scale of the entity's model and proportionally scales its colliders.
 **Signature:**
 
 ```typescript
-setModelScale(modelScale: number): void;
+setModelScale(modelScale: Vector3Like | number): void;
 ```
 
 ## Parameters
@@ -37,12 +37,12 @@ modelScale
 
 </td><td>
 
-number
+[Vector3Like](./server.vector3like.md) \| number
 
 
 </td><td>
 
-The scale of the entity's model.
+The scale of the entity's model. Can be a vector or a number for uniform scaling.
 
 
 </td></tr>

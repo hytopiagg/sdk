@@ -4,10 +4,10 @@
 
 ## ModelEntityOptions.modelScale property
 
-The scale of the entity's model.
+The scale of the entity's model. Can be a vector3 for per-axis scaling, or a number for uniform scaling.
 
 **Signature:**
 
 ```typescript
-modelScale?: number;
+modelScale?: Vector3Like | number;
 ```

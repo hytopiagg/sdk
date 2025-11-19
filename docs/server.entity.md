@@ -412,7 +412,7 @@ The preferred shape of the entity's model when automatically generating its coll
 
 </td><td>
 
-number
+[Vector3Like](./server.vector3like.md)
 
 
 </td><td>

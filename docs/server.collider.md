@@ -370,6 +370,27 @@ The relative rotation of the collider.
 </td></tr>
 <tr><td>
 
+[scale](./server.collider.scale.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[Vector3Like](./server.vector3like.md)
+
+
+</td><td>
+
+The scale of the collider.
+
+
+</td></tr>
+<tr><td>
+
 [shape](./server.collider.shape.md)
 
 
@@ -520,20 +541,6 @@ Removes the collider from the simulation.
 </td></tr>
 <tr><td>
 
-[scale(scalar)](./server.collider.scale.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Scales the collider by the given scalar. Only ball, block, capsule, cone, cylinder, round cylinder are supported.
-
-
-</td></tr>
-<tr><td>
-
 [setBounciness(bounciness)](./server.collider.setbounciness.md)
 
 
@@ -618,6 +625,34 @@ Sets the friction combine rule of the collider.
 </td></tr>
 <tr><td>
 
+[setHalfExtents(halfExtents)](./server.collider.sethalfextents.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the half extents of a simulated block collider.
+
+
+</td></tr>
+<tr><td>
+
+[setHalfHeight(halfHeight)](./server.collider.sethalfheight.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the half height of a simulated capsule, cone, cylinder, or round cylinder collider.
+
+
+</td></tr>
+<tr><td>
+
 [setMass(mass)](./server.collider.setmass.md)
 
 
@@ -646,6 +681,20 @@ Sets the on collision callback for the collider.
 </td></tr>
 <tr><td>
 
+[setRadius(radius)](./server.collider.setradius.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the radius of a simulated ball, capsule, cylinder, or round cylinder collider.
+
+
+</td></tr>
+<tr><td>
+
 [setRelativePosition(position)](./server.collider.setrelativeposition.md)
 
 
@@ -669,6 +718,20 @@ Sets the position of the collider relative to its parent rigid body or the world
 </td><td>
 
 Sets the relative rotation of the collider to its parent rigid body or the world origin.
+
+
+</td></tr>
+<tr><td>
+
+[setScale(scale)](./server.collider.setscale.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Scales the collider by the given scalar. Only ball, block, capsule, cone, cylinder, round cylinder are supported.
 
 
 </td></tr>

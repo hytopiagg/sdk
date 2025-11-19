@@ -122,12 +122,12 @@ _(Optional)_ The preferred shape of the entity's model when automatically genera
 
 </td><td>
 
-number
+[Vector3Like](./server.vector3like.md) \| number
 
 
 </td><td>
 
-_(Optional)_ The scale of the entity's model.
+_(Optional)_ The scale of the entity's model. Can be a vector3 for per-axis scaling, or a number for uniform scaling.
 
 
 </td></tr>

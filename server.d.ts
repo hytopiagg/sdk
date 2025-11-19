@@ -1169,7 +1169,8 @@ export declare class Collider extends EventRouter {
 
 
 
-    private _relativeRotation;
+
+
 
 
 
@@ -1190,7 +1191,7 @@ export declare class Collider extends EventRouter {
      * @param preferredShape - The preferred shape to use for the collider.
      * @returns The collider options object.
      */
-    static optionsFromModelUri(modelUri: string, scale?: number, preferredShape?: ColliderShape): ColliderOptions;
+    static optionsFromModelUri(modelUri: string, scale?: Vector3Like, preferredShape?: ColliderShape): ColliderOptions;
     /** The bounciness of the collider. */
     get bounciness(): number;
     /** The bounciness combine rule of the collider. */
@@ -1219,6 +1220,8 @@ export declare class Collider extends EventRouter {
     get relativePosition(): Vector3Like;
     /** The relative rotation of the collider. */
     get relativeRotation(): QuaternionLike;
+    /** The scale of the collider. */
+    get scale(): Vector3Like;
     /** The shape of the collider. */
     get shape(): ColliderShape;
     /** An arbitrary identifier tag of the collider. Useful for your own logic. */
@@ -1254,6 +1257,16 @@ export declare class Collider extends EventRouter {
      */
     setFrictionCombineRule(frictionCombineRule: CoefficientCombineRule): void;
     /**
+     * Sets the half extents of a simulated block collider.
+     * @param halfExtents - The half extents of the block collider.
+     */
+    setHalfExtents(halfExtents: Vector3Like): void;
+    /**
+     * Sets the half height of a simulated capsule, cone, cylinder, or round cylinder collider.
+     * @param halfHeight - The half height of the capsule, cone, cylinder, or round cylinder collider.
+     */
+    setHalfHeight(halfHeight: number): void;
+    /**
      * Sets the mass of the collider.
      * @param mass - The mass of the collider.
      */
@@ -1263,6 +1276,11 @@ export declare class Collider extends EventRouter {
      * @param callback - The on collision callback for the collider.
      */
     setOnCollision(callback: CollisionCallback | undefined): void;
+    /**
+     * Sets the radius of a simulated ball, capsule, cylinder, or round cylinder collider.
+     * @param radius - The radius of the collider.
+     */
+    setRadius(radius: number): void;
     /**
      * Sets the relative rotation of the collider to its parent rigid body or the world origin.
      *
@@ -1329,7 +1347,7 @@ export declare class Collider extends EventRouter {
      * are supported.
      * @param scalar - The scalar to scale the collider by.
      */
-    scale(scalar: number): void;
+    setScale(scale: Vector3Like): void;
 
 
     private _buildWedgeConvexHullVertices;
@@ -1900,7 +1918,7 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     /** The preferred shape of the entity's model when automatically generating its collider when no explicit colliders are provided. */
     get modelPreferredShape(): ColliderShape | undefined;
     /** The scale of the entity's model. */
-    get modelScale(): number;
+    get modelScale(): Vector3Like;
     /** The nodes to show on the entity's model, overriding hidden nodes. */
     get modelShownNodes(): ReadonlySet<string>;
     /** The URI or path to the texture that overrides the model entity's default texture. */
@@ -1968,9 +1986,9 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     /**
      * Sets the scale of the entity's model and proportionally
      * scales its colliders.
-     * @param modelScale - The scale of the entity's model.
+     * @param modelScale - The scale of the entity's model. Can be a vector or a number for uniform scaling.
      */
-    setModelScale(modelScale: number): void;
+    setModelScale(modelScale: Vector3Like | number): void;
     /**
      * Sets the nodes to show on the entity's model, overriding hidden nodes.
      * Matched nodes will be shown for all players. Uses case insensitive
@@ -2144,7 +2162,7 @@ export declare interface EntityEventPayloads {
     /** Emitted when the scale of the entity's model is set. */
     [EntityEvent.SET_MODEL_SCALE]: {
         entity: Entity;
-        modelScale: number;
+        modelScale: Vector3Like;
     };
     /** Emitted when nodes of the entity's model are set to be shown. */
     [EntityEvent.SET_MODEL_SHOWN_NODES]: {
@@ -3540,8 +3558,8 @@ export declare interface ModelEntityOptions extends BaseEntityOptions {
     modelLoopedAnimations?: string[];
     /** The preferred shape of the entity's model when automatically generating its collider when no explicit colliders are provided. */
     modelPreferredShape?: ColliderShape;
-    /** The scale of the entity's model. */
-    modelScale?: number;
+    /** The scale of the entity's model. Can be a vector3 for per-axis scaling, or a number for uniform scaling. */
+    modelScale?: Vector3Like | number;
     /** The nodes to show on the entity's model, overriding hidden nodes. */
     modelShownNodes?: string[];
     /** The texture uri of the entity's model. Setting this overrides the model's default texture. */
@@ -3618,10 +3636,10 @@ export declare class ModelRegistry {
      * Retrieves the trimesh of a model.
      *
      * @param modelUri - The URI of the model to retrieve the trimesh for.
-     * @param scale - Optional uniform scaling to apply to the trimesh. Defaults to 1, which is no scaling.
+     * @param scale - Optional scaling to apply to the trimesh. Defaults to 1 for all axes (no scaling).
      * @returns The trimesh of the model.
      */
-    getTrimesh(modelUri: string, scale?: number): ModelTrimesh | undefined;
+    getTrimesh(modelUri: string, scale?: Vector3Like): ModelTrimesh | undefined;
     /**
      * Retrieves the X-axis width of a model for a scale of 1.
      *
@@ -4453,7 +4471,6 @@ export declare type PathfindingOptions = {
 export declare class PersistenceManager {
     static readonly instance: PersistenceManager;
     private _saveStatesClient;
-    private _playerData;
 
     /**
      * Get global data from the data persistence service.
@@ -4470,6 +4487,7 @@ export declare class PersistenceManager {
      * @param data - The data to set.
      */
     setGlobalData(key: string, data: Record<string, unknown>): Promise<void>;
+
 
 
 }

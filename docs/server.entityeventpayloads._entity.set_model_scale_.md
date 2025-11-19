@@ -11,6 +11,6 @@ Emitted when the scale of the entity's model is set.
 ```typescript
 [EntityEvent.SET_MODEL_SCALE]: {
         entity: Entity;
-        modelScale: number;
+        modelScale: Vector3Like;
     };
 ```

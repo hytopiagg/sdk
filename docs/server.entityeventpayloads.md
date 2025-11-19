@@ -178,7 +178,7 @@ Emitted when nodes of the entity's model are set to be hidden.
 
 </td><td>
 
-{ entity: [Entity](./server.entity.md)<!-- -->; modelScale: number; }
+{ entity: [Entity](./server.entity.md)<!-- -->; modelScale: [Vector3Like](./server.vector3like.md)<!-- -->; }
 
 
 </td><td>
