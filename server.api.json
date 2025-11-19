@@ -8937,6 +8937,10 @@
                 },
                 {
                   "kind": "Content",
+                  "text": " | number"
+                },
+                {
+                  "kind": "Content",
                   "text": ", preferredShape?: "
                 },
                 {
@@ -8960,8 +8964,8 @@
               ],
               "isStatic": true,
               "returnTypeTokenRange": {
-                "startIndex": 7,
-                "endIndex": 8
+                "startIndex": 8,
+                "endIndex": 9
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -8979,15 +8983,15 @@
                   "parameterName": "scale",
                   "parameterTypeTokenRange": {
                     "startIndex": 3,
-                    "endIndex": 4
+                    "endIndex": 5
                   },
                   "isOptional": true
                 },
                 {
                   "parameterName": "preferredShape",
                   "parameterTypeTokenRange": {
-                    "startIndex": 5,
-                    "endIndex": 6
+                    "startIndex": 6,
+                    "endIndex": 7
                   },
                   "isOptional": true
                 }

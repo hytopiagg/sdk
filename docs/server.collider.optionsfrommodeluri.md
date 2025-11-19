@@ -9,7 +9,7 @@ Creates a collider options object from a modelUri with best approximate shape an
 **Signature:**
 
 ```typescript
-static optionsFromModelUri(modelUri: string, scale?: Vector3Like, preferredShape?: ColliderShape): ColliderOptions;
+static optionsFromModelUri(modelUri: string, scale?: Vector3Like | number, preferredShape?: ColliderShape): ColliderOptions;
 ```
 
 ## Parameters
@@ -53,7 +53,7 @@ scale
 
 </td><td>
 
-[Vector3Like](./server.vector3like.md)
+[Vector3Like](./server.vector3like.md) \| number
 
 
 </td><td>

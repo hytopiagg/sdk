@@ -1191,7 +1191,7 @@ export declare class Collider extends EventRouter {
      * @param preferredShape - The preferred shape to use for the collider.
      * @returns The collider options object.
      */
-    static optionsFromModelUri(modelUri: string, scale?: Vector3Like, preferredShape?: ColliderShape): ColliderOptions;
+    static optionsFromModelUri(modelUri: string, scale?: Vector3Like | number, preferredShape?: ColliderShape): ColliderOptions;
     /** The bounciness of the collider. */
     get bounciness(): number;
     /** The bounciness combine rule of the collider. */
