@@ -26,14 +26,5 @@ Description
 
 
 </td></tr>
-<tr><td>
-
-[debug-client-threejs](./debug-client-threejs.md)
-
-
-</td><td>
-
-
-</td></tr>
 </tbody></table>
 
