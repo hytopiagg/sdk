@@ -10,7 +10,6 @@ import { SdpMatrix3 } from '@dimforge/rapier3d-simd-compat';
 import * as Sentry from '@sentry/node';
 import type { Socket } from 'net';
 import { WebSocket as WebSocket_2 } from 'ws';
-import type { WebTransportSessionImpl } from '@fails-components/webtransport/dist/lib/types';
 
 /**
  * Manages the assets library and synchronization of assets
