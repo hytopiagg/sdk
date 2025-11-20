@@ -19,6 +19,15 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[client](./client.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [debug-client-threejs](./debug-client-threejs.md)
 
 
