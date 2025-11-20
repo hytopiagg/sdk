@@ -4,7 +4,7 @@
 
 ## HytopiaUI class
 
-Global API for interacting with the HYTOPIA game client from Scene UIs. Access via the `hytopia` global variable in your custom HTML UI code.
+Global API for interacting with the HYTOPIA game client. Access via the `hytopia` global variable in your custom HTML UI code.
 
 **Signature:**
 
