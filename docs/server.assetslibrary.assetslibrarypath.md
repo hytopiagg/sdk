@@ -9,5 +9,5 @@ The path to the assets library package. Null if assets library is not available.
 **Signature:**
 
 ```typescript
-readonly assetsLibraryPath: string | null;
+static readonly assetsLibraryPath: string | null;
 ```

@@ -38,7 +38,7 @@ export declare class AssetsLibrary {
     /** The global AssetsLibrary instance as a singleton. */
     static readonly instance: AssetsLibrary;
     /** The path to the assets library package. Null if assets library is not available. */
-    readonly assetsLibraryPath: string | null;
+    static readonly assetsLibraryPath: string | null;
     /**
      * Synchronizes an asset from the assets library to the local assets directory.
      *
@@ -2331,6 +2331,7 @@ export declare class ErrorHandler {
      */
     static fatalError(message: string, context?: string): never;
 
+
 }
 
 /**
@@ -3662,6 +3663,8 @@ export declare class ModelRegistry {
      * @returns Whether the model has a node with the given name.
      */
     modelHasNode(modelUri: string, nodeName: string): boolean;
+
+
 
 
 

@@ -58,6 +58,8 @@ Description
 
 </td><td>
 
+`static`
+
 `readonly`
 
 

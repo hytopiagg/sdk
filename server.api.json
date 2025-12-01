@@ -191,12 +191,12 @@
           "members": [
             {
               "kind": "Property",
-              "canonicalReference": "server!AssetsLibrary#assetsLibraryPath:member",
+              "canonicalReference": "server!AssetsLibrary.assetsLibraryPath:member",
               "docComment": "/**\n * The path to the assets library package. Null if assets library is not available.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "readonly assetsLibraryPath: "
+                  "text": "static readonly assetsLibraryPath: "
                 },
                 {
                   "kind": "Content",
@@ -215,7 +215,7 @@
                 "startIndex": 1,
                 "endIndex": 2
               },
-              "isStatic": false,
+              "isStatic": true,
               "isProtected": false,
               "isAbstract": false
             },
