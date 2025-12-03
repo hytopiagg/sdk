@@ -176,7 +176,7 @@
         {
           "kind": "Class",
           "canonicalReference": "server!AssetsLibrary:class",
-          "docComment": "/**\n * Manages the assets library and synchronization of assets to the local assets directory in development.\n *\n * @remarks\n *\n * The AssetsLibrary is created internally as a global singletone accessible with the static property `AssetsLibrary.instance`.\n *\n * Please note: Assets will automatically sync to local assets in development mode the first time an asset in the library is requested by the client. This means you do not need to explicitly handle calling syncAsset() yourself unless you have a specific reason to.\n *\n * @example\n * ```typescript\n * import { AssetsLibrary } from 'hytopia';\n *\n * const assetsLibrary = AssetsLibrary.instance;\n * assetsLibrary.syncAsset('assets/models/player.gltf');\n * ```\n *\n */\n",
+          "docComment": "/**\n * Manages the assets library and synchronization of assets to the local assets directory in development.\n *\n * @remarks\n *\n * The AssetsLibrary is created internally as a global singletone accessible with the static property `AssetsLibrary.instance`.\n *\n * Please note: Assets will automatically sync to local assets in development mode the first time an asset in the library is requested by the client. This means you do not need to explicitly handle calling syncAsset() yourself unless you have a specific reason to.\n *\n * @example\n * ```typescript\n * import { AssetsLibrary } from 'hytopia';\n *\n * const assetsLibrary = AssetsLibrary.instance;\n * assetsLibrary.syncAsset('assets/models/player.gltf');\n * ```\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",

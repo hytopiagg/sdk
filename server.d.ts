@@ -33,6 +33,8 @@ import type { WebTransportSessionImpl } from '@fails-components/webtransport/dis
  * const assetsLibrary = AssetsLibrary.instance;
  * assetsLibrary.syncAsset('assets/models/player.gltf');
  * ```
+ *
+ * @public
  */
 export declare class AssetsLibrary {
     /** The global AssetsLibrary instance as a singleton. */

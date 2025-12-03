@@ -162,6 +162,34 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[connectArrow(source, target, options)](./client.hytopiaui.connectarrow.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Creates an arrow between two points or entities.
+
+
+</td></tr>
+<tr><td>
+
+[disconnectArrow(arrowId)](./client.hytopiaui.disconnectarrow.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Removes an arrow by its ID.
+
+
+</td></tr>
+<tr><td>
+
 [filterProfanity(text)](./client.hytopiaui.filterprofanity.md)
 
 
@@ -171,6 +199,34 @@ Description
 </td><td>
 
 Filters inappropriate language from text by replacing profanity with asterisks. Use this to sanitize user-generated content displayed in your UI (e.g., chat messages, usernames).
+
+
+</td></tr>
+<tr><td>
+
+[getEntityIdByName(name)](./client.hytopiaui.getentityidbyname.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Finds an entity by its name property and returns its ID. If multiple entities have the same name, returns the first one found.
+
+
+</td></tr>
+<tr><td>
+
+[getPlayerEntityId()](./client.hytopiaui.getplayerentityid.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Gets the entity ID of the current player's entity. Returns undefined if the player entity is not yet initialized.
 
 
 </td></tr>
