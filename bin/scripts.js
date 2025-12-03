@@ -375,7 +375,7 @@ async function packageProject() {
   
   const entryFile = path.join(sourceDir, 'index.mjs');
   const child = spawn(process.execPath, [entryFile], {
-    stdio: 'pipe',
+    stdio: ['ignore', 'pipe', 'inherit'], // stdin ignored, stdout piped (to check for ready), stderr inherited (shows warnings/errors)
     shell: false,
     cwd: sourceDir,
   });
@@ -384,7 +384,7 @@ async function packageProject() {
     child.stdout.on('data', data => {
       process.stdout.write(data);
 
-      if (data.toString().includes('Server running')) {
+      if (data.toString().toLowerCase().includes('server running')) {
         child.kill();
         resolve();
       }
