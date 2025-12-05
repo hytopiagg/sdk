@@ -158,6 +158,12 @@ function init() {
 function installProjectDependencies() {
   // init project
   execSync('npm init -y --silent --loglevel silent', { stdio: ['ignore', 'ignore', 'inherit'] });
+  
+  // Add various common scripts to the package.json
+  execSync('npm pkg set scripts.build="hytopia build"', { stdio: 'ignore' });
+  execSync('npm pkg set scripts.package="hytopia package"', { stdio: 'ignore' });
+  execSync('npm pkg set scripts.upgrade-assets-library="hytopia upgrade-assets-library"', { stdio: 'ignore' });
+  execSync('npm pkg set scripts.upgrade-project="hytopia upgrade-project"', { stdio: 'ignore' });
 
   // create tsconfig.json, used by build
   fs.writeFileSync('tsconfig.json', JSON.stringify({
