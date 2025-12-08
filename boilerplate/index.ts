@@ -115,6 +115,19 @@ startServer(world => {
   });
 
   /**
+   * If a player's connection drops, or they quickly leave and reconnect to the same game,
+   * it's considered a reconnect event and not a new join event, so we need to handle
+   * that appropriately. In this case, we just need to reload the player's UI. If we had
+   * UI data to sync too, we'd want to resync that as well here. RECONNECTED_WORLD is a special
+   * event where the player is still in the world (the disconnect timer hasn't happened yet),
+   * so the server hasn't closed their connection and therefore did not trigger LEFT_WORLD.
+   */
+  world.on(PlayerEvent.RECONNECTED_WORLD, ({ player }) => {
+    // Reload the player's UI to ensure it's up to date.
+    player.ui.load('ui/index.html');
+  });
+
+  /**
    * A silly little easter egg command. When a player types
    * "/rocket" in the game, they'll get launched into the air!
    */
