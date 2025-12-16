@@ -313,4 +313,3 @@ Stops the entity from continuing to move it's current target coordinate.
 
 </td></tr>
 </tbody></table>
-

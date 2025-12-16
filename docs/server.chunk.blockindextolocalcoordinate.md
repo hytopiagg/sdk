@@ -47,7 +47,6 @@ The index of the block to convert.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Vector3Like](./server.vector3like.md)

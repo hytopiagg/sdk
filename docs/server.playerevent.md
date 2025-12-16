@@ -46,6 +46,20 @@ CHAT\_MESSAGE\_SEND
 </td></tr>
 <tr><td>
 
+INTERACT
+
+
+</td><td>
+
+`"PLAYER.INTERACT"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 JOINED\_WORLD
 
 
@@ -115,4 +129,3 @@ REQUEST\_SYNC
 
 </td></tr>
 </tbody></table>
-

@@ -625,4 +625,3 @@ Rotates the provided vector by the rotation this quaternion represents. This mod
 
 </td></tr>
 </tbody></table>
-

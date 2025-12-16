@@ -58,5 +58,18 @@ ENTITY\_CONTACT\_FORCE
 
 
 </td></tr>
-</tbody></table>
+<tr><td>
 
+INTERACT
+
+
+</td><td>
+
+`"BLOCK_TYPE.INTERACT"`
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

@@ -79,7 +79,6 @@ The z-component of the Euler angles in degrees.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Quaternion](./server.quaternion.md)

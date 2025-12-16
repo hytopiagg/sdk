@@ -47,4 +47,3 @@ The options for the Audio instance.
 
 </td></tr>
 </tbody></table>
-

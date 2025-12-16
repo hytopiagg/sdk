@@ -92,4 +92,3 @@ _(Optional)_ The radius of the cylinder collider.
 
 </td></tr>
 </tbody></table>
-

@@ -47,7 +47,6 @@ The matrix to multiply the current matrix by.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Matrix3](./server.matrix3.md)

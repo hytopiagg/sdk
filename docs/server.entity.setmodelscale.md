@@ -47,7 +47,6 @@ The scale of the entity's model. Can be a vector or a number for uniform scaling
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

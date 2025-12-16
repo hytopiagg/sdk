@@ -47,7 +47,6 @@ The angle to rotate in degrees.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Quaternion](./server.quaternion.md)

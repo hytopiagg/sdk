@@ -63,7 +63,6 @@ True if the voxel at the coordinate should be filled, false if it should be remo
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

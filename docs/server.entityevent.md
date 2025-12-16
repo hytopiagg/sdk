@@ -102,6 +102,20 @@ ENTITY\_CONTACT\_FORCE
 </td></tr>
 <tr><td>
 
+INTERACT
+
+
+</td><td>
+
+`"ENTITY.INTERACT"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 SET\_MODEL\_ANIMATIONS\_PLAYBACK\_RATE
 
 
@@ -311,4 +325,3 @@ UPDATE\_ROTATION
 
 </td></tr>
 </tbody></table>
-

@@ -47,7 +47,6 @@ The playback rate.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

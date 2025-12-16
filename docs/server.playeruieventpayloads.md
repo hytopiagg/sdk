@@ -56,6 +56,25 @@ Emitted when data is received by the server from the player's client UI.
 </td></tr>
 <tr><td>
 
+["PLAYER\_UI.FREEZE\_POINTER\_LOCK"](./server.playeruieventpayloads._player_ui.freeze_pointer_lock_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ playerUI: [PlayerUI](./server.playerui.md)<!-- -->; freeze: boolean; }
+
+
+</td><td>
+
+Emitted when the player's pointer lock is frozen or unfrozen.
+
+
+</td></tr>
+<tr><td>
+
 ["PLAYER\_UI.LOAD"](./server.playeruieventpayloads._player_ui.load_.md)
 
 
@@ -112,4 +131,3 @@ Emitted when data is sent from the server to the player's client UI.
 
 </td></tr>
 </tbody></table>
-

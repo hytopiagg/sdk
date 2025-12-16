@@ -47,7 +47,6 @@ The animations to stop.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

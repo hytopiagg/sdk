@@ -9,5 +9,5 @@ The inputs that are included in the PlayerInput.
 **Signature:**
 
 ```typescript
-SUPPORTED_INPUTS: readonly ["w", "a", "s", "d", "sp", "sh", "tb", "ml", "mr", "q", "e", "r", "f", "z", "x", "c", "v", "u", "i", "o", "j", "k", "l", "n", "m", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "cp", "cy", "jd"]
+SUPPORTED_INPUTS: readonly ["w", "a", "s", "d", "sp", "sh", "tb", "ml", "mr", "q", "e", "r", "f", "z", "x", "c", "v", "u", "i", "o", "j", "k", "l", "n", "m", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "cp", "cy", "iro", "ird", "jd"]
 ```

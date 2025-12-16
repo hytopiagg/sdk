@@ -47,7 +47,6 @@ The film offset to set.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

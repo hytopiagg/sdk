@@ -47,7 +47,6 @@ The URI of the model to retrieve the bounding box for.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [ModelBoundingBox](./server.modelboundingbox.md)

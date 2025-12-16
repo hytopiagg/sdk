@@ -73,5 +73,23 @@ Emitted when an entity's contact force is applied to a block type.
 
 
 </td></tr>
-</tbody></table>
+<tr><td>
 
+["BLOCK\_TYPE.INTERACT"](./server.blocktypeeventpayloads._block_type.interact_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ blockType: [BlockType](./server.blocktype.md)<!-- -->; player: [Player](./server.player.md)<!-- -->; raycastHit?: [RaycastHit](./server.raycasthit.md)<!-- -->; }
+
+
+</td><td>
+
+Emitted when a player interacts with a block type.
+
+
+</td></tr>
+</tbody></table>

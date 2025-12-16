@@ -47,7 +47,6 @@ The half height of the capsule, cone, cylinder, or round cylinder collider.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

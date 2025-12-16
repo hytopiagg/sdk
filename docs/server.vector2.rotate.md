@@ -63,7 +63,6 @@ The angle to rotate the vector by.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Vector2](./server.vector2.md)

@@ -49,7 +49,6 @@ The blocks to initialize.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

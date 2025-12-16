@@ -63,7 +63,6 @@ The function to execute within the performance span.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 T

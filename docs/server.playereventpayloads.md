@@ -56,6 +56,25 @@ Emitted when a player sends a chat message.
 </td></tr>
 <tr><td>
 
+["PLAYER.INTERACT"](./server.playereventpayloads._player.interact_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ player: [Player](./server.player.md)<!-- -->; interactOrigin: [Vector3Like](./server.vector3like.md)<!-- -->; interactDirection: [Vector3Like](./server.vector3like.md)<!-- -->; raycastHit?: [RaycastHit](./server.raycasthit.md)<!-- -->; }
+
+
+</td><td>
+
+Emitted when a player interacts the world.
+
+
+</td></tr>
+<tr><td>
+
 ["PLAYER.JOINED\_WORLD"](./server.playereventpayloads._player.joined_world_.md)
 
 
@@ -150,4 +169,3 @@ Emitted when a player's client requests a round trip time synchronization.
 
 </td></tr>
 </tbody></table>
-

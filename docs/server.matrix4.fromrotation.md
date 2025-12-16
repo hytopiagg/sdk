@@ -63,7 +63,6 @@ The axis to rotate the matrix around.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Matrix4](./server.matrix4.md)

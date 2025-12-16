@@ -4,7 +4,7 @@
 
 ## Entity.isEnvironmental property
 
-Whether the entity is environmental, if true it will not invoke its tick function or change position.
+Whether the entity is environmental, if true it will not invoke its tick function or change position. It also cannot be animated or removed after spawning.
 
 **Signature:**
 

@@ -47,7 +47,6 @@ The angle in radians to rotate the matrix by.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Matrix3](./server.matrix3.md)

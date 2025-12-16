@@ -47,7 +47,6 @@ The lifetime of an emitted particle in seconds.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

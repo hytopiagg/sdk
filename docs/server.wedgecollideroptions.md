@@ -73,4 +73,3 @@ _(Optional)_ The extents of the wedge collider, defining full width (x), height 
 
 </td></tr>
 </tbody></table>
-

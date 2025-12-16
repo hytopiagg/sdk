@@ -142,4 +142,3 @@ Checks if a block texture is registered in the atlas.
 
 </td></tr>
 </tbody></table>
-

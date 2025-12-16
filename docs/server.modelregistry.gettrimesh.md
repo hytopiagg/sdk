@@ -63,7 +63,6 @@ _(Optional)_ Optional scaling to apply to the trimesh. Defaults to 1 for all axe
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [ModelTrimesh](./server.modeltrimesh.md) \| undefined

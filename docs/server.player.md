@@ -134,6 +134,48 @@ The current [PlayerInput](./server.playerinput.md) of the player.
 </td></tr>
 <tr><td>
 
+[interactEnabled](./server.player.interactenabled.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the players click/taps will cause interacts with blocks or entities. Defaults to true.
+
+
+</td></tr>
+<tr><td>
+
+[maxInteractDistance](./server.player.maxinteractdistance.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+The maximum distance a player can interact with entities or blocks. The raycast distance in blocks for interactions. Defaults to 20.
+
+
+</td></tr>
+<tr><td>
+
 [profilePictureUrl](./server.player.profilepictureurl.md)
 
 
@@ -308,6 +350,34 @@ Schedule a notification the player at a point in time in the future. This will a
 </td></tr>
 <tr><td>
 
+[setInteractEnabled(enabled)](./server.player.setinteractenabled.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets whether the players click/taps will cause interacts with blocks or entities.
+
+
+</td></tr>
+<tr><td>
+
+[setMaxInteractDistance(distance)](./server.player.setmaxinteractdistance.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the maximum distance a player can interact with entities or blocks.
+
+
+</td></tr>
+<tr><td>
+
 [setPersistedData(data)](./server.player.setpersisteddata.md)
 
 
@@ -335,4 +405,3 @@ Unschedules a scheduled notification for the player.
 
 </td></tr>
 </tbody></table>
-

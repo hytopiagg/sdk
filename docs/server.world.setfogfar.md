@@ -47,7 +47,6 @@ The far distance.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

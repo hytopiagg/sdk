@@ -47,7 +47,6 @@ The shoulder angle to set in degrees.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

@@ -63,7 +63,6 @@ _(Optional)_ The maximum number of retries to attempt in the event of failure.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 Promise&lt;Record&lt;string, unknown&gt; \| undefined&gt;

@@ -47,7 +47,6 @@ The world to spawn the ParticleEmitter in.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

@@ -47,4 +47,3 @@ _(Optional)_ The options for the block type.
 
 </td></tr>
 </tbody></table>
-

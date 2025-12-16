@@ -207,4 +207,3 @@ _(Optional)_ The tint color of the entity as a hex code.
 
 </td></tr>
 </tbody></table>
-

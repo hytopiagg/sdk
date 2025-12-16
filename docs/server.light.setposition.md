@@ -47,7 +47,6 @@ The position of the light.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

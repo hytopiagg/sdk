@@ -47,7 +47,6 @@ The `Matrix4` instance to create the `Matrix3` instance from.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Matrix3](./server.matrix3.md)

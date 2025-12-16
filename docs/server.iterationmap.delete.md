@@ -47,7 +47,6 @@ The key to delete.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 boolean

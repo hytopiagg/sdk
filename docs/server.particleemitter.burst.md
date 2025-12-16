@@ -47,7 +47,6 @@ The number of particles to burst.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

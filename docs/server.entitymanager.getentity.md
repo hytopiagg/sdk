@@ -47,7 +47,6 @@ The id of the entity to get.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 T \| undefined

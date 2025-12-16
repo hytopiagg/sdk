@@ -47,7 +47,6 @@ The options for the child collider to add.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Collider](./server.collider.md) \| null

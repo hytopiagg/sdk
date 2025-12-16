@@ -63,7 +63,6 @@ _(Optional)_ Value to use as this when executing callback.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

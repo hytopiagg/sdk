@@ -47,7 +47,6 @@ _(Optional)_ The animations to exclude from being stopped.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

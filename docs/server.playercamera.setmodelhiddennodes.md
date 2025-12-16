@@ -47,7 +47,6 @@ Determines nodes to hide that match these case insensitive substrings.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

@@ -89,6 +89,20 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[freezePointerLock(freeze)](./server.playerui.freezepointerlock.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Freezes or unfreezes the player's pointer lock state. Preventing player inputs from automatically locking or unlocking the pointer relative to its current state.
+
+
+</td></tr>
+<tr><td>
+
 [load(htmlUri)](./server.playerui.load.md)
 
 
@@ -111,7 +125,7 @@ Loads client UI for the player.
 
 </td><td>
 
-Locks or unlocks the player's mouse pointer. If the pointer is unlocked with lockPointer(false), the player will not be able to use in-game inputs or camera controls from the mouse pointer until `player.ui.lockPointer(true)`<!-- -->, or in your game's client UI html with `hytopia.lockPointer(true)`<!-- -->.
+Locks or unlocks the player's mouse pointer on Desktop. If the pointer is unlocked with `lockPointer(false)`<!-- -->, the player will not be able to use in-game inputs or camera controls from the mouse pointer until `player.ui.lockPointer(true)`<!-- -->, or in your game's client UI html with `hytopia.lockPointer(true)`<!-- -->.
 
 
 </td></tr>
@@ -130,4 +144,3 @@ Sends data to the player's client UI.
 
 </td></tr>
 </tbody></table>
-

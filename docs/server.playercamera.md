@@ -657,4 +657,3 @@ Sets the zoom of the camera.
 
 </td></tr>
 </tbody></table>
-

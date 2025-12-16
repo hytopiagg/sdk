@@ -47,7 +47,6 @@ The `Quaternion` object to create the `Matrix4` instance from.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Matrix4](./server.matrix4.md)

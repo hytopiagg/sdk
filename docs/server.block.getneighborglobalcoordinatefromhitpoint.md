@@ -47,7 +47,6 @@ The hit point on this block to get the neighbor coordinate from.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Vector3Like](./server.vector3like.md)

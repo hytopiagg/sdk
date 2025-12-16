@@ -63,7 +63,6 @@ The block type id to set. Use 0 to remove the block and replace with air.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

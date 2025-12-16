@@ -270,7 +270,7 @@ boolean
 
 </td><td>
 
-Whether the entity is environmental, if true it will not invoke its tick function or change position.
+Whether the entity is environmental, if true it will not invoke its tick function or change position. It also cannot be animated or removed after spawning.
 
 
 </td></tr>
@@ -688,6 +688,20 @@ Despawns the entity and all children from the world.
 </td></tr>
 <tr><td>
 
+[interact(player, raycastHit)](./server.entity.interact.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Triggers an interaction on the entity from a player.
+
+
+</td></tr>
+<tr><td>
+
 [setController(controller)](./server.entity.setcontroller.md)
 
 
@@ -911,4 +925,3 @@ Stops the provided model animations for the entity.
 
 </td></tr>
 </tbody></table>
-

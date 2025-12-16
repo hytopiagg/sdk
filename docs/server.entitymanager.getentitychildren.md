@@ -47,7 +47,6 @@ The entity to get the children for.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Entity](./server.entity.md)<!-- -->\[\]

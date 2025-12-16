@@ -47,7 +47,6 @@ A function that initializes the game. The function can take no parameters to jus
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

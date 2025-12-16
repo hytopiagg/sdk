@@ -47,7 +47,6 @@ The mode to set.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

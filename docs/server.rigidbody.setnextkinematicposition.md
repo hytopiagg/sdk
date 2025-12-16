@@ -47,7 +47,6 @@ The next kinematic position of the rigid body.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

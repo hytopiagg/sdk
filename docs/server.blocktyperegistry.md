@@ -157,4 +157,3 @@ Register a generic block type.
 
 </td></tr>
 </tbody></table>
-

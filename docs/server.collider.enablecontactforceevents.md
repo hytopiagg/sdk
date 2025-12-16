@@ -47,7 +47,6 @@ Whether contact force events are enabled.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

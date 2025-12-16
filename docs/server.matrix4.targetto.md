@@ -79,7 +79,6 @@ The up vector of the camera.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [Matrix4](./server.matrix4.md)

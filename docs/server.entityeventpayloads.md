@@ -132,6 +132,25 @@ Emitted when an entity's contact force is applied to another entity.
 </td></tr>
 <tr><td>
 
+["ENTITY.INTERACT"](./server.entityeventpayloads._entity.interact_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ entity: [Entity](./server.entity.md)<!-- -->; player: [Player](./server.player.md)<!-- -->; raycastHit?: [RaycastHit](./server.raycasthit.md)<!-- -->; }
+
+
+</td><td>
+
+Emitted when a player interacts with the entity by clicking or tapping it.
+
+
+</td></tr>
+<tr><td>
+
 ["ENTITY.SET\_MODEL\_ANIMATIONS\_PLAYBACK\_RATE"](./server.entityeventpayloads._entity.set_model_animations_playback_rate_.md)
 
 
@@ -416,4 +435,3 @@ Emitted when the rotation of the entity is updated at the end of the tick, eithe
 
 </td></tr>
 </tbody></table>
-

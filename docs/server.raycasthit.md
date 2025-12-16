@@ -14,6 +14,8 @@ export type RaycastHit = {
     hitEntity?: Entity;
     hitPoint: Vector3Like;
     hitDistance: number;
+    origin: Vector3Like;
+    originDirection: Vector3Like;
 };
 ```
 **References:** [Block](./server.block.md)<!-- -->, [Entity](./server.entity.md)<!-- -->, [Vector3Like](./server.vector3like.md)

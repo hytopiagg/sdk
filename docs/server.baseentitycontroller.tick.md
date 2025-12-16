@@ -61,7 +61,6 @@ The delta time in milliseconds since the last tick.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

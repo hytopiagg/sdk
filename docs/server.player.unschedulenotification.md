@@ -47,7 +47,6 @@ The id of the notification returned from [Player.scheduleNotification()](./serve
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 Promise&lt;boolean&gt;

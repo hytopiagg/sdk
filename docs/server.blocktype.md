@@ -286,3 +286,36 @@ The URI of the texture for the block type.
 </td></tr>
 </tbody></table>
 
+## Methods
+
+<table><thead><tr><th>
+
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[interact(player, raycastHit)](./server.blocktype.interact.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Triggers an interaction on the block type from a player.
+
+
+</td></tr>
+</tbody></table>

@@ -63,7 +63,6 @@ The handle of the second collider.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 [ContactManifold](./server.contactmanifold.md)<!-- -->\[\]

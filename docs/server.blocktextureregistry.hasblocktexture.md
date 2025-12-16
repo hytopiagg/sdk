@@ -47,7 +47,6 @@ The URI of the texture (e.g., 'blocks/stone.png' or 'blocks/grass' for cubemaps)
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 boolean

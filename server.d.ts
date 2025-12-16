@@ -730,13 +730,25 @@ export declare class BlockType extends EventRouter implements protocol.Serializa
     /** The URI of the texture for the block type. */
     get textureUri(): string;
 
+    /**
+     * Triggers an interaction on the block type from a player.
+     *
+     * @remarks
+     * This is automatically called when a player clicks or taps a block of this block type, but can also be called directly
+     * for programmatic interactions. Emits {@link BlockTypeEvent.INTERACT}.
+     *
+     * @param player - The player interacting with the block type.
+     * @param raycastHit - The raycast hit result, if the interaction was triggered by a client-side click/tap.
+     */
+    interact(player: Player, raycastHit?: RaycastHit): void;
 
 }
 
 /** Event types a BlockType instance can emit. See {@link BlockTypeEventPayloads} for the payloads. @public */
 export declare enum BlockTypeEvent {
     ENTITY_COLLISION = "BLOCK_TYPE.ENTITY_COLLISION",
-    ENTITY_CONTACT_FORCE = "BLOCK_TYPE.ENTITY_CONTACT_FORCE"
+    ENTITY_CONTACT_FORCE = "BLOCK_TYPE.ENTITY_CONTACT_FORCE",
+    INTERACT = "BLOCK_TYPE.INTERACT"
 }
 
 /** Event payloads for BlockType emitted events. @public */
@@ -754,6 +766,12 @@ export declare interface BlockTypeEventPayloads {
         blockType: BlockType;
         entity: Entity;
         contactForceData: ContactForceData;
+    };
+    /** Emitted when a player interacts with a block type. */
+    [BlockTypeEvent.INTERACT]: {
+        blockType: BlockType;
+        player: Player;
+        raycastHit?: RaycastHit;
     };
 }
 
@@ -1941,7 +1959,7 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     get tintColor(): RgbColor | undefined;
     /** Whether the entity is a block entity. */
     get isBlockEntity(): boolean;
-    /** Whether the entity is environmental, if true it will not invoke its tick function or change position. */
+    /** Whether the entity is environmental, if true it will not invoke its tick function or change position. It also cannot be animated or removed after spawning. */
     get isEnvironmental(): boolean;
     /** Whether the entity is a model entity. */
     get isModelEntity(): boolean;
@@ -1962,6 +1980,17 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * Despawns the entity and all children from the world.
      */
     despawn(): void;
+    /**
+     * Triggers an interaction on the entity from a player.
+     *
+     * @remarks
+     * This is automatically called when a player clicks or taps the entity, but can also be called directly
+     * for programmatic interactions. Emits {@link EntityEvent.INTERACT}.
+     *
+     * @param player - The player interacting with the entity.
+     * @param raycastHit - The raycast hit result, if the interaction was triggered by a client-side click/tap.
+     */
+    interact(player: Player, raycastHit?: RaycastHit): void;
     /**
      * Sets the controller for the entity.
      * @param controller - The controller to set.
@@ -2100,6 +2129,7 @@ export declare enum EntityEvent {
     DESPAWN = "ENTITY.DESPAWN",
     ENTITY_COLLISION = "ENTITY.ENTITY_COLLISION",
     ENTITY_CONTACT_FORCE = "ENTITY.ENTITY_CONTACT_FORCE",
+    INTERACT = "ENTITY.INTERACT",
     SET_MODEL_ANIMATIONS_PLAYBACK_RATE = "ENTITY.SET_MODEL_ANIMATIONS_PLAYBACK_RATE",
     SET_MODEL_HIDDEN_NODES = "ENTITY.SET_MODEL_HIDDEN_NODES",
     SET_MODEL_SCALE = "ENTITY.SET_MODEL_SCALE",
@@ -2150,6 +2180,12 @@ export declare interface EntityEventPayloads {
         entity: Entity;
         otherEntity: Entity;
         contactForceData: ContactForceData;
+    };
+    /** Emitted when a player interacts with the entity by clicking or tapping it. */
+    [EntityEvent.INTERACT]: {
+        entity: Entity;
+        player: Player;
+        raycastHit?: RaycastHit;
     };
     /** Emitted when the playback rate of the entity's model animations is set. */
     [EntityEvent.SET_MODEL_ANIMATIONS_PLAYBACK_RATE]: {
@@ -4533,8 +4569,14 @@ export declare class Player extends EventRouter implements protocol.Serializable
 
 
 
+
+
     /** The current {@link PlayerInput} of the player. */
     get input(): PlayerInput;
+    /** Whether the players click/taps will cause interacts with blocks or entities. Defaults to true. */
+    get interactEnabled(): boolean;
+    /** The maximum distance a player can interact with entities or blocks. The raycast distance in blocks for interactions. Defaults to 20. */
+    get maxInteractDistance(): number;
     /** The current {@link World} the player is in. */
     get world(): World | undefined;
     /**
@@ -4589,6 +4631,16 @@ export declare class Player extends EventRouter implements protocol.Serializable
      */
     resetInputs(): void;
     /**
+     * Sets whether the players click/taps will cause interacts with blocks or entities.
+     * @param enabled - Whether the players click/taps will cause interacts with blocks or entities.
+     */
+    setInteractEnabled(enabled: boolean): void;
+    /**
+     * Sets the maximum distance a player can interact with entities or blocks.
+     * @param distance - The maximum distance in blocks used for the interact raycast. Default is 20.
+     */
+    setMaxInteractDistance(distance: number): void;
+    /**
      * Set the persisted data for the player. This data can
      * later be retrieved using {@link Player.getPersistedData},
      * even if a player disconnects and rejoin a game in the future,
@@ -4606,6 +4658,7 @@ export declare class Player extends EventRouter implements protocol.Serializable
      * @returns The persisted data for the player.
      */
     setPersistedData(data: Record<string, unknown>): void;
+
 
 
 
@@ -4973,6 +5026,7 @@ export declare type PlayerEntityOptions = {
 /** Event types a Player can emit. See {@link PlayerEventPayloads} for the payloads. @public */
 export declare enum PlayerEvent {
     CHAT_MESSAGE_SEND = "PLAYER.CHAT_MESSAGE_SEND",
+    INTERACT = "PLAYER.INTERACT",
     JOINED_WORLD = "PLAYER.JOINED_WORLD",
     LEFT_WORLD = "PLAYER.LEFT_WORLD",
     RECONNECTED_WORLD = "PLAYER.RECONNECTED_WORLD",
@@ -4991,6 +5045,13 @@ export declare interface PlayerEventPayloads {
     [PlayerEvent.JOINED_WORLD]: {
         player: Player;
         world: World;
+    };
+    /** Emitted when a player interacts the world. */
+    [PlayerEvent.INTERACT]: {
+        player: Player;
+        interactOrigin: Vector3Like;
+        interactDirection: Vector3Like;
+        raycastHit?: RaycastHit;
     };
     /** Emitted when a player leaves a world. */
     [PlayerEvent.LEFT_WORLD]: {
@@ -5115,15 +5176,24 @@ export declare class PlayerUI extends EventRouter {
     readonly player: Player;
 
     /**
+     * Freezes or unfreezes the player's pointer lock state. Preventing player inputs
+     * from automatically locking or unlocking the pointer relative to its current state.
+     * @param freeze - Set true to freeze the pointer lock state, false to unfreeze it.
+     */
+    freezePointerLock(freeze: boolean): void;
+    /**
      * Loads client UI for the player.
      * @param htmlUri - The ui html uri to load.
      */
     load(htmlUri: string): void;
     /**
-     * Locks or unlocks the player's mouse pointer. If the pointer is unlocked
-     * with lockPointer(false), the player will not be able to use in-game inputs
+     * Locks or unlocks the player's mouse pointer on Desktop. If the pointer is unlocked
+     * with `lockPointer(false)`, the player will not be able to use in-game inputs
      * or camera controls from the mouse pointer until `player.ui.lockPointer(true)`,
      * or in your game's client UI html with `hytopia.lockPointer(true)`.
+     *
+     * @remarks
+     * Pointer lock has no effect on mobile devices.
      *
      * @param lock - Set true to lock the pointer, false to unlock it.
      */
@@ -5138,6 +5208,7 @@ export declare class PlayerUI extends EventRouter {
 /** Event types a PlayerUI can emit. See {@link PlayerUIEventPayloads} for the payloads. @public */
 export declare enum PlayerUIEvent {
     DATA = "PLAYER_UI.DATA",
+    FREEZE_POINTER_LOCK = "PLAYER_UI.FREEZE_POINTER_LOCK",
     LOAD = "PLAYER_UI.LOAD",
     LOCK_POINTER = "PLAYER_UI.LOCK_POINTER",
     SEND_DATA = "PLAYER_UI.SEND_DATA"
@@ -5149,6 +5220,11 @@ export declare interface PlayerUIEventPayloads {
     [PlayerUIEvent.DATA]: {
         playerUI: PlayerUI;
         data: Record<string, any>;
+    };
+    /** Emitted when the player's pointer lock is frozen or unfrozen. */
+    [PlayerUIEvent.FREEZE_POINTER_LOCK]: {
+        playerUI: PlayerUI;
+        freeze: boolean;
     };
     /** Emitted when the player's client UI is loaded. */
     [PlayerUIEvent.LOAD]: {
@@ -5406,6 +5482,10 @@ export declare type RaycastHit = {
     hitPoint: Vector3Like;
     /** The distance from origin where the raycast hit. */
     hitDistance: number;
+    /** The origin of the raycast. */
+    origin: Vector3Like;
+    /** The direction of the raycast from the origin. */
+    originDirection: Vector3Like;
 };
 
 /** Options for raycasting. @public */
@@ -6287,7 +6367,7 @@ export declare interface SpdMatrix3 extends SdpMatrix3 {
 export declare function startServer(init: ((() => void) | ((world: World) => void))): void;
 
 /** The inputs that are included in the PlayerInput. @public */
-export declare const SUPPORTED_INPUTS: readonly ["w", "a", "s", "d", "sp", "sh", "tb", "ml", "mr", "q", "e", "r", "f", "z", "x", "c", "v", "u", "i", "o", "j", "k", "l", "n", "m", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "cp", "cy", "jd"];
+export declare const SUPPORTED_INPUTS: readonly ["w", "a", "s", "d", "sp", "sh", "tb", "ml", "mr", "q", "e", "r", "f", "z", "x", "c", "v", "u", "i", "o", "j", "k", "l", "n", "m", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "cp", "cy", "iro", "ird", "jd"];
 
 /**
  * Manages performance telemetry and error tracking through your Sentry.io account.

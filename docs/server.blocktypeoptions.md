@@ -169,4 +169,3 @@ The URI of the texture asset for the block type.
 
 </td></tr>
 </tbody></table>
-

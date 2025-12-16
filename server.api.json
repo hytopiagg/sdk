@@ -1,7 +1,7 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.52.10",
+    "toolVersion": "7.52.5",
     "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
@@ -5364,6 +5364,72 @@
               "isAbstract": false
             },
             {
+              "kind": "Method",
+              "canonicalReference": "server!BlockType#interact:member(1)",
+              "docComment": "/**\n * Triggers an interaction on the block type from a player.\n *\n * @remarks\n *\n * This is automatically called when a player clicks or taps a block of this block type, but can also be called directly for programmatic interactions. Emits {@link BlockTypeEvent.INTERACT}.\n *\n * @param player - The player interacting with the block type.\n *\n * @param raycastHit - The raycast hit result, if the interaction was triggered by a client-side click/tap.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interact(player: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Player",
+                  "canonicalReference": "server!Player:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", raycastHit?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RaycastHit",
+                  "canonicalReference": "server!RaycastHit:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "player",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "raycastHit",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "interact"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "server!BlockType#isLiquid:member",
               "docComment": "/**\n * Whether the block type is a liquid.\n */\n",
@@ -5612,6 +5678,27 @@
               },
               "releaseTag": "Public",
               "name": "ENTITY_CONTACT_FORCE"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!BlockTypeEvent.INTERACT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "INTERACT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"BLOCK_TYPE.INTERACT\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "INTERACT"
             }
           ]
         },
@@ -5742,6 +5829,69 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "\"BLOCK_TYPE.ENTITY_CONTACT_FORCE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 10
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!BlockTypeEventPayloads#\"BLOCK_TYPE.INTERACT\":member",
+              "docComment": "/**\n * Emitted when a player interacts with a block type.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BlockTypeEvent.INTERACT",
+                  "canonicalReference": "server!BlockTypeEvent.INTERACT:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        blockType: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BlockType",
+                  "canonicalReference": "server!BlockType:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        player: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Player",
+                  "canonicalReference": "server!Player:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        raycastHit?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RaycastHit",
+                  "canonicalReference": "server!RaycastHit:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"BLOCK_TYPE.INTERACT\"",
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 10
@@ -14362,6 +14512,72 @@
               "isAbstract": false
             },
             {
+              "kind": "Method",
+              "canonicalReference": "server!Entity#interact:member(1)",
+              "docComment": "/**\n * Triggers an interaction on the entity from a player.\n *\n * @remarks\n *\n * This is automatically called when a player clicks or taps the entity, but can also be called directly for programmatic interactions. Emits {@link EntityEvent.INTERACT}.\n *\n * @param player - The player interacting with the entity.\n *\n * @param raycastHit - The raycast hit result, if the interaction was triggered by a client-side click/tap.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interact(player: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Player",
+                  "canonicalReference": "server!Player:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", raycastHit?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RaycastHit",
+                  "canonicalReference": "server!RaycastHit:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "player",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "raycastHit",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "interact"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "server!Entity#isBlockEntity:member",
               "docComment": "/**\n * Whether the entity is a block entity.\n */\n",
@@ -14394,7 +14610,7 @@
             {
               "kind": "Property",
               "canonicalReference": "server!Entity#isEnvironmental:member",
-              "docComment": "/**\n * Whether the entity is environmental, if true it will not invoke its tick function or change position.\n */\n",
+              "docComment": "/**\n * Whether the entity is environmental, if true it will not invoke its tick function or change position. It also cannot be animated or removed after spawning.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -16004,6 +16220,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!EntityEvent.INTERACT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "INTERACT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"ENTITY.INTERACT\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "INTERACT"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!EntityEvent.SET_MODEL_ANIMATIONS_PLAYBACK_RATE:member",
               "docComment": "",
               "excerptTokens": [
@@ -16608,6 +16845,69 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "\"ENTITY.ENTITY_CONTACT_FORCE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 10
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!EntityEventPayloads#\"ENTITY.INTERACT\":member",
+              "docComment": "/**\n * Emitted when a player interacts with the entity by clicking or tapping it.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "EntityEvent.INTERACT",
+                  "canonicalReference": "server!EntityEvent.INTERACT:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        entity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Entity",
+                  "canonicalReference": "server!Entity:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        player: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Player",
+                  "canonicalReference": "server!Player:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        raycastHit?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RaycastHit",
+                  "canonicalReference": "server!RaycastHit:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"ENTITY.INTERACT\"",
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 10
@@ -36295,6 +36595,36 @@
               "isAbstract": false
             },
             {
+              "kind": "Property",
+              "canonicalReference": "server!Player#interactEnabled:member",
+              "docComment": "/**\n * Whether the players click/taps will cause interacts with blocks or entities. Defaults to true.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get interactEnabled(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "interactEnabled",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
               "kind": "Method",
               "canonicalReference": "server!Player#joinWorld:member(1)",
               "docComment": "/**\n * Joins a player to a world.\n *\n * @remarks\n *\n * If the player is already in a {@link World}, they will be removed from their current world before joining the new world.\n *\n * @param world - The world to join the player to.\n */\n",
@@ -36342,6 +36672,36 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "joinWorld"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!Player#maxInteractDistance:member",
+              "docComment": "/**\n * The maximum distance a player can interact with entities or blocks. The raycast distance in blocks for interactions. Defaults to 20.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get maxInteractDistance(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "maxInteractDistance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
             },
             {
               "kind": "Property",
@@ -36472,6 +36832,102 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "scheduleNotification"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Player#setInteractEnabled:member(1)",
+              "docComment": "/**\n * Sets whether the players click/taps will cause interacts with blocks or entities.\n *\n * @param enabled - Whether the players click/taps will cause interacts with blocks or entities.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setInteractEnabled(enabled: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "enabled",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setInteractEnabled"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Player#setMaxInteractDistance:member(1)",
+              "docComment": "/**\n * Sets the maximum distance a player can interact with entities or blocks.\n *\n * @param distance - The maximum distance in blocks used for the interact raycast. Default is 20.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setMaxInteractDistance(distance: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "distance",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setMaxInteractDistance"
             },
             {
               "kind": "Method",
@@ -39533,6 +39989,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!PlayerEvent.INTERACT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "INTERACT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PLAYER.INTERACT\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "INTERACT"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!PlayerEvent.JOINED_WORLD:member",
               "docComment": "",
               "excerptTokens": [
@@ -39696,6 +40173,78 @@
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!PlayerEventPayloads#\"PLAYER.INTERACT\":member",
+              "docComment": "/**\n * Emitted when a player interacts the world.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PlayerEvent.INTERACT",
+                  "canonicalReference": "server!PlayerEvent.INTERACT:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        player: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Player",
+                  "canonicalReference": "server!Player:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        interactOrigin: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        interactDirection: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        raycastHit?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RaycastHit",
+                  "canonicalReference": "server!RaycastHit:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PLAYER.INTERACT\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 12
               }
             },
             {
@@ -40520,6 +41069,54 @@
           "members": [
             {
               "kind": "Method",
+              "canonicalReference": "server!PlayerUI#freezePointerLock:member(1)",
+              "docComment": "/**\n * Freezes or unfreezes the player's pointer lock state. Preventing player inputs from automatically locking or unlocking the pointer relative to its current state.\n *\n * @param freeze - Set true to freeze the pointer lock state, false to unfreeze it.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "freezePointerLock(freeze: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "freeze",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "freezePointerLock"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "server!PlayerUI#load:member(1)",
               "docComment": "/**\n * Loads client UI for the player.\n *\n * @param htmlUri - The ui html uri to load.\n */\n",
               "excerptTokens": [
@@ -40569,7 +41166,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!PlayerUI#lockPointer:member(1)",
-              "docComment": "/**\n * Locks or unlocks the player's mouse pointer. If the pointer is unlocked with lockPointer(false), the player will not be able to use in-game inputs or camera controls from the mouse pointer until `player.ui.lockPointer(true)`, or in your game's client UI html with `hytopia.lockPointer(true)`.\n *\n * @param lock - Set true to lock the pointer, false to unlock it.\n */\n",
+              "docComment": "/**\n * Locks or unlocks the player's mouse pointer on Desktop. If the pointer is unlocked with `lockPointer(false)`, the player will not be able to use in-game inputs or camera controls from the mouse pointer until `player.ui.lockPointer(true)`, or in your game's client UI html with `hytopia.lockPointer(true)`.\n *\n * @remarks\n *\n * Pointer lock has no effect on mobile devices.\n *\n * @param lock - Set true to lock the pointer, false to unlock it.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -40738,6 +41335,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!PlayerUIEvent.FREEZE_POINTER_LOCK:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FREEZE_POINTER_LOCK = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PLAYER_UI.FREEZE_POINTER_LOCK\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "FREEZE_POINTER_LOCK"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!PlayerUIEvent.LOAD:member",
               "docComment": "",
               "excerptTokens": [
@@ -40868,6 +41486,51 @@
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!PlayerUIEventPayloads#\"PLAYER_UI.FREEZE_POINTER_LOCK\":member",
+              "docComment": "/**\n * Emitted when the player's pointer lock is frozen or unfrozen.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PlayerUIEvent.FREEZE_POINTER_LOCK",
+                  "canonicalReference": "server!PlayerUIEvent.FREEZE_POINTER_LOCK:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        playerUI: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PlayerUI",
+                  "canonicalReference": "server!PlayerUI:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        freeze: boolean;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PLAYER_UI.FREEZE_POINTER_LOCK\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
               }
             },
             {
@@ -42835,7 +43498,25 @@
             },
             {
               "kind": "Content",
-              "text": ";\n    hitDistance: number;\n}"
+              "text": ";\n    hitDistance: number;\n    origin: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Vector3Like",
+              "canonicalReference": "server!Vector3Like:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n    originDirection: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Vector3Like",
+              "canonicalReference": "server!Vector3Like:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n}"
             },
             {
               "kind": "Content",
@@ -42847,7 +43528,7 @@
           "name": "RaycastHit",
           "typeTokenRange": {
             "startIndex": 1,
-            "endIndex": 8
+            "endIndex": 12
           }
         },
         {
@@ -49758,7 +50439,7 @@
             },
             {
               "kind": "Content",
-              "text": "readonly [\"w\", \"a\", \"s\", \"d\", \"sp\", \"sh\", \"tb\", \"ml\", \"mr\", \"q\", \"e\", \"r\", \"f\", \"z\", \"x\", \"c\", \"v\", \"u\", \"i\", \"o\", \"j\", \"k\", \"l\", \"n\", \"m\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"0\", \"cp\", \"cy\", \"jd\"]"
+              "text": "readonly [\"w\", \"a\", \"s\", \"d\", \"sp\", \"sh\", \"tb\", \"ml\", \"mr\", \"q\", \"e\", \"r\", \"f\", \"z\", \"x\", \"c\", \"v\", \"u\", \"i\", \"o\", \"j\", \"k\", \"l\", \"n\", \"m\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"0\", \"cp\", \"cy\", \"iro\", \"ird\", \"jd\"]"
             }
           ],
           "fileUrlPath": "src/players/Player.ts",

@@ -47,7 +47,6 @@ The position the directional light originates from relative to the player's came
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

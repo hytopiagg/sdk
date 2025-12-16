@@ -47,7 +47,6 @@ The local coordinate of the block to get.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 number

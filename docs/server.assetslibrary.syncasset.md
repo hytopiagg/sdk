@@ -47,7 +47,6 @@ The path of the asset to copy to local assets.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

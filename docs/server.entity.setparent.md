@@ -95,7 +95,6 @@ _(Optional)_ The rotation to set for the entity. If parent is provided, this is 
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

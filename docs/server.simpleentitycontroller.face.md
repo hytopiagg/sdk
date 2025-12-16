@@ -79,7 +79,6 @@ _(Optional)_ Additional options for the face operation, such as callbacks.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 void

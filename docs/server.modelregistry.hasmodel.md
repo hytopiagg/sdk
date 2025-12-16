@@ -47,7 +47,6 @@ The URI of the model to check.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 boolean

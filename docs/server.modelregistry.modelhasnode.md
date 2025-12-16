@@ -63,7 +63,6 @@ The name of the node to check for.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 boolean

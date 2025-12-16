@@ -46,6 +46,20 @@ DATA
 </td></tr>
 <tr><td>
 
+FREEZE\_POINTER\_LOCK
+
+
+</td><td>
+
+`"PLAYER_UI.FREEZE_POINTER_LOCK"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 LOAD
 
 
@@ -87,4 +101,3 @@ SEND\_DATA
 
 </td></tr>
 </tbody></table>
-

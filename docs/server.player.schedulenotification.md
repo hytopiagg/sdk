@@ -63,7 +63,6 @@ A future timestamp in milliseconds to schedule the notification for.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 Promise&lt;string \| void&gt;

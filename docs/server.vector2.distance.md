@@ -47,7 +47,6 @@ The vector to calculate the distance to.
 
 </td></tr>
 </tbody></table>
-
 **Returns:**
 
 number
