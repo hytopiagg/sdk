@@ -76,7 +76,7 @@ async function start() {
   const projectRoot = process.cwd();
   const entryFile = path.join(projectRoot, 'index.mjs');
   const buildCmd = 'hytopia build-dev';
-  const runCmd = `"${process.execPath}" "${entryFile}"`;
+  const runCmd = `"${process.execPath}" --enable-source-maps "${entryFile}"`;
 
   // Start nodemon to watch for changes, rebuild, then run the server
   nodemon({
@@ -470,9 +470,9 @@ async function packageProject() {
 
 
 async function build(devMode = false) {
-  let envFlags = devMode ? '' : '--minify-whitespace --minify-syntax --sourcemap=inline';
+  let envFlags = devMode ? '' : '--minify-whitespace --minify-syntax';
 
-  execSync(`npx --yes bun build --target=node --env=disable --format=esm ${envFlags} --external=@fails-components/webtransport --external=@fails-components/webtransport-transport-http3-quiche --outfile=index.mjs index.ts`, { stdio: 'inherit' });
+  execSync(`npx --yes bun build --target=node --env=disable --format=esm ${envFlags} --sourcemap=inline --external=@fails-components/webtransport --external=@fails-components/webtransport-transport-http3-quiche --outfile=index.mjs index.ts`, { stdio: 'inherit' });
 }
 
 /**
