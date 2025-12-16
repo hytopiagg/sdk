@@ -204,6 +204,20 @@ Filters inappropriate language from text by replacing profanity with asterisks. 
 </td></tr>
 <tr><td>
 
+[freezePointerLock(freeze)](./client.hytopiaui.freezepointerlock.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Freezes or unfreezes the pointer lock state. Preventing player inputs from automatically locking or unlocking the pointer. Esc key will still unlock the pointer - this is a system level feature that cannot be overriden. Pointer lock only affects Desktop devices.
+
+
+</td></tr>
+<tr><td>
+
 [getEntityIdByName(name)](./client.hytopiaui.getentityidbyname.md)
 
 
@@ -282,7 +296,7 @@ Checks whether a Scene UI template is currently registered.
 
 </td><td>
 
-Controls pointer lock for your UI. When locked, the cursor is hidden and mouse movement controls the camera. Call with `true` when hiding your UI so players can control the camera, `false` when showing UI that needs cursor interaction.
+Controls pointer lock for your UI. When locked, the cursor is hidden and mouse movement controls the camera. Call with `true` when hiding your UI so players can control the camera, `false` when showing UI that needs cursor interaction. Pointer lock only affects Desktop devices.
 
 
 </td></tr>

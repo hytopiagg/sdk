@@ -4,7 +4,7 @@
 
 ## HytopiaUI.lockPointer() method
 
-Controls pointer lock for your UI. When locked, the cursor is hidden and mouse movement controls the camera. Call with `true` when hiding your UI so players can control the camera, `false` when showing UI that needs cursor interaction.
+Controls pointer lock for your UI. When locked, the cursor is hidden and mouse movement controls the camera. Call with `true` when hiding your UI so players can control the camera, `false` when showing UI that needs cursor interaction. Pointer lock only affects Desktop devices.
 
 **Signature:**
 
