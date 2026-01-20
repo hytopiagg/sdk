@@ -89,6 +89,20 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[append(htmlUri)](./server.playerui.append.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Appends UI HTML to the player's existing client UI.
+
+
+</td></tr>
+<tr><td>
+
 [freezePointerLock(freeze)](./server.playerui.freezepointerlock.md)
 
 
@@ -111,7 +125,7 @@ Freezes or unfreezes the player's pointer lock state. Preventing player inputs f
 
 </td><td>
 
-Loads client UI for the player.
+Loads client UI for the player, replacing any existing UI.
 
 
 </td></tr>

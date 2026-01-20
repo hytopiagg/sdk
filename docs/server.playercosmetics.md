@@ -14,7 +14,8 @@ export type PlayerCosmetics = {
         slot: string;
         item: PlayerCosmeticsEquippedItem;
     }[];
-    hairStyle: number;
+    hairModelUri?: string;
+    hairTextureUri?: string;
     skinTextureUri: string;
 };
 ```

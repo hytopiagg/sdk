@@ -387,27 +387,6 @@ The unique ID of the world.
 </td></tr>
 <tr><td>
 
-[lightManager](./server.world.lightmanager.md)
-
-
-</td><td>
-
-`readonly`
-
-
-</td><td>
-
-[LightManager](./server.lightmanager.md)
-
-
-</td><td>
-
-The light manager for the world.
-
-
-</td></tr>
-<tr><td>
-
 [loop](./server.world.loop.md)
 
 

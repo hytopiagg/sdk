@@ -170,6 +170,82 @@ Emitted when the color of an emitted particle at the end of its lifetime is set.
 </td></tr>
 <tr><td>
 
+["PARTICLE\_EMITTER.SET\_COLOR\_INTENSITY\_END\_VARIANCE"](./server.particleemittereventpayloads._particle_emitter.set_color_intensity_end_variance_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ particleEmitter: [ParticleEmitter](./server.particleemitter.md)<!-- -->; colorIntensityEndVariance: number; }
+
+
+</td><td>
+
+Emitted when the color intensity variance of an emitted particle at the end of its lifetime is set.
+
+
+</td></tr>
+<tr><td>
+
+["PARTICLE\_EMITTER.SET\_COLOR\_INTENSITY\_END"](./server.particleemittereventpayloads._particle_emitter.set_color_intensity_end_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ particleEmitter: [ParticleEmitter](./server.particleemitter.md)<!-- -->; colorIntensityEnd: number; }
+
+
+</td><td>
+
+Emitted when the color intensity of an emitted particle at the end of its lifetime is set.
+
+
+</td></tr>
+<tr><td>
+
+["PARTICLE\_EMITTER.SET\_COLOR\_INTENSITY\_START\_VARIANCE"](./server.particleemittereventpayloads._particle_emitter.set_color_intensity_start_variance_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ particleEmitter: [ParticleEmitter](./server.particleemitter.md)<!-- -->; colorIntensityStartVariance: number; }
+
+
+</td><td>
+
+Emitted when the color intensity variance of an emitted particle at the start of its lifetime is set.
+
+
+</td></tr>
+<tr><td>
+
+["PARTICLE\_EMITTER.SET\_COLOR\_INTENSITY\_START"](./server.particleemittereventpayloads._particle_emitter.set_color_intensity_start_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ particleEmitter: [ParticleEmitter](./server.particleemitter.md)<!-- -->; colorIntensityStart: number; }
+
+
+</td><td>
+
+Emitted when the color intensity of an emitted particle at the start of its lifetime is set.
+
+
+</td></tr>
+<tr><td>
+
 ["PARTICLE\_EMITTER.SET\_COLOR\_START\_VARIANCE"](./server.particleemittereventpayloads._particle_emitter.set_color_start_variance_.md)
 
 

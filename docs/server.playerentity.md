@@ -93,6 +93,27 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[isTickWithPlayerInputEnabled](./server.playerentity.istickwithplayerinputenabled.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether tickWithPlayerInput() is called during the entity's tick.
+
+
+</td></tr>
+<tr><td>
+
 [nametagSceneUI](./server.playerentity.nametagsceneui.md)
 
 
@@ -130,6 +151,40 @@ The SceneUI instance for the player entity's nametag.
 </td><td>
 
 The player the player entity is assigned to and controlled by.
+
+
+</td></tr>
+</tbody></table>
+
+## Methods
+
+<table><thead><tr><th>
+
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[setTickWithPlayerInputEnabled(enabled)](./server.playerentity.settickwithplayerinputenabled.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets whether tickWithPlayerInput() is called during the entity's tick. Disabling this effectively disables player control of the entity.
 
 
 </td></tr>

@@ -2377,7 +2377,7 @@ export declare class ErrorHandler {
  *
  * @public
  */
-export declare interface EventPayloads extends AudioEventPayloads, BaseEntityControllerEventPayloads, BlockTypeEventPayloads, BlockTypeRegistryEventPayloads, ChatEventPayloads, ChunkLatticeEventPayloads, ConnectionEventPayloads, EntityEventPayloads, GameServerEventPayloads, ParticleEmitterEventPayloads, PlayerCameraEventPayloads, PlayerEventPayloads, PlayerManagerEventPayloads, PlayerUIEventPayloads, SceneUIEventPayloads, SimulationEventPayloads, LightEventPayloads, WebServerEventPayloads, WorldEventPayloads, WorldLoopEventPayloads, WorldManagerEventPayloads {
+export declare interface EventPayloads extends AudioEventPayloads, BaseEntityControllerEventPayloads, BlockTypeEventPayloads, BlockTypeRegistryEventPayloads, ChatEventPayloads, ChunkLatticeEventPayloads, ConnectionEventPayloads, EntityEventPayloads, GameServerEventPayloads, ParticleEmitterEventPayloads, PlayerCameraEventPayloads, PlayerEventPayloads, PlayerManagerEventPayloads, PlayerUIEventPayloads, SceneUIEventPayloads, SimulationEventPayloads, WebServerEventPayloads, WorldEventPayloads, WorldLoopEventPayloads, WorldManagerEventPayloads {
 }
 
 /**
@@ -2703,299 +2703,6 @@ export declare interface KinematicVelocityRigidBodyOptions extends BaseRigidBody
     angularVelocity?: Vector3Like;
     /** The linear velocity of the rigid body. */
     linearVelocity?: Vector3Like;
-}
-
-/**
- * Represents a light in a world. Lights can be point lights
- * or spotlights.
- *
- * @remarks
- * Lights are created directly as instances. They support a
- * variety of configuration options through the {@link LightOptions}
- * constructor argument.
- *
- * <h2>Events</h2>
- *
- * This class is an EventRouter, and instances of it emit
- * events with payloads listed under {@link LightEventPayloads}
- *
- * @example
- * ```typescript
- * const light = new Light({
- *   attachedToEntity: playerEntity,
- *   color: { r: 255, g: 0, b: 0 },
- *   intensity: 5,
- *   offset: { x: 0, y: 1, z: 0 },
- * });
- *
- * light.spawn(world);
- * ```
- *
- * @public
- */
-export declare class Light extends EventRouter implements protocol.Serializable {
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * @param options - The options for the Light instance.
-     */
-    constructor(options: LightOptions);
-    /** The unique identifier for the Light. */
-    get id(): number | undefined;
-    /** If type is spotlight, the angle of the spotlight. */
-    get angle(): number | undefined;
-    /** The entity to which the Light is attached if explicitly set. */
-    get attachedToEntity(): Entity | undefined;
-    /** The color of the light. */
-    get color(): RgbColor;
-    /** The maximum distance the light will illuminate. 0 does not limit distance. Defaults to 0. */
-    get distance(): number | undefined;
-    /** The intensity of the light in candela (cd). Defaults to 1 */
-    get intensity(): number;
-    /** Whether the Light is spawned into the world. */
-    get isSpawned(): boolean;
-    /** The offset of the light from the attached entity or position. */
-    get offset(): Vector3Like | undefined;
-    /** If type is spotlight, the penumbra of the spotlight. */
-    get penumbra(): number | undefined;
-    /** The position of the light in the world if explicitly set. */
-    get position(): Vector3Like | undefined;
-    /** If type is spotlight, the entity the spotlight will constantly point at. */
-    get trackedEntity(): Entity | undefined;
-    /** If type is spotlight, the position the spotlight will constantly point at. */
-    get trackedPosition(): Vector3Like | undefined;
-    /** The type of light. Defaults to point light. */
-    get type(): LightType;
-    /** The world the Light is spawned into. */
-    get world(): World | undefined;
-    /**
-     * Sets the angle of the spotlight if the light type is spotlight.
-     *
-     * @param angle - The angle of the spotlight.
-     */
-    setAngle(angle: number): void;
-    /**
-     * Sets the entity to which the Light is attached.
-     *
-     * @param entity - The entity to attach the Light to.
-     */
-    setAttachedToEntity(entity: Entity): void;
-    /**
-     * Sets the color of the light.
-     *
-     * @param color - The color of the light.
-     */
-    setColor(color: RgbColor): void;
-    /**
-     * Sets the maximum distance the light will illuminate.
-     *
-     * @param distance - The maximum distance the light will illuminate.
-     */
-    setDistance(distance: number): void;
-    /**
-     * Sets the intensity of the light.
-     *
-     * @param intensity - The intensity of the light.
-     */
-    setIntensity(intensity: number): void;
-    /**
-     * Sets the offset of the light from the attached entity or position.
-     *
-     * @param offset - The offset of the light.
-     */
-    setOffset(offset: Vector3Like): void;
-    /**
-     * Sets the penumbra of the spotlight if the light type is spotlight.
-     *
-     * @param penumbra - The penumbra of the spotlight.
-     */
-    setPenumbra(penumbra: number): void;
-    /**
-     * Sets the position of the light.
-     *
-     * @param position - The position of the light.
-     */
-    setPosition(position: Vector3Like): void;
-    /**
-     * Sets the entity the spotlight will constantly point at if the light type is spotlight.
-     *
-     * @param entity - The entity the spotlight will constantly point at.
-     */
-    setTrackedEntity(entity: Entity): void;
-    /**
-     * Sets the position the spotlight will constantly point at if the light type is spotlight.
-     *
-     * @param position - The position the spotlight will constantly point at.
-     */
-    setTrackedPosition(position: Vector3Like): void;
-    /**
-     * Despawns the Light from the world.
-     */
-    despawn(): void;
-    /**
-     * Spawns the Light in the world.
-     *
-     * @param world - The world to spawn the Light in.
-     */
-    spawn(world: World): void;
-
-}
-
-/** Event types a Light instance can emit. See {@link LightEventPayloads} for the payloads. @public */
-export declare enum LightEvent {
-    DESPAWN = "LIGHT.DESPAWN",
-    SET_ANGLE = "LIGHT.SET_ANGLE",
-    SET_ATTACHED_TO_ENTITY = "LIGHT.SET_ATTACHED_TO_ENTITY",
-    SET_COLOR = "LIGHT.SET_COLOR",
-    SET_DISTANCE = "LIGHT.SET_DISTANCE",
-    SET_INTENSITY = "LIGHT.SET_INTENSITY",
-    SET_OFFSET = "LIGHT.SET_OFFSET",
-    SET_PENUMBRA = "LIGHT.SET_PENUMBRA",
-    SET_POSITION = "LIGHT.SET_POSITION",
-    SET_TRACKED_ENTITY = "LIGHT.SET_TRACKED_ENTITY",
-    SET_TRACKED_POSITION = "LIGHT.SET_TRACKED_POSITION",
-    SPAWN = "LIGHT.SPAWN"
-}
-
-/** Event payloads for Light emitted events. @public */
-export declare interface LightEventPayloads {
-    /** Emitted when a light is despawned. */
-    [LightEvent.DESPAWN]: {
-        light: Light;
-    };
-    /** Emitted when the angle of the spotlight is set. */
-    [LightEvent.SET_ANGLE]: {
-        light: Light;
-        angle: number;
-    };
-    /** Emitted when the light is attached to an entity. */
-    [LightEvent.SET_ATTACHED_TO_ENTITY]: {
-        light: Light;
-        entity: Entity;
-    };
-    /** Emitted when the color of the light is set. */
-    [LightEvent.SET_COLOR]: {
-        light: Light;
-        color: RgbColor;
-    };
-    /** Emitted when the maximum distance the light will illuminate is set. */
-    [LightEvent.SET_DISTANCE]: {
-        light: Light;
-        distance: number;
-    };
-    /** Emitted when the intensity of the light is set. */
-    [LightEvent.SET_INTENSITY]: {
-        light: Light;
-        intensity: number;
-    };
-    /** Emitted when the offset of the light is set. */
-    [LightEvent.SET_OFFSET]: {
-        light: Light;
-        offset: Vector3Like;
-    };
-    /** Emitted when the penumbra of the spotlight is set. */
-    [LightEvent.SET_PENUMBRA]: {
-        light: Light;
-        penumbra: number;
-    };
-    /** Emitted when the position of the light is set. */
-    [LightEvent.SET_POSITION]: {
-        light: Light;
-        position: Vector3Like;
-    };
-    /** Emitted when the tracked entity of the spotlight is set. */
-    [LightEvent.SET_TRACKED_ENTITY]: {
-        light: Light;
-        entity: Entity;
-    };
-    /** Emitted when the tracked position of the spotlight is set. */
-    [LightEvent.SET_TRACKED_POSITION]: {
-        light: Light;
-        position: Vector3Like;
-    };
-    /** Emitted when a light is spawned. */
-    [LightEvent.SPAWN]: {
-        light: Light;
-    };
-}
-
-/**
- * Manages Light instances in a world.
- *
- * @remarks
- * The LightManager is created internally as a singleton
- * for each {@link World} instance in a game server.
- * It allows retrieval of all loaded Light instances,
- * entity attached Light instances, and more.
- *
- * @public
- */
-export declare class LightManager {
-
-
-
-
-    /** The world the LightManager is for. */
-    get world(): World;
-
-    /**
-     * Retrieves all spawned Light instances for the world.
-     *
-     * @returns An array of Light instances.
-     */
-    getAllLights(): Light[];
-    /**
-     * Retrieves all spawned Light instances attached to a specific entity.
-     *
-     * @param entity - The entity to get attached Light instances for.
-     * @returns An array of Light instances.
-     */
-    getAllEntityAttachedLights(entity: Entity): Light[];
-
-
-}
-
-/** Options for creating a Light instance. @public */
-export declare interface LightOptions {
-    /** If type is spotlight, the angle of the spotlight. */
-    angle?: number;
-    /** If set, the light will be attached to this entity. */
-    attachedToEntity?: Entity;
-    /** The color of the light. Defaults to white. */
-    color?: RgbColor;
-    /** The maximum distance the light will illuminate. 0 does not limit distance. Defaults to 0. */
-    distance?: number;
-    /** The intensity of the light in candela (cd). Defaults to 1 */
-    intensity?: number;
-    /** The offset of the light from the attached entity or position. */
-    offset?: Vector3Like;
-    /** If type is spotlight, the penumbra of the spotlight. Defaults to 0 */
-    penumbra?: number;
-    /** If set, the light will be attached at this position. */
-    position?: Vector3Like;
-    /** If type is spotlight, the entity the spotlight will constantly point at. */
-    trackedEntity?: Entity;
-    /** If type is spotlight, the position the spotlight will constantly point at. */
-    trackedPosition?: Vector3Like;
-    /** The type of light. Defaults to point light. */
-    type?: LightType;
-}
-
-/** The types a Light can be. @public */
-export declare enum LightType {
-    POINTLIGHT = 0,
-    SPOTLIGHT = 1
 }
 
 /**
@@ -3637,6 +3344,12 @@ export declare class ModelRegistry {
 
 
     /**
+     * Retrieves an array of all available model URIs.
+     *
+     * @returns An array of all available model URIs.
+     */
+    getAllModelUris(): string[];
+    /**
      * Retrieves an array of all known animation names for a model.
      *
      * @param modelUri - The URI of the model to retrieve the animation names for.
@@ -3826,6 +3539,10 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
 
 
 
+
+
+
+
     constructor(options: ParticleEmitterOptions);
     /** The unique identifier for the ParticlEmitter. */
     get id(): number | undefined;
@@ -3839,6 +3556,14 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
     get colorEnd(): RgbColor | undefined;
     /** The color variance of an emitted particle at the end of its lifetime. */
     get colorEndVariance(): RgbColor | undefined;
+    /** The color intensity of an emitted particle at the end of its lifetime. */
+    get colorIntensityEnd(): number | undefined;
+    /** The color intensity variance of an emitted particle at the end of its lifetime. */
+    get colorIntensityEndVariance(): number | undefined;
+    /** The color intensity of an emitted particle at the start of its lifetime. */
+    get colorIntensityStart(): number | undefined;
+    /** The color intensity variance of an emitted particle at the start of its lifetime. */
+    get colorIntensityStartVariance(): number | undefined;
     /** The color of an emitted particle at the start of its lifetime. */
     get colorStart(): RgbColor | undefined;
     /** The color variance of an emitted particle at the start of its lifetime. */
@@ -3923,6 +3648,30 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
      * @param colorEndVariance - The color variance of an emitted particle at the end of its lifetime.
      */
     setColorEndVariance(colorEndVariance: RgbColor): void;
+    /**
+     * Sets the color intensity of an emitted particle at the end of its lifetime.
+     *
+     * @param colorIntensityEnd - The color intensity at the end of lifetime. Values greater than 1 create HDR/bloom effects.
+     */
+    setColorIntensityEnd(colorIntensityEnd: number): void;
+    /**
+     * Sets the color intensity variance of an emitted particle at the end of its lifetime.
+     *
+     * @param colorIntensityEndVariance - The color intensity variance at the end of lifetime.
+     */
+    setColorIntensityEndVariance(colorIntensityEndVariance: number): void;
+    /**
+     * Sets the color intensity of an emitted particle at the start of its lifetime.
+     *
+     * @param colorIntensityStart - The color intensity at the start of lifetime. Values greater than 1 create HDR/bloom effects.
+     */
+    setColorIntensityStart(colorIntensityStart: number): void;
+    /**
+     * Sets the color intensity variance of an emitted particle at the start of its lifetime.
+     *
+     * @param colorIntensityStartVariance - The color intensity variance at the start of lifetime.
+     */
+    setColorIntensityStartVariance(colorIntensityStartVariance: number): void;
     /**
      * Sets the color of an emitted particle at the start of its lifetime.
      *
@@ -4097,6 +3846,10 @@ export declare enum ParticleEmitterEvent {
     SET_ATTACHED_TO_ENTITY_NODE_NAME = "PARTICLE_EMITTER.SET_ATTACHED_TO_ENTITY_NODE_NAME",
     SET_COLOR_END = "PARTICLE_EMITTER.SET_COLOR_END",
     SET_COLOR_END_VARIANCE = "PARTICLE_EMITTER.SET_COLOR_END_VARIANCE",
+    SET_COLOR_INTENSITY_END = "PARTICLE_EMITTER.SET_COLOR_INTENSITY_END",
+    SET_COLOR_INTENSITY_END_VARIANCE = "PARTICLE_EMITTER.SET_COLOR_INTENSITY_END_VARIANCE",
+    SET_COLOR_INTENSITY_START = "PARTICLE_EMITTER.SET_COLOR_INTENSITY_START",
+    SET_COLOR_INTENSITY_START_VARIANCE = "PARTICLE_EMITTER.SET_COLOR_INTENSITY_START_VARIANCE",
     SET_COLOR_START = "PARTICLE_EMITTER.SET_COLOR_START",
     SET_COLOR_START_VARIANCE = "PARTICLE_EMITTER.SET_COLOR_START_VARIANCE",
     SET_GRAVITY = "PARTICLE_EMITTER.SET_GRAVITY",
@@ -4159,6 +3912,26 @@ export declare interface ParticleEmitterEventPayloads {
     [ParticleEmitterEvent.SET_COLOR_END_VARIANCE]: {
         particleEmitter: ParticleEmitter;
         colorEndVariance: RgbColor;
+    };
+    /** Emitted when the color intensity of an emitted particle at the end of its lifetime is set. */
+    [ParticleEmitterEvent.SET_COLOR_INTENSITY_END]: {
+        particleEmitter: ParticleEmitter;
+        colorIntensityEnd: number;
+    };
+    /** Emitted when the color intensity variance of an emitted particle at the end of its lifetime is set. */
+    [ParticleEmitterEvent.SET_COLOR_INTENSITY_END_VARIANCE]: {
+        particleEmitter: ParticleEmitter;
+        colorIntensityEndVariance: number;
+    };
+    /** Emitted when the color intensity of an emitted particle at the start of its lifetime is set. */
+    [ParticleEmitterEvent.SET_COLOR_INTENSITY_START]: {
+        particleEmitter: ParticleEmitter;
+        colorIntensityStart: number;
+    };
+    /** Emitted when the color intensity variance of an emitted particle at the start of its lifetime is set. */
+    [ParticleEmitterEvent.SET_COLOR_INTENSITY_START_VARIANCE]: {
+        particleEmitter: ParticleEmitter;
+        colorIntensityStartVariance: number;
     };
     /** Emitted when the color of an emitted particle at the start of its lifetime is set. */
     [ParticleEmitterEvent.SET_COLOR_START]: {
@@ -4336,6 +4109,14 @@ export declare interface ParticleEmitterOptions {
     colorEnd?: RgbColor;
     /** The color variance of an emitted particle at the end of its lifetime. */
     colorEndVariance?: RgbColor;
+    /** The color intensity of an emitted particle at the end of its lifetime. Values greater than 1 create HDR/bloom effects. */
+    colorIntensityEnd?: number;
+    /** The color intensity variance of an emitted particle at the end of its lifetime. */
+    colorIntensityEndVariance?: number;
+    /** The color intensity of an emitted particle at the start of its lifetime. Values greater than 1 create HDR/bloom effects. */
+    colorIntensityStart?: number;
+    /** The color intensity variance of an emitted particle at the start of its lifetime. */
+    colorIntensityStartVariance?: number;
     /** The color of an emitted particle at the start of its lifetime. */
     colorStart?: RgbColor;
     /** The color variance of an emitted particle at the start of its lifetime. */
@@ -4574,7 +4355,7 @@ export declare class Player extends EventRouter implements protocol.Serializable
     /** The current {@link PlayerInput} of the player. */
     get input(): PlayerInput;
     /** Whether the players click/taps will cause interacts with blocks or entities. Defaults to true. */
-    get interactEnabled(): boolean;
+    get isInteractEnabled(): boolean;
     /** The maximum distance a player can interact with entities or blocks. The raycast distance in blocks for interactions. Defaults to 20. */
     get maxInteractDistance(): number;
     /** The current {@link World} the player is in. */
@@ -4959,7 +4740,8 @@ export declare type PlayerCosmetics = {
         slot: string;
         item: PlayerCosmeticsEquippedItem;
     }[];
-    hairStyle: number;
+    hairModelUri?: string;
+    hairTextureUri?: string;
     skinTextureUri: string;
 };
 
@@ -4972,7 +4754,7 @@ export declare type PlayerCosmeticsEquippedItem = {
 };
 
 /** The slots used for player cosmetics. @public */
-declare type PlayerCosmeticSlot = 'ALL' | 'BACK' | 'HEAD' | 'LEFT_ARM' | 'LEFT_FOOT' | 'LEFT_HAND' | 'LEFT_ITEM' | 'LEFT_LEG' | 'RIGHT_ARM' | 'RIGHT_FOOT' | 'RIGHT_HAND' | 'RIGHT_ITEM' | 'RIGHT_LEG' | 'TORSO';
+export declare type PlayerCosmeticSlot = 'ALL' | 'BACK' | 'HEAD' | 'LEFT_ARM' | 'LEFT_FOOT' | 'LEFT_HAND' | 'LEFT_ITEM' | 'LEFT_LEG' | 'RIGHT_ARM' | 'RIGHT_FOOT' | 'RIGHT_HAND' | 'RIGHT_ITEM' | 'RIGHT_LEG' | 'TORSO';
 
 /**
  * Represents an entity controlled by a player in a world.
@@ -5009,10 +4791,19 @@ export declare class PlayerEntity extends Entity {
     readonly player: Player;
     /** The SceneUI instance for the player entity's nametag. */
     readonly nametagSceneUI: SceneUI;
+
     /**
      * @param options - The options for the player entity.
      */
     constructor(options: PlayerEntityOptions);
+    /** Whether tickWithPlayerInput() is called during the entity's tick. */
+    get isTickWithPlayerInputEnabled(): boolean;
+    /**
+     * Sets whether tickWithPlayerInput() is called during the entity's tick. Disabling
+     * this effectively disables player control of the entity.
+     * @param enabled - Whether tickWithPlayerInput() should be called.
+     */
+    setTickWithPlayerInputEnabled(enabled: boolean): void;
 
 
 }
@@ -5145,6 +4936,7 @@ export declare interface PlayerManagerEventPayloads {
     /** Emitted when a player connects to the server. */
     [PlayerManagerEvent.PLAYER_CONNECTED]: {
         player: Player;
+        connectionParams?: URLSearchParams;
     };
     /** Emitted when a player disconnects from the server for any reason (lost connection, kick, world switch, etc). */
     [PlayerManagerEvent.PLAYER_DISCONNECTED]: {
@@ -5176,14 +4968,28 @@ export declare class PlayerUI extends EventRouter {
     readonly player: Player;
 
     /**
+     * Appends UI HTML to the player's existing client UI.
+     *
+     * @remarks
+     * Multiple calls in the same tick will append in call order.
+     * If used with `.load()` in the same tick, appends occur after the load.
+     *
+     * @param htmlUri - The UI HTML uri to append.
+     */
+    append(htmlUri: string): void;
+    /**
      * Freezes or unfreezes the player's pointer lock state. Preventing player inputs
      * from automatically locking or unlocking the pointer relative to its current state.
      * @param freeze - Set true to freeze the pointer lock state, false to unfreeze it.
      */
     freezePointerLock(freeze: boolean): void;
     /**
-     * Loads client UI for the player.
-     * @param htmlUri - The ui html uri to load.
+     * Loads client UI for the player, replacing any existing UI.
+     *
+     * @remarks
+     * If used with `.append()` in the same tick, the load occurs first.
+     *
+     * @param htmlUri - The UI HTML uri to load.
      */
     load(htmlUri: string): void;
     /**
@@ -5207,6 +5013,7 @@ export declare class PlayerUI extends EventRouter {
 
 /** Event types a PlayerUI can emit. See {@link PlayerUIEventPayloads} for the payloads. @public */
 export declare enum PlayerUIEvent {
+    APPEND = "PLAYER_UI.APPEND",
     DATA = "PLAYER_UI.DATA",
     FREEZE_POINTER_LOCK = "PLAYER_UI.FREEZE_POINTER_LOCK",
     LOAD = "PLAYER_UI.LOAD",
@@ -5216,6 +5023,11 @@ export declare enum PlayerUIEvent {
 
 /** Event payloads for PlayerUI emitted events. @public */
 export declare interface PlayerUIEventPayloads {
+    /** Emitted when UI HTML is appended to the player's existing client UI. */
+    [PlayerUIEvent.APPEND]: {
+        playerUI: PlayerUI;
+        htmlUri: string;
+    };
     /** Emitted when data is received by the server from the player's client UI. */
     [PlayerUIEvent.DATA]: {
         playerUI: PlayerUI;
@@ -7108,7 +6920,6 @@ export declare class World extends EventRouter implements protocol.Serializable 
 
 
 
-
     /**
      * @param options - The options for the world.
      */
@@ -7139,8 +6950,6 @@ export declare class World extends EventRouter implements protocol.Serializable 
     get fogFar(): number;
     /** The minimum distance from the camera to start applying fog. */
     get fogNear(): number;
-    /** The light manager for the world. */
-    get lightManager(): LightManager;
     /** The world loop for the world. */
     get loop(): WorldLoop;
     /** The name of the world. */

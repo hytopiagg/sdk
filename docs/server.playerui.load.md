@@ -4,7 +4,7 @@
 
 ## PlayerUI.load() method
 
-Loads client UI for the player.
+Loads client UI for the player, replacing any existing UI.
 
 **Signature:**
 
@@ -42,7 +42,7 @@ string
 
 </td><td>
 
-The ui html uri to load.
+The UI HTML uri to load.
 
 
 </td></tr>
@@ -50,4 +50,8 @@ The ui html uri to load.
 **Returns:**
 
 void
+
+## Remarks
+
+If used with `.append()` in the same tick, the load occurs first.
 

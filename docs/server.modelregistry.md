@@ -115,6 +115,20 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[getAllModelUris()](./server.modelregistry.getallmodeluris.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Retrieves an array of all available model URIs.
+
+
+</td></tr>
+<tr><td>
+
 [getAnimationNames(modelUri)](./server.modelregistry.getanimationnames.md)
 
 

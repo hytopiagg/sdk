@@ -34,12 +34,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
   
   // Execute the appropriate command
   const commandHandlers = {
-    'build': () => build(false),
-    'build-dev': () => build(true),
+    'build': () => build(false, process.argv[3]),
+    'build-dev': () => build(true, process.argv[3]),
     'help': displayHelp,
     'init': init,
     'init-mcp': initMcp,
     'package': packageProject,
+    'run': run,
     'start': start,
     'upgrade-assets-library': () => upgradeAssetsLibrary(process.argv[3] || 'latest'),
     'upgrade-cli': () => upgradeCli(process.argv[3] || 'latest'),
@@ -74,21 +75,47 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  */
 async function start() {
   const projectRoot = process.cwd();
-  const entryFile = path.join(projectRoot, 'index.mjs');
-  const buildCmd = 'hytopia build-dev';
+  const inputFile = process.argv[3] || 'index.ts';
+  const outputFile = inputFile.replace(/\.ts$/, '.mjs');
+  const entryFile = path.join(projectRoot, outputFile);
+  const buildCmd = `hytopia build-dev ${inputFile}`;
   const runCmd = `"${process.execPath}" --enable-source-maps "${entryFile}"`;
 
   // Start nodemon to watch for changes, rebuild, then run the server
   nodemon({
     watch: ['.'],
     ext: 'js,ts,html',
-    ignore: ['node_modules/**', '.git/**', '*.zip', 'index.mjs', 'assets/**'],
+    ignore: ['node_modules/**', '.git/**', '*.zip', outputFile, 'assets/**'],
     exec: `${buildCmd} && ${runCmd}`,
     delay: 100,
   })
   .on('quit', () => {
     console.log('👋 Shutting down...');
     process.exit();
+  });
+}
+
+/**
+ * Run command
+ * 
+ * Builds and runs the project once without file watching.
+ * Useful for debugging, testing, or production-like runs.
+ * 
+ * @example
+ * `hytopia run`
+ * `hytopia run playground.ts`
+ */
+async function run() {
+  const projectRoot = process.cwd();
+  const inputFile = process.argv[3] || 'index.ts';
+  const outputFile = inputFile.replace(/\.ts$/, '.mjs');
+  const entryFile = path.join(projectRoot, outputFile);
+
+  await build(true, inputFile);
+
+  execSync(`"${process.execPath}" --enable-source-maps "${entryFile}"`, {
+    stdio: 'inherit',
+    cwd: projectRoot,
   });
 }
 
@@ -469,10 +496,11 @@ async function packageProject() {
 // ================================================================================
 
 
-async function build(devMode = false) {
-  let envFlags = devMode ? '' : '--minify-whitespace --minify-syntax';
+async function build(devMode = false, inputFile = 'index.ts') {
+  const outputFile = inputFile.replace(/\.ts$/, '.mjs');
+  const envFlags = devMode ? '' : '--minify-whitespace --minify-syntax';
 
-  execSync(`npx --yes bun build --target=node --env=disable --format=esm ${envFlags} --sourcemap=inline --external=@fails-components/webtransport --external=@fails-components/webtransport-transport-http3-quiche --outfile=index.mjs index.ts`, { stdio: 'inherit' });
+  execSync(`npx --yes bun build --target=node --env=disable --format=esm ${envFlags} --sourcemap=inline --external=@fails-components/webtransport --external=@fails-components/webtransport-transport-http3-quiche --outfile=${outputFile} ${inputFile}`, { stdio: 'inherit' });
 }
 
 /**
@@ -612,9 +640,10 @@ function displayHelp() {
   console.log('Commands:');
   console.log('  help, -h, --help            Show this help');
   console.log('  version, -v, --version      Show CLI version');
-  console.log('  build                       Build the project (Generates ESM index.mjs)');
-  console.log('  build-dev                   Build the project in development mode (Generates ESM index.mjs with local dependencies externalized)');
-  console.log('  start                       Start a HYTOPIA project server (Node.js & watch)');
+  console.log('  build [FILE]                Build the project (Generates ESM .mjs from FILE, default: index.ts)');
+  console.log('  build-dev [FILE]            Build in dev mode (Generates ESM .mjs from FILE, default: index.ts)');
+  console.log('  start [FILE]                Start a HYTOPIA project server (Node.js & nodemon watch, default: index.ts)');
+  console.log('  run [FILE]                  Run the project once without watching (default: index.ts)');
   console.log('  init [--template NAME]      Initialize a new project');
   console.log('  init-mcp                    Setup MCP integrations');
   console.log('  package                     Create a zip of the project for uploading to the HYTOPIA create portal.');
@@ -624,5 +653,6 @@ function displayHelp() {
   console.log('');
   console.log('Examples:');
   console.log('  hytopia init --template zombies-fps');
+  console.log('  hytopia start playground.ts');
   console.log('  hytopia upgrade-project 0.8.12');
 }

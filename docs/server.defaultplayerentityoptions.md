@@ -13,5 +13,5 @@ export type DefaultPlayerEntityOptions = {
     cosmeticHiddenSlots?: PlayerCosmeticSlot[];
 } & PlayerEntityOptions;
 ```
-**References:** [PlayerEntityOptions](./server.playerentityoptions.md)
+**References:** [PlayerCosmeticSlot](./server.playercosmeticslot.md)<!-- -->, [PlayerEntityOptions](./server.playerentityoptions.md)
 

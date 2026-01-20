@@ -45,7 +45,7 @@ Description
 
 </td><td>
 
-{ player: [Player](./server.player.md)<!-- -->; }
+{ player: [Player](./server.player.md)<!-- -->; connectionParams?: URLSearchParams; }
 
 
 </td><td>

@@ -134,7 +134,7 @@ The current [PlayerInput](./server.playerinput.md) of the player.
 </td></tr>
 <tr><td>
 
-[interactEnabled](./server.player.interactenabled.md)
+[isInteractEnabled](./server.player.isinteractenabled.md)
 
 
 </td><td>

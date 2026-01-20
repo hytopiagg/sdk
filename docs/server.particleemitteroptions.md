@@ -132,6 +132,82 @@ _(Optional)_ The color variance of an emitted particle at the end of its lifetim
 </td></tr>
 <tr><td>
 
+[colorIntensityEnd?](./server.particleemitteroptions.colorintensityend.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The color intensity of an emitted particle at the end of its lifetime. Values greater than 1 create HDR/bloom effects.
+
+
+</td></tr>
+<tr><td>
+
+[colorIntensityEndVariance?](./server.particleemitteroptions.colorintensityendvariance.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The color intensity variance of an emitted particle at the end of its lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[colorIntensityStart?](./server.particleemitteroptions.colorintensitystart.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The color intensity of an emitted particle at the start of its lifetime. Values greater than 1 create HDR/bloom effects.
+
+
+</td></tr>
+<tr><td>
+
+[colorIntensityStartVariance?](./server.particleemitteroptions.colorintensitystartvariance.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The color intensity variance of an emitted particle at the start of its lifetime.
+
+
+</td></tr>
+<tr><td>
+
 [colorStart?](./server.particleemitteroptions.colorstart.md)
 
 

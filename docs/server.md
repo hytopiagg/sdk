@@ -239,28 +239,6 @@ A high-performance Map-like data structure optimized for frequent iteration.
 </td></tr>
 <tr><td>
 
-[Light](./server.light.md)
-
-
-</td><td>
-
-Represents a light in a world. Lights can be point lights or spotlights.
-
-
-</td></tr>
-<tr><td>
-
-[LightManager](./server.lightmanager.md)
-
-
-</td><td>
-
-Manages Light instances in a world.
-
-
-</td></tr>
-<tr><td>
-
 [Matrix2](./server.matrix2.md)
 
 
@@ -693,28 +671,6 @@ Event types an Entity instance can emit. See [EntityEventPayloads](./server.enti
 </td><td>
 
 Event types a GameServer instance can emit to the global event router. See [GameServerEventPayloads](./server.gameservereventpayloads.md) for the payloads.
-
-
-</td></tr>
-<tr><td>
-
-[LightEvent](./server.lightevent.md)
-
-
-</td><td>
-
-Event types a Light instance can emit. See [LightEventPayloads](./server.lighteventpayloads.md) for the payloads.
-
-
-</td></tr>
-<tr><td>
-
-[LightType](./server.lighttype.md)
-
-
-</td><td>
-
-The types a Light can be.
 
 
 </td></tr>
@@ -1174,28 +1130,6 @@ The options for a kinematic position rigid body.
 </td><td>
 
 The options for a kinematic velocity rigid body.
-
-
-</td></tr>
-<tr><td>
-
-[LightEventPayloads](./server.lighteventpayloads.md)
-
-
-</td><td>
-
-Event payloads for Light emitted events.
-
-
-</td></tr>
-<tr><td>
-
-[LightOptions](./server.lightoptions.md)
-
-
-</td><td>
-
-Options for creating a Light instance.
 
 
 </td></tr>
@@ -1831,6 +1765,17 @@ The cosmetics of a player.
 </td><td>
 
 An equipped item of a player's cosmetics.
+
+
+</td></tr>
+<tr><td>
+
+[PlayerCosmeticSlot](./server.playercosmeticslot.md)
+
+
+</td><td>
+
+The slots used for player cosmetics.
 
 
 </td></tr>

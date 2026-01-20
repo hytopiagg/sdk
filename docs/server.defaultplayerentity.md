@@ -95,7 +95,7 @@ Description
 
 </td><td>
 
-PlayerCosmeticSlot\[\]
+[PlayerCosmeticSlot](./server.playercosmeticslot.md)<!-- -->\[\]
 
 
 </td><td>

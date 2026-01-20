@@ -198,6 +198,90 @@ The color variance of an emitted particle at the end of its lifetime.
 </td></tr>
 <tr><td>
 
+[colorIntensityEnd](./server.particleemitter.colorintensityend.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number \| undefined
+
+
+</td><td>
+
+The color intensity of an emitted particle at the end of its lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[colorIntensityEndVariance](./server.particleemitter.colorintensityendvariance.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number \| undefined
+
+
+</td><td>
+
+The color intensity variance of an emitted particle at the end of its lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[colorIntensityStart](./server.particleemitter.colorintensitystart.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number \| undefined
+
+
+</td><td>
+
+The color intensity of an emitted particle at the start of its lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[colorIntensityStartVariance](./server.particleemitter.colorintensitystartvariance.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number \| undefined
+
+
+</td><td>
+
+The color intensity variance of an emitted particle at the start of its lifetime.
+
+
+</td></tr>
+<tr><td>
+
 [colorStart](./server.particleemitter.colorstart.md)
 
 
@@ -913,6 +997,62 @@ Sets the color of an emitted particle at the end of its lifetime.
 </td><td>
 
 Sets the color variance of an emitted particle at the end of its lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[setColorIntensityEnd(colorIntensityEnd)](./server.particleemitter.setcolorintensityend.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the color intensity of an emitted particle at the end of its lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[setColorIntensityEndVariance(colorIntensityEndVariance)](./server.particleemitter.setcolorintensityendvariance.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the color intensity variance of an emitted particle at the end of its lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[setColorIntensityStart(colorIntensityStart)](./server.particleemitter.setcolorintensitystart.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the color intensity of an emitted particle at the start of its lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[setColorIntensityStartVariance(colorIntensityStartVariance)](./server.particleemitter.setcolorintensitystartvariance.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the color intensity variance of an emitted particle at the start of its lifetime.
 
 
 </td></tr>

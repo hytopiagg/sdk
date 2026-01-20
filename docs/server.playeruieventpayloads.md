@@ -37,6 +37,25 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+["PLAYER\_UI.APPEND"](./server.playeruieventpayloads._player_ui.append_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ playerUI: [PlayerUI](./server.playerui.md)<!-- -->; htmlUri: string; }
+
+
+</td><td>
+
+Emitted when UI HTML is appended to the player's existing client UI.
+
+
+</td></tr>
+<tr><td>
+
 ["PLAYER\_UI.DATA"](./server.playeruieventpayloads._player_ui.data_.md)
 
 

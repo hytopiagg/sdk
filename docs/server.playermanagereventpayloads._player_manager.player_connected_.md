@@ -11,5 +11,6 @@ Emitted when a player connects to the server.
 ```typescript
 [PlayerManagerEvent.PLAYER_CONNECTED]: {
         player: Player;
+        connectionParams?: URLSearchParams;
     };
 ```
