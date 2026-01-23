@@ -3375,7 +3375,7 @@ export declare interface ModelEntityOptions extends BaseEntityOptions {
     modelUri?: string;
 }
 
-declare type ModelNodeOverride = {
+export declare type ModelNodeOverride = {
     /** The name of the node to override. Matching is case insensitive, prioritizing exact match then falling back to substring match. */
     name: string;
     /** The emissive color of the node. */

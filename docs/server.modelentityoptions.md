@@ -103,7 +103,7 @@ _(Optional)_ The looped animations to start when the entity is spawned.
 
 </td><td>
 
-ModelNodeOverride\[\]
+[ModelNodeOverride](./server.modelnodeoverride.md)<!-- -->\[\]
 
 
 </td><td>

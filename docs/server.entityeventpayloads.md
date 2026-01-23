@@ -235,7 +235,7 @@ Emitted when nodes of the entity's model are set to be hidden.
 
 </td><td>
 
-{ entity: [Entity](./server.entity.md)<!-- -->; modelNodeOverride: ModelNodeOverride; }
+{ entity: [Entity](./server.entity.md)<!-- -->; modelNodeOverride: [ModelNodeOverride](./server.modelnodeoverride.md)<!-- -->; }
 
 
 </td><td>

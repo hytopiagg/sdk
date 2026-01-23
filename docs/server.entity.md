@@ -433,7 +433,7 @@ The looped animations to start when the entity is spawned.
 
 </td><td>
 
-ReadonlyMap&lt;string, Readonly&lt;ModelNodeOverride&gt;&gt;
+ReadonlyMap&lt;string, Readonly&lt;[ModelNodeOverride](./server.modelnodeoverride.md)<!-- -->&gt;&gt;
 
 
 </td><td>
