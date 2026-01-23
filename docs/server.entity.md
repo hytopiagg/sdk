@@ -192,6 +192,48 @@ The depth (z-axis) of the entity's model with scale consideration or block entit
 </td></tr>
 <tr><td>
 
+[emissiveColor](./server.entity.emissivecolor.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[RgbColor](./server.rgbcolor.md) \| undefined
+
+
+</td><td>
+
+The emissive color of the entity.
+
+
+</td></tr>
+<tr><td>
+
+[emissiveIntensity](./server.entity.emissiveintensity.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number \| undefined
+
+
+</td><td>
+
+The emissive intensity of the entity.
+
+
+</td></tr>
+<tr><td>
+
 [height](./server.entity.height.md)
 
 
@@ -376,6 +418,27 @@ ReadonlySet&lt;string&gt;
 </td><td>
 
 The looped animations to start when the entity is spawned.
+
+
+</td></tr>
+<tr><td>
+
+[modelNodeOverrides](./server.entity.modelnodeoverrides.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+ReadonlyMap&lt;string, Readonly&lt;ModelNodeOverride&gt;&gt;
+
+
+</td><td>
+
+The node overrides of the entity's model. Mapped by name to the model node override.
 
 
 </td></tr>
@@ -716,6 +779,34 @@ Sets the controller for the entity.
 </td></tr>
 <tr><td>
 
+[setEmissiveColor(emissiveColor)](./server.entity.setemissivecolor.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the emissive color of the entity.
+
+
+</td></tr>
+<tr><td>
+
+[setEmissiveIntensity(emissiveIntensity)](./server.entity.setemissiveintensity.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the emissive intensity of the entity.
+
+
+</td></tr>
+<tr><td>
+
 [setModelAnimationsPlaybackRate(playbackRate)](./server.entity.setmodelanimationsplaybackrate.md)
 
 
@@ -739,6 +830,48 @@ Sets the playback rate of all animations on the entity's model.
 </td><td>
 
 Sets the nodes to hide on the entity's model. Matched nodes will be hidden for all players. Uses case insensitive substring matching.
+
+
+</td></tr>
+<tr><td>
+
+[setModelNodeEmissiveColor(name, emissiveColor)](./server.entity.setmodelnodeemissivecolor.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the emissive color of a node on the entity's model.
+
+
+</td></tr>
+<tr><td>
+
+[setModelNodeEmissiveIntensity(name, emissiveIntensity)](./server.entity.setmodelnodeemissiveintensity.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the emissive intensity of a node on the entity's model.
+
+
+</td></tr>
+<tr><td>
+
+[setModelNodeOverride(modelNodeOverride)](./server.entity.setmodelnodeoverride.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets a node override for the entity's model.
 
 
 </td></tr>

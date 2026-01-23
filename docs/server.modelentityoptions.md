@@ -95,6 +95,25 @@ _(Optional)_ The looped animations to start when the entity is spawned.
 </td></tr>
 <tr><td>
 
+[modelNodeOverrides?](./server.modelentityoptions.modelnodeoverrides.md)
+
+
+</td><td>
+
+
+</td><td>
+
+ModelNodeOverride\[\]
+
+
+</td><td>
+
+_(Optional)_ The node overrides for the entity's model.
+
+
+</td></tr>
+<tr><td>
+
 [modelPreferredShape?](./server.modelentityoptions.modelpreferredshape.md)
 
 

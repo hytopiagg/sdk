@@ -116,6 +116,34 @@ INTERACT
 </td></tr>
 <tr><td>
 
+SET\_EMISSIVE\_COLOR
+
+
+</td><td>
+
+`"ENTITY.SET_EMISSIVE_COLOR"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+SET\_EMISSIVE\_INTENSITY
+
+
+</td><td>
+
+`"ENTITY.SET_EMISSIVE_INTENSITY"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 SET\_MODEL\_ANIMATIONS\_PLAYBACK\_RATE
 
 
@@ -136,6 +164,20 @@ SET\_MODEL\_HIDDEN\_NODES
 </td><td>
 
 `"ENTITY.SET_MODEL_HIDDEN_NODES"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+SET\_MODEL\_NODE\_OVERRIDE
+
+
+</td><td>
+
+`"ENTITY.SET_MODEL_NODE_OVERRIDE"`
 
 
 </td><td>

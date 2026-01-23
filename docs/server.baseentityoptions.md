@@ -56,6 +56,44 @@ _(Optional)_ The entity controller to use for the entity.
 </td></tr>
 <tr><td>
 
+[emissiveColor?](./server.baseentityoptions.emissivecolor.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[RgbColor](./server.rgbcolor.md)
+
+
+</td><td>
+
+_(Optional)_ The emissive color of the entity.
+
+
+</td></tr>
+<tr><td>
+
+[emissiveIntensity?](./server.baseentityoptions.emissiveintensity.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The emissive intensity of the entity. Use a value over 1 for brighter emissive effects.
+
+
+</td></tr>
+<tr><td>
+
 [isEnvironmental?](./server.baseentityoptions.isenvironmental.md)
 
 

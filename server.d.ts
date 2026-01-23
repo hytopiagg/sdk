@@ -530,6 +530,10 @@ export declare interface BaseEntityControllerEventPayloads {
 export declare interface BaseEntityOptions {
     /** The entity controller to use for the entity. */
     controller?: BaseEntityController;
+    /** The emissive color of the entity. */
+    emissiveColor?: RgbColor;
+    /** The emissive intensity of the entity. Use a value over 1 for brighter emissive effects. */
+    emissiveIntensity?: number;
     /** The opacity of the entity between 0 and 1. 0 is fully transparent, 1 is fully opaque. */
     opacity?: number;
     /** Whether the entity is environmental, if true it will not invoke its tick function or change position. Defaults to false. */
@@ -1913,6 +1917,9 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
 
 
 
+
+
+
     /**
      * @param options - The options for the entity.
      */
@@ -1925,6 +1932,10 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     get blockTextureUri(): string | undefined;
     /** The controller for the entity. */
     get controller(): BaseEntityController | undefined;
+    /** The emissive color of the entity. */
+    get emissiveColor(): RgbColor | undefined;
+    /** The emissive intensity of the entity. */
+    get emissiveIntensity(): number | undefined;
     /** The depth (z-axis) of the entity's model with scale consideration or block entity's y*2 half extents. */
     get depth(): number;
     /** The height (y-axis) of the entity's model with scale consideration or block entity's y*2 half extents. */
@@ -1935,6 +1946,8 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     get modelHiddenNodes(): ReadonlySet<string>;
     /** The looped animations to start when the entity is spawned. */
     get modelLoopedAnimations(): ReadonlySet<string>;
+    /** The node overrides of the entity's model. Mapped by name to the model node override. */
+    get modelNodeOverrides(): ReadonlyMap<string, Readonly<ModelNodeOverride>>;
     /** The preferred shape of the entity's model when automatically generating its collider when no explicit colliders are provided. */
     get modelPreferredShape(): ColliderShape | undefined;
     /** The scale of the entity's model. */
@@ -1997,6 +2010,16 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      */
     setController(controller: BaseEntityController | undefined): void;
     /**
+     * Sets the emissive color of the entity.
+     * @param emissiveColor - The emissive color of the entity.
+     */
+    setEmissiveColor(emissiveColor: RgbColor | undefined): void;
+    /**
+     * Sets the emissive intensity of the entity.
+     * @param emissiveIntensity - The emissive intensity of the entity. Use a value over 1 for brighter emissive effects.
+     */
+    setEmissiveIntensity(emissiveIntensity: number | undefined): void;
+    /**
      * Sets the playback rate of all animations on the entity's model.
      *
      * @remarks
@@ -2014,6 +2037,23 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * @param modelHiddenNodes - The nodes to hide on the entity's model.
      */
     setModelHiddenNodes(modelHiddenNodes: string[]): void;
+    /**
+     * Sets a node override for the entity's model.
+     * @param modelNodeOverride - The model node override to set.
+     */
+    setModelNodeOverride(modelNodeOverride: ModelNodeOverride): void;
+    /**
+     * Sets the emissive color of a node on the entity's model.
+     * @param name - The name of the node to override. Matching is case insensitive, prioritizing exact match then falling back to substring match.
+     * @param emissiveColor - The emissive color of the node.
+     */
+    setModelNodeEmissiveColor(name: string, emissiveColor: RgbColor | undefined): void;
+    /**
+     * Sets the emissive intensity of a node on the entity's model.
+     * @param name - The name of the node to override. Matching is case insensitive, prioritizing exact match then falling back to substring match.
+     * @param emissiveIntensity - The emissive intensity of the node. Use a value over 1 for brighter emissive effects.
+     */
+    setModelNodeEmissiveIntensity(name: string, emissiveIntensity: number | undefined): void;
     /**
      * Sets the scale of the entity's model and proportionally
      * scales its colliders.
@@ -2120,6 +2160,7 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
 
 
 
+
 }
 
 /** Event types an Entity instance can emit. See {@link EntityEventPayloads} for the payloads. @public */
@@ -2130,8 +2171,11 @@ export declare enum EntityEvent {
     ENTITY_COLLISION = "ENTITY.ENTITY_COLLISION",
     ENTITY_CONTACT_FORCE = "ENTITY.ENTITY_CONTACT_FORCE",
     INTERACT = "ENTITY.INTERACT",
+    SET_EMISSIVE_COLOR = "ENTITY.SET_EMISSIVE_COLOR",
+    SET_EMISSIVE_INTENSITY = "ENTITY.SET_EMISSIVE_INTENSITY",
     SET_MODEL_ANIMATIONS_PLAYBACK_RATE = "ENTITY.SET_MODEL_ANIMATIONS_PLAYBACK_RATE",
     SET_MODEL_HIDDEN_NODES = "ENTITY.SET_MODEL_HIDDEN_NODES",
+    SET_MODEL_NODE_OVERRIDE = "ENTITY.SET_MODEL_NODE_OVERRIDE",
     SET_MODEL_SCALE = "ENTITY.SET_MODEL_SCALE",
     SET_MODEL_SHOWN_NODES = "ENTITY.SET_MODEL_SHOWN_NODES",
     SET_MODEL_TEXTURE_URI = "ENTITY.SET_MODEL_TEXTURE_URI",
@@ -2187,6 +2231,16 @@ export declare interface EntityEventPayloads {
         player: Player;
         raycastHit?: RaycastHit;
     };
+    /** Emitted when the emissive color is set. */
+    [EntityEvent.SET_EMISSIVE_COLOR]: {
+        entity: Entity;
+        emissiveColor: RgbColor | undefined;
+    };
+    /** Emitted when the emissive intensity is set. */
+    [EntityEvent.SET_EMISSIVE_INTENSITY]: {
+        entity: Entity;
+        emissiveIntensity: number | undefined;
+    };
     /** Emitted when the playback rate of the entity's model animations is set. */
     [EntityEvent.SET_MODEL_ANIMATIONS_PLAYBACK_RATE]: {
         entity: Entity;
@@ -2196,6 +2250,11 @@ export declare interface EntityEventPayloads {
     [EntityEvent.SET_MODEL_HIDDEN_NODES]: {
         entity: Entity;
         modelHiddenNodes: Set<string>;
+    };
+    /** Emitted when a node override of the entity's model is set or updated. */
+    [EntityEvent.SET_MODEL_NODE_OVERRIDE]: {
+        entity: Entity;
+        modelNodeOverride: ModelNodeOverride;
     };
     /** Emitted when the scale of the entity's model is set. */
     [EntityEvent.SET_MODEL_SCALE]: {
@@ -3302,6 +3361,8 @@ export declare interface ModelEntityOptions extends BaseEntityOptions {
     modelHiddenNodes?: string[];
     /** The looped animations to start when the entity is spawned. */
     modelLoopedAnimations?: string[];
+    /** The node overrides for the entity's model. */
+    modelNodeOverrides?: ModelNodeOverride[];
     /** The preferred shape of the entity's model when automatically generating its collider when no explicit colliders are provided. */
     modelPreferredShape?: ColliderShape;
     /** The scale of the entity's model. Can be a vector3 for per-axis scaling, or a number for uniform scaling. */
@@ -3313,6 +3374,15 @@ export declare interface ModelEntityOptions extends BaseEntityOptions {
     /** The URI or path to the .gltf model asset to be used for the entity. */
     modelUri?: string;
 }
+
+declare type ModelNodeOverride = {
+    /** The name of the node to override. Matching is case insensitive, prioritizing exact match then falling back to substring match. */
+    name: string;
+    /** The emissive color of the node. */
+    emissiveColor?: RgbColor;
+    /** The emissive intensity of the node. */
+    emissiveIntensity?: number;
+};
 
 /**
  * Manages model data for all known models of the game.
@@ -6173,10 +6243,12 @@ export declare interface SpdMatrix3 extends SdpMatrix3 {
  * @param init - A function that initializes the game. The function can take no parameters
  * to just initialize game logic, or it can accept a world parameter. If it accepts a world
  * parameter, a default world will be automatically created and passed to the function.
+ * The init function can be async - the server will wait for it to complete before
+ * accepting connections.
  *
  * @public
  */
-export declare function startServer(init: ((() => void) | ((world: World) => void))): void;
+export declare function startServer(init: ((() => void | Promise<void>) | ((world: World) => void | Promise<void>))): void;
 
 /** The inputs that are included in the PlayerInput. @public */
 export declare const SUPPORTED_INPUTS: readonly ["w", "a", "s", "d", "sp", "sh", "tb", "ml", "mr", "q", "e", "r", "f", "z", "x", "c", "v", "u", "i", "o", "j", "k", "l", "n", "m", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "cp", "cy", "iro", "ird", "jd"];

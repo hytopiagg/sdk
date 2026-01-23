@@ -151,6 +151,44 @@ Emitted when a player interacts with the entity by clicking or tapping it.
 </td></tr>
 <tr><td>
 
+["ENTITY.SET\_EMISSIVE\_COLOR"](./server.entityeventpayloads._entity.set_emissive_color_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ entity: [Entity](./server.entity.md)<!-- -->; emissiveColor: [RgbColor](./server.rgbcolor.md) \| undefined; }
+
+
+</td><td>
+
+Emitted when the emissive color is set.
+
+
+</td></tr>
+<tr><td>
+
+["ENTITY.SET\_EMISSIVE\_INTENSITY"](./server.entityeventpayloads._entity.set_emissive_intensity_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ entity: [Entity](./server.entity.md)<!-- -->; emissiveIntensity: number \| undefined; }
+
+
+</td><td>
+
+Emitted when the emissive intensity is set.
+
+
+</td></tr>
+<tr><td>
+
 ["ENTITY.SET\_MODEL\_ANIMATIONS\_PLAYBACK\_RATE"](./server.entityeventpayloads._entity.set_model_animations_playback_rate_.md)
 
 
@@ -184,6 +222,25 @@ Emitted when the playback rate of the entity's model animations is set.
 </td><td>
 
 Emitted when nodes of the entity's model are set to be hidden.
+
+
+</td></tr>
+<tr><td>
+
+["ENTITY.SET\_MODEL\_NODE\_OVERRIDE"](./server.entityeventpayloads._entity.set_model_node_override_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ entity: [Entity](./server.entity.md)<!-- -->; modelNodeOverride: ModelNodeOverride; }
+
+
+</td><td>
+
+Emitted when a node override of the entity's model is set or updated.
 
 
 </td></tr>

@@ -4282,6 +4282,61 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "server!BaseEntityOptions#emissiveColor:member",
+              "docComment": "/**\n * The emissive color of the entity.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "emissiveColor?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "emissiveColor",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!BaseEntityOptions#emissiveIntensity:member",
+              "docComment": "/**\n * The emissive intensity of the entity. Use a value over 1 for brighter emissive effects.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "emissiveIntensity?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "emissiveIntensity",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "server!BaseEntityOptions#isEnvironmental:member",
               "docComment": "/**\n * Whether the entity is environmental, if true it will not invoke its tick function or change position. Defaults to false.\n */\n",
               "excerptTokens": [
@@ -14453,6 +14508,71 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!Entity#emissiveColor:member",
+              "docComment": "/**\n * The emissive color of the entity.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get emissiveColor(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "emissiveColor",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!Entity#emissiveIntensity:member",
+              "docComment": "/**\n * The emissive intensity of the entity.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get emissiveIntensity(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "emissiveIntensity",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!Entity#height:member",
               "docComment": "/**\n * The height (y-axis) of the entity's model with scale consideration or block entity's y*2 half extents.\n */\n",
               "excerptTokens": [
@@ -14799,6 +14919,59 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!Entity#modelNodeOverrides:member",
+              "docComment": "/**\n * The node overrides of the entity's model. Mapped by name to the model node override.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get modelNodeOverrides(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ReadonlyMap",
+                  "canonicalReference": "!ReadonlyMap:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Readonly",
+                  "canonicalReference": "!Readonly:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ModelNodeOverride",
+                  "canonicalReference": "server!~ModelNodeOverride:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "modelNodeOverrides",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 7
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!Entity#modelPreferredShape:member",
               "docComment": "/**\n * The preferred shape of the entity's model when automatically generating its collider when no explicit colliders are provided.\n */\n",
               "excerptTokens": [
@@ -15138,6 +15311,107 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "server!Entity#setEmissiveColor:member(1)",
+              "docComment": "/**\n * Sets the emissive color of the entity.\n *\n * @param emissiveColor - The emissive color of the entity.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setEmissiveColor(emissiveColor: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "emissiveColor",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setEmissiveColor"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Entity#setEmissiveIntensity:member(1)",
+              "docComment": "/**\n * Sets the emissive intensity of the entity.\n *\n * @param emissiveIntensity - The emissive intensity of the entity. Use a value over 1 for brighter emissive effects.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setEmissiveIntensity(emissiveIntensity: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "emissiveIntensity",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setEmissiveIntensity"
+            },
+            {
+              "kind": "Method",
               "canonicalReference": "server!Entity#setModelAnimationsPlaybackRate:member(1)",
               "docComment": "/**\n * Sets the playback rate of all animations on the entity's model.\n *\n * @remarks\n *\n * Defaults to 1. A positive value will play the animation forward, a negative value will play the animation in reverse. Any value may be used. You can make animations play faster by using larger values.\n *\n * @param playbackRate - The playback rate of the entity's model animations.\n */\n",
               "excerptTokens": [
@@ -15231,6 +15505,188 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "setModelHiddenNodes"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Entity#setModelNodeEmissiveColor:member(1)",
+              "docComment": "/**\n * Sets the emissive color of a node on the entity's model.\n *\n * @param name - The name of the node to override. Matching is case insensitive, prioritizing exact match then falling back to substring match.\n *\n * @param emissiveColor - The emissive color of the node.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setModelNodeEmissiveColor(name: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", emissiveColor: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "emissiveColor",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setModelNodeEmissiveColor"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Entity#setModelNodeEmissiveIntensity:member(1)",
+              "docComment": "/**\n * Sets the emissive intensity of a node on the entity's model.\n *\n * @param name - The name of the node to override. Matching is case insensitive, prioritizing exact match then falling back to substring match.\n *\n * @param emissiveIntensity - The emissive intensity of the node. Use a value over 1 for brighter emissive effects.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setModelNodeEmissiveIntensity(name: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", emissiveIntensity: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "emissiveIntensity",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setModelNodeEmissiveIntensity"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Entity#setModelNodeOverride:member(1)",
+              "docComment": "/**\n * Sets a node override for the entity's model.\n *\n * @param modelNodeOverride - The model node override to set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setModelNodeOverride(modelNodeOverride: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ModelNodeOverride",
+                  "canonicalReference": "server!~ModelNodeOverride:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "modelNodeOverride",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setModelNodeOverride"
             },
             {
               "kind": "Method",
@@ -16241,6 +16697,48 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!EntityEvent.SET_EMISSIVE_COLOR:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_EMISSIVE_COLOR = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"ENTITY.SET_EMISSIVE_COLOR\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_EMISSIVE_COLOR"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!EntityEvent.SET_EMISSIVE_INTENSITY:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_EMISSIVE_INTENSITY = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"ENTITY.SET_EMISSIVE_INTENSITY\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_EMISSIVE_INTENSITY"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!EntityEvent.SET_MODEL_ANIMATIONS_PLAYBACK_RATE:member",
               "docComment": "",
               "excerptTokens": [
@@ -16280,6 +16778,27 @@
               },
               "releaseTag": "Public",
               "name": "SET_MODEL_HIDDEN_NODES"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!EntityEvent.SET_MODEL_NODE_OVERRIDE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_MODEL_NODE_OVERRIDE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"ENTITY.SET_MODEL_NODE_OVERRIDE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_MODEL_NODE_OVERRIDE"
             },
             {
               "kind": "EnumMember",
@@ -16915,6 +17434,105 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "server!EntityEventPayloads#\"ENTITY.SET_EMISSIVE_COLOR\":member",
+              "docComment": "/**\n * Emitted when the emissive color is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "EntityEvent.SET_EMISSIVE_COLOR",
+                  "canonicalReference": "server!EntityEvent.SET_EMISSIVE_COLOR:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        entity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Entity",
+                  "canonicalReference": "server!Entity:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        emissiveColor: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"ENTITY.SET_EMISSIVE_COLOR\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!EntityEventPayloads#\"ENTITY.SET_EMISSIVE_INTENSITY\":member",
+              "docComment": "/**\n * Emitted when the emissive intensity is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "EntityEvent.SET_EMISSIVE_INTENSITY",
+                  "canonicalReference": "server!EntityEvent.SET_EMISSIVE_INTENSITY:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        entity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Entity",
+                  "canonicalReference": "server!Entity:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        emissiveIntensity: number | undefined;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"ENTITY.SET_EMISSIVE_INTENSITY\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "server!EntityEventPayloads#\"ENTITY.SET_MODEL_ANIMATIONS_PLAYBACK_RATE\":member",
               "docComment": "/**\n * Emitted when the playback rate of the entity's model animations is set.\n */\n",
               "excerptTokens": [
@@ -17007,6 +17625,60 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "\"ENTITY.SET_MODEL_HIDDEN_NODES\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!EntityEventPayloads#\"ENTITY.SET_MODEL_NODE_OVERRIDE\":member",
+              "docComment": "/**\n * Emitted when a node override of the entity's model is set or updated.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "EntityEvent.SET_MODEL_NODE_OVERRIDE",
+                  "canonicalReference": "server!EntityEvent.SET_MODEL_NODE_OVERRIDE:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        entity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Entity",
+                  "canonicalReference": "server!Entity:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        modelNodeOverride: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ModelNodeOverride",
+                  "canonicalReference": "server!~ModelNodeOverride:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"ENTITY.SET_MODEL_NODE_OVERRIDE\"",
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 8
@@ -26298,6 +26970,38 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ModelEntityOptions#modelNodeOverrides:member",
+              "docComment": "/**\n * The node overrides for the entity's model.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "modelNodeOverrides?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ModelNodeOverride",
+                  "canonicalReference": "server!~ModelNodeOverride:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "modelNodeOverrides",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
               }
             },
             {
@@ -48807,7 +49511,7 @@
         {
           "kind": "Function",
           "canonicalReference": "server!startServer:function(1)",
-          "docComment": "/**\n * The entry point for running game setup and starting the game server.\n *\n * @remarks\n *\n * This function should always be called first when initializing your game. It will internally handle initialization of the physics engine and other systems required systems. All of your game setup logic should be executed in the init function.\n *\n * @param init - A function that initializes the game. The function can take no parameters to just initialize game logic, or it can accept a world parameter. If it accepts a world parameter, a default world will be automatically created and passed to the function.\n *\n * @public\n */\n",
+          "docComment": "/**\n * The entry point for running game setup and starting the game server.\n *\n * @remarks\n *\n * This function should always be called first when initializing your game. It will internally handle initialization of the physics engine and other systems required systems. All of your game setup logic should be executed in the init function.\n *\n * @param init - A function that initializes the game. The function can take no parameters to just initialize game logic, or it can accept a world parameter. If it accepts a world parameter, a default world will be automatically created and passed to the function. The init function can be async - the server will wait for it to complete before accepting connections.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -48815,7 +49519,16 @@
             },
             {
               "kind": "Content",
-              "text": "((() => void) | ((world: "
+              "text": "((() => void | "
+            },
+            {
+              "kind": "Reference",
+              "text": "Promise",
+              "canonicalReference": "!Promise:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<void>) | ((world: "
             },
             {
               "kind": "Reference",
@@ -48824,7 +49537,16 @@
             },
             {
               "kind": "Content",
-              "text": ") => void))"
+              "text": ") => void | "
+            },
+            {
+              "kind": "Reference",
+              "text": "Promise",
+              "canonicalReference": "!Promise:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<void>))"
             },
             {
               "kind": "Content",
@@ -48841,8 +49563,8 @@
           ],
           "fileUrlPath": "src/GameServer.ts",
           "returnTypeTokenRange": {
-            "startIndex": 5,
-            "endIndex": 6
+            "startIndex": 9,
+            "endIndex": 10
           },
           "releaseTag": "Public",
           "overloadIndex": 1,
@@ -48851,7 +49573,7 @@
               "parameterName": "init",
               "parameterTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 4
+                "endIndex": 8
               },
               "isOptional": false
             }
