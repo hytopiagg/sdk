@@ -4749,7 +4749,7 @@
         {
           "kind": "Variable",
           "canonicalReference": "server!BLOCK_ROTATIONS:var",
-          "docComment": "/**\n * All valid block rotations.\n *\n * @public\n */\n",
+          "docComment": "/**\n * All valid block rotations. Named as `{face pointing up}_{Y rotation degrees}`. N prefix = negative axis (e.g. NZ_90 = -Z face up, rotated 90° around global Y).\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",

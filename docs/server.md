@@ -1463,7 +1463,7 @@ Description
 
 </td><td>
 
-All valid block rotations.
+All valid block rotations. Named as `{face pointing up}_{Y rotation degrees}`<!-- -->. N prefix = negative axis (e.g. NZ\_90 = -Z face up, rotated 90° around global Y).
 
 
 </td></tr>

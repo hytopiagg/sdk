@@ -595,7 +595,8 @@ export declare class Block {
     getNeighborGlobalCoordinateFromHitPoint(hitPoint: Vector3Like): Vector3Like;
 }
 
-/** All valid block rotations. @public */
+/** All valid block rotations. Named as `{face pointing up}_{Y rotation degrees}`.
+ * N prefix = negative axis (e.g. NZ_90 = -Z face up, rotated 90° around global Y). @public */
 export declare const BLOCK_ROTATIONS: {
     readonly Y_0: {
         readonly enumIndex: 0;
