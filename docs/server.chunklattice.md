@@ -257,7 +257,7 @@ Initialize all blocks in the lattice in bulk, removing all previously existing b
 </td></tr>
 <tr><td>
 
-[setBlock(globalCoordinate, blockTypeId)](./server.chunklattice.setblock.md)
+[setBlock(globalCoordinate, blockTypeId, blockRotation)](./server.chunklattice.setblock.md)
 
 
 </td><td>

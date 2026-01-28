@@ -181,6 +181,111 @@ The friction combine rule of the collider.
 </td></tr>
 <tr><td>
 
+[isBall](./server.collider.isball.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the collider is a ball collider.
+
+
+</td></tr>
+<tr><td>
+
+[isBlock](./server.collider.isblock.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the collider is a block collider.
+
+
+</td></tr>
+<tr><td>
+
+[isCapsule](./server.collider.iscapsule.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the collider is a capsule collider.
+
+
+</td></tr>
+<tr><td>
+
+[isCone](./server.collider.iscone.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the collider is a cone collider.
+
+
+</td></tr>
+<tr><td>
+
+[isCylinder](./server.collider.iscylinder.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the collider is a cylinder collider.
+
+
+</td></tr>
+<tr><td>
+
 [isEnabled](./server.collider.isenabled.md)
 
 
@@ -202,6 +307,27 @@ Whether the collider is enabled.
 </td></tr>
 <tr><td>
 
+[isNone](./server.collider.isnone.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the collider is a none collider.
+
+
+</td></tr>
+<tr><td>
+
 [isRemoved](./server.collider.isremoved.md)
 
 
@@ -218,6 +344,27 @@ boolean
 </td><td>
 
 Whether the collider has been removed from the simulation.
+
+
+</td></tr>
+<tr><td>
+
+[isRoundCylinder](./server.collider.isroundcylinder.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the collider is a round cylinder collider.
 
 
 </td></tr>
@@ -260,6 +407,69 @@ boolean
 </td><td>
 
 Whether the collider is simulated.
+
+
+</td></tr>
+<tr><td>
+
+[isTrimesh](./server.collider.istrimesh.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the collider is a trimesh collider.
+
+
+</td></tr>
+<tr><td>
+
+[isVoxel](./server.collider.isvoxel.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the collider is a voxel collider.
+
+
+</td></tr>
+<tr><td>
+
+[isWedge](./server.collider.iswedge.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the collider is a wedge collider.
 
 
 </td></tr>

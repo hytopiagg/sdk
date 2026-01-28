@@ -83,7 +83,7 @@ Emitted when a chunk is removed from the lattice.
 
 </td><td>
 
-{ chunkLattice: [ChunkLattice](./server.chunklattice.md)<!-- -->; chunk: [Chunk](./server.chunk.md)<!-- -->; globalCoordinate: [Vector3Like](./server.vector3like.md)<!-- -->; localCoordinate: [Vector3Like](./server.vector3like.md)<!-- -->; blockTypeId: number; }
+{ chunkLattice: [ChunkLattice](./server.chunklattice.md)<!-- -->; chunk: [Chunk](./server.chunk.md)<!-- -->; globalCoordinate: [Vector3Like](./server.vector3like.md)<!-- -->; localCoordinate: [Vector3Like](./server.vector3like.md)<!-- -->; blockTypeId: number; blockRotation?: [BlockRotation](./server.blockrotation.md)<!-- -->; }
 
 
 </td><td>

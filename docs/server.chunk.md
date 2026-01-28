@@ -76,6 +76,27 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[blockRotations](./server.chunk.blockrotations.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+Readonly&lt;Map&lt;number, [BlockRotation](./server.blockrotation.md)<!-- -->&gt;&gt;
+
+
+</td><td>
+
+The rotations of the blocks in the chunk as a map of block index to rotation.
+
+
+</td></tr>
+<tr><td>
+
 [blocks](./server.chunk.blocks.md)
 
 
@@ -163,6 +184,20 @@ Convert a block index to a local coordinate.
 </td><td>
 
 Get the block type id at a specific local coordinate.
+
+
+</td></tr>
+<tr><td>
+
+[getBlockRotation(localCoordinate)](./server.chunk.getblockrotation.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Get the rotation of a block at a specific local coordinate.
 
 
 </td></tr>

@@ -9,7 +9,7 @@ Set the block at a global coordinate by block type id, automatically creating a 
 **Signature:**
 
 ```typescript
-setBlock(globalCoordinate: Vector3Like, blockTypeId: number): void;
+setBlock(globalCoordinate: Vector3Like, blockTypeId: number, blockRotation?: BlockRotation): void;
 ```
 
 ## Parameters
@@ -59,6 +59,22 @@ number
 </td><td>
 
 The block type id to set. Use 0 to remove the block and replace with air.
+
+
+</td></tr>
+<tr><td>
+
+blockRotation
+
+
+</td><td>
+
+[BlockRotation](./server.blockrotation.md)
+
+
+</td><td>
+
+_(Optional)_
 
 
 </td></tr>

@@ -107,33 +107,12 @@ Description
 
 </td><td>
 
-[VoxelsColliderOptions](./server.voxelscollideroptions.md)
+[VoxelsColliderOptions](./server.voxelscollideroptions.md) \| [TrimeshColliderOptions](./server.trimeshcollideroptions.md)
 
 
 </td><td>
 
 The collider options for the block type.
-
-
-</td></tr>
-<tr><td>
-
-[halfExtents](./server.blocktype.halfextents.md)
-
-
-</td><td>
-
-`readonly`
-
-
-</td><td>
-
-[Vector3Like](./server.vector3like.md)
-
-
-</td><td>
-
-The half extents size of the block type.
 
 
 </td></tr>
@@ -202,6 +181,48 @@ Whether the block type is meshable.
 </td></tr>
 <tr><td>
 
+[isTrimesh](./server.blocktype.istrimesh.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the block type is a trimesh block.
+
+
+</td></tr>
+<tr><td>
+
+[isVoxel](./server.blocktype.isvoxel.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the block type is a voxel block.
+
+
+</td></tr>
+<tr><td>
+
 [lightLevel](./server.blocktype.lightlevel.md)
 
 
@@ -239,27 +260,6 @@ string
 </td><td>
 
 The name of the block type.
-
-
-</td></tr>
-<tr><td>
-
-[size](./server.blocktype.size.md)
-
-
-</td><td>
-
-`readonly`
-
-
-</td><td>
-
-[Vector3Like](./server.vector3like.md)
-
-
-</td><td>
-
-The size of the block type.
 
 
 </td></tr>

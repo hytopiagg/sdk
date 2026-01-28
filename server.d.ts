@@ -595,6 +595,106 @@ export declare class Block {
     getNeighborGlobalCoordinateFromHitPoint(hitPoint: Vector3Like): Vector3Like;
 }
 
+/** All valid block rotations. @public */
+export declare const BLOCK_ROTATIONS: {
+    readonly Y_0: {
+        readonly enumIndex: 0;
+        readonly matrix: readonly [1, 0, 0, 0, 1, 0, 0, 0, 1];
+    };
+    readonly Y_90: {
+        readonly enumIndex: 1;
+        readonly matrix: readonly [0, 0, -1, 0, 1, 0, 1, 0, 0];
+    };
+    readonly Y_180: {
+        readonly enumIndex: 2;
+        readonly matrix: readonly [-1, 0, 0, 0, 1, 0, 0, 0, -1];
+    };
+    readonly Y_270: {
+        readonly enumIndex: 3;
+        readonly matrix: readonly [0, 0, 1, 0, 1, 0, -1, 0, 0];
+    };
+    readonly NY_0: {
+        readonly enumIndex: 4;
+        readonly matrix: readonly [-1, 0, 0, 0, -1, 0, 0, 0, 1];
+    };
+    readonly NY_90: {
+        readonly enumIndex: 5;
+        readonly matrix: readonly [0, 0, -1, 0, -1, 0, -1, 0, 0];
+    };
+    readonly NY_180: {
+        readonly enumIndex: 6;
+        readonly matrix: readonly [1, 0, 0, 0, -1, 0, 0, 0, -1];
+    };
+    readonly NY_270: {
+        readonly enumIndex: 7;
+        readonly matrix: readonly [0, 0, 1, 0, -1, 0, 1, 0, 0];
+    };
+    readonly X_0: {
+        readonly enumIndex: 8;
+        readonly matrix: readonly [0, -1, 0, 1, 0, 0, 0, 0, 1];
+    };
+    readonly X_90: {
+        readonly enumIndex: 9;
+        readonly matrix: readonly [0, 0, -1, 1, 0, 0, 0, -1, 0];
+    };
+    readonly X_180: {
+        readonly enumIndex: 10;
+        readonly matrix: readonly [0, 1, 0, 1, 0, 0, 0, 0, -1];
+    };
+    readonly X_270: {
+        readonly enumIndex: 11;
+        readonly matrix: readonly [0, 0, 1, 1, 0, 0, 0, 1, 0];
+    };
+    readonly NX_0: {
+        readonly enumIndex: 12;
+        readonly matrix: readonly [0, 1, 0, -1, 0, 0, 0, 0, 1];
+    };
+    readonly NX_90: {
+        readonly enumIndex: 13;
+        readonly matrix: readonly [0, 0, -1, -1, 0, 0, 0, 1, 0];
+    };
+    readonly NX_180: {
+        readonly enumIndex: 14;
+        readonly matrix: readonly [0, -1, 0, -1, 0, 0, 0, 0, -1];
+    };
+    readonly NX_270: {
+        readonly enumIndex: 15;
+        readonly matrix: readonly [0, 0, 1, -1, 0, 0, 0, -1, 0];
+    };
+    readonly Z_0: {
+        readonly enumIndex: 16;
+        readonly matrix: readonly [1, 0, 0, 0, 0, 1, 0, -1, 0];
+    };
+    readonly Z_90: {
+        readonly enumIndex: 17;
+        readonly matrix: readonly [0, 1, 0, 0, 0, 1, 1, 0, 0];
+    };
+    readonly Z_180: {
+        readonly enumIndex: 18;
+        readonly matrix: readonly [-1, 0, 0, 0, 0, 1, 0, 1, 0];
+    };
+    readonly Z_270: {
+        readonly enumIndex: 19;
+        readonly matrix: readonly [0, -1, 0, 0, 0, 1, -1, 0, 0];
+    };
+    readonly NZ_0: {
+        readonly enumIndex: 20;
+        readonly matrix: readonly [1, 0, 0, 0, 0, -1, 0, 1, 0];
+    };
+    readonly NZ_90: {
+        readonly enumIndex: 21;
+        readonly matrix: readonly [0, -1, 0, 0, 0, -1, 1, 0, 0];
+    };
+    readonly NZ_180: {
+        readonly enumIndex: 22;
+        readonly matrix: readonly [-1, 0, 0, 0, 0, -1, 0, -1, 0];
+    };
+    readonly NZ_270: {
+        readonly enumIndex: 23;
+        readonly matrix: readonly [0, 1, 0, 0, 0, -1, -1, 0, 0];
+    };
+};
+
 /** The options for a block collider. @public */
 export declare interface BlockColliderOptions extends BaseColliderOptions {
     shape: ColliderShape.BLOCK;
@@ -609,6 +709,15 @@ export declare interface BlockEntityOptions extends BaseEntityOptions {
     /** The texture uri of a entity if the entity is a block entity, if set rigidBodyOptions collider shape [0] must be a block */
     blockTextureUri?: string;
 }
+
+/** A block placement in a world. @public */
+export declare interface BlockPlacement {
+    globalCoordinate: Vector3Like;
+    blockRotation?: BlockRotation;
+}
+
+/** A block rotation from {@link BLOCK_ROTATIONS}. @public */
+export declare type BlockRotation = typeof BLOCK_ROTATIONS[keyof typeof BLOCK_ROTATIONS];
 
 /** Block texture metadata including UVs and rendering hints. @public */
 export declare type BlockTextureMetadata = {
@@ -708,7 +817,6 @@ export declare class BlockType extends EventRouter implements protocol.Serializa
 
 
 
-
     /**
      * Creates a new block type instance.
      * @param world - The world the block type is for.
@@ -718,19 +826,19 @@ export declare class BlockType extends EventRouter implements protocol.Serializa
     /** The unique identifier for the block type. */
     get id(): number;
     /** The collider options for the block type. */
-    get colliderOptions(): VoxelsColliderOptions;
-    /** The half extents size of the block type. */
-    get halfExtents(): Vector3Like;
+    get colliderOptions(): VoxelsColliderOptions | TrimeshColliderOptions;
     /** Whether the block type is a liquid. */
     get isLiquid(): boolean;
     /** Whether the block type is meshable. */
     get isMeshable(): boolean;
+    /** Whether the block type is a trimesh block. */
+    get isTrimesh(): boolean;
+    /** Whether the block type is a voxel block. */
+    get isVoxel(): boolean;
     /** The light emission level. */
     get lightLevel(): number;
     /** The name of the block type. */
     get name(): string;
-    /** The size of the block type. */
-    get size(): Vector3Like;
     /** The URI of the texture for the block type. */
     get textureUri(): string;
 
@@ -745,6 +853,7 @@ export declare class BlockType extends EventRouter implements protocol.Serializa
      * @param raycastHit - The raycast hit result, if the interaction was triggered by a client-side click/tap.
      */
     interact(player: Player, raycastHit?: RaycastHit): void;
+
 
 }
 
@@ -784,9 +893,7 @@ export declare interface BlockTypeOptions {
     /** The unique numeric identifier for the block type. */
     id: number;
     /** The custom collider options for the block type. */
-    customColliderOptions?: VoxelsColliderOptions;
-    /** The half extents size of the block type. */
-    halfExtents?: Vector3Like;
+    customColliderOptions?: VoxelsColliderOptions | TrimeshColliderOptions;
     /** Whether the block type is a liquid. */
     isLiquid?: boolean;
     /** The light emission level, between 0 and 15. */
@@ -997,12 +1104,15 @@ export declare class ChatManager extends EventRouter {
 export declare class Chunk implements protocol.Serializable {
 
 
+
     /**
      * Creates a new chunk instance.
      */
     constructor(originCoordinate: Vector3Like);
     /** The blocks in the chunk as a flat Uint8Array[4096], each index as 0 or a block type id. */
     get blocks(): Readonly<Uint8Array>;
+    /** The rotations of the blocks in the chunk as a map of block index to rotation. */
+    get blockRotations(): Readonly<Map<number, BlockRotation>>;
     /** The origin coordinate of the chunk. */
     get originCoordinate(): Vector3Like;
     /**
@@ -1029,6 +1139,12 @@ export declare class Chunk implements protocol.Serializable {
      * @returns The block type id.
      */
     getBlockId(localCoordinate: Vector3Like): number;
+    /**
+     * Get the rotation of a block at a specific local coordinate.
+     * @param localCoordinate - The local coordinate of the block to get the rotation of.
+     * @returns The rotation of the block, defaults to identity rotation.
+     */
+    getBlockRotation(localCoordinate: Vector3Like): BlockRotation;
     /**
      * Check if a block exists at a specific local coordinate.
      * @param localCoordinate - The local coordinate of the block to check.
@@ -1123,15 +1239,20 @@ export declare class ChunkLattice extends EventRouter {
      * @param blocks - The blocks to initialize.
      */
     initializeBlocks(blocks: {
-        [blockTypeId: number]: Vector3Like[];
+        [blockTypeId: number]: BlockPlacement[];
     }): void;
     /**
      * Set the block at a global coordinate by block type id, automatically
      * creating a chunk if it doesn't exist. Use block type id 0 for air (to remove a block).
      * @param globalCoordinate - The global coordinate of the block to set.
      * @param blockTypeId - The block type id to set. Use 0 to remove the block and replace with air.
+     * @param rotation - The rotation of the block, per-axes angles are rounded to the nearest 90 degree increment.
      */
-    setBlock(globalCoordinate: Vector3Like, blockTypeId: number): void;
+    setBlock(globalCoordinate: Vector3Like, blockTypeId: number, blockRotation?: BlockRotation): void;
+
+
+
+
 
 
 
@@ -1163,6 +1284,7 @@ export declare interface ChunkLatticeEventPayloads {
         globalCoordinate: Vector3Like;
         localCoordinate: Vector3Like;
         blockTypeId: number;
+        blockRotation?: BlockRotation;
     };
 }
 
@@ -1234,6 +1356,26 @@ export declare class Collider extends EventRouter {
     get isSensor(): boolean;
     /** Whether the collider is simulated. */
     get isSimulated(): boolean;
+    /** Whether the collider is a ball collider. */
+    get isBall(): boolean;
+    /** Whether the collider is a block collider. */
+    get isBlock(): boolean;
+    /** Whether the collider is a capsule collider. */
+    get isCapsule(): boolean;
+    /** Whether the collider is a cone collider. */
+    get isCone(): boolean;
+    /** Whether the collider is a cylinder collider. */
+    get isCylinder(): boolean;
+    /** Whether the collider is a none collider. */
+    get isNone(): boolean;
+    /** Whether the collider is a round cylinder collider. */
+    get isRoundCylinder(): boolean;
+    /** Whether the collider is a trimesh collider. */
+    get isTrimesh(): boolean;
+    /** Whether the collider is a voxel collider. */
+    get isVoxel(): boolean;
+    /** Whether the collider is a wedge collider. */
+    get isWedge(): boolean;
     /** The parent rigid body of the collider. */
     get parentRigidBody(): RigidBody | undefined;
     /** The raw collider object from the Rapier physics engine. */
@@ -7359,8 +7501,11 @@ export declare interface WorldMap {
     blockTypes?: BlockTypeOptions[];
     /** The blocks in the map */
     blocks?: {
-        /** The global coordinate to block type id mapping. */
-        [coordinate: string]: number;
+        /** The global coordinate to block mapping. */
+        [coordinate: string]: number | {
+            i: number;
+            r?: number;
+        };
     };
     /** The entities in the map. */
     entities?: {

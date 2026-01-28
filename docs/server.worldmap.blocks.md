@@ -10,6 +10,9 @@ The blocks in the map
 
 ```typescript
 blocks?: {
-        [coordinate: string]: number;
+        [coordinate: string]: number | {
+            i: number;
+            r?: number;
+        };
     };
 ```

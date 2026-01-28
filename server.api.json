@@ -4747,6 +4747,29 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "Variable",
+          "canonicalReference": "server!BLOCK_ROTATIONS:var",
+          "docComment": "/**\n * All valid block rotations.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "BLOCK_ROTATIONS: "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    readonly Y_0: {\n        readonly enumIndex: 0;\n        readonly matrix: readonly [1, 0, 0, 0, 1, 0, 0, 0, 1];\n    };\n    readonly Y_90: {\n        readonly enumIndex: 1;\n        readonly matrix: readonly [0, 0, -1, 0, 1, 0, 1, 0, 0];\n    };\n    readonly Y_180: {\n        readonly enumIndex: 2;\n        readonly matrix: readonly [-1, 0, 0, 0, 1, 0, 0, 0, -1];\n    };\n    readonly Y_270: {\n        readonly enumIndex: 3;\n        readonly matrix: readonly [0, 0, 1, 0, 1, 0, -1, 0, 0];\n    };\n    readonly NY_0: {\n        readonly enumIndex: 4;\n        readonly matrix: readonly [-1, 0, 0, 0, -1, 0, 0, 0, 1];\n    };\n    readonly NY_90: {\n        readonly enumIndex: 5;\n        readonly matrix: readonly [0, 0, -1, 0, -1, 0, -1, 0, 0];\n    };\n    readonly NY_180: {\n        readonly enumIndex: 6;\n        readonly matrix: readonly [1, 0, 0, 0, -1, 0, 0, 0, -1];\n    };\n    readonly NY_270: {\n        readonly enumIndex: 7;\n        readonly matrix: readonly [0, 0, 1, 0, -1, 0, 1, 0, 0];\n    };\n    readonly X_0: {\n        readonly enumIndex: 8;\n        readonly matrix: readonly [0, -1, 0, 1, 0, 0, 0, 0, 1];\n    };\n    readonly X_90: {\n        readonly enumIndex: 9;\n        readonly matrix: readonly [0, 0, -1, 1, 0, 0, 0, -1, 0];\n    };\n    readonly X_180: {\n        readonly enumIndex: 10;\n        readonly matrix: readonly [0, 1, 0, 1, 0, 0, 0, 0, -1];\n    };\n    readonly X_270: {\n        readonly enumIndex: 11;\n        readonly matrix: readonly [0, 0, 1, 1, 0, 0, 0, 1, 0];\n    };\n    readonly NX_0: {\n        readonly enumIndex: 12;\n        readonly matrix: readonly [0, 1, 0, -1, 0, 0, 0, 0, 1];\n    };\n    readonly NX_90: {\n        readonly enumIndex: 13;\n        readonly matrix: readonly [0, 0, -1, -1, 0, 0, 0, 1, 0];\n    };\n    readonly NX_180: {\n        readonly enumIndex: 14;\n        readonly matrix: readonly [0, -1, 0, -1, 0, 0, 0, 0, -1];\n    };\n    readonly NX_270: {\n        readonly enumIndex: 15;\n        readonly matrix: readonly [0, 0, 1, -1, 0, 0, 0, -1, 0];\n    };\n    readonly Z_0: {\n        readonly enumIndex: 16;\n        readonly matrix: readonly [1, 0, 0, 0, 0, 1, 0, -1, 0];\n    };\n    readonly Z_90: {\n        readonly enumIndex: 17;\n        readonly matrix: readonly [0, 1, 0, 0, 0, 1, 1, 0, 0];\n    };\n    readonly Z_180: {\n        readonly enumIndex: 18;\n        readonly matrix: readonly [-1, 0, 0, 0, 0, 1, 0, 1, 0];\n    };\n    readonly Z_270: {\n        readonly enumIndex: 19;\n        readonly matrix: readonly [0, -1, 0, 0, 0, 1, -1, 0, 0];\n    };\n    readonly NZ_0: {\n        readonly enumIndex: 20;\n        readonly matrix: readonly [1, 0, 0, 0, 0, -1, 0, 1, 0];\n    };\n    readonly NZ_90: {\n        readonly enumIndex: 21;\n        readonly matrix: readonly [0, -1, 0, 0, 0, -1, 1, 0, 0];\n    };\n    readonly NZ_180: {\n        readonly enumIndex: 22;\n        readonly matrix: readonly [-1, 0, 0, 0, 0, -1, 0, -1, 0];\n    };\n    readonly NZ_270: {\n        readonly enumIndex: 23;\n        readonly matrix: readonly [0, 1, 0, 0, 0, -1, -1, 0, 0];\n    };\n}"
+            }
+          ],
+          "fileUrlPath": "src/worlds/blocks/Block.ts",
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "BLOCK_ROTATIONS",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
           "kind": "Class",
           "canonicalReference": "server!Block:class",
           "docComment": "/**\n * Represents a block in a world.\n *\n * @remarks\n *\n * Instances of this class are created internally but made publicly available through various public facing API methods.\n *\n * The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `Block` class.\n *\n * @public\n */\n",
@@ -5053,6 +5076,124 @@
           ]
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "server!BlockPlacement:interface",
+          "docComment": "/**\n * A block placement in a world.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface BlockPlacement "
+            }
+          ],
+          "fileUrlPath": "src/worlds/blocks/Block.ts",
+          "releaseTag": "Public",
+          "name": "BlockPlacement",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!BlockPlacement#blockRotation:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "blockRotation?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BlockRotation",
+                  "canonicalReference": "server!BlockRotation:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "blockRotation",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!BlockPlacement#globalCoordinate:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "globalCoordinate: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "globalCoordinate",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "server!BlockRotation:type",
+          "docComment": "/**\n * A block rotation from {@link BLOCK_ROTATIONS}.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type BlockRotation = "
+            },
+            {
+              "kind": "Content",
+              "text": "typeof "
+            },
+            {
+              "kind": "Reference",
+              "text": "BLOCK_ROTATIONS",
+              "canonicalReference": "server!BLOCK_ROTATIONS:var"
+            },
+            {
+              "kind": "Content",
+              "text": "[keyof typeof "
+            },
+            {
+              "kind": "Reference",
+              "text": "BLOCK_ROTATIONS",
+              "canonicalReference": "server!BLOCK_ROTATIONS:var"
+            },
+            {
+              "kind": "Content",
+              "text": "]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "fileUrlPath": "src/worlds/blocks/Block.ts",
+          "releaseTag": "Public",
+          "name": "BlockRotation",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 6
+          }
+        },
+        {
           "kind": "TypeAlias",
           "canonicalReference": "server!BlockTextureMetadata:type",
           "docComment": "/**\n * Block texture metadata including UVs and rendering hints.\n *\n * @public\n */\n",
@@ -5342,6 +5483,15 @@
                 },
                 {
                   "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TrimeshColliderOptions",
+                  "canonicalReference": "server!TrimeshColliderOptions:interface"
+                },
+                {
+                  "kind": "Content",
                   "text": ";"
                 }
               ],
@@ -5351,38 +5501,7 @@
               "name": "colliderOptions",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 2
-              },
-              "isStatic": false,
-              "isProtected": false,
-              "isAbstract": false
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "server!BlockType#halfExtents:member",
-              "docComment": "/**\n * The half extents size of the block type.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get halfExtents(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Vector3Like",
-                  "canonicalReference": "server!Vector3Like:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "halfExtents",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
+                "endIndex": 4
               },
               "isStatic": false,
               "isProtected": false,
@@ -5546,6 +5665,66 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!BlockType#isTrimesh:member",
+              "docComment": "/**\n * Whether the block type is a trimesh block.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isTrimesh(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isTrimesh",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!BlockType#isVoxel:member",
+              "docComment": "/**\n * Whether the block type is a voxel block.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isVoxel(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isVoxel",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!BlockType#lightLevel:member",
               "docComment": "/**\n * The light emission level.\n */\n",
               "excerptTokens": [
@@ -5596,37 +5775,6 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "name",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
-              },
-              "isStatic": false,
-              "isProtected": false,
-              "isAbstract": false
-            },
-            {
-              "kind": "Property",
-              "canonicalReference": "server!BlockType#size:member",
-              "docComment": "/**\n * The size of the block type.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "get size(): "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Vector3Like",
-                  "canonicalReference": "server!Vector3Like:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": true,
-              "isOptional": false,
-              "releaseTag": "Public",
-              "name": "size",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -5986,6 +6134,15 @@
                 },
                 {
                   "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TrimeshColliderOptions",
+                  "canonicalReference": "server!TrimeshColliderOptions:interface"
+                },
+                {
+                  "kind": "Content",
                   "text": ";"
                 }
               ],
@@ -5995,35 +6152,7 @@
               "name": "customColliderOptions",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 2
-              }
-            },
-            {
-              "kind": "PropertySignature",
-              "canonicalReference": "server!BlockTypeOptions#halfExtents:member",
-              "docComment": "/**\n * The half extents size of the block type.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "halfExtents?: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "Vector3Like",
-                  "canonicalReference": "server!Vector3Like:interface"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isReadonly": false,
-              "isOptional": true,
-              "releaseTag": "Public",
-              "name": "halfExtents",
-              "propertyTypeTokenRange": {
-                "startIndex": 1,
-                "endIndex": 2
+                "endIndex": 4
               }
             },
             {
@@ -7280,6 +7409,59 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!Chunk#blockRotations:member",
+              "docComment": "/**\n * The rotations of the blocks in the chunk as a map of block index to rotation.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get blockRotations(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Readonly",
+                  "canonicalReference": "!Readonly:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Map",
+                  "canonicalReference": "!Map:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<number, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BlockRotation",
+                  "canonicalReference": "server!BlockRotation:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "blockRotations",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 7
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!Chunk#blocks:member",
               "docComment": "/**\n * The blocks in the chunk as a flat Uint8Array[4096], each index as 0 or a block type id.\n */\n",
               "excerptTokens": [
@@ -7370,6 +7552,56 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "getBlockId"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Chunk#getBlockRotation:member(1)",
+              "docComment": "/**\n * Get the rotation of a block at a specific local coordinate.\n *\n * @param localCoordinate - The local coordinate of the block to get the rotation of.\n *\n * @returns The rotation of the block, defaults to identity rotation.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getBlockRotation(localCoordinate: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BlockRotation",
+                  "canonicalReference": "server!BlockRotation:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "localCoordinate",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "getBlockRotation"
             },
             {
               "kind": "Method",
@@ -8082,8 +8314,8 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "Vector3Like",
-                  "canonicalReference": "server!Vector3Like:interface"
+                  "text": "BlockPlacement",
+                  "canonicalReference": "server!BlockPlacement:interface"
                 },
                 {
                   "kind": "Content",
@@ -8127,7 +8359,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!ChunkLattice#setBlock:member(1)",
-              "docComment": "/**\n * Set the block at a global coordinate by block type id, automatically creating a chunk if it doesn't exist. Use block type id 0 for air (to remove a block).\n *\n * @param globalCoordinate - The global coordinate of the block to set.\n *\n * @param blockTypeId - The block type id to set. Use 0 to remove the block and replace with air.\n */\n",
+              "docComment": "/**\n * Set the block at a global coordinate by block type id, automatically creating a chunk if it doesn't exist. Use block type id 0 for air (to remove a block).\n *\n * @param globalCoordinate - The global coordinate of the block to set.\n *\n * @param blockTypeId - The block type id to set. Use 0 to remove the block and replace with air.\n *\n * @param rotation - The rotation of the block, per-axes angles are rounded to the nearest 90 degree increment.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8148,6 +8380,15 @@
                 },
                 {
                   "kind": "Content",
+                  "text": ", blockRotation?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BlockRotation",
+                  "canonicalReference": "server!BlockRotation:type"
+                },
+                {
+                  "kind": "Content",
                   "text": "): "
                 },
                 {
@@ -8161,8 +8402,8 @@
               ],
               "isStatic": false,
               "returnTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 6
+                "startIndex": 7,
+                "endIndex": 8
               },
               "releaseTag": "Public",
               "isProtected": false,
@@ -8183,6 +8424,14 @@
                     "endIndex": 4
                   },
                   "isOptional": false
+                },
+                {
+                  "parameterName": "blockRotation",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 6
+                  },
+                  "isOptional": true
                 }
               ],
               "isOptional": false,
@@ -8455,7 +8704,16 @@
                 },
                 {
                   "kind": "Content",
-                  "text": ";\n        blockTypeId: number;\n    }"
+                  "text": ";\n        blockTypeId: number;\n        blockRotation?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "BlockRotation",
+                  "canonicalReference": "server!BlockRotation:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
                 },
                 {
                   "kind": "Content",
@@ -8468,7 +8726,7 @@
               "name": "\"CHUNK_LATTICE.SET_BLOCK\"",
               "propertyTypeTokenRange": {
                 "startIndex": 3,
-                "endIndex": 12
+                "endIndex": 14
               }
             }
           ],
@@ -8950,6 +9208,156 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!Collider#isBall:member",
+              "docComment": "/**\n * Whether the collider is a ball collider.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isBall(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isBall",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!Collider#isBlock:member",
+              "docComment": "/**\n * Whether the collider is a block collider.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isBlock(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isBlock",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!Collider#isCapsule:member",
+              "docComment": "/**\n * Whether the collider is a capsule collider.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isCapsule(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isCapsule",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!Collider#isCone:member",
+              "docComment": "/**\n * Whether the collider is a cone collider.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isCone(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isCone",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!Collider#isCylinder:member",
+              "docComment": "/**\n * Whether the collider is a cylinder collider.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isCylinder(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isCylinder",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!Collider#isEnabled:member",
               "docComment": "/**\n * Whether the collider is enabled.\n */\n",
               "excerptTokens": [
@@ -8980,6 +9388,36 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!Collider#isNone:member",
+              "docComment": "/**\n * Whether the collider is a none collider.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isNone(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isNone",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!Collider#isRemoved:member",
               "docComment": "/**\n * Whether the collider has been removed from the simulation.\n */\n",
               "excerptTokens": [
@@ -9000,6 +9438,36 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isRemoved",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!Collider#isRoundCylinder:member",
+              "docComment": "/**\n * Whether the collider is a round cylinder collider.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isRoundCylinder(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isRoundCylinder",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -9060,6 +9528,96 @@
               "isOptional": false,
               "releaseTag": "Public",
               "name": "isSimulated",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!Collider#isTrimesh:member",
+              "docComment": "/**\n * Whether the collider is a trimesh collider.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isTrimesh(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isTrimesh",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!Collider#isVoxel:member",
+              "docComment": "/**\n * Whether the collider is a voxel collider.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isVoxel(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isVoxel",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!Collider#isWedge:member",
+              "docComment": "/**\n * Whether the collider is a wedge collider.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get isWedge(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "isWedge",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -57744,7 +58302,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "{\n        [coordinate: string]: number;\n    }"
+                  "text": "{\n        [coordinate: string]: number | {\n            i: number;\n            r?: number;\n        };\n    }"
                 },
                 {
                   "kind": "Content",

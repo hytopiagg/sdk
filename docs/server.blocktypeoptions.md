@@ -45,31 +45,12 @@ Description
 
 </td><td>
 
-[VoxelsColliderOptions](./server.voxelscollideroptions.md)
+[VoxelsColliderOptions](./server.voxelscollideroptions.md) \| [TrimeshColliderOptions](./server.trimeshcollideroptions.md)
 
 
 </td><td>
 
 _(Optional)_ The custom collider options for the block type.
-
-
-</td></tr>
-<tr><td>
-
-[halfExtents?](./server.blocktypeoptions.halfextents.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[Vector3Like](./server.vector3like.md)
-
-
-</td><td>
-
-_(Optional)_ The half extents size of the block type.
 
 
 </td></tr>

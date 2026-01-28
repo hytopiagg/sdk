@@ -9,5 +9,5 @@ The collider options for the block type.
 **Signature:**
 
 ```typescript
-get colliderOptions(): VoxelsColliderOptions;
+get colliderOptions(): VoxelsColliderOptions | TrimeshColliderOptions;
 ```

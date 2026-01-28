@@ -15,5 +15,6 @@ Emitted when a block is set in the lattice.
         globalCoordinate: Vector3Like;
         localCoordinate: Vector3Like;
         blockTypeId: number;
+        blockRotation?: BlockRotation;
     };
 ```

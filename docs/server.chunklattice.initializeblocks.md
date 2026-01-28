@@ -10,7 +10,7 @@ Initialize all blocks in the lattice in bulk, removing all previously existing b
 
 ```typescript
 initializeBlocks(blocks: {
-        [blockTypeId: number]: Vector3Like[];
+        [blockTypeId: number]: BlockPlacement[];
     }): void;
 ```
 
@@ -39,7 +39,7 @@ blocks
 
 </td><td>
 
-{ \[blockTypeId: number\]: [Vector3Like](./server.vector3like.md)<!-- -->\[\]; }
+{ \[blockTypeId: number\]: [BlockPlacement](./server.blockplacement.md)<!-- -->\[\]; }
 
 
 </td><td>

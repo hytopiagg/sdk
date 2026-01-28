@@ -959,6 +959,17 @@ The options for creating a block entity.
 </td></tr>
 <tr><td>
 
+[BlockPlacement](./server.blockplacement.md)
+
+
+</td><td>
+
+A block placement in a world.
+
+
+</td></tr>
+<tr><td>
+
 [BlockTypeEventPayloads](./server.blocktypeeventpayloads.md)
 
 
@@ -1447,6 +1458,17 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[BLOCK\_ROTATIONS](./server.block_rotations.md)
+
+
+</td><td>
+
+All valid block rotations.
+
+
+</td></tr>
+<tr><td>
+
 [DEFAULT\_ENTITY\_RIGID\_BODY\_OPTIONS](./server.default_entity_rigid_body_options.md)
 
 
@@ -1483,6 +1505,17 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
+
+[BlockRotation](./server.blockrotation.md)
+
+
+</td><td>
+
+A block rotation from [BLOCK\_ROTATIONS](./server.block_rotations.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
 
 [BlockTextureMetadata](./server.blocktexturemetadata.md)
 

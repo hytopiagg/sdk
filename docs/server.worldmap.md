@@ -45,7 +45,7 @@ Description
 
 </td><td>
 
-{ \[coordinate: string\]: number; }
+{ \[coordinate: string\]: number \| { i: number; r?: number; }; }
 
 
 </td><td>
