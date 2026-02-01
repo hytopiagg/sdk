@@ -83,3 +83,17 @@ _(Optional)_ The optional rotation to spawn the entity with.
 
 void
 
+## Remarks
+
+\*\*Rotation default:\*\* If no rotation is provided, entity spawns with identity rotation facing -Z. For Y-axis rotation (yaw): `{ x: 0, y: sin(yaw/2), z: 0, w: cos(yaw/2) }`<!-- -->. Yaw 0 = facing -Z.
+
+\*\*Auto-collider creation:\*\* If no colliders are provided, a default collider is auto-generated from the model bounds (or block half extents). Set `modelPreferredShape` to `ColliderShape.NONE` to disable.
+
+\*\*Collision groups:\*\* Colliders with default collision groups are auto-assigned based on `isEnvironmental` and `isSensor` flags. Environmental entities don't collide with blocks or other environmental entities.
+
+\*\*Event enabling:\*\* Collision/contact force events are auto-enabled on colliders if listeners are registered for `BLOCK_COLLISION`<!-- -->, `ENTITY_COLLISION`<!-- -->, `BLOCK_CONTACT_FORCE`<!-- -->, or `ENTITY_CONTACT_FORCE` prior to spawning.
+
+\*\*Controller:\*\* If a controller is attached, `controller.spawn()` is called after the entity is added to the physics simulation.
+
+\*\*Parent handling:\*\* If `parent` was set in options, `setParent()` is called after spawn with the provided position/rotation.
+

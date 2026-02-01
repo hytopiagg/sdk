@@ -51,3 +51,7 @@ Determines nodes to show that match these case insensitive substrings.
 
 void
 
+## Remarks
+
+\*\*Replaces:\*\* Replaces the current shown nodes set (not a merge).
+

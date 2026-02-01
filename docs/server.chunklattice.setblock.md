@@ -74,7 +74,7 @@ blockRotation
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ The rotation of the block.
 
 
 </td></tr>
@@ -82,4 +82,10 @@ _(Optional)_
 **Returns:**
 
 void
+
+## Remarks
+
+\*\*Collider updates:\*\* Manages physics colliders automatically. For voxel block types, updates the existing collider. For trimesh block types, recreates the entire collider.
+
+\*\*Removes previous:\*\* If replacing an existing block, removes it from its collider first. If the previous block type has no remaining blocks, its collider is removed from simulation.
 

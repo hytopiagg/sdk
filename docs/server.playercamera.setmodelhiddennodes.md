@@ -51,3 +51,7 @@ Determines nodes to hide that match these case insensitive substrings.
 
 void
 
+## Remarks
+
+\*\*Replaces:\*\* Replaces the current hidden nodes set (not a merge).
+

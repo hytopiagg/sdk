@@ -15,3 +15,7 @@ removeFromSimulation(): void;
 
 void
 
+## Remarks
+
+\*\*Child colliders:\*\* Also removes all child colliders from the simulation.
+

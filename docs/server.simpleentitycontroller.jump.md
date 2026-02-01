@@ -42,7 +42,7 @@ number
 
 </td><td>
 
-The height to jump to.
+The height to jump to (in blocks).
 
 
 </td></tr>
@@ -50,4 +50,12 @@ The height to jump to.
 **Returns:**
 
 void
+
+## Remarks
+
+\*\*Deferred:\*\* The impulse is applied on the next tick, not immediately.
+
+\*\*Dynamic only:\*\* Has no effect on kinematic entities. Uses `entity.applyImpulse()`<!-- -->.
+
+\*\*Animations:\*\* Starts `jumpOneshotAnimations` and stops idle/move animations when the jump occurs.
 

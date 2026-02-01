@@ -99,3 +99,13 @@ The delta time in milliseconds since the last tick.
 
 void
 
+## Remarks
+
+\*\*Rotation (-Z forward):\*\* Sets entity rotation based on camera yaw. A yaw of 0 faces -Z. Movement direction offsets (WASD/joystick) are added to camera yaw to determine facing. Models must be authored with their front facing -Z.
+
+\*\*Child entities:\*\* If `entity.parent` is set, only emits the event and returns early. Movement logic is skipped for child entities.
+
+\*\*Input cancellation:\*\* If `autoCancelMouseLeftClick` is true (default), `input.ml` is set to `false` after processing to prevent repeated triggers.
+
+\*\*Animations:\*\* Automatically manages idle, walk, run, jump, swim, and interact animations based on movement state and input.
+

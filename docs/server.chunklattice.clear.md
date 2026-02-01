@@ -15,3 +15,9 @@ clear(): void;
 
 void
 
+## Remarks
+
+\*\*Removes colliders:\*\* All block type colliders are removed from the physics simulation.
+
+\*\*Emits events:\*\* Emits `REMOVE_CHUNK` for each chunk before clearing.
+

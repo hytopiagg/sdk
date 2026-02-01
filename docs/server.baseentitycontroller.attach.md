@@ -51,3 +51,9 @@ The entity to attach the controller to.
 
 void
 
+## Remarks
+
+\*\*Called by:\*\* `Entity` constructor when a controller is provided in options.
+
+\*\*Super call:\*\* Call `super.attach(entity)` to emit the `ATTACH` event.
+

@@ -51,3 +51,7 @@ The simulation to add the rigid body to.
 
 void
 
+## Remarks
+
+\*\*Child colliders:\*\* Also adds all pending child colliders to the simulation.
+

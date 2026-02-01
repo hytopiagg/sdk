@@ -51,3 +51,7 @@ The nodes to hide on the entity's model.
 
 void
 
+## Remarks
+
+\*\*Replaces, not merges:\*\* This replaces all hidden nodes, not adds to them. To add nodes, include existing hidden nodes in the array.
+

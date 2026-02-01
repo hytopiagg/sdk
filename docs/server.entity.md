@@ -19,6 +19,12 @@ export default class Entity extends RigidBody implements protocol.Serializable
 
 Entities are highly configurable and controllable. All entities are created from a .gltf model asset and allow full control of their rigid body and attached collider dynamics.
 
+<h2>Coordinate System</h2>
+
+HYTOPIA uses a right-handed coordinate system where: - \*\*+X\*\* is right - \*\*+Y\*\* is up - \*\*-Z\*\* is forward (identity orientation)
+
+Models should be authored with their front/forward facing the \*\*-Z axis\*\*. When an entity has identity rotation (0,0,0,1 quaternion or yaw=0), it faces -Z.
+
 <h2>Events</h2>
 
 This class is an EventRouter, and instances of it emit events with payloads listed under [EntityEventPayloads](./server.entityeventpayloads.md)
@@ -77,7 +83,7 @@ Description
 
 </td><td>
 
-Constructs a new instance of the `Entity` class
+Creates a new Entity instance.
 
 
 </td></tr>
@@ -765,20 +771,6 @@ Triggers an interaction on the entity from a player.
 </td></tr>
 <tr><td>
 
-[setController(controller)](./server.entity.setcontroller.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Sets the controller for the entity.
-
-
-</td></tr>
-<tr><td>
-
 [setEmissiveColor(emissiveColor)](./server.entity.setemissivecolor.md)
 
 
@@ -1011,7 +1003,7 @@ Starts a oneshot animation for the entity, blending with other animations curren
 
 </td><td>
 
-Stops all looped and oneshot animations for the entity, optionally excluded the provided animations from stopping.
+Stops all looped and oneshot animations for the entity, optionally excluding the provided animations from stopping.
 
 
 </td></tr>

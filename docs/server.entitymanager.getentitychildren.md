@@ -51,5 +51,9 @@ The entity to get the children for.
 
 [Entity](./server.entity.md)<!-- -->\[\]
 
-All child entities of the entity.
+All direct child entities of the entity.
+
+## Remarks
+
+\*\*Direct children only:\*\* Returns only immediate children, not recursive descendants.
 

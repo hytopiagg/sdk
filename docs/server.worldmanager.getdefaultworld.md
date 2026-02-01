@@ -17,3 +17,7 @@ getDefaultWorld(): World;
 
 The default world.
 
+## Remarks
+
+\*\*Lazy-creates:\*\* Creates a default world if none exists.
+

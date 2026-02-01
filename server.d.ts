@@ -150,6 +150,10 @@ export declare class Audio extends EventRouter implements protocol.Serializable 
     /**
      * Sets the entity to which the audio is attached, following its position.
      *
+     * @remarks
+     * **Clears position:** Setting an attached entity clears any previously set `position`.
+     * Audio can be entity-attached or position-based, not both.
+     *
      * @param entity - The entity to attach the Audio to.
      */
     setAttachedToEntity(entity: Entity): void;
@@ -179,7 +183,11 @@ export declare class Audio extends EventRouter implements protocol.Serializable 
      */
     setDistortion(distortion: number): void;
     /**
-     * Sets the position of the audio. Will detach from entity if attached.
+     * Sets the position of the audio.
+     *
+     * @remarks
+     * **Detaches from entity:** Setting a position clears any `attachedToEntity`.
+     * Audio can be position-based or entity-attached, not both.
      *
      * @param position - The position in the world.
      */
@@ -339,11 +347,17 @@ export declare class AudioManager {
     /**
      * Unregisters and stops an audio instance from the audio manager.
      *
+     * @remarks
+     * **Pauses audio:** Calls `audio.pause()` before removing from the manager.
+     *
      * @param audio - The audio instance to pause and unregister.
      */
     unregisterAudio(audio: Audio): void;
     /**
      * Unregisters and stops all audio instances attached to a specific entity.
+     *
+     * @remarks
+     * **Pauses all:** Calls `unregisterAudio()` for each attached audio, which pauses them.
      *
      * @param entity - The entity to pause and unregister audio instances for.
      */
@@ -444,33 +458,62 @@ export declare abstract class BaseEntityController extends EventRouter {
     /**
      * Override this method to handle the attachment of an entity
      * to your entity controller.
+     *
+     * @remarks
+     * **Called by:** `Entity` constructor when a controller is provided in options.
+     *
+     * **Super call:** Call `super.attach(entity)` to emit the `ATTACH` event.
+     *
      * @param entity - The entity to attach the controller to.
      */
     attach(entity: Entity): void;
     /**
      * Override this method to handle the despawn of an entity
      * from your entity controller.
-     * @param entity - The entity to despawn.
+     *
+     * @remarks
+     * **Called by:** `Entity.despawn()` after `detach()` is called.
+     *
+     * **Super call:** Call `super.despawn(entity)` to emit the `DESPAWN` event.
+     *
+     * @param entity - The entity being despawned.
      */
     despawn(entity: Entity): void;
     /**
      * Override this method to handle the detachment of an entity
      * from your entity controller.
-     * @param entity - The entity to detach.
+     *
+     * @remarks
+     * **Called by:** `Entity.despawn()` before `despawn()` is called.
+     *
+     * **Super call:** Call `super.detach(entity)` to emit the `DETACH` event.
+     *
+     * @param entity - The entity being detached.
      */
     detach(entity: Entity): void;
     /**
      * Override this method to handle the spawning of an entity
      * to your entity controller.
-     * @param entity - The entity to spawn.
+     *
+     * @remarks
+     * **Called by:** `Entity.spawn()` after the entity is added to the physics simulation.
+     *
+     * **Super call:** Call `super.spawn(entity)` to emit the `SPAWN` event.
+     *
+     * @param entity - The entity being spawned.
      */
     spawn(entity: Entity): void;
     /**
      * Override this method to handle entity movements
      * based on player input for your entity controller.
-     * This is called every tick by a PlayerEntity with a
-     * entity controller.
-     * @param entity - The entity to tick.
+     *
+     * @remarks
+     * **Called by:** `PlayerEntity.tick()` every tick when `isTickWithPlayerInputEnabled` is true.
+     * Called before `tick()`.
+     *
+     * **Super call:** Call `super.tickWithPlayerInput(...)` to emit the `TICK_WITH_PLAYER_INPUT` event.
+     *
+     * @param entity - The player entity being ticked.
      * @param input - The current input state of the player.
      * @param cameraOrientation - The current camera orientation state of the player.
      * @param deltaTimeMs - The delta time in milliseconds since the last tick.
@@ -479,6 +522,14 @@ export declare abstract class BaseEntityController extends EventRouter {
     /**
      * Override this method to handle entity movements
      * based on your entity controller.
+     *
+     * @remarks
+     * **Called by:** `Entity.tick()` every tick for non-environmental entities.
+     * For `PlayerEntity`, this is called after `tickWithPlayerInput()`.
+     *
+     * **Super call:** Call `super.tick(entity, deltaTimeMs)` to emit the `TICK` event.
+     *
+     * @param entity - The entity being ticked.
      * @param deltaTimeMs - The delta time in milliseconds since the last tick.
      */
     tick(entity: Entity, deltaTimeMs: number): void;
@@ -595,8 +646,11 @@ export declare class Block {
     getNeighborGlobalCoordinateFromHitPoint(hitPoint: Vector3Like): Vector3Like;
 }
 
-/** All valid block rotations. Named as `{face pointing up}_{Y rotation degrees}`.
- * N prefix = negative axis (e.g. NZ_90 = -Z face up, rotated 90° around global Y). @public */
+/**
+ * All valid block rotations. Named as `{face pointing up}_{Y rotation degrees}`.
+ * N prefix = negative axis (e.g. NZ_90 = -Z face up, rotated 90° around global Y).
+ * @public
+ */
 export declare const BLOCK_ROTATIONS: {
     readonly Y_0: {
         readonly enumIndex: 0;
@@ -949,6 +1003,11 @@ export declare class BlockTypeRegistry extends EventRouter implements protocol.S
     getBlockType(id: number): BlockType;
     /**
      * Register a generic block type.
+     *
+     * @remarks
+     * **Creates anonymous class:** Internally creates an anonymous class extending `BlockType` with the
+     * provided options, then calls `registerBlockType()`.
+     *
      * @param blockTypeOptions - The options for the block type.
      * @returns The registered block type.
      */
@@ -1182,6 +1241,11 @@ export declare class ChunkLattice extends EventRouter {
     get chunkCount(): number;
     /**
      * Removes and clears all chunks and their blocks from the lattice.
+     *
+     * @remarks
+     * **Removes colliders:** All block type colliders are removed from the physics simulation.
+     *
+     * **Emits events:** Emits `REMOVE_CHUNK` for each chunk before clearing.
      */
     clear(): void;
     /**
@@ -1211,9 +1275,13 @@ export declare class ChunkLattice extends EventRouter {
     getChunk(globalCoordinate: Vector3Like): Chunk | undefined;
 
     /**
-     * Get the chunk for a given global coordinate.
+     * Get the chunk for a given global coordinate, creating it if it doesn't exist.
+     *
+     * @remarks
+     * **Creates chunk:** If the chunk doesn't exist, creates a new one and emits `ADD_CHUNK`.
+     *
      * @param globalCoordinate - The global coordinate of the chunk to get.
-     * @returns The chunk at the given global coordinate or undefined if not found.
+     * @returns The chunk at the given global coordinate (created if needed).
      */
     getOrCreateChunk(globalCoordinate: Vector3Like): Chunk;
     /**
@@ -1237,7 +1305,14 @@ export declare class ChunkLattice extends EventRouter {
      * Initialize all blocks in the lattice in bulk, removing
      * all previously existing blocks. This is much more
      * efficient than setting each block individually.
-     * @param blocks - The blocks to initialize.
+     *
+     * @remarks
+     * **Clears first:** Calls `clear()` before initializing, removing all existing blocks and colliders.
+     *
+     * **Collider optimization:** Creates one collider per block type with all placements combined.
+     * Voxel colliders have their states combined for efficient neighbor collision detection.
+     *
+     * @param blocks - The blocks to initialize, keyed by block type id.
      */
     initializeBlocks(blocks: {
         [blockTypeId: number]: BlockPlacement[];
@@ -1245,9 +1320,17 @@ export declare class ChunkLattice extends EventRouter {
     /**
      * Set the block at a global coordinate by block type id, automatically
      * creating a chunk if it doesn't exist. Use block type id 0 for air (to remove a block).
+     *
+     * @remarks
+     * **Collider updates:** Manages physics colliders automatically. For voxel block types, updates
+     * the existing collider. For trimesh block types, recreates the entire collider.
+     *
+     * **Removes previous:** If replacing an existing block, removes it from its collider first.
+     * If the previous block type has no remaining blocks, its collider is removed from simulation.
+     *
      * @param globalCoordinate - The global coordinate of the block to set.
      * @param blockTypeId - The block type id to set. Use 0 to remove the block and replace with air.
-     * @param rotation - The rotation of the block, per-axes angles are rounded to the nearest 90 degree increment.
+     * @param blockRotation - The rotation of the block.
      */
     setBlock(globalCoordinate: Vector3Like, blockTypeId: number, blockRotation?: BlockRotation): void;
 
@@ -1440,6 +1523,10 @@ export declare class Collider extends EventRouter {
     setMass(mass: number): void;
     /**
      * Sets the on collision callback for the collider.
+     *
+     * @remarks
+     * **Auto-enables events:** Automatically enables/disables collision events based on whether callback is set.
+     *
      * @param callback - The on collision callback for the collider.
      */
     setOnCollision(callback: CollisionCallback | undefined): void;
@@ -1486,6 +1573,12 @@ export declare class Collider extends EventRouter {
     setVoxel(coordinate: Vector3Like, filled: boolean): void;
     /**
      * Adds the collider to the simulation.
+     *
+     * @remarks
+     * **Parent linking:** Links the collider to the parent rigid body if provided.
+     *
+     * **Collision callback:** Applies any configured `onCollision` callback.
+     *
      * @param simulation - The simulation to add the collider to.
      * @param parentRigidBody - The parent rigid body of the collider.
      */
@@ -1506,12 +1599,20 @@ export declare class Collider extends EventRouter {
 
     /**
      * Removes the collider from the simulation.
+     *
+     * @remarks
+     * **Parent unlinking:** Unlinks from parent rigid body if attached.
      */
     removeFromSimulation(): void;
     /**
      * Scales the collider by the given scalar. Only
      * ball, block, capsule, cone, cylinder, round cylinder
      * are supported.
+     *
+     * @remarks
+     * **Ratio-based:** Uses ratio-based scaling relative to current scale, not absolute dimensions.
+     * Also scales `relativePosition` proportionally.
+     *
      * @param scalar - The scalar to scale the collider by.
      */
     setScale(scale: Vector3Like): void;
@@ -1735,6 +1836,18 @@ export declare const DEFAULT_ENTITY_RIGID_BODY_OPTIONS: RigidBodyOptions;
  */
 export declare class DefaultPlayerEntity extends PlayerEntity {
     private _cosmeticHiddenSlots;
+    /**
+     * Creates a new DefaultPlayerEntity instance.
+     *
+     * @remarks
+     * **Auto-assigned defaults:** A `DefaultPlayerEntityController` is automatically created and assigned.
+     * Default `modelLoopedAnimations` are `['idle_lower', 'idle_upper']`. All defaults can be overridden via options.
+     *
+     * **Cosmetics on spawn:** When spawned, player cosmetics (hair, skin, equipped items) are fetched asynchronously
+     * and applied. Child entities are created for hair and equipped cosmetic items.
+     *
+     * @param options - The options for the default player entity.
+     */
     constructor(options: DefaultPlayerEntityOptions);
     /** The cosmetic slots that are hidden. @public */
     get cosmeticHiddenSlots(): PlayerCosmeticSlot[];
@@ -1751,6 +1864,12 @@ export declare class DefaultPlayerEntity extends PlayerEntity {
  * default player entity. We recommend you extend this class
  * if you'd like to implement additional logic on top of the
  * DefaultPlayerEntityController implementation.
+ *
+ * <h2>Coordinate System & Model Orientation</h2>
+ *
+ * HYTOPIA uses **-Z as forward**. Models must be authored with their front facing -Z.
+ * A yaw of 0 means facing -Z. The controller rotates the entity based on camera yaw and
+ * movement direction, always orienting the entity's -Z axis in the intended facing direction.
  *
  * @example
  * ```typescript
@@ -1877,6 +1996,19 @@ export declare class DefaultPlayerEntityController extends BaseEntityController 
     get platform(): Entity | undefined;
     /**
      * Called when the controller is attached to an entity.
+     *
+     * @remarks
+     * **Wraps `applyImpulse`:** The entity's `applyImpulse` method is wrapped to track external velocities
+     * separately from internal movement. External impulses decay over time when grounded.
+     *
+     * **Locks rotations:** Calls `entity.lockAllRotations()` to prevent physics from rotating the entity.
+     * Rotation is set explicitly by the controller based on camera orientation.
+     *
+     * **Enables CCD:** Enables continuous collision detection on the entity.
+     *
+     * **Swimming detection:** Registers a `BLOCK_COLLISION` listener to detect liquid blocks and manage
+     * swimming state, gravity scale, and animations.
+     *
      * @param entity - The entity to attach the controller to.
      */
     attach(entity: Entity): void;
@@ -1884,6 +2016,14 @@ export declare class DefaultPlayerEntityController extends BaseEntityController 
      * Called when the controlled entity is spawned.
      * In DefaultPlayerEntityController, this function is used to create
      * the colliders for the entity for wall and ground detection.
+     *
+     * @remarks
+     * **Creates colliders:** Adds two child colliders to the entity:
+     * - `groundSensor`: Cylinder sensor below entity for ground/platform detection and landing animations
+     * - `wallCollider`: Capsule collider for wall collision with zero friction
+     *
+     * **Collider sizes scale:** Collider dimensions scale proportionally with `entity.height`.
+     *
      * @param entity - The entity that is spawned.
      */
     spawn(entity: Entity): void;
@@ -1892,6 +2032,20 @@ export declare class DefaultPlayerEntityController extends BaseEntityController 
      * overriding the default implementation. If the entity to tick
      * is a child entity, only the event will be emitted but the default
      * movement logic will not be applied.
+     *
+     * @remarks
+     * **Rotation (-Z forward):** Sets entity rotation based on camera yaw. A yaw of 0 faces -Z.
+     * Movement direction offsets (WASD/joystick) are added to camera yaw to determine facing.
+     * Models must be authored with their front facing -Z.
+     *
+     * **Child entities:** If `entity.parent` is set, only emits the event and returns early.
+     * Movement logic is skipped for child entities.
+     *
+     * **Input cancellation:** If `autoCancelMouseLeftClick` is true (default), `input.ml` is set to
+     * `false` after processing to prevent repeated triggers.
+     *
+     * **Animations:** Automatically manages idle, walk, run, jump, swim, and interact animations
+     * based on movement state and input.
      *
      * @param entity - The entity to tick.
      * @param input - The current input state of the player.
@@ -2002,6 +2156,16 @@ export declare interface DynamicRigidBodyOptions extends BaseRigidBodyOptions {
  * allow full control of their rigid body and attached collider
  * dynamics.
  *
+ * <h2>Coordinate System</h2>
+ *
+ * HYTOPIA uses a right-handed coordinate system where:
+ * - **+X** is right
+ * - **+Y** is up
+ * - **-Z** is forward (identity orientation)
+ *
+ * Models should be authored with their front/forward facing the **-Z axis**.
+ * When an entity has identity rotation (0,0,0,1 quaternion or yaw=0), it faces -Z.
+ *
  * <h2>Events</h2>
  *
  * This class is an EventRouter, and instances of it emit
@@ -2064,6 +2228,12 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
 
 
     /**
+     * Creates a new Entity instance.
+     *
+     * @remarks
+     * **Controller attachment:** If `controller` is provided, `controller.attach(this)` is called
+     * during construction (before spawn).
+     *
      * @param options - The options for the entity.
      */
     constructor(options: EntityOptions);
@@ -2127,6 +2297,24 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     get world(): World | undefined;
     /**
      * Spawns the entity in the world.
+     *
+     * @remarks
+     * **Rotation default:** If no rotation is provided, entity spawns with identity rotation facing -Z.
+     * For Y-axis rotation (yaw): `{ x: 0, y: sin(yaw/2), z: 0, w: cos(yaw/2) }`. Yaw 0 = facing -Z.
+     *
+     * **Auto-collider creation:** If no colliders are provided, a default collider is auto-generated
+     * from the model bounds (or block half extents). Set `modelPreferredShape` to `ColliderShape.NONE` to disable.
+     *
+     * **Collision groups:** Colliders with default collision groups are auto-assigned based on `isEnvironmental`
+     * and `isSensor` flags. Environmental entities don't collide with blocks or other environmental entities.
+     *
+     * **Event enabling:** Collision/contact force events are auto-enabled on colliders if listeners
+     * are registered for `BLOCK_COLLISION`, `ENTITY_COLLISION`, `BLOCK_CONTACT_FORCE`, or `ENTITY_CONTACT_FORCE` prior to spawning.
+     *
+     * **Controller:** If a controller is attached, `controller.spawn()` is called after the entity is added to the physics simulation.
+     *
+     * **Parent handling:** If `parent` was set in options, `setParent()` is called after spawn with the provided position/rotation.
+     *
      * @param world - The world to spawn the entity in.
      * @param position - The position to spawn the entity at.
      * @param rotation - The optional rotation to spawn the entity with.
@@ -2134,6 +2322,16 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     spawn(world: World, position: Vector3Like, rotation?: QuaternionLike): void;
     /**
      * Despawns the entity and all children from the world.
+     *
+     * @remarks
+     * **Cascading:** Recursively despawns all child entities first (depth-first).
+     *
+     * **Controller:** Calls `controller.detach()` then `controller.despawn()` if attached.
+     *
+     * **Cleanup:** Automatically unregisters attached audios, despawns attached particle emitters,
+     * and unloads attached scene UIs from their respective managers.
+     *
+     * **Simulation:** Removes from physics simulation.
      */
     despawn(): void;
     /**
@@ -2147,11 +2345,6 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * @param raycastHit - The raycast hit result, if the interaction was triggered by a client-side click/tap.
      */
     interact(player: Player, raycastHit?: RaycastHit): void;
-    /**
-     * Sets the controller for the entity.
-     * @param controller - The controller to set.
-     */
-    setController(controller: BaseEntityController | undefined): void;
     /**
      * Sets the emissive color of the entity.
      * @param emissiveColor - The emissive color of the entity.
@@ -2177,6 +2370,11 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * Sets the nodes to hide on the entity's model. Matched nodes
      * will be hidden for all players. Uses case insensitive
      * substring matching.
+     *
+     * @remarks
+     * **Replaces, not merges:** This replaces all hidden nodes, not adds to them.
+     * To add nodes, include existing hidden nodes in the array.
+     *
      * @param modelHiddenNodes - The nodes to hide on the entity's model.
      */
     setModelHiddenNodes(modelHiddenNodes: string[]): void;
@@ -2200,6 +2398,14 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     /**
      * Sets the scale of the entity's model and proportionally
      * scales its colliders.
+     *
+     * @remarks
+     * **Collider scaling is relative:** Colliders are scaled by the ratio of new/old scale, not set to absolute values.
+     * Example: scaling from 1 to 2 doubles collider size; scaling from 2 to 4 also doubles it.
+     *
+     * **Reference equality check:** Uses `===` to compare with current scale, so passing the same
+     * object reference will early return even if values changed. Always pass a new object.
+     *
      * @param modelScale - The scale of the entity's model. Can be a vector or a number for uniform scaling.
      */
     setModelScale(modelScale: Vector3Like | number): void;
@@ -2207,6 +2413,11 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * Sets the nodes to show on the entity's model, overriding hidden nodes.
      * Matched nodes will be shown for all players. Uses case insensitive
      * substring matching.
+     *
+     * @remarks
+     * **Replaces, not merges:** This replaces all shown nodes, not adds to them.
+     * To add nodes, include existing shown nodes in the array.
+     *
      * @param modelShownNodes - The nodes to show on the entity's model.
      */
     setModelShownNodes(modelShownNodes: string[]): void;
@@ -2248,8 +2459,8 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * other animations currently playing.
      *
      * @remarks
-     * This method will be ignored and do nothing if the entity
-     * is a block entity.
+     * **Deduplication:** If an animation is already in the looped set, it won't be re-added or restarted.
+     * The event only emits if at least one new animation is added.
      *
      * @param animations - The animations to start.
      */
@@ -2259,15 +2470,22 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * other animations currently playing.
      *
      * @remarks
-     * This method will be ignored and do nothing if the entity
-     * is a block entity.
+     * **No deduplication:** Unlike `startModelLoopedAnimations`, this always emits the event
+     * even if the animation is already playing. This allows restarting oneshot animations.
+     *
+     * **Tracking:** Oneshot animations are tracked internally to prevent packet spam from `stopModelAnimations()`
+     * but are not serialized for new player joins (they're transient).
      *
      * @param animations - The animations to start.
      */
     startModelOneshotAnimations(animations: string[]): void;
     /**
      * Stops all looped and oneshot animations for the entity,
-     * optionally excluded the provided animations from stopping.
+     * optionally excluding the provided animations from stopping.
+     *
+     * @remarks
+     * **Delegates to `stopModelAnimations`:** Collects animations from both looped and oneshot sets
+     * (minus exclusions), then calls `stopModelAnimations()` once.
      *
      * @param excludedAnimations - The animations to exclude from being stopped.
      */
@@ -2290,8 +2508,7 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * Stops the provided model animations for the entity.
      *
      * @remarks
-     * This method will be ignored and do nothing if the entity
-     * is a block entity.
+     * **Removes from both sets:** Stops animations from both looped and oneshot tracking sets.
      *
      * @param animations - The animations to stop.
      */
@@ -2507,9 +2724,9 @@ export declare class EntityManager {
      */
     getAllPlayerEntities(): PlayerEntity[];
     /**
-     * Gets all spawned entities in the world assigned to the provided player.
+     * Gets all spawned player entities in the world assigned to the provided player.
      * @param player - The player to get the entities for.
-     * @returns All spawned entities in the world assigned to the player.
+     * @returns All spawned player entities in the world assigned to the player.
      */
     getPlayerEntitiesByPlayer(player: Player): PlayerEntity[];
     /**
@@ -2532,8 +2749,12 @@ export declare class EntityManager {
     getEntitiesByTagSubstring(tagSubstring: string): Entity[];
     /**
      * Gets all child entities of an entity.
+     *
+     * @remarks
+     * **Direct children only:** Returns only immediate children, not recursive descendants.
+     *
      * @param entity - The entity to get the children for.
-     * @returns All child entities of the entity.
+     * @returns All direct child entities of the entity.
      */
     getEntityChildren(entity: Entity): Entity[];
 
@@ -3840,6 +4061,9 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
     /**
      * Sets the entity to which the ParticleEmitter is attached.
      *
+     * @remarks
+     * Clears any set position (mutual exclusivity).
+     *
      * @param entity - The entity to attach the ParticleEmitter to.
      */
     setAttachedToEntity(entity: Entity): void;
@@ -4043,6 +4267,9 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
     stop(): void;
     /**
      * Spawns the ParticleEmitter in the world.
+     *
+     * @remarks
+     * **Requires spawned entity:** If attached to an entity, the entity must be spawned first.
      *
      * @param world - The world to spawn the ParticleEmitter in.
      */
@@ -4398,6 +4625,12 @@ export declare type PathfindCompleteCallback = () => void;
  * called can cause performance issues, use it sparingly. The .pathfind() method should only need to
  * be called once in nearly all cases when attempting to move an entity to a target coordinate.
  *
+ * <h2>Coordinate System & Model Orientation</h2>
+ *
+ * HYTOPIA uses **-Z as forward**. Models must be authored with their front facing -Z.
+ * The pathfinding controller automatically calls `face()` to orient the entity's -Z axis
+ * toward each waypoint as it moves.
+ *
  * @public
  */
 export declare class PathfindingEntityController extends SimpleEntityController {
@@ -4443,10 +4676,27 @@ export declare class PathfindingEntityController extends SimpleEntityController 
     get waypointTimeoutMs(): number;
     /**
      * Calculate a path and move to the target if a path is found. Returns true if a path is found, false if no path is found.
+     *
+     * @remarks
+     * **Synchronous return:** Path calculation happens synchronously. Returns `true` if a path was found,
+     * `false` if no path exists or calculation was aborted.
+     *
+     * **Auto-starts movement:** If a path is found, movement begins immediately using the inherited
+     * `move()`, `face()`, and `jump()` methods from `SimpleEntityController`.
+     *
+     * **Auto-facing (-Z forward):** Automatically calls `face()` for each waypoint, orienting the entity's
+     * -Z axis toward the next waypoint. Models must be authored with their front facing -Z.
+     *
+     * **A* algorithm:** Uses A* pathfinding with configurable `maxJump`, `maxFall`, and `verticalPenalty`.
+     * Path calculation is capped by `maxOpenSetIterations` (default 200) to prevent blocking.
+     *
+     * **Waypoint progression:** Entity moves through calculated waypoints sequentially. Each waypoint
+     * has a timeout (`waypointTimeoutMs`) after which it's skipped if not reached.
+     *
      * @param target - The target coordinate to pathfind to.
-     * @param speed - The speed of the entity.
+     * @param speed - The speed of the entity (blocks per second).
      * @param options - The pathfinding options.
-     * @returns Whether the path was found.
+     * @returns Whether a path was found.
      */
     pathfind(target: Vector3Like, speed: number, options?: PathfindingOptions): boolean;
 
@@ -4509,6 +4759,12 @@ export declare class PersistenceManager {
 
     /**
      * Get global data from the data persistence service.
+     *
+     * @remarks
+     * **Empty data:** Returns `{}` if key exists but has no data.
+     *
+     * **Failure:** Returns `undefined` if fetch failed after retries.
+     *
      * @param key - The key to get the data from.
      * @param maxRetries - The maximum number of retries to attempt in the event of failure.
      * @returns The data from the persistence layer.
@@ -4575,6 +4831,9 @@ export declare class Player extends EventRouter implements protocol.Serializable
     get world(): World | undefined;
     /**
      * Disconnects the player from the game server.
+     *
+     * @remarks
+     * **Event:** Emits `LEFT_WORLD` event before disconnecting if in a world.
      */
     disconnect(): void;
     /**
@@ -4594,9 +4853,10 @@ export declare class Player extends EventRouter implements protocol.Serializable
      * Joins a player to a world.
      *
      * @remarks
-     * If the player is already in a {@link World}, they
-     * will be removed from their current world before joining
-     * the new world.
+     * If switching worlds (already in a different world):
+     * - Despawns all player entities for this player in the current world.
+     * - Triggers a disconnect/reconnect cycle internally.
+     * - `JOINED_WORLD` event emits after reconnection completes.
      *
      * @param world - The world to join the player to.
      */
@@ -4750,6 +5010,9 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
     /**
      * Resets the camera to its default, unattached,
      * spectator mode state.
+     *
+     * @remarks
+     * **Clears:** `attachedToEntity`, `attachedToPosition`, `orientation`, `trackedEntity`, and `trackedPosition`.
      */
     reset(): void;
     /**
@@ -4784,6 +5047,10 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
      * Sets the nodes of the model the camera is attached to
      * that will not be rendered for the player. Uses case
      * insensitive substring matching.
+     *
+     * @remarks
+     * **Replaces:** Replaces the current hidden nodes set (not a merge).
+     *
      * @param modelHiddenNodes - Determines nodes to hide that match these case insensitive substrings.
      */
     setModelHiddenNodes(modelHiddenNodes: string[]): void;
@@ -4791,6 +5058,10 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
      * Sets the nodes of the model the camera is attached to
      * that will be rendered for the player, overriding hidden
      * nodes. Uses case insensitive substring matching.
+     *
+     * @remarks
+     * **Replaces:** Replaces the current shown nodes set (not a merge).
+     *
      * @param modelShownNodes - Determines nodes to show that match these case insensitive substrings.
      */
     setModelShownNodes(modelShownNodes: string[]): void;
@@ -5006,6 +5277,12 @@ export declare class PlayerEntity extends Entity {
     readonly nametagSceneUI: SceneUI;
 
     /**
+     * Creates a new PlayerEntity instance.
+     *
+     * @remarks
+     * **Nametag:** A `nametagSceneUI` is automatically created using the built-in `hytopia:nametag` template
+     * with the player's username and profile picture. Access via `nametagSceneUI` property to customize.
+     *
      * @param options - The options for the player entity.
      */
     constructor(options: PlayerEntityOptions);
@@ -5710,6 +5987,12 @@ export declare class RigidBody extends EventRouter {
     setPosition(position: Vector3Like): void;
     /**
      * Sets the rotation of the rigid body.
+     *
+     * @remarks
+     * **Coordinate system:** Identity rotation (0,0,0,1 quaternion) means facing -Z.
+     * For Y-axis rotation only (yaw), use: `{ x: 0, y: sin(yaw/2), z: 0, w: cos(yaw/2) }`.
+     * A yaw of 0 faces -Z, positive yaw rotates counter-clockwise when viewed from above.
+     *
      * @param rotation - The rotation of the rigid body.
      */
     setRotation(rotation: QuaternionLike): void;
@@ -5755,6 +6038,10 @@ export declare class RigidBody extends EventRouter {
     addChildColliderToSimulation(collider: Collider): void;
     /**
      * Adds the rigid body to a simulation.
+     *
+     * @remarks
+     * **Child colliders:** Also adds all pending child colliders to the simulation.
+     *
      * @param simulation - The simulation to add the rigid body to.
      */
     addToSimulation(simulation: Simulation): void;
@@ -5813,6 +6100,9 @@ export declare class RigidBody extends EventRouter {
     lockAllPositions(): void;
     /**
      * Removes the rigid body from the simulation it belongs to.
+     *
+     * @remarks
+     * **Child colliders:** Also removes all child colliders from the simulation.
      */
     removeFromSimulation(): void;
 
@@ -5943,11 +6233,17 @@ export declare class SceneUI extends EventRouter implements protocol.Serializabl
     /**
      * Loads the SceneUI into the world.
      *
+     * @remarks
+     * **Requires spawned entity:** If attached to an entity, the entity must be spawned first.
+     *
      * @param world - The world to load the SceneUI into.
      */
     load(world: World): void;
     /**
      * Sets the entity to which the SceneUI is attached, following its position.
+     *
+     * @remarks
+     * **Clears position:** Clears any set position (mutual exclusivity).
      *
      * @param entity - The entity to attach the SceneUI to.
      */
@@ -5959,7 +6255,10 @@ export declare class SceneUI extends EventRouter implements protocol.Serializabl
      */
     setOffset(offset: Vector3Like): void;
     /**
-     * Sets the position of the SceneUI. Will detach from entity if attached.
+     * Sets the position of the SceneUI.
+     *
+     * @remarks
+     * **Detaches entity:** Detaches from any attached entity (mutual exclusivity).
      *
      * @param position - The position in the world.
      */
@@ -6073,6 +6372,9 @@ export declare class SceneUIManager {
     /**
      * Unloads and unregisters all SceneUI instances attached to a specific entity.
      *
+     * @remarks
+     * **Cleanup:** Calls `unload()` on each attached SceneUI.
+     *
      * @param entity - The entity to unload and unregister SceneUI instances for.
      */
     unloadEntityAttachedSceneUIs(entity: Entity): void;
@@ -6105,6 +6407,12 @@ export declare interface SceneUIOptions {
  * extend for your own more complex entity controller
  * that implements things like pathfinding. Compatible with
  * entities that have kinematic or dynamic rigid body types.
+ *
+ * <h2>Coordinate System & Model Orientation</h2>
+ *
+ * HYTOPIA uses **-Z as forward**. Models must be authored with their front facing -Z.
+ * When `face()` rotates an entity to look at a target, it orients the entity's -Z axis toward that target.
+ * A yaw of 0 means facing -Z (into the screen in default camera view).
  *
  * @example
  * ```typescript
@@ -6164,6 +6472,11 @@ export declare class SimpleEntityController extends BaseEntityController {
     /**
      * Override of the {@link BaseEntityController.spawn} method. Starts
      * the set idle animations (if any) when the entity is spawned.
+     *
+     * @remarks
+     * **Auto-starts idle animations:** Calls `_startIdleAnimations()` which stops move/jump animations
+     * and starts the configured `idleLoopedAnimations`.
+     *
      * @param entity - The entity that was spawned.
      */
     spawn(entity: Entity): void;
@@ -6171,12 +6484,17 @@ export declare class SimpleEntityController extends BaseEntityController {
      * Rotates the entity at a given speed to face a target coordinate.
      *
      * @remarks
-     * If this method is called while the entity is already attempting
-     * to face another target, the previous target will be ignored and
-     * the entity will start attempting to face the new target.
+     * **-Z forward:** Orients the entity so its **-Z axis** points toward the target.
+     * Models must be authored with their front facing -Z for correct orientation.
+     *
+     * **Replaces previous target:** If called while already facing, the previous target is discarded
+     * and the entity starts facing the new target. There is no queue.
+     *
+     * **Y-axis only:** Only rotates around the Y-axis (yaw). Does not pitch up/down to face targets
+     * at different heights.
      *
      * @param target - The target coordinate to face.
-     * @param speed - The speed at which to rotate to the target coordinate.
+     * @param speed - The speed at which to rotate to the target coordinate (radians per second).
      * @param options - Additional options for the face operation, such as callbacks.
      */
     face(target: Vector3Like, speed: number, options?: FaceOptions): void;
@@ -6184,28 +6502,50 @@ export declare class SimpleEntityController extends BaseEntityController {
      * Applies an upwards impulse to the entity to simulate a jump, only supported
      * for entities with dynamic rigid body types.
      *
-     * @param height - The height to jump to.
+     * @remarks
+     * **Deferred:** The impulse is applied on the next tick, not immediately.
+     *
+     * **Dynamic only:** Has no effect on kinematic entities. Uses `entity.applyImpulse()`.
+     *
+     * **Animations:** Starts `jumpOneshotAnimations` and stops idle/move animations when the jump occurs.
+     *
+     * @param height - The height to jump to (in blocks).
      */
     jump(height: number): void;
     /**
      * Moves the entity at a given speed in a straight line to a target coordinate.
      *
      * @remarks
-     * If this method is called while the entity is already attempting
-     * to move to another target, the previous target will be ignored and
-     * the entity will start attempting to move to the new target.
+     * **Position only:** This method only changes position, not rotation. Use `face()` simultaneously
+     * to rotate the entity toward its movement direction (-Z forward).
+     *
+     * **Replaces previous target:** If called while already moving, the previous target is discarded
+     * and the entity starts moving to the new target. There is no queue.
+     *
+     * **Straight line:** Moves directly toward target using `entity.setPosition()`. Does not pathfind
+     * around obstacles.
+     *
+     * **Animations:** Starts `moveLoopedAnimations` on the first tick of movement. When complete,
+     * starts `idleLoopedAnimations` (unless `moveStartIdleAnimationsOnCompletion` is false).
      *
      * @param target - The target coordinate to move to.
-     * @param speed - The speed at which to move to the target coordinate.
+     * @param speed - The speed at which to move to the target coordinate (blocks per second).
      * @param options - Additional options for the move operation, such as callbacks.
      */
     move(target: Vector3Like, speed: number, options?: MoveOptions): void;
     /**
      * Stops the entity from attempting to face a target coordinate.
+     *
+     * @remarks
+     * **Deferred:** Takes effect on the next tick. The `faceCompleteCallback` will still be called.
      */
     stopFace(): void;
     /**
-     * Stops the entity from continuing to move it's current target coordinate.
+     * Stops the entity from continuing to move to its current target coordinate.
+     *
+     * @remarks
+     * **Deferred:** Takes effect on the next tick. The `moveCompleteCallback` will still be called
+     * and idle animations will start (unless `moveStartIdleAnimationsOnCompletion` was false).
      */
     stopMove(): void;
 
@@ -6285,8 +6625,7 @@ export declare class Simulation extends EventRouter {
      * Gets the contact manifolds for a pair of colliders.
      *
      * @remarks
-     * Contact manifolds will not be returned for contacts that
-     * involve sensors.
+     * **Sensors:** Returns empty array for contacts involving sensors (sensors don't generate contact manifolds).
      *
      * @param colliderHandleA - The handle of the first collider.
      * @param colliderHandleB - The handle of the second collider.
@@ -6382,6 +6721,13 @@ export declare interface SpdMatrix3 extends SdpMatrix3 {
  * game. It will internally handle initialization of the physics engine
  * and other systems required systems. All of your game setup logic
  * should be executed in the init function.
+ *
+ * Initialization order:
+ * 1. Physics engine (RAPIER) initialization
+ * 2. Block texture atlas preload
+ * 3. Model preload
+ * 4. Your init function execution (server waits if async)
+ * 5. Server starts accepting connections
  *
  * @param init - A function that initializes the game. The function can take no parameters
  * to just initialize game logic, or it can accept a world parameter. If it accepts a world
@@ -7186,6 +7532,14 @@ export declare class World extends EventRouter implements protocol.Serializable 
     get tag(): string | undefined;
     /**
      * Loads a map into the world, clearing any prior map.
+     *
+     * @remarks
+     * **Clears existing:** Calls `chunkLattice.clear()` before loading, removing all blocks and colliders.
+     *
+     * **Block types:** Registers block types from the map into the world's `blockTypeRegistry`.
+     *
+     * **Entities:** Spawns map entities with `isEnvironmental: true` by default.
+     *
      * @param map - The map to load.
      */
     loadMap(map: WorldMap): void;
@@ -7448,8 +7802,11 @@ export declare class WorldManager {
 
     /**
      * Creates a new world.
+     *
+     * @remarks
+     * **Auto-starts:** Automatically starts the world after creation.
+     *
      * @param options - The options for the world.
-     * @param start - Whether to start the world immediately, defaults to true.
      * @returns The created world.
      */
     createWorld(options: Omit<WorldOptions, 'id'>): World;
@@ -7460,6 +7817,10 @@ export declare class WorldManager {
     getAllWorlds(): World[];
     /**
      * Gets the default world.
+     *
+     * @remarks
+     * **Lazy-creates:** Creates a default world if none exists.
+     *
      * @returns The default world.
      */
     getDefaultWorld(): World;

@@ -51,3 +51,11 @@ The map to load.
 
 void
 
+## Remarks
+
+\*\*Clears existing:\*\* Calls `chunkLattice.clear()` before loading, removing all blocks and colliders.
+
+\*\*Block types:\*\* Registers block types from the map into the world's `blockTypeRegistry`<!-- -->.
+
+\*\*Entities:\*\* Spawns map entities with `isEnvironmental: true` by default.
+

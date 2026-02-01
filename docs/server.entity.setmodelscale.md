@@ -51,3 +51,9 @@ The scale of the entity's model. Can be a vector or a number for uniform scaling
 
 void
 
+## Remarks
+
+\*\*Collider scaling is relative:\*\* Colliders are scaled by the ratio of new/old scale, not set to absolute values. Example: scaling from 1 to 2 doubles collider size; scaling from 2 to 4 also doubles it.
+
+\*\*Reference equality check:\*\* Uses `===` to compare with current scale, so passing the same object reference will early return even if values changed. Always pass a new object.
+

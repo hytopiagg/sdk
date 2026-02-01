@@ -51,3 +51,13 @@ The entity to attach the controller to.
 
 void
 
+## Remarks
+
+\*\*Wraps `applyImpulse`<!-- -->:\*\* The entity's `applyImpulse` method is wrapped to track external velocities separately from internal movement. External impulses decay over time when grounded.
+
+\*\*Locks rotations:\*\* Calls `entity.lockAllRotations()` to prevent physics from rotating the entity. Rotation is set explicitly by the controller based on camera orientation.
+
+\*\*Enables CCD:\*\* Enables continuous collision detection on the entity.
+
+\*\*Swimming detection:\*\* Registers a `BLOCK_COLLISION` listener to detect liquid blocks and manage swimming state, gravity scale, and animations.
+

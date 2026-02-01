@@ -53,5 +53,7 @@ void
 
 ## Remarks
 
-This method will be ignored and do nothing if the entity is a block entity.
+\*\*No deduplication:\*\* Unlike `startModelLoopedAnimations`<!-- -->, this always emits the event even if the animation is already playing. This allows restarting oneshot animations.
+
+\*\*Tracking:\*\* Oneshot animations are tracked internally to prevent packet spam from `stopModelAnimations()` but are not serialized for new player joins (they're transient).
 

@@ -62,7 +62,7 @@ Description
 
 </td><td>
 
-Constructs a new instance of the `PlayerEntity` class
+Creates a new PlayerEntity instance.
 
 
 </td></tr>

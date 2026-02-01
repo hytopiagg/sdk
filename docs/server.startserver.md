@@ -55,3 +55,5 @@ void
 
 This function should always be called first when initializing your game. It will internally handle initialization of the physics engine and other systems required systems. All of your game setup logic should be executed in the init function.
 
+Initialization order: 1. Physics engine (RAPIER) initialization 2. Block texture atlas preload 3. Model preload 4. Your init function execution (server waits if async) 5. Server starts accepting connections
+

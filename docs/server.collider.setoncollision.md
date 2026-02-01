@@ -51,3 +51,7 @@ The on collision callback for the collider.
 
 void
 
+## Remarks
+
+\*\*Auto-enables events:\*\* Automatically enables/disables collision events based on whether callback is set.
+

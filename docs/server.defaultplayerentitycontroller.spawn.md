@@ -51,3 +51,9 @@ The entity that is spawned.
 
 void
 
+## Remarks
+
+\*\*Creates colliders:\*\* Adds two child colliders to the entity: - `groundSensor`<!-- -->: Cylinder sensor below entity for ground/platform detection and landing animations - `wallCollider`<!-- -->: Capsule collider for wall collision with zero friction
+
+\*\*Collider sizes scale:\*\* Collider dimensions scale proportionally with `entity.height`<!-- -->.
+

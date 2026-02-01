@@ -4,7 +4,7 @@
 
 ## Entity.(constructor)
 
-Constructs a new instance of the `Entity` class
+Creates a new Entity instance.
 
 **Signature:**
 
@@ -47,3 +47,8 @@ The options for the entity.
 
 </td></tr>
 </tbody></table>
+
+## Remarks
+
+\*\*Controller attachment:\*\* If `controller` is provided, `controller.attach(this)` is called during construction (before spawn).
+

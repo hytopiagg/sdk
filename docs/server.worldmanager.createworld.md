@@ -53,3 +53,7 @@ The options for the world.
 
 The created world.
 
+## Remarks
+
+\*\*Auto-starts:\*\* Automatically starts the world after creation.
+

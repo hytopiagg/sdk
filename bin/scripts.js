@@ -205,6 +205,9 @@ function installProjectDependencies() {
     }
   }, null, 2))
 
+  // install dev dependencies
+  execSync('npm install --save-dev typescript', { stdio: 'inherit' });
+
   // install hytopia sdk and hytopia assets
   execSync('npm install --force hytopia@latest', { stdio: 'inherit' });
   execSync('npm install --save-optional --force @hytopia.com/assets@latest', { stdio: 'inherit' });

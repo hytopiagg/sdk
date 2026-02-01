@@ -58,7 +58,7 @@ number
 
 </td><td>
 
-The speed at which to move to the target coordinate.
+The speed at which to move to the target coordinate (blocks per second).
 
 
 </td></tr>
@@ -85,5 +85,11 @@ void
 
 ## Remarks
 
-If this method is called while the entity is already attempting to move to another target, the previous target will be ignored and the entity will start attempting to move to the new target.
+\*\*Position only:\*\* This method only changes position, not rotation. Use `face()` simultaneously to rotate the entity toward its movement direction (-Z forward).
+
+\*\*Replaces previous target:\*\* If called while already moving, the previous target is discarded and the entity starts moving to the new target. There is no queue.
+
+\*\*Straight line:\*\* Moves directly toward target using `entity.setPosition()`<!-- -->. Does not pathfind around obstacles.
+
+\*\*Animations:\*\* Starts `moveLoopedAnimations` on the first tick of movement. When complete, starts `idleLoopedAnimations` (unless `moveStartIdleAnimationsOnCompletion` is false).
 

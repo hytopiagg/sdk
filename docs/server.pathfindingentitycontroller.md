@@ -17,6 +17,10 @@ export default class PathfindingEntityController extends SimpleEntityController
 
 This class implements pathfinding using the A\* algorithm. Pathfinding when frequently called can cause performance issues, use it sparingly. The .pathfind() method should only need to be called once in nearly all cases when attempting to move an entity to a target coordinate.
 
+<h2>Coordinate System &amp; Model Orientation</h2>
+
+HYTOPIA uses \*\*-Z as forward\*\*. Models must be authored with their front facing -Z. The pathfinding controller automatically calls `face()` to orient the entity's -Z axis toward each waypoint as it moves.
+
 ## Constructors
 
 <table><thead><tr><th>

@@ -119,7 +119,7 @@ Override this method to handle entity movements based on your entity controller.
 
 </td><td>
 
-Override this method to handle entity movements based on player input for your entity controller. This is called every tick by a PlayerEntity with a entity controller.
+Override this method to handle entity movements based on player input for your entity controller.
 
 
 </td></tr>

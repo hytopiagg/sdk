@@ -4,7 +4,7 @@
 
 ## SimpleEntityController.stopMove() method
 
-Stops the entity from continuing to move it's current target coordinate.
+Stops the entity from continuing to move to its current target coordinate.
 
 **Signature:**
 
@@ -14,4 +14,8 @@ stopMove(): void;
 **Returns:**
 
 void
+
+## Remarks
+
+\*\*Deferred:\*\* Takes effect on the next tick. The `moveCompleteCallback` will still be called and idle animations will start (unless `moveStartIdleAnimationsOnCompletion` was false).
 

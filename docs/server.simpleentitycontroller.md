@@ -17,6 +17,10 @@ export default class SimpleEntityController extends BaseEntityController
 
 This class implements simple movement methods that serve as a way to add realistic movement and rotational facing functionality to an entity. This is also a great base to extend for your own more complex entity controller that implements things like pathfinding. Compatible with entities that have kinematic or dynamic rigid body types.
 
+<h2>Coordinate System &amp; Model Orientation</h2>
+
+HYTOPIA uses \*\*-Z as forward\*\*. Models must be authored with their front facing -Z. When `face()` rotates an entity to look at a target, it orients the entity's -Z axis toward that target. A yaw of 0 means facing -Z (into the screen in default camera view).
+
 ## Example
 
 
@@ -308,7 +312,7 @@ Stops the entity from attempting to face a target coordinate.
 
 </td><td>
 
-Stops the entity from continuing to move it's current target coordinate.
+Stops the entity from continuing to move to its current target coordinate.
 
 
 </td></tr>

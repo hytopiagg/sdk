@@ -15,3 +15,13 @@ despawn(): void;
 
 void
 
+## Remarks
+
+\*\*Cascading:\*\* Recursively despawns all child entities first (depth-first).
+
+\*\*Controller:\*\* Calls `controller.detach()` then `controller.despawn()` if attached.
+
+\*\*Cleanup:\*\* Automatically unregisters attached audios, despawns attached particle emitters, and unloads attached scene UIs from their respective managers.
+
+\*\*Simulation:\*\* Removes from physics simulation.
+

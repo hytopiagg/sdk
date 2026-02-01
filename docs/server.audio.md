@@ -597,7 +597,7 @@ Sets the playback rate of the audio.
 
 </td><td>
 
-Sets the position of the audio. Will detach from entity if attached.
+Sets the position of the audio.
 
 
 </td></tr>

@@ -4,7 +4,7 @@
 
 ## ChunkLattice.getOrCreateChunk() method
 
-Get the chunk for a given global coordinate.
+Get the chunk for a given global coordinate, creating it if it doesn't exist.
 
 **Signature:**
 
@@ -51,5 +51,9 @@ The global coordinate of the chunk to get.
 
 [Chunk](./server.chunk.md)
 
-The chunk at the given global coordinate or undefined if not found.
+The chunk at the given global coordinate (created if needed).
+
+## Remarks
+
+\*\*Creates chunk:\*\* If the chunk doesn't exist, creates a new one and emits `ADD_CHUNK`<!-- -->.
 

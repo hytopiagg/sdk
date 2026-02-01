@@ -15,3 +15,7 @@ stopFace(): void;
 
 void
 
+## Remarks
+
+\*\*Deferred:\*\* Takes effect on the next tick. The `faceCompleteCallback` will still be called.
+

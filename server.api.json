@@ -897,7 +897,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Audio#setAttachedToEntity:member(1)",
-              "docComment": "/**\n * Sets the entity to which the audio is attached, following its position.\n *\n * @param entity - The entity to attach the Audio to.\n */\n",
+              "docComment": "/**\n * Sets the entity to which the audio is attached, following its position.\n *\n * @remarks\n *\n * **Clears position:** Setting an attached entity clears any previously set `position`. Audio can be entity-attached or position-based, not both.\n *\n * @param entity - The entity to attach the Audio to.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -1138,7 +1138,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Audio#setPosition:member(1)",
-              "docComment": "/**\n * Sets the position of the audio. Will detach from entity if attached.\n *\n * @param position - The position in the world.\n */\n",
+              "docComment": "/**\n * Sets the position of the audio.\n *\n * @remarks\n *\n * **Detaches from entity:** Setting a position clears any `attachedToEntity`. Audio can be position-based or entity-attached, not both.\n *\n * @param position - The position in the world.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2377,7 +2377,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!AudioManager#unregisterAudio:member(1)",
-              "docComment": "/**\n * Unregisters and stops an audio instance from the audio manager.\n *\n * @param audio - The audio instance to pause and unregister.\n */\n",
+              "docComment": "/**\n * Unregisters and stops an audio instance from the audio manager.\n *\n * @remarks\n *\n * **Pauses audio:** Calls `audio.pause()` before removing from the manager.\n *\n * @param audio - The audio instance to pause and unregister.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -2426,7 +2426,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!AudioManager#unregisterEntityAttachedAudios:member(1)",
-              "docComment": "/**\n * Unregisters and stops all audio instances attached to a specific entity.\n *\n * @param entity - The entity to pause and unregister audio instances for.\n */\n",
+              "docComment": "/**\n * Unregisters and stops all audio instances attached to a specific entity.\n *\n * @remarks\n *\n * **Pauses all:** Calls `unregisterAudio()` for each attached audio, which pauses them.\n *\n * @param entity - The entity to pause and unregister audio instances for.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3424,7 +3424,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!BaseEntityController#attach:member(1)",
-              "docComment": "/**\n * Override this method to handle the attachment of an entity to your entity controller.\n *\n * @param entity - The entity to attach the controller to.\n */\n",
+              "docComment": "/**\n * Override this method to handle the attachment of an entity to your entity controller.\n *\n * @remarks\n *\n * **Called by:** `Entity` constructor when a controller is provided in options.\n *\n * **Super call:** Call `super.attach(entity)` to emit the `ATTACH` event.\n *\n * @param entity - The entity to attach the controller to.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3473,7 +3473,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!BaseEntityController#despawn:member(1)",
-              "docComment": "/**\n * Override this method to handle the despawn of an entity from your entity controller.\n *\n * @param entity - The entity to despawn.\n */\n",
+              "docComment": "/**\n * Override this method to handle the despawn of an entity from your entity controller.\n *\n * @remarks\n *\n * **Called by:** `Entity.despawn()` after `detach()` is called.\n *\n * **Super call:** Call `super.despawn(entity)` to emit the `DESPAWN` event.\n *\n * @param entity - The entity being despawned.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3522,7 +3522,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!BaseEntityController#detach:member(1)",
-              "docComment": "/**\n * Override this method to handle the detachment of an entity from your entity controller.\n *\n * @param entity - The entity to detach.\n */\n",
+              "docComment": "/**\n * Override this method to handle the detachment of an entity from your entity controller.\n *\n * @remarks\n *\n * **Called by:** `Entity.despawn()` before `despawn()` is called.\n *\n * **Super call:** Call `super.detach(entity)` to emit the `DETACH` event.\n *\n * @param entity - The entity being detached.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3571,7 +3571,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!BaseEntityController#spawn:member(1)",
-              "docComment": "/**\n * Override this method to handle the spawning of an entity to your entity controller.\n *\n * @param entity - The entity to spawn.\n */\n",
+              "docComment": "/**\n * Override this method to handle the spawning of an entity to your entity controller.\n *\n * @remarks\n *\n * **Called by:** `Entity.spawn()` after the entity is added to the physics simulation.\n *\n * **Super call:** Call `super.spawn(entity)` to emit the `SPAWN` event.\n *\n * @param entity - The entity being spawned.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3620,7 +3620,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!BaseEntityController#tick:member(1)",
-              "docComment": "/**\n * Override this method to handle entity movements based on your entity controller.\n *\n * @param deltaTimeMs - The delta time in milliseconds since the last tick.\n */\n",
+              "docComment": "/**\n * Override this method to handle entity movements based on your entity controller.\n *\n * @remarks\n *\n * **Called by:** `Entity.tick()` every tick for non-environmental entities. For `PlayerEntity`, this is called after `tickWithPlayerInput()`.\n *\n * **Super call:** Call `super.tick(entity, deltaTimeMs)` to emit the `TICK` event.\n *\n * @param entity - The entity being ticked.\n *\n * @param deltaTimeMs - The delta time in milliseconds since the last tick.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3685,7 +3685,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!BaseEntityController#tickWithPlayerInput:member(1)",
-              "docComment": "/**\n * Override this method to handle entity movements based on player input for your entity controller. This is called every tick by a PlayerEntity with a entity controller.\n *\n * @param entity - The entity to tick.\n *\n * @param input - The current input state of the player.\n *\n * @param cameraOrientation - The current camera orientation state of the player.\n *\n * @param deltaTimeMs - The delta time in milliseconds since the last tick.\n */\n",
+              "docComment": "/**\n * Override this method to handle entity movements based on player input for your entity controller.\n *\n * @remarks\n *\n * **Called by:** `PlayerEntity.tick()` every tick when `isTickWithPlayerInputEnabled` is true. Called before `tick()`.\n *\n * **Super call:** Call `super.tickWithPlayerInput(...)` to emit the `TICK_WITH_PLAYER_INPUT` event.\n *\n * @param entity - The player entity being ticked.\n *\n * @param input - The current input state of the player.\n *\n * @param cameraOrientation - The current camera orientation state of the player.\n *\n * @param deltaTimeMs - The delta time in milliseconds since the last tick.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -6464,7 +6464,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!BlockTypeRegistry#registerGenericBlockType:member(1)",
-              "docComment": "/**\n * Register a generic block type.\n *\n * @param blockTypeOptions - The options for the block type.\n *\n * @returns The registered block type.\n */\n",
+              "docComment": "/**\n * Register a generic block type.\n *\n * @remarks\n *\n * **Creates anonymous class:** Internally creates an anonymous class extending `BlockType` with the provided options, then calls `registerBlockType()`.\n *\n * @param blockTypeOptions - The options for the block type.\n *\n * @returns The registered block type.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -7882,7 +7882,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!ChunkLattice#clear:member(1)",
-              "docComment": "/**\n * Removes and clears all chunks and their blocks from the lattice.\n */\n",
+              "docComment": "/**\n * Removes and clears all chunks and their blocks from the lattice.\n *\n * @remarks\n *\n * **Removes colliders:** All block type colliders are removed from the physics simulation.\n *\n * **Emits events:** Emits `REMOVE_CHUNK` for each chunk before clearing.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8154,7 +8154,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!ChunkLattice#getOrCreateChunk:member(1)",
-              "docComment": "/**\n * Get the chunk for a given global coordinate.\n *\n * @param globalCoordinate - The global coordinate of the chunk to get.\n *\n * @returns The chunk at the given global coordinate or undefined if not found.\n */\n",
+              "docComment": "/**\n * Get the chunk for a given global coordinate, creating it if it doesn't exist.\n *\n * @remarks\n *\n * **Creates chunk:** If the chunk doesn't exist, creates a new one and emits `ADD_CHUNK`.\n *\n * @param globalCoordinate - The global coordinate of the chunk to get.\n *\n * @returns The chunk at the given global coordinate (created if needed).\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8302,7 +8302,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!ChunkLattice#initializeBlocks:member(1)",
-              "docComment": "/**\n * Initialize all blocks in the lattice in bulk, removing all previously existing blocks. This is much more efficient than setting each block individually.\n *\n * @param blocks - The blocks to initialize.\n */\n",
+              "docComment": "/**\n * Initialize all blocks in the lattice in bulk, removing all previously existing blocks. This is much more efficient than setting each block individually.\n *\n * @remarks\n *\n * **Clears first:** Calls `clear()` before initializing, removing all existing blocks and colliders.\n *\n * **Collider optimization:** Creates one collider per block type with all placements combined. Voxel colliders have their states combined for efficient neighbor collision detection.\n *\n * @param blocks - The blocks to initialize, keyed by block type id.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8359,7 +8359,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!ChunkLattice#setBlock:member(1)",
-              "docComment": "/**\n * Set the block at a global coordinate by block type id, automatically creating a chunk if it doesn't exist. Use block type id 0 for air (to remove a block).\n *\n * @param globalCoordinate - The global coordinate of the block to set.\n *\n * @param blockTypeId - The block type id to set. Use 0 to remove the block and replace with air.\n *\n * @param rotation - The rotation of the block, per-axes angles are rounded to the nearest 90 degree increment.\n */\n",
+              "docComment": "/**\n * Set the block at a global coordinate by block type id, automatically creating a chunk if it doesn't exist. Use block type id 0 for air (to remove a block).\n *\n * @remarks\n *\n * **Collider updates:** Manages physics colliders automatically. For voxel block types, updates the existing collider. For trimesh block types, recreates the entire collider.\n *\n * **Removes previous:** If replacing an existing block, removes it from its collider first. If the previous block type has no remaining blocks, its collider is removed from simulation.\n *\n * @param globalCoordinate - The global coordinate of the block to set.\n *\n * @param blockTypeId - The block type id to set. Use 0 to remove the block and replace with air.\n *\n * @param blockRotation - The rotation of the block.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -8894,7 +8894,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Collider#addToSimulation:member(1)",
-              "docComment": "/**\n * Adds the collider to the simulation.\n *\n * @param simulation - The simulation to add the collider to.\n *\n * @param parentRigidBody - The parent rigid body of the collider.\n */\n",
+              "docComment": "/**\n * Adds the collider to the simulation.\n *\n * @remarks\n *\n * **Parent linking:** Links the collider to the parent rigid body if provided.\n *\n * **Collision callback:** Applies any configured `onCollision` callback.\n *\n * @param simulation - The simulation to add the collider to.\n *\n * @param parentRigidBody - The parent rigid body of the collider.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -9933,7 +9933,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Collider#removeFromSimulation:member(1)",
-              "docComment": "/**\n * Removes the collider from the simulation.\n */\n",
+              "docComment": "/**\n * Removes the collider from the simulation.\n *\n * @remarks\n *\n * **Parent unlinking:** Unlinks from parent rigid body if attached.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -10431,7 +10431,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Collider#setOnCollision:member(1)",
-              "docComment": "/**\n * Sets the on collision callback for the collider.\n *\n * @param callback - The on collision callback for the collider.\n */\n",
+              "docComment": "/**\n * Sets the on collision callback for the collider.\n *\n * @remarks\n *\n * **Auto-enables events:** Automatically enables/disables collision events based on whether callback is set.\n *\n * @param callback - The on collision callback for the collider.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -10630,7 +10630,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Collider#setScale:member(1)",
-              "docComment": "/**\n * Scales the collider by the given scalar. Only ball, block, capsule, cone, cylinder, round cylinder are supported.\n *\n * @param scalar - The scalar to scale the collider by.\n */\n",
+              "docComment": "/**\n * Scales the collider by the given scalar. Only ball, block, capsule, cone, cylinder, round cylinder are supported.\n *\n * @remarks\n *\n * **Ratio-based:** Uses ratio-based scaling relative to current scale, not absolute dimensions. Also scales `relativePosition` proportionally.\n *\n * @param scalar - The scalar to scale the collider by.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -12385,7 +12385,7 @@
             {
               "kind": "Constructor",
               "canonicalReference": "server!DefaultPlayerEntity:constructor(1)",
-              "docComment": "/**\n * Constructs a new instance of the `DefaultPlayerEntity` class\n */\n",
+              "docComment": "/**\n * Creates a new DefaultPlayerEntity instance.\n *\n * @remarks\n *\n * **Auto-assigned defaults:** A `DefaultPlayerEntityController` is automatically created and assigned. Default `modelLoopedAnimations` are `['idle_lower', 'idle_upper']`. All defaults can be overridden via options.\n *\n * **Cosmetics on spawn:** When spawned, player cosmetics (hair, skin, equipped items) are fetched asynchronously and applied. Child entities are created for hair and equipped cosmetic items.\n *\n * @param options - The options for the default player entity.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -12460,7 +12460,7 @@
         {
           "kind": "Class",
           "canonicalReference": "server!DefaultPlayerEntityController:class",
-          "docComment": "/**\n * The player entity controller implementation.\n *\n * @remarks\n *\n * This class extends {@link BaseEntityController} and implements the default movement, platforming, jump, swimming, and other basic logic for the default player entity. We recommend you extend this class if you'd like to implement additional logic on top of the DefaultPlayerEntityController implementation.\n *\n * @example\n * ```typescript\n * // Create a custom entity controller for myEntity, prior to spawning it.\n * myEntity.setController(new DefaultPlayerEntityController({\n *   jumpVelocity: 10,\n *   runVelocity: 8,\n *   walkVelocity: 4,\n * }));\n *\n * // Spawn the entity in the world.\n * myEntity.spawn(world, { x: 53, y: 10, z: 23 });\n * ```\n *\n * @public\n */\n",
+          "docComment": "/**\n * The player entity controller implementation.\n *\n * @remarks\n *\n * This class extends {@link BaseEntityController} and implements the default movement, platforming, jump, swimming, and other basic logic for the default player entity. We recommend you extend this class if you'd like to implement additional logic on top of the DefaultPlayerEntityController implementation.\n *\n * <h2>Coordinate System & Model Orientation</h2>\n *\n * HYTOPIA uses **-Z as forward**. Models must be authored with their front facing -Z. A yaw of 0 means facing -Z. The controller rotates the entity based on camera yaw and movement direction, always orienting the entity's -Z axis in the intended facing direction.\n *\n * @example\n * ```typescript\n * // Create a custom entity controller for myEntity, prior to spawning it.\n * myEntity.setController(new DefaultPlayerEntityController({\n *   jumpVelocity: 10,\n *   runVelocity: 8,\n *   walkVelocity: 4,\n * }));\n *\n * // Spawn the entity in the world.\n * myEntity.spawn(world, { x: 53, y: 10, z: 23 });\n * ```\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -12548,7 +12548,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!DefaultPlayerEntityController#attach:member(1)",
-              "docComment": "/**\n * Called when the controller is attached to an entity.\n *\n * @param entity - The entity to attach the controller to.\n */\n",
+              "docComment": "/**\n * Called when the controller is attached to an entity.\n *\n * @remarks\n *\n * **Wraps `applyImpulse`:** The entity's `applyImpulse` method is wrapped to track external velocities separately from internal movement. External impulses decay over time when grounded.\n *\n * **Locks rotations:** Calls `entity.lockAllRotations()` to prevent physics from rotating the entity. Rotation is set explicitly by the controller based on camera orientation.\n *\n * **Enables CCD:** Enables continuous collision detection on the entity.\n *\n * **Swimming detection:** Registers a `BLOCK_COLLISION` listener to detect liquid blocks and manage swimming state, gravity scale, and animations.\n *\n * @param entity - The entity to attach the controller to.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -13208,7 +13208,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!DefaultPlayerEntityController#spawn:member(1)",
-              "docComment": "/**\n * Called when the controlled entity is spawned. In DefaultPlayerEntityController, this function is used to create the colliders for the entity for wall and ground detection.\n *\n * @param entity - The entity that is spawned.\n */\n",
+              "docComment": "/**\n * Called when the controlled entity is spawned. In DefaultPlayerEntityController, this function is used to create the colliders for the entity for wall and ground detection.\n *\n * @remarks\n *\n * **Creates colliders:** Adds two child colliders to the entity: - `groundSensor`: Cylinder sensor below entity for ground/platform detection and landing animations - `wallCollider`: Capsule collider for wall collision with zero friction\n *\n * **Collider sizes scale:** Collider dimensions scale proportionally with `entity.height`.\n *\n * @param entity - The entity that is spawned.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -13497,7 +13497,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!DefaultPlayerEntityController#tickWithPlayerInput:member(1)",
-              "docComment": "/**\n * Ticks the player movement for the entity controller, overriding the default implementation. If the entity to tick is a child entity, only the event will be emitted but the default movement logic will not be applied.\n *\n * @param entity - The entity to tick.\n *\n * @param input - The current input state of the player.\n *\n * @param cameraOrientation - The current camera orientation state of the player.\n *\n * @param deltaTimeMs - The delta time in milliseconds since the last tick.\n */\n",
+              "docComment": "/**\n * Ticks the player movement for the entity controller, overriding the default implementation. If the entity to tick is a child entity, only the event will be emitted but the default movement logic will not be applied.\n *\n * @remarks\n *\n * **Rotation (-Z forward):** Sets entity rotation based on camera yaw. A yaw of 0 faces -Z. Movement direction offsets (WASD/joystick) are added to camera yaw to determine facing. Models must be authored with their front facing -Z.\n *\n * **Child entities:** If `entity.parent` is set, only emits the event and returns early. Movement logic is skipped for child entities.\n *\n * **Input cancellation:** If `autoCancelMouseLeftClick` is true (default), `input.ml` is set to `false` after processing to prevent repeated triggers.\n *\n * **Animations:** Automatically manages idle, walk, run, jump, swim, and interact animations based on movement state and input.\n *\n * @param entity - The entity to tick.\n *\n * @param input - The current input state of the player.\n *\n * @param cameraOrientation - The current camera orientation state of the player.\n *\n * @param deltaTimeMs - The delta time in milliseconds since the last tick.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -14839,7 +14839,7 @@
         {
           "kind": "Class",
           "canonicalReference": "server!Entity:class",
-          "docComment": "/**\n * Represents an entity in a world.\n *\n * @remarks\n *\n * Entities are highly configurable and controllable. All entities are created from a .gltf model asset and allow full control of their rigid body and attached collider dynamics.\n *\n * <h2>Events</h2>\n *\n * This class is an EventRouter, and instances of it emit events with payloads listed under {@link EntityEventPayloads}\n *\n * @example\n * ```typescript\n * const spider = new Entity({\n *   name: 'Spider',\n *   modelUri: 'models/spider.gltf',\n *   modelLoopedAnimations: [ 'walk' ],\n *   rigidBodyOptions: {\n *     type: RigidBodyType.DYNAMIC,\n *     enabledRotations: { x: false, y: true, z: false },\n *     colliders: [\n *       {\n *         shape: ColliderShape.ROUND_CYLINDER,\n *         borderRadius: 0.1,\n *         halfHeight: 0.225,\n *         radius: 0.5,\n *         tag: 'body',\n *       }\n *     ],\n *   },\n * });\n *\n * spider.spawn(world, { x: 20, y: 6, z: 10 });\n * ```\n *\n * @public\n */\n",
+          "docComment": "/**\n * Represents an entity in a world.\n *\n * @remarks\n *\n * Entities are highly configurable and controllable. All entities are created from a .gltf model asset and allow full control of their rigid body and attached collider dynamics.\n *\n * <h2>Coordinate System</h2>\n *\n * HYTOPIA uses a right-handed coordinate system where: - **+X** is right - **+Y** is up - **-Z** is forward (identity orientation)\n *\n * Models should be authored with their front/forward facing the **-Z axis**. When an entity has identity rotation (0,0,0,1 quaternion or yaw=0), it faces -Z.\n *\n * <h2>Events</h2>\n *\n * This class is an EventRouter, and instances of it emit events with payloads listed under {@link EntityEventPayloads}\n *\n * @example\n * ```typescript\n * const spider = new Entity({\n *   name: 'Spider',\n *   modelUri: 'models/spider.gltf',\n *   modelLoopedAnimations: [ 'walk' ],\n *   rigidBodyOptions: {\n *     type: RigidBodyType.DYNAMIC,\n *     enabledRotations: { x: false, y: true, z: false },\n *     colliders: [\n *       {\n *         shape: ColliderShape.ROUND_CYLINDER,\n *         borderRadius: 0.1,\n *         halfHeight: 0.225,\n *         radius: 0.5,\n *         tag: 'body',\n *       }\n *     ],\n *   },\n * });\n *\n * spider.spawn(world, { x: 20, y: 6, z: 10 });\n * ```\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -14873,7 +14873,7 @@
             {
               "kind": "Constructor",
               "canonicalReference": "server!Entity:constructor(1)",
-              "docComment": "/**\n * Constructs a new instance of the `Entity` class\n *\n * @param options - The options for the entity.\n */\n",
+              "docComment": "/**\n * Creates a new Entity instance.\n *\n * @remarks\n *\n * **Controller attachment:** If `controller` is provided, `controller.attach(this)` is called during construction (before spawn).\n *\n * @param options - The options for the entity.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -15036,7 +15036,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Entity#despawn:member(1)",
-              "docComment": "/**\n * Despawns the entity and all children from the world.\n */\n",
+              "docComment": "/**\n * Despawns the entity and all children from the world.\n *\n * @remarks\n *\n * **Cascading:** Recursively despawns all child entities first (depth-first).\n *\n * **Controller:** Calls `controller.detach()` then `controller.despawn()` if attached.\n *\n * **Cleanup:** Automatically unregisters attached audios, despawns attached particle emitters, and unloads attached scene UIs from their respective managers.\n *\n * **Simulation:** Removes from physics simulation.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -15816,59 +15816,6 @@
             },
             {
               "kind": "Method",
-              "canonicalReference": "server!Entity#setController:member(1)",
-              "docComment": "/**\n * Sets the controller for the entity.\n *\n * @param controller - The controller to set.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "setController(controller: "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "BaseEntityController",
-                  "canonicalReference": "server!BaseEntityController:class"
-                },
-                {
-                  "kind": "Content",
-                  "text": " | undefined"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
-                "startIndex": 4,
-                "endIndex": 5
-              },
-              "releaseTag": "Public",
-              "isProtected": false,
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "controller",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 3
-                  },
-                  "isOptional": false
-                }
-              ],
-              "isOptional": false,
-              "isAbstract": false,
-              "name": "setController"
-            },
-            {
-              "kind": "Method",
               "canonicalReference": "server!Entity#setEmissiveColor:member(1)",
               "docComment": "/**\n * Sets the emissive color of the entity.\n *\n * @param emissiveColor - The emissive color of the entity.\n */\n",
               "excerptTokens": [
@@ -16019,7 +15966,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Entity#setModelHiddenNodes:member(1)",
-              "docComment": "/**\n * Sets the nodes to hide on the entity's model. Matched nodes will be hidden for all players. Uses case insensitive substring matching.\n *\n * @param modelHiddenNodes - The nodes to hide on the entity's model.\n */\n",
+              "docComment": "/**\n * Sets the nodes to hide on the entity's model. Matched nodes will be hidden for all players. Uses case insensitive substring matching.\n *\n * @remarks\n *\n * **Replaces, not merges:** This replaces all hidden nodes, not adds to them. To add nodes, include existing hidden nodes in the array.\n *\n * @param modelHiddenNodes - The nodes to hide on the entity's model.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -16249,7 +16196,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Entity#setModelScale:member(1)",
-              "docComment": "/**\n * Sets the scale of the entity's model and proportionally scales its colliders.\n *\n * @param modelScale - The scale of the entity's model. Can be a vector or a number for uniform scaling.\n */\n",
+              "docComment": "/**\n * Sets the scale of the entity's model and proportionally scales its colliders.\n *\n * @remarks\n *\n * **Collider scaling is relative:** Colliders are scaled by the ratio of new/old scale, not set to absolute values. Example: scaling from 1 to 2 doubles collider size; scaling from 2 to 4 also doubles it.\n *\n * **Reference equality check:** Uses `===` to compare with current scale, so passing the same object reference will early return even if values changed. Always pass a new object.\n *\n * @param modelScale - The scale of the entity's model. Can be a vector or a number for uniform scaling.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -16302,7 +16249,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Entity#setModelShownNodes:member(1)",
-              "docComment": "/**\n * Sets the nodes to show on the entity's model, overriding hidden nodes. Matched nodes will be shown for all players. Uses case insensitive substring matching.\n *\n * @param modelShownNodes - The nodes to show on the entity's model.\n */\n",
+              "docComment": "/**\n * Sets the nodes to show on the entity's model, overriding hidden nodes. Matched nodes will be shown for all players. Uses case insensitive substring matching.\n *\n * @remarks\n *\n * **Replaces, not merges:** This replaces all shown nodes, not adds to them. To add nodes, include existing shown nodes in the array.\n *\n * @param modelShownNodes - The nodes to show on the entity's model.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -16602,7 +16549,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Entity#spawn:member(1)",
-              "docComment": "/**\n * Spawns the entity in the world.\n *\n * @param world - The world to spawn the entity in.\n *\n * @param position - The position to spawn the entity at.\n *\n * @param rotation - The optional rotation to spawn the entity with.\n */\n",
+              "docComment": "/**\n * Spawns the entity in the world.\n *\n * @remarks\n *\n * **Rotation default:** If no rotation is provided, entity spawns with identity rotation facing -Z. For Y-axis rotation (yaw): `{ x: 0, y: sin(yaw/2), z: 0, w: cos(yaw/2) }`. Yaw 0 = facing -Z.\n *\n * **Auto-collider creation:** If no colliders are provided, a default collider is auto-generated from the model bounds (or block half extents). Set `modelPreferredShape` to `ColliderShape.NONE` to disable.\n *\n * **Collision groups:** Colliders with default collision groups are auto-assigned based on `isEnvironmental` and `isSensor` flags. Environmental entities don't collide with blocks or other environmental entities.\n *\n * **Event enabling:** Collision/contact force events are auto-enabled on colliders if listeners are registered for `BLOCK_COLLISION`, `ENTITY_COLLISION`, `BLOCK_CONTACT_FORCE`, or `ENTITY_CONTACT_FORCE` prior to spawning.\n *\n * **Controller:** If a controller is attached, `controller.spawn()` is called after the entity is added to the physics simulation.\n *\n * **Parent handling:** If `parent` was set in options, `setParent()` is called after spawn with the provided position/rotation.\n *\n * @param world - The world to spawn the entity in.\n *\n * @param position - The position to spawn the entity at.\n *\n * @param rotation - The optional rotation to spawn the entity with.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -16685,7 +16632,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Entity#startModelLoopedAnimations:member(1)",
-              "docComment": "/**\n * Starts looped animations for the entity, blending with other animations currently playing.\n *\n * @remarks\n *\n * This method will be ignored and do nothing if the entity is a block entity.\n *\n * @param animations - The animations to start.\n */\n",
+              "docComment": "/**\n * Starts looped animations for the entity, blending with other animations currently playing.\n *\n * @remarks\n *\n * **Deduplication:** If an animation is already in the looped set, it won't be re-added or restarted. The event only emits if at least one new animation is added.\n *\n * @param animations - The animations to start.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -16733,7 +16680,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Entity#startModelOneshotAnimations:member(1)",
-              "docComment": "/**\n * Starts a oneshot animation for the entity, blending with other animations currently playing.\n *\n * @remarks\n *\n * This method will be ignored and do nothing if the entity is a block entity.\n *\n * @param animations - The animations to start.\n */\n",
+              "docComment": "/**\n * Starts a oneshot animation for the entity, blending with other animations currently playing.\n *\n * @remarks\n *\n * **No deduplication:** Unlike `startModelLoopedAnimations`, this always emits the event even if the animation is already playing. This allows restarting oneshot animations.\n *\n * **Tracking:** Oneshot animations are tracked internally to prevent packet spam from `stopModelAnimations()` but are not serialized for new player joins (they're transient).\n *\n * @param animations - The animations to start.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -16781,7 +16728,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Entity#stopAllModelAnimations:member(1)",
-              "docComment": "/**\n * Stops all looped and oneshot animations for the entity, optionally excluded the provided animations from stopping.\n *\n * @param excludedAnimations - The animations to exclude from being stopped.\n */\n",
+              "docComment": "/**\n * Stops all looped and oneshot animations for the entity, optionally excluding the provided animations from stopping.\n *\n * @remarks\n *\n * **Delegates to `stopModelAnimations`:** Collects animations from both looped and oneshot sets (minus exclusions), then calls `stopModelAnimations()` once.\n *\n * @param excludedAnimations - The animations to exclude from being stopped.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -16925,7 +16872,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Entity#stopModelAnimations:member(1)",
-              "docComment": "/**\n * Stops the provided model animations for the entity.\n *\n * @remarks\n *\n * This method will be ignored and do nothing if the entity is a block entity.\n *\n * @param animations - The animations to stop.\n */\n",
+              "docComment": "/**\n * Stops the provided model animations for the entity.\n *\n * @remarks\n *\n * **Removes from both sets:** Stops animations from both looped and oneshot tracking sets.\n *\n * @param animations - The animations to stop.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -19208,7 +19155,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!EntityManager#getEntityChildren:member(1)",
-              "docComment": "/**\n * Gets all child entities of an entity.\n *\n * @param entity - The entity to get the children for.\n *\n * @returns All child entities of the entity.\n */\n",
+              "docComment": "/**\n * Gets all child entities of an entity.\n *\n * @remarks\n *\n * **Direct children only:** Returns only immediate children, not recursive descendants.\n *\n * @param entity - The entity to get the children for.\n *\n * @returns All direct child entities of the entity.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -19262,7 +19209,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!EntityManager#getPlayerEntitiesByPlayer:member(1)",
-              "docComment": "/**\n * Gets all spawned entities in the world assigned to the provided player.\n *\n * @param player - The player to get the entities for.\n *\n * @returns All spawned entities in the world assigned to the player.\n */\n",
+              "docComment": "/**\n * Gets all spawned player entities in the world assigned to the provided player.\n *\n * @param player - The player to get the entities for.\n *\n * @returns All spawned player entities in the world assigned to the player.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -29638,7 +29585,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!ParticleEmitter#setAttachedToEntity:member(1)",
-              "docComment": "/**\n * Sets the entity to which the ParticleEmitter is attached.\n *\n * @param entity - The entity to attach the ParticleEmitter to.\n */\n",
+              "docComment": "/**\n * Sets the entity to which the ParticleEmitter is attached.\n *\n * @remarks\n *\n * Clears any set position (mutual exclusivity).\n *\n * @param entity - The entity to attach the ParticleEmitter to.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -31287,7 +31234,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!ParticleEmitter#spawn:member(1)",
-              "docComment": "/**\n * Spawns the ParticleEmitter in the world.\n *\n * @param world - The world to spawn the ParticleEmitter in.\n */\n",
+              "docComment": "/**\n * Spawns the ParticleEmitter in the world.\n *\n * @remarks\n *\n * **Requires spawned entity:** If attached to an entity, the entity must be spawned first.\n *\n * @param world - The world to spawn the ParticleEmitter in.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -35139,7 +35086,7 @@
         {
           "kind": "Class",
           "canonicalReference": "server!PathfindingEntityController:class",
-          "docComment": "/**\n * A pathfinding entity controller built on top of {@link SimpleEntityController}.\n *\n * @remarks\n *\n * This class implements pathfinding using the A* algorithm. Pathfinding when frequently called can cause performance issues, use it sparingly. The .pathfind() method should only need to be called once in nearly all cases when attempting to move an entity to a target coordinate.\n *\n * @public\n */\n",
+          "docComment": "/**\n * A pathfinding entity controller built on top of {@link SimpleEntityController}.\n *\n * @remarks\n *\n * This class implements pathfinding using the A* algorithm. Pathfinding when frequently called can cause performance issues, use it sparingly. The .pathfind() method should only need to be called once in nearly all cases when attempting to move an entity to a target coordinate.\n *\n * <h2>Coordinate System & Model Orientation</h2>\n *\n * HYTOPIA uses **-Z as forward**. Models must be authored with their front facing -Z. The pathfinding controller automatically calls `face()` to orient the entity's -Z axis toward each waypoint as it moves.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -35317,7 +35264,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!PathfindingEntityController#pathfind:member(1)",
-              "docComment": "/**\n * Calculate a path and move to the target if a path is found. Returns true if a path is found, false if no path is found.\n *\n * @param target - The target coordinate to pathfind to.\n *\n * @param speed - The speed of the entity.\n *\n * @param options - The pathfinding options.\n *\n * @returns Whether the path was found.\n */\n",
+              "docComment": "/**\n * Calculate a path and move to the target if a path is found. Returns true if a path is found, false if no path is found.\n *\n * @remarks\n *\n * **Synchronous return:** Path calculation happens synchronously. Returns `true` if a path was found, `false` if no path exists or calculation was aborted.\n *\n * **Auto-starts movement:** If a path is found, movement begins immediately using the inherited `move()`, `face()`, and `jump()` methods from `SimpleEntityController`.\n *\n * **Auto-facing (-Z forward):** Automatically calls `face()` for each waypoint, orienting the entity's -Z axis toward the next waypoint. Models must be authored with their front facing -Z.\n *\n * **A* algorithm:** Uses A* pathfinding with configurable `maxJump`, `maxFall`, and `verticalPenalty`. Path calculation is capped by `maxOpenSetIterations` (default 200) to prevent blocking.\n *\n * **Waypoint progression:** Entity moves through calculated waypoints sequentially. Each waypoint has a timeout (`waypointTimeoutMs`) after which it's skipped if not reached.\n *\n * @param target - The target coordinate to pathfind to.\n *\n * @param speed - The speed of the entity (blocks per second).\n *\n * @param options - The pathfinding options.\n *\n * @returns Whether a path was found.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -35674,7 +35621,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!PersistenceManager#getGlobalData:member(1)",
-              "docComment": "/**\n * Get global data from the data persistence service.\n *\n * @param key - The key to get the data from.\n *\n * @param maxRetries - The maximum number of retries to attempt in the event of failure.\n *\n * @returns The data from the persistence layer.\n */\n",
+              "docComment": "/**\n * Get global data from the data persistence service.\n *\n * @remarks\n *\n * **Empty data:** Returns `{}` if key exists but has no data.\n *\n * **Failure:** Returns `undefined` if fetch failed after retries.\n *\n * @param key - The key to get the data from.\n *\n * @param maxRetries - The maximum number of retries to attempt in the event of failure.\n *\n * @returns The data from the persistence layer.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -35969,7 +35916,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Player#disconnect:member(1)",
-              "docComment": "/**\n * Disconnects the player from the game server.\n */\n",
+              "docComment": "/**\n * Disconnects the player from the game server.\n *\n * @remarks\n *\n * **Event:** Emits `LEFT_WORLD` event before disconnecting if in a world.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -36127,7 +36074,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Player#joinWorld:member(1)",
-              "docComment": "/**\n * Joins a player to a world.\n *\n * @remarks\n *\n * If the player is already in a {@link World}, they will be removed from their current world before joining the new world.\n *\n * @param world - The world to join the player to.\n */\n",
+              "docComment": "/**\n * Joins a player to a world.\n *\n * @remarks\n *\n * If switching worlds (already in a different world): - Despawns all player entities for this player in the current world. - Triggers a disconnect/reconnect cycle internally. - `JOINED_WORLD` event emits after reconnection completes.\n *\n * @param world - The world to join the player to.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -37194,7 +37141,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!PlayerCamera#reset:member(1)",
-              "docComment": "/**\n * Resets the camera to its default, unattached, spectator mode state.\n */\n",
+              "docComment": "/**\n * Resets the camera to its default, unattached, spectator mode state.\n *\n * @remarks\n *\n * **Clears:** `attachedToEntity`, `attachedToPosition`, `orientation`, `trackedEntity`, and `trackedPosition`.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -37516,7 +37463,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!PlayerCamera#setModelHiddenNodes:member(1)",
-              "docComment": "/**\n * Sets the nodes of the model the camera is attached to that will not be rendered for the player. Uses case insensitive substring matching.\n *\n * @param modelHiddenNodes - Determines nodes to hide that match these case insensitive substrings.\n */\n",
+              "docComment": "/**\n * Sets the nodes of the model the camera is attached to that will not be rendered for the player. Uses case insensitive substring matching.\n *\n * @remarks\n *\n * **Replaces:** Replaces the current hidden nodes set (not a merge).\n *\n * @param modelHiddenNodes - Determines nodes to hide that match these case insensitive substrings.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -37564,7 +37511,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!PlayerCamera#setModelShownNodes:member(1)",
-              "docComment": "/**\n * Sets the nodes of the model the camera is attached to that will be rendered for the player, overriding hidden nodes. Uses case insensitive substring matching.\n *\n * @param modelShownNodes - Determines nodes to show that match these case insensitive substrings.\n */\n",
+              "docComment": "/**\n * Sets the nodes of the model the camera is attached to that will be rendered for the player, overriding hidden nodes. Uses case insensitive substring matching.\n *\n * @remarks\n *\n * **Replaces:** Replaces the current shown nodes set (not a merge).\n *\n * @param modelShownNodes - Determines nodes to show that match these case insensitive substrings.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -39338,7 +39285,7 @@
             {
               "kind": "Constructor",
               "canonicalReference": "server!PlayerEntity:constructor(1)",
-              "docComment": "/**\n * Constructs a new instance of the `PlayerEntity` class\n *\n * @param options - The options for the player entity.\n */\n",
+              "docComment": "/**\n * Creates a new PlayerEntity instance.\n *\n * @remarks\n *\n * **Nametag:** A `nametagSceneUI` is automatically created using the built-in `hytopia:nametag` template with the player's username and profile picture. Access via `nametagSceneUI` property to customize.\n *\n * @param options - The options for the player entity.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -43656,7 +43603,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!RigidBody#addToSimulation:member(1)",
-              "docComment": "/**\n * Adds the rigid body to a simulation.\n *\n * @param simulation - The simulation to add the rigid body to.\n */\n",
+              "docComment": "/**\n * Adds the rigid body to a simulation.\n *\n * @remarks\n *\n * **Child colliders:** Also adds all pending child colliders to the simulation.\n *\n * @param simulation - The simulation to add the rigid body to.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -45130,7 +45077,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!RigidBody#removeFromSimulation:member(1)",
-              "docComment": "/**\n * Removes the rigid body from the simulation it belongs to.\n */\n",
+              "docComment": "/**\n * Removes the rigid body from the simulation it belongs to.\n *\n * @remarks\n *\n * **Child colliders:** Also removes all child colliders from the simulation.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -46190,7 +46137,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!RigidBody#setRotation:member(1)",
-              "docComment": "/**\n * Sets the rotation of the rigid body.\n *\n * @param rotation - The rotation of the rigid body.\n */\n",
+              "docComment": "/**\n * Sets the rotation of the rigid body.\n *\n * @remarks\n *\n * **Coordinate system:** Identity rotation (0,0,0,1 quaternion) means facing -Z. For Y-axis rotation only (yaw), use: `{ x: 0, y: sin(yaw/2), z: 0, w: cos(yaw/2) }`. A yaw of 0 faces -Z, positive yaw rotates counter-clockwise when viewed from above.\n *\n * @param rotation - The rotation of the rigid body.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -47060,7 +47007,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!SceneUI#load:member(1)",
-              "docComment": "/**\n * Loads the SceneUI into the world.\n *\n * @param world - The world to load the SceneUI into.\n */\n",
+              "docComment": "/**\n * Loads the SceneUI into the world.\n *\n * @remarks\n *\n * **Requires spawned entity:** If attached to an entity, the entity must be spawned first.\n *\n * @param world - The world to load the SceneUI into.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -47179,7 +47126,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!SceneUI#setAttachedToEntity:member(1)",
-              "docComment": "/**\n * Sets the entity to which the SceneUI is attached, following its position.\n *\n * @param entity - The entity to attach the SceneUI to.\n */\n",
+              "docComment": "/**\n * Sets the entity to which the SceneUI is attached, following its position.\n *\n * @remarks\n *\n * **Clears position:** Clears any set position (mutual exclusivity).\n *\n * @param entity - The entity to attach the SceneUI to.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -47277,7 +47224,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!SceneUI#setPosition:member(1)",
-              "docComment": "/**\n * Sets the position of the SceneUI. Will detach from entity if attached.\n *\n * @param position - The position in the world.\n */\n",
+              "docComment": "/**\n * Sets the position of the SceneUI.\n *\n * @remarks\n *\n * **Detaches entity:** Detaches from any attached entity (mutual exclusivity).\n *\n * @param position - The position in the world.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -48278,7 +48225,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!SceneUIManager#unloadEntityAttachedSceneUIs:member(1)",
-              "docComment": "/**\n * Unloads and unregisters all SceneUI instances attached to a specific entity.\n *\n * @param entity - The entity to unload and unregister SceneUI instances for.\n */\n",
+              "docComment": "/**\n * Unloads and unregisters all SceneUI instances attached to a specific entity.\n *\n * @remarks\n *\n * **Cleanup:** Calls `unload()` on each attached SceneUI.\n *\n * @param entity - The entity to unload and unregister SceneUI instances for.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -48544,7 +48491,7 @@
         {
           "kind": "Class",
           "canonicalReference": "server!SimpleEntityController:class",
-          "docComment": "/**\n * A simple entity controller with basic movement functions.\n *\n * @remarks\n *\n * This class implements simple movement methods that serve as a way to add realistic movement and rotational facing functionality to an entity. This is also a great base to extend for your own more complex entity controller that implements things like pathfinding. Compatible with entities that have kinematic or dynamic rigid body types.\n *\n * @example\n * ```typescript\n * // Create a custom entity controller for myEntity, prior to spawning it.\n * myEntity.setController(new SimpleEntityController());\n *\n * // Spawn the entity in the world.\n * myEntity.spawn(world, { x: 53, y: 10, z: 23 });\n *\n * // Move the entity at a speed of 4 blocks\n * // per second to the coordinate (10, 1, 10).\n * // console.log when we reach the target.\n * myEntity.controller.move({ x: 10, y: 1, z: 10 }, 4, {\n *   moveCompleteCallback: endPosition => {\n *     console.log('Finished moving to', endPosition);\n *   },\n * });\n * ```\n *\n * @public\n */\n",
+          "docComment": "/**\n * A simple entity controller with basic movement functions.\n *\n * @remarks\n *\n * This class implements simple movement methods that serve as a way to add realistic movement and rotational facing functionality to an entity. This is also a great base to extend for your own more complex entity controller that implements things like pathfinding. Compatible with entities that have kinematic or dynamic rigid body types.\n *\n * <h2>Coordinate System & Model Orientation</h2>\n *\n * HYTOPIA uses **-Z as forward**. Models must be authored with their front facing -Z. When `face()` rotates an entity to look at a target, it orients the entity's -Z axis toward that target. A yaw of 0 means facing -Z (into the screen in default camera view).\n *\n * @example\n * ```typescript\n * // Create a custom entity controller for myEntity, prior to spawning it.\n * myEntity.setController(new SimpleEntityController());\n *\n * // Spawn the entity in the world.\n * myEntity.spawn(world, { x: 53, y: 10, z: 23 });\n *\n * // Move the entity at a speed of 4 blocks\n * // per second to the coordinate (10, 1, 10).\n * // console.log when we reach the target.\n * myEntity.controller.move({ x: 10, y: 1, z: 10 }, 4, {\n *   moveCompleteCallback: endPosition => {\n *     console.log('Finished moving to', endPosition);\n *   },\n * });\n * ```\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -48602,7 +48549,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!SimpleEntityController#face:member(1)",
-              "docComment": "/**\n * Rotates the entity at a given speed to face a target coordinate.\n *\n * @remarks\n *\n * If this method is called while the entity is already attempting to face another target, the previous target will be ignored and the entity will start attempting to face the new target.\n *\n * @param target - The target coordinate to face.\n *\n * @param speed - The speed at which to rotate to the target coordinate.\n *\n * @param options - Additional options for the face operation, such as callbacks.\n */\n",
+              "docComment": "/**\n * Rotates the entity at a given speed to face a target coordinate.\n *\n * @remarks\n *\n * **-Z forward:** Orients the entity so its **-Z axis** points toward the target. Models must be authored with their front facing -Z for correct orientation.\n *\n * **Replaces previous target:** If called while already facing, the previous target is discarded and the entity starts facing the new target. There is no queue.\n *\n * **Y-axis only:** Only rotates around the Y-axis (yaw). Does not pitch up/down to face targets at different heights.\n *\n * @param target - The target coordinate to face.\n *\n * @param speed - The speed at which to rotate to the target coordinate (radians per second).\n *\n * @param options - Additional options for the face operation, such as callbacks.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -48744,7 +48691,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!SimpleEntityController#jump:member(1)",
-              "docComment": "/**\n * Applies an upwards impulse to the entity to simulate a jump, only supported for entities with dynamic rigid body types.\n *\n * @param height - The height to jump to.\n */\n",
+              "docComment": "/**\n * Applies an upwards impulse to the entity to simulate a jump, only supported for entities with dynamic rigid body types.\n *\n * @remarks\n *\n * **Deferred:** The impulse is applied on the next tick, not immediately.\n *\n * **Dynamic only:** Has no effect on kinematic entities. Uses `entity.applyImpulse()`.\n *\n * **Animations:** Starts `jumpOneshotAnimations` and stops idle/move animations when the jump occurs.\n *\n * @param height - The height to jump to (in blocks).\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -48822,7 +48769,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!SimpleEntityController#move:member(1)",
-              "docComment": "/**\n * Moves the entity at a given speed in a straight line to a target coordinate.\n *\n * @remarks\n *\n * If this method is called while the entity is already attempting to move to another target, the previous target will be ignored and the entity will start attempting to move to the new target.\n *\n * @param target - The target coordinate to move to.\n *\n * @param speed - The speed at which to move to the target coordinate.\n *\n * @param options - Additional options for the move operation, such as callbacks.\n */\n",
+              "docComment": "/**\n * Moves the entity at a given speed in a straight line to a target coordinate.\n *\n * @remarks\n *\n * **Position only:** This method only changes position, not rotation. Use `face()` simultaneously to rotate the entity toward its movement direction (-Z forward).\n *\n * **Replaces previous target:** If called while already moving, the previous target is discarded and the entity starts moving to the new target. There is no queue.\n *\n * **Straight line:** Moves directly toward target using `entity.setPosition()`. Does not pathfind around obstacles.\n *\n * **Animations:** Starts `moveLoopedAnimations` on the first tick of movement. When complete, starts `idleLoopedAnimations` (unless `moveStartIdleAnimationsOnCompletion` is false).\n *\n * @param target - The target coordinate to move to.\n *\n * @param speed - The speed at which to move to the target coordinate (blocks per second).\n *\n * @param options - Additional options for the move operation, such as callbacks.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -48994,7 +48941,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!SimpleEntityController#spawn:member(1)",
-              "docComment": "/**\n * Override of the {@link BaseEntityController.spawn} method. Starts the set idle animations (if any) when the entity is spawned.\n *\n * @param entity - The entity that was spawned.\n */\n",
+              "docComment": "/**\n * Override of the {@link BaseEntityController.spawn} method. Starts the set idle animations (if any) when the entity is spawned.\n *\n * @remarks\n *\n * **Auto-starts idle animations:** Calls `_startIdleAnimations()` which stops move/jump animations and starts the configured `idleLoopedAnimations`.\n *\n * @param entity - The entity that was spawned.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -49043,7 +48990,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!SimpleEntityController#stopFace:member(1)",
-              "docComment": "/**\n * Stops the entity from attempting to face a target coordinate.\n */\n",
+              "docComment": "/**\n * Stops the entity from attempting to face a target coordinate.\n *\n * @remarks\n *\n * **Deferred:** Takes effect on the next tick. The `faceCompleteCallback` will still be called.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -49074,7 +49021,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!SimpleEntityController#stopMove:member(1)",
-              "docComment": "/**\n * Stops the entity from continuing to move it's current target coordinate.\n */\n",
+              "docComment": "/**\n * Stops the entity from continuing to move to its current target coordinate.\n *\n * @remarks\n *\n * **Deferred:** Takes effect on the next tick. The `moveCompleteCallback` will still be called and idle animations will start (unless `moveStartIdleAnimationsOnCompletion` was false).\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -49250,7 +49197,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!Simulation#getContactManifolds:member(1)",
-              "docComment": "/**\n * Gets the contact manifolds for a pair of colliders.\n *\n * @remarks\n *\n * Contact manifolds will not be returned for contacts that involve sensors.\n *\n * @param colliderHandleA - The handle of the first collider.\n *\n * @param colliderHandleB - The handle of the second collider.\n *\n * @returns The contact manifolds, or an empty array if no contact.\n */\n",
+              "docComment": "/**\n * Gets the contact manifolds for a pair of colliders.\n *\n * @remarks\n *\n * **Sensors:** Returns empty array for contacts involving sensors (sensors don't generate contact manifolds).\n *\n * @param colliderHandleA - The handle of the first collider.\n *\n * @param colliderHandleB - The handle of the second collider.\n *\n * @returns The contact manifolds, or an empty array if no contact.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -50104,7 +50051,7 @@
         {
           "kind": "Function",
           "canonicalReference": "server!startServer:function(1)",
-          "docComment": "/**\n * The entry point for running game setup and starting the game server.\n *\n * @remarks\n *\n * This function should always be called first when initializing your game. It will internally handle initialization of the physics engine and other systems required systems. All of your game setup logic should be executed in the init function.\n *\n * @param init - A function that initializes the game. The function can take no parameters to just initialize game logic, or it can accept a world parameter. If it accepts a world parameter, a default world will be automatically created and passed to the function. The init function can be async - the server will wait for it to complete before accepting connections.\n *\n * @public\n */\n",
+          "docComment": "/**\n * The entry point for running game setup and starting the game server.\n *\n * @remarks\n *\n * This function should always be called first when initializing your game. It will internally handle initialization of the physics engine and other systems required systems. All of your game setup logic should be executed in the init function.\n *\n * Initialization order: 1. Physics engine (RAPIER) initialization 2. Block texture atlas preload 3. Model preload 4. Your init function execution (server waits if async) 5. Server starts accepting connections\n *\n * @param init - A function that initializes the game. The function can take no parameters to just initialize game logic, or it can accept a world parameter. If it accepts a world parameter, a default world will be automatically created and passed to the function. The init function can be async - the server will wait for it to complete before accepting connections.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -55567,7 +55514,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!World#loadMap:member(1)",
-              "docComment": "/**\n * Loads a map into the world, clearing any prior map.\n *\n * @param map - The map to load.\n */\n",
+              "docComment": "/**\n * Loads a map into the world, clearing any prior map.\n *\n * @remarks\n *\n * **Clears existing:** Calls `chunkLattice.clear()` before loading, removing all blocks and colliders.\n *\n * **Block types:** Registers block types from the map into the world's `blockTypeRegistry`.\n *\n * **Entities:** Spawns map entities with `isEnvironmental: true` by default.\n *\n * @param map - The map to load.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -57858,7 +57805,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!WorldManager#createWorld:member(1)",
-              "docComment": "/**\n * Creates a new world.\n *\n * @param options - The options for the world.\n *\n * @param start - Whether to start the world immediately, defaults to true.\n *\n * @returns The created world.\n */\n",
+              "docComment": "/**\n * Creates a new world.\n *\n * @remarks\n *\n * **Auto-starts:** Automatically starts the world after creation.\n *\n * @param options - The options for the world.\n *\n * @returns The created world.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -57957,7 +57904,7 @@
             {
               "kind": "Method",
               "canonicalReference": "server!WorldManager#getDefaultWorld:member(1)",
-              "docComment": "/**\n * Gets the default world.\n *\n * @returns The default world.\n */\n",
+              "docComment": "/**\n * Gets the default world.\n *\n * @remarks\n *\n * **Lazy-creates:** Creates a default world if none exists.\n *\n * @returns The default world.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

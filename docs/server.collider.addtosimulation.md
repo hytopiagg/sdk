@@ -67,3 +67,9 @@ _(Optional)_ The parent rigid body of the collider.
 
 void
 
+## Remarks
+
+\*\*Parent linking:\*\* Links the collider to the parent rigid body if provided.
+
+\*\*Collision callback:\*\* Applies any configured `onCollision` callback.
+

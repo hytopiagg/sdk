@@ -4,7 +4,7 @@
 
 ## PlayerEntity.(constructor)
 
-Constructs a new instance of the `PlayerEntity` class
+Creates a new PlayerEntity instance.
 
 **Signature:**
 
@@ -47,3 +47,8 @@ The options for the player entity.
 
 </td></tr>
 </tbody></table>
+
+## Remarks
+
+\*\*Nametag:\*\* A `nametagSceneUI` is automatically created using the built-in `hytopia:nametag` template with the player's username and profile picture. Access via `nametagSceneUI` property to customize.
+

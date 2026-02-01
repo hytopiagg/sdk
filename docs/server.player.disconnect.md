@@ -15,3 +15,7 @@ disconnect(): void;
 
 void
 
+## Remarks
+
+\*\*Event:\*\* Emits `LEFT_WORLD` event before disconnecting if in a world.
+

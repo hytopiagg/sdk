@@ -53,5 +53,5 @@ void
 
 ## Remarks
 
-This method will be ignored and do nothing if the entity is a block entity.
+\*\*Deduplication:\*\* If an animation is already in the looped set, it won't be re-added or restarted. The event only emits if at least one new animation is added.
 

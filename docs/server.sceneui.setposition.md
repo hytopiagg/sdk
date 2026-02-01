@@ -4,7 +4,7 @@
 
 ## SceneUI.setPosition() method
 
-Sets the position of the SceneUI. Will detach from entity if attached.
+Sets the position of the SceneUI.
 
 **Signature:**
 
@@ -50,4 +50,8 @@ The position in the world.
 **Returns:**
 
 void
+
+## Remarks
+
+\*\*Detaches entity:\*\* Detaches from any attached entity (mutual exclusivity).
 

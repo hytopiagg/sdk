@@ -51,3 +51,7 @@ The entity that was spawned.
 
 void
 
+## Remarks
+
+\*\*Auto-starts idle animations:\*\* Calls `_startIdleAnimations()` which stops move/jump animations and starts the configured `idleLoopedAnimations`<!-- -->.
+

@@ -51,3 +51,7 @@ The entity to pause and unregister audio instances for.
 
 void
 
+## Remarks
+
+\*\*Pauses all:\*\* Calls `unregisterAudio()` for each attached audio, which pauses them.
+

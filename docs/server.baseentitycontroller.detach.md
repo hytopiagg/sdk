@@ -42,7 +42,7 @@ entity
 
 </td><td>
 
-The entity to detach.
+The entity being detached.
 
 
 </td></tr>
@@ -50,4 +50,10 @@ The entity to detach.
 **Returns:**
 
 void
+
+## Remarks
+
+\*\*Called by:\*\* `Entity.despawn()` before `despawn()` is called.
+
+\*\*Super call:\*\* Call `super.detach(entity)` to emit the `DETACH` event.
 

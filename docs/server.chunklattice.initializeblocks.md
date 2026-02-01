@@ -44,7 +44,7 @@ blocks
 
 </td><td>
 
-The blocks to initialize.
+The blocks to initialize, keyed by block type id.
 
 
 </td></tr>
@@ -52,4 +52,10 @@ The blocks to initialize.
 **Returns:**
 
 void
+
+## Remarks
+
+\*\*Clears first:\*\* Calls `clear()` before initializing, removing all existing blocks and colliders.
+
+\*\*Collider optimization:\*\* Creates one collider per block type with all placements combined. Voxel colliders have their states combined for efficient neighbor collision detection.
 

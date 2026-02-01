@@ -4,7 +4,7 @@
 
 ## Audio.setPosition() method
 
-Sets the position of the audio. Will detach from entity if attached.
+Sets the position of the audio.
 
 **Signature:**
 
@@ -50,4 +50,8 @@ The position in the world.
 **Returns:**
 
 void
+
+## Remarks
+
+\*\*Detaches from entity:\*\* Setting a position clears any `attachedToEntity`<!-- -->. Audio can be position-based or entity-attached, not both.
 

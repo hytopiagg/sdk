@@ -51,3 +51,7 @@ The entity to attach the Audio to.
 
 void
 
+## Remarks
+
+\*\*Clears position:\*\* Setting an attached entity clears any previously set `position`<!-- -->. Audio can be entity-attached or position-based, not both.
+

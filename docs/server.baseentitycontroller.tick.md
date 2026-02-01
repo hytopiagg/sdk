@@ -42,6 +42,8 @@ entity
 
 </td><td>
 
+The entity being ticked.
+
 
 </td></tr>
 <tr><td>
@@ -64,4 +66,10 @@ The delta time in milliseconds since the last tick.
 **Returns:**
 
 void
+
+## Remarks
+
+\*\*Called by:\*\* `Entity.tick()` every tick for non-environmental entities. For `PlayerEntity`<!-- -->, this is called after `tickWithPlayerInput()`<!-- -->.
+
+\*\*Super call:\*\* Call `super.tick(entity, deltaTimeMs)` to emit the `TICK` event.
 

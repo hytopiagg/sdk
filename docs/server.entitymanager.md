@@ -206,7 +206,7 @@ Gets all child entities of an entity.
 
 </td><td>
 
-Gets all spawned entities in the world assigned to the provided player.
+Gets all spawned player entities in the world assigned to the provided player.
 
 
 </td></tr>

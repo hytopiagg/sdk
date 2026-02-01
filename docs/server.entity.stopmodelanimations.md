@@ -53,5 +53,5 @@ void
 
 ## Remarks
 
-This method will be ignored and do nothing if the entity is a block entity.
+\*\*Removes from both sets:\*\* Stops animations from both looped and oneshot tracking sets.
 

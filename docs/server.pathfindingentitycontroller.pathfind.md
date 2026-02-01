@@ -58,7 +58,7 @@ number
 
 </td><td>
 
-The speed of the entity.
+The speed of the entity (blocks per second).
 
 
 </td></tr>
@@ -83,5 +83,17 @@ _(Optional)_ The pathfinding options.
 
 boolean
 
-Whether the path was found.
+Whether a path was found.
+
+## Remarks
+
+\*\*Synchronous return:\*\* Path calculation happens synchronously. Returns `true` if a path was found, `false` if no path exists or calculation was aborted.
+
+\*\*Auto-starts movement:\*\* If a path is found, movement begins immediately using the inherited `move()`<!-- -->, `face()`<!-- -->, and `jump()` methods from `SimpleEntityController`<!-- -->.
+
+\*\*Auto-facing (-Z forward):\*\* Automatically calls `face()` for each waypoint, orienting the entity's -Z axis toward the next waypoint. Models must be authored with their front facing -Z.
+
+\*\*A\* algorithm:\*\* Uses A\* pathfinding with configurable `maxJump`<!-- -->, `maxFall`<!-- -->, and `verticalPenalty`<!-- -->. Path calculation is capped by `maxOpenSetIterations` (default 200) to prevent blocking.
+
+\*\*Waypoint progression:\*\* Entity moves through calculated waypoints sequentially. Each waypoint has a timeout (`waypointTimeoutMs`<!-- -->) after which it's skipped if not reached.
 

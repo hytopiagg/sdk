@@ -15,3 +15,7 @@ reset(): void;
 
 void
 
+## Remarks
+
+\*\*Clears:\*\* `attachedToEntity`<!-- -->, `attachedToPosition`<!-- -->, `orientation`<!-- -->, `trackedEntity`<!-- -->, and `trackedPosition`<!-- -->.
+

@@ -51,3 +51,7 @@ The entity to attach the SceneUI to.
 
 void
 
+## Remarks
+
+\*\*Clears position:\*\* Clears any set position (mutual exclusivity).
+

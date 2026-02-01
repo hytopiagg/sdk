@@ -58,7 +58,7 @@ number
 
 </td><td>
 
-The speed at which to rotate to the target coordinate.
+The speed at which to rotate to the target coordinate (radians per second).
 
 
 </td></tr>
@@ -85,5 +85,9 @@ void
 
 ## Remarks
 
-If this method is called while the entity is already attempting to face another target, the previous target will be ignored and the entity will start attempting to face the new target.
+\*\*-Z forward:\*\* Orients the entity so its \*\*-Z axis\*\* points toward the target. Models must be authored with their front facing -Z for correct orientation.
+
+\*\*Replaces previous target:\*\* If called while already facing, the previous target is discarded and the entity starts facing the new target. There is no queue.
+
+\*\*Y-axis only:\*\* Only rotates around the Y-axis (yaw). Does not pitch up/down to face targets at different heights.
 

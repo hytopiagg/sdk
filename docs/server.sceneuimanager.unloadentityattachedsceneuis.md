@@ -51,3 +51,7 @@ The entity to unload and unregister SceneUI instances for.
 
 void
 
+## Remarks
+
+\*\*Cleanup:\*\* Calls `unload()` on each attached SceneUI.
+

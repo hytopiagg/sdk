@@ -51,3 +51,7 @@ The audio instance to pause and unregister.
 
 void
 
+## Remarks
+
+\*\*Pauses audio:\*\* Calls `audio.pause()` before removing from the manager.
+

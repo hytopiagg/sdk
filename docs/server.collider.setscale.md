@@ -49,3 +49,7 @@ scale
 
 void
 
+## Remarks
+
+\*\*Ratio-based:\*\* Uses ratio-based scaling relative to current scale, not absolute dimensions. Also scales `relativePosition` proportionally.
+

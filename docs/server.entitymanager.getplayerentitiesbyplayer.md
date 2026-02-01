@@ -4,7 +4,7 @@
 
 ## EntityManager.getPlayerEntitiesByPlayer() method
 
-Gets all spawned entities in the world assigned to the provided player.
+Gets all spawned player entities in the world assigned to the provided player.
 
 **Signature:**
 
@@ -51,5 +51,5 @@ The player to get the entities for.
 
 [PlayerEntity](./server.playerentity.md)<!-- -->\[\]
 
-All spawned entities in the world assigned to the player.
+All spawned player entities in the world assigned to the player.
 

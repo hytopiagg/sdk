@@ -51,3 +51,7 @@ The nodes to show on the entity's model.
 
 void
 
+## Remarks
+
+\*\*Replaces, not merges:\*\* This replaces all shown nodes, not adds to them. To add nodes, include existing shown nodes in the array.
+

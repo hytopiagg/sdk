@@ -4,7 +4,7 @@
 
 ## DefaultPlayerEntity.(constructor)
 
-Constructs a new instance of the `DefaultPlayerEntity` class
+Creates a new DefaultPlayerEntity instance.
 
 **Signature:**
 
@@ -42,6 +42,15 @@ options
 
 </td><td>
 
+The options for the default player entity.
+
 
 </td></tr>
 </tbody></table>
+
+## Remarks
+
+\*\*Auto-assigned defaults:\*\* A `DefaultPlayerEntityController` is automatically created and assigned. Default `modelLoopedAnimations` are `['idle_lower', 'idle_upper']`<!-- -->. All defaults can be overridden via options.
+
+\*\*Cosmetics on spawn:\*\* When spawned, player cosmetics (hair, skin, equipped items) are fetched asynchronously and applied. Child entities are created for hair and equipped cosmetic items.
+

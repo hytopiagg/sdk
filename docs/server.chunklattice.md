@@ -209,7 +209,7 @@ Get the chunk that contains the given global coordinate.
 
 </td><td>
 
-Get the chunk for a given global coordinate.
+Get the chunk for a given global coordinate, creating it if it doesn't exist.
 
 
 </td></tr>

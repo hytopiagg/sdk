@@ -51,3 +51,7 @@ The world to load the SceneUI into.
 
 void
 
+## Remarks
+
+\*\*Requires spawned entity:\*\* If attached to an entity, the entity must be spawned first.
+

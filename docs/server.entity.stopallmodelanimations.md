@@ -4,7 +4,7 @@
 
 ## Entity.stopAllModelAnimations() method
 
-Stops all looped and oneshot animations for the entity, optionally excluded the provided animations from stopping.
+Stops all looped and oneshot animations for the entity, optionally excluding the provided animations from stopping.
 
 **Signature:**
 
@@ -50,4 +50,8 @@ _(Optional)_ The animations to exclude from being stopped.
 **Returns:**
 
 void
+
+## Remarks
+
+\*\*Delegates to `stopModelAnimations`<!-- -->:\*\* Collects animations from both looped and oneshot sets (minus exclusions), then calls `stopModelAnimations()` once.
 

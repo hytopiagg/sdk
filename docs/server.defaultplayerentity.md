@@ -54,7 +54,7 @@ Description
 
 </td><td>
 
-Constructs a new instance of the `DefaultPlayerEntity` class
+Creates a new DefaultPlayerEntity instance.
 
 
 </td></tr>

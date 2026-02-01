@@ -42,7 +42,7 @@ entity
 
 </td><td>
 
-The entity to spawn.
+The entity being spawned.
 
 
 </td></tr>
@@ -50,4 +50,10 @@ The entity to spawn.
 **Returns:**
 
 void
+
+## Remarks
+
+\*\*Called by:\*\* `Entity.spawn()` after the entity is added to the physics simulation.
+
+\*\*Super call:\*\* Call `super.spawn(entity)` to emit the `SPAWN` event.
 

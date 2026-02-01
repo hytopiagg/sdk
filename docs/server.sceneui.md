@@ -352,7 +352,7 @@ Sets the spatial offset of the SceneUI relative to the attached entity or positi
 
 </td><td>
 
-Sets the position of the SceneUI. Will detach from entity if attached.
+Sets the position of the SceneUI.
 
 
 </td></tr>

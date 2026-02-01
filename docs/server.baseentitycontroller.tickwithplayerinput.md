@@ -4,7 +4,7 @@
 
 ## BaseEntityController.tickWithPlayerInput() method
 
-Override this method to handle entity movements based on player input for your entity controller. This is called every tick by a PlayerEntity with a entity controller.
+Override this method to handle entity movements based on player input for your entity controller.
 
 **Signature:**
 
@@ -42,7 +42,7 @@ entity
 
 </td><td>
 
-The entity to tick.
+The player entity being ticked.
 
 
 </td></tr>
@@ -98,4 +98,10 @@ The delta time in milliseconds since the last tick.
 **Returns:**
 
 void
+
+## Remarks
+
+\*\*Called by:\*\* `PlayerEntity.tick()` every tick when `isTickWithPlayerInputEnabled` is true. Called before `tick()`<!-- -->.
+
+\*\*Super call:\*\* Call `super.tickWithPlayerInput(...)` to emit the `TICK_WITH_PLAYER_INPUT` event.
 

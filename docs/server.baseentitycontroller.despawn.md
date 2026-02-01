@@ -42,7 +42,7 @@ entity
 
 </td><td>
 
-The entity to despawn.
+The entity being despawned.
 
 
 </td></tr>
@@ -50,4 +50,10 @@ The entity to despawn.
 **Returns:**
 
 void
+
+## Remarks
+
+\*\*Called by:\*\* `Entity.despawn()` after `detach()` is called.
+
+\*\*Super call:\*\* Call `super.despawn(entity)` to emit the `DESPAWN` event.
 

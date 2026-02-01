@@ -71,5 +71,5 @@ The contact manifolds, or an empty array if no contact.
 
 ## Remarks
 
-Contact manifolds will not be returned for contacts that involve sensors.
+\*\*Sensors:\*\* Returns empty array for contacts involving sensors (sensors don't generate contact manifolds).
 

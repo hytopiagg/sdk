@@ -53,5 +53,5 @@ void
 
 ## Remarks
 
-If the player is already in a [World](./server.world.md)<!-- -->, they will be removed from their current world before joining the new world.
+If switching worlds (already in a different world): - Despawns all player entities for this player in the current world. - Triggers a disconnect/reconnect cycle internally. - `JOINED_WORLD` event emits after reconnection completes.
 

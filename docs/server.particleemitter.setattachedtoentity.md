@@ -51,3 +51,7 @@ The entity to attach the ParticleEmitter to.
 
 void
 
+## Remarks
+
+Clears any set position (mutual exclusivity).
+

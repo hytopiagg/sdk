@@ -17,6 +17,10 @@ export default class DefaultPlayerEntityController extends BaseEntityController
 
 This class extends [BaseEntityController](./server.baseentitycontroller.md) and implements the default movement, platforming, jump, swimming, and other basic logic for the default player entity. We recommend you extend this class if you'd like to implement additional logic on top of the DefaultPlayerEntityController implementation.
 
+<h2>Coordinate System &amp; Model Orientation</h2>
+
+HYTOPIA uses \*\*-Z as forward\*\*. Models must be authored with their front facing -Z. A yaw of 0 means facing -Z. The controller rotates the entity based on camera yaw and movement direction, always orienting the entity's -Z axis in the intended facing direction.
+
 ## Example
 
 

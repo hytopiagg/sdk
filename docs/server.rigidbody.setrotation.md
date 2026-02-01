@@ -51,3 +51,7 @@ The rotation of the rigid body.
 
 void
 
+## Remarks
+
+\*\*Coordinate system:\*\* Identity rotation (0,0,0,1 quaternion) means facing -Z. For Y-axis rotation only (yaw), use: `{ x: 0, y: sin(yaw/2), z: 0, w: cos(yaw/2) }`<!-- -->. A yaw of 0 faces -Z, positive yaw rotates counter-clockwise when viewed from above.
+
