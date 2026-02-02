@@ -455,6 +455,44 @@ Emitted when the opacity of an emitted particle at the start of its lifetime is 
 </td></tr>
 <tr><td>
 
+["PARTICLE\_EMITTER.SET\_ORIENTATION\_FIXED\_ROTATION"](./server.particleemittereventpayloads._particle_emitter.set_orientation_fixed_rotation_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ particleEmitter: [ParticleEmitter](./server.particleemitter.md)<!-- -->; orientationFixedRotation: [Vector3Like](./server.vector3like.md)<!-- -->; }
+
+
+</td><td>
+
+Emitted when the fixed rotation of emitted particles is set.
+
+
+</td></tr>
+<tr><td>
+
+["PARTICLE\_EMITTER.SET\_ORIENTATION"](./server.particleemittereventpayloads._particle_emitter.set_orientation_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ particleEmitter: [ParticleEmitter](./server.particleemitter.md)<!-- -->; orientation: [ParticleEmitterOrientation](./server.particleemitterorientation.md)<!-- -->; }
+
+
+</td><td>
+
+Emitted when the orientation mode of emitted particles is set.
+
+
+</td></tr>
+<tr><td>
+
 ["PARTICLE\_EMITTER.SET\_PAUSED"](./server.particleemittereventpayloads._particle_emitter.set_paused_.md)
 
 

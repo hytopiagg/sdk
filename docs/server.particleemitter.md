@@ -429,6 +429,27 @@ The lifetime variance of an emitted particle in seconds.
 </td></tr>
 <tr><td>
 
+[lockToEmitter](./server.particleemitter.locktoemitter.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether emitted particles follow the emitter's world position. Cannot be changed after construction.
+
+
+</td></tr>
+<tr><td>
+
 [maxParticles](./server.particleemitter.maxparticles.md)
 
 
@@ -550,6 +571,48 @@ number \| undefined
 </td><td>
 
 The opacity variance of an emitted particle at the start of its lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[orientation](./server.particleemitter.orientation.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[ParticleEmitterOrientation](./server.particleemitterorientation.md) \| undefined
+
+
+</td><td>
+
+The orientation mode of emitted particles.
+
+
+</td></tr>
+<tr><td>
+
+[orientationFixedRotation](./server.particleemitter.orientationfixedrotation.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[Vector3Like](./server.vector3like.md) \| undefined
+
+
+</td><td>
+
+The fixed rotation of emitted particles in degrees when orientation is 'fixed'.
 
 
 </td></tr>
@@ -1207,6 +1270,34 @@ Sets the opacity of an emitted particle at the start of its lifetime.
 </td><td>
 
 Sets the opacity variance of an emitted particle at the start of its lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[setOrientation(orientation)](./server.particleemitter.setorientation.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the orientation mode of emitted particles.
+
+
+</td></tr>
+<tr><td>
+
+[setOrientationFixedRotation(orientationFixedRotation)](./server.particleemitter.setorientationfixedrotation.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the fixed rotation of emitted particles when orientation is 'fixed'.
 
 
 </td></tr>

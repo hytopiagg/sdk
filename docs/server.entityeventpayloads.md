@@ -322,6 +322,25 @@ Emitted when the opacity of the entity is set.
 </td></tr>
 <tr><td>
 
+["ENTITY.SET\_OUTLINE"](./server.entityeventpayloads._entity.set_outline_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ entity: [Entity](./server.entity.md)<!-- -->; outline: [Outline](./server.outline.md) \| undefined; forPlayer?: [Player](./server.player.md)<!-- -->; }
+
+
+</td><td>
+
+Emitted when the outline of the entity is set.
+
+
+</td></tr>
+<tr><td>
+
 ["ENTITY.SET\_PARENT"](./server.entityeventpayloads._entity.set_parent_.md)
 
 

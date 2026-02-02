@@ -151,6 +151,25 @@ _(Optional)_ The opacity of the entity between 0 and 1. 0 is fully transparent, 
 </td></tr>
 <tr><td>
 
+[outline?](./server.baseentityoptions.outline.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Outline](./server.outline.md)
+
+
+</td><td>
+
+_(Optional)_ The outline rendering options for the entity.
+
+
+</td></tr>
+<tr><td>
+
 [parent?](./server.baseentityoptions.parent.md)
 
 

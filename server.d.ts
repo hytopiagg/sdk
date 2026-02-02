@@ -587,6 +587,8 @@ export declare interface BaseEntityOptions {
     emissiveIntensity?: number;
     /** The opacity of the entity between 0 and 1. 0 is fully transparent, 1 is fully opaque. */
     opacity?: number;
+    /** The outline rendering options for the entity. */
+    outline?: Outline;
     /** Whether the entity is environmental, if true it will not invoke its tick function or change position. Defaults to false. */
     isEnvironmental?: boolean;
     /** The parent entity of the entity, entities with a parent will ignore creating their own colliders. */
@@ -2227,6 +2229,7 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
 
 
 
+
     /**
      * Creates a new Entity instance.
      *
@@ -2275,6 +2278,8 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     get name(): string;
     /** The opacity of the entity between 0 and 1. 0 is fully transparent, 1 is fully opaque. */
     get opacity(): number;
+    /** The outline rendering options for the entity. */
+    get outline(): Outline | undefined;
     /** The parent entity of the entity. */
     get parent(): Entity | undefined;
     /** The name of the parent's node (if parent is a model entity) this entity is attached to when spawned. */
@@ -2433,6 +2438,12 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      */
     setOpacity(opacity: number): void;
     /**
+     * Sets the outline rendering options for the entity.
+     * @param outline - The outline options, or undefined to remove the outline.
+     * @param forPlayer - The player to set the outline for, if undefined the outline will be set for all players.
+     */
+    setOutline(outline: Outline | undefined, forPlayer?: Player): void;
+    /**
      * Sets the parent of the entity and resets this entity's position and rotation.
      *
      * @remarks
@@ -2540,6 +2551,7 @@ export declare enum EntityEvent {
     SET_MODEL_SHOWN_NODES = "ENTITY.SET_MODEL_SHOWN_NODES",
     SET_MODEL_TEXTURE_URI = "ENTITY.SET_MODEL_TEXTURE_URI",
     SET_OPACITY = "ENTITY.SET_OPACITY",
+    SET_OUTLINE = "ENTITY.SET_OUTLINE",
     SET_PARENT = "ENTITY.SET_PARENT",
     SET_TINT_COLOR = "ENTITY.SET_TINT_COLOR",
     SPAWN = "ENTITY.SPAWN",
@@ -2635,6 +2647,12 @@ export declare interface EntityEventPayloads {
     [EntityEvent.SET_OPACITY]: {
         entity: Entity;
         opacity: number;
+    };
+    /** Emitted when the outline of the entity is set. */
+    [EntityEvent.SET_OUTLINE]: {
+        entity: Entity;
+        outline: Outline | undefined;
+        forPlayer?: Player;
     };
     /** Emitted when the parent of the entity is set. */
     [EntityEvent.SET_PARENT]: {
@@ -3915,6 +3933,20 @@ export declare interface NoneColliderOptions extends BaseColliderOptions {
     shape: ColliderShape.NONE;
 }
 
+/** The options for rendering an outline. @public */
+export declare interface Outline {
+    /** The color of the outline. Defaults to black. */
+    color?: RgbColor;
+    /** The intensity multiplier for the outline color. Use values over 1 for brighter/glowing outlines. Defaults to 1.0. */
+    colorIntensity?: number;
+    /** The thickness of the outline in world units. Defaults to 0.05. */
+    thickness?: number;
+    /** The opacity of the outline between 0 and 1. Defaults to 1.0. */
+    opacity?: number;
+    /** Whether the outline should be visible when the entity is occluded by other objects. Defaults to true. */
+    occluded?: boolean;
+}
+
 /**
  * Represents a particle emitter in the world. Emit 2D
  * particles that always face the camera.
@@ -3941,6 +3973,9 @@ export declare interface NoneColliderOptions extends BaseColliderOptions {
  * @public
  */
 export declare class ParticleEmitter extends EventRouter implements protocol.Serializable {
+
+
+
 
 
 
@@ -4010,10 +4045,16 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
     get lifetime(): number | undefined;
     /** The lifetime variance of an emitted particle in seconds. */
     get lifetimeVariance(): number | undefined;
+    /** Whether emitted particles follow the emitter's world position. Cannot be changed after construction. */
+    get lockToEmitter(): boolean;
     /** The maximum number of live particles. */
     get maxParticles(): number | undefined;
     /** The offset of the particle emitter from the attached entity or position. */
     get offset(): Vector3Like | undefined;
+    /** The orientation mode of emitted particles. */
+    get orientation(): ParticleEmitterOrientation | undefined;
+    /** The fixed rotation of emitted particles in degrees when orientation is 'fixed'. */
+    get orientationFixedRotation(): Vector3Like | undefined;
     /** The opacity of an emitted particle at the end of its lifetime. */
     get opacityEnd(): number | undefined;
     /** The opacity variance of an emitted particle at the end of its lifetime. */
@@ -4151,6 +4192,18 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
      * @param offset - The offset of the particle emitter from the attached entity or position.
      */
     setOffset(offset: Vector3Like): void;
+    /**
+     * Sets the orientation mode of emitted particles.
+     *
+     * @param orientation - The orientation mode. 'billboard' faces the camera, 'billboardY' faces the camera but keeps Y-axis upward, 'fixed' uses a fixed rotation.
+     */
+    setOrientation(orientation: ParticleEmitterOrientation): void;
+    /**
+     * Sets the fixed rotation of emitted particles when orientation is 'fixed'.
+     *
+     * @param orientationFixedRotation - The fixed rotation in degrees (x, y, z).
+     */
+    setOrientationFixedRotation(orientationFixedRotation: Vector3Like): void;
     /**
      * Sets the opacity of an emitted particle at the end of its lifetime.
      *
@@ -4297,6 +4350,8 @@ export declare enum ParticleEmitterEvent {
     SET_LIFETIME_VARIANCE = "PARTICLE_EMITTER.SET_LIFETIME_VARIANCE",
     SET_MAX_PARTICLES = "PARTICLE_EMITTER.SET_MAX_PARTICLES",
     SET_OFFSET = "PARTICLE_EMITTER.SET_OFFSET",
+    SET_ORIENTATION = "PARTICLE_EMITTER.SET_ORIENTATION",
+    SET_ORIENTATION_FIXED_ROTATION = "PARTICLE_EMITTER.SET_ORIENTATION_FIXED_ROTATION",
     SET_OPACITY_END = "PARTICLE_EMITTER.SET_OPACITY_END",
     SET_OPACITY_END_VARIANCE = "PARTICLE_EMITTER.SET_OPACITY_END_VARIANCE",
     SET_OPACITY_START = "PARTICLE_EMITTER.SET_OPACITY_START",
@@ -4407,6 +4462,16 @@ export declare interface ParticleEmitterEventPayloads {
     [ParticleEmitterEvent.SET_OFFSET]: {
         particleEmitter: ParticleEmitter;
         offset: Vector3Like;
+    };
+    /** Emitted when the orientation mode of emitted particles is set. */
+    [ParticleEmitterEvent.SET_ORIENTATION]: {
+        particleEmitter: ParticleEmitter;
+        orientation: ParticleEmitterOrientation;
+    };
+    /** Emitted when the fixed rotation of emitted particles is set. */
+    [ParticleEmitterEvent.SET_ORIENTATION_FIXED_ROTATION]: {
+        particleEmitter: ParticleEmitter;
+        orientationFixedRotation: Vector3Like;
     };
     /** Emitted when the opacity of an emitted particle at the end of its lifetime is set. */
     [ParticleEmitterEvent.SET_OPACITY_END]: {
@@ -4567,10 +4632,16 @@ export declare interface ParticleEmitterOptions {
     lifetime?: number;
     /** The lifetime variance of an emitted particle in seconds. */
     lifetimeVariance?: number;
+    /** When enabled, emitted particles follow the emitter's world position. Cannot be changed after construction.*/
+    lockToEmitter?: boolean;
     /** The maximum number of live particles. */
     maxParticles?: number;
     /** The offset of the particle emitter from the attached entity or position. */
     offset?: Vector3Like;
+    /** The orientation mode of emitted particles. 'billboard' faces the camera, 'billboardY' faces the camera but keeps Y-axis upward, 'fixed' uses a fixed rotation. Defaults to 'billboard'. */
+    orientation?: ParticleEmitterOrientation;
+    /** The fixed rotation of emitted particles in degrees (x, y, z) when orientation is 'fixed'. Defaults to (0, 0, 0). */
+    orientationFixedRotation?: Vector3Like;
     /** The opacity of an emitted particle at the end of its lifetime. */
     opacityEnd?: number;
     /** The opacity variance of an emitted particle at the end of its lifetime. */
@@ -4602,6 +4673,9 @@ export declare interface ParticleEmitterOptions {
     /** The velocity variance of an emitted particle. */
     velocityVariance?: Vector3Like;
 }
+
+/** The orientation mode for particles. @public */
+export declare type ParticleEmitterOrientation = 'billboard' | 'billboardY' | 'fixed';
 
 /**
  * A callback function called when the pathfinding algorithm aborts.

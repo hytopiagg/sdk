@@ -597,6 +597,27 @@ The opacity of the entity between 0 and 1. 0 is fully transparent, 1 is fully op
 </td></tr>
 <tr><td>
 
+[outline](./server.entity.outline.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+[Outline](./server.outline.md) \| undefined
+
+
+</td><td>
+
+The outline rendering options for the entity.
+
+
+</td></tr>
+<tr><td>
+
 [parent](./server.entity.parent.md)
 
 
@@ -920,6 +941,20 @@ Sets the texture uri of the entity's model. Setting this overrides the model's d
 </td><td>
 
 Sets the opacity of the entity.
+
+
+</td></tr>
+<tr><td>
+
+[setOutline(outline, forPlayer)](./server.entity.setoutline.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the outline rendering options for the entity.
 
 
 </td></tr>

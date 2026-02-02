@@ -242,6 +242,20 @@ SET\_OPACITY
 </td></tr>
 <tr><td>
 
+SET\_OUTLINE
+
+
+</td><td>
+
+`"ENTITY.SET_OUTLINE"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 SET\_PARENT
 
 

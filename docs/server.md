@@ -1168,6 +1168,17 @@ The options for an error type "none" collider.
 </td></tr>
 <tr><td>
 
+[Outline](./server.outline.md)
+
+
+</td><td>
+
+The options for rendering an outline.
+
+
+</td></tr>
+<tr><td>
+
 [ParticleEmitterEventPayloads](./server.particleemittereventpayloads.md)
 
 
@@ -1741,6 +1752,17 @@ A callback function called when the entity associated with the SimpleEntityContr
 </td><td>
 
 Options for the [SimpleEntityController.move()](./server.simpleentitycontroller.move.md) method.
+
+
+</td></tr>
+<tr><td>
+
+[ParticleEmitterOrientation](./server.particleemitterorientation.md)
+
+
+</td><td>
+
+The orientation mode for particles.
 
 
 </td></tr>

@@ -303,6 +303,25 @@ _(Optional)_ The lifetime variance of an emitted particle in seconds.
 </td></tr>
 <tr><td>
 
+[lockToEmitter?](./server.particleemitteroptions.locktoemitter.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ When enabled, emitted particles follow the emitter's world position. Cannot be changed after construction.
+
+
+</td></tr>
+<tr><td>
+
 [maxParticles?](./server.particleemitteroptions.maxparticles.md)
 
 
@@ -412,6 +431,44 @@ number
 </td><td>
 
 _(Optional)_ The opacity variance of an emitted particle at the start of its lifetime.
+
+
+</td></tr>
+<tr><td>
+
+[orientation?](./server.particleemitteroptions.orientation.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ParticleEmitterOrientation](./server.particleemitterorientation.md)
+
+
+</td><td>
+
+_(Optional)_ The orientation mode of emitted particles. 'billboard' faces the camera, 'billboardY' faces the camera but keeps Y-axis upward, 'fixed' uses a fixed rotation. Defaults to 'billboard'.
+
+
+</td></tr>
+<tr><td>
+
+[orientationFixedRotation?](./server.particleemitteroptions.orientationfixedrotation.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Vector3Like](./server.vector3like.md)
+
+
+</td><td>
+
+_(Optional)_ The fixed rotation of emitted particles in degrees (x, y, z) when orientation is 'fixed'. Defaults to (0, 0, 0).
 
 
 </td></tr>

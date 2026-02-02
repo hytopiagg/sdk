@@ -4418,6 +4418,34 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "server!BaseEntityOptions#outline:member",
+              "docComment": "/**\n * The outline rendering options for the entity.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "outline?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Outline",
+                  "canonicalReference": "server!Outline:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "outline",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "server!BaseEntityOptions#parent:member",
               "docComment": "/**\n * The parent entity of the entity, entities with a parent will ignore creating their own colliders.\n */\n",
               "excerptTokens": [
@@ -15751,6 +15779,41 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!Entity#outline:member",
+              "docComment": "/**\n * The outline rendering options for the entity.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get outline(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Outline",
+                  "canonicalReference": "server!Outline:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "outline",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!Entity#parent:member",
               "docComment": "/**\n * The parent entity of the entity.\n */\n",
               "excerptTokens": [
@@ -16389,6 +16452,76 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "setOpacity"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!Entity#setOutline:member(1)",
+              "docComment": "/**\n * Sets the outline rendering options for the entity.\n *\n * @param outline - The outline options, or undefined to remove the outline.\n *\n * @param forPlayer - The player to set the outline for, if undefined the outline will be set for all players.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setOutline(outline: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Outline",
+                  "canonicalReference": "server!Outline:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", forPlayer?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Player",
+                  "canonicalReference": "server!Player:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "outline",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "forPlayer",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setOutline"
             },
             {
               "kind": "Method",
@@ -17391,6 +17524,27 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!EntityEvent.SET_OUTLINE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_OUTLINE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"ENTITY.SET_OUTLINE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_OUTLINE"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!EntityEvent.SET_PARENT:member",
               "docComment": "",
               "excerptTokens": [
@@ -18385,6 +18539,69 @@
               "propertyTypeTokenRange": {
                 "startIndex": 3,
                 "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!EntityEventPayloads#\"ENTITY.SET_OUTLINE\":member",
+              "docComment": "/**\n * Emitted when the outline of the entity is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "EntityEvent.SET_OUTLINE",
+                  "canonicalReference": "server!EntityEvent.SET_OUTLINE:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        entity: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Entity",
+                  "canonicalReference": "server!Entity:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        outline: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Outline",
+                  "canonicalReference": "server!Outline:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined;\n        forPlayer?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Player",
+                  "canonicalReference": "server!Player:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"ENTITY.SET_OUTLINE\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 10
               }
             },
             {
@@ -28503,6 +28720,160 @@
           ]
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "server!Outline:interface",
+          "docComment": "/**\n * The options for rendering an outline.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "interface Outline "
+            }
+          ],
+          "fileUrlPath": "src/shared/types/Outline.ts",
+          "releaseTag": "Public",
+          "name": "Outline",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!Outline#color:member",
+              "docComment": "/**\n * The color of the outline. Defaults to black.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "color?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RgbColor",
+                  "canonicalReference": "server!RgbColor:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "color",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!Outline#colorIntensity:member",
+              "docComment": "/**\n * The intensity multiplier for the outline color. Use values over 1 for brighter/glowing outlines. Defaults to 1.0.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "colorIntensity?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "colorIntensity",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!Outline#occluded:member",
+              "docComment": "/**\n * Whether the outline should be visible when the entity is occluded by other objects. Defaults to true.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "occluded?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "occluded",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!Outline#opacity:member",
+              "docComment": "/**\n * The opacity of the outline between 0 and 1. Defaults to 1.0.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "opacity?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "opacity",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!Outline#thickness:member",
+              "docComment": "/**\n * The thickness of the outline in world units. Defaults to 0.05.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "thickness?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "thickness",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
           "kind": "Class",
           "canonicalReference": "server!ParticleEmitter:class",
           "docComment": "/**\n * Represents a particle emitter in the world. Emit 2D particles that always face the camera.\n *\n * @remarks\n *\n * Particle emitters are created directly as instances. They support a variety of configuration options through the {@link ParticleEmitterOptions} constructor argument.\n *\n * <h2>Events</h2>\n *\n * This class is an EventRouter, and instance of it emit events with payloads listed under {@link ParticleEmitterEventPayloads}.\n *\n * @example\n * ```typescript\n * const particleEmitter = new ParticleEmitter({\n *   textureUri: 'textures/particles/smoke.png',\n * });\n *\n * particleEmitter.spawn(world);\n * ```\n *\n * @public\n */\n",
@@ -29160,6 +29531,36 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#lockToEmitter:member",
+              "docComment": "/**\n * Whether emitted particles follow the emitter's world position. Cannot be changed after construction.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get lockToEmitter(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "lockToEmitter",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "server!ParticleEmitter#maxParticles:member",
               "docComment": "/**\n * The maximum number of live particles.\n */\n",
               "excerptTokens": [
@@ -29338,6 +29739,76 @@
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#orientation:member",
+              "docComment": "/**\n * The orientation mode of emitted particles.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get orientation(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterOrientation",
+                  "canonicalReference": "server!ParticleEmitterOrientation:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "orientation",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "server!ParticleEmitter#orientationFixedRotation:member",
+              "docComment": "/**\n * The fixed rotation of emitted particles in degrees when orientation is 'fixed'.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "get orientationFixedRotation(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": true,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "orientationFixedRotation",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
               },
               "isStatic": false,
               "isProtected": false,
@@ -30500,6 +30971,104 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "setOpacityStartVariance"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setOrientation:member(1)",
+              "docComment": "/**\n * Sets the orientation mode of emitted particles.\n *\n * @param orientation - The orientation mode. 'billboard' faces the camera, 'billboardY' faces the camera but keeps Y-axis upward, 'fixed' uses a fixed rotation.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setOrientation(orientation: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterOrientation",
+                  "canonicalReference": "server!ParticleEmitterOrientation:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "orientation",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setOrientation"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "server!ParticleEmitter#setOrientationFixedRotation:member(1)",
+              "docComment": "/**\n * Sets the fixed rotation of emitted particles when orientation is 'fixed'.\n *\n * @param orientationFixedRotation - The fixed rotation in degrees (x, y, z).\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setOrientationFixedRotation(orientationFixedRotation: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "orientationFixedRotation",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "setOrientationFixedRotation"
             },
             {
               "kind": "Method",
@@ -31967,6 +32536,48 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_ORIENTATION:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_ORIENTATION = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_ORIENTATION\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_ORIENTATION"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "server!ParticleEmitterEvent.SET_ORIENTATION_FIXED_ROTATION:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "SET_ORIENTATION_FIXED_ROTATION = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"PARTICLE_EMITTER.SET_ORIENTATION_FIXED_ROTATION\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "SET_ORIENTATION_FIXED_ROTATION"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "server!ParticleEmitterEvent.SET_PAUSED:member",
               "docComment": "",
               "excerptTokens": [
@@ -33331,6 +33942,114 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_ORIENTATION_FIXED_ROTATION\":member",
+              "docComment": "/**\n * Emitted when the fixed rotation of emitted particles is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_ORIENTATION_FIXED_ROTATION",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_ORIENTATION_FIXED_ROTATION:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        orientationFixedRotation: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_ORIENTATION_FIXED_ROTATION\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_ORIENTATION\":member",
+              "docComment": "/**\n * Emitted when the orientation mode of emitted particles is set.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterEvent.SET_ORIENTATION",
+                  "canonicalReference": "server!ParticleEmitterEvent.SET_ORIENTATION:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        particleEmitter: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitter",
+                  "canonicalReference": "server!ParticleEmitter:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        orientation: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterOrientation",
+                  "canonicalReference": "server!ParticleEmitterOrientation:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "\"PARTICLE_EMITTER.SET_ORIENTATION\"",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 8
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "server!ParticleEmitterEventPayloads#\"PARTICLE_EMITTER.SET_PAUSED\":member",
               "docComment": "/**\n * Emitted when the paused state of an emitted particle is set.\n */\n",
               "excerptTokens": [
@@ -34539,6 +35258,33 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#lockToEmitter:member",
+              "docComment": "/**\n * When enabled, emitted particles follow the emitter's world position. Cannot be changed after construction.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "lockToEmitter?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "lockToEmitter",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "server!ParticleEmitterOptions#maxParticles:member",
               "docComment": "/**\n * The maximum number of live particles.\n */\n",
               "excerptTokens": [
@@ -34695,6 +35441,62 @@
               "isOptional": true,
               "releaseTag": "Public",
               "name": "opacityStartVariance",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#orientation:member",
+              "docComment": "/**\n * The orientation mode of emitted particles. 'billboard' faces the camera, 'billboardY' faces the camera but keeps Y-axis upward, 'fixed' uses a fixed rotation. Defaults to 'billboard'.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "orientation?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ParticleEmitterOrientation",
+                  "canonicalReference": "server!ParticleEmitterOrientation:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "orientation",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "server!ParticleEmitterOptions#orientationFixedRotation:member",
+              "docComment": "/**\n * The fixed rotation of emitted particles in degrees (x, y, z) when orientation is 'fixed'. Defaults to (0, 0, 0).\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "orientationFixedRotation?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Vector3Like",
+                  "canonicalReference": "server!Vector3Like:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "orientationFixedRotation",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
@@ -35030,6 +35832,32 @@
             }
           ],
           "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "server!ParticleEmitterOrientation:type",
+          "docComment": "/**\n * The orientation mode for particles.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export type ParticleEmitterOrientation = "
+            },
+            {
+              "kind": "Content",
+              "text": "'billboard' | 'billboardY' | 'fixed'"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "fileUrlPath": "src/worlds/particles/ParticleEmitter.ts",
+          "releaseTag": "Public",
+          "name": "ParticleEmitterOrientation",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
         },
         {
           "kind": "TypeAlias",

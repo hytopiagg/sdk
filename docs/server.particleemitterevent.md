@@ -340,6 +340,34 @@ SET\_OPACITY\_START\_VARIANCE
 </td></tr>
 <tr><td>
 
+SET\_ORIENTATION
+
+
+</td><td>
+
+`"PARTICLE_EMITTER.SET_ORIENTATION"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+SET\_ORIENTATION\_FIXED\_ROTATION
+
+
+</td><td>
+
+`"PARTICLE_EMITTER.SET_ORIENTATION_FIXED_ROTATION"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 SET\_PAUSED
 
 
