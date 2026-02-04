@@ -4,7 +4,9 @@
 
 ## PathfindCompleteCallback type
 
-A callback function called when the entity associated with the PathfindingEntityController finishes pathfinding and is now at the target coordinate.
+Callback invoked when pathfinding completes and the entity reaches the target.
+
+\*\*Category:\*\* Controllers
 
 **Signature:**
 

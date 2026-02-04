@@ -4,7 +4,9 @@
 
 ## BlockRotation type
 
-A block rotation from [BLOCK\_ROTATIONS](./server.block_rotations.md)<!-- -->.
+A block rotation from `BLOCK_ROTATIONS`<!-- -->.
+
+\*\*Category:\*\* Blocks
 
 **Signature:**
 

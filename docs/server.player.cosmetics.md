@@ -4,10 +4,17 @@
 
 ## Player.cosmetics property
 
-The cosmetics for the player
+The cosmetics for the player.
 
 **Signature:**
 
 ```typescript
 readonly cosmetics: Promise<PlayerCosmetics | void>;
 ```
+
+## Remarks
+
+This resolves asynchronously and may resolve to `void` if unavailable.
+
+\*\*Category:\*\* Players
+

@@ -4,10 +4,19 @@
 
 ## PlayerManager.worldSelectionHandler property
 
-Optional handler for selecting the world a newly connected player joins. Returning no world results in the player joining the default WorldManager world.
+Optional handler for selecting the world a newly connected player joins.
+
+Use for: lobby routing or game mode selection. Do NOT use for: moving players after they have already joined a world; use `Player.joinWorld`<!-- -->.
 
 **Signature:**
 
 ```typescript
 worldSelectionHandler?: (player: Player) => Promise<World | undefined>;
 ```
+
+## Remarks
+
+Return `undefined` to place the player in the default world.
+
+\*\*Category:\*\* Players
+

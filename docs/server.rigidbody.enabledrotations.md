@@ -6,6 +6,8 @@
 
 The enabled axes of rotational movement of the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

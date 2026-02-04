@@ -6,6 +6,8 @@
 
 Manages chat and commands in a world.
 
+When to use: broadcasting chat, sending system messages, or registering chat commands. Do NOT use for: player HUD/menus; use `PlayerUI` for rich UI.
+
 **Signature:**
 
 ```typescript
@@ -15,11 +17,13 @@ export default class ChatManager extends EventRouter
 
 ## Remarks
 
-The ChatManager is created internally as a singleton for each [World](./server.world.md) instance in a game server. The ChatManager allows you to broadcast messages, send messages to specific players, and register commands that can be used in chat to execute game logic.
+The ChatManager is created internally as a singleton for each `World` instance in a game server. The ChatManager allows you to broadcast messages, send messages to specific players, and register commands that can be used in chat to execute game logic.
+
+Pattern: register commands during world initialization and keep callbacks fast. Anti-pattern: assuming commands are permission-checked; always validate access in callbacks.
 
 <h2>Events</h2>
 
-This class is an EventRouter, and instances of it emit events with payloads listed under [ChatEventPayloads](./server.chateventpayloads.md)
+This class is an EventRouter, and instances of it emit events with payloads listed under `ChatEventPayloads`
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `ChatManager` class.
 
@@ -39,6 +43,7 @@ world.chatManager.registerCommand('/kick', (player, args, message) => {
   }
 });
 ```
+\*\*Category:\*\* Chat
 
 ## Methods
 

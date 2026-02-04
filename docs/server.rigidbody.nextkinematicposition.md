@@ -6,6 +6,8 @@
 
 The next kinematic position of the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

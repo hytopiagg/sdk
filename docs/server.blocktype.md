@@ -4,7 +4,9 @@
 
 ## BlockType class
 
-Represents a block type.
+Represents a block type definition.
+
+When to use: defining new block types (textures, colliders, liquid behavior). Do NOT use for: placing blocks directly; use `ChunkLattice.setBlock`<!-- -->.
 
 **Signature:**
 
@@ -17,18 +19,18 @@ export default class BlockType extends EventRouter implements protocol.Serializa
 
 ## Remarks
 
-Block types are created directly as instances. They support a variety of configuration options through the [BlockTypeOptions](./server.blocktypeoptions.md) constructor argument. Block types are registered with a [BlockTypeRegistry](./server.blocktyperegistry.md) instance, allowing you to create custom blocks with unique visual representations and behaviors.
+Block types are created as instances and registered with a `BlockTypeRegistry` for a specific world. Liquids are treated as sensors in physics.
 
 <h2>Events</h2>
 
-This class is an EventRouter, and instances of it emit events with payloads listed under [BlockTypeEventPayloads](./server.blocktypeeventpayloads.md)
+This class is an EventRouter, and instances of it emit events with payloads listed under `BlockTypeEventPayloads`<!-- -->.
 
 ## Example
 
 
 ```typescript
 const stoneBlockTypeId = 10;
-world.blockTypeRegistry.registerBlockType(stoneBlockTypeId, new BlockType({
+world.blockTypeRegistry.registerBlockType(new BlockType({
   id: stoneBlockTypeId,
   textureUri: 'textures/stone.png',
   name: 'Stone',
@@ -37,6 +39,7 @@ world.blockTypeRegistry.registerBlockType(stoneBlockTypeId, new BlockType({
 // Create a stone block at coordinate 0, 1, 0
 world.chunkLattice.setBlock({ x: 0, y: 1, z: 0 }, stoneBlockTypeId);
 ```
+\*\*Category:\*\* Blocks
 
 ## Constructors
 
@@ -67,6 +70,8 @@ Description
 </td><td>
 
 Creates a new block type instance.
+
+Use for: defining a block type before registering it with a `BlockTypeRegistry`<!-- -->.
 
 
 </td></tr>
@@ -114,6 +119,8 @@ Description
 
 The collider options for the block type.
 
+\*\*Category:\*\* Blocks
+
 
 </td></tr>
 <tr><td>
@@ -134,6 +141,8 @@ number
 </td><td>
 
 The unique identifier for the block type.
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>
@@ -156,6 +165,8 @@ boolean
 
 Whether the block type is a liquid.
 
+\*\*Category:\*\* Blocks
+
 
 </td></tr>
 <tr><td>
@@ -175,7 +186,9 @@ boolean
 
 </td><td>
 
-Whether the block type is meshable.
+Whether the block type is meshable (voxel-based).
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>
@@ -196,7 +209,9 @@ boolean
 
 </td><td>
 
-Whether the block type is a trimesh block.
+Whether the block type uses a trimesh collider.
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>
@@ -217,7 +232,9 @@ boolean
 
 </td><td>
 
-Whether the block type is a voxel block.
+Whether the block type uses a voxel collider.
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>
@@ -238,7 +255,9 @@ number
 
 </td><td>
 
-The light emission level.
+The light emission level (0-15).
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>
@@ -261,6 +280,8 @@ string
 
 The name of the block type.
 
+\*\*Category:\*\* Blocks
+
 
 </td></tr>
 <tr><td>
@@ -281,6 +302,8 @@ string
 </td><td>
 
 The URI of the texture for the block type.
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>
@@ -315,6 +338,8 @@ Description
 </td><td>
 
 Triggers an interaction on the block type from a player.
+
+Use for: programmatic interactions that should mimic player clicks.
 
 
 </td></tr>

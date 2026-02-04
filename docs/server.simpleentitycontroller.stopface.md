@@ -19,3 +19,5 @@ void
 
 \*\*Deferred:\*\* Takes effect on the next tick. The `faceCompleteCallback` will still be called.
 
+\*\*Category:\*\* Controllers
+

@@ -6,6 +6,8 @@
 
 Represents a 2x2 matrix.
 
+When to use: 2D transforms or linear algebra utilities. Do NOT use for: immutable math; most methods mutate the instance.
+
 **Signature:**
 
 ```typescript
@@ -15,7 +17,11 @@ export default class Matrix2 extends Float32Array
 
 ## Remarks
 
-All matrix methods result in mutation of the matrix instance. This class extends `Float32Array` to provide an efficient way to create and manipulate a 2x2 matrix. Various convenience methods are provided for common matrix operations.
+All matrix methods result in mutation of the matrix instance. This class extends `Float32Array` to provide an efficient way to create and manipulate a 2x2 matrix.
+
+Pattern: reuse instances to reduce allocations. Anti-pattern: treating matrices as immutable values.
+
+\*\*Category:\*\* Math
 
 ## Constructors
 

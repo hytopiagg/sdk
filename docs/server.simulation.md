@@ -6,6 +6,8 @@
 
 Represents the physics simulation for a world.
 
+When to use: advanced physics queries, custom gravity, or debug rendering. Do NOT use for: typical movement; use entity/rigid body APIs instead.
+
 **Signature:**
 
 ```typescript
@@ -15,11 +17,13 @@ export default class Simulation extends EventRouter
 
 ## Remarks
 
-The simulation internally and automatically handles the physical interactions, collisions, contact forces, and events for all aspects of the world. Most methods are not often used directly, but are provided for advanced usage.
+Access via `World.simulation`<!-- -->. The simulation drives all collision and contact events for blocks and entities.
 
 <h2>Events</h2>
 
-This class is an EventRouter, and instances of it emit events with payloads listed under [SimulationEventPayloads](./server.simulationeventpayloads.md)
+This class is an EventRouter, and instances of it emit events with payloads listed under `SimulationEventPayloads`<!-- -->.
+
+\*\*Category:\*\* Physics
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `Simulation` class.
 
@@ -65,6 +69,8 @@ RAPIER.Vector3
 
 The gravity vector for the simulation.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -84,7 +90,9 @@ boolean
 
 </td><td>
 
-Whether the simulation has debug raycasting enabled
+Whether debug raycasting is enabled.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -105,7 +113,9 @@ boolean
 
 </td><td>
 
-Whether the simulation has debug rendering enabled.
+Whether debug rendering is enabled.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -128,6 +138,8 @@ number
 
 The fixed timestep for the simulation.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -147,7 +159,9 @@ The fixed timestep for the simulation.
 
 </td><td>
 
-The world the simulation is for.
+The world this simulation belongs to.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -181,7 +195,7 @@ Description
 
 </td><td>
 
-Enables or disables debug raycasting for the simulation. This will render lines for the raycast that disappear after a few seconds.
+Enables or disables debug raycasting for the simulation.
 
 
 </td></tr>
@@ -195,7 +209,7 @@ Enables or disables debug raycasting for the simulation. This will render lines 
 
 </td><td>
 
-Enables or disables debug rendering for the simulation. When enabled, all colliders and rigid body outlines will be rendered in the world. Do not enable this in production. In large worlds enabling this can cause noticable lag and RTT spikes.
+Enables or disables debug rendering for the simulation.
 
 
 </td></tr>
@@ -237,7 +251,7 @@ Gets the intersections with a raw shape.
 
 </td><td>
 
-Casts a ray through the simulation.
+Casts a ray through the simulation and returns the first hit.
 
 
 </td></tr>

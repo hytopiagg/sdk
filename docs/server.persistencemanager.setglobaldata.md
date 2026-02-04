@@ -60,6 +60,8 @@ Record&lt;string, unknown&gt;
 
 The data to set.
 
+\*\*Side effects:\*\* Performs network I/O to persist data.
+
 
 </td></tr>
 </tbody></table>

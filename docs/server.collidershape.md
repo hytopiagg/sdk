@@ -6,6 +6,8 @@
 
 The shapes a collider can be.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

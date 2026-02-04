@@ -6,6 +6,8 @@
 
 Event payloads for World emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

@@ -44,6 +44,8 @@ collisionGroups
 
 The collision groups for solid colliders of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

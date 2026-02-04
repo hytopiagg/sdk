@@ -6,6 +6,8 @@
 
 The collision groups the collider belongs to.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

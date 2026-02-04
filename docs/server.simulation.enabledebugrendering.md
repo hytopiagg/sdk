@@ -4,7 +4,7 @@
 
 ## Simulation.enableDebugRendering() method
 
-Enables or disables debug rendering for the simulation. When enabled, all colliders and rigid body outlines will be rendered in the world. Do not enable this in production. In large worlds enabling this can cause noticable lag and RTT spikes.
+Enables or disables debug rendering for the simulation.
 
 **Signature:**
 
@@ -58,7 +58,11 @@ RAPIER.QueryFilterFlags
 
 </td><td>
 
-_(Optional)_
+_(Optional)_ Optional query filter flags for debug rendering.
+
+\*\*Side effects:\*\* Emits `SimulationEvent.DEBUG_RENDER` each step while enabled.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -66,4 +70,8 @@ _(Optional)_
 **Returns:**
 
 void
+
+## Remarks
+
+When enabled, all colliders and rigid body outlines are rendered. Avoid enabling in production; it can cause noticeable lag.
 

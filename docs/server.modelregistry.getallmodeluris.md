@@ -17,3 +17,5 @@ string\[\]
 
 An array of all available model URIs.
 
+\*\*Category:\*\* Models
+

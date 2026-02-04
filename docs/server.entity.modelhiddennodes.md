@@ -6,6 +6,8 @@
 
 The nodes to hide on the entity's model.
 
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

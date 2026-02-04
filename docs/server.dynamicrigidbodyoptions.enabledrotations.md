@@ -6,6 +6,8 @@
 
 The enabled rotations of the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

@@ -4,7 +4,9 @@
 
 ## PathfindingEntityController.target property
 
-The target coordinate to pathfind to.
+The target coordinate being pathfound to.
+
+\*\*Category:\*\* Controllers
 
 **Signature:**
 

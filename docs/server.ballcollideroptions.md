@@ -6,6 +6,10 @@
 
 The options for a ball collider.
 
+Use for: sphere-shaped colliders. Do NOT use for: other shapes; use the matching collider option type.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript
@@ -52,6 +56,8 @@ number
 </td><td>
 
 _(Optional)_ The radius of the ball collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

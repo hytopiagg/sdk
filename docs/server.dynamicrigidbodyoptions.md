@@ -6,6 +6,10 @@
 
 The options for a dynamic rigid body, also the default type.
 
+Use for: physics-driven bodies affected by forces and collisions. Do NOT use for: kinematic bodies; use the kinematic option types instead.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript
@@ -53,6 +57,8 @@ number
 
 _(Optional)_ The additional mass of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -71,6 +77,8 @@ _(Optional)_ The additional mass of the rigid body.
 </td><td>
 
 _(Optional)_ The additional mass properties of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -91,6 +99,8 @@ number
 
 _(Optional)_ The additional solver iterations of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -109,6 +119,8 @@ number
 </td><td>
 
 _(Optional)_ The angular damping of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -129,6 +141,8 @@ _(Optional)_ The angular damping of the rigid body.
 
 _(Optional)_ The angular velocity of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -147,6 +161,8 @@ boolean
 </td><td>
 
 _(Optional)_ Whether the rigid body has continuous collision detection enabled.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -167,6 +183,8 @@ number
 
 _(Optional)_ The dominance group of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -185,6 +203,8 @@ _(Optional)_ The dominance group of the rigid body.
 </td><td>
 
 _(Optional)_ The enabled axes of positional movement of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -205,6 +225,8 @@ _(Optional)_ The enabled axes of positional movement of the rigid body.
 
 _(Optional)_ The enabled rotations of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -223,6 +245,8 @@ number
 </td><td>
 
 _(Optional)_ The gravity scale of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -243,6 +267,8 @@ number
 
 _(Optional)_ The linear damping of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -261,6 +287,8 @@ _(Optional)_ The linear damping of the rigid body.
 </td><td>
 
 _(Optional)_ The linear velocity of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -281,6 +309,8 @@ boolean
 
 _(Optional)_ Whether the rigid body is sleeping.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -299,6 +329,8 @@ number
 </td><td>
 
 _(Optional)_ The soft continuous collision detection prediction of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

@@ -4,7 +4,9 @@
 
 ## World.chunkLattice property
 
-The chunk lattice for the world.
+The chunk lattice for this world.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

@@ -6,6 +6,8 @@
 
 Manages known block types in a world.
 
+When to use: registering and retrieving block types for a specific world. Do NOT use for: placing blocks; use `ChunkLattice.setBlock`<!-- -->.
+
 **Signature:**
 
 ```typescript
@@ -17,11 +19,11 @@ export default class BlockTypeRegistry extends EventRouter implements protocol.S
 
 ## Remarks
 
-Block type registries are created internally as a singleton for each [World](./server.world.md) instance in a game server. A block type registry allows you to register and retrieve block types by their unique id for a world.
+Each `World` has its own registry. Block type IDs are unique per world.
 
 <h2>Events</h2>
 
-This class is an EventRouter, and instances of it emit events with payloads listed under [BlockTypeRegistryEventPayloads](./server.blocktyperegistryeventpayloads.md)
+This class is an EventRouter, and instances of it emit events with payloads listed under `BlockTypeRegistryEventPayloads`<!-- -->.
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `BlockTypeRegistry` class.
 
@@ -35,6 +37,7 @@ world.blockTypeRegistry.registerGenericBlockType({
   name: 'Dirt',
 });
 ```
+\*\*Category:\*\* Blocks
 
 ## Properties
 
@@ -77,6 +80,8 @@ Description
 </td><td>
 
 The world the block type registry is for.
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>

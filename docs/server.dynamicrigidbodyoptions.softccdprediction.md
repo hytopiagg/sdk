@@ -6,6 +6,8 @@
 
 The soft continuous collision detection prediction of the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

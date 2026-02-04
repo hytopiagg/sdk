@@ -44,6 +44,8 @@ number
 
 The angular damping of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

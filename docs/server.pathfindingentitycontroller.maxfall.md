@@ -6,6 +6,8 @@
 
 The maximum fall distance the entity can fall.
 
+\*\*Category:\*\* Controllers
+
 **Signature:**
 
 ```typescript

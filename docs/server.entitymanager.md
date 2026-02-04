@@ -6,6 +6,8 @@
 
 Manages entities in a world.
 
+When to use: querying and filtering entities within a specific world. Do NOT use for: cross-world queries; access each world's manager separately.
+
 **Signature:**
 
 ```typescript
@@ -14,7 +16,7 @@ export default class EntityManager
 
 ## Remarks
 
-The EntityManager is created internally as a singleton for each [World](./server.world.md) instance in a game server. It allows retrieval of all entities, player entities, and more.
+The EntityManager is created internally per `World` instance.
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `EntityManager` class.
 
@@ -26,6 +28,7 @@ The constructor for this class is marked as internal. Third-party code should no
 const entityManager = world.entityManager;
 const entities = entityManager.getAllEntities();
 ```
+\*\*Category:\*\* Entities
 
 ## Properties
 
@@ -69,6 +72,8 @@ number
 
 The number of spawned entities in the world.
 
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -88,7 +93,9 @@ The number of spawned entities in the world.
 
 </td><td>
 
-The world the entity manager is for.
+The world this manager is for.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -178,7 +185,7 @@ Gets all spawned entities in the world with a tag that includes a specific subst
 
 </td><td>
 
-Gets a spawned entity in the world by its id.
+Gets a spawned entity in the world by its ID.
 
 
 </td></tr>

@@ -44,6 +44,8 @@ entity
 
 The entity to attach the controller to.
 
+\*\*Category:\*\* Controllers
+
 
 </td></tr>
 </tbody></table>

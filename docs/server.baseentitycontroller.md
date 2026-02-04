@@ -6,6 +6,8 @@
 
 A base class for entity controller implementations.
 
+When to use: implementing custom entity behavior and movement logic. Do NOT use for: one-off entity changes; prefer direct entity APIs.
+
 **Signature:**
 
 ```typescript
@@ -15,11 +17,17 @@ export default abstract class BaseEntityController extends EventRouter
 
 ## Remarks
 
-The BaseEntityController should be extended by a more specific entity controller that you or a plugin implements. Entity controllers are intended to be used as one controller instance per entity, but are flexible enough for edge cases such as if you want to create niche behavior of one controller for many entities that behave in unison.
+Controllers are typically one instance per entity, but can be shared across entities if you manage state carefully.
+
+<h2>Lifecycle</h2>
+
+1) `attach()` — called during `Entity` construction when a controller is provided. 2) `spawn()` — called after the entity is added to the physics simulation. 3) `tickWithPlayerInput()` — called each world tick for `PlayerEntity` before `tick()`<!-- -->. 4) `tick()` — called each world tick before physics stepping. 5) `detach()` → `despawn()` — called during `Entity.despawn`<!-- -->.
 
 <h2>Events</h2>
 
-This class is an EventRouter, and instances of it emit events with payloads listed under [BaseEntityControllerEventPayloads](./server.baseentitycontrollereventpayloads.md)
+This class is an EventRouter, and instances of it emit events with payloads listed under `BaseEntityControllerEventPayloads`<!-- -->.
+
+\*\*Category:\*\* Controllers
 
 ## Methods
 

@@ -4,10 +4,17 @@
 
 ## Entity.blockTextureUri property
 
-The URI or path to the texture to be used, if this is set, the entity is a block entity.
+The texture URI for block entities.
 
 **Signature:**
 
 ```typescript
 get blockTextureUri(): string | undefined;
 ```
+
+## Remarks
+
+When set, this entity is treated as a block entity.
+
+\*\*Category:\*\* Entities
+

@@ -60,10 +60,16 @@ callback
 
 The callback function to execute when the command is used.
 
+\*\*Requires:\*\* Use a consistent command prefix (for example, `/kick`<!-- -->) if you want slash commands.
+
 
 </td></tr>
 </tbody></table>
 **Returns:**
 
 void
+
+## Remarks
+
+Commands are matched by exact string equality against the first token in a chat message.
 

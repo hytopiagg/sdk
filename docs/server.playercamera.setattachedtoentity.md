@@ -4,7 +4,9 @@
 
 ## PlayerCamera.setAttachedToEntity() method
 
-Sets the entity the camera is attached to.
+Attaches the camera to an entity.
+
+Use for: third-person follow cameras or entity-bound views. Do NOT use for: tracking an entity without attachment; use `PlayerCamera.setTrackedEntity`<!-- -->.
 
 **Signature:**
 
@@ -42,7 +44,13 @@ entity
 
 </td><td>
 
-The entity to attach the camera to.
+The entity to attach the camera to (must be spawned).
+
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerCameraEvent.SET_ATTACHED_TO_ENTITY`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>

@@ -4,10 +4,17 @@
 
 ## DefaultPlayerEntityController.isSwimming property
 
-Whether the entity is swimming, this is determined by if the entity is in a liquid block.
+Whether the entity is swimming.
 
 **Signature:**
 
 ```typescript
 get isSwimming(): boolean;
 ```
+
+## Remarks
+
+Determined by whether the entity is in contact with a liquid block.
+
+\*\*Category:\*\* Controllers
+

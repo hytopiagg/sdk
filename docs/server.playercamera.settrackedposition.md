@@ -4,7 +4,9 @@
 
 ## PlayerCamera.setTrackedPosition() method
 
-Sets the position the camera will constantly look at, even if the camera attached entity moves.
+Sets the position the camera will continuously look at.
+
+Use for: fixed focal points in the scene.
 
 **Signature:**
 
@@ -42,7 +44,13 @@ position
 
 </td><td>
 
-The position to track or undefined to stop tracking.
+The position to track, or undefined to stop tracking.
+
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerCameraEvent.SET_TRACKED_POSITION`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>

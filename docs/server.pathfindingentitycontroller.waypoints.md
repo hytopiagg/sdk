@@ -6,6 +6,8 @@
 
 The current waypoints being followed.
 
+\*\*Category:\*\* Controllers
+
 **Signature:**
 
 ```typescript

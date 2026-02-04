@@ -6,6 +6,8 @@
 
 The collider options for the block type.
 
+\*\*Category:\*\* Blocks
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,8 @@
 
 The raw shape object from the Rapier physics engine.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

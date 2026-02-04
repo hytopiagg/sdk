@@ -6,6 +6,8 @@
 
 The additional mass properties of the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

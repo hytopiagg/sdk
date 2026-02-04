@@ -19,3 +19,5 @@ void
 
 \*\*Deferred:\*\* Takes effect on the next tick. The `moveCompleteCallback` will still be called and idle animations will start (unless `moveStartIdleAnimationsOnCompletion` was false).
 
+\*\*Category:\*\* Controllers
+

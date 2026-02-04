@@ -6,6 +6,8 @@
 
 Retrieves all loaded SceneUI instances attached to a specific entity.
 
+Use for: cleanup or inspection of entity-bound scene UI.
+
 **Signature:**
 
 ```typescript
@@ -52,4 +54,6 @@ The entity to get attached SceneUI instances for.
 [SceneUI](./server.sceneui.md)<!-- -->\[\]
 
 An array of SceneUI instances.
+
+\*\*Requires:\*\* Entity should belong to this world for meaningful results.
 

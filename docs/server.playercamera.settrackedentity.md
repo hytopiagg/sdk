@@ -4,7 +4,9 @@
 
 ## PlayerCamera.setTrackedEntity() method
 
-Sets the entity the camera will constantly look at, even if the camera attached or tracked entity moves.
+Sets the entity the camera will continuously look at.
+
+Use for: keeping the camera focused on a moving entity.
 
 **Signature:**
 
@@ -42,7 +44,13 @@ entity
 
 </td><td>
 
-The entity to track or undefined to stop tracking.
+The entity to track, or undefined to stop tracking.
+
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerCameraEvent.SET_TRACKED_ENTITY`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>

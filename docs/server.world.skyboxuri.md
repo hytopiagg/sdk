@@ -4,7 +4,9 @@
 
 ## World.skyboxUri property
 
-The URI of the skybox cubemap for the world.
+The URI of the skybox cubemap for this world.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

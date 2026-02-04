@@ -44,6 +44,8 @@ number
 
 The additional mass of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

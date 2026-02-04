@@ -44,6 +44,10 @@ number \| undefined
 
 The emissive intensity of the entity. Use a value over 1 for brighter emissive effects.
 
+\*\*Side effects:\*\* Emits `EntityEvent.SET_EMISSIVE_INTENSITY` when spawned.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>

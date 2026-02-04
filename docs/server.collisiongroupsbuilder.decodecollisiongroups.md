@@ -4,7 +4,7 @@
 
 ## CollisionGroupsBuilder.decodeCollisionGroups() method
 
-Decodes a set of collision groups into a set of their string equivalents.
+Decodes collision groups into their string equivalents.
 
 **Signature:**
 
@@ -52,4 +52,6 @@ The set of collision groups to decode.
 [DecodedCollisionGroups](./server.decodedcollisiongroups.md)
 
 A set of collision groups represented as their string equivalents.
+
+\*\*Category:\*\* Physics
 

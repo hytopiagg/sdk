@@ -6,6 +6,8 @@
 
 Represents a 3-dimensional vector.
 
+When to use: performance-sensitive 3D math and transforms. Do NOT use for: immutable math; most methods mutate the instance.
+
 **Signature:**
 
 ```typescript
@@ -17,7 +19,11 @@ export default class Vector3 extends Float32Array implements Vector3Like
 
 ## Remarks
 
-All vector methods result in mutation of the vector instance. This class extends `Float32Array` to provide an efficient way to create and manipulate a 3-dimensional vector. Various convenience methods are provided for common vector operations.
+All vector methods result in mutation of the vector instance. This class extends `Float32Array` to provide an efficient way to create and manipulate a 3-dimensional vector.
+
+Pattern: reuse instances (and temporary vectors) to reduce allocations. Anti-pattern: storing references and assuming value semantics.
+
+\*\*Category:\*\* Math
 
 ## Constructors
 

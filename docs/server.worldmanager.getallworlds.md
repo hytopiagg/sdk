@@ -4,7 +4,7 @@
 
 ## WorldManager.getAllWorlds() method
 
-Gets all worlds.
+Gets all worlds currently managed by the server.
 
 **Signature:**
 
@@ -16,4 +16,6 @@ getAllWorlds(): World[];
 [World](./server.world.md)<!-- -->\[\]
 
 All worlds.
+
+\*\*Category:\*\* Core
 

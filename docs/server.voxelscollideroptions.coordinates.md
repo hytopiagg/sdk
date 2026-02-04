@@ -6,6 +6,8 @@
 
 The coordinate of each voxel in the collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

@@ -4,7 +4,9 @@
 
 ## Player.setPersistedData() method
 
-Set the persisted data for the player. This data can later be retrieved using [Player.getPersistedData()](./server.player.getpersisteddata.md)<!-- -->, even if a player disconnects and rejoin a game in the future, or joins a different HYTOPIA managed lobby of your game.
+Merges data into the player's persisted data cache.
+
+Use for: saving progress, inventory, or other player-specific state. Do NOT use for: large binary data or per-tick updates.
 
 **Signature:**
 
@@ -42,7 +44,13 @@ Record&lt;string, unknown&gt;
 
 </td><td>
 
-The data to set.
+The data to merge into the persisted data.
+
+\*\*Requires:\*\* Player persistence must have been loaded before calling.
+
+\*\*Side effects:\*\* Mutates the in-memory persistence cache for this player.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -51,9 +59,7 @@ The data to set.
 
 void
 
-The persisted data for the player.
-
 ## Remarks
 
-This method is asynchronous and returns a promise that resolves to the player data. Data is set using shallow merge of the existing data. It is recommended that you provide a changed data object for your saved data structure rather than the entire data object to avoid edge cases with data persistence or overwrites.
+Data is merged shallowly into the cached persistence object.
 

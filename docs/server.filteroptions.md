@@ -4,7 +4,11 @@
 
 ## FilterOptions type
 
-Filter options for various operations like raycasting and intersections.
+Filter options for raycasting and intersection queries.
+
+Use for: scoping physics queries to specific colliders or groups. Do NOT use for: persistent collision configuration; use `CollisionGroupsBuilder`<!-- -->.
+
+\*\*Category:\*\* Physics
 
 **Signature:**
 

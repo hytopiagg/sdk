@@ -6,6 +6,10 @@
 
 The options for a block collider.
 
+Use for: axis-aligned box colliders. Do NOT use for: other shapes; use the matching collider option type.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript
@@ -52,6 +56,8 @@ Description
 </td><td>
 
 _(Optional)_ The half extents of the block collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

@@ -4,7 +4,7 @@
 
 ## PlayerCamera.setOffset() method
 
-Sets the relative offset of the camera from the entity or position it is attached to.
+Sets the relative offset of the camera from its attachment target.
 
 **Signature:**
 
@@ -43,6 +43,12 @@ offset
 </td><td>
 
 The offset to set.
+
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerCameraEvent.SET_OFFSET`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>

@@ -6,6 +6,8 @@
 
 Data for contact forces.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

@@ -44,6 +44,8 @@ boolean
 
 Whether the rigid body is sleeping.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

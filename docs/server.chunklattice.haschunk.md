@@ -4,7 +4,7 @@
 
 ## ChunkLattice.hasChunk() method
 
-Check if a chunk exists for a given global coordinate.
+Checks if a chunk exists for a given global coordinate.
 
 **Signature:**
 
@@ -52,4 +52,6 @@ The global coordinate of the chunk to check.
 boolean
 
 Whether the chunk exists.
+
+\*\*Category:\*\* Blocks
 

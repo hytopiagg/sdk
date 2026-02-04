@@ -4,7 +4,9 @@
 
 ## Entity.isModelEntity property
 
-Whether the entity is a model entity.
+Whether this entity is a model entity.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

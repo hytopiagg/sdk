@@ -6,6 +6,8 @@
 
 The bounciness of the collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

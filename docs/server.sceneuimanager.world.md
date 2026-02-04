@@ -6,6 +6,8 @@
 
 The world the SceneUIManager is for.
 
+\*\*Category:\*\* UI
+
 **Signature:**
 
 ```typescript

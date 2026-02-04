@@ -69,3 +69,7 @@ boolean
 
 `true` if any listeners were found and invoked, `false` otherwise.
 
+\*\*Side effects:\*\* Invokes listeners registered for the event type.
+
+\*\*Category:\*\* Events
+

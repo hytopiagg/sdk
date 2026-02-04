@@ -60,6 +60,8 @@ listener
 
 The listener function to remove.
 
+\*\*Category:\*\* Events
+
 
 </td></tr>
 </tbody></table>

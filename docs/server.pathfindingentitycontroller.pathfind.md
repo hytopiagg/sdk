@@ -4,7 +4,9 @@
 
 ## PathfindingEntityController.pathfind() method
 
-Calculate a path and move to the target if a path is found. Returns true if a path is found, false if no path is found.
+Calculates a path and moves to the target if a path is found.
+
+Use for: one-shot navigation to a destination. Do NOT use for: high-frequency replanning; it is synchronous.
 
 **Signature:**
 
@@ -83,7 +85,13 @@ _(Optional)_ The pathfinding options.
 
 boolean
 
-Whether a path was found.
+True if a path was found, false otherwise.
+
+\*\*Requires:\*\* The controller must be attached to a spawned entity in a world.
+
+\*\*Side effects:\*\* Starts movement and facing if a path is found.
+
+\*\*Category:\*\* Controllers
 
 ## Remarks
 

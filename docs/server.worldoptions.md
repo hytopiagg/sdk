@@ -6,11 +6,19 @@
 
 Options for creating a World instance.
 
+Use for: initializing a world and its environment at construction time. Do NOT use for: runtime changes; use the corresponding `set*` methods on `World`<!-- -->.
+
 **Signature:**
 
 ```typescript
 export interface WorldOptions 
 ```
+
+## Remarks
+
+Options are applied once at construction time. For runtime changes, use the corresponding `set*` methods on `World`<!-- -->.
+
+\*\*Category:\*\* Core
 
 ## Properties
 

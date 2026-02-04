@@ -6,6 +6,8 @@
 
 Wakes up the rigid body. Physics otherwise optimizes waking it when necessary.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

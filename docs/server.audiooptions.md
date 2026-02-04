@@ -6,6 +6,12 @@
 
 Options for creating an Audio instance.
 
+Positional audio can be configured via `AudioOptions.attachedToEntity` or `AudioOptions.position`<!-- -->.
+
+Use for: configuring audio before calling `Audio.play`<!-- -->. Do NOT use for: runtime updates after playback starts; use `Audio.set*` methods.
+
+\*\*Category:\*\* Audio
+
 **Signature:**
 
 ```typescript

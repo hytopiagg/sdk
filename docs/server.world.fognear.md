@@ -6,6 +6,8 @@
 
 The minimum distance from the camera to start applying fog.
 
+\*\*Category:\*\* Core
+
 **Signature:**
 
 ```typescript

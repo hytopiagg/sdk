@@ -6,6 +6,8 @@
 
 Represents an entity controlled by a player in a world.
 
+When to use: custom player avatars that respond to player input. Do NOT use for: non-player NPCs; use `Entity` with a controller instead.
+
 **Signature:**
 
 ```typescript
@@ -15,7 +17,7 @@ export default class PlayerEntity extends Entity
 
 ## Remarks
 
-Player entities extend the [Entity](./server.entity.md) class. They can be created and assigned to a player at anytime during gameplay, but most commonly when a player joins a world. PlayerEntity expects a controller to be set prior to spawning. Without setting a controller, the player entity will not respond to player inputs and throw an error.
+Player entities extend `Entity`<!-- -->. They expect a controller to be set before spawning. Without a controller, player input cannot be processed.
 
 ## Example
 
@@ -33,6 +35,7 @@ world.onPlayerJoin = player => {
   playerEntity.spawn(world, { x: 10, y: 20, z: 15 });
 };
 ```
+\*\*Category:\*\* Entities
 
 ## Constructors
 
@@ -108,7 +111,9 @@ boolean
 
 </td><td>
 
-Whether tickWithPlayerInput() is called during the entity's tick.
+Whether `tickWithPlayerInput()` is called during the entity's tick.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -131,6 +136,8 @@ Whether tickWithPlayerInput() is called during the entity's tick.
 
 The SceneUI instance for the player entity's nametag.
 
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -150,7 +157,9 @@ The SceneUI instance for the player entity's nametag.
 
 </td><td>
 
-The player the player entity is assigned to and controlled by.
+The player this entity is assigned to and controlled by.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -184,7 +193,9 @@ Description
 
 </td><td>
 
-Sets whether tickWithPlayerInput() is called during the entity's tick. Disabling this effectively disables player control of the entity.
+Enables or disables `tickWithPlayerInput()` during the entity's tick.
+
+Use for: temporarily disabling player control (cutscenes, menus, stuns).
 
 
 </td></tr>

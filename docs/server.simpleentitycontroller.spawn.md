@@ -4,7 +4,7 @@
 
 ## SimpleEntityController.spawn() method
 
-Override of the [BaseEntityController.spawn()](./server.baseentitycontroller.spawn.md) method. Starts the set idle animations (if any) when the entity is spawned.
+Override of the `BaseEntityController.spawn` method. Starts the set idle animations (if any) when the entity is spawned.
 
 **Signature:**
 
@@ -43,6 +43,8 @@ entity
 </td><td>
 
 The entity that was spawned.
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>

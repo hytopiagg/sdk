@@ -6,6 +6,8 @@
 
 Manages block textures and block texture atlas generation of the game.
 
+When to use: querying texture atlas UVs and transparency hints for blocks. Do NOT use for: runtime texture modifications; regenerate atlas offline in dev.
+
 **Signature:**
 
 ```typescript
@@ -14,7 +16,9 @@ export default class BlockTextureRegistry
 
 ## Remarks
 
-The BlockTextureRegistry is created internally as a global singletone accessible with the static property `BlockTextureRegistry.instance`<!-- -->.
+The BlockTextureRegistry is created internally as a global singleton accessible via `BlockTextureRegistry.instance`<!-- -->. The atlas is preloaded during server startup and cached in memory.
+
+Pattern: call `BlockTextureRegistry.hasBlockTexture` before lookup to avoid warnings. Anti-pattern: assuming missing textures are silently ignored.
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `BlockTextureRegistry` class.
 
@@ -27,6 +31,7 @@ import { BlockTextureRegistry } from 'hytopia';
 const blockTextureRegistry = BlockTextureRegistry.instance;
 const metadata = blockTextureRegistry.getBlockTextureMetadata('blocks/stone.png');
 ```
+\*\*Category:\*\* Textures
 
 ## Properties
 
@@ -66,7 +71,11 @@ boolean
 
 </td><td>
 
-Whether to generate the atlas if needed. Defaults to `true` in development, `false` in production.
+Whether to generate the atlas if needed.
+
+Defaults to `true` in development, `false` in production.
+
+\*\*Category:\*\* Textures
 
 
 </td></tr>
@@ -90,6 +99,8 @@ Whether to generate the atlas if needed. Defaults to `true` in development, `fal
 </td><td>
 
 The global BlockTextureRegistry instance as a singleton.
+
+\*\*Category:\*\* Textures
 
 
 </td></tr>

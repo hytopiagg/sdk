@@ -69,7 +69,9 @@ The handle of the second collider.
 
 The contact manifolds, or an empty array if no contact.
 
+\*\*Category:\*\* Physics
+
 ## Remarks
 
-\*\*Sensors:\*\* Returns empty array for contacts involving sensors (sensors don't generate contact manifolds).
+Returns an empty array for sensor contacts (sensors do not generate manifolds).
 

@@ -4,10 +4,17 @@
 
 ## PlayerCamera.modelHiddenNodes property
 
-The nodes of the model the camera is attached to that will not be rendered for the player. Uses case insensitive substring matching.
+Model nodes that will not be rendered for this player.
 
 **Signature:**
 
 ```typescript
 get modelHiddenNodes(): Set<string>;
 ```
+
+## Remarks
+
+Uses case-insensitive substring matching.
+
+\*\*Category:\*\* Players
+

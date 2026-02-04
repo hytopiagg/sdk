@@ -4,7 +4,9 @@
 
 ## BlockType.lightLevel property
 
-The light emission level.
+The light emission level (0-15).
+
+\*\*Category:\*\* Blocks
 
 **Signature:**
 

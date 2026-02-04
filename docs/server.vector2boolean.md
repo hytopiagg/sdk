@@ -6,6 +6,8 @@
 
 A 2-dimensional vector of boolean values.
 
+\*\*Category:\*\* Math
+
 **Signature:**
 
 ```typescript

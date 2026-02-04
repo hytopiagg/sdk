@@ -4,7 +4,9 @@
 
 ## Player.setInteractEnabled() method
 
-Sets whether the players click/taps will cause interacts with blocks or entities.
+Enables or disables interaction clicks/taps for this player.
+
+Use for: cutscenes, menus, or temporary input blocking.
 
 **Signature:**
 
@@ -42,7 +44,9 @@ boolean
 
 </td><td>
 
-Whether the players click/taps will cause interacts with blocks or entities.
+True to allow interactions, false to block them.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>

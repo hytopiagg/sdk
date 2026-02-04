@@ -6,6 +6,8 @@
 
 Block texture metadata including UVs and rendering hints.
 
+\*\*Category:\*\* Textures
+
 **Signature:**
 
 ```typescript

@@ -4,7 +4,9 @@
 
 ## PlayerUI.lockPointer() method
 
-Locks or unlocks the player's mouse pointer on Desktop. If the pointer is unlocked with `lockPointer(false)`<!-- -->, the player will not be able to use in-game inputs or camera controls from the mouse pointer until `player.ui.lockPointer(true)`<!-- -->, or in your game's client UI html with `hytopia.lockPointer(true)`<!-- -->.
+Locks or unlocks the player's mouse pointer on desktop.
+
+Use for: controlling when mouse input is captured. Do NOT use for: mobile devices (pointer lock has no effect).
 
 **Signature:**
 
@@ -42,7 +44,13 @@ boolean
 
 </td><td>
 
-Set true to lock the pointer, false to unlock it.
+True to lock the pointer, false to unlock it.
+
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerUIEvent.LOCK_POINTER`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -53,5 +61,5 @@ void
 
 ## Remarks
 
-Pointer lock has no effect on mobile devices.
+If unlocked, the player cannot use in-game mouse inputs until it is locked again.
 

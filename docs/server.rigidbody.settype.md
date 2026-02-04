@@ -6,6 +6,8 @@
 
 Sets the type of the rigid body.
 
+Use for: switching between dynamic, fixed, and kinematic behavior. Do NOT use for: per-tick motion changes; prefer velocity or forces.
+
 **Signature:**
 
 ```typescript
@@ -43,6 +45,8 @@ type
 </td><td>
 
 The type of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

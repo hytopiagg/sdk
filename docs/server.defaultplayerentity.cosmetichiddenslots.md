@@ -6,6 +6,8 @@
 
 The cosmetic slots that are hidden.
 
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,10 @@
 
 The options for a kinematic velocity rigid body.
 
+Use for: moving bodies by setting velocities each tick. Do NOT use for: physics-driven motion; use dynamic bodies instead.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript
@@ -53,6 +57,8 @@ Description
 
 _(Optional)_ The angular velocity of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -71,6 +77,8 @@ _(Optional)_ The angular velocity of the rigid body.
 </td><td>
 
 _(Optional)_ The linear velocity of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

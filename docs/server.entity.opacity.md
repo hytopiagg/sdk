@@ -4,7 +4,9 @@
 
 ## Entity.opacity property
 
-The opacity of the entity between 0 and 1. 0 is fully transparent, 1 is fully opaque.
+The opacity of the entity between 0 and 1.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

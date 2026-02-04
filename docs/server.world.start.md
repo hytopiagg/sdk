@@ -4,7 +4,13 @@
 
 ## World.start() method
 
-Starts the world loop, which begins ticking physics, entities, etc.
+Starts the world loop, which begins ticking physics, entities, and networking.
+
+Use for: resuming a previously stopped world. Do NOT use for: standard world creation when using `WorldManager.createWorld` (it auto-starts).
+
+\*\*Side effects:\*\* Emits `WorldEvent.START`<!-- -->.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

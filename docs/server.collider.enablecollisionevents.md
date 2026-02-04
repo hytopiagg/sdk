@@ -44,6 +44,8 @@ boolean
 
 Whether collision events are enabled.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

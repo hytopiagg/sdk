@@ -6,6 +6,10 @@
 
 The options for a wedge collider.
 
+Use for: wedge-shaped colliders (inclined planes). Do NOT use for: other shapes; use the matching collider option type.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript
@@ -52,6 +56,8 @@ Description
 </td><td>
 
 _(Optional)_ The extents of the wedge collider, defining full width (x), height (y), and length (z).
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

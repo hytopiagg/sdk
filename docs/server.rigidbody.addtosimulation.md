@@ -44,6 +44,10 @@ simulation
 
 The simulation to add the rigid body to.
 
+\*\*Side effects:\*\* Creates the underlying physics body and registers child colliders.
+
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>
@@ -53,5 +57,5 @@ void
 
 ## Remarks
 
-\*\*Child colliders:\*\* Also adds all pending child colliders to the simulation.
+\*\*Child colliders:\*\* Also adds all pending child colliders to the simulation. After this call, the rigid body is simulated and can respond to forces.
 

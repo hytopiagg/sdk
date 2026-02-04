@@ -44,10 +44,18 @@ string\[\]
 
 _(Optional)_ The animations to exclude from being stopped.
 
+\*\*Requires:\*\* Entity must be spawned.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>
 **Returns:**
 
 void
+
+## Remarks
+
+Model entities only; no effect for block entities.
 

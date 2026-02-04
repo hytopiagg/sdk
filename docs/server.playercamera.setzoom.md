@@ -44,6 +44,12 @@ number
 
 The zoom to set, 0 to infinity.
 
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerCameraEvent.SET_ZOOM`<!-- -->.
+
+\*\*Category:\*\* Players
+
 
 </td></tr>
 </tbody></table>

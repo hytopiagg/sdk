@@ -6,6 +6,8 @@
 
 Whether the rigid body has continuous collision detection enabled.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

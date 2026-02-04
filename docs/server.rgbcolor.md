@@ -4,7 +4,9 @@
 
 ## RgbColor interface
 
-A RGB color. r, g and b expect a value between 0 and 255.
+An RGB color. `r`<!-- -->, `g`<!-- -->, and `b` expect a value between 0 and 255.
+
+\*\*Category:\*\* Types
 
 **Signature:**
 

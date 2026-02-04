@@ -4,7 +4,7 @@
 
 ## Chunk.globalCoordinateToOriginCoordinate() method
 
-Convert a global coordinate to an origin coordinate.
+Converts a global coordinate to a chunk origin coordinate.
 
 **Signature:**
 
@@ -52,4 +52,6 @@ The global coordinate to convert.
 [Vector3Like](./server.vector3like.md)
 
 The origin coordinate.
+
+\*\*Category:\*\* Blocks
 

@@ -6,6 +6,10 @@
 
 The base options for a rigid body.
 
+Use for: initial rigid body configuration when creating entities or bodies. Do NOT use for: runtime changes; use `RigidBody` setter methods instead.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript
@@ -50,7 +54,9 @@ Description
 
 </td><td>
 
-_(Optional)_ The colliders of the rigid body, provided as [ColliderOptions](./server.collideroptions.md)<!-- -->.
+_(Optional)_ The colliders of the rigid body, provided as `ColliderOptions`<!-- -->.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -71,6 +77,8 @@ boolean
 
 _(Optional)_ Whether the rigid body is enabled.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -89,6 +97,8 @@ _(Optional)_ Whether the rigid body is enabled.
 </td><td>
 
 _(Optional)_ The position of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -109,6 +119,8 @@ _(Optional)_ The position of the rigid body.
 
 _(Optional)_ The rotation of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -128,6 +140,8 @@ _(Optional)_ The rotation of the rigid body.
 
 _(Optional)_ The simulation the rigid body is in. If provided, the rigid body will be automatically added to the simulation.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -145,7 +159,9 @@ _(Optional)_ The simulation the rigid body is in. If provided, the rigid body wi
 
 </td><td>
 
-_(Optional)_ The type of the rigid body, defaults to [RigidBodyType.DYNAMIC](./server.rigidbodytype.md)<!-- -->.
+_(Optional)_ The type of the rigid body, defaults to `RigidBodyType.DYNAMIC`<!-- -->.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

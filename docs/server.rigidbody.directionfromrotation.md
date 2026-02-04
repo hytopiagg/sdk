@@ -6,6 +6,8 @@
 
 The direction from the rotation of the rigid body. (-Z identity)
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,8 @@
 
 Creates a new block type instance.
 
+Use for: defining a block type before registering it with a `BlockTypeRegistry`<!-- -->.
+
 **Signature:**
 
 ```typescript
@@ -43,6 +45,8 @@ options
 </td><td>
 
 _(Optional)_ The options for the block type.
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>

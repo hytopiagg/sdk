@@ -6,6 +6,8 @@
 
 Whether the collider is a sensor.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

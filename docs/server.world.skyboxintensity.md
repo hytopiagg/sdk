@@ -6,6 +6,8 @@
 
 The intensity of the world's skybox brightness.
 
+\*\*Category:\*\* Core
+
 **Signature:**
 
 ```typescript

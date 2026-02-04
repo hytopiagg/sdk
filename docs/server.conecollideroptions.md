@@ -6,6 +6,10 @@
 
 The options for a cone collider.
 
+Use for: cone-shaped colliders. Do NOT use for: other shapes; use the matching collider option type.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript
@@ -53,6 +57,8 @@ number
 
 _(Optional)_ The half height of the cone collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -71,6 +77,8 @@ number
 </td><td>
 
 _(Optional)_ The radius of the cone collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

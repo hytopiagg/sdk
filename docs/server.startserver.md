@@ -4,7 +4,9 @@
 
 ## startServer() function
 
-The entry point for running game setup and starting the game server.
+Boots the server runtime, runs your init callback, and starts accepting connections.
+
+Use for: normal server startup in your entry file. Do NOT use for: restarting an already running server within the same process.
 
 **Signature:**
 
@@ -42,7 +44,9 @@ init
 
 </td><td>
 
-A function that initializes the game. The function can take no parameters to just initialize game logic, or it can accept a world parameter. If it accepts a world parameter, a default world will be automatically created and passed to the function. The init function can be async - the server will wait for it to complete before accepting connections.
+Game initialization callback. It can be sync or async. If it accepts a world parameter, the default world is created and passed in.
+
+\*\*Requires:\*\* Call once per process before using gameplay systems.
 
 
 </td></tr>
@@ -53,7 +57,7 @@ void
 
 ## Remarks
 
-This function should always be called first when initializing your game. It will internally handle initialization of the physics engine and other systems required systems. All of your game setup logic should be executed in the init function.
+Initialization order: 1) Physics engine (RAPIER) 2) Block texture atlas preload 3) Model preload 4) Your `init` callback (awaited if async) 5) Server starts accepting connections
 
-Initialization order: 1. Physics engine (RAPIER) initialization 2. Block texture atlas preload 3. Model preload 4. Your init function execution (server waits if async) 5. Server starts accepting connections
+If `init` declares a `world` parameter, a default world is created and provided.
 

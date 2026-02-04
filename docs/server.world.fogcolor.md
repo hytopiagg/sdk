@@ -4,7 +4,9 @@
 
 ## World.fogColor property
 
-The color of the fog, if not explicitly set, defaults to ambient light color.
+The fog color, or undefined to use ambient light color.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

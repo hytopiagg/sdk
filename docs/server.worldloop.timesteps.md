@@ -6,6 +6,8 @@
 
 The fixed timestep of the world loop in seconds.
 
+\*\*Category:\*\* Core
+
 **Signature:**
 
 ```typescript

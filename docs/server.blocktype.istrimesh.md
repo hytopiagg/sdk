@@ -4,7 +4,9 @@
 
 ## BlockType.isTrimesh property
 
-Whether the block type is a trimesh block.
+Whether the block type uses a trimesh collider.
+
+\*\*Category:\*\* Blocks
 
 **Signature:**
 

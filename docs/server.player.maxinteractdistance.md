@@ -4,10 +4,17 @@
 
 ## Player.maxInteractDistance property
 
-The maximum distance a player can interact with entities or blocks. The raycast distance in blocks for interactions. Defaults to 20.
+The maximum distance a player can interact with entities or blocks.
 
 **Signature:**
 
 ```typescript
 get maxInteractDistance(): number;
 ```
+
+## Remarks
+
+Measured in world blocks. Defaults to `20`<!-- -->.
+
+\*\*Category:\*\* Players
+

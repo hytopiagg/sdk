@@ -6,6 +6,8 @@
 
 The number of colliders in the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

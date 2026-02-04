@@ -69,3 +69,7 @@ _(Optional)_ Optional scaling to apply to the trimesh. Defaults to 1 for all axe
 
 The trimesh of the model.
 
+\*\*Requires:\*\* Model data must be loaded (server startup).
+
+\*\*Category:\*\* Models
+

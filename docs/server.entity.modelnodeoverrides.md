@@ -4,7 +4,9 @@
 
 ## Entity.modelNodeOverrides property
 
-The node overrides of the entity's model. Mapped by name to the model node override.
+The node overrides of the entity's model, mapped by name.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

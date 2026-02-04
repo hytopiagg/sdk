@@ -6,6 +6,8 @@
 
 Gets the most adjacent neighbor global coordinate of this block based on a relative hit point, typically from a raycast.
 
+Use for: placing a new block on the face that was hit.
+
 **Signature:**
 
 ```typescript
@@ -42,7 +44,7 @@ hitPoint
 
 </td><td>
 
-The hit point on this block to get the neighbor coordinate from.
+The hit point on this block (global coordinates).
 
 
 </td></tr>
@@ -51,5 +53,7 @@ The hit point on this block to get the neighbor coordinate from.
 
 [Vector3Like](./server.vector3like.md)
 
-A neighbor global coordinate of this block based on the hit point.
+The adjacent block coordinate in world space.
+
+\*\*Category:\*\* Blocks
 

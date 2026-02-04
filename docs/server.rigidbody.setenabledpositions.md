@@ -44,6 +44,8 @@ enabledPositions
 
 Whether the rigid body has enabled positional movement.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

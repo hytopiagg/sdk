@@ -6,6 +6,8 @@
 
 The intensity of the ambient light.
 
+\*\*Category:\*\* Core
+
 **Signature:**
 
 ```typescript

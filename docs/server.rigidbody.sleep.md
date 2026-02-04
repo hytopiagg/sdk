@@ -6,6 +6,8 @@
 
 Explicitly puts the rigid body to sleep. Physics otherwise optimizes sleeping.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

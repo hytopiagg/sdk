@@ -44,10 +44,16 @@ position
 
 The position of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>
 **Returns:**
 
 void
+
+## Remarks
+
+This teleports the body to the given position. For smooth motion, prefer velocities or forces (dynamic) or next kinematic targets (kinematic).
 

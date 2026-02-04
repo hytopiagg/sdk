@@ -4,7 +4,7 @@
 
 ## PlayerCamera.setModelHiddenNodes() method
 
-Sets the nodes of the model the camera is attached to that will not be rendered for the player. Uses case insensitive substring matching.
+Sets model nodes that will not be rendered for this player.
 
 **Signature:**
 
@@ -42,7 +42,13 @@ string\[\]
 
 </td><td>
 
-Determines nodes to hide that match these case insensitive substrings.
+Substrings of node names to hide.
+
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerCameraEvent.SET_MODEL_HIDDEN_NODES`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -53,5 +59,5 @@ void
 
 ## Remarks
 
-\*\*Replaces:\*\* Replaces the current hidden nodes set (not a merge).
+Uses case-insensitive substring matching and replaces the current hidden set.
 

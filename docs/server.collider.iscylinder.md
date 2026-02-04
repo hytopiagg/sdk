@@ -6,6 +6,8 @@
 
 Whether the collider is a cylinder collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

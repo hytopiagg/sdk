@@ -44,6 +44,8 @@ entity
 
 The entity being detached.
 
+\*\*Category:\*\* Controllers
+
 
 </td></tr>
 </tbody></table>

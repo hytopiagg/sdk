@@ -4,10 +4,17 @@
 
 ## Player.isInteractEnabled property
 
-Whether the players click/taps will cause interacts with blocks or entities. Defaults to true.
+Whether player click/tap input triggers interactions.
 
 **Signature:**
 
 ```typescript
 get isInteractEnabled(): boolean;
 ```
+
+## Remarks
+
+Defaults to `true`<!-- -->.
+
+\*\*Category:\*\* Players
+

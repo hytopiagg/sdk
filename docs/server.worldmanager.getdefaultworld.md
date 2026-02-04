@@ -4,7 +4,9 @@
 
 ## WorldManager.getDefaultWorld() method
 
-Gets the default world.
+Gets the default world, creating it if it does not exist.
+
+Use for: a single-world game or as a safe fallback when routing players. Do NOT use for: creating specialized worlds with unique options.
 
 **Signature:**
 
@@ -17,7 +19,11 @@ getDefaultWorld(): World;
 
 The default world.
 
+\*\*Side effects:\*\* Creates and starts a world if it does not yet exist.
+
+\*\*Category:\*\* Core
+
 ## Remarks
 
-\*\*Lazy-creates:\*\* Creates a default world if none exists.
+Lazy-creates and auto-starts a default world if none exists.
 

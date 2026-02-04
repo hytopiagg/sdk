@@ -4,7 +4,9 @@
 
 ## PathfindAbortCallback type
 
-A callback function called when the pathfinding algorithm aborts.
+Callback invoked when pathfinding aborts.
+
+\*\*Category:\*\* Controllers
 
 **Signature:**
 

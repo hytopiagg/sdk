@@ -44,6 +44,8 @@ options
 
 The options for the default player entity.
 
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>

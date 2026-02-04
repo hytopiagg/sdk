@@ -4,7 +4,11 @@
 
 ## EntityOptions type
 
-The options for creating an Entity instance.
+The options for creating an `Entity` instance.
+
+Use for: constructing an entity; choose `BlockEntityOptions` or `ModelEntityOptions`<!-- -->. Do NOT use for: mutating entity state after spawn; use entity setters and methods.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

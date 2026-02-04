@@ -6,6 +6,10 @@
 
 Removes all key-value pairs from the IterationMap. Highly optimized for the common "build up, iterate, clear" pattern.
 
+\*\*Side effects:\*\* Clears the backing map and value array.
+
+\*\*Category:\*\* Utilities
+
 **Signature:**
 
 ```typescript

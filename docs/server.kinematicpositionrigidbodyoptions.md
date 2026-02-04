@@ -6,6 +6,10 @@
 
 The options for a kinematic position rigid body.
 
+Use for: moving bodies by setting target positions each tick. Do NOT use for: physics-driven motion; use dynamic bodies instead.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

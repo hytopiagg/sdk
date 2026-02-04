@@ -6,6 +6,8 @@
 
 The controller for the entity.
 
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

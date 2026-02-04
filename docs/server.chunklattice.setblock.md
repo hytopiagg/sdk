@@ -4,7 +4,9 @@
 
 ## ChunkLattice.setBlock() method
 
-Set the block at a global coordinate by block type id, automatically creating a chunk if it doesn't exist. Use block type id 0 for air (to remove a block).
+Sets the block at a global coordinate by block type ID.
+
+Use for: incremental terrain edits. Do NOT use for: bulk terrain loading; use `ChunkLattice.initializeBlocks`<!-- -->.
 
 **Signature:**
 
@@ -58,7 +60,7 @@ number
 
 </td><td>
 
-The block type id to set. Use 0 to remove the block and replace with air.
+The block type ID to set. Use 0 to remove the block and replace with air.
 
 
 </td></tr>
@@ -76,6 +78,10 @@ blockRotation
 
 _(Optional)_ The rotation of the block.
 
+\*\*Side effects:\*\* Emits `ChunkLatticeEvent.SET_BLOCK` and mutates block colliders.
+
+\*\*Category:\*\* Blocks
+
 
 </td></tr>
 </tbody></table>
@@ -85,7 +91,9 @@ void
 
 ## Remarks
 
-\*\*Collider updates:\*\* Manages physics colliders automatically. For voxel block types, updates the existing collider. For trimesh block types, recreates the entire collider.
+\*\*Air:\*\* Use block type ID `0` to remove a block (set to air).
+
+\*\*Collider updates:\*\* For voxel block types, updates the existing collider. For trimesh block types, recreates the entire collider.
 
 \*\*Removes previous:\*\* If replacing an existing block, removes it from its collider first. If the previous block type has no remaining blocks, its collider is removed from simulation.
 

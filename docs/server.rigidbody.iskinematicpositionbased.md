@@ -6,6 +6,8 @@
 
 Whether the rigid body is kinematic position based.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

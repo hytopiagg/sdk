@@ -17,11 +17,11 @@ export default class Audio extends EventRouter implements protocol.Serializable
 
 ## Remarks
 
-Audio instances are created directly as instances. They support a variety of configuration options through the [AudioOptions](./server.audiooptions.md) constructor argument.
+Audio instances are created directly as instances. They support a variety of configuration options through the `AudioOptions` constructor argument.
 
 <h2>Events</h2>
 
-This class is an EventRouter, and instances of it emit events with payloads listed under [AudioEventPayloads](./server.audioeventpayloads.md)
+This class is an EventRouter, and instances of it emit events with payloads listed under `AudioEventPayloads`
 
 ## Example
 
@@ -33,6 +33,7 @@ This class is an EventRouter, and instances of it emit events with payloads list
   volume: 0.5,
 })).play(world);
 ```
+\*\*Category:\*\* Audio
 
 ## Constructors
 

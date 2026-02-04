@@ -6,6 +6,8 @@
 
 The linear damping of the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

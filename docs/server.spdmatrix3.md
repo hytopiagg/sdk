@@ -6,6 +6,8 @@
 
 A 3x3 symmetric positive-definite matrix for spatial dynamics.
 
+\*\*Category:\*\* Math
+
 **Signature:**
 
 ```typescript

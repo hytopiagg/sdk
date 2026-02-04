@@ -17,3 +17,5 @@ IterableIterator&lt;\[K, V\]&gt;
 
 An iterator for the entries.
 
+\*\*Category:\*\* Utilities
+

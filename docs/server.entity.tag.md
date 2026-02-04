@@ -4,7 +4,9 @@
 
 ## Entity.tag property
 
-An arbitrary identifier tag of the entity. Useful for your own logic.
+An arbitrary identifier tag for your own logic.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

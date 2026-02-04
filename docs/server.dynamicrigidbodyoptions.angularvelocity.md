@@ -6,6 +6,8 @@
 
 The angular velocity of the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

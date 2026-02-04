@@ -4,7 +4,7 @@
 
 ## ChunkLattice.getBlockTypeCount() method
 
-Get the number of blocks of a specific block type in the lattice.
+Gets the number of blocks of a specific block type in the lattice.
 
 **Signature:**
 
@@ -42,7 +42,7 @@ number
 
 </td><td>
 
-The block type id to get the count of.
+The block type ID to count.
 
 
 </td></tr>
@@ -52,4 +52,6 @@ The block type id to get the count of.
 number
 
 The number of blocks of the block type.
+
+\*\*Category:\*\* Blocks
 

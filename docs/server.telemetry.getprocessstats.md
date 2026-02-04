@@ -53,3 +53,5 @@ Record&lt;string, any&gt;
 
 Process statistics including heap usage, RSS memory, and capacity metrics.
 
+\*\*Category:\*\* Telemetry
+

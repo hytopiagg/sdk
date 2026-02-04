@@ -6,6 +6,8 @@
 
 The name of the world.
 
+\*\*Category:\*\* Core
+
 **Signature:**
 
 ```typescript

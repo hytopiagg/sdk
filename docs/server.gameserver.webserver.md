@@ -6,6 +6,8 @@
 
 The web server for the game server.
 
+\*\*Category:\*\* Core
+
 **Signature:**
 
 ```typescript

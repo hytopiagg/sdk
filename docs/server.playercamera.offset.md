@@ -4,7 +4,9 @@
 
 ## PlayerCamera.offset property
 
-The relative offset of the camera from the entity or position it is attached to.
+The relative offset of the camera from its attachment target.
+
+\*\*Category:\*\* Players
 
 **Signature:**
 

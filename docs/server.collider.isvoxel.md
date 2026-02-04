@@ -6,6 +6,8 @@
 
 Whether the collider is a voxel collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,8 @@
 
 Manages SceneUI instances in a world.
 
+When to use: querying or bulk-unloading scene UI elements in a world. Do NOT use for: player HUD/menus; use `PlayerUI` for per-player UI.
+
 **Signature:**
 
 ```typescript
@@ -14,7 +16,9 @@ export default class SceneUIManager
 
 ## Remarks
 
-The SceneUIManager is created internally as a singleton for each [World](./server.world.md) instance in a game server. It allows retrieval of all loaded SceneUI instances, entity attached SceneUI instances, and more.
+The SceneUIManager is created internally per `World` instance. Pattern: load scene UI for world objects and unload them when entities despawn.
+
+\*\*Category:\*\* UI
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `SceneUIManager` class.
 
@@ -60,6 +64,8 @@ Description
 
 The world the SceneUIManager is for.
 
+\*\*Category:\*\* UI
+
 
 </td></tr>
 </tbody></table>
@@ -93,6 +99,8 @@ Description
 </td><td>
 
 Retrieves all loaded SceneUI instances attached to a specific entity.
+
+Use for: cleanup or inspection of entity-bound scene UI.
 
 
 </td></tr>

@@ -53,3 +53,5 @@ The player to get the entities for.
 
 All spawned player entities in the world assigned to the player.
 
+\*\*Category:\*\* Entities
+

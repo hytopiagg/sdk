@@ -4,7 +4,7 @@
 
 ## Collider.optionsFromModelUri() method
 
-Creates a collider options object from a modelUri with best approximate shape and size.
+Creates collider options from a model URI using an approximate shape and size.
 
 **Signature:**
 
@@ -84,4 +84,10 @@ _(Optional)_ The preferred shape to use for the collider.
 [ColliderOptions](./server.collideroptions.md)
 
 The collider options object.
+
+\*\*Category:\*\* Physics
+
+## Remarks
+
+Uses model bounds and heuristics unless `preferredShape` is specified.
 

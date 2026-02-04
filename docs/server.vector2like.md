@@ -6,6 +6,8 @@
 
 A 2-dimensional vector.
 
+\*\*Category:\*\* Math
+
 **Signature:**
 
 ```typescript

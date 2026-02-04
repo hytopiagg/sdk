@@ -272,13 +272,14 @@ PLAYER
 
 ## Remarks
 
-The collision groups are used to determine which objects collide and generate collision and contact force events. The default collision groups can be used for most entity and block interactions, but you may want to create your own for more complex scenarios. Up to 15 collision groups can be registered. Collision groups use pairwise filtering using bit masks.
+Collision groups determine which objects collide and generate events. Up to 15 groups can be registered. Filtering uses pairwise bit masks:
 
-This filtering method is based on two 16-bit values: - The belongsTo groups (the 16 left-most bits of `self.0`<!-- -->). - The collidesWith mask (the 16 right-most bits of `self.0`<!-- -->).
+- The belongsTo groups (the 16 left-most bits of `self.0`<!-- -->) - The collidesWith mask (the 16 right-most bits of `self.0`<!-- -->)
 
-An interaction is allowed between two filters `a` and `b` two conditions are met simultaneously: - The belongsTo groups of `a` has at least one bit set to `1` in common with the collidesWith mask of `b`<!-- -->. - The belongsTo groups of `b` has at least one bit set to `1` in common with the collidesWith mask of `a`<!-- -->. In other words, interactions are allowed between two filter if the following condition is met:
+An interaction is allowed between two filters `a` and `b` if:
 
 ```
 ((a >> 16) & b) != 0 && ((b >> 16) & a) != 0
 ```
+\*\*Category:\*\* Physics
 

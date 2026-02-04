@@ -6,6 +6,8 @@
 
 The number of players currently connected to the server.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

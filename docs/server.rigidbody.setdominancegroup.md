@@ -44,6 +44,8 @@ number
 
 The dominance group of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

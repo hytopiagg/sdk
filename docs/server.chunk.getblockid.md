@@ -4,7 +4,7 @@
 
 ## Chunk.getBlockId() method
 
-Get the block type id at a specific local coordinate.
+Gets the block type ID at a specific local coordinate.
 
 **Signature:**
 
@@ -51,5 +51,11 @@ The local coordinate of the block to get.
 
 number
 
-The block type id.
+The block type ID.
+
+\*\*Category:\*\* Blocks
+
+## Remarks
+
+Expects local coordinates in the range 0..15 for each axis.
 

@@ -6,6 +6,10 @@
 
 The options for an error type "none" collider.
 
+Use for: explicitly disabling collider creation. Do NOT use for: physical interactions; no collider will be created.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

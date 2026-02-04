@@ -4,10 +4,17 @@
 
 ## PlayerCamera.modelShownNodes property
 
-The nodes of the model the camera is attached to that will be rendered for the player, overriding hidden nodes. Uses case insensitive substring matching.
+Model nodes that will be rendered for this player, overriding hidden nodes.
 
 **Signature:**
 
 ```typescript
 get modelShownNodes(): Set<string>;
 ```
+
+## Remarks
+
+Uses case-insensitive substring matching.
+
+\*\*Category:\*\* Players
+

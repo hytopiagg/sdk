@@ -44,6 +44,8 @@ enabledRotations
 
 Whether the rigid body has enabled rotations.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

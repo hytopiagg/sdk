@@ -4,7 +4,9 @@
 
 ## EntityManager.world property
 
-The world the entity manager is for.
+The world this manager is for.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

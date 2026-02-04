@@ -6,6 +6,8 @@
 
 Sets the next kinematic position of the rigid body.
 
+Use for: kinematic bodies driven by explicit position each tick. Do NOT use for: dynamic bodies; use forces or velocity instead.
+
 **Signature:**
 
 ```typescript
@@ -43,6 +45,10 @@ nextKinematicPosition
 </td><td>
 
 The next kinematic position of the rigid body.
+
+\*\*Requires:\*\* Rigid body must be kinematic.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

@@ -6,6 +6,8 @@
 
 Despawns the entity and all children from the world.
 
+Use for: removing entities from the world. Do NOT use for: temporary hiding; consider visibility or animations instead.
+
 **Signature:**
 
 ```typescript
@@ -24,4 +26,8 @@ void
 \*\*Cleanup:\*\* Automatically unregisters attached audios, despawns attached particle emitters, and unloads attached scene UIs from their respective managers.
 
 \*\*Simulation:\*\* Removes from physics simulation.
+
+\*\*Side effects:\*\* Emits `EntityEvent.DESPAWN` and unregisters from world managers.
+
+\*\*Category:\*\* Entities
 

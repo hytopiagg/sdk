@@ -4,6 +4,10 @@
 
 ## ModelNodeOverride type
 
+A per-node visual override for a model entity.
+
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

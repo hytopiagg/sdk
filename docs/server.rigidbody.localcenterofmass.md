@@ -6,6 +6,8 @@
 
 The local center of mass of the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

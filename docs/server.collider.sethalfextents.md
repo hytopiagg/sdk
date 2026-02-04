@@ -44,6 +44,8 @@ halfExtents
 
 The half extents of the block collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

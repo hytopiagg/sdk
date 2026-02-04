@@ -6,6 +6,8 @@
 
 The scale of the collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

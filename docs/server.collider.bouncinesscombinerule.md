@@ -6,6 +6,8 @@
 
 The bounciness combine rule of the collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

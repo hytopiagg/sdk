@@ -53,3 +53,7 @@ The URI of the texture (e.g., 'blocks/stone.png' or 'blocks/grass').
 
 Array of texture metadata, or undefined if not found.
 
+\*\*Requires:\*\* Atlas must be preloaded (server startup).
+
+\*\*Category:\*\* Textures
+

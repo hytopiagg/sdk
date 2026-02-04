@@ -4,10 +4,17 @@
 
 ## World.loop property
 
-The world loop for the world.
+The world loop that drives ticking for this world.
 
 **Signature:**
 
 ```typescript
 get loop(): WorldLoop;
 ```
+
+## Remarks
+
+Use `World.start` and `World.stop` for lifecycle control.
+
+\*\*Category:\*\* Core
+

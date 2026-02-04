@@ -4,7 +4,9 @@
 
 ## PathfindingEntityController.maxOpenSetIterations property
 
-The maximum number of open set iterations that can be processed before aborting pathfinding. Defaults to 200.
+The maximum open set iterations before aborting pathfinding.
+
+\*\*Category:\*\* Controllers
 
 **Signature:**
 

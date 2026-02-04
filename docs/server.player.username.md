@@ -6,6 +6,8 @@
 
 The unique HYTOPIA username for the player.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

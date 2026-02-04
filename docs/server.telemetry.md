@@ -4,7 +4,9 @@
 
 ## Telemetry class
 
-Manages performance telemetry and error tracking through your Sentry.io account.
+Manages performance telemetry and error tracking through your Sentry account.
+
+When to use: profiling and diagnosing slow ticks or runtime errors in production. Do NOT use for: high-volume custom metrics; use a dedicated metrics pipeline instead.
 
 **Signature:**
 
@@ -14,7 +16,9 @@ export default class Telemetry
 
 ## Remarks
 
-The Telemetry class provides low-overhead performance monitoring and error tracking through Sentry (https://sentry.io) integration and your provided Sentry DSN. It automatically tracks critical game loop operations like physics simulation, entity updates, network synchronization, and more. The system only sends telemetry data when errors or slow-tick performance issues are detected, minimizing bandwidth and storage costs.
+Provides low-overhead performance monitoring and error tracking via Sentry. The system only sends telemetry data when errors or slow-tick performance issues are detected.
+
+Pattern: initialize once at server startup and wrap critical sections with `Telemetry.startSpan`<!-- -->. Anti-pattern: creating spans inside tight loops without filtering.
 
 ## Example
 
@@ -26,12 +30,11 @@ Telemetry.initializeSentry('MY_SENTRY_PROJECT_DSN');
 // Wrap performance-critical code in spans
 Telemetry.startSpan({
   operation: TelemetrySpanOperation.CUSTOM_OPERATION,
-  attributes: { // any arbitrary attributes you want to attach to the span
+  attributes: {
     playerCount: world.playerManager.connectedPlayers.length,
     entityCount: world.entityManager.entityCount,
   },
 }, () => {
-  // Your performance-critical code here
   performExpensiveOperation();
 });
 
@@ -39,6 +42,7 @@ Telemetry.startSpan({
 const stats = Telemetry.getProcessStats();
 console.log(`Heap usage: ${stats.jsHeapUsagePercent * 100}%`);
 ```
+\*\*Category:\*\* Telemetry
 
 ## Methods
 

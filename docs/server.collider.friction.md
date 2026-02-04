@@ -6,6 +6,8 @@
 
 The friction of the collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

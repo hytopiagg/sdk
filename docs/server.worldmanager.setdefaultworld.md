@@ -4,7 +4,9 @@
 
 ## WorldManager.setDefaultWorld() method
 
-Sets the default world. This is the world players automatically join when they connect to the game.
+Sets the default world players join on connect.
+
+Use for: changing the lobby or main world at runtime. Do NOT use for: moving already connected players; use `Player.joinWorld`<!-- -->.
 
 **Signature:**
 
@@ -43,6 +45,8 @@ world
 </td><td>
 
 The world to set as the default.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>

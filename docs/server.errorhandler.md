@@ -6,11 +6,19 @@
 
 Manages error and warning logging.
 
+When to use: reporting recoverable issues or fatal errors with consistent formatting. Do NOT use for: normal control flow; prefer explicit return values or exceptions.
+
 **Signature:**
 
 ```typescript
 export default class ErrorHandler 
 ```
+
+## Remarks
+
+In production, `console.log` is disabled to reduce log spam; use `console.info` instead. Pattern: log warnings for recoverable issues and use `ErrorHandler.fatalError` for unrecoverable state. Anti-pattern: swallowing exceptions without logging context.
+
+\*\*Category:\*\* Utilities
 
 ## Methods
 

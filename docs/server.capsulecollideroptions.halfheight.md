@@ -6,6 +6,8 @@
 
 The half height of the capsule collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

@@ -4,7 +4,9 @@
 
 ## PathfindingEntityController.waypointNextIndex property
 
-The index representing the next waypoint moving towards of the current set of waypoints being followed.
+The index of the next waypoint being approached.
+
+\*\*Category:\*\* Controllers
 
 **Signature:**
 

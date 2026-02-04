@@ -6,6 +6,8 @@
 
 The simulation the collider is in, if provided the collider will automatically be added to the simulation.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

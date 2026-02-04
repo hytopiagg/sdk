@@ -6,6 +6,8 @@
 
 Whether the entity is moving from player inputs.
 
+\*\*Category:\*\* Controllers
+
 **Signature:**
 
 ```typescript

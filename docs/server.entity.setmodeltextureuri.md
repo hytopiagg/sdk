@@ -44,10 +44,18 @@ string \| undefined
 
 The texture uri of the entity's model.
 
+\*\*Side effects:\*\* Emits `EntityEvent.SET_MODEL_TEXTURE_URI` when spawned.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>
 **Returns:**
 
 void
+
+## Remarks
+
+Model entities only; no effect for block entities.
 

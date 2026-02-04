@@ -6,6 +6,8 @@
 
 The URI of the texture for the block type.
 
+\*\*Category:\*\* Blocks
+
 **Signature:**
 
 ```typescript

@@ -4,7 +4,7 @@
 
 ## Simulation.raycast() method
 
-Casts a ray through the simulation.
+Casts a ray through the simulation and returns the first hit.
 
 **Signature:**
 
@@ -101,7 +101,9 @@ _(Optional)_ The options for the raycast.
 
 A RaycastHit object containing the first block or entity hit by the ray, or null if no hit.
 
+\*\*Category:\*\* Physics
+
 ## Remarks
 
-The cast ray will stop at the the first block or entity hit within the length of the ray.
+The ray stops at the first block or entity hit within the length of the ray.
 

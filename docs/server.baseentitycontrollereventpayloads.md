@@ -6,6 +6,8 @@
 
 Event payloads for BaseEntityController emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

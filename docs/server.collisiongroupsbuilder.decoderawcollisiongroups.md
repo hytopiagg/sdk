@@ -4,7 +4,7 @@
 
 ## CollisionGroupsBuilder.decodeRawCollisionGroups() method
 
-Decodes a raw set of collision groups into a set of collision groups.
+Decodes a raw collision group mask into a set of collision groups.
 
 **Signature:**
 
@@ -52,4 +52,6 @@ The raw set of collision groups to decode.
 [CollisionGroups](./server.collisiongroups.md)
 
 A set of collision groups.
+
+\*\*Category:\*\* Physics
 

@@ -4,7 +4,9 @@
 
 ## PathfindingEntityController.verticalPenalty property
 
-The vertical penalty for the pathfinding algorithm. A higher value will prefer paths with less vertical movement.
+The vertical penalty used during pathfinding.
+
+\*\*Category:\*\* Controllers
 
 **Signature:**
 

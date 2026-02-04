@@ -6,6 +6,8 @@
 
 Manages the assets library and synchronization of assets to the local assets directory in development.
 
+When to use: pulling assets from the shared library during local development. Do NOT use for: production asset loading; the library is disabled in production.
+
 **Signature:**
 
 ```typescript
@@ -14,9 +16,9 @@ export default class AssetsLibrary
 
 ## Remarks
 
-The AssetsLibrary is created internally as a global singletone accessible with the static property `AssetsLibrary.instance`<!-- -->.
+The AssetsLibrary is created internally as a global singleton accessible via `AssetsLibrary.instance`<!-- -->.
 
-Please note: Assets will automatically sync to local assets in development mode the first time an asset in the library is requested by the client. This means you do not need to explicitly handle calling syncAsset() yourself unless you have a specific reason to.
+Assets automatically sync to local assets in development mode the first time an asset in the library is requested by the client. You generally do not need to call `AssetsLibrary.syncAsset` unless you have a specific reason to.
 
 ## Example
 
@@ -27,6 +29,7 @@ import { AssetsLibrary } from 'hytopia';
 const assetsLibrary = AssetsLibrary.instance;
 assetsLibrary.syncAsset('assets/models/player.gltf');
 ```
+\*\*Category:\*\* Assets
 
 ## Properties
 
@@ -72,6 +75,8 @@ string \| null
 
 The path to the assets library package. Null if assets library is not available.
 
+\*\*Category:\*\* Assets
+
 
 </td></tr>
 <tr><td>
@@ -94,6 +99,8 @@ The path to the assets library package. Null if assets library is not available.
 </td><td>
 
 The global AssetsLibrary instance as a singleton.
+
+\*\*Category:\*\* Assets
 
 
 </td></tr>

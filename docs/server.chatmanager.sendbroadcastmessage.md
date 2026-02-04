@@ -73,4 +73,5 @@ void
 ```typescript
 chatManager.sendBroadcastMessage('Hello, world!', 'FF00AA');
 ```
+\*\*Side effects:\*\* Emits `ChatEvent.BROADCAST_MESSAGE` for network sync.
 

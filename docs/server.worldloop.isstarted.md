@@ -6,6 +6,8 @@
 
 Whether the world loop is started.
 
+\*\*Category:\*\* Core
+
 **Signature:**
 
 ```typescript

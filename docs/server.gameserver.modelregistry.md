@@ -4,7 +4,9 @@
 
 ## GameServer.modelRegistry property
 
-The model manager for the game server.
+The model registry for the game server.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

@@ -6,6 +6,8 @@
 
 Whether the collider is a none collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

@@ -4,7 +4,9 @@
 
 ## Entity class
 
-Represents an entity in a world.
+Represents a dynamic or static object in a world.
+
+When to use: any non-player object that needs physics, visuals, or interactions. Do NOT use for: player-controlled avatars (use `PlayerEntity` / `DefaultPlayerEntity`<!-- -->). Do NOT use for: voxel blocks (use block APIs on `ChunkLattice`<!-- -->).
 
 **Signature:**
 
@@ -17,7 +19,7 @@ export default class Entity extends RigidBody implements protocol.Serializable
 
 ## Remarks
 
-Entities are highly configurable and controllable. All entities are created from a .gltf model asset and allow full control of their rigid body and attached collider dynamics.
+Entities are created from a block texture or a `.gltf` model and can have rigid bodies, colliders, animations, and controllers.
 
 <h2>Coordinate System</h2>
 
@@ -27,7 +29,7 @@ Models should be authored with their front/forward facing the \*\*-Z axis\*\*. W
 
 <h2>Events</h2>
 
-This class is an EventRouter, and instances of it emit events with payloads listed under [EntityEventPayloads](./server.entityeventpayloads.md)
+This class is an EventRouter, and instances of it emit events with payloads listed under `EntityEventPayloads`<!-- -->.
 
 ## Example
 
@@ -54,6 +56,7 @@ const spider = new Entity({
 
 spider.spawn(world, { x: 20, y: 6, z: 10 });
 ```
+\*\*Category:\*\* Entities
 
 ## Constructors
 
@@ -84,6 +87,8 @@ Description
 </td><td>
 
 Creates a new Entity instance.
+
+Use for: defining a new entity before spawning it into a world. Do NOT use for: player-controlled avatars (use `PlayerEntity` or `DefaultPlayerEntity`<!-- -->).
 
 
 </td></tr>
@@ -129,7 +134,7 @@ Description
 
 </td><td>
 
-The half extends of the visual size of the block entity when blockTextureUri is set.
+The half extents of the block entity's visual size.
 
 
 </td></tr>
@@ -150,7 +155,7 @@ string \| undefined
 
 </td><td>
 
-The URI or path to the texture to be used, if this is set, the entity is a block entity.
+The texture URI for block entities.
 
 
 </td></tr>
@@ -173,6 +178,8 @@ The URI or path to the texture to be used, if this is set, the entity is a block
 
 The controller for the entity.
 
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -192,7 +199,9 @@ number
 
 </td><td>
 
-The depth (z-axis) of the entity's model with scale consideration or block entity's y\*2 half extents.
+The depth (Z-axis) of the entity's model or block size.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -215,6 +224,8 @@ The depth (z-axis) of the entity's model with scale consideration or block entit
 
 The emissive color of the entity.
 
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -236,6 +247,8 @@ number \| undefined
 
 The emissive intensity of the entity.
 
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -255,7 +268,9 @@ number
 
 </td><td>
 
-The height (y-axis) of the entity's model with scale consideration or block entity's y\*2 half extents.
+The height (Y-axis) of the entity's model or block size.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -297,7 +312,9 @@ boolean
 
 </td><td>
 
-Whether the entity is a block entity.
+Whether this entity is a block entity.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -318,7 +335,7 @@ boolean
 
 </td><td>
 
-Whether the entity is environmental, if true it will not invoke its tick function or change position. It also cannot be animated or removed after spawning.
+Whether the entity is environmental.
 
 
 </td></tr>
@@ -339,7 +356,9 @@ boolean
 
 </td><td>
 
-Whether the entity is a model entity.
+Whether this entity is a model entity.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -360,7 +379,9 @@ boolean
 
 </td><td>
 
-Whether the entity is spawned.
+Whether the entity is spawned in a world.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -383,6 +404,8 @@ number
 
 The playback rate of the entity's model animations.
 
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -403,6 +426,8 @@ ReadonlySet&lt;string&gt;
 </td><td>
 
 The nodes to hide on the entity's model.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -425,6 +450,8 @@ ReadonlySet&lt;string&gt;
 
 The looped animations to start when the entity is spawned.
 
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -444,7 +471,9 @@ ReadonlyMap&lt;string, Readonly&lt;[ModelNodeOverride](./server.modelnodeoverrid
 
 </td><td>
 
-The node overrides of the entity's model. Mapped by name to the model node override.
+The node overrides of the entity's model, mapped by name.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -465,7 +494,9 @@ The node overrides of the entity's model. Mapped by name to the model node overr
 
 </td><td>
 
-The preferred shape of the entity's model when automatically generating its collider when no explicit colliders are provided.
+The preferred collider shape when auto-generating colliders from the model.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -488,6 +519,8 @@ The preferred shape of the entity's model when automatically generating its coll
 
 The scale of the entity's model.
 
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -509,6 +542,8 @@ ReadonlySet&lt;string&gt;
 
 The nodes to show on the entity's model, overriding hidden nodes.
 
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -528,7 +563,9 @@ string \| undefined
 
 </td><td>
 
-The URI or path to the texture that overrides the model entity's default texture.
+The texture URI that overrides the model entity's default texture.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -549,7 +586,9 @@ string \| undefined
 
 </td><td>
 
-The URI or path to the .gltf model asset to be used for the entity.
+The URI or path to the `.gltf` model asset.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -572,6 +611,8 @@ string
 
 The name of the entity.
 
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -591,7 +632,9 @@ number
 
 </td><td>
 
-The opacity of the entity between 0 and 1. 0 is fully transparent, 1 is fully opaque.
+The opacity of the entity between 0 and 1.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -614,6 +657,8 @@ The opacity of the entity between 0 and 1. 0 is fully transparent, 1 is fully op
 
 The outline rendering options for the entity.
 
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -633,7 +678,9 @@ The outline rendering options for the entity.
 
 </td><td>
 
-The parent entity of the entity.
+The parent entity, if attached.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -654,7 +701,9 @@ string \| undefined
 
 </td><td>
 
-The name of the parent's node (if parent is a model entity) this entity is attached to when spawned.
+The parent model node name, if attached.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -675,7 +724,9 @@ string \| undefined
 
 </td><td>
 
-An arbitrary identifier tag of the entity. Useful for your own logic.
+An arbitrary identifier tag for your own logic.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -698,6 +749,8 @@ An arbitrary identifier tag of the entity. Useful for your own logic.
 
 The tint color of the entity.
 
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -717,7 +770,9 @@ number
 
 </td><td>
 
-The width (x-axis) of the entity's model with scale consideration or block entity's x\*2 half extents.
+The width (X-axis) of the entity's model or block size.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -738,7 +793,9 @@ The width (x-axis) of the entity's model with scale consideration or block entit
 
 </td><td>
 
-The world the entity is in.
+The world the entity is in, if spawned.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -774,6 +831,8 @@ Description
 
 Despawns the entity and all children from the world.
 
+Use for: removing entities from the world. Do NOT use for: temporary hiding; consider visibility or animations instead.
+
 
 </td></tr>
 <tr><td>
@@ -788,6 +847,8 @@ Despawns the entity and all children from the world.
 
 Triggers an interaction on the entity from a player.
 
+Use for: programmatic interactions that should mimic a player click/tap. Do NOT use for: server-only effects without player context.
+
 
 </td></tr>
 <tr><td>
@@ -801,6 +862,8 @@ Triggers an interaction on the entity from a player.
 </td><td>
 
 Sets the emissive color of the entity.
+
+Use for: glow effects or highlighted states.
 
 
 </td></tr>
@@ -997,6 +1060,8 @@ Sets the tint color of the entity.
 </td><td>
 
 Spawns the entity in the world.
+
+Use for: placing the entity into a world so it simulates and syncs to clients. Do NOT use for: reusing a single entity instance across multiple worlds.
 
 
 </td></tr>

@@ -44,6 +44,12 @@ string\[\]
 
 The animations to start.
 
+\*\*Requires:\*\* Entity must be spawned.
+
+\*\*Side effects:\*\* Emits `EntityEvent.START_MODEL_LOOPED_ANIMATIONS`<!-- -->.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>
@@ -52,6 +58,8 @@ The animations to start.
 void
 
 ## Remarks
+
+Model entities only; no effect for block entities.
 
 \*\*Deduplication:\*\* If an animation is already in the looped set, it won't be re-added or restarted. The event only emits if at least one new animation is added.
 

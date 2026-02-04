@@ -6,6 +6,8 @@
 
 The profile picture URL for the player.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

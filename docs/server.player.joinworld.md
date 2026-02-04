@@ -4,7 +4,9 @@
 
 ## Player.joinWorld() method
 
-Joins a player to a world.
+Assigns the player to a world.
+
+Use for: initial placement or moving a player between worlds. Do NOT use for: respawning or teleporting within the same world.
 
 **Signature:**
 
@@ -44,6 +46,10 @@ world
 
 The world to join the player to.
 
+\*\*Side effects:\*\* Emits `PlayerEvent.JOINED_WORLD` and `PlayerEvent.LEFT_WORLD` during world switches.
+
+\*\*Category:\*\* Players
+
 
 </td></tr>
 </tbody></table>
@@ -53,5 +59,5 @@ void
 
 ## Remarks
 
-If switching worlds (already in a different world): - Despawns all player entities for this player in the current world. - Triggers a disconnect/reconnect cycle internally. - `JOINED_WORLD` event emits after reconnection completes.
+If switching worlds, the player is internally disconnected/reconnected and `JOINED_WORLD` is emitted after reconnection completes.
 

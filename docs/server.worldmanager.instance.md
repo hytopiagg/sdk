@@ -4,7 +4,9 @@
 
 ## WorldManager.instance property
 
-The global WorldManager instance as a singleton.
+The global WorldManager instance (singleton).
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

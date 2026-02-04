@@ -44,6 +44,10 @@ string\[\]
 
 _(Optional)_ The animations to exclude from being stopped.
 
+\*\*Requires:\*\* Entity must be spawned.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>
@@ -52,6 +56,8 @@ _(Optional)_ The animations to exclude from being stopped.
 void
 
 ## Remarks
+
+Model entities only; no effect for block entities.
 
 \*\*Delegates to `stopModelAnimations`<!-- -->:\*\* Collects animations from both looped and oneshot sets (minus exclusions), then calls `stopModelAnimations()` once.
 

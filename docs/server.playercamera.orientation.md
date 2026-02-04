@@ -11,3 +11,10 @@ The current orientation of the camera.
 ```typescript
 get orientation(): PlayerCameraOrientation;
 ```
+
+## Remarks
+
+Updated by client input; there is no public setter.
+
+\*\*Category:\*\* Players
+

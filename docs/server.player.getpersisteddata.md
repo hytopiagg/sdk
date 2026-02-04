@@ -4,7 +4,9 @@
 
 ## Player.getPersistedData() method
 
-Get the persisted data for the player.
+Gets the persisted data for the player, if available.
+
+Use for: reading saved progress after the player connects.
 
 **Signature:**
 
@@ -15,9 +17,13 @@ getPersistedData(): Record<string, unknown> | undefined;
 
 Record&lt;string, unknown&gt; \| undefined
 
-The persisted data for the player.
+The persisted data for the player, or undefined.
+
+\*\*Requires:\*\* Player persistence must have been loaded (handled during connect).
+
+\*\*Category:\*\* Players
 
 ## Remarks
 
-This method returns the player persisted data. If it returns undefined, the player data failed to load and your game logic should handle this case appropriately. If it returns an empty object, the player data loaded successfully but no prior data has been set.
+Returns `undefined` if data hasn't loaded or no data exists. Returns an empty object when data loads successfully but is empty.
 

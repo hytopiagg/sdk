@@ -6,6 +6,8 @@
 
 Whether the rigid body is kinematic velocity based.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

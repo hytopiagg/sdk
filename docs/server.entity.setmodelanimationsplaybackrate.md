@@ -44,6 +44,10 @@ number
 
 The playback rate of the entity's model animations.
 
+\*\*Side effects:\*\* Emits `EntityEvent.SET_MODEL_ANIMATIONS_PLAYBACK_RATE` when spawned.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>
@@ -52,6 +56,8 @@ The playback rate of the entity's model animations.
 void
 
 ## Remarks
+
+Model entities only; no effect for block entities.
 
 Defaults to 1. A positive value will play the animation forward, a negative value will play the animation in reverse. Any value may be used. You can make animations play faster by using larger values.
 

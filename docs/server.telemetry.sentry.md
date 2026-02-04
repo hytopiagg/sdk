@@ -17,6 +17,8 @@ typeof Sentry
 
 The Sentry SDK instance.
 
+\*\*Category:\*\* Telemetry
+
 ## Remarks
 
 This method provides direct access to the Sentry SDK for operations not covered by the Telemetry wrapper, such as custom error reporting, user context setting, or advanced span manipulation.

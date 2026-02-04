@@ -6,6 +6,8 @@
 
 The world the audio manager is for.
 
+\*\*Category:\*\* Audio
+
 **Signature:**
 
 ```typescript

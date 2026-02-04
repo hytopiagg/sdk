@@ -6,6 +6,8 @@
 
 The half height of the cylinder collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

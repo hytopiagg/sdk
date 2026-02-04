@@ -6,6 +6,8 @@
 
 The on collision callback for the collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

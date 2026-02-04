@@ -6,6 +6,8 @@
 
 Event payloads for Entity emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

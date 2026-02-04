@@ -6,6 +6,8 @@
 
 The global event router instance.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

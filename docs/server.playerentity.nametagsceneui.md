@@ -6,6 +6,8 @@
 
 The SceneUI instance for the player entity's nametag.
 
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

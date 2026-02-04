@@ -44,6 +44,10 @@ number
 
 The near distance.
 
+\*\*Side effects:\*\* Emits `WorldEvent.SET_FOG_NEAR`<!-- -->.
+
+\*\*Category:\*\* Core
+
 
 </td></tr>
 </tbody></table>

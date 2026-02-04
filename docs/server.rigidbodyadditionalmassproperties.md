@@ -6,6 +6,8 @@
 
 Additional mass properties for a RigidBody.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

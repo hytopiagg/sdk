@@ -4,7 +4,9 @@
 
 ## IntersectionResult type
 
-A intersection result.
+An intersection result.
+
+\*\*Category:\*\* Physics
 
 **Signature:**
 

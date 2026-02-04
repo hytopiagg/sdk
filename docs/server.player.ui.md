@@ -6,6 +6,8 @@
 
 The UI for the player.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

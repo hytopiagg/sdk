@@ -6,6 +6,8 @@
 
 The number of spawned entities in the world.
 
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

@@ -4,7 +4,9 @@
 
 ## GameServer.worldManager property
 
-The world manager for the game server
+The world manager for the game server.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

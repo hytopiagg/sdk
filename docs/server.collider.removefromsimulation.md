@@ -19,3 +19,7 @@ void
 
 \*\*Parent unlinking:\*\* Unlinks from parent rigid body if attached.
 
+\*\*Side effects:\*\* Removes the collider from the simulation and unlinks it from any parent rigid body.
+
+\*\*Category:\*\* Physics
+

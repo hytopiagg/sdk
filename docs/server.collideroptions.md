@@ -6,6 +6,10 @@
 
 The options for a collider.
 
+Use for: providing collider definitions when creating rigid bodies or entities. Do NOT use for: runtime changes; use `Collider` APIs instead.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

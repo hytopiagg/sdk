@@ -6,6 +6,8 @@
 
 Manages model data for all known models of the game.
 
+When to use: querying model metadata (bounds, node names, animations, trimesh). Do NOT use for: runtime mesh editing; use dedicated tooling or physics colliders.
+
 **Signature:**
 
 ```typescript
@@ -14,7 +16,9 @@ export default class ModelRegistry
 
 ## Remarks
 
-The ModelRegistry is created internally as a global singletone accessible with the static property `ModelRegistry.instance`<!-- -->.
+The ModelRegistry is created internally as a global singleton accessible via `ModelRegistry.instance`<!-- -->. Model data is preloaded during server startup and cached in memory.
+
+Pattern: call `ModelRegistry.hasModel` before accessing metadata to avoid warnings. Anti-pattern: calling `ModelRegistry.getTrimesh` every tick; it may allocate arrays.
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `ModelRegistry` class.
 
@@ -27,6 +31,7 @@ import { ModelRegistry } from 'hytopia';
 const modelRegistry = ModelRegistry.instance;
 const boundingBox = modelRegistry.getBoundingBox('models/player.gltf');
 ```
+\*\*Category:\*\* Models
 
 ## Properties
 
@@ -72,6 +77,8 @@ Description
 
 The global ModelRegistry instance as a singleton.
 
+\*\*Category:\*\* Models
+
 
 </td></tr>
 <tr><td>
@@ -89,7 +96,11 @@ boolean
 
 </td><td>
 
-Whether to generate optimized models if needed. Defaults to `true` in development, `false` in production.
+Whether to generate optimized models if needed.
+
+Defaults to `true` in development, `false` in production.
+
+\*\*Category:\*\* Models
 
 
 </td></tr>

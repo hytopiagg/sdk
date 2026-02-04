@@ -6,6 +6,8 @@
 
 Retrieves all spawned ParticleEmitter instances attached to a specific entity.
 
+Use for: cleanup or inspection of entity-bound emitters.
+
 **Signature:**
 
 ```typescript
@@ -52,4 +54,6 @@ The entity to get attached ParticleEmitter instances for.
 [ParticleEmitter](./server.particleemitter.md)<!-- -->\[\]
 
 An array of ParticleEmitter instances.
+
+\*\*Requires:\*\* Entity should belong to this world for meaningful results.
 

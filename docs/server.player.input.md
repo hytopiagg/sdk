@@ -4,7 +4,9 @@
 
 ## Player.input property
 
-The current [PlayerInput](./server.playerinput.md) of the player.
+The current `PlayerInput` of the player.
+
+\*\*Category:\*\* Players
 
 **Signature:**
 

@@ -44,6 +44,8 @@ number
 
 The additional solver iterations of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

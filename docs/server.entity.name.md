@@ -6,6 +6,8 @@
 
 The name of the entity.
 
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

@@ -44,6 +44,10 @@ color
 
 The color of the fog, or undefined to reset to ambient light color.
 
+\*\*Side effects:\*\* Emits `WorldEvent.SET_FOG_COLOR`<!-- -->.
+
+\*\*Category:\*\* Core
+
 
 </td></tr>
 </tbody></table>

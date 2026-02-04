@@ -6,6 +6,8 @@
 
 Represents the default player model entity.
 
+When to use: standard player avatars with built-in cosmetics and default controls. Do NOT use for: fully custom player rigs that don't match the default model's anchors/animations.
+
 **Signature:**
 
 ```typescript
@@ -15,7 +17,7 @@ export default class DefaultPlayerEntity extends PlayerEntity
 
 ## Remarks
 
-The default player entity extends the [PlayerEntity](./server.playerentity.md) class, uses the default player model, and assigns a DefaultPlayerEntityController. This entity is the most commonly used player controlled entity in games. It automatically handles things like managing player visual customizations and cosmetics, and more. If you want to change the default model used, you can override all of the defaults, including the modelUri, but you must ensure that the model used has the same animation names and anchor points as the default player model in order to prevent unexpected behavior.
+Extends `PlayerEntity`<!-- -->, uses the default player model, and assigns `DefaultPlayerEntityController`<!-- -->. You can override defaults, but if you change `modelUri`<!-- -->, ensure the model has the same animation names and anchor points.
 
 ## Example
 
@@ -25,6 +27,7 @@ const playerEntity = new DefaultPlayerEntity({ player });
 
 playerEntity.spawn(world, { x: 0, y: 10, z: 0 });
 ```
+\*\*Category:\*\* Entities
 
 ## Constructors
 
@@ -101,6 +104,8 @@ Description
 </td><td>
 
 The cosmetic slots that are hidden.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>

@@ -76,6 +76,10 @@ payload
 
 The payload to broadcast.
 
+\*\*Requires:\*\* The provided world must be active and using the same event payload types.
+
+\*\*Side effects:\*\* Invokes local listeners and listeners registered on the world instance.
+
 
 </td></tr>
 </tbody></table>

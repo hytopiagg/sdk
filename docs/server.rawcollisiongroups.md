@@ -6,6 +6,8 @@
 
 A raw set of collision groups represented as a 32-bit number.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

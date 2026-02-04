@@ -6,6 +6,8 @@
 
 Whether the collider is a ball collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

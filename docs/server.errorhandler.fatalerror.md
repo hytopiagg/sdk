@@ -71,3 +71,7 @@ never
 
 The created Error object
 
+\*\*Side effects:\*\* Writes to stderr and throws, terminating the current execution path.
+
+\*\*Category:\*\* Utilities
+

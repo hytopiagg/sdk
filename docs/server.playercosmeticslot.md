@@ -6,6 +6,8 @@
 
 The slots used for player cosmetics.
 
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

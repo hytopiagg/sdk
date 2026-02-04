@@ -6,6 +6,8 @@
 
 Event payloads for WorldLoop emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

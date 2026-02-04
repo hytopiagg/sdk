@@ -6,6 +6,8 @@
 
 The mode of the camera.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

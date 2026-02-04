@@ -6,6 +6,8 @@
 
 Whether the collider is a wedge collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

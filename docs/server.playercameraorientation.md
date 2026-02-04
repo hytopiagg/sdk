@@ -6,6 +6,8 @@
 
 The camera orientation state of a Player.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

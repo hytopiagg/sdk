@@ -6,6 +6,8 @@
 
 The global coordinate of the block.
 
+\*\*Category:\*\* Blocks
+
 **Signature:**
 
 ```typescript

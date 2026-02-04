@@ -60,6 +60,12 @@ number
 
 _(Optional)_ The tick duration that must be exceeded to send a performance span to Sentry for a given tick. Defaults to 50ms.
 
+\*\*Requires:\*\* A valid Sentry DSN and network access.
+
+\*\*Side effects:\*\* Initializes the Sentry SDK and registers global hooks.
+
+\*\*Category:\*\* Telemetry
+
 
 </td></tr>
 </tbody></table>

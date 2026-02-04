@@ -4,7 +4,9 @@
 
 ## SUPPORTED\_INPUTS variable
 
-The inputs that are included in the PlayerInput.
+The inputs that are included in `PlayerInput`<!-- -->.
+
+\*\*Category:\*\* Players
 
 **Signature:**
 

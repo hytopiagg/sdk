@@ -6,6 +6,8 @@
 
 A lattice of chunks that represent a world's terrain.
 
+When to use: reading or mutating blocks in world space. Do NOT use for: per-entity placement logic; prefer higher-level game systems.
+
 **Signature:**
 
 ```typescript
@@ -15,7 +17,13 @@ export default class ChunkLattice extends EventRouter
 
 ## Remarks
 
-The ChunkLattice lattice tracks the current terrain of a world, comprised of [Chunk](./server.chunk.md) instances.
+The lattice owns all chunks and keeps physics colliders in sync with blocks.
+
+<h2>Coordinate System</h2>
+
+- \*\*Global (world) coordinates:\*\* integer block positions in world space. - \*\*Chunk origin:\*\* world coordinate at the chunk's minimum corner (multiples of 16). - \*\*Local coordinates:\*\* 0..15 per axis within a chunk. - \*\*Axes:\*\* +X right, +Y up, -Z forward. - \*\*Origin:\*\* (0,0,0) is the world origin.
+
+\*\*Category:\*\* Blocks
 
 ## Constructors
 
@@ -93,6 +101,8 @@ number
 
 The number of chunks in the lattice.
 
+\*\*Category:\*\* Blocks
+
 
 </td></tr>
 </tbody></table>
@@ -127,6 +137,8 @@ Description
 
 Removes and clears all chunks and their blocks from the lattice.
 
+Use for: full world resets or map reloads. Do NOT use for: incremental changes; use `ChunkLattice.setBlock`<!-- -->.
+
 
 </td></tr>
 <tr><td>
@@ -139,7 +151,7 @@ Removes and clears all chunks and their blocks from the lattice.
 
 </td><td>
 
-Get all chunks in the lattice.
+Gets all chunks in the lattice.
 
 
 </td></tr>
@@ -153,7 +165,7 @@ Get all chunks in the lattice.
 
 </td><td>
 
-Get the block type id at a specific global coordinate.
+Gets the block type ID at a specific global coordinate.
 
 
 </td></tr>
@@ -167,7 +179,7 @@ Get the block type id at a specific global coordinate.
 
 </td><td>
 
-Get the block type at a specific global coordinate.
+Gets the block type at a specific global coordinate.
 
 
 </td></tr>
@@ -181,7 +193,7 @@ Get the block type at a specific global coordinate.
 
 </td><td>
 
-Get the number of blocks of a specific block type in the lattice.
+Gets the number of blocks of a specific block type in the lattice.
 
 
 </td></tr>
@@ -195,7 +207,7 @@ Get the number of blocks of a specific block type in the lattice.
 
 </td><td>
 
-Get the chunk that contains the given global coordinate.
+Gets the chunk that contains the given global coordinate.
 
 
 </td></tr>
@@ -209,7 +221,7 @@ Get the chunk that contains the given global coordinate.
 
 </td><td>
 
-Get the chunk for a given global coordinate, creating it if it doesn't exist.
+Gets the chunk for a given global coordinate, creating it if it doesn't exist.
 
 
 </td></tr>
@@ -223,7 +235,7 @@ Get the chunk for a given global coordinate, creating it if it doesn't exist.
 
 </td><td>
 
-Check if a block exists at a specific global coordinate.
+Checks if a block exists at a specific global coordinate.
 
 
 </td></tr>
@@ -237,7 +249,7 @@ Check if a block exists at a specific global coordinate.
 
 </td><td>
 
-Check if a chunk exists for a given global coordinate.
+Checks if a chunk exists for a given global coordinate.
 
 
 </td></tr>
@@ -251,7 +263,9 @@ Check if a chunk exists for a given global coordinate.
 
 </td><td>
 
-Initialize all blocks in the lattice in bulk, removing all previously existing blocks. This is much more efficient than setting each block individually.
+Initializes all blocks in the lattice in bulk, replacing existing blocks.
+
+Use for: loading maps or generating terrain in one pass. Do NOT use for: incremental edits; use `ChunkLattice.setBlock`<!-- -->.
 
 
 </td></tr>
@@ -265,7 +279,9 @@ Initialize all blocks in the lattice in bulk, removing all previously existing b
 
 </td><td>
 
-Set the block at a global coordinate by block type id, automatically creating a chunk if it doesn't exist. Use block type id 0 for air (to remove a block).
+Sets the block at a global coordinate by block type ID.
+
+Use for: incremental terrain edits. Do NOT use for: bulk terrain loading; use `ChunkLattice.initializeBlocks`<!-- -->.
 
 
 </td></tr>

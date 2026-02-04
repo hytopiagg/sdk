@@ -4,7 +4,9 @@
 
 ## Entity.world property
 
-The world the entity is in.
+The world the entity is in, if spawned.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

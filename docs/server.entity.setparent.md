@@ -92,6 +92,12 @@ rotation
 
 _(Optional)_ The rotation to set for the entity. If parent is provided, this is relative to the parent's rotation.
 
+\*\*Requires:\*\* If `parent` is provided, it must be spawned.
+
+\*\*Side effects:\*\* Disables/enables colliders, changes rigid body type, and emits `EntityEvent.SET_PARENT`<!-- -->.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>

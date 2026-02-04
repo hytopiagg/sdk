@@ -6,6 +6,8 @@
 
 The position the camera is attached to.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

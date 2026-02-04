@@ -6,6 +6,8 @@
 
 The half height of the cone collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,10 @@
 
 The options for a fixed rigid body.
 
+Use for: immovable bodies (world geometry, static platforms). Do NOT use for: moving objects; use dynamic or kinematic options.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

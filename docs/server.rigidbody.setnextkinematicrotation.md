@@ -6,6 +6,8 @@
 
 Sets the next kinematic rotation of the rigid body.
 
+Use for: kinematic bodies driven by explicit rotation each tick. Do NOT use for: dynamic bodies; use torque or angular velocity instead.
+
 **Signature:**
 
 ```typescript
@@ -43,6 +45,10 @@ nextKinematicRotation
 </td><td>
 
 The next kinematic rotation of the rigid body.
+
+\*\*Requires:\*\* Rigid body must be kinematic.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

@@ -4,7 +4,11 @@
 
 ## MoveOptions type
 
-Options for the [SimpleEntityController.move()](./server.simpleentitycontroller.move.md) method.
+Options for `SimpleEntityController.move`<!-- -->.
+
+Use for: customizing a single `move()` call. Do NOT use for: persistent defaults; use `SimpleEntityControllerOptions`<!-- -->.
+
+\*\*Category:\*\* Controllers
 
 **Signature:**
 

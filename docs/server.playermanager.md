@@ -6,6 +6,8 @@
 
 Manages all connected players in a game server.
 
+When to use: accessing online players, reacting to connection lifecycle events, or routing players to worlds. Do NOT use for: constructing or persisting players yourself; players are created automatically on connection.
+
 **Signature:**
 
 ```typescript
@@ -14,11 +16,11 @@ export default class PlayerManager
 
 ## Remarks
 
-The PlayerManager is created internally as a global singleton accessible with the static property `PlayerManager.instance`<!-- -->.
+Access via `PlayerManager.instance` — do not construct directly.
 
 <h2>Events</h2>
 
-This class emits global events with payloads listed under [PlayerManagerEventPayloads](./server.playermanagereventpayloads.md)
+This class emits global events with payloads listed under `PlayerManagerEventPayloads`<!-- -->.
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `PlayerManager` class.
 
@@ -31,6 +33,7 @@ import { PlayerManager } from 'hytopia';
 const playerManager = PlayerManager.instance;
 const connectedPlayers = playerManager.getConnectedPlayers();
 ```
+\*\*Category:\*\* Players
 
 ## Properties
 
@@ -74,7 +77,9 @@ Description
 
 </td><td>
 
-The global PlayerManager instance as a singleton.
+The global PlayerManager instance (singleton).
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -97,6 +102,8 @@ number
 
 The number of players currently connected to the server.
 
+\*\*Category:\*\* Players
+
 
 </td></tr>
 <tr><td>
@@ -114,7 +121,9 @@ The number of players currently connected to the server.
 
 </td><td>
 
-_(Optional)_ Optional handler for selecting the world a newly connected player joins. Returning no world results in the player joining the default WorldManager world.
+_(Optional)_ Optional handler for selecting the world a newly connected player joins.
+
+Use for: lobby routing or game mode selection. Do NOT use for: moving players after they have already joined a world; use `Player.joinWorld`<!-- -->.
 
 
 </td></tr>
@@ -148,7 +157,7 @@ Description
 
 </td><td>
 
-Get a connected player by their username (case insensitive).
+Get a connected player by their username (case-insensitive).
 
 
 </td></tr>

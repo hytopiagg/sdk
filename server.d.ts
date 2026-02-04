@@ -16,15 +16,16 @@ import type { WebTransportSessionImpl } from '@fails-components/webtransport/dis
  * Manages the assets library and synchronization of assets
  * to the local assets directory in development.
  *
+ * When to use: pulling assets from the shared library during local development.
+ * Do NOT use for: production asset loading; the library is disabled in production.
+ *
  * @remarks
  * The AssetsLibrary is created internally as a global
- * singletone accessible with the static property
- * `AssetsLibrary.instance`.
+ * singleton accessible via `AssetsLibrary.instance`.
  *
- * Please note: Assets will automatically sync to local assets in
- * development mode the first time an asset in the library is requested
- * by the client. This means you do not need to explicitly handle
- * calling syncAsset() yourself unless you have a specific reason to.
+ * Assets automatically sync to local assets in development mode the first
+ * time an asset in the library is requested by the client. You generally do
+ * not need to call `AssetsLibrary.syncAsset` unless you have a specific reason to.
  *
  * @example
  * ```typescript
@@ -34,12 +35,21 @@ import type { WebTransportSessionImpl } from '@fails-components/webtransport/dis
  * assetsLibrary.syncAsset('assets/models/player.gltf');
  * ```
  *
+ * **Category:** Assets
  * @public
  */
 export declare class AssetsLibrary {
-    /** The global AssetsLibrary instance as a singleton. */
+    /**
+     * The global AssetsLibrary instance as a singleton.
+     *
+     * **Category:** Assets
+     */
     static readonly instance: AssetsLibrary;
-    /** The path to the assets library package. Null if assets library is not available. */
+    /**
+     * The path to the assets library package. Null if assets library is not available.
+     *
+     * **Category:** Assets
+     */
     static readonly assetsLibraryPath: string | null;
     /**
      * Synchronizes an asset from the assets library to the local assets directory.
@@ -49,6 +59,12 @@ export declare class AssetsLibrary {
      * The assets library is unavailable in production, so assets must be local to the project.
      *
      * @param assetPath - The path of the asset to copy to local assets.
+     *
+     * **Requires:** Assets library must be available (development only).
+     *
+     * **Side effects:** Writes files into the local `assets/` directory.
+     *
+     * **Category:** Assets
      */
     syncAsset(assetPath: string): void;
 }
@@ -59,12 +75,12 @@ export declare class AssetsLibrary {
  * @remarks
  * Audio instances are created directly as instances.
  * They support a variety of configuration options through
- * the {@link AudioOptions} constructor argument.
+ * the `AudioOptions` constructor argument.
  *
  * <h2>Events</h2>
  *
  * This class is an EventRouter, and instances of it emit
- * events with payloads listed under {@link AudioEventPayloads}
+ * events with payloads listed under `AudioEventPayloads`
  *
  * @example
  * ```typescript
@@ -77,6 +93,7 @@ export declare class AssetsLibrary {
  *
  * @eventProperty
  *
+ * **Category:** Audio
  * @public
  */
 export declare class Audio extends EventRouter implements protocol.Serializable {
@@ -222,7 +239,14 @@ export declare class Audio extends EventRouter implements protocol.Serializable 
 
 }
 
-/** Event types an Audio instance can emit. See {@link AudioEventPayloads} for the payloads. @public */
+/**
+ * Event types an Audio instance can emit.
+ *
+ * See `AudioEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum AudioEvent {
     PAUSE = "AUDIO.PAUSE",
     PLAY = "AUDIO.PLAY",
@@ -237,7 +261,12 @@ export declare enum AudioEvent {
     SET_VOLUME = "AUDIO.SET_VOLUME"
 }
 
-/** Event payloads for Audio emitted events. @public */
+/**
+ * Event payloads for Audio emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface AudioEventPayloads {
     /** Emitted when the audio is paused. */
     [AudioEvent.PAUSE]: {
@@ -296,19 +325,22 @@ export declare interface AudioEventPayloads {
 /**
  * Manages audio instances in a world.
  *
+ * When to use: querying or bulk-controlling audio in a specific world.
+ * Do NOT use for: individual playback configuration; use `Audio` instances.
+ *
  * @remarks
- * The AudioManager is created internally as a singleton
- * for each {@link World} instance in a game server.
- * It allows retrieval of all loaded audio, entity
- * attached audio, looped audio, and more.
+ * The AudioManager is created internally per `World` instance.
+ * Audio is loaded on first `Audio.play`; this manager tracks loaded instances.
+ * Pattern: call `AudioManager.unregisterEntityAttachedAudios` when despawning entities with positional audio.
  *
  * @example
  * ```typescript
  * // Stop all audio in the world
  * const audioManager = world.audioManager;
- * audioManager.getAllAudios().map(audio => audio.pause());
+ * audioManager.getAllAudios().forEach(audio => audio.pause());
  * ```
  *
+ * **Category:** Audio
  * @public
  */
 export declare class AudioManager {
@@ -316,55 +348,108 @@ export declare class AudioManager {
 
 
 
-    /** The world the audio manager is for. */
+    /**
+     * The world the audio manager is for.
+     *
+     * **Category:** Audio
+     */
     get world(): World;
     /**
      * Retrieves all loaded audio instances for the world.
      *
      * @returns An array of audio instances.
+     *
+     * **Category:** Audio
      */
     getAllAudios(): Audio[];
     /**
      * Retrieves all loaded audio instances attached to a specific entity.
      *
+     * Use for: cleanup when despawning an entity with positional audio.
+     *
      * @param entity - The entity to get attached audio instances for.
      * @returns An array of audio instances.
+     *
+     * **Requires:** Entity should belong to this world for meaningful results.
+     *
+     * @see `AudioManager.unregisterEntityAttachedAudios`
+     *
+     * **Category:** Audio
      */
     getAllEntityAttachedAudios(entity: Entity): Audio[];
     /**
      * Retrieves all looped audio instances for the world.
      *
      * @returns An array of audio instances.
+     *
+     * @see `AudioManager.getAllOneshotAudios`
+     *
+     * **Category:** Audio
      */
     getAllLoopedAudios(): Audio[];
     /**
      * Retrieves all oneshot (non-looped) audio instances for the world.
      *
      * @returns An array of audio instances.
+     *
+     * @see `AudioManager.getAllLoopedAudios`
+     *
+     * **Category:** Audio
      */
     getAllOneshotAudios(): Audio[];
 
     /**
      * Unregisters and stops an audio instance from the audio manager.
      *
+     * Use for: explicit cleanup of one-shot or temporary sounds.
+     * Do NOT use for: pausing/resuming; use `Audio.pause` or `Audio.play` instead.
+     *
      * @remarks
      * **Pauses audio:** Calls `audio.pause()` before removing from the manager.
      *
      * @param audio - The audio instance to pause and unregister.
+     *
+     * **Requires:** Audio must be loaded (have an id) or an error is logged.
+     *
+     * **Side effects:** Pauses the audio and removes it from manager tracking.
+     *
+     * @see `AudioManager.unregisterEntityAttachedAudios`
+     *
+     * **Category:** Audio
      */
     unregisterAudio(audio: Audio): void;
     /**
      * Unregisters and stops all audio instances attached to a specific entity.
      *
+     * Use for: entity despawn or cleanup scenarios.
+     *
      * @remarks
-     * **Pauses all:** Calls `unregisterAudio()` for each attached audio, which pauses them.
+     * **Pauses all:** Calls `AudioManager.unregisterAudio` for each attached audio, which pauses them.
      *
      * @param entity - The entity to pause and unregister audio instances for.
+     *
+     * **Requires:** Entity should belong to this world for meaningful results.
+     *
+     * **Side effects:** Pauses and unregisters any attached audio instances.
+     *
+     * @see `AudioManager.getAllEntityAttachedAudios`
+     *
+     * **Category:** Audio
      */
     unregisterEntityAttachedAudios(entity: Entity): void;
 }
 
-/** Options for creating an Audio instance. @public */
+/**
+ * Options for creating an Audio instance.
+ *
+ * Positional audio can be configured via `AudioOptions.attachedToEntity` or `AudioOptions.position`.
+ *
+ * Use for: configuring audio before calling `Audio.play`.
+ * Do NOT use for: runtime updates after playback starts; use `Audio.set*` methods.
+ *
+ * **Category:** Audio
+ * @public
+ */
 export declare interface AudioOptions {
     /** If set, audio playback will follow the entity's position. */
     attachedToEntity?: Entity;
@@ -392,66 +477,155 @@ export declare interface AudioOptions {
     volume?: number;
 }
 
-/** The options for a ball collider. @public */
+/**
+ * The options for a ball collider. @public
+ *
+ * Use for: sphere-shaped colliders.
+ * Do NOT use for: other shapes; use the matching collider option type.
+ *
+ * **Category:** Physics
+ */
 export declare interface BallColliderOptions extends BaseColliderOptions {
     shape: ColliderShape.BALL;
-    /** The radius of the ball collider. */
+    /**
+     * The radius of the ball collider.
+     *
+     * **Category:** Physics
+     */
     radius?: number;
 }
 
-/** The base options for a collider. @public */
+/**
+ * The base options for a collider. @public
+ *
+ * Use for: configuring colliders when creating entities or rigid bodies.
+ * Do NOT use for: runtime changes; use `Collider` methods instead.
+ *
+ * **Category:** Physics
+ */
 export declare interface BaseColliderOptions {
-    /** The shape of the collider. */
+    /**
+     * The shape of the collider.
+     *
+     * **Category:** Physics
+     */
     shape: ColliderShape;
-    /** The bounciness of the collider. */
+    /**
+     * The bounciness of the collider.
+     *
+     * **Category:** Physics
+     */
     bounciness?: number;
-    /** The bounciness combine rule of the collider. */
+    /**
+     * The bounciness combine rule of the collider.
+     *
+     * **Category:** Physics
+     */
     bouncinessCombineRule?: CoefficientCombineRule;
-    /** The collision groups the collider belongs to. */
+    /**
+     * The collision groups the collider belongs to.
+     *
+     * **Category:** Physics
+     */
     collisionGroups?: CollisionGroups;
-    /** Whether the collider is enabled. */
+    /**
+     * Whether the collider is enabled.
+     *
+     * **Category:** Physics
+     */
     enabled?: boolean;
-    /** The flags of the collider if the shape is a trimesh */
+    /**
+     * The flags of the collider if the shape is a trimesh
+     *
+     * **Category:** Physics
+     */
     flags?: number;
-    /** The friction of the collider. */
+    /**
+     * The friction of the collider.
+     *
+     * **Category:** Physics
+     */
     friction?: number;
-    /** The friction combine rule of the collider. */
+    /**
+     * The friction combine rule of the collider.
+     *
+     * **Category:** Physics
+     */
     frictionCombineRule?: CoefficientCombineRule;
-    /** Whether the collider is a sensor. */
+    /**
+     * Whether the collider is a sensor.
+     *
+     * **Category:** Physics
+     */
     isSensor?: boolean;
-    /** The mass of the collider. */
+    /**
+     * The mass of the collider.
+     *
+     * **Category:** Physics
+     */
     mass?: number;
-    /** The on collision callback for the collider. */
+    /**
+     * The on collision callback for the collider.
+     *
+     * **Category:** Physics
+     */
     onCollision?: CollisionCallback;
-    /** The parent rigid body of the collider. */
+    /**
+     * The parent rigid body of the collider.
+     *
+     * **Category:** Physics
+     */
     parentRigidBody?: RigidBody;
-    /** The relative position of the collider. Relative to parent rigid body. */
+    /**
+     * The relative position of the collider. Relative to parent rigid body.
+     *
+     * **Category:** Physics
+     */
     relativePosition?: Vector3Like;
-    /** The relative rotation of the collider. Relative to parent rigid body. */
+    /**
+     * The relative rotation of the collider. Relative to parent rigid body.
+     *
+     * **Category:** Physics
+     */
     relativeRotation?: QuaternionLike;
-    /** The simulation the collider is in, if provided the collider will automatically be added to the simulation. */
+    /**
+     * The simulation the collider is in, if provided the collider will automatically be added to the simulation.
+     *
+     * **Category:** Physics
+     */
     simulation?: Simulation;
-    /** An arbitrary identifier tag of the collider. Useful for your own logic. */
+    /**
+     * An arbitrary identifier tag of the collider. Useful for your own logic.
+     *
+     * **Category:** Physics
+     */
     tag?: string;
 }
 
 /**
  * A base class for entity controller implementations.
  *
+ * When to use: implementing custom entity behavior and movement logic.
+ * Do NOT use for: one-off entity changes; prefer direct entity APIs.
+ *
  * @remarks
- * The BaseEntityController should be extended
- * by a more specific entity controller that you or a
- * plugin implements. Entity controllers are intended to
- * be used as one controller instance per entity, but
- * are flexible enough for edge cases such as if you want to create
- * niche behavior of one controller for many entities that
- * behave in unison.
+ * Controllers are typically one instance per entity, but can be shared across
+ * entities if you manage state carefully.
+ *
+ * <h2>Lifecycle</h2>
+ *
+ * 1) `attach()` — called during `Entity` construction when a controller is provided.
+ * 2) `spawn()` — called after the entity is added to the physics simulation.
+ * 3) `tickWithPlayerInput()` — called each world tick for `PlayerEntity` before `tick()`.
+ * 4) `tick()` — called each world tick before physics stepping.
+ * 5) `detach()` → `despawn()` — called during `Entity.despawn`.
  *
  * <h2>Events</h2>
  *
- * This class is an EventRouter, and instances of it emit
- * events with payloads listed under {@link BaseEntityControllerEventPayloads}
+ * This class is an EventRouter, and instances of it emit events with payloads listed under
+ * `BaseEntityControllerEventPayloads`.
  *
+ * **Category:** Controllers
  * @public
  */
 export declare abstract class BaseEntityController extends EventRouter {
@@ -465,6 +639,8 @@ export declare abstract class BaseEntityController extends EventRouter {
      * **Super call:** Call `super.attach(entity)` to emit the `ATTACH` event.
      *
      * @param entity - The entity to attach the controller to.
+     *
+     * **Category:** Controllers
      */
     attach(entity: Entity): void;
     /**
@@ -477,6 +653,8 @@ export declare abstract class BaseEntityController extends EventRouter {
      * **Super call:** Call `super.despawn(entity)` to emit the `DESPAWN` event.
      *
      * @param entity - The entity being despawned.
+     *
+     * **Category:** Controllers
      */
     despawn(entity: Entity): void;
     /**
@@ -489,6 +667,8 @@ export declare abstract class BaseEntityController extends EventRouter {
      * **Super call:** Call `super.detach(entity)` to emit the `DETACH` event.
      *
      * @param entity - The entity being detached.
+     *
+     * **Category:** Controllers
      */
     detach(entity: Entity): void;
     /**
@@ -501,6 +681,8 @@ export declare abstract class BaseEntityController extends EventRouter {
      * **Super call:** Call `super.spawn(entity)` to emit the `SPAWN` event.
      *
      * @param entity - The entity being spawned.
+     *
+     * **Category:** Controllers
      */
     spawn(entity: Entity): void;
     /**
@@ -517,6 +699,8 @@ export declare abstract class BaseEntityController extends EventRouter {
      * @param input - The current input state of the player.
      * @param cameraOrientation - The current camera orientation state of the player.
      * @param deltaTimeMs - The delta time in milliseconds since the last tick.
+     *
+     * **Category:** Controllers
      */
     tickWithPlayerInput(entity: PlayerEntity, input: PlayerInput, cameraOrientation: PlayerCameraOrientation, deltaTimeMs: number): void;
     /**
@@ -531,11 +715,20 @@ export declare abstract class BaseEntityController extends EventRouter {
      *
      * @param entity - The entity being ticked.
      * @param deltaTimeMs - The delta time in milliseconds since the last tick.
+     *
+     * **Category:** Controllers
      */
     tick(entity: Entity, deltaTimeMs: number): void;
 }
 
-/** Event types a BaseEntityController instance can emit. See {@link BaseEntityControllerEventPayloads} for the payloads. @public */
+/**
+ * Event types a BaseEntityController instance can emit.
+ *
+ * See `BaseEntityControllerEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum BaseEntityControllerEvent {
     ATTACH = "BASE_ENTITY_CONTROLLER.ATTACH",
     DESPAWN = "BASE_ENTITY_CONTROLLER.DESPAWN",
@@ -545,7 +738,12 @@ export declare enum BaseEntityControllerEvent {
     TICK_WITH_PLAYER_INPUT = "BASE_ENTITY_CONTROLLER.TICK_WITH_PLAYER_INPUT"
 }
 
-/** Event payloads for BaseEntityController emitted events. @public */
+/**
+ * Event payloads for BaseEntityController emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface BaseEntityControllerEventPayloads {
     /** Emitted when an entity is attached to the controller. */
     [BaseEntityControllerEvent.ATTACH]: {
@@ -577,7 +775,15 @@ export declare interface BaseEntityControllerEventPayloads {
     };
 }
 
-/** The base options for an entity. @public */
+/**
+ * The base options for an entity.
+ *
+ * Use for: common entity configuration shared by block and model entities.
+ * Do NOT use for: runtime changes after spawn; use `Entity` setters instead.
+ *
+ * **Category:** Entities
+ * @public
+ */
 export declare interface BaseEntityOptions {
     /** The entity controller to use for the entity. */
     controller?: BaseEntityController;
@@ -605,36 +811,78 @@ export declare interface BaseEntityOptions {
     name?: string;
 }
 
-/** The base options for a rigid body. @public */
+/**
+ * The base options for a rigid body. @public
+ *
+ * Use for: initial rigid body configuration when creating entities or bodies.
+ * Do NOT use for: runtime changes; use `RigidBody` setter methods instead.
+ *
+ * **Category:** Physics
+ */
 export declare interface BaseRigidBodyOptions {
-    /** The type of the rigid body, defaults to {@link RigidBodyType.DYNAMIC}. */
+    /**
+     * The type of the rigid body, defaults to `RigidBodyType.DYNAMIC`.
+     *
+     * **Category:** Physics
+     */
     type?: RigidBodyType;
-    /** The colliders of the rigid body, provided as {@link ColliderOptions}. */
+    /**
+     * The colliders of the rigid body, provided as `ColliderOptions`.
+     *
+     * **Category:** Physics
+     */
     colliders?: ColliderOptions[];
-    /** Whether the rigid body is enabled. */
+    /**
+     * Whether the rigid body is enabled.
+     *
+     * **Category:** Physics
+     */
     enabled?: boolean;
-    /** The position of the rigid body. */
+    /**
+     * The position of the rigid body.
+     *
+     * **Category:** Physics
+     */
     position?: Vector3Like;
-    /** The rotation of the rigid body. */
+    /**
+     * The rotation of the rigid body.
+     *
+     * **Category:** Physics
+     */
     rotation?: QuaternionLike;
-    /** The simulation the rigid body is in. If provided, the rigid body will be automatically added to the simulation. */
+    /**
+     * The simulation the rigid body is in. If provided, the rigid body will be automatically added to the simulation.
+     *
+     * **Category:** Physics
+     */
     simulation?: Simulation;
 }
 
 /**
  * Represents a block in a world.
  *
- * @remarks
- * Instances of this class are created internally but made
- * publicly available through various public facing API
- * methods.
+ * When to use: reading block data from queries like raycasts or chunk lookups.
+ * Do NOT use for: creating or placing blocks directly; use `ChunkLattice.setBlock`.
  *
+ * @remarks
+ * Instances are created internally and surfaced by API methods.
+ * Block coordinates are **world coordinates** (global block grid), not local chunk coordinates.
+ *
+ * **Category:** Blocks
  * @public
  */
 export declare class Block {
-    /** The global coordinate of the block. */
+    /**
+     * The global coordinate of the block.
+     *
+     * **Category:** Blocks
+     */
     readonly globalCoordinate: Vector3Like;
-    /** The block type of the block. */
+    /**
+     * The block type of the block.
+     *
+     * **Category:** Blocks
+     */
     readonly blockType: BlockType;
 
 
@@ -642,15 +890,22 @@ export declare class Block {
      * Gets the most adjacent neighbor global coordinate of this block
      * based on a relative hit point, typically from a raycast.
      *
-     * @param hitPoint - The hit point on this block to get the neighbor coordinate from.
-     * @returns A neighbor global coordinate of this block based on the hit point.
+     * Use for: placing a new block on the face that was hit.
+     *
+     * @param hitPoint - The hit point on this block (global coordinates).
+     * @returns The adjacent block coordinate in world space.
+     *
+     * **Category:** Blocks
      */
     getNeighborGlobalCoordinateFromHitPoint(hitPoint: Vector3Like): Vector3Like;
 }
 
 /**
- * All valid block rotations. Named as `{face pointing up}_{Y rotation degrees}`.
- * N prefix = negative axis (e.g. NZ_90 = -Z face up, rotated 90° around global Y).
+ * All valid block rotations, named as `{face pointing up}_{Y rotation degrees}`.
+ *
+ * N prefix = negative axis (e.g. `NZ_90` = -Z face up, rotated 90° around global Y).
+ *
+ * **Category:** Blocks
  * @public
  */
 export declare const BLOCK_ROTATIONS: {
@@ -752,14 +1007,33 @@ export declare const BLOCK_ROTATIONS: {
     };
 };
 
-/** The options for a block collider. @public */
+/**
+ * The options for a block collider. @public
+ *
+ * Use for: axis-aligned box colliders.
+ * Do NOT use for: other shapes; use the matching collider option type.
+ *
+ * **Category:** Physics
+ */
 export declare interface BlockColliderOptions extends BaseColliderOptions {
     shape: ColliderShape.BLOCK;
-    /** The half extents of the block collider. */
+    /**
+     * The half extents of the block collider.
+     *
+     * **Category:** Physics
+     */
     halfExtents?: Vector3Like;
 }
 
-/** The options for creating a block entity. @public */
+/**
+ * The options for creating a block entity.
+ *
+ * Use for: entities rendered as blocks with a `BlockType` texture.
+ * Do NOT use for: model entities; use `ModelEntityOptions`.
+ *
+ * **Category:** Entities
+ * @public
+ */
 export declare interface BlockEntityOptions extends BaseEntityOptions {
     /** The half extents of the visual size of the block entity when blockTextureUri is set. If no rigidBodyOptions.colliders are provided, a block collider with the size of the half extents will be created. */
     blockHalfExtents?: Vector3Like;
@@ -767,16 +1041,31 @@ export declare interface BlockEntityOptions extends BaseEntityOptions {
     blockTextureUri?: string;
 }
 
-/** A block placement in a world. @public */
+/**
+ * A block placement in world coordinates.
+ *
+ * **Category:** Blocks
+ * @public
+ */
 export declare interface BlockPlacement {
     globalCoordinate: Vector3Like;
     blockRotation?: BlockRotation;
 }
 
-/** A block rotation from {@link BLOCK_ROTATIONS}. @public */
+/**
+ * A block rotation from `BLOCK_ROTATIONS`.
+ *
+ * **Category:** Blocks
+ * @public
+ */
 export declare type BlockRotation = typeof BLOCK_ROTATIONS[keyof typeof BLOCK_ROTATIONS];
 
-/** Block texture metadata including UVs and rendering hints. @public */
+/**
+ * Block texture metadata including UVs and rendering hints.
+ *
+ * **Category:** Textures
+ * @public
+ */
 export declare type BlockTextureMetadata = {
     u0: number;
     v0: number;
@@ -790,10 +1079,16 @@ export declare type BlockTextureMetadata = {
 /**
  * Manages block textures and block texture atlas generation of the game.
  *
+ * When to use: querying texture atlas UVs and transparency hints for blocks.
+ * Do NOT use for: runtime texture modifications; regenerate atlas offline in dev.
+ *
  * @remarks
  * The BlockTextureRegistry is created internally as a global
- * singletone accessible with the static property
- * `BlockTextureRegistry.instance`.
+ * singleton accessible via `BlockTextureRegistry.instance`.
+ * The atlas is preloaded during server startup and cached in memory.
+ *
+ * Pattern: call `BlockTextureRegistry.hasBlockTexture` before lookup to avoid warnings.
+ * Anti-pattern: assuming missing textures are silently ignored.
  *
  * @example
  * ```typescript
@@ -803,12 +1098,23 @@ export declare type BlockTextureMetadata = {
  * const metadata = blockTextureRegistry.getBlockTextureMetadata('blocks/stone.png');
  * ```
  *
+ * **Category:** Textures
  * @public
  */
 export declare class BlockTextureRegistry {
-    /** The global BlockTextureRegistry instance as a singleton. */
+    /**
+     * The global BlockTextureRegistry instance as a singleton.
+     *
+     * **Category:** Textures
+     */
     static readonly instance: BlockTextureRegistry;
-    /** Whether to generate the atlas if needed. Defaults to `true` in development, `false` in production. */
+    /**
+     * Whether to generate the atlas if needed.
+     *
+     * Defaults to `true` in development, `false` in production.
+     *
+     * **Category:** Textures
+     */
     generate: boolean;
 
 
@@ -817,6 +1123,10 @@ export declare class BlockTextureRegistry {
      *
      * @param textureUri - The URI of the texture (e.g., 'blocks/stone.png' or 'blocks/grass' for cubemaps).
      * @returns Whether the texture is registered.
+     *
+     * **Requires:** Atlas must be preloaded (server startup).
+     *
+     * **Category:** Textures
      */
     hasBlockTexture(textureUri: string): boolean;
     /**
@@ -824,6 +1134,10 @@ export declare class BlockTextureRegistry {
      *
      * @param textureUri - The URI of the texture (e.g., 'blocks/stone.png' or 'blocks/grass').
      * @returns Array of texture metadata, or undefined if not found.
+     *
+     * **Requires:** Atlas must be preloaded (server startup).
+     *
+     * **Category:** Textures
      */
     getBlockTextureMetadata(textureUri: string): BlockTextureMetadata[] | undefined;
 
@@ -837,25 +1151,24 @@ export declare class BlockTextureRegistry {
 }
 
 /**
- * Represents a block type.
+ * Represents a block type definition.
+ *
+ * When to use: defining new block types (textures, colliders, liquid behavior).
+ * Do NOT use for: placing blocks directly; use `ChunkLattice.setBlock`.
  *
  * @remarks
- * Block types are created directly as instances.
- * They support a variety of configuration options through
- * the {@link BlockTypeOptions} constructor argument.
- * Block types are registered with a {@link BlockTypeRegistry} instance,
- * allowing you to create custom blocks with unique visual representations
- * and behaviors.
+ * Block types are created as instances and registered with a `BlockTypeRegistry`
+ * for a specific world. Liquids are treated as sensors in physics.
  *
  * <h2>Events</h2>
  *
- * This class is an EventRouter, and instances of it emit
- * events with payloads listed under {@link BlockTypeEventPayloads}
+ * This class is an EventRouter, and instances of it emit events with payloads listed under
+ * `BlockTypeEventPayloads`.
  *
  * @example
  * ```typescript
  * const stoneBlockTypeId = 10;
- * world.blockTypeRegistry.registerBlockType(stoneBlockTypeId, new BlockType({
+ * world.blockTypeRegistry.registerBlockType(new BlockType({
  *   id: stoneBlockTypeId,
  *   textureUri: 'textures/stone.png',
  *   name: 'Stone',
@@ -865,6 +1178,7 @@ export declare class BlockTextureRegistry {
  * world.chunkLattice.setBlock({ x: 0, y: 1, z: 0 }, stoneBlockTypeId);
  * ```
  *
+ * **Category:** Blocks
  * @public
  */
 export declare class BlockType extends EventRouter implements protocol.Serializable {
@@ -876,52 +1190,110 @@ export declare class BlockType extends EventRouter implements protocol.Serializa
 
     /**
      * Creates a new block type instance.
-     * @param world - The world the block type is for.
+     *
+     * Use for: defining a block type before registering it with a `BlockTypeRegistry`.
+     *
      * @param options - The options for the block type.
+     *
+     * **Category:** Blocks
      */
     constructor(options?: BlockTypeOptions);
-    /** The unique identifier for the block type. */
+    /**
+     * The unique identifier for the block type.
+     *
+     * **Category:** Blocks
+     */
     get id(): number;
-    /** The collider options for the block type. */
+    /**
+     * The collider options for the block type.
+     *
+     * **Category:** Blocks
+     */
     get colliderOptions(): VoxelsColliderOptions | TrimeshColliderOptions;
-    /** Whether the block type is a liquid. */
+    /**
+     * Whether the block type is a liquid.
+     *
+     * **Category:** Blocks
+     */
     get isLiquid(): boolean;
-    /** Whether the block type is meshable. */
+    /**
+     * Whether the block type is meshable (voxel-based).
+     *
+     * **Category:** Blocks
+     */
     get isMeshable(): boolean;
-    /** Whether the block type is a trimesh block. */
+    /**
+     * Whether the block type uses a trimesh collider.
+     *
+     * **Category:** Blocks
+     */
     get isTrimesh(): boolean;
-    /** Whether the block type is a voxel block. */
+    /**
+     * Whether the block type uses a voxel collider.
+     *
+     * **Category:** Blocks
+     */
     get isVoxel(): boolean;
-    /** The light emission level. */
+    /**
+     * The light emission level (0-15).
+     *
+     * **Category:** Blocks
+     */
     get lightLevel(): number;
-    /** The name of the block type. */
+    /**
+     * The name of the block type.
+     *
+     * **Category:** Blocks
+     */
     get name(): string;
-    /** The URI of the texture for the block type. */
+    /**
+     * The URI of the texture for the block type.
+     *
+     * **Category:** Blocks
+     */
     get textureUri(): string;
 
     /**
      * Triggers an interaction on the block type from a player.
      *
+     * Use for: programmatic interactions that should mimic player clicks.
+     *
      * @remarks
      * This is automatically called when a player clicks or taps a block of this block type, but can also be called directly
-     * for programmatic interactions. Emits {@link BlockTypeEvent.INTERACT}.
+     * for programmatic interactions. Emits `BlockTypeEvent.INTERACT`.
      *
      * @param player - The player interacting with the block type.
      * @param raycastHit - The raycast hit result, if the interaction was triggered by a client-side click/tap.
+     *
+     * **Side effects:** Emits `BlockTypeEvent.INTERACT`.
+     *
+     * **Category:** Blocks
      */
     interact(player: Player, raycastHit?: RaycastHit): void;
 
 
 }
 
-/** Event types a BlockType instance can emit. See {@link BlockTypeEventPayloads} for the payloads. @public */
+/**
+ * Event types a BlockType instance can emit.
+ *
+ * See `BlockTypeEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum BlockTypeEvent {
     ENTITY_COLLISION = "BLOCK_TYPE.ENTITY_COLLISION",
     ENTITY_CONTACT_FORCE = "BLOCK_TYPE.ENTITY_CONTACT_FORCE",
     INTERACT = "BLOCK_TYPE.INTERACT"
 }
 
-/** Event payloads for BlockType emitted events. @public */
+/**
+ * Event payloads for BlockType emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface BlockTypeEventPayloads {
     /** Emitted when an entity collides with a block type. */
     [BlockTypeEvent.ENTITY_COLLISION]: {
@@ -945,7 +1317,15 @@ export declare interface BlockTypeEventPayloads {
     };
 }
 
-/** Options for creating a block type instance. @public */
+/**
+ * Options for creating a block type instance.
+ *
+ * Use for: defining new block types to register in a `BlockTypeRegistry`.
+ * Do NOT use for: placing blocks; use `ChunkLattice.setBlock`.
+ *
+ * **Category:** Blocks
+ * @public
+ */
 export declare interface BlockTypeOptions {
     /** The unique numeric identifier for the block type. */
     id: number;
@@ -964,16 +1344,16 @@ export declare interface BlockTypeOptions {
 /**
  * Manages known block types in a world.
  *
+ * When to use: registering and retrieving block types for a specific world.
+ * Do NOT use for: placing blocks; use `ChunkLattice.setBlock`.
+ *
  * @remarks
- * Block type registries are created internally as a singleton
- * for each {@link World} instance in a game server. A block
- * type registry allows you to register and retrieve block
- * types by their unique id for a world.
+ * Each `World` has its own registry. Block type IDs are unique per world.
  *
  * <h2>Events</h2>
  *
- * This class is an EventRouter, and instances of it emit
- * events with payloads listed under {@link BlockTypeRegistryEventPayloads}
+ * This class is an EventRouter, and instances of it emit events with payloads listed under
+ * `BlockTypeRegistryEventPayloads`.
  *
  * @example
  * ```typescript
@@ -984,23 +1364,36 @@ export declare interface BlockTypeOptions {
  * });
  * ```
  *
+ * **Category:** Blocks
  * @public
  */
 export declare class BlockTypeRegistry extends EventRouter implements protocol.Serializable {
 
 
 
-    /** The world the block type registry is for. */
+    /**
+     * The world the block type registry is for.
+     *
+     * **Category:** Blocks
+     */
     get world(): World;
     /**
      * Get all registered block types.
      * @returns An array of all registered block types.
+     *
+     * **Category:** Blocks
      */
     getAllBlockTypes(): BlockType[];
     /**
      * Get a registered block type by its id.
+     *
+     * @remarks
+     * Throws a fatal error if the block type is not registered.
+     *
      * @param id - The id of the block type to get.
      * @returns The block type with the given id.
+     *
+     * **Category:** Blocks
      */
     getBlockType(id: number): BlockType;
     /**
@@ -1012,22 +1405,42 @@ export declare class BlockTypeRegistry extends EventRouter implements protocol.S
      *
      * @param blockTypeOptions - The options for the block type.
      * @returns The registered block type.
+     *
+     * **Side effects:** Emits `BlockTypeRegistryEvent.REGISTER_BLOCK_TYPE`.
+     *
+     * **Category:** Blocks
      */
     registerGenericBlockType(blockTypeOptions: BlockTypeOptions): BlockType;
     /**
      * Register a block type.
      * @param blockType - The block type to register.
+     *
+     * **Side effects:** Emits `BlockTypeRegistryEvent.REGISTER_BLOCK_TYPE`.
+     *
+     * **Category:** Blocks
      */
     registerBlockType(blockType: BlockType): void;
 
 }
 
-/** Event types a BlockTypeRegistry instance can emit. See {@link BlockTypeRegistryEventPayloads} for the payloads. @public */
+/**
+ * Event types a BlockTypeRegistry instance can emit.
+ *
+ * See `BlockTypeRegistryEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum BlockTypeRegistryEvent {
     REGISTER_BLOCK_TYPE = "BLOCK_TYPE_REGISTRY.REGISTER_BLOCK_TYPE"
 }
 
-/** Event payloads for BlockTypeRegistry emitted events. @public */
+/**
+ * Event payloads for BlockTypeRegistry emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface BlockTypeRegistryEventPayloads {
     /** Emitted when a block type is registered. */
     [BlockTypeRegistryEvent.REGISTER_BLOCK_TYPE]: {
@@ -1037,22 +1450,49 @@ export declare interface BlockTypeRegistryEventPayloads {
     };
 }
 
-/** The options for a capsule collider. @public */
+/**
+ * The options for a capsule collider. @public
+ *
+ * Use for: capsule-shaped colliders.
+ * Do NOT use for: other shapes; use the matching collider option type.
+ *
+ * **Category:** Physics
+ */
 export declare interface CapsuleColliderOptions extends BaseColliderOptions {
     shape: ColliderShape.CAPSULE;
-    /** The half height of the capsule collider. */
+    /**
+     * The half height of the capsule collider.
+     *
+     * **Category:** Physics
+     */
     halfHeight?: number;
-    /** The radius of the capsule collider. */
+    /**
+     * The radius of the capsule collider.
+     *
+     * **Category:** Physics
+     */
     radius?: number;
 }
 
-/** Event types a ChatManager instance can emit. See {@link ChatEventPayloads} for the payloads. @public */
+/**
+ * Event types a ChatManager instance can emit.
+ *
+ * See `ChatEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum ChatEvent {
     BROADCAST_MESSAGE = "CHAT.BROADCAST_MESSAGE",
     PLAYER_MESSAGE = "CHAT.PLAYER_MESSAGE"
 }
 
-/** Event payloads for ChatManager emitted events. @public */
+/**
+ * Event payloads for ChatManager emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface ChatEventPayloads {
     /** Emitted when a broadcast message is sent. */
     [ChatEvent.BROADCAST_MESSAGE]: {
@@ -1071,18 +1511,24 @@ export declare interface ChatEventPayloads {
 /**
  * Manages chat and commands in a world.
  *
+ * When to use: broadcasting chat, sending system messages, or registering chat commands.
+ * Do NOT use for: player HUD/menus; use `PlayerUI` for rich UI.
+ *
  * @remarks
  * The ChatManager is created internally as a singleton
- * for each {@link World} instance in a game server.
+ * for each `World` instance in a game server.
  * The ChatManager allows you to broadcast messages,
  * send messages to specific players, and register
  * commands that can be used in chat to execute game
  * logic.
  *
+ * Pattern: register commands during world initialization and keep callbacks fast.
+ * Anti-pattern: assuming commands are permission-checked; always validate access in callbacks.
+ *
  * <h2>Events</h2>
  *
  * This class is an EventRouter, and instances of it emit
- * events with payloads listed under {@link ChatEventPayloads}
+ * events with payloads listed under `ChatEventPayloads`
  *
  * @example
  * ```typescript
@@ -1099,6 +1545,7 @@ export declare interface ChatEventPayloads {
  * });
  * ```
  *
+ * **Category:** Chat
  * @public
  */
 export declare class ChatManager extends EventRouter {
@@ -1107,17 +1554,33 @@ export declare class ChatManager extends EventRouter {
 
     /**
      * Register a command and its callback.
+     *
+     * @remarks
+     * Commands are matched by exact string equality against the first token in a chat message.
+     *
      * @param command - The command to register.
      * @param callback - The callback function to execute when the command is used.
+     *
+     * **Requires:** Use a consistent command prefix (for example, `/kick`) if you want slash commands.
+     *
+     * @see `ChatManager.unregisterCommand`
+     *
+     * **Category:** Chat
      */
     registerCommand(command: string, callback: CommandCallback): void;
     /**
      * Unregister a command.
+     *
      * @param command - The command to unregister.
+     *
+     * @see `ChatManager.registerCommand`
+     *
+     * **Category:** Chat
      */
     unregisterCommand(command: string): void;
     /**
      * Send a system broadcast message to all players in the world.
+     *
      * @param message - The message to send.
      * @param color - The color of the message as a hex color code, excluding #.
      *
@@ -1125,17 +1588,30 @@ export declare class ChatManager extends EventRouter {
      * ```typescript
      * chatManager.sendBroadcastMessage('Hello, world!', 'FF00AA');
      * ```
+     *
+     * **Side effects:** Emits `ChatEvent.BROADCAST_MESSAGE` for network sync.
+     *
+     * @see `ChatManager.sendPlayerMessage`
+     *
+     * **Category:** Chat
      */
     sendBroadcastMessage(message: string, color?: string): void;
     /**
      * Handle a command if it exists.
+     *
      * @param player - The player that sent the command.
      * @param message - The full message.
      * @returns True if a command was handled, false otherwise.
+     *
+     * @remarks
+     * The command is parsed as the first space-delimited token in the message.
+     *
+     * **Category:** Chat
      */
     handleCommand(player: Player, message: string): boolean;
     /**
      * Send a system message to a specific player, only visible to them.
+     *
      * @param player - The player to send the message to.
      * @param message - The message to send.
      * @param color - The color of the message as a hex color code, excluding #.
@@ -1144,6 +1620,12 @@ export declare class ChatManager extends EventRouter {
      * ```typescript
      * chatManager.sendPlayerMessage(player, 'Hello, player!', 'FF00AA');
      * ```
+     *
+     * **Side effects:** Emits `ChatEvent.PLAYER_MESSAGE` for network sync.
+     *
+     * @see `ChatManager.sendBroadcastMessage`
+     *
+     * **Category:** Chat
      */
     sendPlayerMessage(player: Player, message: string, color?: string): void;
 
@@ -1151,16 +1633,21 @@ export declare class ChatManager extends EventRouter {
 }
 
 /**
- * A 16^3 chunk of blocks. Used to represent a world's terrain.
+ * A 16^3 chunk of blocks representing a slice of world terrain.
+ *
+ * When to use: reading chunk data or working with bulk block operations.
+ * Do NOT use for: creating terrain directly; prefer `ChunkLattice`.
  *
  * @remarks
- * Chunks make up the bulk of the terrain in a world. Chunks are
- * fixed size, each containing 16^3 possible blocks as
- * a 16x16x16 cube. Chunks are primarily a data structure used by
- * {@link ChunkLattice} to represent a world's terrain.
- * Chunks store their internal block coordinates in local
- * space, meaning local coordinates x: 0...15, y: 0...15, z: 0...15.
+ * Chunks are fixed-size (16×16×16) and store block IDs by local coordinates.
  *
+ * <h2>Coordinate System</h2>
+ *
+ * - **Global (world) coordinates:** integer block positions in world space.
+ * - **Chunk origin:** the world coordinate at the chunk's minimum corner (multiples of 16).
+ * - **Local coordinates:** 0..15 per axis within the chunk.
+ *
+ * **Category:** Blocks
  * @public
  */
 export declare class Chunk implements protocol.Serializable {
@@ -1171,46 +1658,79 @@ export declare class Chunk implements protocol.Serializable {
      * Creates a new chunk instance.
      */
     constructor(originCoordinate: Vector3Like);
-    /** The blocks in the chunk as a flat Uint8Array[4096], each index as 0 or a block type id. */
+    /**
+     * The blocks in the chunk as a flat Uint8Array[4096], each index as 0 or a block type ID.
+     *
+     * **Category:** Blocks
+     */
     get blocks(): Readonly<Uint8Array>;
-    /** The rotations of the blocks in the chunk as a map of block index to rotation. */
+    /**
+     * The rotations of the blocks in the chunk as a map of block index to rotation.
+     *
+     * **Category:** Blocks
+     */
     get blockRotations(): Readonly<Map<number, BlockRotation>>;
-    /** The origin coordinate of the chunk. */
+    /**
+     * The origin coordinate of the chunk (world-space, multiples of 16).
+     *
+     * **Category:** Blocks
+     */
     get originCoordinate(): Vector3Like;
     /**
-     * Convert a block index to a local coordinate.
+     * Converts a block index to a local coordinate.
+     *
      * @param index - The index of the block to convert.
      * @returns The local coordinate of the block.
+     *
+     * **Category:** Blocks
      */
     static blockIndexToLocalCoordinate(index: number): Vector3Like;
     /**
-     * Convert a global coordinate to a local coordinate.
+     * Converts a global coordinate to a local coordinate.
+     *
      * @param globalCoordinate - The global coordinate to convert.
      * @returns The local coordinate.
+     *
+     * **Category:** Blocks
      */
     static globalCoordinateToLocalCoordinate(globalCoordinate: Vector3Like): Vector3Like;
     /**
-     * Convert a global coordinate to an origin coordinate.
+     * Converts a global coordinate to a chunk origin coordinate.
+     *
      * @param globalCoordinate - The global coordinate to convert.
      * @returns The origin coordinate.
+     *
+     * **Category:** Blocks
      */
     static globalCoordinateToOriginCoordinate(globalCoordinate: Vector3Like): Vector3Like;
     /**
-     * Get the block type id at a specific local coordinate.
+     * Gets the block type ID at a specific local coordinate.
+     *
+     * @remarks
+     * Expects local coordinates in the range 0..15 for each axis.
+     *
      * @param localCoordinate - The local coordinate of the block to get.
-     * @returns The block type id.
+     * @returns The block type ID.
+     *
+     * **Category:** Blocks
      */
     getBlockId(localCoordinate: Vector3Like): number;
     /**
-     * Get the rotation of a block at a specific local coordinate.
+     * Gets the rotation of a block at a specific local coordinate.
+     *
      * @param localCoordinate - The local coordinate of the block to get the rotation of.
-     * @returns The rotation of the block, defaults to identity rotation.
+     * @returns The rotation of the block (defaults to identity rotation).
+     *
+     * **Category:** Blocks
      */
     getBlockRotation(localCoordinate: Vector3Like): BlockRotation;
     /**
-     * Check if a block exists at a specific local coordinate.
+     * Checks if a block exists at a specific local coordinate.
+     *
      * @param localCoordinate - The local coordinate of the block to check.
      * @returns Whether a block exists.
+     *
+     * **Category:** Blocks
      */
     hasBlock(localCoordinate: Vector3Like): boolean;
 
@@ -1222,10 +1742,21 @@ export declare class Chunk implements protocol.Serializable {
 /**
  * A lattice of chunks that represent a world's terrain.
  *
- * @remarks
- * The ChunkLattice lattice tracks the current terrain of a world,
- * comprised of {@link Chunk} instances.
+ * When to use: reading or mutating blocks in world space.
+ * Do NOT use for: per-entity placement logic; prefer higher-level game systems.
  *
+ * @remarks
+ * The lattice owns all chunks and keeps physics colliders in sync with blocks.
+ *
+ * <h2>Coordinate System</h2>
+ *
+ * - **Global (world) coordinates:** integer block positions in world space.
+ * - **Chunk origin:** world coordinate at the chunk's minimum corner (multiples of 16).
+ * - **Local coordinates:** 0..15 per axis within a chunk.
+ * - **Axes:** +X right, +Y up, -Z forward.
+ * - **Origin:** (0,0,0) is the world origin.
+ *
+ * **Category:** Blocks
  * @public
  */
 export declare class ChunkLattice extends EventRouter {
@@ -1239,100 +1770,149 @@ export declare class ChunkLattice extends EventRouter {
      * @param world - The world the chunk lattice is for.
      */
     constructor(world: World);
-    /** The number of chunks in the lattice. */
+    /**
+     * The number of chunks in the lattice.
+     *
+     * **Category:** Blocks
+     */
     get chunkCount(): number;
     /**
      * Removes and clears all chunks and their blocks from the lattice.
+     *
+     * Use for: full world resets or map reloads.
+     * Do NOT use for: incremental changes; use `ChunkLattice.setBlock`.
      *
      * @remarks
      * **Removes colliders:** All block type colliders are removed from the physics simulation.
      *
      * **Emits events:** Emits `REMOVE_CHUNK` for each chunk before clearing.
+     *
+     * **Side effects:** Clears all chunks, placements, and block colliders.
+     *
+     * **Category:** Blocks
      */
     clear(): void;
     /**
-     * Get the block type id at a specific global coordinate.
+     * Gets the block type ID at a specific global coordinate.
+     *
      * @param globalCoordinate - The global coordinate of the block to get.
-     * @returns The block type id, 0 if no block is set.
+     * @returns The block type ID, or 0 if no block is set.
+     *
+     * **Category:** Blocks
      */
     getBlockId(globalCoordinate: Vector3Like): number;
 
     /**
-     * Get the block type at a specific global coordinate.
+     * Gets the block type at a specific global coordinate.
+     *
      * @param globalCoordinate - The global coordinate of the block to get.
-     * @returns The block type, null if no block is set.
+     * @returns The block type, or null if no block is set.
+     *
+     * **Category:** Blocks
      */
     getBlockType(globalCoordinate: Vector3Like): BlockType | null;
     /**
-     * Get the number of blocks of a specific block type in the lattice.
-     * @param blockTypeId - The block type id to get the count of.
+     * Gets the number of blocks of a specific block type in the lattice.
+     *
+     * @param blockTypeId - The block type ID to count.
      * @returns The number of blocks of the block type.
+     *
+     * **Category:** Blocks
      */
     getBlockTypeCount(blockTypeId: number): number;
     /**
-     * Get the chunk that contains the given global coordinate.
+     * Gets the chunk that contains the given global coordinate.
+     *
      * @param globalCoordinate - The global coordinate to get the chunk for.
      * @returns The chunk that contains the given global coordinate or undefined if not found.
+     *
+     * **Category:** Blocks
      */
     getChunk(globalCoordinate: Vector3Like): Chunk | undefined;
 
     /**
-     * Get the chunk for a given global coordinate, creating it if it doesn't exist.
+     * Gets the chunk for a given global coordinate, creating it if it doesn't exist.
      *
      * @remarks
-     * **Creates chunk:** If the chunk doesn't exist, creates a new one and emits `ADD_CHUNK`.
+     * Creates a new chunk and emits `ChunkLatticeEvent.ADD_CHUNK` if needed.
      *
      * @param globalCoordinate - The global coordinate of the chunk to get.
      * @returns The chunk at the given global coordinate (created if needed).
+     *
+     * **Side effects:** May create and register a new chunk.
+     *
+     * **Category:** Blocks
      */
     getOrCreateChunk(globalCoordinate: Vector3Like): Chunk;
     /**
-     * Get all chunks in the lattice.
+     * Gets all chunks in the lattice.
+     *
      * @returns An array of all chunks in the lattice.
+     *
+     * **Category:** Blocks
      */
     getAllChunks(): Chunk[];
     /**
-     * Check if a block exists at a specific global coordinate.
+     * Checks if a block exists at a specific global coordinate.
+     *
      * @param globalCoordinate - The global coordinate of the block to check.
      * @returns Whether a block exists.
+     *
+     * **Category:** Blocks
      */
     hasBlock(globalCoordinate: Vector3Like): boolean;
     /**
-     * Check if a chunk exists for a given global coordinate.
+     * Checks if a chunk exists for a given global coordinate.
+     *
      * @param globalCoordinate - The global coordinate of the chunk to check.
      * @returns Whether the chunk exists.
+     *
+     * **Category:** Blocks
      */
     hasChunk(globalCoordinate: Vector3Like): boolean;
     /**
-     * Initialize all blocks in the lattice in bulk, removing
-     * all previously existing blocks. This is much more
-     * efficient than setting each block individually.
+     * Initializes all blocks in the lattice in bulk, replacing existing blocks.
+     *
+     * Use for: loading maps or generating terrain in one pass.
+     * Do NOT use for: incremental edits; use `ChunkLattice.setBlock`.
      *
      * @remarks
-     * **Clears first:** Calls `clear()` before initializing, removing all existing blocks and colliders.
+     * **Clears first:** Calls `ChunkLattice.clear` before initializing, removing all existing blocks and colliders.
      *
      * **Collider optimization:** Creates one collider per block type with all placements combined.
      * Voxel colliders have their states combined for efficient neighbor collision detection.
      *
-     * @param blocks - The blocks to initialize, keyed by block type id.
+     * @param blocks - The blocks to initialize, keyed by block type ID.
+     *
+     * **Side effects:** Clears existing data, creates colliders, and emits `ChunkLatticeEvent.SET_BLOCK` per block.
+     *
+     * **Category:** Blocks
      */
     initializeBlocks(blocks: {
         [blockTypeId: number]: BlockPlacement[];
     }): void;
     /**
-     * Set the block at a global coordinate by block type id, automatically
-     * creating a chunk if it doesn't exist. Use block type id 0 for air (to remove a block).
+     * Sets the block at a global coordinate by block type ID.
+     *
+     * Use for: incremental terrain edits.
+     * Do NOT use for: bulk terrain loading; use `ChunkLattice.initializeBlocks`.
      *
      * @remarks
-     * **Collider updates:** Manages physics colliders automatically. For voxel block types, updates
-     * the existing collider. For trimesh block types, recreates the entire collider.
+     * **Air:** Use block type ID `0` to remove a block (set to air).
+     *
+     * **Collider updates:** For voxel block types, updates the existing collider.
+     * For trimesh block types, recreates the entire collider.
      *
      * **Removes previous:** If replacing an existing block, removes it from its collider first.
      * If the previous block type has no remaining blocks, its collider is removed from simulation.
      *
      * @param globalCoordinate - The global coordinate of the block to set.
-     * @param blockTypeId - The block type id to set. Use 0 to remove the block and replace with air.
+     * @param blockTypeId - The block type ID to set. Use 0 to remove the block and replace with air.
      * @param blockRotation - The rotation of the block.
+     *
+     * **Side effects:** Emits `ChunkLatticeEvent.SET_BLOCK` and mutates block colliders.
+     *
+     * **Category:** Blocks
      */
     setBlock(globalCoordinate: Vector3Like, blockTypeId: number, blockRotation?: BlockRotation): void;
 
@@ -1344,14 +1924,26 @@ export declare class ChunkLattice extends EventRouter {
 
 }
 
-/** Event types a ChunkLattice instance can emit. See {@link ChunkLatticeEventPayloads} for the payloads. @public */
+/**
+ * Event types a ChunkLattice instance can emit.
+ *
+ * See `ChunkLatticeEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum ChunkLatticeEvent {
     ADD_CHUNK = "CHUNK_LATTICE.ADD_CHUNK",
     REMOVE_CHUNK = "CHUNK_LATTICE.REMOVE_CHUNK",
     SET_BLOCK = "CHUNK_LATTICE.SET_BLOCK"
 }
 
-/** Event payloads for ChunkLattice emitted events. @public */
+/**
+ * Event payloads for ChunkLattice emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface ChunkLatticeEventPayloads {
     /** Emitted when a chunk is added to the lattice. */
     [ChunkLatticeEvent.ADD_CHUNK]: {
@@ -1374,7 +1966,11 @@ export declare interface ChunkLatticeEventPayloads {
     };
 }
 
-/** The coefficient for friction or bounciness combine rule. @public */
+/**
+ * The coefficient for friction or bounciness combine rule. @public
+ *
+ * **Category:** Physics
+ */
 export declare enum CoefficientCombineRule {
     Average = 0,
     Min = 1,
@@ -1385,14 +1981,14 @@ export declare enum CoefficientCombineRule {
 /**
  * Represents a collider in a world's physics simulation.
  *
- * @remarks
- * Colliders make up the foundation of the physical interactions
- * in a world. They are highly configurable and have many
- * aspects that can be adjusted both before simulation and
- * while simulated. Colliders will most often be used through
- * passing {@link ColliderOptions} to a {@link RigidBody} or
- * an entity's {@link EntityOptions}.
+ * When to use: defining collision shapes for rigid bodies or entities.
+ * Do NOT use for: gameplay queries; use `Simulation.raycast` or intersection APIs instead.
  *
+ * @remarks
+ * Colliders are usually created via `RigidBody` or `Entity` options.
+ * You can also create and manage them directly for advanced use cases.
+ *
+ * **Category:** Physics
  * @public
  */
 export declare class Collider extends EventRouter {
@@ -1407,120 +2003,270 @@ export declare class Collider extends EventRouter {
 
 
     /**
+     * Creates a collider with the provided options.
+     *
+     * Use for: configuring a collider before adding it to a simulation or rigid body.
+     *
      * @param colliderOptions - The options for the collider instance.
+     *
+     * **Category:** Physics
      */
     constructor(colliderOptions: ColliderOptions);
     /**
-     * Creates a collider options object from a block's half extents.
+     * Creates collider options from a block's half extents.
+     *
      * @param halfExtents - The half extents of the block.
      * @returns The collider options object.
+     *
+     * **Category:** Physics
      */
     static optionsFromBlockHalfExtents(halfExtents: Vector3Like): ColliderOptions;
     /**
-     * Creates a collider options object from a modelUri with best approximate shape and size.
+     * Creates collider options from a model URI using an approximate shape and size.
+     *
+     * @remarks
+     * Uses model bounds and heuristics unless `preferredShape` is specified.
+     *
      * @param modelUri - The URI of the model.
      * @param scale - The scale of the model.
      * @param preferredShape - The preferred shape to use for the collider.
      * @returns The collider options object.
+     *
+     * **Category:** Physics
      */
     static optionsFromModelUri(modelUri: string, scale?: Vector3Like | number, preferredShape?: ColliderShape): ColliderOptions;
-    /** The bounciness of the collider. */
+    /**
+     * The bounciness of the collider.
+     *
+     * **Category:** Physics
+     */
     get bounciness(): number;
-    /** The bounciness combine rule of the collider. */
+    /**
+     * The bounciness combine rule of the collider.
+     *
+     * **Category:** Physics
+     */
     get bouncinessCombineRule(): CoefficientCombineRule;
-    /** The collision groups the collider belongs to. */
+    /**
+     * The collision groups the collider belongs to.
+     *
+     * **Category:** Physics
+     */
     get collisionGroups(): CollisionGroups;
-    /** The friction of the collider. */
+    /**
+     * The friction of the collider.
+     *
+     * **Category:** Physics
+     */
     get friction(): number;
-    /** The friction combine rule of the collider. */
+    /**
+     * The friction combine rule of the collider.
+     *
+     * **Category:** Physics
+     */
     get frictionCombineRule(): CoefficientCombineRule;
-    /** Whether the collider is enabled. */
+    /**
+     * Whether the collider is enabled.
+     *
+     * **Category:** Physics
+     */
     get isEnabled(): boolean;
-    /** Whether the collider has been removed from the simulation. */
+    /**
+     * Whether the collider has been removed from the simulation.
+     *
+     * **Category:** Physics
+     */
     get isRemoved(): boolean;
-    /** Whether the collider is a sensor. */
+    /**
+     * Whether the collider is a sensor.
+     *
+     * **Category:** Physics
+     */
     get isSensor(): boolean;
-    /** Whether the collider is simulated. */
+    /**
+     * Whether the collider is simulated.
+     *
+     * **Category:** Physics
+     */
     get isSimulated(): boolean;
-    /** Whether the collider is a ball collider. */
+    /**
+     * Whether the collider is a ball collider.
+     *
+     * **Category:** Physics
+     */
     get isBall(): boolean;
-    /** Whether the collider is a block collider. */
+    /**
+     * Whether the collider is a block collider.
+     *
+     * **Category:** Physics
+     */
     get isBlock(): boolean;
-    /** Whether the collider is a capsule collider. */
+    /**
+     * Whether the collider is a capsule collider.
+     *
+     * **Category:** Physics
+     */
     get isCapsule(): boolean;
-    /** Whether the collider is a cone collider. */
+    /**
+     * Whether the collider is a cone collider.
+     *
+     * **Category:** Physics
+     */
     get isCone(): boolean;
-    /** Whether the collider is a cylinder collider. */
+    /**
+     * Whether the collider is a cylinder collider.
+     *
+     * **Category:** Physics
+     */
     get isCylinder(): boolean;
-    /** Whether the collider is a none collider. */
+    /**
+     * Whether the collider is a none collider.
+     *
+     * **Category:** Physics
+     */
     get isNone(): boolean;
-    /** Whether the collider is a round cylinder collider. */
+    /**
+     * Whether the collider is a round cylinder collider.
+     *
+     * **Category:** Physics
+     */
     get isRoundCylinder(): boolean;
-    /** Whether the collider is a trimesh collider. */
+    /**
+     * Whether the collider is a trimesh collider.
+     *
+     * **Category:** Physics
+     */
     get isTrimesh(): boolean;
-    /** Whether the collider is a voxel collider. */
+    /**
+     * Whether the collider is a voxel collider.
+     *
+     * **Category:** Physics
+     */
     get isVoxel(): boolean;
-    /** Whether the collider is a wedge collider. */
+    /**
+     * Whether the collider is a wedge collider.
+     *
+     * **Category:** Physics
+     */
     get isWedge(): boolean;
-    /** The parent rigid body of the collider. */
+    /**
+     * The parent rigid body of the collider.
+     *
+     * **Category:** Physics
+     */
     get parentRigidBody(): RigidBody | undefined;
-    /** The raw collider object from the Rapier physics engine. */
+    /**
+     * The raw collider object from the Rapier physics engine.
+     *
+     * **Category:** Physics
+     */
     get rawCollider(): RawCollider | undefined;
-    /** The raw shape object from the Rapier physics engine. */
+    /**
+     * The raw shape object from the Rapier physics engine.
+     *
+     * **Category:** Physics
+     */
     get rawShape(): RawShape | undefined;
-    /** The relative position of the collider to its parent rigid body. */
+    /**
+     * The relative position of the collider to its parent rigid body.
+     *
+     * **Category:** Physics
+     */
     get relativePosition(): Vector3Like;
-    /** The relative rotation of the collider. */
+    /**
+     * The relative rotation of the collider.
+     *
+     * **Category:** Physics
+     */
     get relativeRotation(): QuaternionLike;
-    /** The scale of the collider. */
+    /**
+     * The scale of the collider.
+     *
+     * **Category:** Physics
+     */
     get scale(): Vector3Like;
-    /** The shape of the collider. */
+    /**
+     * The shape of the collider.
+     *
+     * **Category:** Physics
+     */
     get shape(): ColliderShape;
-    /** An arbitrary identifier tag of the collider. Useful for your own logic. */
+    /**
+     * An arbitrary identifier tag of the collider. Useful for your own logic.
+     *
+     * **Category:** Physics
+     */
     get tag(): string | undefined;
     /**
      * Sets the bounciness of the collider.
      * @param bounciness - The bounciness of the collider.
+     *
+     *
+     * **Category:** Physics
      */
     setBounciness(bounciness: number): void;
     /**
      * Sets the bounciness combine rule of the collider.
      * @param bouncinessCombineRule - The bounciness combine rule of the collider.
+     *
+     *
+     * **Category:** Physics
      */
     setBouncinessCombineRule(bouncinessCombineRule: CoefficientCombineRule): void;
     /**
      * Sets the collision groups of the collider.
      * @param collisionGroups - The collision groups of the collider.
+     *
+     *
+     * **Category:** Physics
      */
     setCollisionGroups(collisionGroups: CollisionGroups): void;
     /**
      * Sets whether the collider is enabled.
      * @param enabled - Whether the collider is enabled.
+     *
+     *
+     * **Category:** Physics
      */
     setEnabled(enabled: boolean): void;
     /**
      * Sets the friction of the collider.
      * @param friction - The friction of the collider.
+     *
+     *
+     * **Category:** Physics
      */
     setFriction(friction: number): void;
     /**
      * Sets the friction combine rule of the collider.
      * @param frictionCombineRule - The friction combine rule of the collider.
+     *
+     *
+     * **Category:** Physics
      */
     setFrictionCombineRule(frictionCombineRule: CoefficientCombineRule): void;
     /**
      * Sets the half extents of a simulated block collider.
      * @param halfExtents - The half extents of the block collider.
+     *
+     *
+     * **Category:** Physics
      */
     setHalfExtents(halfExtents: Vector3Like): void;
     /**
      * Sets the half height of a simulated capsule, cone, cylinder, or round cylinder collider.
      * @param halfHeight - The half height of the capsule, cone, cylinder, or round cylinder collider.
+     *
+     *
+     * **Category:** Physics
      */
     setHalfHeight(halfHeight: number): void;
     /**
      * Sets the mass of the collider.
      * @param mass - The mass of the collider.
+     *
+     *
+     * **Category:** Physics
      */
     setMass(mass: number): void;
     /**
@@ -1530,11 +2276,17 @@ export declare class Collider extends EventRouter {
      * **Auto-enables events:** Automatically enables/disables collision events based on whether callback is set.
      *
      * @param callback - The on collision callback for the collider.
+     *
+     *
+     * **Category:** Physics
      */
     setOnCollision(callback: CollisionCallback | undefined): void;
     /**
      * Sets the radius of a simulated ball, capsule, cylinder, or round cylinder collider.
      * @param radius - The radius of the collider.
+     *
+     *
+     * **Category:** Physics
      */
     setRadius(radius: number): void;
     /**
@@ -1545,6 +2297,9 @@ export declare class Collider extends EventRouter {
      * is relative to the parent rigid body or the world origin.
      *
      * @param rotation - The relative rotation of the collider.
+     *
+     *
+     * **Category:** Physics
      */
     setRelativeRotation(rotation: QuaternionLike): void;
     /**
@@ -1555,22 +2310,34 @@ export declare class Collider extends EventRouter {
      * is relative to the parent rigid body or the world origin.
      *
      * @param position - The relative position of the collider.
+     *
+     *
+     * **Category:** Physics
      */
     setRelativePosition(position: Vector3Like): void;
     /**
      * Sets whether the collider is a sensor.
      * @param sensor - Whether the collider is a sensor.
+     *
+     *
+     * **Category:** Physics
      */
     setSensor(sensor: boolean): void;
     /**
      * Sets the tag of the collider.
      * @param tag - The tag of the collider.
+     *
+     *
+     * **Category:** Physics
      */
     setTag(tag: string): void;
     /**
      * Sets the voxel at the given coordinate as filled or not filled.
      * @param coordinate - The coordinate of the voxel to set.
      * @param filled - True if the voxel at the coordinate should be filled, false if it should be removed.
+     *
+     *
+     * **Category:** Physics
      */
     setVoxel(coordinate: Vector3Like, filled: boolean): void;
     /**
@@ -1583,6 +2350,8 @@ export declare class Collider extends EventRouter {
      *
      * @param simulation - The simulation to add the collider to.
      * @param parentRigidBody - The parent rigid body of the collider.
+     *
+     * **Category:** Physics
      */
     addToSimulation(simulation: Simulation, parentRigidBody?: RigidBody): void;
 
@@ -1590,12 +2359,18 @@ export declare class Collider extends EventRouter {
      * Enables or disables collision events for the collider.
      * This is automatically enabled if an on collision callback is set.
      * @param enabled - Whether collision events are enabled.
+     *
+     *
+     * **Category:** Physics
      */
     enableCollisionEvents(enabled: boolean): void;
     /**
      * Enables or disables contact force events for the collider.
      * This is automatically enabled if an on contact force callback is set.
      * @param enabled - Whether contact force events are enabled.
+     *
+     *
+     * **Category:** Physics
      */
     enableContactForceEvents(enabled: boolean): void;
 
@@ -1604,6 +2379,10 @@ export declare class Collider extends EventRouter {
      *
      * @remarks
      * **Parent unlinking:** Unlinks from parent rigid body if attached.
+     *
+     * **Side effects:** Removes the collider from the simulation and unlinks it from any parent rigid body.
+     *
+     * **Category:** Physics
      */
     removeFromSimulation(): void;
     /**
@@ -1616,6 +2395,9 @@ export declare class Collider extends EventRouter {
      * Also scales `relativePosition` proportionally.
      *
      * @param scalar - The scalar to scale the collider by.
+     *
+     *
+     * **Category:** Physics
      */
     setScale(scale: Vector3Like): void;
 
@@ -1629,10 +2411,21 @@ export declare class Collider extends EventRouter {
 
 }
 
-/** The options for a collider. @public */
+/**
+ * The options for a collider. @public
+ *
+ * Use for: providing collider definitions when creating rigid bodies or entities.
+ * Do NOT use for: runtime changes; use `Collider` APIs instead.
+ *
+ * **Category:** Physics
+ */
 export declare type ColliderOptions = BallColliderOptions | BlockColliderOptions | CapsuleColliderOptions | ConeColliderOptions | CylinderColliderOptions | RoundCylinderColliderOptions | TrimeshColliderOptions | VoxelsColliderOptions | WedgeColliderOptions | NoneColliderOptions;
 
-/** The shapes a collider can be. @public */
+/**
+ * The shapes a collider can be. @public
+ *
+ * **Category:** Physics
+ */
 export declare enum ColliderShape {
     NONE = "none",
     BALL = "ball",
@@ -1648,8 +2441,11 @@ export declare enum ColliderShape {
 
 /**
  * A callback function that is called when a collision occurs.
+ *
  * @param other - The other object involved in the collision, a block or entity.
  * @param started - Whether the collision has started or ended.
+ *
+ * **Category:** Physics
  * @public
  */
 export declare type CollisionCallback = ((other: BlockType | Entity, started: boolean) => void) | ((other: BlockType | Entity, started: boolean, colliderHandleA: number, colliderHandleB: number) => void);
@@ -1658,26 +2454,19 @@ export declare type CollisionCallback = ((other: BlockType | Entity, started: bo
  * The default collision groups.
  *
  * @remarks
- * The collision groups are used to determine which objects collide and
- * generate collision and contact force events. The default collision groups
- * can be used for most entity and block interactions, but you may want to
- * create your own for more complex scenarios. Up to 15 collision groups can be
- * registered. Collision groups use pairwise filtering using bit masks.
+ * Collision groups determine which objects collide and generate events. Up to 15 groups
+ * can be registered. Filtering uses pairwise bit masks:
  *
- * This filtering method is based on two 16-bit values:
- * - The belongsTo groups (the 16 left-most bits of `self.0`).
- * - The collidesWith mask (the 16 right-most bits of `self.0`).
+ * - The belongsTo groups (the 16 left-most bits of `self.0`)
+ * - The collidesWith mask (the 16 right-most bits of `self.0`)
  *
- * An interaction is allowed between two filters `a` and `b` two conditions
- * are met simultaneously:
- * - The belongsTo groups of `a` has at least one bit set to `1` in common with the collidesWith mask of `b`.
- * - The belongsTo groups of `b` has at least one bit set to `1` in common with the collidesWith mask of `a`.
- * In other words, interactions are allowed between two filter if the following condition is met:
+ * An interaction is allowed between two filters `a` and `b` if:
  *
  * ```
  * ((a >> 16) & b) != 0 && ((b >> 16) & a) != 0
  * ```
  *
+ * **Category:** Physics
  * @public
  */
 export declare enum CollisionGroup {
@@ -1700,7 +2489,12 @@ export declare enum CollisionGroup {
     ALL = 65535
 }
 
-/** A set of collision groups. @public */
+/**
+ * A set of collision groups.
+ *
+ * **Category:** Physics
+ * @public
+ */
 export declare type CollisionGroups = {
     belongsTo: CollisionGroup[];
     collidesWith: CollisionGroup[];
@@ -1709,39 +2503,52 @@ export declare type CollisionGroups = {
 /**
  * A helper class for building and decoding collision groups.
  *
- * @remarks
- * This class should be used directly with its static methods.
- * You can assign collision groups to colliders of entities and
- * blocks to control optimized collision interactions and filterings
- * between blocks and entities, and entities and other entities.
+ * When to use: creating custom collision filters for colliders and rigid bodies.
+ * Do NOT use for: per-frame changes; collision group changes are usually infrequent.
  *
+ * @remarks
+ * Use the static methods directly to encode or decode collision group masks.
+ *
+ * **Category:** Physics
  * @public
  */
 export declare class CollisionGroupsBuilder {
     private static readonly BELONGS_TO_SHIFT;
     private static readonly COLLIDES_WITH_MASK;
     /**
-     * Builds a raw set of collision groups from a set of collision groups.
+     * Builds a raw collision group mask from a set of collision groups.
+     *
      * @param collisionGroups - The set of collision groups to build.
      * @returns A raw set of collision groups represented as a 32-bit number.
+     *
+     * **Category:** Physics
      */
     static buildRawCollisionGroups(collisionGroups: CollisionGroups): RawCollisionGroups;
     /**
-     * Decodes a raw set of collision groups into a set of collision groups.
+     * Decodes a raw collision group mask into a set of collision groups.
+     *
      * @param groups - The raw set of collision groups to decode.
      * @returns A set of collision groups.
+     *
+     * **Category:** Physics
      */
     static decodeRawCollisionGroups(groups: RawCollisionGroups): CollisionGroups;
     /**
-     * Decodes a set of collision groups into a set of their string equivalents.
+     * Decodes collision groups into their string equivalents.
+     *
      * @param collisionGroups - The set of collision groups to decode.
      * @returns A set of collision groups represented as their string equivalents.
+     *
+     * **Category:** Physics
      */
     static decodeCollisionGroups(collisionGroups: CollisionGroups): DecodedCollisionGroups;
     /**
      * Checks if the collision groups are the default collision groups.
+     *
      * @param collisionGroups - The set of collision groups to check.
      * @returns Whether the collision groups are the default collision groups.
+     *
+     * **Category:** Physics
      */
     static isDefaultCollisionGroups(collisionGroups: CollisionGroups): boolean;
     /**
@@ -1759,20 +2566,41 @@ export declare class CollisionGroupsBuilder {
  * @param player - The player that sent the command.
  * @param args - An array of arguments, comprised of all space separated text after the command.
  * @param message - The full message of the command.
+ * **Category:** Chat
  * @public
  */
 export declare type CommandCallback = (player: Player, args: string[], message: string) => void;
 
-/** The options for a cone collider. @public */
+/**
+ * The options for a cone collider. @public
+ *
+ * Use for: cone-shaped colliders.
+ * Do NOT use for: other shapes; use the matching collider option type.
+ *
+ * **Category:** Physics
+ */
 export declare interface ConeColliderOptions extends BaseColliderOptions {
     shape: ColliderShape.CONE;
-    /** The half height of the cone collider. */
+    /**
+     * The half height of the cone collider.
+     *
+     * **Category:** Physics
+     */
     halfHeight?: number;
-    /** The radius of the cone collider. */
+    /**
+     * The radius of the cone collider.
+     *
+     * **Category:** Physics
+     */
     radius?: number;
 }
 
-/** Data for contact forces. @public */
+/**
+ * Data for contact forces.
+ *
+ * **Category:** Physics
+ * @public
+ */
 export declare type ContactForceData = {
     /** The total force vector. */
     totalForce: RAPIER.Vector;
@@ -1784,7 +2612,12 @@ export declare type ContactForceData = {
     maxForceMagnitude: number;
 };
 
-/** A contact manifold. @public */
+/**
+ * A contact manifold.
+ *
+ * **Category:** Physics
+ * @public
+ */
 export declare type ContactManifold = {
     /** The contact points as global coordinates. */
     contactPoints: Vector3Like[];
@@ -1796,36 +2629,59 @@ export declare type ContactManifold = {
     normal: Vector3Like;
 };
 
-/** The options for a cylinder collider. @public */
+/**
+ * The options for a cylinder collider. @public
+ *
+ * Use for: cylinder-shaped colliders.
+ * Do NOT use for: other shapes; use the matching collider option type.
+ *
+ * **Category:** Physics
+ */
 export declare interface CylinderColliderOptions extends BaseColliderOptions {
     shape: ColliderShape.CYLINDER;
-    /** The half height of the cylinder collider. */
+    /**
+     * The half height of the cylinder collider.
+     *
+     * **Category:** Physics
+     */
     halfHeight?: number;
-    /** The radius of the cylinder collider. */
+    /**
+     * The radius of the cylinder collider.
+     *
+     * **Category:** Physics
+     */
     radius?: number;
 }
 
-/** A decoded set of collision groups represented as their string equivalents. @public */
+/**
+ * A decoded set of collision groups represented as their string equivalents.
+ *
+ * **Category:** Physics
+ * @public
+ */
 export declare type DecodedCollisionGroups = {
     belongsTo: string[];
     collidesWith: string[];
 };
 
-/** The default rigid body options for a model entity when EntityOptions.rigidBodyOptions is not provided. @public */
+/**
+ * The default rigid body options for a model entity when `EntityOptions.rigidBodyOptions` is not provided.
+ *
+ * **Category:** Entities
+ * @public
+ */
 export declare const DEFAULT_ENTITY_RIGID_BODY_OPTIONS: RigidBodyOptions;
 
 /**
  * Represents the default player model entity.
  *
+ * When to use: standard player avatars with built-in cosmetics and default controls.
+ * Do NOT use for: fully custom player rigs that don't match the default model's anchors/animations.
+ *
  * @remarks
- * The default player entity extends the {@link PlayerEntity} class,
- * uses the default player model, and assigns a DefaultPlayerEntityController.
- * This entity is the most commonly used player controlled entity in games.
- * It automatically handles things like managing player visual customizations
- * and cosmetics, and more. If you want to change the default model used, you
- * can override all of the defaults, including the modelUri, but you must
- * ensure that the model used has the same animation names and anchor points
- * as the default player model in order to prevent unexpected behavior.
+ * Extends `PlayerEntity`, uses the default player model, and assigns
+ * `DefaultPlayerEntityController`. You can override defaults, but if you
+ * change `modelUri`, ensure the model has the same animation names and anchor points.
  *
  * @example
  * ```typescript
@@ -1834,6 +2690,7 @@ export declare const DEFAULT_ENTITY_RIGID_BODY_OPTIONS: RigidBodyOptions;
  * playerEntity.spawn(world, { x: 0, y: 10, z: 0 });
  * ```
  *
+ * **Category:** Entities
  * @public
  */
 export declare class DefaultPlayerEntity extends PlayerEntity {
@@ -1849,23 +2706,30 @@ export declare class DefaultPlayerEntity extends PlayerEntity {
      * and applied. Child entities are created for hair and equipped cosmetic items.
      *
      * @param options - The options for the default player entity.
+     *
+     * **Category:** Entities
      */
     constructor(options: DefaultPlayerEntityOptions);
-    /** The cosmetic slots that are hidden. @public */
+    /**
+     * The cosmetic slots that are hidden.
+     *
+     * **Category:** Entities
+     * @public
+     */
     get cosmeticHiddenSlots(): PlayerCosmeticSlot[];
 
 }
 
 /**
- * The player entity controller implementation.
+ * The default player entity controller implementation.
+ *
+ * When to use: player-controlled avatars using `DefaultPlayerEntity`.
+ * Do NOT use for: NPCs or non-player entities; use `SimpleEntityController` or
+ * `PathfindingEntityController` instead.
  *
  * @remarks
- * This class extends {@link BaseEntityController}
- * and implements the default movement, platforming, jump,
- * swimming, and other basic logic for the
- * default player entity. We recommend you extend this class
- * if you'd like to implement additional logic on top of the
- * DefaultPlayerEntityController implementation.
+ * Extends `BaseEntityController` and implements default movement, platforming,
+ * jumping, and swimming. You can extend this class to add custom logic.
  *
  * <h2>Coordinate System & Model Orientation</h2>
  *
@@ -1886,6 +2750,7 @@ export declare class DefaultPlayerEntity extends PlayerEntity {
  * myEntity.spawn(world, { x: 53, y: 10, z: 23 });
  * ```
  *
+ * **Category:** Controllers
  * @public
  */
 export declare class DefaultPlayerEntityController extends BaseEntityController {
@@ -1984,17 +2849,45 @@ export declare class DefaultPlayerEntityController extends BaseEntityController 
 
     /**
      * @param options - Options for the controller.
+     *
+     * **Category:** Controllers
      */
     constructor(options?: DefaultPlayerEntityControllerOptions);
-    /** Whether the entity is moving from player inputs. */
+    /**
+     * Whether the entity is moving from player inputs.
+     *
+     * **Category:** Controllers
+     */
     get isActivelyMoving(): boolean;
-    /** Whether the entity is grounded. */
+    /**
+     * Whether the entity is grounded.
+     *
+     * **Category:** Controllers
+     */
     get isGrounded(): boolean;
-    /** Whether the entity is on a platform, a platform is any entity with a kinematic rigid body. */
+    /**
+     * Whether the entity is on a platform.
+     *
+     * @remarks
+     * A platform is any entity with a kinematic rigid body.
+     *
+     * **Category:** Controllers
+     */
     get isOnPlatform(): boolean;
-    /** Whether the entity is swimming, this is determined by if the entity is in a liquid block. */
+    /**
+     * Whether the entity is swimming.
+     *
+     * @remarks
+     * Determined by whether the entity is in contact with a liquid block.
+     *
+     * **Category:** Controllers
+     */
     get isSwimming(): boolean;
-    /** The platform the entity is on, if any. */
+    /**
+     * The platform the entity is on, if any.
+     *
+     * **Category:** Controllers
+     */
     get platform(): Entity | undefined;
     /**
      * Called when the controller is attached to an entity.
@@ -2012,6 +2905,8 @@ export declare class DefaultPlayerEntityController extends BaseEntityController 
      * swimming state, gravity scale, and animations.
      *
      * @param entity - The entity to attach the controller to.
+     *
+     * **Category:** Controllers
      */
     attach(entity: Entity): void;
     /**
@@ -2027,6 +2922,8 @@ export declare class DefaultPlayerEntityController extends BaseEntityController 
      * **Collider sizes scale:** Collider dimensions scale proportionally with `entity.height`.
      *
      * @param entity - The entity that is spawned.
+     *
+     * **Category:** Controllers
      */
     spawn(entity: Entity): void;
     /**
@@ -2053,11 +2950,21 @@ export declare class DefaultPlayerEntityController extends BaseEntityController 
      * @param input - The current input state of the player.
      * @param cameraOrientation - The current camera orientation state of the player.
      * @param deltaTimeMs - The delta time in milliseconds since the last tick.
+     *
+     * **Category:** Controllers
      */
     tickWithPlayerInput(entity: PlayerEntity, input: PlayerInput, cameraOrientation: PlayerCameraOrientation, deltaTimeMs: number): void;
 }
 
-/** Options for creating a DefaultPlayerEntityController instance. @public */
+/**
+ * Options for creating a DefaultPlayerEntityController instance.
+ *
+ * Use for: configuring default player movement and animation behavior at construction time.
+ * Do NOT use for: per-frame changes; override methods or adjust controller state instead.
+ *
+ * **Category:** Controllers
+ * @public
+ */
 export declare interface DefaultPlayerEntityControllerOptions {
     /** Whether to apply directional rotations to the entity while moving, defaults to true. */
     applyDirectionalMovementRotations?: boolean;
@@ -2111,52 +3018,126 @@ export declare interface DefaultPlayerEntityControllerOptions {
     walkVelocity?: number;
 }
 
-/** Options for creating a DefaultPlayerEntity instance. @public */
+/**
+ * Options for creating a DefaultPlayerEntity instance.
+ *
+ * Use for: customizing the default player avatar (for example cosmetic visibility).
+ * Do NOT use for: changing movement behavior; use `DefaultPlayerEntityControllerOptions`.
+ *
+ * **Category:** Entities
+ * @public
+ */
 export declare type DefaultPlayerEntityOptions = {
+    /** Cosmetic slots to hide. Use 'ALL' to hide all cosmetics. */
     cosmeticHiddenSlots?: PlayerCosmeticSlot[];
 } & PlayerEntityOptions;
 
-/** The options for a dynamic rigid body, also the default type. @public */
+/**
+ * The options for a dynamic rigid body, also the default type. @public
+ *
+ * Use for: physics-driven bodies affected by forces and collisions.
+ * Do NOT use for: kinematic bodies; use the kinematic option types instead.
+ *
+ * **Category:** Physics
+ */
 export declare interface DynamicRigidBodyOptions extends BaseRigidBodyOptions {
     type: RigidBodyType.DYNAMIC;
-    /** The additional mass of the rigid body. */
+    /**
+     * The additional mass of the rigid body.
+     *
+     * **Category:** Physics
+     */
     additionalMass?: number;
-    /** The additional mass properties of the rigid body. */
+    /**
+     * The additional mass properties of the rigid body.
+     *
+     * **Category:** Physics
+     */
     additionalMassProperties?: RigidBodyAdditionalMassProperties;
-    /** The additional solver iterations of the rigid body. */
+    /**
+     * The additional solver iterations of the rigid body.
+     *
+     * **Category:** Physics
+     */
     additionalSolverIterations?: number;
-    /** The angular damping of the rigid body. */
+    /**
+     * The angular damping of the rigid body.
+     *
+     * **Category:** Physics
+     */
     angularDamping?: number;
-    /** The angular velocity of the rigid body. */
+    /**
+     * The angular velocity of the rigid body.
+     *
+     * **Category:** Physics
+     */
     angularVelocity?: Vector3Like;
-    /** Whether the rigid body has continuous collision detection enabled. */
+    /**
+     * Whether the rigid body has continuous collision detection enabled.
+     *
+     * **Category:** Physics
+     */
     ccdEnabled?: boolean;
-    /** The dominance group of the rigid body. */
+    /**
+     * The dominance group of the rigid body.
+     *
+     * **Category:** Physics
+     */
     dominanceGroup?: number;
-    /** The enabled axes of positional movement of the rigid body. */
+    /**
+     * The enabled axes of positional movement of the rigid body.
+     *
+     * **Category:** Physics
+     */
     enabledPositions?: Vector3Boolean;
-    /** The enabled rotations of the rigid body. */
+    /**
+     * The enabled rotations of the rigid body.
+     *
+     * **Category:** Physics
+     */
     enabledRotations?: Vector3Boolean;
-    /** The gravity scale of the rigid body. */
+    /**
+     * The gravity scale of the rigid body.
+     *
+     * **Category:** Physics
+     */
     gravityScale?: number;
-    /** The linear damping of the rigid body. */
+    /**
+     * The linear damping of the rigid body.
+     *
+     * **Category:** Physics
+     */
     linearDamping?: number;
-    /** The linear velocity of the rigid body. */
+    /**
+     * The linear velocity of the rigid body.
+     *
+     * **Category:** Physics
+     */
     linearVelocity?: Vector3Like;
-    /** Whether the rigid body is sleeping. */
+    /**
+     * Whether the rigid body is sleeping.
+     *
+     * **Category:** Physics
+     */
     sleeping?: boolean;
-    /** The soft continuous collision detection prediction of the rigid body. */
+    /**
+     * The soft continuous collision detection prediction of the rigid body.
+     *
+     * **Category:** Physics
+     */
     softCcdPrediction?: number;
 }
 
 /**
- * Represents an entity in a world.
+ * Represents a dynamic or static object in a world.
+ *
+ * When to use: any non-player object that needs physics, visuals, or interactions.
+ * Do NOT use for: player-controlled avatars (use `PlayerEntity` / `DefaultPlayerEntity`).
+ * Do NOT use for: voxel blocks (use block APIs on `ChunkLattice`).
  *
  * @remarks
- * Entities are highly configurable and controllable. All
- * entities are created from a .gltf model asset and
- * allow full control of their rigid body and attached collider
- * dynamics.
+ * Entities are created from a block texture or a `.gltf` model and can have rigid bodies,
+ * colliders, animations, and controllers.
  *
  * <h2>Coordinate System</h2>
  *
@@ -2170,8 +3151,8 @@ export declare interface DynamicRigidBodyOptions extends BaseRigidBodyOptions {
  *
  * <h2>Events</h2>
  *
- * This class is an EventRouter, and instances of it emit
- * events with payloads listed under {@link EntityEventPayloads}
+ * This class is an EventRouter, and instances of it emit events with payloads listed under
+ * `EntityEventPayloads`.
  *
  * @example
  * ```typescript
@@ -2197,6 +3178,7 @@ export declare interface DynamicRigidBodyOptions extends BaseRigidBodyOptions {
  * spider.spawn(world, { x: 20, y: 6, z: 10 });
  * ```
  *
+ * **Category:** Entities
  * @public
  */
 export declare class Entity extends RigidBody implements protocol.Serializable {
@@ -2233,75 +3215,219 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
     /**
      * Creates a new Entity instance.
      *
+     * Use for: defining a new entity before spawning it into a world.
+     * Do NOT use for: player-controlled avatars (use `PlayerEntity` or `DefaultPlayerEntity`).
+     *
      * @remarks
-     * **Controller attachment:** If `controller` is provided, `controller.attach(this)` is called
-     * during construction (before spawn).
+     * Exactly one of `blockTextureUri` or `modelUri` must be provided.
+     * If `controller` is provided, `controller.attach(this)` is called during construction (before spawn).
      *
      * @param options - The options for the entity.
+     *
+     * **Requires:** If `parent` is provided, it must already be spawned.
+     *
+     * **Side effects:** May attach the provided controller.
+     *
+     * **Category:** Entities
      */
     constructor(options: EntityOptions);
-    /** The unique identifier for the entity. */
+    /**
+     * The unique identifier for the entity.
+     *
+     * @remarks
+     * Assigned when the entity is spawned.
+     *
+     * **Category:** Entities
+     */
     get id(): number | undefined;
-    /** The half extends of the visual size of the block entity when blockTextureUri is set. */
+    /**
+     * The half extents of the block entity's visual size.
+     *
+     * @remarks
+     * Only set for block entities.
+     *
+     * **Category:** Entities
+     */
     get blockHalfExtents(): Vector3Like | undefined;
-    /** The URI or path to the texture to be used, if this is set, the entity is a block entity. */
+    /**
+     * The texture URI for block entities.
+     *
+     * @remarks
+     * When set, this entity is treated as a block entity.
+     *
+     * **Category:** Entities
+     */
     get blockTextureUri(): string | undefined;
-    /** The controller for the entity. */
+    /**
+     * The controller for the entity.
+     *
+     * **Category:** Entities
+     */
     get controller(): BaseEntityController | undefined;
-    /** The emissive color of the entity. */
+    /**
+     * The emissive color of the entity.
+     *
+     * **Category:** Entities
+     */
     get emissiveColor(): RgbColor | undefined;
-    /** The emissive intensity of the entity. */
+    /**
+     * The emissive intensity of the entity.
+     *
+     * **Category:** Entities
+     */
     get emissiveIntensity(): number | undefined;
-    /** The depth (z-axis) of the entity's model with scale consideration or block entity's y*2 half extents. */
+    /**
+     * The depth (Z-axis) of the entity's model or block size.
+     *
+     * **Category:** Entities
+     */
     get depth(): number;
-    /** The height (y-axis) of the entity's model with scale consideration or block entity's y*2 half extents. */
+    /**
+     * The height (Y-axis) of the entity's model or block size.
+     *
+     * **Category:** Entities
+     */
     get height(): number;
-    /** The playback rate of the entity's model animations. */
+    /**
+     * The playback rate of the entity's model animations.
+     *
+     * **Category:** Entities
+     */
     get modelAnimationsPlaybackRate(): number;
-    /** The nodes to hide on the entity's model. */
+    /**
+     * The nodes to hide on the entity's model.
+     *
+     * **Category:** Entities
+     */
     get modelHiddenNodes(): ReadonlySet<string>;
-    /** The looped animations to start when the entity is spawned. */
+    /**
+     * The looped animations to start when the entity is spawned.
+     *
+     * **Category:** Entities
+     */
     get modelLoopedAnimations(): ReadonlySet<string>;
-    /** The node overrides of the entity's model. Mapped by name to the model node override. */
+    /**
+     * The node overrides of the entity's model, mapped by name.
+     *
+     * **Category:** Entities
+     */
     get modelNodeOverrides(): ReadonlyMap<string, Readonly<ModelNodeOverride>>;
-    /** The preferred shape of the entity's model when automatically generating its collider when no explicit colliders are provided. */
+    /**
+     * The preferred collider shape when auto-generating colliders from the model.
+     *
+     * **Category:** Entities
+     */
     get modelPreferredShape(): ColliderShape | undefined;
-    /** The scale of the entity's model. */
+    /**
+     * The scale of the entity's model.
+     *
+     * **Category:** Entities
+     */
     get modelScale(): Vector3Like;
-    /** The nodes to show on the entity's model, overriding hidden nodes. */
+    /**
+     * The nodes to show on the entity's model, overriding hidden nodes.
+     *
+     * **Category:** Entities
+     */
     get modelShownNodes(): ReadonlySet<string>;
-    /** The URI or path to the texture that overrides the model entity's default texture. */
+    /**
+     * The texture URI that overrides the model entity's default texture.
+     *
+     * **Category:** Entities
+     */
     get modelTextureUri(): string | undefined;
-    /** The URI or path to the .gltf model asset to be used for the entity. */
+    /**
+     * The URI or path to the `.gltf` model asset.
+     *
+     * **Category:** Entities
+     */
     get modelUri(): string | undefined;
-    /** The name of the entity. */
+    /**
+     * The name of the entity.
+     *
+     * **Category:** Entities
+     */
     get name(): string;
-    /** The opacity of the entity between 0 and 1. 0 is fully transparent, 1 is fully opaque. */
+    /**
+     * The opacity of the entity between 0 and 1.
+     *
+     * **Category:** Entities
+     */
     get opacity(): number;
-    /** The outline rendering options for the entity. */
+    /**
+     * The outline rendering options for the entity.
+     *
+     * **Category:** Entities
+     */
     get outline(): Outline | undefined;
-    /** The parent entity of the entity. */
+    /**
+     * The parent entity, if attached.
+     *
+     * **Category:** Entities
+     */
     get parent(): Entity | undefined;
-    /** The name of the parent's node (if parent is a model entity) this entity is attached to when spawned. */
+    /**
+     * The parent model node name, if attached.
+     *
+     * **Category:** Entities
+     */
     get parentNodeName(): string | undefined;
-    /** An arbitrary identifier tag of the entity. Useful for your own logic. */
+    /**
+     * An arbitrary identifier tag for your own logic.
+     *
+     * **Category:** Entities
+     */
     get tag(): string | undefined;
-    /** The tint color of the entity. */
+    /**
+     * The tint color of the entity.
+     *
+     * **Category:** Entities
+     */
     get tintColor(): RgbColor | undefined;
-    /** Whether the entity is a block entity. */
+    /**
+     * Whether this entity is a block entity.
+     *
+     * **Category:** Entities
+     */
     get isBlockEntity(): boolean;
-    /** Whether the entity is environmental, if true it will not invoke its tick function or change position. It also cannot be animated or removed after spawning. */
+    /**
+     * Whether the entity is environmental.
+     *
+     * @remarks
+     * Environmental entities are excluded from per-tick controller updates and update emission.
+     *
+     * **Category:** Entities
+     */
     get isEnvironmental(): boolean;
-    /** Whether the entity is a model entity. */
+    /**
+     * Whether this entity is a model entity.
+     *
+     * **Category:** Entities
+     */
     get isModelEntity(): boolean;
-    /** Whether the entity is spawned. */
+    /**
+     * Whether the entity is spawned in a world.
+     *
+     * **Category:** Entities
+     */
     get isSpawned(): boolean;
-    /** The width (x-axis) of the entity's model with scale consideration or block entity's x*2 half extents. */
+    /**
+     * The width (X-axis) of the entity's model or block size.
+     *
+     * **Category:** Entities
+     */
     get width(): number;
-    /** The world the entity is in. */
+    /**
+     * The world the entity is in, if spawned.
+     *
+     * **Category:** Entities
+     */
     get world(): World | undefined;
     /**
      * Spawns the entity in the world.
+     *
+     * Use for: placing the entity into a world so it simulates and syncs to clients.
+     * Do NOT use for: reusing a single entity instance across multiple worlds.
      *
      * @remarks
      * **Rotation default:** If no rotation is provided, entity spawns with identity rotation facing -Z.
@@ -2323,10 +3449,19 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * @param world - The world to spawn the entity in.
      * @param position - The position to spawn the entity at.
      * @param rotation - The optional rotation to spawn the entity with.
+     *
+     * **Requires:** Entity must not already be spawned.
+     *
+     * **Side effects:** Registers the entity, adds it to the simulation, and emits `EntityEvent.SPAWN`.
+     *
+     * **Category:** Entities
      */
     spawn(world: World, position: Vector3Like, rotation?: QuaternionLike): void;
     /**
      * Despawns the entity and all children from the world.
+     *
+     * Use for: removing entities from the world.
+     * Do NOT use for: temporary hiding; consider visibility or animations instead.
      *
      * @remarks
      * **Cascading:** Recursively despawns all child entities first (depth-first).
@@ -2337,38 +3472,69 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * and unloads attached scene UIs from their respective managers.
      *
      * **Simulation:** Removes from physics simulation.
+     *
+     * **Side effects:** Emits `EntityEvent.DESPAWN` and unregisters from world managers.
+     *
+     * **Category:** Entities
      */
     despawn(): void;
     /**
      * Triggers an interaction on the entity from a player.
      *
+     * Use for: programmatic interactions that should mimic a player click/tap.
+     * Do NOT use for: server-only effects without player context.
+     *
      * @remarks
      * This is automatically called when a player clicks or taps the entity, but can also be called directly
-     * for programmatic interactions. Emits {@link EntityEvent.INTERACT}.
+     * for programmatic interactions. Emits `EntityEvent.INTERACT`.
      *
      * @param player - The player interacting with the entity.
      * @param raycastHit - The raycast hit result, if the interaction was triggered by a client-side click/tap.
+     *
+     * **Requires:** Entity must be spawned.
+     *
+     * **Side effects:** Emits `EntityEvent.INTERACT`.
+     *
+     * **Category:** Entities
      */
     interact(player: Player, raycastHit?: RaycastHit): void;
     /**
      * Sets the emissive color of the entity.
+     *
+     * Use for: glow effects or highlighted states.
+     *
      * @param emissiveColor - The emissive color of the entity.
+     *
+     * **Side effects:** Emits `EntityEvent.SET_EMISSIVE_COLOR` when spawned.
+     *
+     * **Category:** Entities
      */
     setEmissiveColor(emissiveColor: RgbColor | undefined): void;
     /**
      * Sets the emissive intensity of the entity.
+     *
      * @param emissiveIntensity - The emissive intensity of the entity. Use a value over 1 for brighter emissive effects.
+     *
+     * **Side effects:** Emits `EntityEvent.SET_EMISSIVE_INTENSITY` when spawned.
+     *
+     * **Category:** Entities
      */
     setEmissiveIntensity(emissiveIntensity: number | undefined): void;
     /**
      * Sets the playback rate of all animations on the entity's model.
      *
      * @remarks
+     * Model entities only; no effect for block entities.
+     *
      * Defaults to 1. A positive value will play the animation forward,
      * a negative value will play the animation in reverse. Any value may be used.
      * You can make animations play faster by using larger values.
      *
      * @param playbackRate - The playback rate of the entity's model animations.
+     *
+     * **Side effects:** Emits `EntityEvent.SET_MODEL_ANIMATIONS_PLAYBACK_RATE` when spawned.
+     *
+     * **Category:** Entities
      */
     setModelAnimationsPlaybackRate(playbackRate: number): void;
     /**
@@ -2377,27 +3543,57 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * substring matching.
      *
      * @remarks
+     * Model entities only; no effect for block entities.
+     *
      * **Replaces, not merges:** This replaces all hidden nodes, not adds to them.
      * To add nodes, include existing hidden nodes in the array.
      *
      * @param modelHiddenNodes - The nodes to hide on the entity's model.
+     *
+     * **Side effects:** Emits `EntityEvent.SET_MODEL_HIDDEN_NODES` when spawned.
+     *
+     * **Category:** Entities
      */
     setModelHiddenNodes(modelHiddenNodes: string[]): void;
     /**
      * Sets a node override for the entity's model.
+     *
+     * @remarks
+     * Model entities only; no effect for block entities.
+     *
      * @param modelNodeOverride - The model node override to set.
+     *
+     * **Side effects:** Emits `EntityEvent.SET_MODEL_NODE_OVERRIDE` when spawned.
+     *
+     * **Category:** Entities
      */
     setModelNodeOverride(modelNodeOverride: ModelNodeOverride): void;
     /**
      * Sets the emissive color of a node on the entity's model.
+     *
+     * @remarks
+     * Model entities only; no effect for block entities.
+     *
      * @param name - The name of the node to override. Matching is case insensitive, prioritizing exact match then falling back to substring match.
      * @param emissiveColor - The emissive color of the node.
+     *
+     * **Side effects:** Emits `EntityEvent.SET_MODEL_NODE_OVERRIDE` when spawned.
+     *
+     * **Category:** Entities
      */
     setModelNodeEmissiveColor(name: string, emissiveColor: RgbColor | undefined): void;
     /**
      * Sets the emissive intensity of a node on the entity's model.
+     *
+     * @remarks
+     * Model entities only; no effect for block entities.
+     *
      * @param name - The name of the node to override. Matching is case insensitive, prioritizing exact match then falling back to substring match.
      * @param emissiveIntensity - The emissive intensity of the node. Use a value over 1 for brighter emissive effects.
+     *
+     * **Side effects:** Emits `EntityEvent.SET_MODEL_NODE_OVERRIDE` when spawned.
+     *
+     * **Category:** Entities
      */
     setModelNodeEmissiveIntensity(name: string, emissiveIntensity: number | undefined): void;
     /**
@@ -2405,6 +3601,8 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * scales its colliders.
      *
      * @remarks
+     * Model entities only; no effect for block entities.
+     *
      * **Collider scaling is relative:** Colliders are scaled by the ratio of new/old scale, not set to absolute values.
      * Example: scaling from 1 to 2 doubles collider size; scaling from 2 to 4 also doubles it.
      *
@@ -2412,6 +3610,10 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * object reference will early return even if values changed. Always pass a new object.
      *
      * @param modelScale - The scale of the entity's model. Can be a vector or a number for uniform scaling.
+     *
+     * **Side effects:** Scales existing colliders and emits `EntityEvent.SET_MODEL_SCALE` when spawned.
+     *
+     * **Category:** Entities
      */
     setModelScale(modelScale: Vector3Like | number): void;
     /**
@@ -2420,27 +3622,49 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * substring matching.
      *
      * @remarks
+     * Model entities only; no effect for block entities.
+     *
      * **Replaces, not merges:** This replaces all shown nodes, not adds to them.
      * To add nodes, include existing shown nodes in the array.
      *
      * @param modelShownNodes - The nodes to show on the entity's model.
+     *
+     * **Side effects:** Emits `EntityEvent.SET_MODEL_SHOWN_NODES` when spawned.
+     *
+     * **Category:** Entities
      */
     setModelShownNodes(modelShownNodes: string[]): void;
     /**
      * Sets the texture uri of the entity's model. Setting
      * this overrides the model's default texture.
+     *
+     * @remarks
+     * Model entities only; no effect for block entities.
+     *
      * @param modelTextureUri - The texture uri of the entity's model.
+     *
+     * **Side effects:** Emits `EntityEvent.SET_MODEL_TEXTURE_URI` when spawned.
+     *
+     * **Category:** Entities
      */
     setModelTextureUri(modelTextureUri: string | undefined): void;
     /**
      * Sets the opacity of the entity.
      * @param opacity - The opacity of the entity between 0 and 1. 0 is fully transparent, 1 is fully opaque.
+     *
+     * **Side effects:** Emits `EntityEvent.SET_OPACITY` when spawned.
+     *
+     * **Category:** Entities
      */
     setOpacity(opacity: number): void;
     /**
      * Sets the outline rendering options for the entity.
      * @param outline - The outline options, or undefined to remove the outline.
      * @param forPlayer - The player to set the outline for, if undefined the outline will be set for all players.
+     *
+     * **Side effects:** Emits `EntityEvent.SET_OUTLINE` when spawned.
+     *
+     * **Category:** Entities
      */
     setOutline(outline: Outline | undefined, forPlayer?: Player): void;
     /**
@@ -2458,11 +3682,21 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * @param parentNodeName - The name of the parent's node (if parent is a model entity) this entity will attach to.
      * @param position - The position to set for the entity. If parent is provided, this is relative to the parent's attachment point.
      * @param rotation - The rotation to set for the entity. If parent is provided, this is relative to the parent's rotation.
+     *
+     * **Requires:** If `parent` is provided, it must be spawned.
+     *
+     * **Side effects:** Disables/enables colliders, changes rigid body type, and emits `EntityEvent.SET_PARENT`.
+     *
+     * **Category:** Entities
      */
     setParent(parent: Entity | undefined, parentNodeName?: string, position?: Vector3Like, rotation?: QuaternionLike): void;
     /**
      * Sets the tint color of the entity.
      * @param tintColor - The tint color of the entity.
+     *
+     * **Side effects:** Emits `EntityEvent.SET_TINT_COLOR` when spawned.
+     *
+     * **Category:** Entities
      */
     setTintColor(tintColor: RgbColor | undefined): void;
     /**
@@ -2470,10 +3704,18 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * other animations currently playing.
      *
      * @remarks
+     * Model entities only; no effect for block entities.
+     *
      * **Deduplication:** If an animation is already in the looped set, it won't be re-added or restarted.
      * The event only emits if at least one new animation is added.
      *
      * @param animations - The animations to start.
+     *
+     * **Requires:** Entity must be spawned.
+     *
+     * **Side effects:** Emits `EntityEvent.START_MODEL_LOOPED_ANIMATIONS`.
+     *
+     * **Category:** Entities
      */
     startModelLoopedAnimations(animations: string[]): void;
     /**
@@ -2481,6 +3723,8 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * other animations currently playing.
      *
      * @remarks
+     * Model entities only; no effect for block entities.
+     *
      * **No deduplication:** Unlike `startModelLoopedAnimations`, this always emits the event
      * even if the animation is already playing. This allows restarting oneshot animations.
      *
@@ -2488,6 +3732,12 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * but are not serialized for new player joins (they're transient).
      *
      * @param animations - The animations to start.
+     *
+     * **Requires:** Entity must be spawned.
+     *
+     * **Side effects:** Emits `EntityEvent.START_MODEL_ONESHOT_ANIMATIONS`.
+     *
+     * **Category:** Entities
      */
     startModelOneshotAnimations(animations: string[]): void;
     /**
@@ -2495,33 +3745,61 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * optionally excluding the provided animations from stopping.
      *
      * @remarks
+     * Model entities only; no effect for block entities.
+     *
      * **Delegates to `stopModelAnimations`:** Collects animations from both looped and oneshot sets
      * (minus exclusions), then calls `stopModelAnimations()` once.
      *
      * @param excludedAnimations - The animations to exclude from being stopped.
+     *
+     * **Requires:** Entity must be spawned.
+     *
+     * **Category:** Entities
      */
     stopAllModelAnimations(excludedAnimations?: string[]): void;
     /**
      * Stops all looped animations for the entity, optionally
      * excluded the provided animations from stopping.
      *
+     * @remarks
+     * Model entities only; no effect for block entities.
+     *
      * @param excludedAnimations - The animations to exclude from being stopped.
+     *
+     * **Requires:** Entity must be spawned.
+     *
+     * **Category:** Entities
      */
     stopAllModelLoopedAnimations(excludedAnimations?: string[]): void;
     /**
      * Stops all oneshot animations for the entity, optionally
      * excluded the provided animations from stopping.
      *
+     * @remarks
+     * Model entities only; no effect for block entities.
+     *
      * @param excludedAnimations - The animations to exclude from being stopped.
+     *
+     * **Requires:** Entity must be spawned.
+     *
+     * **Category:** Entities
      */
     stopAllModelOneshotAnimations(excludedAnimations?: string[]): void;
     /**
      * Stops the provided model animations for the entity.
      *
      * @remarks
+     * Model entities only; no effect for block entities.
+     *
      * **Removes from both sets:** Stops animations from both looped and oneshot tracking sets.
      *
      * @param animations - The animations to stop.
+     *
+     * **Requires:** Entity must be spawned.
+     *
+     * **Side effects:** Emits `EntityEvent.STOP_MODEL_ANIMATIONS`.
+     *
+     * **Category:** Entities
      */
     stopModelAnimations(animations: string[]): void;
 
@@ -2534,7 +3812,14 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
 
 }
 
-/** Event types an Entity instance can emit. See {@link EntityEventPayloads} for the payloads. @public */
+/**
+ * Event types an Entity instance can emit.
+ *
+ * See `EntityEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum EntityEvent {
     BLOCK_COLLISION = "ENTITY.BLOCK_COLLISION",
     BLOCK_CONTACT_FORCE = "ENTITY.BLOCK_CONTACT_FORCE",
@@ -2563,7 +3848,12 @@ export declare enum EntityEvent {
     UPDATE_ROTATION = "ENTITY.UPDATE_ROTATION"
 }
 
-/** Event payloads for Entity emitted events. @public */
+/**
+ * Event payloads for Entity emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface EntityEventPayloads {
     /** Emitted when an entity collides with a block type. */
     [EntityEvent.BLOCK_COLLISION]: {
@@ -2704,11 +3994,11 @@ export declare interface EntityEventPayloads {
 /**
  * Manages entities in a world.
  *
+ * When to use: querying and filtering entities within a specific world.
+ * Do NOT use for: cross-world queries; access each world's manager separately.
+ *
  * @remarks
- * The EntityManager is created internally as a singleton
- * for each {@link World} instance in a game server.
- * It allows retrieval of all entities, player entities,
- * and more.
+ * The EntityManager is created internally per `World` instance.
  *
  * @example
  * ```typescript
@@ -2717,6 +4007,7 @@ export declare interface EntityEventPayloads {
  * const entities = entityManager.getAllEntities();
  * ```
  *
+ * **Category:** Entities
  * @public
  */
 export declare class EntityManager {
@@ -2725,66 +4016,111 @@ export declare class EntityManager {
 
 
 
-    /** The number of spawned entities in the world. */
+    /**
+     * The number of spawned entities in the world.
+     *
+     * **Category:** Entities
+     */
     get entityCount(): number;
-    /** The world the entity manager is for. */
+    /**
+     * The world this manager is for.
+     *
+     * **Category:** Entities
+     */
     get world(): World;
 
 
     /**
      * Gets all spawned entities in the world.
+     *
      * @returns All spawned entities in the world.
+     *
+     * **Category:** Entities
      */
     getAllEntities(): Entity[];
     /**
      * Gets all spawned player entities in the world.
+     *
      * @returns All spawned player entities in the world.
+     *
+     * **Category:** Entities
      */
     getAllPlayerEntities(): PlayerEntity[];
     /**
      * Gets all spawned player entities in the world assigned to the provided player.
+     *
      * @param player - The player to get the entities for.
      * @returns All spawned player entities in the world assigned to the player.
+     *
+     * **Category:** Entities
      */
     getPlayerEntitiesByPlayer(player: Player): PlayerEntity[];
     /**
-     * Gets a spawned entity in the world by its id.
-     * @param id - The id of the entity to get.
-     * @returns The spawned entity with the provided id, or undefined if no entity is found.
+     * Gets a spawned entity in the world by its ID.
+     *
+     * @param id - The ID of the entity to get.
+     * @returns The spawned entity with the provided ID, or undefined if no entity is found.
+     *
+     * **Category:** Entities
      */
     getEntity<T extends Entity>(id: number): T | undefined;
     /**
      * Gets all spawned entities in the world with a specific tag.
+     *
      * @param tag - The tag to get the entities for.
      * @returns All spawned entities in the world with the provided tag.
+     *
+     * **Category:** Entities
      */
     getEntitiesByTag(tag: string): Entity[];
     /**
      * Gets all spawned entities in the world with a tag that includes a specific substring.
+     *
      * @param tagSubstring - The tag substring to get the entities for.
      * @returns All spawned entities in the world with a tag that includes the provided substring.
+     *
+     * **Category:** Entities
      */
     getEntitiesByTagSubstring(tagSubstring: string): Entity[];
     /**
      * Gets all child entities of an entity.
      *
      * @remarks
-     * **Direct children only:** Returns only immediate children, not recursive descendants.
+     * Direct children only; does not include recursive descendants.
      *
      * @param entity - The entity to get the children for.
      * @returns All direct child entities of the entity.
+     *
+     * **Category:** Entities
      */
     getEntityChildren(entity: Entity): Entity[];
 
 
 }
 
-/** The options for creating an Entity instance. @public */
+/**
+ * The options for creating an `Entity` instance.
+ *
+ * Use for: constructing an entity; choose `BlockEntityOptions` or `ModelEntityOptions`.
+ * Do NOT use for: mutating entity state after spawn; use entity setters and methods.
+ *
+ * **Category:** Entities
+ * @public
+ */
 export declare type EntityOptions = BlockEntityOptions | ModelEntityOptions;
 
 /**
  * Manages error and warning logging.
  *
+ * When to use: reporting recoverable issues or fatal errors with consistent formatting.
+ * Do NOT use for: normal control flow; prefer explicit return values or exceptions.
+ *
+ * @remarks
+ * In production, `console.log` is disabled to reduce log spam; use `console.info` instead.
+ * Pattern: log warnings for recoverable issues and use `ErrorHandler.fatalError` for unrecoverable state.
+ * Anti-pattern: swallowing exceptions without logging context.
+ *
+ * **Category:** Utilities
  * @public
  */
 export declare class ErrorHandler {
@@ -2794,12 +4130,20 @@ export declare class ErrorHandler {
      * Logs a formatted warning message to alert about potential issues
      * @param message - The warning message to display
      * @param context - Optional context information about the warning
+     *
+     * **Side effects:** Writes to stderr and increments the warning count.
+     *
+     * **Category:** Utilities
      */
     static warning(message: string, context?: string): void;
     /**
      * Logs a formatted error message with stack trace to help debug issues
      * @param message - The error message to display
      * @param context - Optional context information about the error
+     *
+     * **Side effects:** Writes to stderr and increments the error count.
+     *
+     * **Category:** Utilities
      */
     static error(message: string, context?: string): void;
     /**
@@ -2807,6 +4151,10 @@ export declare class ErrorHandler {
      * @param message - The error message to display
      * @param context - Optional context information about the error
      * @throws The created Error object
+     *
+     * **Side effects:** Writes to stderr and throws, terminating the current execution path.
+     *
+     * **Category:** Utilities
      */
     static fatalError(message: string, context?: string): never;
 
@@ -2816,18 +4164,32 @@ export declare class ErrorHandler {
 /**
  * The payloads for all events in the game server.
  *
+ * **Category:** Events
  * @public
  */
 export declare interface EventPayloads extends AudioEventPayloads, BaseEntityControllerEventPayloads, BlockTypeEventPayloads, BlockTypeRegistryEventPayloads, ChatEventPayloads, ChunkLatticeEventPayloads, ConnectionEventPayloads, EntityEventPayloads, GameServerEventPayloads, ParticleEmitterEventPayloads, PlayerCameraEventPayloads, PlayerEventPayloads, PlayerManagerEventPayloads, PlayerUIEventPayloads, SceneUIEventPayloads, SimulationEventPayloads, WebServerEventPayloads, WorldEventPayloads, WorldLoopEventPayloads, WorldManagerEventPayloads {
 }
 
 /**
- * Manages event emission and assigned listener callbacks.
+ * Routes events to listeners in local, world, or global scope.
  *
+ * When to use: event-driven hooks within server subsystems.
+ * Do NOT use for: high-frequency per-entity updates; prefer direct method calls for hot paths.
+ *
+ * @remarks
+ * Provides local emission, world-scoped emission, and a shared global instance.
+ * Pattern: use `EventRouter.emitWithWorld()` for world-scoped events and `final()` to install a single terminal listener.
+ * Anti-pattern: installing multiple final listeners for the same event type; only one is supported.
+ *
+ * **Category:** Events
  * @public
  */
 export declare class EventRouter {
-    /** The global event router instance. */
+    /**
+     * The global event router instance.
+     *
+     * **Category:** Events
+     */
     static readonly globalInstance: EventRouter;
 
     private _finalListeners;
@@ -2838,6 +4200,10 @@ export declare class EventRouter {
      * @param payload - The payload to emit.
      *
      * @returns `true` if any listeners were found and invoked, `false` otherwise.
+     *
+     * **Side effects:** Invokes listeners registered for the event type.
+     *
+     * **Category:** Events
      */
     emit<TEventType extends keyof EventPayloads>(eventType: TEventType, payload: EventPayloads[TEventType]): boolean;
     emit(eventType: string, payload: any): boolean;
@@ -2846,6 +4212,12 @@ export declare class EventRouter {
      *
      * @param eventType - The type of event to emit.
      * @param payload - The payload to emit.
+     *
+     * **Side effects:** Invokes local listeners and `EventRouter.globalInstance` listeners.
+     *
+     * @see `EventRouter.emit()`
+     *
+     * **Category:** Events
      */
     emitWithGlobal<TEventType extends keyof EventPayloads>(eventType: TEventType, payload: EventPayloads[TEventType]): void;
     emitWithGlobal(eventType: string, payload: any): void;
@@ -2855,6 +4227,14 @@ export declare class EventRouter {
      * @param world - The world to broadcast the event to.
      * @param eventType - The type of event to broadcast.
      * @param payload - The payload to broadcast.
+     *
+     * **Requires:** The provided world must be active and using the same event payload types.
+     *
+     * **Side effects:** Invokes local listeners and listeners registered on the world instance.
+     *
+     * @see `EventRouter.emit()`
+     *
+     * **Category:** Events
      */
     emitWithWorld<TEventType extends keyof EventPayloads>(world: World, eventType: TEventType, payload: EventPayloads[TEventType]): void;
     emitWithWorld(world: World, eventType: string, payload: any): void;
@@ -2866,6 +4246,8 @@ export declare class EventRouter {
      * @param eventType - The type of event to check for listeners.
      *
      * @returns `true` if listeners are found, `false` otherwise.
+     *
+     * **Category:** Events
      */
     hasListeners<TEventType extends keyof EventPayloads>(eventType: TEventType): boolean;
     hasListeners(eventType: string): boolean;
@@ -2875,6 +4257,8 @@ export declare class EventRouter {
      * @param eventType - The type of event to get listeners for.
      *
      * @returns All listeners for the event type.
+     *
+     * **Category:** Events
      */
     listeners<TEventType extends keyof EventPayloads>(eventType: TEventType): EventEmitter.EventListener<any, string>[];
     listeners(eventType: string): EventEmitter.EventListener<any, string>[];
@@ -2884,6 +4268,8 @@ export declare class EventRouter {
      * @param eventType - The type of event to get the listener count for.
      *
      * @returns The number of listeners for the event type.
+     *
+     * **Category:** Events
      */
     listenerCount<TEventType extends keyof EventPayloads>(eventType: TEventType): number;
     listenerCount(eventType: string): number;
@@ -2892,6 +4278,8 @@ export declare class EventRouter {
      *
      * @param eventType - The type of event to remove the listener from.
      * @param listener - The listener function to remove.
+     *
+     * **Category:** Events
      */
     off<TEventType extends keyof EventPayloads>(eventType: TEventType, listener: (payload: EventPayloads[TEventType]) => void): void;
     off(eventType: string, listener: (payload: any) => void): void;
@@ -2899,6 +4287,10 @@ export declare class EventRouter {
      * Remove all listeners or all listeners for a provided event type.
      *
      * @param eventType - The type of event to remove all listeners from.
+     *
+     * **Side effects:** Clears listeners and final listeners for the event type.
+     *
+     * **Category:** Events
      */
     offAll<TEventType extends keyof EventPayloads>(eventType?: TEventType): void;
     offAll(eventType?: string): void;
@@ -2910,6 +4302,8 @@ export declare class EventRouter {
      *
      * @param eventType - The type of event to listen for.
      * @param listener - The listener function to invoke when the event is emitted.
+     *
+     * **Category:** Events
      */
     on<TEventType extends keyof EventPayloads>(eventType: TEventType, listener: (payload: EventPayloads[TEventType]) => void): void;
     on(eventType: string, listener: (payload: any) => void): void;
@@ -2918,32 +4312,41 @@ export declare class EventRouter {
      *
      * @param eventType - The type of event to listen for.
      * @param listener - The listener function to invoke when the event is emitted.
+     *
+     * **Category:** Events
      */
     once<TEventType extends keyof EventPayloads>(eventType: TEventType, listener: (payload: EventPayloads[TEventType]) => void): void;
     once(eventType: string, listener: (payload: any) => void): void;
 }
 
 /**
- * A callback function called when the entity associated with the
- * SimpleEntityController updates its rotation as it is
- * attempting to face a target coordinate.
+ * Callback invoked as the entity rotates toward a target.
+ *
  * @param currentRotation - The current rotation of the entity.
  * @param targetRotation - The target rotation of the entity.
+ *
+ * **Category:** Controllers
  * @public
  */
 export declare type FaceCallback = (currentRotation: QuaternionLike, targetRotation: QuaternionLike) => void;
 
 /**
- * A callback function called when the entity associated with the
- * SimpleEntityController finishes rotating and is now facing
- * a target coordinate.
+ * Callback invoked when the entity finishes rotating to face a target.
+ *
  * @param endRotation - The rotation of the entity after it has finished rotating.
+ *
+ * **Category:** Controllers
  * @public
  */
 export declare type FaceCompleteCallback = (endRotation: QuaternionLike) => void;
 
 /**
- * Options for the {@link SimpleEntityController.face} method.
+ * Options for `SimpleEntityController.face`.
+ *
+ * Use for: customizing a single `face()` call (callbacks, completion).
+ * Do NOT use for: persistent defaults; use `SimpleEntityControllerOptions`.
+ *
+ * **Category:** Controllers
  * @public
  */
 export declare type FaceOptions = {
@@ -2951,7 +4354,15 @@ export declare type FaceOptions = {
     faceCompleteCallback?: FaceCompleteCallback;
 };
 
-/** Filter options for various operations like raycasting and intersections. @public */
+/**
+ * Filter options for raycasting and intersection queries.
+ *
+ * Use for: scoping physics queries to specific colliders or groups.
+ * Do NOT use for: persistent collision configuration; use `CollisionGroupsBuilder`.
+ *
+ * **Category:** Physics
+ * @public
+ */
 export declare type FilterOptions = {
     /** The query filter flags. */
     filterFlags?: RAPIER.QueryFilterFlags;
@@ -2965,18 +4376,29 @@ export declare type FilterOptions = {
     filterPredicate?: (collider: RawCollider) => boolean;
 };
 
-/** The options for a fixed rigid body. @public */
+/**
+ * The options for a fixed rigid body. @public
+ *
+ * Use for: immovable bodies (world geometry, static platforms).
+ * Do NOT use for: moving objects; use dynamic or kinematic options.
+ *
+ * **Category:** Physics
+ */
 export declare interface FixedRigidBodyOptions extends BaseRigidBodyOptions {
     type: RigidBodyType.FIXED;
 }
 
 /**
- * Manages the game and associated worlds and systems.
+ * Global entry point for server systems (players, worlds, assets).
+ *
+ * When to use: accessing global managers and registries after startup.
+ * Do NOT use for: constructing your own server instance.
  *
  * @remarks
- * This class is used as a singleton and should be
- * accessed via the `instance` property
+ * Access via `GameServer.instance` — do not construct directly.
+ * Initialize with `startServer` to ensure physics and assets are ready.
  *
+ * **Category:** Core
  * @public
  */
 export declare class GameServer {
@@ -2988,29 +4410,68 @@ export declare class GameServer {
 
 
 
-    /** The singleton instance of the game server. */
+    /**
+     * The singleton instance of the game server.
+     *
+     * @remarks
+     * Access this after calling `startServer`.
+     *
+     * **Category:** Core
+     */
     static get instance(): GameServer;
-    /** The block texture registry for the game server. */
+    /**
+     * The block texture registry for the game server.
+     *
+     * **Category:** Core
+     */
     get blockTextureRegistry(): BlockTextureRegistry;
-    /** The model manager for the game server. */
+    /**
+     * The model registry for the game server.
+     *
+     * **Category:** Core
+     */
     get modelRegistry(): ModelRegistry;
-    /** The player manager for the game server. */
+    /**
+     * The player manager for the game server.
+     *
+     * **Category:** Core
+     */
     get playerManager(): PlayerManager;
 
-    /** The web server for the game server. */
+    /**
+     * The web server for the game server.
+     *
+     * **Category:** Core
+     */
     get webServer(): WebServer;
-    /** The world manager for the game server */
+    /**
+     * The world manager for the game server.
+     *
+     * **Category:** Core
+     */
     get worldManager(): WorldManager;
 
 }
 
-/** Event types a GameServer instance can emit to the global event router. See {@link GameServerEventPayloads} for the payloads. @public */
+/**
+ * Event types a GameServer instance can emit to the global event router.
+ *
+ * See `GameServerEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum GameServerEvent {
     START = "GAMESERVER.START",
     STOP = "GAMESERVER.STOP"
 }
 
-/** Event payloads for GameServer emitted events. @public */
+/**
+ * Event payloads for GameServer emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface GameServerEventPayloads {
     /** Emitted when the game server starts. */
     [GameServerEvent.START]: {
@@ -3022,7 +4483,12 @@ export declare interface GameServerEventPayloads {
     };
 }
 
-/** A intersection result. @public */
+/**
+ * An intersection result.
+ *
+ * **Category:** Physics
+ * @public
+ */
 export declare type IntersectionResult = {
     /** The block type that was intersected. */
     intersectedBlockType?: BlockType;
@@ -3033,11 +4499,17 @@ export declare type IntersectionResult = {
 /**
  * A high-performance Map-like data structure optimized for frequent iteration.
  *
+ * When to use: per-tick collections that are built, iterated, and cleared each frame.
+ * Do NOT use for: long-lived maps with rare iteration; a standard Map is simpler.
+ *
  * @remarks
  * IterationMap maintains both a Map for O(1) lookups and an Array for fast iteration,
  * eliminating the need for Array.from() calls and providing ~2x faster iteration
  * than Map.values(). Optimized for "build up, iterate, clear" usage patterns
  * common in game loops.
+ *
+ * Pattern: update via `IterationMap.set`, iterate with `IterationMap.valuesArray`, then `IterationMap.clear`.
+ * Anti-pattern: mutating the map during `IterationMap.valuesArray` iteration.
  *
  * @example
  * ```typescript
@@ -3057,6 +4529,7 @@ export declare type IntersectionResult = {
  * iterationMap.clear();
  * ```
  *
+ * **Category:** Utilities
  * @public
  */
 export declare class IterationMap<K, V> {
@@ -3065,17 +4538,25 @@ export declare class IterationMap<K, V> {
 
     /**
      * Returns the number of key-value pairs in the IterationMap.
+     *
+     * **Category:** Utilities
      */
     get size(): number;
     /**
      * Returns a readonly array of all values for fast iteration.
      * This is the key performance feature - use this instead of .values() for iteration.
+     *
+     * **Side effects:** Rebuilds the backing array when the map has changed.
+     *
+     * **Category:** Utilities
      */
     get valuesArray(): readonly V[];
     /**
      * Returns the value associated with the key, or undefined if the key doesn't exist.
      * @param key - The key to look up.
      * @returns The value associated with the key, or undefined.
+     *
+     * **Category:** Utilities
      */
     get(key: K): V | undefined;
     /**
@@ -3083,78 +4564,130 @@ export declare class IterationMap<K, V> {
      * @param key - The key to set.
      * @param value - The value to set.
      * @returns The IterationMap instance for chaining.
+     *
+     * **Side effects:** May mark the internal array as dirty.
+     *
+     * **Category:** Utilities
      */
     set(key: K, value: V): this;
     /**
      * Returns true if the key exists in the IterationMap.
      * @param key - The key to check.
      * @returns True if the key exists, false otherwise.
+     *
+     * **Category:** Utilities
      */
     has(key: K): boolean;
     /**
      * Removes the key-value pair from the IterationMap.
      * @param key - The key to delete.
      * @returns True if the key existed and was deleted, false otherwise.
+     *
+     * **Side effects:** Marks the internal array as dirty.
+     *
+     * **Category:** Utilities
      */
     delete(key: K): boolean;
     /**
      * Removes all key-value pairs from the IterationMap.
      * Highly optimized for the common "build up, iterate, clear" pattern.
+     *
+     * **Side effects:** Clears the backing map and value array.
+     *
+     * **Category:** Utilities
      */
     clear(): void;
     /**
      * Executes a provided function once for each key-value pair.
      * @param callbackfn - Function to execute for each element.
      * @param thisArg - Value to use as this when executing callback.
+     *
+     * **Category:** Utilities
      */
     forEach(callbackfn: (value: V, key: K, map: IterationMap<K, V>) => void, thisArg?: any): void;
     /**
      * Returns an iterator for the keys in the IterationMap.
      * @returns An iterator for the keys.
+     *
+     * **Category:** Utilities
      */
     keys(): IterableIterator<K>;
     /**
      * Returns an iterator for the values in the IterationMap.
      * Note: For performance-critical iteration, use .valuesArray instead.
      * @returns An iterator for the values.
+     *
+     * **Category:** Utilities
      */
     values(): IterableIterator<V>;
     /**
      * Returns an iterator for the key-value pairs in the IterationMap.
      * @returns An iterator for the entries.
+     *
+     * **Category:** Utilities
      */
     entries(): IterableIterator<[K, V]>;
     /**
      * Returns an iterator for the key-value pairs in the IterationMap.
      * @returns An iterator for the entries.
+     *
+     * **Category:** Utilities
      */
     [Symbol.iterator](): IterableIterator<[K, V]>;
 
 }
 
-/** The options for a kinematic position rigid body. @public */
+/**
+ * The options for a kinematic position rigid body. @public
+ *
+ * Use for: moving bodies by setting target positions each tick.
+ * Do NOT use for: physics-driven motion; use dynamic bodies instead.
+ *
+ * **Category:** Physics
+ */
 export declare interface KinematicPositionRigidBodyOptions extends BaseRigidBodyOptions {
     type: RigidBodyType.KINEMATIC_POSITION;
 }
 
-/** The options for a kinematic velocity rigid body. @public */
+/**
+ * The options for a kinematic velocity rigid body. @public
+ *
+ * Use for: moving bodies by setting velocities each tick.
+ * Do NOT use for: physics-driven motion; use dynamic bodies instead.
+ *
+ * **Category:** Physics
+ */
 export declare interface KinematicVelocityRigidBodyOptions extends BaseRigidBodyOptions {
     type: RigidBodyType.KINEMATIC_VELOCITY;
-    /** The angular velocity of the rigid body. */
+    /**
+     * The angular velocity of the rigid body.
+     *
+     * **Category:** Physics
+     */
     angularVelocity?: Vector3Like;
-    /** The linear velocity of the rigid body. */
+    /**
+     * The linear velocity of the rigid body.
+     *
+     * **Category:** Physics
+     */
     linearVelocity?: Vector3Like;
 }
 
 /**
  * Represents a 2x2 matrix.
  *
+ * When to use: 2D transforms or linear algebra utilities.
+ * Do NOT use for: immutable math; most methods mutate the instance.
+ *
  * @remarks
  * All matrix methods result in mutation of the matrix instance.
  * This class extends `Float32Array` to provide an efficient way to
- * create and manipulate a 2x2 matrix. Various convenience methods are
- * provided for common matrix operations.
+ * create and manipulate a 2x2 matrix.
  *
+ * Pattern: reuse instances to reduce allocations.
+ * Anti-pattern: treating matrices as immutable values.
+ *
+ * **Category:** Math
  * @public
  */
 export declare class Matrix2 extends Float32Array {
@@ -3280,12 +4813,18 @@ export declare class Matrix2 extends Float32Array {
 /**
  * Represents a 3x3 matrix.
  *
+ * When to use: 2D homogeneous transforms or normal matrix math.
+ * Do NOT use for: immutable math; most methods mutate the instance.
+ *
  * @remarks
  * All matrix methods result in mutation of the matrix instance.
  * This class extends `Float32Array` to provide an efficient way to
- * create and manipulate a 3x3 matrix. Various convenience methods are
- * provided for common matrix operations.
+ * create and manipulate a 3x3 matrix.
  *
+ * Pattern: reuse instances to reduce allocations.
+ * Anti-pattern: treating matrices as immutable values.
+ *
+ * **Category:** Math
  * @public
  */
 export declare class Matrix3 extends Float32Array {
@@ -3450,12 +4989,18 @@ export declare class Matrix3 extends Float32Array {
 /**
  * Represents a 4x4 matrix.
  *
+ * When to use: 3D transforms (translation, rotation, scale) and camera math.
+ * Do NOT use for: immutable math; most methods mutate the instance.
+ *
  * @remarks
  * All matrix methods result in mutation of the matrix instance.
  * This class extends `Float32Array` to provide an efficient way to
- * create and manipulate a 4x4 matrix. Various convenience methods are
- * provided for common matrix operations.
+ * create and manipulate a 4x4 matrix.
  *
+ * Pattern: reuse instances to reduce allocations.
+ * Anti-pattern: treating matrices as immutable values.
+ *
+ * **Category:** Math
  * @public
  */
 export declare class Matrix4 extends Float32Array {
@@ -3729,13 +5274,26 @@ export declare class Matrix4 extends Float32Array {
     transpose(): Matrix4;
 }
 
-/** A bounding box for a model. @public */
+/**
+ * A bounding box for a model.
+ *
+ * **Category:** Models
+ * @public
+ */
 export declare type ModelBoundingBox = {
     min: Vector3Like;
     max: Vector3Like;
 };
 
-/** The options for creating a model entity. @public */
+/**
+ * The options for creating a model entity.
+ *
+ * Use for: entities rendered from a glTF model.
+ * Do NOT use for: block entities; use `BlockEntityOptions`.
+ *
+ * **Category:** Entities
+ * @public
+ */
 export declare interface ModelEntityOptions extends BaseEntityOptions {
     /** The playback rate of the entity's model animations. */
     modelAnimationsPlaybackRate?: number;
@@ -3757,6 +5315,12 @@ export declare interface ModelEntityOptions extends BaseEntityOptions {
     modelUri?: string;
 }
 
+/**
+ * A per-node visual override for a model entity.
+ *
+ * **Category:** Entities
+ * @public
+ */
 export declare type ModelNodeOverride = {
     /** The name of the node to override. Matching is case insensitive, prioritizing exact match then falling back to substring match. */
     name: string;
@@ -3769,10 +5333,16 @@ export declare type ModelNodeOverride = {
 /**
  * Manages model data for all known models of the game.
  *
+ * When to use: querying model metadata (bounds, node names, animations, trimesh).
+ * Do NOT use for: runtime mesh editing; use dedicated tooling or physics colliders.
+ *
  * @remarks
  * The ModelRegistry is created internally as a global
- * singletone accessible with the static property
- * `ModelRegistry.instance`.
+ * singleton accessible via `ModelRegistry.instance`.
+ * Model data is preloaded during server startup and cached in memory.
+ *
+ * Pattern: call `ModelRegistry.hasModel` before accessing metadata to avoid warnings.
+ * Anti-pattern: calling `ModelRegistry.getTrimesh` every tick; it may allocate arrays.
  *
  * @example
  * ```typescript
@@ -3782,12 +5352,23 @@ export declare type ModelNodeOverride = {
  * const boundingBox = modelRegistry.getBoundingBox('models/player.gltf');
  * ```
  *
+ * **Category:** Models
  * @public
  */
 export declare class ModelRegistry {
-    /** The global ModelRegistry instance as a singleton. */
+    /**
+     * The global ModelRegistry instance as a singleton.
+     *
+     * **Category:** Models
+     */
     static readonly instance: ModelRegistry;
-    /** Whether to generate optimized models if needed. Defaults to `true` in development, `false` in production. */
+    /**
+     * Whether to generate optimized models if needed.
+     *
+     * Defaults to `true` in development, `false` in production.
+     *
+     * **Category:** Models
+     */
     optimize: boolean;
 
 
@@ -3799,6 +5380,8 @@ export declare class ModelRegistry {
      * Retrieves an array of all available model URIs.
      *
      * @returns An array of all available model URIs.
+     *
+     * **Category:** Models
      */
     getAllModelUris(): string[];
     /**
@@ -3806,6 +5389,10 @@ export declare class ModelRegistry {
      *
      * @param modelUri - The URI of the model to retrieve the animation names for.
      * @returns An array of all known animation names for the model.
+     *
+     * **Requires:** Model data must be loaded (server startup).
+     *
+     * **Category:** Models
      */
     getAnimationNames(modelUri: string): string[];
     /**
@@ -3813,6 +5400,10 @@ export declare class ModelRegistry {
      *
      * @param modelUri - The URI of the model to retrieve the bounding box for.
      * @returns The bounding box of the model.
+     *
+     * **Requires:** Model data must be loaded (server startup).
+     *
+     * **Category:** Models
      */
     getBoundingBox(modelUri: string): ModelBoundingBox;
     /**
@@ -3820,6 +5411,10 @@ export declare class ModelRegistry {
      *
      * @param modelUri - The URI of the model to retrieve the depth for.
      * @returns The depth of the model.
+     *
+     * @see `ModelRegistry.getBoundingBox`
+     *
+     * **Category:** Models
      */
     getDepth(modelUri: string): number;
     /**
@@ -3827,6 +5422,10 @@ export declare class ModelRegistry {
      *
      * @param modelUri - The URI of the model to retrieve the height for.
      * @returns The height of the model.
+     *
+     * @see `ModelRegistry.getBoundingBox`
+     *
+     * **Category:** Models
      */
     getHeight(modelUri: string): number;
     /**
@@ -3834,6 +5433,10 @@ export declare class ModelRegistry {
      *
      * @param modelUri - The URI of the model to retrieve the node names for.
      * @returns The names of all nodes in the model.
+     *
+     * **Requires:** Model data must be loaded (server startup).
+     *
+     * **Category:** Models
      */
     getNodeNames(modelUri: string): string[];
     /**
@@ -3842,6 +5445,10 @@ export declare class ModelRegistry {
      * @param modelUri - The URI of the model to retrieve the trimesh for.
      * @param scale - Optional scaling to apply to the trimesh. Defaults to 1 for all axes (no scaling).
      * @returns The trimesh of the model.
+     *
+     * **Requires:** Model data must be loaded (server startup).
+     *
+     * **Category:** Models
      */
     getTrimesh(modelUri: string, scale?: Vector3Like): ModelTrimesh | undefined;
     /**
@@ -3849,6 +5456,10 @@ export declare class ModelRegistry {
      *
      * @param modelUri - The URI of the model to retrieve the width for.
      * @returns The width of the model.
+     *
+     * @see `ModelRegistry.getBoundingBox`
+     *
+     * **Category:** Models
      */
     getWidth(modelUri: string): number;
     /**
@@ -3856,6 +5467,8 @@ export declare class ModelRegistry {
      *
      * @param modelUri - The URI of the model to check.
      * @returns Whether the model is registered.
+     *
+     * **Category:** Models
      */
     hasModel(modelUri: string): boolean;
     /**
@@ -3864,6 +5477,10 @@ export declare class ModelRegistry {
      * @param modelUri - The URI of the model to check.
      * @param nodeName - The name of the node to check for.
      * @returns Whether the model has a node with the given name.
+     *
+     * **Requires:** Model data must be loaded (server startup).
+     *
+     * **Category:** Models
      */
     modelHasNode(modelUri: string, nodeName: string): boolean;
 
@@ -3880,33 +5497,45 @@ export declare class ModelRegistry {
 
 }
 
-/** A trimesh for a model. @public */
+/**
+ * A trimesh for a model.
+ *
+ * **Category:** Models
+ * @public
+ */
 export declare type ModelTrimesh = {
     vertices: Float32Array;
     indices: Uint32Array;
 };
 
 /**
- * A callback function called when the entity associated with the
- * SimpleEntityController updates its position as it is
- * attempting to move to a target coordinate.
+ * Callback invoked as the entity moves toward a target coordinate.
+ *
  * @param currentPosition - The current position of the entity.
  * @param targetPosition - The target position of the entity.
+ *
+ * **Category:** Controllers
  * @public
  */
 export declare type MoveCallback = (currentPosition: Vector3Like, targetPosition: Vector3Like) => void;
 
 /**
- * A callback function called when the entity associated with the
- * SimpleEntityController reaches the target coordinate. An entity
- * must reach the x,y,z coordinate for the callback to be called.
+ * Callback invoked when the entity reaches the target coordinate.
+ *
  * @param endPosition - The position of the entity after it has finished moving.
+ *
+ * **Category:** Controllers
  * @public
  */
 export declare type MoveCompleteCallback = (endPosition: Vector3Like) => void;
 
 /**
- * Options for the {@link SimpleEntityController.move} method.
+ * Options for `SimpleEntityController.move`.
+ *
+ * Use for: customizing a single `move()` call.
+ * Do NOT use for: persistent defaults; use `SimpleEntityControllerOptions`.
+ *
+ * **Category:** Controllers
  * @public
  */
 export declare type MoveOptions = {
@@ -3928,12 +5557,24 @@ export declare type MoveOptions = {
     moveCompletesWhenStuck?: boolean;
 };
 
-/** The options for an error type "none" collider. @public */
+/**
+ * The options for an error type "none" collider. @public
+ *
+ * Use for: explicitly disabling collider creation.
+ * Do NOT use for: physical interactions; no collider will be created.
+ *
+ * **Category:** Physics
+ */
 export declare interface NoneColliderOptions extends BaseColliderOptions {
     shape: ColliderShape.NONE;
 }
 
-/** The options for rendering an outline. @public */
+/**
+ * The options for rendering an outline.
+ *
+ * **Category:** Types
+ * @public
+ */
 export declare interface Outline {
     /** The color of the outline. Defaults to black. */
     color?: RgbColor;
@@ -3953,13 +5594,13 @@ export declare interface Outline {
  *
  * @remarks
  * Particle emitters are created directly as instances. They support a
- * variety of configuration options through the {@link ParticleEmitterOptions}
+ * variety of configuration options through the `ParticleEmitterOptions`
  * constructor argument.
  *
  * <h2>Events</h2>
  *
  * This class is an EventRouter, and instance of it emit
- * events with payloads listed under {@link ParticleEmitterEventPayloads}.
+ * events with payloads listed under `ParticleEmitterEventPayloads`.
  *
  * @example
  * ```typescript
@@ -3970,6 +5611,7 @@ export declare interface Outline {
  * particleEmitter.spawn(world);
  * ```
  *
+ * **Category:** Particles
  * @public
  */
 export declare class ParticleEmitter extends EventRouter implements protocol.Serializable {
@@ -4330,7 +5972,14 @@ export declare class ParticleEmitter extends EventRouter implements protocol.Ser
 
 }
 
-/** Event types a ParticleEmitter instance can emit. See {@link ParticleEmitterEventPayloads} @public */
+/**
+ * Event types a ParticleEmitter instance can emit.
+ *
+ * See `ParticleEmitterEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum ParticleEmitterEvent {
     BURST = "PARTICLE_EMITTER.BURST",
     DESPAWN = "PARTICLE_EMITTER.DESPAWN",
@@ -4372,7 +6021,12 @@ export declare enum ParticleEmitterEvent {
     SPAWN = "PARTICLE_EMITTER.SPAWN"
 }
 
-/** Event payloads for ParticleEmitter emitted events. @public */
+/**
+ * Event payloads for ParticleEmitter emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface ParticleEmitterEventPayloads {
     /** Emitted when a ParticleEmitter bursts the specified number of particles. */
     [ParticleEmitterEvent.BURST]: {
@@ -4567,12 +6221,14 @@ export declare interface ParticleEmitterEventPayloads {
 /**
  * Manages ParticleEmitter instances in a world.
  *
- * @remarks
- * The ParticleEmitterManager is created internally as a singleton
- * for each {@link World} instance in a game server.
- * It allows retrieval of all loaded ParticleEmitter instances,
- * entity attached ParticleEmitter instances, and more.
+ * When to use: querying or bulk-cleaning particle emitters for a world.
+ * Do NOT use for: configuring emitters; use `ParticleEmitter` instances directly.
  *
+ * @remarks
+ * The ParticleEmitterManager is created internally per `World` instance.
+ * Pattern: spawn emitters during gameplay and use this manager for cleanup on entity despawn.
+ *
+ * **Category:** Particles
  * @public
  */
 export declare class ParticleEmitterManager {
@@ -4580,27 +6236,49 @@ export declare class ParticleEmitterManager {
 
 
 
-    /** The world the ParticleEmitterManager is for. */
+    /**
+     * The world the ParticleEmitterManager is for.
+     *
+     * **Category:** Particles
+     */
     get world(): World;
 
     /**
      * Retrieves all spawned ParticleEmitter instances for the world.
      *
      * @returns An array of ParticleEmitter instances.
+     *
+     * **Category:** Particles
      */
     getAllParticleEmitters(): ParticleEmitter[];
     /**
      * Retrieves all spawned ParticleEmitter instances attached to a specific entity.
      *
+     * Use for: cleanup or inspection of entity-bound emitters.
+     *
      * @param entity - The entity to get attached ParticleEmitter instances for.
      * @returns An array of ParticleEmitter instances.
+     *
+     * **Requires:** Entity should belong to this world for meaningful results.
+     *
+     * @see `despawnEntityAttachedParticleEmitters()`
+     *
+     * **Category:** Particles
      */
     getAllEntityAttachedParticleEmitters(entity: Entity): ParticleEmitter[];
 
 
 }
 
-/** Options for creating a ParticleEmitter instance. @public */
+/**
+ * Options for creating a ParticleEmitter instance.
+ *
+ * Use for: configuring an emitter before calling `ParticleEmitter.spawn`.
+ * Do NOT use for: runtime updates after spawn; use `ParticleEmitter.set*` methods.
+ *
+ * **Category:** Particles
+ * @public
+ */
 export declare interface ParticleEmitterOptions {
     /** The URI or path to the texture to be used for the particles. */
     textureUri: string;
@@ -4674,37 +6352,46 @@ export declare interface ParticleEmitterOptions {
     velocityVariance?: Vector3Like;
 }
 
-/** The orientation mode for particles. @public */
+/**
+ * The orientation mode for particles.
+ *
+ * **Category:** Particles
+ * @public
+ */
 export declare type ParticleEmitterOrientation = 'billboard' | 'billboardY' | 'fixed';
 
 /**
- * A callback function called when the pathfinding algorithm aborts.
+ * Callback invoked when pathfinding aborts.
+ *
+ * **Category:** Controllers
  * @public
  */
 export declare type PathfindAbortCallback = () => void;
 
 /**
- * A callback function called when the entity associated with the
- * PathfindingEntityController finishes pathfinding and is now at the
- * target coordinate.
+ * Callback invoked when pathfinding completes and the entity reaches the target.
+ *
+ * **Category:** Controllers
  * @public
  */
 export declare type PathfindCompleteCallback = () => void;
 
 /**
- * A pathfinding entity controller built on top of {@link SimpleEntityController}.
+ * A pathfinding entity controller built on top of `SimpleEntityController`.
+ *
+ * When to use: obstacle-aware movement to a target coordinate.
+ * Do NOT use for: per-tick recalculation; pathfinding is synchronous and can be expensive.
  *
  * @remarks
- * This class implements pathfinding using the A* algorithm. Pathfinding when frequently
- * called can cause performance issues, use it sparingly. The .pathfind() method should only need to
- * be called once in nearly all cases when attempting to move an entity to a target coordinate.
+ * Implements A* pathfinding. Call `PathfindingEntityController.pathfind` sparingly; it is intended to be
+ * called once per destination in most cases.
  *
  * <h2>Coordinate System & Model Orientation</h2>
  *
  * HYTOPIA uses **-Z as forward**. Models must be authored with their front facing -Z.
- * The pathfinding controller automatically calls `face()` to orient the entity's -Z axis
- * toward each waypoint as it moves.
+ * The controller automatically calls `face()` to orient the entity's -Z axis toward each waypoint.
  *
+ * **Category:** Controllers
  * @public
  */
 export declare class PathfindingEntityController extends SimpleEntityController {
@@ -4726,30 +6413,78 @@ export declare class PathfindingEntityController extends SimpleEntityController 
 
     /**
      * @param options - Options for the controller.
+     *
+     * **Category:** Controllers
      */
     constructor(options?: PathfindingEntityControllerOptions);
-    /** Whether to enable debug mode or not. When debug mode is enabled, the pathfinding algorithm will log debug information to the console. Defaults to false. */
+    /**
+     * Whether to enable debug mode.
+     *
+     * @remarks
+     * When enabled, pathfinding logs debug information to the console.
+     *
+     * **Category:** Controllers
+     */
     get debug(): boolean;
-    /** The maximum fall distance the entity can fall. */
+    /**
+     * The maximum fall distance the entity can fall.
+     *
+     * **Category:** Controllers
+     */
     get maxFall(): number;
-    /** The maximum jump distance the entity can jump. */
+    /**
+     * The maximum jump distance the entity can jump.
+     *
+     * **Category:** Controllers
+     */
     get maxJump(): number;
-    /** The maximum number of open set iterations that can be processed before aborting pathfinding. Defaults to 200. */
+    /**
+     * The maximum open set iterations before aborting pathfinding.
+     *
+     * **Category:** Controllers
+     */
     get maxOpenSetIterations(): number;
-    /** The speed of the entity. */
+    /**
+     * The speed used for path movement.
+     *
+     * **Category:** Controllers
+     */
     get speed(): number;
-    /** The target coordinate to pathfind to. */
+    /**
+     * The target coordinate being pathfound to.
+     *
+     * **Category:** Controllers
+     */
     get target(): Vector3Like | undefined;
-    /** The vertical penalty for the pathfinding algorithm. A higher value will prefer paths with less vertical movement. */
+    /**
+     * The vertical penalty used during pathfinding.
+     *
+     * **Category:** Controllers
+     */
     get verticalPenalty(): number;
-    /** The current waypoints being followed. */
+    /**
+     * The current waypoints being followed.
+     *
+     * **Category:** Controllers
+     */
     get waypoints(): Vector3Like[];
-    /** The index representing the next waypoint moving towards of the current set of waypoints being followed. */
+    /**
+     * The index of the next waypoint being approached.
+     *
+     * **Category:** Controllers
+     */
     get waypointNextIndex(): number;
-    /** The timeout in milliseconds for a waypoint to be considered reached. Defaults to 2000ms divided by the speed of the entity. */
+    /**
+     * The timeout in milliseconds for a waypoint to be considered reached.
+     *
+     * **Category:** Controllers
+     */
     get waypointTimeoutMs(): number;
     /**
-     * Calculate a path and move to the target if a path is found. Returns true if a path is found, false if no path is found.
+     * Calculates a path and moves to the target if a path is found.
+     *
+     * Use for: one-shot navigation to a destination.
+     * Do NOT use for: high-frequency replanning; it is synchronous.
      *
      * @remarks
      * **Synchronous return:** Path calculation happens synchronously. Returns `true` if a path was found,
@@ -4770,7 +6505,13 @@ export declare class PathfindingEntityController extends SimpleEntityController 
      * @param target - The target coordinate to pathfind to.
      * @param speed - The speed of the entity (blocks per second).
      * @param options - The pathfinding options.
-     * @returns Whether a path was found.
+     * @returns True if a path was found, false otherwise.
+     *
+     * **Requires:** The controller must be attached to a spawned entity in a world.
+     *
+     * **Side effects:** Starts movement and facing if a path is found.
+     *
+     * **Category:** Controllers
      */
     pathfind(target: Vector3Like, speed: number, options?: PathfindingOptions): boolean;
 
@@ -4784,12 +6525,25 @@ export declare class PathfindingEntityController extends SimpleEntityController 
 
 }
 
-/** Options for creating a PathfindingEntityController instance. @public */
+/**
+ * Options for creating a PathfindingEntityController instance.
+ *
+ * Use for: constructing a pathfinding controller with base movement settings.
+ * Do NOT use for: per-path overrides; use `PathfindingOptions`.
+ *
+ * **Category:** Controllers
+ * @public
+ */
 declare interface PathfindingEntityControllerOptions extends SimpleEntityControllerOptions {
 }
 
 /**
- * Options for the {@link PathfindingEntityController.pathfind} method.
+ * Options for `PathfindingEntityController.pathfind`.
+ *
+ * Use for: configuring a single pathfinding request.
+ * Do NOT use for: per-tick recalculation; call `pathfind` sparingly.
+ *
+ * **Category:** Controllers
  * @public
  */
 export declare type PathfindingOptions = {
@@ -4820,14 +6574,25 @@ export declare type PathfindingOptions = {
 /**
  * Manages persistence of player and global data.
  *
- * @remarks
- * This class is a singleton accessible with the static property
- * `PersistenceManager.instance`. Convenience methods are also
- * available on the `Player` and `GameServer` classes.
+ * When to use: reading or writing persisted data shared across lobbies or per player.
+ * Do NOT use for: per-tick state; cache data in memory and write back periodically.
  *
+ * @remarks
+ * This class is a singleton accessible with `PersistenceManager.instance`.
+ * Convenience methods are also available on `Player` and `GameServer`.
+ *
+ * Pattern: load data on join, update in memory, and save on significant events.
+ * Anti-pattern: calling persistence APIs every frame.
+ *
+ * **Category:** Persistence
  * @public
  */
 export declare class PersistenceManager {
+    /**
+     * Singleton instance.
+     *
+     * **Category:** Persistence
+     */
     static readonly instance: PersistenceManager;
     private _saveStatesClient;
 
@@ -4842,6 +6607,12 @@ export declare class PersistenceManager {
      * @param key - The key to get the data from.
      * @param maxRetries - The maximum number of retries to attempt in the event of failure.
      * @returns The data from the persistence layer.
+     *
+     * **Side effects:** May perform network I/O and retries.
+     *
+     * @see `PersistenceManager.setGlobalData`
+     *
+     * **Category:** Persistence
      */
     getGlobalData(key: string, maxRetries?: number): Promise<Record<string, unknown> | undefined>;
 
@@ -4850,6 +6621,12 @@ export declare class PersistenceManager {
      * data is available and shared by all lobbies of your game.
      * @param key - The key to set the data to.
      * @param data - The data to set.
+     *
+     * **Side effects:** Performs network I/O to persist data.
+     *
+     * @see `PersistenceManager.getGlobalData`
+     *
+     * **Category:** Persistence
      */
     setGlobalData(key: string, data: Record<string, unknown>): Promise<void>;
 
@@ -4858,34 +6635,63 @@ export declare class PersistenceManager {
 }
 
 /**
- * A player in the game.
+ * A connected player in the game.
+ *
+ * When to use: interacting with a connected player's state, UI, and world membership.
+ * Do NOT use for: constructing players or representing offline users.
  *
  * @remarks
- * Players are automatically created when they connect and
- * authenticate with the game server. This is all handled
- * internally.
+ * Players are created automatically on connection by `PlayerManager`.
  *
  * <h2>Events</h2>
  *
- * This class is an EventRouter, and instances of it emit
- * events with payloads listed under {@link PlayerEventPayloads}
+ * This class is an EventRouter, and instances of it emit events with payloads listed under
+ * `PlayerEventPayloads`.
  *
+ * **Category:** Players
  * @public
  */
 export declare class Player extends EventRouter implements protocol.Serializable {
 
-    /** The unique HYTOPIA UUID for the player. */
+    /**
+     * The unique HYTOPIA UUID for the player.
+     *
+     * **Category:** Players
+     */
     readonly id: string;
-    /** The unique HYTOPIA username for the player. */
+    /**
+     * The unique HYTOPIA username for the player.
+     *
+     * **Category:** Players
+     */
     readonly username: string;
-    /** The profile picture URL for the player. */
+    /**
+     * The profile picture URL for the player.
+     *
+     * **Category:** Players
+     */
     readonly profilePictureUrl: string | undefined;
-    /** The camera for the player. */
+    /**
+     * The camera for the player.
+     *
+     * **Category:** Players
+     */
     readonly camera: PlayerCamera;
 
-    /** The cosmetics for the player */
+    /**
+     * The cosmetics for the player.
+     *
+     * @remarks
+     * This resolves asynchronously and may resolve to `void` if unavailable.
+     *
+     * **Category:** Players
+     */
     readonly cosmetics: Promise<PlayerCosmetics | void>;
-    /** The UI for the player. */
+    /**
+     * The UI for the player.
+     *
+     * **Category:** Players
+     */
     readonly ui: PlayerUI;
 
 
@@ -4895,95 +6701,156 @@ export declare class Player extends EventRouter implements protocol.Serializable
 
 
 
-    /** The current {@link PlayerInput} of the player. */
+    /**
+     * The current `PlayerInput` of the player.
+     *
+     * **Category:** Players
+     */
     get input(): PlayerInput;
-    /** Whether the players click/taps will cause interacts with blocks or entities. Defaults to true. */
+    /**
+     * Whether player click/tap input triggers interactions.
+     *
+     * @remarks
+     * Defaults to `true`.
+     *
+     * **Category:** Players
+     */
     get isInteractEnabled(): boolean;
-    /** The maximum distance a player can interact with entities or blocks. The raycast distance in blocks for interactions. Defaults to 20. */
+    /**
+     * The maximum distance a player can interact with entities or blocks.
+     *
+     * @remarks
+     * Measured in world blocks. Defaults to `20`.
+     *
+     * **Category:** Players
+     */
     get maxInteractDistance(): number;
-    /** The current {@link World} the player is in. */
+    /**
+     * The current `World` the player is in, or undefined if not yet joined.
+     *
+     * **Category:** Players
+     */
     get world(): World | undefined;
     /**
      * Disconnects the player from the game server.
      *
-     * @remarks
-     * **Event:** Emits `LEFT_WORLD` event before disconnecting if in a world.
+     * Use for: kicking a player or enforcing a logout.
+     * Do NOT use for: switching worlds; use `Player.joinWorld` instead.
+     *
+     * **Side effects:** Emits `PlayerEvent.LEFT_WORLD` if the player is in a world and closes the connection.
+     *
+     * **Category:** Players
      */
     disconnect(): void;
     /**
-     * Get the persisted data for the player.
+     * Gets the persisted data for the player, if available.
+     *
+     * Use for: reading saved progress after the player connects.
      *
      * @remarks
-     * This method returns the player persisted data. If it returns
-     * undefined, the player data failed to load and your game
-     * logic should handle this case appropriately. If it returns
-     * an empty object, the player data loaded successfully but
-     * no prior data has been set.
+     * Returns `undefined` if data hasn't loaded or no data exists.
+     * Returns an empty object when data loads successfully but is empty.
      *
-     * @returns The persisted data for the player.
+     * @returns The persisted data for the player, or undefined.
+     *
+     * **Requires:** Player persistence must have been loaded (handled during connect).
+     *
+     * **Category:** Players
      */
     getPersistedData(): Record<string, unknown> | undefined;
     /**
-     * Joins a player to a world.
+     * Assigns the player to a world.
+     *
+     * Use for: initial placement or moving a player between worlds.
+     * Do NOT use for: respawning or teleporting within the same world.
      *
      * @remarks
-     * If switching worlds (already in a different world):
-     * - Despawns all player entities for this player in the current world.
-     * - Triggers a disconnect/reconnect cycle internally.
-     * - `JOINED_WORLD` event emits after reconnection completes.
+     * If switching worlds, the player is internally disconnected/reconnected and
+     * `JOINED_WORLD` is emitted after reconnection completes.
      *
      * @param world - The world to join the player to.
+     *
+     * **Side effects:** Emits `PlayerEvent.JOINED_WORLD` and `PlayerEvent.LEFT_WORLD`
+     * during world switches.
+     *
+     * **Category:** Players
      */
     joinWorld(world: World): void;
     /**
-     * Schedule a notification the player at a point in time in the future.
-     * This will automatically handle prompting a player (if necessary) for
-     * notification permissions in-game.
+     * Schedules a notification for the player at a future time.
+     *
+     * Use for: re-engagement or timed reminders.
+     * Do NOT use for: immediate in-game messaging; use chat or UI instead.
+     *
+     * @remarks
+     * Automatically prompts for notification permission in-game if needed.
      *
      * @param type - The type of notification to schedule.
      * @param scheduledFor - A future timestamp in milliseconds to schedule the notification for.
-     * @returns The id of the notification if it was scheduled successfully, undefined otherwise.
+     * @returns The ID of the notification if scheduled successfully, undefined otherwise.
+     *
+     * **Requires:** Player must be in a world to request permission.
+     *
+     * **Side effects:** Emits `PlayerEvent.REQUEST_NOTIFICATION_PERMISSION`.
+     *
+     * **Category:** Players
      */
     scheduleNotification(type: string, scheduledFor: number): Promise<string | void>;
     /**
      * Unschedules a scheduled notification for the player.
      *
-     * @param notificationId - The id of the notification returned from {@link Player.scheduleNotification}.
-     * @returns boolean - True if the notification was unscheduled, false otherwise.
+     * @param notificationId - The ID returned from `Player.scheduleNotification`.
+     * @returns True if the notification was unscheduled, false otherwise.
+     *
+     * **Category:** Players
      */
     unscheduleNotification(notificationId: string): Promise<boolean>;
 
 
     /**
-     * Resets all inputs keys
+     * Resets all cached input keys for the player.
+     *
+     * Use for: clearing stuck input states (e.g., after disconnect or pause).
+     *
+     * **Side effects:** Clears the current `PlayerInput` state.
+     *
+     * **Category:** Players
      */
     resetInputs(): void;
     /**
-     * Sets whether the players click/taps will cause interacts with blocks or entities.
-     * @param enabled - Whether the players click/taps will cause interacts with blocks or entities.
+     * Enables or disables interaction clicks/taps for this player.
+     *
+     * Use for: cutscenes, menus, or temporary input blocking.
+     *
+     * @param enabled - True to allow interactions, false to block them.
+     *
+     * **Category:** Players
      */
     setInteractEnabled(enabled: boolean): void;
     /**
      * Sets the maximum distance a player can interact with entities or blocks.
-     * @param distance - The maximum distance in blocks used for the interact raycast. Default is 20.
+     *
+     * @param distance - The maximum distance in blocks used for the interact raycast.
+     *
+     * **Category:** Players
      */
     setMaxInteractDistance(distance: number): void;
     /**
-     * Set the persisted data for the player. This data can
-     * later be retrieved using {@link Player.getPersistedData},
-     * even if a player disconnects and rejoin a game in the future,
-     * or joins a different HYTOPIA managed lobby of your game.
+     * Merges data into the player's persisted data cache.
+     *
+     * Use for: saving progress, inventory, or other player-specific state.
+     * Do NOT use for: large binary data or per-tick updates.
      *
      * @remarks
-     * This method is asynchronous and returns a promise that
-     * resolves to the player data. Data is set using shallow
-     * merge of the existing data. It is recommended that you
-     * provide a changed data object for your saved data structure
-     * rather than the entire data object to avoid edge cases with
-     * data persistence or overwrites.
+     * Data is merged shallowly into the cached persistence object.
      *
-     * @param data - The data to set.
-     * @returns The persisted data for the player.
+     * @param data - The data to merge into the persisted data.
+     *
+     * **Requires:** Player persistence must have been loaded before calling.
+     *
+     * **Side effects:** Mutates the in-memory persistence cache for this player.
+     *
+     * **Category:** Players
      */
     setPersistedData(data: Record<string, unknown>): void;
 
@@ -4999,26 +6866,31 @@ export declare class Player extends EventRouter implements protocol.Serializable
 /**
  * The camera for a Player.
  *
+ * When to use: controlling a player's view, mode, and camera offsets.
+ * Do NOT use for: moving the player or entities; use entity movement APIs.
+ *
  * @remarks
- * The camera is used to render the player's view of the
- * world. The player's camera exposes functionality to
- * control the camera of a player. All player objects
- * have a camera, accessible via {@link Player.camera}.
+ * Access via `Player.camera`. Most operations require the player to be in a world.
  *
  * <h2>Events</h2>
  *
- * This class is an EventRouter, and instances of it emit
- * events with payloads listed under {@link PlayerCameraEventPayloads}
+ * This class is an EventRouter, and instances of it emit events with payloads listed under
+ * `PlayerCameraEventPayloads`.
  *
  * @example
  * ```typescript
  * player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
  * ```
  *
+ * **Category:** Players
  * @public
  */
 export declare class PlayerCamera extends EventRouter implements protocol.Serializable {
-    /** The player that the camera belongs to. @readonly */
+    /**
+     * The player that the camera belongs to.
+     *
+     * **Category:** Players
+     */
     readonly player: Player;
 
 
@@ -5035,153 +6907,354 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
 
 
 
-    /** The entity the camera is attached to. */
+    /**
+     * The entity the camera is attached to.
+     *
+     * **Category:** Players
+     */
     get attachedToEntity(): Entity | undefined;
-    /** The position the camera is attached to. */
+    /**
+     * The position the camera is attached to.
+     *
+     * **Category:** Players
+     */
     get attachedToPosition(): Vector3Like | undefined;
-    /** The facing direction vector of the camera based on its current orientation. */
+    /**
+     * The facing direction vector of the camera based on its current orientation.
+     *
+     * **Category:** Players
+     */
     get facingDirection(): Vector3Like;
-    /** The quaternion representing the camera's facing direction. */
+    /**
+     * The quaternion representing the camera's facing direction.
+     *
+     * **Category:** Players
+     */
     get facingQuaternion(): QuaternionLike;
-    /** The film offset of the camera. A positive value shifts the camera right, a negative value shifts it left. */
+    /**
+     * The film offset of the camera.
+     *
+     * @remarks
+     * Positive shifts right, negative shifts left.
+     *
+     * **Category:** Players
+     */
     get filmOffset(): number;
-    /** Only used in first-person mode. The forward offset of the camera. A positive number shifts the camera forward, a negative number shifts it backward. */
+    /**
+     * The forward offset of the camera (first-person mode only).
+     *
+     * @remarks
+     * Positive shifts forward, negative shifts backward.
+     *
+     * **Category:** Players
+     */
     get forwardOffset(): number;
-    /** The field of view of the camera. */
+    /**
+     * The field of view of the camera.
+     *
+     * **Category:** Players
+     */
     get fov(): number;
-    /** The nodes of the model the camera is attached to that will not be rendered for the player. Uses case insensitive substring matching. */
+    /**
+     * Model nodes that will not be rendered for this player.
+     *
+     * @remarks
+     * Uses case-insensitive substring matching.
+     *
+     * **Category:** Players
+     */
     get modelHiddenNodes(): Set<string>;
-    /** The nodes of the model the camera is attached to that will be rendered for the player, overriding hidden nodes. Uses case insensitive substring matching. */
+    /**
+     * Model nodes that will be rendered for this player, overriding hidden nodes.
+     *
+     * @remarks
+     * Uses case-insensitive substring matching.
+     *
+     * **Category:** Players
+     */
     get modelShownNodes(): Set<string>;
-    /** The mode of the camera. */
+    /**
+     * The mode of the camera.
+     *
+     * **Category:** Players
+     */
     get mode(): PlayerCameraMode;
-    /** The relative offset of the camera from the entity or position it is attached to. */
+    /**
+     * The relative offset of the camera from its attachment target.
+     *
+     * **Category:** Players
+     */
     get offset(): Vector3Like;
-    /** The current orientation of the camera. */
+    /**
+     * The current orientation of the camera.
+     *
+     * @remarks
+     * Updated by client input; there is no public setter.
+     *
+     * **Category:** Players
+     */
     get orientation(): PlayerCameraOrientation;
-    /** The shoulder angle of the camera in degrees. */
+    /**
+     * The shoulder angle of the camera in degrees.
+     *
+     * **Category:** Players
+     */
     get shoulderAngle(): number;
-    /** The entity the camera will constantly look at, even if the camera attached or tracked entity moves. */
+    /**
+     * The entity the camera will constantly look at, if set.
+     *
+     * **Category:** Players
+     */
     get trackedEntity(): Entity | undefined;
-    /** The position the camera will constantly look at, even if the camera attached entity moves. */
+    /**
+     * The position the camera will constantly look at, if set.
+     *
+     * **Category:** Players
+     */
     get trackedPosition(): Vector3Like | undefined;
-    /** The zoom of the camera. */
+    /**
+     * The zoom of the camera.
+     *
+     * **Category:** Players
+     */
     get zoom(): number;
     /**
-     * Makes the camera look at an entity. If the camera was
-     * previously tracking an entity or position, it will
-     * stop tracking.
+     * Makes the camera look at an entity once.
+     *
+     * Use for: one-off focus moments (e.g., cutscene beats).
+     * Do NOT use for: continuous tracking; use `PlayerCamera.setTrackedEntity`.
+     *
      * @param entity - The entity to look at.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerCameraEvent.LOOK_AT_ENTITY`.
+     *
+     * **Category:** Players
      */
     lookAtEntity(entity: Entity): void;
     /**
-     * Makes the camera look at a position. If the camera was
-     * previously tracking an entity or position, it will
-     * stop tracking.
+     * Makes the camera look at a position once.
+     *
+     * Use for: one-off focus moments (e.g., points of interest).
+     * Do NOT use for: continuous tracking; use `PlayerCamera.setTrackedPosition`.
+     *
      * @param position - The position to look at.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerCameraEvent.LOOK_AT_POSITION`.
+     *
+     * **Category:** Players
      */
     lookAtPosition(position: Vector3Like): void;
     /**
-     * Resets the camera to its default, unattached,
-     * spectator mode state.
+     * Resets the camera state on the server.
+     *
+     * Use for: clearing camera state on disconnect or reconnect.
      *
      * @remarks
-     * **Clears:** `attachedToEntity`, `attachedToPosition`, `orientation`, `trackedEntity`, and `trackedPosition`.
+     * Clears `attachedToEntity`, `attachedToPosition`, `orientation`, `trackedEntity`, and `trackedPosition`.
+     * This does not emit a camera event; it only resets server-side state.
+     *
+     * **Category:** Players
      */
     reset(): void;
     /**
-     * Sets the entity the camera is attached to.
-     * @param entity - The entity to attach the camera to.
+     * Attaches the camera to an entity.
+     *
+     * Use for: third-person follow cameras or entity-bound views.
+     * Do NOT use for: tracking an entity without attachment; use `PlayerCamera.setTrackedEntity`.
+     *
+     * @param entity - The entity to attach the camera to (must be spawned).
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerCameraEvent.SET_ATTACHED_TO_ENTITY`.
+     *
+     * **Category:** Players
      */
     setAttachedToEntity(entity: Entity): void;
     /**
-     * Sets the position the camera is attached to.
+     * Attaches the camera to a world position.
+     *
+     * Use for: fixed cameras or cinematic shots.
+     * Do NOT use for: tracking a moving target; use `PlayerCamera.setTrackedPosition`.
+     *
      * @param position - The position to attach the camera to.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerCameraEvent.SET_ATTACHED_TO_POSITION`.
+     *
+     * **Category:** Players
      */
     setAttachedToPosition(position: Vector3Like): void;
     /**
-     * Sets the film offset of the camera. A positive value
-     * shifts the camera right, a negative value shifts it left.
+     * Sets the film offset of the camera.
+     *
+     * @remarks
+     * Positive shifts right, negative shifts left.
+     *
      * @param filmOffset - The film offset to set.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerCameraEvent.SET_FILM_OFFSET`.
+     *
+     * **Category:** Players
      */
     setFilmOffset(filmOffset: number): void;
     /**
-     * Only used in first-person mode. Sets the forward offset
-     * of the camera. A positive value shifts the camera forward,
-     * a negative value shifts it backward.
+     * Sets the forward offset of the camera (first-person mode only).
+     *
+     * @remarks
+     * Positive shifts forward, negative shifts backward.
+     *
      * @param forwardOffset - The forward offset to set.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerCameraEvent.SET_FORWARD_OFFSET`.
+     *
+     * **Category:** Players
      */
     setForwardOffset(forwardOffset: number): void;
     /**
      * Sets the field of view of the camera.
+     *
      * @param fov - The field of view to set.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerCameraEvent.SET_FOV`.
+     *
+     * **Category:** Players
      */
     setFov(fov: number): void;
     /**
-     * Sets the nodes of the model the camera is attached to
-     * that will not be rendered for the player. Uses case
-     * insensitive substring matching.
+     * Sets model nodes that will not be rendered for this player.
      *
      * @remarks
-     * **Replaces:** Replaces the current hidden nodes set (not a merge).
+     * Uses case-insensitive substring matching and replaces the current hidden set.
      *
-     * @param modelHiddenNodes - Determines nodes to hide that match these case insensitive substrings.
+     * @param modelHiddenNodes - Substrings of node names to hide.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerCameraEvent.SET_MODEL_HIDDEN_NODES`.
+     *
+     * **Category:** Players
      */
     setModelHiddenNodes(modelHiddenNodes: string[]): void;
     /**
-     * Sets the nodes of the model the camera is attached to
-     * that will be rendered for the player, overriding hidden
-     * nodes. Uses case insensitive substring matching.
+     * Sets model nodes that will be rendered for this player, overriding hidden nodes.
      *
      * @remarks
-     * **Replaces:** Replaces the current shown nodes set (not a merge).
+     * Uses case-insensitive substring matching and replaces the current shown set.
      *
-     * @param modelShownNodes - Determines nodes to show that match these case insensitive substrings.
+     * @param modelShownNodes - Substrings of node names to show.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerCameraEvent.SET_MODEL_SHOWN_NODES`.
+     *
+     * **Category:** Players
      */
     setModelShownNodes(modelShownNodes: string[]): void;
     /**
      * Sets the mode of the camera.
+     *
      * @param mode - The mode to set.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerCameraEvent.SET_MODE`.
+     *
+     * **Category:** Players
      */
     setMode(mode: PlayerCameraMode): void;
     /**
-     * Sets the relative offset of the camera from the
-     * entity or position it is attached to.
+     * Sets the relative offset of the camera from its attachment target.
+     *
      * @param offset - The offset to set.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerCameraEvent.SET_OFFSET`.
+     *
+     * **Category:** Players
      */
     setOffset(offset: Vector3Like): void;
 
 
     /**
-     * Only used in third-person mode. Sets the shoulder angle
-     * of the camera in degrees. A positive value shifts the
-     * camera to the right, a negative value shifts it to the
-     * left.
+     * Sets the shoulder angle of the camera in degrees (third-person mode only).
+     *
+     * @remarks
+     * Positive shifts right, negative shifts left.
+     *
      * @param shoulderAngle - The shoulder angle to set in degrees.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerCameraEvent.SET_SHOULDER_ANGLE`.
+     *
+     * **Category:** Players
      */
     setShoulderAngle(shoulderAngle: number): void;
     /**
-     * Sets the entity the camera will constantly look at,
-     * even if the camera attached or tracked entity moves.
-     * @param entity - The entity to track or undefined to stop tracking.
+     * Sets the entity the camera will continuously look at.
+     *
+     * Use for: keeping the camera focused on a moving entity.
+     *
+     * @param entity - The entity to track, or undefined to stop tracking.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerCameraEvent.SET_TRACKED_ENTITY`.
+     *
+     * **Category:** Players
      */
     setTrackedEntity(entity: Entity | undefined): void;
     /**
-     * Sets the position the camera will constantly look at,
-     * even if the camera attached entity moves.
-     * @param position - The position to track or undefined to stop tracking.
+     * Sets the position the camera will continuously look at.
+     *
+     * Use for: fixed focal points in the scene.
+     *
+     * @param position - The position to track, or undefined to stop tracking.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerCameraEvent.SET_TRACKED_POSITION`.
+     *
+     * **Category:** Players
      */
     setTrackedPosition(position: Vector3Like | undefined): void;
     /**
      * Sets the zoom of the camera.
+     *
      * @param zoom - The zoom to set, 0 to infinity.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerCameraEvent.SET_ZOOM`.
+     *
+     * **Category:** Players
      */
     setZoom(zoom: number): void;
 
 
 }
 
-/** Event types a PlayerCamera can emit. See {@link PlayerCameraEventPayloads} for the payloads. @public */
+/**
+ * Event types a PlayerCamera can emit.
+ *
+ * See `PlayerCameraEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum PlayerCameraEvent {
     LOOK_AT_ENTITY = "PLAYER_CAMERA.LOOK_AT_ENTITY",
     LOOK_AT_POSITION = "PLAYER_CAMERA.LOOK_AT_POSITION",
@@ -5200,7 +7273,12 @@ export declare enum PlayerCameraEvent {
     SET_ZOOM = "PLAYER_CAMERA.SET_ZOOM"
 }
 
-/** Event payloads for PlayerCamera emitted events. @public */
+/**
+ * Event payloads for PlayerCamera emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface PlayerCameraEventPayloads {
     /** Emitted when the camera looks at an entity. */
     [PlayerCameraEvent.LOOK_AT_ENTITY]: {
@@ -5279,20 +7357,35 @@ export declare interface PlayerCameraEventPayloads {
     };
 }
 
-/** The mode of the camera. @public */
+/**
+ * The mode of the camera.
+ *
+ * **Category:** Players
+ * @public
+ */
 export declare enum PlayerCameraMode {
     FIRST_PERSON = 0,
     THIRD_PERSON = 1,
     SPECTATOR = 2
 }
 
-/** The camera orientation state of a Player. @public */
+/**
+ * The camera orientation state of a Player.
+ *
+ * **Category:** Players
+ * @public
+ */
 export declare type PlayerCameraOrientation = {
     pitch: number;
     yaw: number;
 };
 
-/** The cosmetics of a player. @public */
+/**
+ * The cosmetics of a player.
+ *
+ * **Category:** Networking
+ * @public
+ */
 export declare type PlayerCosmetics = {
     equippedItems: {
         slot: string;
@@ -5303,7 +7396,12 @@ export declare type PlayerCosmetics = {
     skinTextureUri: string;
 };
 
-/** An equipped item of a player's cosmetics. @public */
+/**
+ * An equipped item of a player's cosmetics.
+ *
+ * **Category:** Networking
+ * @public
+ */
 export declare type PlayerCosmeticsEquippedItem = {
     flags: string[];
     type: string;
@@ -5311,21 +7409,23 @@ export declare type PlayerCosmeticsEquippedItem = {
     textureUrl?: string;
 };
 
-/** The slots used for player cosmetics. @public */
+/**
+ * The slots used for player cosmetics.
+ *
+ * **Category:** Entities
+ * @public
+ */
 export declare type PlayerCosmeticSlot = 'ALL' | 'BACK' | 'HEAD' | 'LEFT_ARM' | 'LEFT_FOOT' | 'LEFT_HAND' | 'LEFT_ITEM' | 'LEFT_LEG' | 'RIGHT_ARM' | 'RIGHT_FOOT' | 'RIGHT_HAND' | 'RIGHT_ITEM' | 'RIGHT_LEG' | 'TORSO';
 
 /**
  * Represents an entity controlled by a player in a world.
  *
+ * When to use: custom player avatars that respond to player input.
+ * Do NOT use for: non-player NPCs; use `Entity` with a controller instead.
+ *
  * @remarks
- * Player entities extend the {@link Entity} class.
- * They can be created and assigned to a player at
- * anytime during gameplay, but most commonly when
- * a player joins a world. PlayerEntity expects
- * a controller to be set prior to spawning.
- * Without setting a controller, the player entity
- * will not respond to player inputs and throw an
- * error.
+ * Player entities extend `Entity`. They expect a controller to be set before spawning.
+ * Without a controller, player input cannot be processed.
  *
  * @example
  * ```typescript
@@ -5342,12 +7442,21 @@ export declare type PlayerCosmeticSlot = 'ALL' | 'BACK' | 'HEAD' | 'LEFT_ARM' | 
  * };
  * ```
  *
+ * **Category:** Entities
  * @public
  */
 export declare class PlayerEntity extends Entity {
-    /** The player the player entity is assigned to and controlled by. */
+    /**
+     * The player this entity is assigned to and controlled by.
+     *
+     * **Category:** Entities
+     */
     readonly player: Player;
-    /** The SceneUI instance for the player entity's nametag. */
+    /**
+     * The SceneUI instance for the player entity's nametag.
+     *
+     * **Category:** Entities
+     */
     readonly nametagSceneUI: SceneUI;
 
     /**
@@ -5358,27 +7467,52 @@ export declare class PlayerEntity extends Entity {
      * with the player's username and profile picture. Access via `nametagSceneUI` property to customize.
      *
      * @param options - The options for the player entity.
+     *
+     * **Category:** Entities
      */
     constructor(options: PlayerEntityOptions);
-    /** Whether tickWithPlayerInput() is called during the entity's tick. */
+    /**
+     * Whether `tickWithPlayerInput()` is called during the entity's tick.
+     *
+     * **Category:** Entities
+     */
     get isTickWithPlayerInputEnabled(): boolean;
     /**
-     * Sets whether tickWithPlayerInput() is called during the entity's tick. Disabling
-     * this effectively disables player control of the entity.
-     * @param enabled - Whether tickWithPlayerInput() should be called.
+     * Enables or disables `tickWithPlayerInput()` during the entity's tick.
+     *
+     * Use for: temporarily disabling player control (cutscenes, menus, stuns).
+     *
+     * @param enabled - Whether `tickWithPlayerInput()` should be called.
+     *
+     * **Category:** Entities
      */
     setTickWithPlayerInputEnabled(enabled: boolean): void;
 
 
 }
 
-/** Options for creating a PlayerEntity instance. @public */
+/**
+ * Options for creating a PlayerEntity instance.
+ *
+ * Use for: creating a player-bound entity (requires `player`).
+ * Do NOT use for: non-player entities; use `EntityOptions`.
+ *
+ * **Category:** Entities
+ * @public
+ */
 export declare type PlayerEntityOptions = {
     /** The player the player entity is assigned to. */
     player: Player;
 } & EntityOptions;
 
-/** Event types a Player can emit. See {@link PlayerEventPayloads} for the payloads. @public */
+/**
+ * Event types a Player can emit.
+ *
+ * See `PlayerEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum PlayerEvent {
     CHAT_MESSAGE_SEND = "PLAYER.CHAT_MESSAGE_SEND",
     INTERACT = "PLAYER.INTERACT",
@@ -5389,7 +7523,12 @@ export declare enum PlayerEvent {
     REQUEST_SYNC = "PLAYER.REQUEST_SYNC"
 }
 
-/** Event payloads for Player emitted events. @public */
+/**
+ * Event payloads for Player emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface PlayerEventPayloads {
     /** Emitted when a player sends a chat message. */
     [PlayerEvent.CHAT_MESSAGE_SEND]: {
@@ -5430,21 +7569,29 @@ export declare interface PlayerEventPayloads {
     };
 }
 
-/** The input state of a Player. @public */
+/**
+ * The input state of a `Player`.
+ *
+ * **Category:** Players
+ * @public
+ */
 export declare type PlayerInput = InputSchema;
 
 /**
  * Manages all connected players in a game server.
  *
+ * When to use: accessing online players, reacting to connection lifecycle events,
+ * or routing players to worlds.
+ * Do NOT use for: constructing or persisting players yourself; players are created
+ * automatically on connection.
+ *
  * @remarks
- * The PlayerManager is created internally as a global
- * singleton accessible with the static property
- * `PlayerManager.instance`.
+ * Access via `PlayerManager.instance` — do not construct directly.
  *
  * <h2>Events</h2>
  *
- * This class emits global events with payloads listed
- * under {@link PlayerManagerEventPayloads}
+ * This class emits global events with payloads listed under
+ * `PlayerManagerEventPayloads`.
  *
  * @example
  * ```typescript
@@ -5454,32 +7601,60 @@ export declare type PlayerInput = InputSchema;
  * const connectedPlayers = playerManager.getConnectedPlayers();
  * ```
  *
+ * **Category:** Players
  * @public
  */
 export declare class PlayerManager {
-    /** The global PlayerManager instance as a singleton. */
+    /**
+     * The global PlayerManager instance (singleton).
+     *
+     * **Category:** Players
+     */
     static readonly instance: PlayerManager;
-    /** Optional handler for selecting the world a newly connected player joins. Returning no world results in the player joining the default WorldManager world. */
+    /**
+     * Optional handler for selecting the world a newly connected player joins.
+     *
+     * Use for: lobby routing or game mode selection.
+     * Do NOT use for: moving players after they have already joined a world; use `Player.joinWorld`.
+     *
+     * @remarks
+     * Return `undefined` to place the player in the default world.
+     *
+     * **Category:** Players
+     */
     worldSelectionHandler?: (player: Player) => Promise<World | undefined>;
 
 
-    /** The number of players currently connected to the server. */
+    /**
+     * The number of players currently connected to the server.
+     *
+     * **Category:** Players
+     */
     get playerCount(): number;
     /**
      * Get all connected players.
+     *
      * @returns An array of all connected players.
+     *
+     * **Category:** Players
      */
     getConnectedPlayers(): Player[];
     /**
      * Get all connected players in a specific world.
+     *
      * @param world - The world to get connected players for.
      * @returns An array of all connected players in the world.
+     *
+     * **Category:** Players
      */
     getConnectedPlayersByWorld(world: World): Player[];
     /**
-     * Get a connected player by their username (case insensitive).
+     * Get a connected player by their username (case-insensitive).
+     *
      * @param username - The username of the player to get.
      * @returns The connected player with the given username or undefined if not found.
+     *
+     * **Category:** Players
      */
     getConnectedPlayerByUsername(username: string): Player | undefined;
 
@@ -5488,14 +7663,26 @@ export declare class PlayerManager {
 
 }
 
-/** Event types a PlayerManager can emit. See {@link PlayerManagerEventPayloads} for the payloads. @public */
+/**
+ * Event types a PlayerManager can emit.
+ *
+ * See `PlayerManagerEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum PlayerManagerEvent {
     PLAYER_CONNECTED = "PLAYER_MANAGER.PLAYER_CONNECTED",
     PLAYER_DISCONNECTED = "PLAYER_MANAGER.PLAYER_DISCONNECTED",
     PLAYER_RECONNECTED = "PLAYER_MANAGER.PLAYER_RECONNECTED"
 }
 
-/** Event payloads for PlayerManager emitted events. @public */
+/**
+ * Event payloads for PlayerManager emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface PlayerManagerEventPayloads {
     /** Emitted when a player connects to the server. */
     [PlayerManagerEvent.PLAYER_CONNECTED]: {
@@ -5515,67 +7702,121 @@ export declare interface PlayerManagerEventPayloads {
 /**
  * The UI for a player.
  *
+ * When to use: showing overlays, HUDs, menus, and custom UI for a specific player.
+ * Do NOT use for: world-level UI shared by all players; use scene UI systems instead.
+ *
  * @remarks
- * UI allows control of all in-game overlays a player
- * sees. UI is controlled by HTML, CSS and JavaScript
- * files you provide in your `assets` folder.
+ * UI is driven by HTML, CSS, and JavaScript files in your `assets` folder.
  *
  * <h2>Events</h2>
  *
- * This class is an EventRouter, and instances of it emit
- * events with payloads listed under {@link PlayerUIEventPayloads}
+ * This class is an EventRouter, and instances of it emit events with payloads listed under
+ * `PlayerUIEventPayloads`.
  *
+ * **Category:** Players
  * @public
  */
 export declare class PlayerUI extends EventRouter {
-    /** The player that the UI belongs to. @readonly */
+    /**
+     * The player that the UI belongs to.
+     *
+     * **Category:** Players
+     */
     readonly player: Player;
 
     /**
      * Appends UI HTML to the player's existing client UI.
      *
-     * @remarks
-     * Multiple calls in the same tick will append in call order.
-     * If used with `.load()` in the same tick, appends occur after the load.
+     * Use for: incremental overlays (notifications, tooltips, modal layers).
+     * Do NOT use for: replacing the entire UI; use `PlayerUI.load`.
      *
-     * @param htmlUri - The UI HTML uri to append.
+     * @remarks
+     * Multiple calls in the same tick append in call order.
+     * If used with `PlayerUI.load` in the same tick, appends occur after the load.
+     *
+     * @param htmlUri - The UI HTML URI to append.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerUIEvent.APPEND`.
+     *
+     * **Category:** Players
      */
     append(htmlUri: string): void;
     /**
-     * Freezes or unfreezes the player's pointer lock state. Preventing player inputs
-     * from automatically locking or unlocking the pointer relative to its current state.
-     * @param freeze - Set true to freeze the pointer lock state, false to unfreeze it.
+     * Freezes or unfreezes the player's pointer lock state.
+     *
+     * Use for: menus or cutscenes that should not alter pointer lock.
+     *
+     * @param freeze - True to freeze pointer lock, false to unfreeze it.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerUIEvent.FREEZE_POINTER_LOCK`.
+     *
+     * **Category:** Players
      */
     freezePointerLock(freeze: boolean): void;
     /**
      * Loads client UI for the player, replacing any existing UI.
      *
-     * @remarks
-     * If used with `.append()` in the same tick, the load occurs first.
+     * Use for: switching to a new UI screen or resetting the UI.
+     * Do NOT use for: incremental overlays; use `PlayerUI.append`.
      *
-     * @param htmlUri - The UI HTML uri to load.
+     * @remarks
+     * If used with `PlayerUI.append` in the same tick, the load occurs first.
+     *
+     * @param htmlUri - The UI HTML URI to load.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerUIEvent.LOAD`.
+     *
+     * **Category:** Players
      */
     load(htmlUri: string): void;
     /**
-     * Locks or unlocks the player's mouse pointer on Desktop. If the pointer is unlocked
-     * with `lockPointer(false)`, the player will not be able to use in-game inputs
-     * or camera controls from the mouse pointer until `player.ui.lockPointer(true)`,
-     * or in your game's client UI html with `hytopia.lockPointer(true)`.
+     * Locks or unlocks the player's mouse pointer on desktop.
+     *
+     * Use for: controlling when mouse input is captured.
+     * Do NOT use for: mobile devices (pointer lock has no effect).
      *
      * @remarks
-     * Pointer lock has no effect on mobile devices.
+     * If unlocked, the player cannot use in-game mouse inputs until it is locked again.
      *
-     * @param lock - Set true to lock the pointer, false to unlock it.
+     * @param lock - True to lock the pointer, false to unlock it.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerUIEvent.LOCK_POINTER`.
+     *
+     * **Category:** Players
      */
     lockPointer(lock: boolean): void;
     /**
      * Sends data to the player's client UI.
+     *
+     * Use for: pushing state updates to your UI scripts.
+     *
      * @param data - The data to send to the client UI.
+     *
+     * **Requires:** Player must be in a world.
+     *
+     * **Side effects:** Emits `PlayerUIEvent.SEND_DATA`.
+     *
+     * **Category:** Players
      */
     sendData(data: object): void;
 }
 
-/** Event types a PlayerUI can emit. See {@link PlayerUIEventPayloads} for the payloads. @public */
+/**
+ * Event types a PlayerUI can emit.
+ *
+ * See `PlayerUIEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum PlayerUIEvent {
     APPEND = "PLAYER_UI.APPEND",
     DATA = "PLAYER_UI.DATA",
@@ -5585,7 +7826,12 @@ export declare enum PlayerUIEvent {
     SEND_DATA = "PLAYER_UI.SEND_DATA"
 }
 
-/** Event payloads for PlayerUI emitted events. @public */
+/**
+ * Event payloads for PlayerUI emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface PlayerUIEventPayloads {
     /** Emitted when UI HTML is appended to the player's existing client UI. */
     [PlayerUIEvent.APPEND]: {
@@ -5622,12 +7868,18 @@ export declare interface PlayerUIEventPayloads {
 /**
  * Represents a quaternion.
  *
+ * When to use: rotation math for entities, cameras, or transforms.
+ * Do NOT use for: immutable math; most methods mutate the instance.
+ *
  * @remarks
  * All quaternion methods result in mutation of the quaternion instance.
  * This class extends `Float32Array` to provide an efficient way to
- * create and manipulate a quaternion. Various convenience methods are
- * provided for common quaternion operations.
+ * create and manipulate a quaternion.
  *
+ * Pattern: reuse instances to avoid allocations in tight loops.
+ * Anti-pattern: assuming methods return new instances; most mutate in place.
+ *
+ * **Category:** Math
  * @public
  */
 export declare class Quaternion extends Float32Array implements QuaternionLike {
@@ -5831,7 +8083,12 @@ export declare class Quaternion extends Float32Array implements QuaternionLike {
     toString(): string;
 }
 
-/** A quaternion. @public */
+/**
+ * A quaternion.
+ *
+ * **Category:** Math
+ * @public
+ */
 export declare interface QuaternionLike {
     x: number;
     y: number;
@@ -5839,16 +8096,34 @@ export declare interface QuaternionLike {
     w: number;
 }
 
-/** A raw collider object from the Rapier physics engine. @public */
+/**
+ * A raw collider object from the Rapier physics engine. @public
+ *
+ * **Category:** Physics
+ */
 export declare type RawCollider = RAPIER.Collider;
 
-/** A raw set of collision groups represented as a 32-bit number. @public */
+/**
+ * A raw set of collision groups represented as a 32-bit number.
+ *
+ * **Category:** Physics
+ * @public
+ */
 export declare type RawCollisionGroups = RAPIER.InteractionGroups;
 
-/** A raw shape object from the Rapier physics engine. @public */
+/**
+ * A raw shape object from the Rapier physics engine. @public
+ *
+ * **Category:** Physics
+ */
 export declare type RawShape = RAPIER.Shape;
 
-/** A hit result from a raycast. @public */
+/**
+ * A hit result from a raycast.
+ *
+ * **Category:** Physics
+ * @public
+ */
 export declare type RaycastHit = {
     /** The block the raycast hit. */
     hitBlock?: Block;
@@ -5864,13 +8139,26 @@ export declare type RaycastHit = {
     originDirection: Vector3Like;
 };
 
-/** Options for raycasting. @public */
+/**
+ * Options for raycasting.
+ *
+ * Use for: configuring `Simulation.raycast` calls.
+ * Do NOT use for: caching long-term query state; build per query.
+ *
+ * **Category:** Physics
+ * @public
+ */
 export declare type RaycastOptions = {
     /** Whether to use solid mode for the raycast, defaults to true. */
     solidMode?: boolean;
 } & FilterOptions;
 
-/** A RGB color. r, g and b expect a value between 0 and 255. @public */
+/**
+ * An RGB color. `r`, `g`, and `b` expect a value between 0 and 255.
+ *
+ * **Category:** Types
+ * @public
+ */
 export declare interface RgbColor {
     r: number;
     g: number;
@@ -5880,11 +8168,14 @@ export declare interface RgbColor {
 /**
  * Represents a rigid body in a world's physics simulation.
  *
- * @remarks
- * Rigid bodies are the core of the physics simulation. They are
- * used to represent physical objects (IE: entities) that can
- * interact with each other.
+ * When to use: physics-simulated or kinematic objects that need forces, collisions, or velocity.
+ * Do NOT use for: purely visual transforms; use entity transforms without physics when possible.
  *
+ * @remarks
+ * Provide `simulation` in `RigidBodyOptions` or call `RigidBody.addToSimulation` to create the
+ * underlying physics body. Many methods are type-specific (dynamic vs kinematic); see `RigidBody.setType`.
+ *
+ * **Category:** Physics
  * @public
  */
 export declare class RigidBody extends EventRouter {
@@ -5898,165 +8189,390 @@ export declare class RigidBody extends EventRouter {
 
 
     /**
+     * Creates a rigid body with the provided options.
+     *
+     * Use for: configuring physics behavior before adding to a simulation.
+     * Do NOT use for: immediate physics queries; the rigid body must be simulated first.
+     *
      * @param options - The options for the rigid body instance.
+     *
+     * **Category:** Physics
      */
     constructor(options: RigidBodyOptions);
-    /** The additional mass of the rigid body. */
+    /**
+     * The additional mass of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get additionalMass(): number;
-    /** The additional solver iterations of the rigid body. */
+    /**
+     * The additional solver iterations of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get additionalSolverIterations(): number;
-    /** The angular damping of the rigid body. */
+    /**
+     * The angular damping of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get angularDamping(): number;
-    /** The angular velocity of the rigid body. */
+    /**
+     * The angular velocity of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get angularVelocity(): Vector3Like;
-    /** The colliders of the rigid body. */
+    /**
+     * The colliders of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get colliders(): Set<Collider>;
-    /** The dominance group of the rigid body. */
+    /**
+     * The dominance group of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get dominanceGroup(): number;
-    /** The direction from the rotation of the rigid body. (-Z identity) */
+    /**
+     * The direction from the rotation of the rigid body. (-Z identity)
+     *
+     * **Category:** Physics
+     */
     get directionFromRotation(): Vector3Like;
-    /** The effective angular inertia of the rigid body. */
+    /**
+     * The effective angular inertia of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get effectiveAngularInertia(): SpdMatrix3 | undefined;
-    /** The effective inverse mass of the rigid body. */
+    /**
+     * The effective inverse mass of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get effectiveInverseMass(): Vector3Like | undefined;
-    /** The enabled axes of rotational movement of the rigid body. */
+    /**
+     * The enabled axes of rotational movement of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get enabledRotations(): Vector3Boolean;
-    /** The enabled axes of positional movement of the rigid body. */
+    /**
+     * The enabled axes of positional movement of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get enabledPositions(): Vector3Boolean;
-    /** The gravity scale of the rigid body. */
+    /**
+     * The gravity scale of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get gravityScale(): number;
-    /** The inverse mass of the rigid body. */
+    /**
+     * The inverse mass of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get inverseMass(): number | undefined;
-    /** Whether the rigid body has continuous collision detection enabled. */
+    /**
+     * Whether the rigid body has continuous collision detection enabled.
+     *
+     * **Category:** Physics
+     */
     get isCcdEnabled(): boolean;
-    /** Whether the rigid body is dynamic. */
+    /**
+     * Whether the rigid body is dynamic.
+     *
+     * **Category:** Physics
+     */
     get isDynamic(): boolean;
-    /** Whether the rigid body is enabled. */
+    /**
+     * Whether the rigid body is enabled.
+     *
+     * **Category:** Physics
+     */
     get isEnabled(): boolean;
-    /** Whether the rigid body is fixed. */
+    /**
+     * Whether the rigid body is fixed.
+     *
+     * **Category:** Physics
+     */
     get isFixed(): boolean;
-    /** Whether the rigid body is kinematic. */
+    /**
+     * Whether the rigid body is kinematic.
+     *
+     * **Category:** Physics
+     */
     get isKinematic(): boolean;
-    /** Whether the rigid body is kinematic position based. */
+    /**
+     * Whether the rigid body is kinematic position based.
+     *
+     * **Category:** Physics
+     */
     get isKinematicPositionBased(): boolean;
-    /** Whether the rigid body is kinematic velocity based. */
+    /**
+     * Whether the rigid body is kinematic velocity based.
+     *
+     * **Category:** Physics
+     */
     get isKinematicVelocityBased(): boolean;
-    /** Whether the rigid body is moving. */
+    /**
+     * Whether the rigid body is moving.
+     *
+     * **Category:** Physics
+     */
     get isMoving(): boolean;
-    /** Whether the rigid body has been removed from the simulation. */
+    /**
+     * Whether the rigid body has been removed from the simulation.
+     *
+     * **Category:** Physics
+     */
     get isRemoved(): boolean;
-    /** Whether the rigid body is simulated. */
+    /**
+     * Whether the rigid body is simulated.
+     *
+     * **Category:** Physics
+     */
     get isSimulated(): boolean;
-    /** Whether the rigid body is sleeping. */
+    /**
+     * Whether the rigid body is sleeping.
+     *
+     * **Category:** Physics
+     */
     get isSleeping(): boolean;
-    /** The linear damping of the rigid body. */
+    /**
+     * The linear damping of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get linearDamping(): number;
-    /** The linear velocity of the rigid body. */
+    /**
+     * The linear velocity of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get linearVelocity(): Vector3Like;
-    /** The local center of mass of the rigid body. */
+    /**
+     * The local center of mass of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get localCenterOfMass(): Vector3Like;
-    /** The mass of the rigid body. */
+    /**
+     * The mass of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get mass(): number;
-    /** The next kinematic rotation of the rigid body. */
+    /**
+     * The next kinematic rotation of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get nextKinematicRotation(): QuaternionLike;
-    /** The next kinematic position of the rigid body. */
+    /**
+     * The next kinematic position of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get nextKinematicPosition(): Vector3Like;
-    /** The number of colliders in the rigid body. */
+    /**
+     * The number of colliders in the rigid body.
+     *
+     * **Category:** Physics
+     */
     get numColliders(): number;
-    /** The principal angular inertia of the rigid body. */
+    /**
+     * The principal angular inertia of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get principalAngularInertia(): Vector3Like;
-    /** The principal angular inertia local frame of the rigid body. */
+    /**
+     * The principal angular inertia local frame of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get principalAngularInertiaLocalFrame(): QuaternionLike | undefined;
-    /** The position of the rigid body. */
+    /**
+     * The position of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get position(): Vector3Like;
-    /** The raw RAPIER rigid body instance. */
+    /**
+     * The raw RAPIER rigid body instance.
+     *
+     * **Category:** Physics
+     */
     get rawRigidBody(): RAPIER.RigidBody | undefined;
-    /** The rotation of the rigid body. */
+    /**
+     * The rotation of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get rotation(): QuaternionLike;
-    /** The soft continuous collision detection prediction of the rigid body. */
+    /**
+     * The soft continuous collision detection prediction of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get softCcdPrediction(): number;
-    /** The type of the rigid body. */
+    /**
+     * The type of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get type(): RigidBodyType;
-    /** The world center of mass of the rigid body. */
+    /**
+     * The world center of mass of the rigid body.
+     *
+     * **Category:** Physics
+     */
     get worldCenterOfMass(): Vector3Like | undefined;
     /**
      * Sets the additional mass of the rigid body.
      * @param additionalMass - The additional mass of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     setAdditionalMass(additionalMass: number): void;
     /**
      * Sets the additional mass properties of the rigid body.
      * @param additionalMassProperties - The additional mass properties of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     setAdditionalMassProperties(additionalMassProperties: RigidBodyAdditionalMassProperties): void;
     /**
      * Sets the additional solver iterations of the rigid body.
      * @param solverIterations - The additional solver iterations of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     setAdditionalSolverIterations(solverIterations: number): void;
     /**
      * Sets the angular damping of the rigid body.
      * @param angularDamping - The angular damping of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     setAngularDamping(angularDamping: number): void;
     /**
      * Sets the angular velocity of the rigid body.
      * @param angularVelocity - The angular velocity of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     setAngularVelocity(angularVelocity: Vector3Like): void;
     /**
      * Sets whether the rigid body has continuous collision detection enabled.
      * @param ccdEnabled - Whether the rigid body has continuous collision detection enabled.
+     *
+     *
+     * **Category:** Physics
      */
     setCcdEnabled(ccdEnabled: boolean): void;
     /**
      * Sets the dominance group of the rigid body.
      * @param dominanceGroup - The dominance group of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     setDominanceGroup(dominanceGroup: number): void;
     /**
      * Sets whether the rigid body is enabled.
      * @param enabled - Whether the rigid body is enabled.
+     *
+     *
+     * **Category:** Physics
      */
     setEnabled(enabled: boolean): void;
     /**
      * Sets whether the rigid body has enabled positional movement.
      * @param enabledPositions - Whether the rigid body has enabled positional movement.
+     *
+     *
+     * **Category:** Physics
      */
     setEnabledPositions(enabledPositions: Vector3Boolean): void;
     /**
      * Sets whether the rigid body has enabled rotations.
      * @param enabledRotations - Whether the rigid body has enabled rotations.
+     *
+     *
+     * **Category:** Physics
      */
     setEnabledRotations(enabledRotations: Vector3Boolean): void;
     /**
      * Sets the gravity scale of the rigid body.
      * @param gravityScale - The gravity scale of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     setGravityScale(gravityScale: number): void;
     /**
      * Sets the linear damping of the rigid body.
      * @param linearDamping - The linear damping of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     setLinearDamping(linearDamping: number): void;
     /**
      * Sets the linear velocity of the rigid body.
      * @param linearVelocity - The linear velocity of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     setLinearVelocity(linearVelocity: Vector3Like): void;
     /**
      * Sets the next kinematic rotation of the rigid body.
+     *
+     * Use for: kinematic bodies driven by explicit rotation each tick.
+     * Do NOT use for: dynamic bodies; use torque or angular velocity instead.
+     *
      * @param nextKinematicRotation - The next kinematic rotation of the rigid body.
+     *
+     * **Requires:** Rigid body must be kinematic.
+     *
+     * **Category:** Physics
      */
     setNextKinematicRotation(nextKinematicRotation: QuaternionLike): void;
     /**
      * Sets the next kinematic position of the rigid body.
+     *
+     * Use for: kinematic bodies driven by explicit position each tick.
+     * Do NOT use for: dynamic bodies; use forces or velocity instead.
+     *
      * @param nextKinematicPosition - The next kinematic position of the rigid body.
+     *
+     * **Requires:** Rigid body must be kinematic.
+     *
+     * **Category:** Physics
      */
     setNextKinematicPosition(nextKinematicPosition: Vector3Like): void;
     /**
      * Sets the position of the rigid body.
+     *
+     * @remarks
+     * This teleports the body to the given position. For smooth motion,
+     * prefer velocities or forces (dynamic) or next kinematic targets (kinematic).
+     *
      * @param position - The position of the rigid body.
+     *
+     * **Category:** Physics
      */
     setPosition(position: Vector3Like): void;
     /**
@@ -6067,47 +8583,85 @@ export declare class RigidBody extends EventRouter {
      * For Y-axis rotation only (yaw), use: `{ x: 0, y: sin(yaw/2), z: 0, w: cos(yaw/2) }`.
      * A yaw of 0 faces -Z, positive yaw rotates counter-clockwise when viewed from above.
      *
+     * This sets rotation immediately. For smooth rotation, use angular velocity (dynamic)
+     * or next kinematic rotation (kinematic).
+     *
      * @param rotation - The rotation of the rigid body.
+     *
+     * **Category:** Physics
      */
     setRotation(rotation: QuaternionLike): void;
     /**
      * Sets whether the rigid body is sleeping.
      * @param sleeping - Whether the rigid body is sleeping.
+     *
+     *
+     * **Category:** Physics
      */
     setSleeping(sleeping: boolean): void;
     /**
      * Sets the soft ccd prediction of the rigid body.
      * @param softCcdPrediction - The soft ccd prediction of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     setSoftCcdPrediction(softCcdPrediction: number): void;
     /**
      * Sets the collision groups for solid colliders (non-sensor) of the rigid body.
      * @param collisionGroups - The collision groups for solid colliders of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     setCollisionGroupsForSolidColliders(collisionGroups: CollisionGroups): void;
     /**
      * Sets the collision groups for sensor colliders of the rigid body.
      * @param collisionGroups - The collision groups for sensor colliders of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     setCollisionGroupsForSensorColliders(collisionGroups: CollisionGroups): void;
     /**
      * Sets the type of the rigid body.
+     *
+     * Use for: switching between dynamic, fixed, and kinematic behavior.
+     * Do NOT use for: per-tick motion changes; prefer velocity or forces.
+     *
      * @param type - The type of the rigid body.
+     *
+     * **Category:** Physics
      */
     setType(type: RigidBodyType): void;
     /**
      * Adds a force to the rigid body.
+     *
+     * @remarks
+     * Dynamic bodies only; has no effect on fixed or kinematic bodies.
+     *
      * @param force - The force to add to the rigid body.
+     *
+     * **Category:** Physics
      */
     addForce(force: Vector3Like): void;
     /**
      * Adds a torque to the rigid body.
+     *
+     * @remarks
+     * Dynamic bodies only; has no effect on fixed or kinematic bodies.
+     *
      * @param torque - The torque to add to the rigid body.
+     *
+     * **Category:** Physics
      */
     addTorque(torque: Vector3Like): void;
     /**
      * Adds an unsimulated child collider to the rigid body for the simulation it belongs to.
      * @param collider - The child collider to add to the rigid body for the simulation it belongs to.
+     *
+     *
+     * **Category:** Physics
      */
     addChildColliderToSimulation(collider: Collider): void;
     /**
@@ -6115,24 +8669,47 @@ export declare class RigidBody extends EventRouter {
      *
      * @remarks
      * **Child colliders:** Also adds all pending child colliders to the simulation.
+     * After this call, the rigid body is simulated and can respond to forces.
      *
      * @param simulation - The simulation to add the rigid body to.
+     *
+     * **Side effects:** Creates the underlying physics body and registers child colliders.
+     *
+     * **Category:** Physics
      */
     addToSimulation(simulation: Simulation): void;
     /**
      * Applies an impulse to the rigid body.
+     *
+     * @remarks
+     * Dynamic bodies only; has no effect on fixed or kinematic bodies.
+     *
      * @param impulse - The impulse to apply to the rigid body.
+     *
+     * **Category:** Physics
      */
     applyImpulse(impulse: Vector3Like): void;
     /**
      * Applies an impulse to the rigid body at a point.
+     *
+     * @remarks
+     * Dynamic bodies only; has no effect on fixed or kinematic bodies.
+     *
      * @param impulse - The impulse to apply to the rigid body.
      * @param point - The point at which to apply the impulse.
+     *
+     * **Category:** Physics
      */
     applyImpulseAtPoint(impulse: Vector3Like, point: Vector3Like): void;
     /**
      * Applies a torque impulse to the rigid body.
+     *
+     * @remarks
+     * Dynamic bodies only; has no effect on fixed or kinematic bodies.
+     *
      * @param impulse - The torque impulse to apply to the rigid body.
+     *
+     * **Category:** Physics
      */
     applyTorqueImpulse(impulse: Vector3Like): void;
     /**
@@ -6144,6 +8721,9 @@ export declare class RigidBody extends EventRouter {
      *
      * @param colliderOptions - The options for the child collider to add.
      * @returns The child collider that was added to the rigid body, or null if failed.
+     *
+     *
+     * **Category:** Physics
      */
     createAndAddChildCollider(colliderOptions: ColliderOptions): Collider | null;
     /**
@@ -6155,21 +8735,33 @@ export declare class RigidBody extends EventRouter {
      *
      * @param colliderOptions - The options for the child colliders to add to the rigid body.
      * @returns The child colliders that were added to the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     createAndAddChildColliders(colliderOptions: ColliderOptions[]): Collider[];
     /**
      * Gets the colliders of the rigid body by tag.
      * @param tag - The tag to filter by.
      * @returns The colliders of the rigid body with the given tag.
+     *
+     *
+     * **Category:** Physics
      */
     getCollidersByTag(tag: string): Collider[];
 
     /**
      * Locks all rotations of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     lockAllRotations(): void;
     /**
      * Locks all positional movement of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     lockAllPositions(): void;
     /**
@@ -6177,31 +8769,53 @@ export declare class RigidBody extends EventRouter {
      *
      * @remarks
      * **Child colliders:** Also removes all child colliders from the simulation.
+     *
+     * **Side effects:** Unregisters the rigid body and all attached colliders.
+     *
+     * **Category:** Physics
      */
     removeFromSimulation(): void;
 
     /**
      * Resets the angular velocity of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     resetAngularVelocity(): void;
     /**
      * Resets the forces actiong on the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     resetForces(): void;
     /**
      * Resets the linear velocity of the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     resetLinearVelocity(): void;
     /**
      * Resets the torques acting on the rigid body.
+     *
+     *
+     * **Category:** Physics
      */
     resetTorques(): void;
     /**
      * Explicitly puts the rigid body to sleep. Physics otherwise optimizes sleeping.
+     *
+     *
+     * **Category:** Physics
      */
     sleep(): void;
     /**
      * Wakes up the rigid body. Physics otherwise optimizes waking it when necessary.
+     *
+     *
+     * **Category:** Physics
      */
     wakeUp(): void;
 
@@ -6218,7 +8832,11 @@ export declare class RigidBody extends EventRouter {
 
 }
 
-/** Additional mass properties for a RigidBody. @public */
+/**
+ * Additional mass properties for a RigidBody. @public
+ *
+ * **Category:** Physics
+ */
 export declare type RigidBodyAdditionalMassProperties = {
     additionalMass: number;
     centerOfMass: Vector3Like;
@@ -6226,10 +8844,21 @@ export declare type RigidBodyAdditionalMassProperties = {
     principalAngularInertiaLocalFrame: QuaternionLike;
 };
 
-/** The options for a rigid body. @public */
+/**
+ * The options for a rigid body. @public
+ *
+ * Use for: constructing rigid bodies; choose an option type matching `RigidBodyType`.
+ * Do NOT use for: runtime changes; use `RigidBody` methods instead.
+ *
+ * **Category:** Physics
+ */
 export declare type RigidBodyOptions = DynamicRigidBodyOptions | FixedRigidBodyOptions | KinematicPositionRigidBodyOptions | KinematicVelocityRigidBodyOptions;
 
-/** The types a RigidBody can be. @public */
+/**
+ * The types a RigidBody can be. @public
+ *
+ * **Category:** Physics
+ */
 export declare enum RigidBodyType {
     DYNAMIC = "dynamic",
     FIXED = "fixed",
@@ -6237,14 +8866,33 @@ export declare enum RigidBodyType {
     KINEMATIC_VELOCITY = "kinematic_velocity"
 }
 
-/** The options for a round cylinder collider. @public */
+/**
+ * The options for a round cylinder collider. @public
+ *
+ * Use for: rounded cylinder colliders.
+ * Do NOT use for: other shapes; use the matching collider option type.
+ *
+ * **Category:** Physics
+ */
 export declare interface RoundCylinderColliderOptions extends BaseColliderOptions {
     shape: ColliderShape.ROUND_CYLINDER;
-    /** The border radius of the round cylinder collider. */
+    /**
+     * The border radius of the round cylinder collider.
+     *
+     * **Category:** Physics
+     */
     borderRadius?: number;
-    /** The half height of the round cylinder collider. */
+    /**
+     * The half height of the round cylinder collider.
+     *
+     * **Category:** Physics
+     */
     halfHeight?: number;
-    /** The radius of the round cylinder collider. */
+    /**
+     * The radius of the round cylinder collider.
+     *
+     * **Category:** Physics
+     */
     radius?: number;
 }
 
@@ -6255,12 +8903,12 @@ export declare interface RoundCylinderColliderOptions extends BaseColliderOption
  * @remarks
  * SceneUI instances are created directly as instances.
  * They support a variety of configuration options through
- * the {@link SceneUIOptions} constructor argument.
+ * the `SceneUIOptions` constructor argument.
  *
  * <h2>Events</h2>
  *
  * This class is an EventRouter, and instances of it emit
- * events with payloads listed under {@link SceneUIEventPayloads}
+ * events with payloads listed under `SceneUIEventPayloads`
  *
  * @example
  * ```typescript
@@ -6271,6 +8919,7 @@ export declare interface RoundCylinderColliderOptions extends BaseColliderOption
  * });
  * ```
  *
+ * **Category:** UI
  * @public
  */
 export declare class SceneUI extends EventRouter implements protocol.Serializable {
@@ -6356,7 +9005,14 @@ export declare class SceneUI extends EventRouter implements protocol.Serializabl
 
 }
 
-/** Event types a SceneUI instance can emit. See {@link SceneUIEventPayloads} for the payloads. @public */
+/**
+ * Event types a SceneUI instance can emit.
+ *
+ * See `SceneUIEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum SceneUIEvent {
     LOAD = "SCENE_UI.LOAD",
     SET_ATTACHED_TO_ENTITY = "SCENE_UI.SET_ATTACHED_TO_ENTITY",
@@ -6367,7 +9023,12 @@ export declare enum SceneUIEvent {
     UNLOAD = "SCENE_UI.UNLOAD"
 }
 
-/** Event payloads for SceneUI emitted events. @public */
+/**
+ * Event payloads for SceneUI emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface SceneUIEventPayloads {
     /** Emitted when a SceneUI is loaded into the world. */
     [SceneUIEvent.LOAD]: {
@@ -6407,12 +9068,14 @@ export declare interface SceneUIEventPayloads {
 /**
  * Manages SceneUI instances in a world.
  *
- * @remarks
- * The SceneUIManager is created internally as a singleton
- * for each {@link World} instance in a game server.
- * It allows retrieval of all loaded SceneUI instances,
- * entity attached SceneUI instances, and more.
+ * When to use: querying or bulk-unloading scene UI elements in a world.
+ * Do NOT use for: player HUD/menus; use `PlayerUI` for per-player UI.
  *
+ * @remarks
+ * The SceneUIManager is created internally per `World` instance.
+ * Pattern: load scene UI for world objects and unload them when entities despawn.
+ *
+ * **Category:** UI
  * @public
  */
 export declare class SceneUIManager {
@@ -6420,19 +9083,33 @@ export declare class SceneUIManager {
 
 
 
-    /** The world the SceneUIManager is for. */
+    /**
+     * The world the SceneUIManager is for.
+     *
+     * **Category:** UI
+     */
     get world(): World;
     /**
      * Retrieves all loaded SceneUI instances for the world.
      *
      * @returns An array of SceneUI instances.
+     *
+     * **Category:** UI
      */
     getAllSceneUIs(): SceneUI[];
     /**
      * Retrieves all loaded SceneUI instances attached to a specific entity.
      *
+     * Use for: cleanup or inspection of entity-bound scene UI.
+     *
      * @param entity - The entity to get attached SceneUI instances for.
      * @returns An array of SceneUI instances.
+     *
+     * **Requires:** Entity should belong to this world for meaningful results.
+     *
+     * @see `SceneUIManager.unloadEntityAttachedSceneUIs`
+     *
+     * **Category:** UI
      */
     getAllEntityAttachedSceneUIs(entity: Entity): SceneUI[];
     /**
@@ -6440,6 +9117,8 @@ export declare class SceneUIManager {
      *
      * @param id - The unique identifier (id) of the SceneUI to retrieve.
      * @returns The SceneUI instance if found, otherwise undefined.
+     *
+     * **Category:** UI
      */
     getSceneUIById(id: number): SceneUI | undefined;
 
@@ -6447,15 +9126,31 @@ export declare class SceneUIManager {
      * Unloads and unregisters all SceneUI instances attached to a specific entity.
      *
      * @remarks
-     * **Cleanup:** Calls `unload()` on each attached SceneUI.
+     * **Cleanup:** Calls `SceneUI.unload` on each attached SceneUI.
      *
      * @param entity - The entity to unload and unregister SceneUI instances for.
+     *
+     * **Requires:** Entity should belong to this world for meaningful results.
+     *
+     * **Side effects:** Unloads any attached scene UI and removes it from manager tracking.
+     *
+     * @see `SceneUIManager.getAllEntityAttachedSceneUIs`
+     *
+     * **Category:** UI
      */
     unloadEntityAttachedSceneUIs(entity: Entity): void;
 
 }
 
-/** Options for creating a SceneUI instance. @public */
+/**
+ * Options for creating a SceneUI instance.
+ *
+ * Use for: configuring scene UI before `SceneUI.load`.
+ * Do NOT use for: runtime updates after load; use `SceneUI.set*` methods.
+ *
+ * **Category:** UI
+ * @public
+ */
 export declare interface SceneUIOptions {
     /** If set, SceneUI will follow the entity's position */
     attachedToEntity?: Entity;
@@ -6474,19 +9169,18 @@ export declare interface SceneUIOptions {
 /**
  * A simple entity controller with basic movement functions.
  *
+ * When to use: straightforward movement and facing without pathfinding.
+ * Do NOT use for: obstacle-aware movement; use `PathfindingEntityController`.
+ *
  * @remarks
- * This class implements simple movement methods that serve
- * as a way to add realistic movement and rotational facing
- * functionality to an entity. This is also a great base to
- * extend for your own more complex entity controller
- * that implements things like pathfinding. Compatible with
- * entities that have kinematic or dynamic rigid body types.
+ * This class provides straight-line movement and yaw-only facing. It is compatible
+ * with kinematic or dynamic rigid bodies.
  *
  * <h2>Coordinate System & Model Orientation</h2>
  *
  * HYTOPIA uses **-Z as forward**. Models must be authored with their front facing -Z.
  * When `face()` rotates an entity to look at a target, it orients the entity's -Z axis toward that target.
- * A yaw of 0 means facing -Z (into the screen in default camera view).
+ * A yaw of 0 means facing -Z.
  *
  * @example
  * ```typescript
@@ -6506,6 +9200,7 @@ export declare interface SceneUIOptions {
  * });
  * ```
  *
+ * **Category:** Controllers
  * @public
  */
 export declare class SimpleEntityController extends BaseEntityController {
@@ -6541,10 +9236,12 @@ export declare class SimpleEntityController extends BaseEntityController {
 
     /**
      * @param options - Options for the controller.
+     *
+     * **Category:** Controllers
      */
     constructor(options?: SimpleEntityControllerOptions);
     /**
-     * Override of the {@link BaseEntityController.spawn} method. Starts
+     * Override of the `BaseEntityController.spawn` method. Starts
      * the set idle animations (if any) when the entity is spawned.
      *
      * @remarks
@@ -6552,10 +9249,15 @@ export declare class SimpleEntityController extends BaseEntityController {
      * and starts the configured `idleLoopedAnimations`.
      *
      * @param entity - The entity that was spawned.
+     *
+     * **Category:** Controllers
      */
     spawn(entity: Entity): void;
     /**
      * Rotates the entity at a given speed to face a target coordinate.
+     *
+     * Use for: turning an entity to look at a target without moving it.
+     * Do NOT use for: pitch/roll orientation; this rotates yaw only.
      *
      * @remarks
      * **-Z forward:** Orients the entity so its **-Z axis** points toward the target.
@@ -6570,11 +9272,16 @@ export declare class SimpleEntityController extends BaseEntityController {
      * @param target - The target coordinate to face.
      * @param speed - The speed at which to rotate to the target coordinate (radians per second).
      * @param options - Additional options for the face operation, such as callbacks.
+     *
+     * **Category:** Controllers
      */
     face(target: Vector3Like, speed: number, options?: FaceOptions): void;
     /**
      * Applies an upwards impulse to the entity to simulate a jump, only supported
      * for entities with dynamic rigid body types.
+     *
+     * Use for: a single jump impulse for dynamic entities.
+     * Do NOT use for: kinematic entities; this has no effect.
      *
      * @remarks
      * **Deferred:** The impulse is applied on the next tick, not immediately.
@@ -6584,10 +9291,15 @@ export declare class SimpleEntityController extends BaseEntityController {
      * **Animations:** Starts `jumpOneshotAnimations` and stops idle/move animations when the jump occurs.
      *
      * @param height - The height to jump to (in blocks).
+     *
+     * **Category:** Controllers
      */
     jump(height: number): void;
     /**
      * Moves the entity at a given speed in a straight line to a target coordinate.
+     *
+     * Use for: simple straight-line movement.
+     * Do NOT use for: obstacle avoidance; use `PathfindingEntityController`.
      *
      * @remarks
      * **Position only:** This method only changes position, not rotation. Use `face()` simultaneously
@@ -6605,6 +9317,8 @@ export declare class SimpleEntityController extends BaseEntityController {
      * @param target - The target coordinate to move to.
      * @param speed - The speed at which to move to the target coordinate (blocks per second).
      * @param options - Additional options for the move operation, such as callbacks.
+     *
+     * **Category:** Controllers
      */
     move(target: Vector3Like, speed: number, options?: MoveOptions): void;
     /**
@@ -6612,6 +9326,8 @@ export declare class SimpleEntityController extends BaseEntityController {
      *
      * @remarks
      * **Deferred:** Takes effect on the next tick. The `faceCompleteCallback` will still be called.
+     *
+     * **Category:** Controllers
      */
     stopFace(): void;
     /**
@@ -6620,6 +9336,8 @@ export declare class SimpleEntityController extends BaseEntityController {
      * @remarks
      * **Deferred:** Takes effect on the next tick. The `moveCompleteCallback` will still be called
      * and idle animations will start (unless `moveStartIdleAnimationsOnCompletion` was false).
+     *
+     * **Category:** Controllers
      */
     stopMove(): void;
 
@@ -6628,7 +9346,15 @@ export declare class SimpleEntityController extends BaseEntityController {
 
 }
 
-/** Options for creating a SimpleEntityController instance. @public */
+/**
+ * Options for creating a SimpleEntityController instance.
+ *
+ * Use for: default movement/animation settings at construction time.
+ * Do NOT use for: per-move overrides; use `MoveOptions`.
+ *
+ * **Category:** Controllers
+ * @public
+ */
 declare interface SimpleEntityControllerOptions {
     /** The animations to loop when the entity is idle. */
     idleLoopedAnimations?: string[];
@@ -6645,17 +9371,19 @@ declare interface SimpleEntityControllerOptions {
 /**
  * Represents the physics simulation for a world.
  *
+ * When to use: advanced physics queries, custom gravity, or debug rendering.
+ * Do NOT use for: typical movement; use entity/rigid body APIs instead.
+ *
  * @remarks
- * The simulation internally and automatically handles the physical
- * interactions, collisions, contact forces, and events for all aspects
- * of the world. Most methods are not often used directly, but are
- * provided for advanced usage.
+ * Access via `World.simulation`. The simulation drives all collision and contact
+ * events for blocks and entities.
  *
  * <h2>Events</h2>
  *
- * This class is an EventRouter, and instances of it emit
- * events with payloads listed under {@link SimulationEventPayloads}
+ * This class is an EventRouter, and instances of it emit events with payloads listed under
+ * `SimulationEventPayloads`.
  *
+ * **Category:** Physics
  * @public
  */
 export declare class Simulation extends EventRouter {
@@ -6668,77 +9396,120 @@ export declare class Simulation extends EventRouter {
 
 
 
-    /** Whether the simulation has debug raycasting enabled */
+    /**
+     * Whether debug raycasting is enabled.
+     *
+     * **Category:** Physics
+     */
     get isDebugRaycastingEnabled(): boolean;
-    /** Whether the simulation has debug rendering enabled. */
+    /**
+     * Whether debug rendering is enabled.
+     *
+     * **Category:** Physics
+     */
     get isDebugRenderingEnabled(): boolean;
-    /** The gravity vector for the simulation. */
+    /**
+     * The gravity vector for the simulation.
+     *
+     * **Category:** Physics
+     */
     get gravity(): RAPIER.Vector3;
-    /** The fixed timestep for the simulation. */
+    /**
+     * The fixed timestep for the simulation.
+     *
+     * **Category:** Physics
+     */
     get timestepS(): number;
-    /** The world the simulation is for. */
+    /**
+     * The world this simulation belongs to.
+     *
+     * **Category:** Physics
+     */
     get world(): World;
 
 
     /**
      * Enables or disables debug raycasting for the simulation.
-     * This will render lines for the raycast that disappear
-     * after a few seconds.
+     *
+     * @remarks
+     * When enabled, raycasts emit `SimulationEvent.DEBUG_RAYCAST` for visualization.
+     *
      * @param enabled - Whether to enable debug raycasting.
+     *
+     * **Side effects:** Emits debug raycast events when `Simulation.raycast` is called.
+     *
+     * **Category:** Physics
      */
     enableDebugRaycasting(enabled: boolean): void;
     /**
      * Enables or disables debug rendering for the simulation.
-     * When enabled, all colliders and rigid body outlines
-     * will be rendered in the world. Do not enable this in production.
-     * In large worlds enabling this can cause noticable lag and RTT spikes.
+     *
+     * @remarks
+     * When enabled, all colliders and rigid body outlines are rendered.
+     * Avoid enabling in production; it can cause noticeable lag.
+     *
      * @param enabled - Whether to enable debug rendering.
+     * @param filterFlags - Optional query filter flags for debug rendering.
+     *
+     * **Side effects:** Emits `SimulationEvent.DEBUG_RENDER` each step while enabled.
+     *
+     * **Category:** Physics
      */
     enableDebugRendering(enabled: boolean, filterFlags?: RAPIER.QueryFilterFlags): void;
     /**
      * Gets the contact manifolds for a pair of colliders.
      *
      * @remarks
-     * **Sensors:** Returns empty array for contacts involving sensors (sensors don't generate contact manifolds).
+     * Returns an empty array for sensor contacts (sensors do not generate manifolds).
      *
      * @param colliderHandleA - The handle of the first collider.
      * @param colliderHandleB - The handle of the second collider.
      * @returns The contact manifolds, or an empty array if no contact.
+     *
+     * **Category:** Physics
      */
     getContactManifolds(colliderHandleA: RAPIER.ColliderHandle, colliderHandleB: RAPIER.ColliderHandle): ContactManifold[];
     /**
      * Gets the intersections with a raw shape.
      *
      * @remarks
-     * rawShape can be retrieved from a simulated or
-     * unsimulated collider using {@link Collider.rawShape}.
+     * `rawShape` can be retrieved from a simulated or unsimulated collider using
+     * `Collider.rawShape`.
      *
      * @param rawShape - The raw shape to get intersections with.
      * @param position - The position of the shape.
      * @param rotation - The rotation of the shape.
      * @param options - The options for the intersections.
      * @returns The intersections.
+     *
+     * **Category:** Physics
      */
     intersectionsWithRawShape(rawShape: RawShape, position: Vector3Like, rotation: QuaternionLike, options?: FilterOptions): IntersectionResult[];
     /**
-     * Casts a ray through the simulation.
+     * Casts a ray through the simulation and returns the first hit.
      *
      * @remarks
-     * The cast ray will stop at the the first block or
-     * entity hit within the length of the ray.
+     * The ray stops at the first block or entity hit within the length of the ray.
      *
      * @param origin - The origin of the ray.
      * @param direction - The direction of the ray.
      * @param length - The length of the ray.
      * @param options - The options for the raycast.
      * @returns A RaycastHit object containing the first block or entity hit by the ray, or null if no hit.
+     *
+     * **Category:** Physics
      */
     raycast(origin: RAPIER.Vector3, direction: RAPIER.Vector3, length: number, options?: RaycastOptions): RaycastHit | null;
 
 
     /**
      * Sets the gravity vector for the simulation.
+     *
      * @param gravity - The gravity vector.
+     *
+     * **Side effects:** Changes gravity for all simulated rigid bodies.
+     *
+     * **Category:** Physics
      */
     setGravity(gravity: RAPIER.Vector3): void;
 
@@ -6747,7 +9518,14 @@ export declare class Simulation extends EventRouter {
 
 }
 
-/** Event types a Simulation instance can emit. See {@link SimulationEventPayloads} for the payloads. @public */
+/**
+ * Event types a Simulation instance can emit.
+ *
+ * See `SimulationEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum SimulationEvent {
     STEP_START = "SIMULATION.STEP_START",
     STEP_END = "SIMULATION.STEP_END",
@@ -6755,7 +9533,12 @@ export declare enum SimulationEvent {
     DEBUG_RENDER = "SIMULATION.DEBUG_RENDER"
 }
 
-/** Event payloads for Simulation emitted events. @public */
+/**
+ * Event payloads for Simulation emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface SimulationEventPayloads {
     /** Emitted when the simulation step starts. */
     [SimulationEvent.STEP_START]: {
@@ -6783,49 +9566,64 @@ export declare interface SimulationEventPayloads {
     };
 }
 
-/** A 3x3 symmetric positive-definite matrix for spatial dynamics. @public */
+/**
+ * A 3x3 symmetric positive-definite matrix for spatial dynamics.
+ *
+ * **Category:** Math
+ * @public
+ */
 export declare interface SpdMatrix3 extends SdpMatrix3 {
 }
 
 /**
- * The entry point for running game setup and starting the game server.
+ * Boots the server runtime, runs your init callback, and starts accepting connections.
+ *
+ * Use for: normal server startup in your entry file.
+ * Do NOT use for: restarting an already running server within the same process.
  *
  * @remarks
- * This function should always be called first when initializing your
- * game. It will internally handle initialization of the physics engine
- * and other systems required systems. All of your game setup logic
- * should be executed in the init function.
- *
  * Initialization order:
- * 1. Physics engine (RAPIER) initialization
- * 2. Block texture atlas preload
- * 3. Model preload
- * 4. Your init function execution (server waits if async)
- * 5. Server starts accepting connections
+ * 1) Physics engine (RAPIER)
+ * 2) Block texture atlas preload
+ * 3) Model preload
+ * 4) Your `init` callback (awaited if async)
+ * 5) Server starts accepting connections
  *
- * @param init - A function that initializes the game. The function can take no parameters
- * to just initialize game logic, or it can accept a world parameter. If it accepts a world
- * parameter, a default world will be automatically created and passed to the function.
- * The init function can be async - the server will wait for it to complete before
- * accepting connections.
+ * If `init` declares a `world` parameter, a default world is created and provided.
  *
+ * @param init - Game initialization callback. It can be sync or async. If it accepts a
+ * world parameter, the default world is created and passed in.
+ *
+ * **Requires:** Call once per process before using gameplay systems.
+ *
+ * @see `GameServer`
+ * @see `WorldManager.getDefaultWorld`
+ *
+ * **Category:** Core
  * @public
  */
 export declare function startServer(init: ((() => void | Promise<void>) | ((world: World) => void | Promise<void>))): void;
 
-/** The inputs that are included in the PlayerInput. @public */
+/**
+ * The inputs that are included in `PlayerInput`.
+ *
+ * **Category:** Players
+ * @public
+ */
 export declare const SUPPORTED_INPUTS: readonly ["w", "a", "s", "d", "sp", "sh", "tb", "ml", "mr", "q", "e", "r", "f", "z", "x", "c", "v", "u", "i", "o", "j", "k", "l", "n", "m", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "cp", "cy", "iro", "ird", "jd"];
 
 /**
- * Manages performance telemetry and error tracking through your Sentry.io account.
+ * Manages performance telemetry and error tracking through your Sentry account.
+ *
+ * When to use: profiling and diagnosing slow ticks or runtime errors in production.
+ * Do NOT use for: high-volume custom metrics; use a dedicated metrics pipeline instead.
  *
  * @remarks
- * The Telemetry class provides low-overhead performance monitoring
- * and error tracking through Sentry (https://sentry.io) integration
- * and your provided Sentry DSN. It automatically tracks critical game loop
- * operations like physics simulation, entity updates, network synchronization,
- * and more. The system only sends telemetry data when errors or slow-tick
- * performance issues are detected, minimizing bandwidth and storage costs.
+ * Provides low-overhead performance monitoring and error tracking via Sentry.
+ * The system only sends telemetry data when errors or slow-tick performance issues are detected.
+ *
+ * Pattern: initialize once at server startup and wrap critical sections with `Telemetry.startSpan`.
+ * Anti-pattern: creating spans inside tight loops without filtering.
  *
  * @example
  * ```typescript
@@ -6835,12 +9633,11 @@ export declare const SUPPORTED_INPUTS: readonly ["w", "a", "s", "d", "sp", "sh",
  * // Wrap performance-critical code in spans
  * Telemetry.startSpan({
  *   operation: TelemetrySpanOperation.CUSTOM_OPERATION,
- *   attributes: { // any arbitrary attributes you want to attach to the span
+ *   attributes: {
  *     playerCount: world.playerManager.connectedPlayers.length,
  *     entityCount: world.entityManager.entityCount,
  *   },
  * }, () => {
- *   // Your performance-critical code here
  *   performExpensiveOperation();
  * });
  *
@@ -6849,6 +9646,7 @@ export declare const SUPPORTED_INPUTS: readonly ["w", "a", "s", "d", "sp", "sh",
  * console.log(`Heap usage: ${stats.jsHeapUsagePercent * 100}%`);
  * ```
  *
+ * **Category:** Telemetry
  * @public
  */
 export declare class Telemetry {
@@ -6857,6 +9655,8 @@ export declare class Telemetry {
      *
      * @param asMeasurement - Whether to return data in Sentry measurement format with units.
      * @returns Process statistics including heap usage, RSS memory, and capacity metrics.
+     *
+     * **Category:** Telemetry
      */
     static getProcessStats(asMeasurement?: boolean): Record<string, any>;
     /**
@@ -6871,6 +9671,12 @@ export declare class Telemetry {
      * @param sentryDsn - The Sentry Data Source Name (DSN) for your project.
      * @param tickTimeMsThreshold - The tick duration that must be exceeded to
      * send a performance span to Sentry for a given tick. Defaults to 50ms.
+     *
+     * **Requires:** A valid Sentry DSN and network access.
+     *
+     * **Side effects:** Initializes the Sentry SDK and registers global hooks.
+     *
+     * **Category:** Telemetry
      */
     static initializeSentry(sentryDsn: string, tickTimeMsThreshold?: number): void;
     /**
@@ -6898,6 +9704,8 @@ export declare class Telemetry {
      *   return processEntities(entities);
      * });
      * ```
+     *
+     * **Category:** Telemetry
      */
     static startSpan<T>(options: TelemetrySpanOptions, callback: (span?: Sentry.Span) => T): T;
     /**
@@ -6909,11 +9717,18 @@ export declare class Telemetry {
      * user context setting, or advanced span manipulation.
      *
      * @returns The Sentry SDK instance.
+     *
+     * **Category:** Telemetry
      */
     static sentry(): typeof Sentry;
 }
 
-/** Performance telemetry span operation types. @public */
+/**
+ * Performance telemetry span operation types.
+ *
+ * **Category:** Telemetry
+ * @public
+ */
 export declare enum TelemetrySpanOperation {
     BUILD_PACKETS = "build_packets",
     ENTITIES_EMIT_UPDATES = "entities_emit_updates",
@@ -6932,7 +9747,15 @@ export declare enum TelemetrySpanOperation {
     WORLD_TICK = "world_tick"
 }
 
-/** Options for creating a telemetry span. @public */
+/**
+ * Options for creating a telemetry span.
+ *
+ * Use for: configuring `Telemetry.startSpan` calls.
+ * Do NOT use for: long-lived spans; keep spans short and scoped to a task.
+ *
+ * **Category:** Telemetry
+ * @public
+ */
 export declare type TelemetrySpanOptions = {
     /** The operation being measured. */
     operation: TelemetrySpanOperation | string;
@@ -6940,24 +9763,45 @@ export declare type TelemetrySpanOptions = {
     attributes?: Record<string, string | number>;
 };
 
-/** The options for a trimesh collider. @public */
+/**
+ * The options for a trimesh collider. @public
+ *
+ * Use for: mesh-based colliders from model data.
+ * Do NOT use for: simple primitives; prefer analytic shapes when possible.
+ *
+ * **Category:** Physics
+ */
 export declare interface TrimeshColliderOptions extends BaseColliderOptions {
     shape: ColliderShape.TRIMESH;
-    /** The indices of the trimesh collider. */
+    /**
+     * The indices of the trimesh collider.
+     *
+     * **Category:** Physics
+     */
     indices?: Uint32Array;
-    /** The vertices of the trimesh collider. */
+    /**
+     * The vertices of the trimesh collider.
+     *
+     * **Category:** Physics
+     */
     vertices?: Float32Array;
 }
 
 /**
  * Represents a 2D vector.
  *
+ * When to use: performance-sensitive math in game loops or geometry utilities.
+ * Do NOT use for: immutable math; most methods mutate the instance.
+ *
  * @remarks
  * All vector methods result in mutation of the vector instance.
  * This class extends `Float32Array` to provide an efficient way to
- * create and manipulate a 2-dimensional vector. Various convenience
- * methods are provided for common vector operations.
+ * create and manipulate a 2-dimensional vector.
  *
+ * Pattern: reuse instances (and temporary vectors) to reduce allocations.
+ * Anti-pattern: storing references and assuming value semantics.
+ *
+ * **Category:** Math
  * @public
  */
 export declare class Vector2 extends Float32Array implements Vector2Like {
@@ -7181,13 +10025,23 @@ export declare class Vector2 extends Float32Array implements Vector2Like {
     zero(): Vector2;
 }
 
-/** A 2-dimensional vector of boolean values. @public */
+/**
+ * A 2-dimensional vector of boolean values.
+ *
+ * **Category:** Math
+ * @public
+ */
 export declare interface Vector2Boolean {
     x: boolean;
     y: boolean;
 }
 
-/** A 2-dimensional vector. @public */
+/**
+ * A 2-dimensional vector.
+ *
+ * **Category:** Math
+ * @public
+ */
 export declare interface Vector2Like {
     x: number;
     y: number;
@@ -7196,12 +10050,18 @@ export declare interface Vector2Like {
 /**
  * Represents a 3-dimensional vector.
  *
+ * When to use: performance-sensitive 3D math and transforms.
+ * Do NOT use for: immutable math; most methods mutate the instance.
+ *
  * @remarks
  * All vector methods result in mutation of the vector instance.
  * This class extends `Float32Array` to provide an efficient way to
- * create and manipulate a 3-dimensional vector. Various convenience
- * methods are provided for common vector operations.
+ * create and manipulate a 3-dimensional vector.
  *
+ * Pattern: reuse instances (and temporary vectors) to reduce allocations.
+ * Anti-pattern: storing references and assuming value semantics.
+ *
+ * **Category:** Math
  * @public
  */
 export declare class Vector3 extends Float32Array implements Vector3Like {
@@ -7451,84 +10311,123 @@ export declare class Vector3 extends Float32Array implements Vector3Like {
     zero(): Vector3;
 }
 
-/** A 3-dimensional vector of boolean values. @public */
+/**
+ * A 3-dimensional vector of boolean values.
+ *
+ * **Category:** Math
+ * @public
+ */
 export declare interface Vector3Boolean {
     x: boolean;
     y: boolean;
     z: boolean;
 }
 
-/** A 3-dimensional vector. @public */
+/**
+ * A 3-dimensional vector.
+ *
+ * **Category:** Math
+ * @public
+ */
 export declare interface Vector3Like {
     x: number;
     y: number;
     z: number;
 }
 
-/** The options for a voxels collider. @public */
+/**
+ * The options for a voxels collider. @public
+ *
+ * Use for: voxel-based colliders (block volumes).
+ * Do NOT use for: simple primitives; prefer analytic shapes when possible.
+ *
+ * **Category:** Physics
+ */
 export declare interface VoxelsColliderOptions extends BaseColliderOptions {
     shape: ColliderShape.VOXELS;
-    /** The coordinate of each voxel in the collider. */
+    /**
+     * The coordinate of each voxel in the collider.
+     *
+     * **Category:** Physics
+     */
     coordinates?: Vector3Like[];
-    /** The size of each voxel in the collider. */
+    /**
+     * The size of each voxel in the collider.
+     *
+     * **Category:** Physics
+     */
     size?: Vector3Like;
 }
 
 /**
- * A callback function called when the entity associated with the
- * PathfindingEntityController finishes moving to a calculate waypoint
- * of its current path.
- * @param waypoint - The waypoint that the entity has finished moving to.
- * @param waypointIndex - The index of the waypoint that the entity has finished moving to.
+ * Callback invoked when the entity finishes moving to a waypoint.
+ *
+ * @param waypoint - The waypoint reached.
+ * @param waypointIndex - The index of the waypoint reached.
+ *
+ * **Category:** Controllers
  * @public
  */
 export declare type WaypointMoveCompleteCallback = (waypoint: Vector3Like, waypointIndex: number) => void;
 
 /**
- * A callback function called when the entity associated with the
- * PathfindingEntityController skips a waypoint because it took too long to reach.
- * @param waypoint - The waypoint that the entity skipped.
- * @param waypointIndex - The index of the waypoint that the entity skipped.
+ * Callback invoked when a waypoint is skipped due to timeout.
+ *
+ * @param waypoint - The waypoint that was skipped.
+ * @param waypointIndex - The index of the waypoint that was skipped.
+ *
+ * **Category:** Controllers
  * @public
  */
 export declare type WaypointMoveSkippedCallback = (waypoint: Vector3Like, waypointIndex: number) => void;
 
-/** The options for a wedge collider. @public */
+/**
+ * The options for a wedge collider. @public
+ *
+ * Use for: wedge-shaped colliders (inclined planes).
+ * Do NOT use for: other shapes; use the matching collider option type.
+ *
+ * **Category:** Physics
+ */
 export declare interface WedgeColliderOptions extends BaseColliderOptions {
     shape: ColliderShape.WEDGE;
-    /** The extents of the wedge collider, defining full width (x), height (y), and length (z). */
+    /**
+     * The extents of the wedge collider, defining full width (x), height (y), and length (z).
+     *
+     * **Category:** Physics
+     */
     extents?: Vector3Like;
 }
 
 /**
- * Represents a world in the game server.
+ * Represents an isolated simulation space (a world) on the server.
+ *
+ * When to use: your primary container for game objects, physics, and players.
+ * Use multiple worlds to run separate rooms, arenas, or instances.
+ * Do NOT use for: cross-world global state; keep that in your own services or `GameServer`.
  *
  * @remarks
- * Worlds are the primary container for game objects
- * and interactions. A game can have multiple worlds running
- * simultaneously, each uniquely isolated from each other.
- * Players who have joined your server can be assigned to a world
- * programmatically by your game logic if desired. This is useful
- * for things like mini-games, or complex dungeons with multiple
- * floors that can be optimized by splitting them into seperate
- * world or "room" simulations, etc. In most cases, the single
- * automatically created default world is all you need, but
- * this flexibility is available for more complex games.
+ * Prefer creating worlds via `WorldManager.createWorld` or
+ * `WorldManager.getDefaultWorld` so IDs and lifecycle are managed consistently.
+ *
+ * Initialization:
+ * - Call `World.start` to begin ticking (auto-started when created by `WorldManager`).
+ * - Use `set*` methods for runtime lighting or skybox changes.
  *
  * <h2>Events</h2>
  *
- * This class is an EventRouter, and instances of it emit
- * events with payloads listed under {@link WorldEventPayloads}
+ * This class is an EventRouter, and instances of it emit events with payloads listed
+ * under `WorldEventPayloads`.
  *
  * @example
  * ```typescript
- * const world = new World({
- *   id: 1,
+ * const world = WorldManager.instance.createWorld({
  *   name: 'My World',
  *   skyboxUri: 'skyboxes/partly-cloudy',
  * });
  * ```
  *
+ * **Category:** Core
  * @public
  */
 export declare class World extends EventRouter implements protocol.Serializable {
@@ -7556,130 +10455,305 @@ export declare class World extends EventRouter implements protocol.Serializable 
 
 
     /**
-     * @param options - The options for the world.
+     * Creates a world instance with the provided options.
+     *
+     * Use for: direct construction only when you need custom lifecycle control.
+     * Do NOT use for: routine world creation; prefer `WorldManager.createWorld`.
+     *
+     * @param options - Initial world configuration. Options are applied once at construction.
+     *
+     * @see `WorldManager.createWorld`
+     *
+     * **Category:** Core
      */
     constructor(options: WorldOptions);
-    /** The unique ID of the world. */
-    get id(): number;
-    /** The color of the ambient light. */
-    get ambientLightColor(): RgbColor;
-    /** The intensity of the ambient light. */
-    get ambientLightIntensity(): number;
-    /** The block type registry for the world. */
-    get blockTypeRegistry(): BlockTypeRegistry;
-    /** The chat manager for the world. */
-    get chatManager(): ChatManager;
-    /** The chunk lattice for the world. */
-    get chunkLattice(): ChunkLattice;
-    /** The color of the directional light. */
-    get directionalLightColor(): RgbColor;
-    /** The intensity of the directional light. */
-    get directionalLightIntensity(): number;
-    /** The position the directional light originates from. */
-    get directionalLightPosition(): Vector3Like;
-    /** The entity manager for the world. */
-    get entityManager(): EntityManager;
-    /** The color of the fog, if not explicitly set, defaults to ambient light color. */
-    get fogColor(): RgbColor | undefined;
-    /** The maximum distance from the camera at which fog stops being applied. */
-    get fogFar(): number;
-    /** The minimum distance from the camera to start applying fog. */
-    get fogNear(): number;
-    /** The world loop for the world. */
-    get loop(): WorldLoop;
-    /** The name of the world. */
-    get name(): string;
-
-    /** The particle emitter manager for the world. */
-    get particleEmitterManager(): ParticleEmitterManager;
-    /** The scene UI manager for the world. */
-    get sceneUIManager(): SceneUIManager;
-    /** The simulation for the world. */
-    get simulation(): Simulation;
-    /** The intensity of the world's skybox brightness. */
-    get skyboxIntensity(): number;
-    /** The URI of the skybox cubemap for the world. */
-    get skyboxUri(): string;
-    /** The audio manager for the world. */
-    get audioManager(): AudioManager;
-    /** An arbitrary identifier tag of the world. Useful for your own logic. */
-    get tag(): string | undefined;
     /**
-     * Loads a map into the world, clearing any prior map.
+     * The unique ID of the world.
+     *
+     * **Category:** Core
+     */
+    get id(): number;
+    /**
+     * The color of the ambient light.
+     *
+     * **Category:** Core
+     */
+    get ambientLightColor(): RgbColor;
+    /**
+     * The intensity of the ambient light.
+     *
+     * **Category:** Core
+     */
+    get ambientLightIntensity(): number;
+    /**
+     * The block type registry for this world.
+     *
+     * **Category:** Core
+     */
+    get blockTypeRegistry(): BlockTypeRegistry;
+    /**
+     * The chat manager for this world.
+     *
+     * **Category:** Core
+     */
+    get chatManager(): ChatManager;
+    /**
+     * The chunk lattice for this world.
+     *
+     * **Category:** Core
+     */
+    get chunkLattice(): ChunkLattice;
+    /**
+     * The color of the directional light.
+     *
+     * **Category:** Core
+     */
+    get directionalLightColor(): RgbColor;
+    /**
+     * The intensity of the directional light.
+     *
+     * **Category:** Core
+     */
+    get directionalLightIntensity(): number;
+    /**
+     * The position the directional light originates from (relative to the camera).
+     *
+     * **Category:** Core
+     */
+    get directionalLightPosition(): Vector3Like;
+    /**
+     * The entity manager for this world.
+     *
+     * **Category:** Core
+     */
+    get entityManager(): EntityManager;
+    /**
+     * The fog color, or undefined to use ambient light color.
+     *
+     * **Category:** Core
+     */
+    get fogColor(): RgbColor | undefined;
+    /**
+     * The maximum distance from the camera at which fog stops being applied.
+     *
+     * **Category:** Core
+     */
+    get fogFar(): number;
+    /**
+     * The minimum distance from the camera to start applying fog.
+     *
+     * **Category:** Core
+     */
+    get fogNear(): number;
+    /**
+     * The world loop that drives ticking for this world.
      *
      * @remarks
-     * **Clears existing:** Calls `chunkLattice.clear()` before loading, removing all blocks and colliders.
+     * Use `World.start` and `World.stop` for lifecycle control.
      *
-     * **Block types:** Registers block types from the map into the world's `blockTypeRegistry`.
+     * **Category:** Core
+     */
+    get loop(): WorldLoop;
+    /**
+     * The name of the world.
      *
-     * **Entities:** Spawns map entities with `isEnvironmental: true` by default.
+     * **Category:** Core
+     */
+    get name(): string;
+
+    /**
+     * The particle emitter manager for this world.
+     *
+     * **Category:** Core
+     */
+    get particleEmitterManager(): ParticleEmitterManager;
+    /**
+     * The scene UI manager for this world.
+     *
+     * **Category:** Core
+     */
+    get sceneUIManager(): SceneUIManager;
+    /**
+     * The physics simulation for this world.
+     *
+     * **Category:** Core
+     */
+    get simulation(): Simulation;
+    /**
+     * The intensity of the world's skybox brightness.
+     *
+     * **Category:** Core
+     */
+    get skyboxIntensity(): number;
+    /**
+     * The URI of the skybox cubemap for this world.
+     *
+     * **Category:** Core
+     */
+    get skyboxUri(): string;
+    /**
+     * The audio manager for this world.
+     *
+     * **Category:** Core
+     */
+    get audioManager(): AudioManager;
+    /**
+     * An arbitrary identifier tag for your own logic.
+     *
+     * **Category:** Core
+     */
+    get tag(): string | undefined;
+    /**
+     * Loads a map into the world, replacing any prior map contents.
+     *
+     * Use for: initializing or fully resetting a world from serialized map data.
+     * Do NOT use for: incremental edits while players are actively interacting with the world.
+     *
+     * @remarks
+     * - Clears existing blocks and colliders via `ChunkLattice.clear`.
+     * - Registers block types from the map into `World.blockTypeRegistry`.
+     * - Spawns map entities as `isEnvironmental: true` by default.
      *
      * @param map - The map to load.
+     *
+     * **Side effects:** Clears the chunk lattice, registers block types, and spawns entities.
+     *
+     * **Category:** Core
      */
     loadMap(map: WorldMap): void;
     /**
      * Sets the color of the world's ambient light.
+     *
      * @param color - The color of the light.
+     *
+     * **Side effects:** Emits `WorldEvent.SET_AMBIENT_LIGHT_COLOR`.
+     *
+     * **Category:** Core
      */
     setAmbientLightColor(color: RgbColor): void;
     /**
      * Sets the intensity of the world's ambient light.
+     *
      * @param intensity - The intensity.
+     *
+     * **Side effects:** Emits `WorldEvent.SET_AMBIENT_LIGHT_INTENSITY`.
+     *
+     * **Category:** Core
      */
     setAmbientLightIntensity(intensity: number): void;
     /**
      * Sets the color of the world's directional light.
+     *
      * @param color - The color of the light.
+     *
+     * **Side effects:** Emits `WorldEvent.SET_DIRECTIONAL_LIGHT_COLOR`.
+     *
+     * **Category:** Core
      */
     setDirectionalLightColor(color: RgbColor): void;
     /**
      * Sets the intensity of the world's directional light.
+     *
      * @param intensity - The intensity.
+     *
+     * **Side effects:** Emits `WorldEvent.SET_DIRECTIONAL_LIGHT_INTENSITY`.
+     *
+     * **Category:** Core
      */
     setDirectionalLightIntensity(intensity: number): void;
     /**
-     * Sets the position the world's directional light originates
-     * from relative to a player's camera position.
-     * @param position - The position the directional light originates from relative to the player's camera position.
+     * Sets the position the world's directional light originates from relative to a player's camera.
+     *
+     * @param position - The light position relative to the player's camera.
+     *
+     * **Side effects:** Emits `WorldEvent.SET_DIRECTIONAL_LIGHT_POSITION`.
+     *
+     * **Category:** Core
      */
     setDirectionalLightPosition(position: Vector3Like): void;
     /**
      * Sets the color of the world's fog.
+     *
      * @param color - The color of the fog, or undefined to reset to ambient light color.
+     *
+     * **Side effects:** Emits `WorldEvent.SET_FOG_COLOR`.
+     *
+     * **Category:** Core
      */
     setFogColor(color: RgbColor | undefined): void;
     /**
      * Sets the maximum distance from the camera at which fog stops being applied.
+     *
      * @param far - The far distance.
+     *
+     * **Side effects:** Emits `WorldEvent.SET_FOG_FAR`.
+     *
+     * **Category:** Core
      */
     setFogFar(far: number): void;
     /**
      * Sets the minimum distance from the camera to start applying fog.
+     *
      * @param near - The near distance.
+     *
+     * **Side effects:** Emits `WorldEvent.SET_FOG_NEAR`.
+     *
+     * **Category:** Core
      */
     setFogNear(near: number): void;
     /**
      * Sets the intensity of the world's skybox brightness.
+     *
      * @param intensity - The intensity.
+     *
+     * **Side effects:** Emits `WorldEvent.SET_SKYBOX_INTENSITY`.
+     *
+     * **Category:** Core
      */
     setSkyboxIntensity(intensity: number): void;
     /**
      * Sets the cubemap URI of the world's skybox.
+     *
      * @param skyboxUri - The cubemap URI of the skybox.
+     *
+     * **Side effects:** Emits `WorldEvent.SET_SKYBOX_URI`.
+     *
+     * **Category:** Core
      */
     setSkyboxUri(skyboxUri: string): void;
     /**
-     * Starts the world loop, which begins ticking physics, entities, etc.
+     * Starts the world loop, which begins ticking physics, entities, and networking.
+     *
+     * Use for: resuming a previously stopped world.
+     * Do NOT use for: standard world creation when using `WorldManager.createWorld` (it auto-starts).
+     *
+     * **Side effects:** Emits `WorldEvent.START`.
+     *
+     * **Category:** Core
      */
     start(): void;
     /**
-     * Stops the world loop, which stops ticking physics, entities, etc.
+     * Stops the world loop, pausing physics, entities, and networking ticks.
+     *
+     * Use for: pausing a world or preparing for a full map reset.
+     * Do NOT use for: disconnecting players; they remain assigned to this world.
+     *
+     * **Side effects:** Emits `WorldEvent.STOP`.
+     *
+     * **Category:** Core
      */
     stop(): void;
 
 }
 
-/** Event types a World instance can emit. See {@link WorldEventPayloads} for the payloads. @public */
+/**
+ * Event types a World instance can emit.
+ *
+ * See `WorldEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum WorldEvent {
     SET_AMBIENT_LIGHT_COLOR = "WORLD.SET_AMBIENT_LIGHT_COLOR",
     SET_AMBIENT_LIGHT_INTENSITY = "WORLD.SET_AMBIENT_LIGHT_INTENSITY",
@@ -7695,7 +10769,12 @@ export declare enum WorldEvent {
     STOP = "WORLD.STOP"
 }
 
-/** Event payloads for World emitted events. @public */
+/**
+ * Event payloads for World emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface WorldEventPayloads {
     /** Emitted when the color of the world's ambient light is set. */
     [WorldEvent.SET_AMBIENT_LIGHT_COLOR]: {
@@ -7762,27 +10841,24 @@ export declare interface WorldEventPayloads {
 /**
  * Manages the tick loop for a world.
  *
+ * When to use: advanced scheduling or instrumentation of a world's tick cycle.
+ * Do NOT use for: normal lifecycle control—use `World.start` and `World.stop`.
+ *
  * @remarks
- * The world loop automatically handles ticking physics,
- * entities, and other world logic.
+ * The world loop automatically handles ticking physics, entities, and other world logic.
  *
- * The internal order of tick operations is as follows:
- *
- * 1. Update chunks and meshing
- *
- * 2. Tick entity logic
- *
- * 3. Step physics
- *
- * 4. Check and emit entity updates
- *
- * 5. Synchronize network packets with player clients
+ * The internal order of tick operations is:
+ * 1) Tick entity logic
+ * 2) Step physics
+ * 3) Check and emit entity updates
+ * 4) Synchronize network packets with player clients
  *
  * <h2>Events</h2>
  *
- * This class is an EventRouter, and instances of it emit
- * events with payloads listed under {@link WorldLoopEventPayloads}
+ * This class is an EventRouter, and instances of it emit events with payloads listed under
+ * `WorldLoopEventPayloads`.
  *
+ * **Category:** Core
  * @public
  */
 export declare class WorldLoop extends EventRouter {
@@ -7790,15 +10866,35 @@ export declare class WorldLoop extends EventRouter {
 
 
 
-    /** The current tick of the world loop. */
+    /**
+     * The current tick count of the world loop.
+     *
+     * **Category:** Core
+     */
     get currentTick(): number;
-    /** Whether the world loop is started. */
+    /**
+     * Whether the world loop is started.
+     *
+     * **Category:** Core
+     */
     get isStarted(): boolean;
-    /** The next tick time in milliseconds. */
+    /**
+     * The next scheduled tick time in milliseconds.
+     *
+     * **Category:** Core
+     */
     get nextTickMs(): number;
-    /** The fixed timestep of the world loop in seconds. */
+    /**
+     * The fixed timestep of the world loop in seconds.
+     *
+     * **Category:** Core
+     */
     get timestepS(): number;
-    /** The world that the loop manages. */
+    /**
+     * The world this loop manages.
+     *
+     * **Category:** Core
+     */
     get world(): World;
 
 
@@ -7806,7 +10902,14 @@ export declare class WorldLoop extends EventRouter {
 
 }
 
-/** Event types a WorldLoop instance can emit. See {@link WorldLoopEventPayloads} for the payloads. @public */
+/**
+ * Event types a WorldLoop instance can emit.
+ *
+ * See `WorldLoopEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum WorldLoopEvent {
     START = "WORLD_LOOP.START",
     STOP = "WORLD_LOOP.STOP",
@@ -7815,7 +10918,12 @@ export declare enum WorldLoopEvent {
     TICK_ERROR = "WORLD_LOOP.TICK_ERROR"
 }
 
-/** Event payloads for WorldLoop emitted events. @public */
+/**
+ * Event payloads for WorldLoop emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface WorldLoopEventPayloads {
     /** Emitted when the world loop starts. */
     [WorldLoopEvent.START]: {
@@ -7845,15 +10953,17 @@ export declare interface WorldLoopEventPayloads {
 /**
  * Manages all worlds in a game server.
  *
+ * When to use: creating additional worlds, routing players, or querying the active world set.
+ * Do NOT use for: instantiating `World` directly for gameplay; use `WorldManager.createWorld`
+ * to ensure IDs and lifecycle are managed consistently.
+ *
  * @remarks
- * The WorldManager is created internally as a global
- * singleton accessible with the static property
- * `WorldManager.instance`.
+ * Access via `WorldManager.instance` — do not construct directly.
  *
  * <h2>Events</h2>
  *
- * This class emits global events with payloads listed
- * under {@link WorldManagerEventPayloads}
+ * This class emits global events with payloads listed under
+ * `WorldManagerEventPayloads`.
  *
  * @example
  * ```typescript
@@ -7866,64 +10976,112 @@ export declare interface WorldLoopEventPayloads {
  * });
  * ```
  *
+ * **Category:** Core
  * @public
  */
 export declare class WorldManager {
-    /** The global WorldManager instance as a singleton. */
+    /**
+     * The global WorldManager instance (singleton).
+     *
+     * **Category:** Core
+     */
     static readonly instance: WorldManager;
 
 
 
     /**
-     * Creates a new world.
+     * Creates and starts a new world with a unique ID.
+     *
+     * Use for: additional game rooms, arenas, or isolated simulations.
+     * Do NOT use for: deferred world creation without starting; this always starts.
      *
      * @remarks
-     * **Auto-starts:** Automatically starts the world after creation.
+     * Auto-starts the world after creation.
      *
-     * @param options - The options for the world.
+     * @param options - The options for the world (ID is assigned automatically).
      * @returns The created world.
+     *
+     * **Side effects:** Starts the world's tick loop and emits `WorldManagerEvent.WORLD_CREATED`.
+     *
+     * @see `World.start`
+     * @see `WorldManager.getDefaultWorld`
+     *
+     * **Category:** Core
      */
     createWorld(options: Omit<WorldOptions, 'id'>): World;
     /**
-     * Gets all worlds.
+     * Gets all worlds currently managed by the server.
+     *
      * @returns All worlds.
+     *
+     * **Category:** Core
      */
     getAllWorlds(): World[];
     /**
-     * Gets the default world.
+     * Gets the default world, creating it if it does not exist.
+     *
+     * Use for: a single-world game or as a safe fallback when routing players.
+     * Do NOT use for: creating specialized worlds with unique options.
      *
      * @remarks
-     * **Lazy-creates:** Creates a default world if none exists.
+     * Lazy-creates and auto-starts a default world if none exists.
      *
      * @returns The default world.
+     *
+     * **Side effects:** Creates and starts a world if it does not yet exist.
+     *
+     * **Category:** Core
      */
     getDefaultWorld(): World;
     /**
      * Gets all worlds with a specific tag.
-     * @param tag - The tag to get the worlds for.
+     *
+     * @param tag - The tag to filter worlds by.
      * @returns All worlds with the provided tag.
+     *
+     * **Category:** Core
      */
     getWorldsByTag(tag: string): World[];
     /**
-     * Gets a world by its id.
-     * @param id - The id of the world to get.
-     * @returns The world with the provided id, or undefined if no world is found.
+     * Gets a world by its ID.
+     *
+     * @param id - The ID of the world to get.
+     * @returns The world with the provided ID, or undefined if no world is found.
+     *
+     * **Category:** Core
      */
     getWorld(id: number): World | undefined;
     /**
-     * Sets the default world. This is the world players
-     * automatically join when they connect to the game.
+     * Sets the default world players join on connect.
+     *
+     * Use for: changing the lobby or main world at runtime.
+     * Do NOT use for: moving already connected players; use `Player.joinWorld`.
+     *
      * @param world - The world to set as the default.
+     *
+     * **Category:** Core
      */
     setDefaultWorld(world: World): void;
 }
 
-/** Event types a WorldManager instance can emit to the global event router. See {@link WorldManagerEventPayloads} for the payloads. @public */
+/**
+ * Event types a WorldManager instance can emit to the global event router.
+ *
+ * See `WorldManagerEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare enum WorldManagerEvent {
     WORLD_CREATED = "WORLD_MANAGER.WORLD_CREATED"
 }
 
-/** Event payloads for WorldManager emitted events. @public */
+/**
+ * Event payloads for WorldManager emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
 export declare interface WorldManagerEventPayloads {
     /** Emitted when a world is created. */
     [WorldManagerEvent.WORLD_CREATED]: {
@@ -7931,7 +11089,18 @@ export declare interface WorldManagerEventPayloads {
     };
 }
 
-/** A map representation for a world. @public */
+/**
+ * A map representation for initializing a world.
+ *
+ * Use for: importing static maps or tooling exports via `World.loadMap`.
+ * Do NOT use for: incremental edits while a world is live; use chunk/block APIs instead.
+ *
+ * @remarks
+ * `blocks` uses `"x,y,z"` world block coordinates as string keys.
+ *
+ * **Category:** Core
+ * @public
+ */
 export declare interface WorldMap {
     /** The block types in the map. */
     blockTypes?: BlockTypeOptions[];
@@ -7954,7 +11123,19 @@ export declare interface WorldMap {
     };
 }
 
-/** Options for creating a World instance. @public */
+/**
+ * Options for creating a World instance.
+ *
+ * Use for: initializing a world and its environment at construction time.
+ * Do NOT use for: runtime changes; use the corresponding `set*` methods on `World`.
+ *
+ * @remarks
+ * Options are applied once at construction time. For runtime changes, use the
+ * corresponding `set*` methods on `World`.
+ *
+ * **Category:** Core
+ * @public
+ */
 export declare interface WorldOptions {
     /** The unique ID of the world. */
     id: number;

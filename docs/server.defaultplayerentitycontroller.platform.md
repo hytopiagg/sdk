@@ -6,6 +6,8 @@
 
 The platform the entity is on, if any.
 
+\*\*Category:\*\* Controllers
+
 **Signature:**
 
 ```typescript

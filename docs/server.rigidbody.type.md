@@ -6,6 +6,8 @@
 
 The type of the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

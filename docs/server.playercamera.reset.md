@@ -4,7 +4,9 @@
 
 ## PlayerCamera.reset() method
 
-Resets the camera to its default, unattached, spectator mode state.
+Resets the camera state on the server.
+
+Use for: clearing camera state on disconnect or reconnect.
 
 **Signature:**
 
@@ -17,5 +19,7 @@ void
 
 ## Remarks
 
-\*\*Clears:\*\* `attachedToEntity`<!-- -->, `attachedToPosition`<!-- -->, `orientation`<!-- -->, `trackedEntity`<!-- -->, and `trackedPosition`<!-- -->.
+Clears `attachedToEntity`<!-- -->, `attachedToPosition`<!-- -->, `orientation`<!-- -->, `trackedEntity`<!-- -->, and `trackedPosition`<!-- -->. This does not emit a camera event; it only resets server-side state.
+
+\*\*Category:\*\* Players
 

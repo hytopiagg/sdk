@@ -4,7 +4,9 @@
 
 ## PlayerCamera.setAttachedToPosition() method
 
-Sets the position the camera is attached to.
+Attaches the camera to a world position.
+
+Use for: fixed cameras or cinematic shots. Do NOT use for: tracking a moving target; use `PlayerCamera.setTrackedPosition`<!-- -->.
 
 **Signature:**
 
@@ -43,6 +45,12 @@ position
 </td><td>
 
 The position to attach the camera to.
+
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerCameraEvent.SET_ATTACHED_TO_POSITION`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>

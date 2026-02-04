@@ -4,7 +4,9 @@
 
 ## PathfindingEntityController class
 
-A pathfinding entity controller built on top of [SimpleEntityController](./server.simpleentitycontroller.md)<!-- -->.
+A pathfinding entity controller built on top of `SimpleEntityController`<!-- -->.
+
+When to use: obstacle-aware movement to a target coordinate. Do NOT use for: per-tick recalculation; pathfinding is synchronous and can be expensive.
 
 **Signature:**
 
@@ -15,11 +17,13 @@ export default class PathfindingEntityController extends SimpleEntityController
 
 ## Remarks
 
-This class implements pathfinding using the A\* algorithm. Pathfinding when frequently called can cause performance issues, use it sparingly. The .pathfind() method should only need to be called once in nearly all cases when attempting to move an entity to a target coordinate.
+Implements A\* pathfinding. Call `PathfindingEntityController.pathfind` sparingly; it is intended to be called once per destination in most cases.
 
 <h2>Coordinate System &amp; Model Orientation</h2>
 
-HYTOPIA uses \*\*-Z as forward\*\*. Models must be authored with their front facing -Z. The pathfinding controller automatically calls `face()` to orient the entity's -Z axis toward each waypoint as it moves.
+HYTOPIA uses \*\*-Z as forward\*\*. Models must be authored with their front facing -Z. The controller automatically calls `face()` to orient the entity's -Z axis toward each waypoint.
+
+\*\*Category:\*\* Controllers
 
 ## Constructors
 
@@ -95,7 +99,7 @@ boolean
 
 </td><td>
 
-Whether to enable debug mode or not. When debug mode is enabled, the pathfinding algorithm will log debug information to the console. Defaults to false.
+Whether to enable debug mode.
 
 
 </td></tr>
@@ -118,6 +122,8 @@ number
 
 The maximum fall distance the entity can fall.
 
+\*\*Category:\*\* Controllers
+
 
 </td></tr>
 <tr><td>
@@ -139,6 +145,8 @@ number
 
 The maximum jump distance the entity can jump.
 
+\*\*Category:\*\* Controllers
+
 
 </td></tr>
 <tr><td>
@@ -158,7 +166,9 @@ number
 
 </td><td>
 
-The maximum number of open set iterations that can be processed before aborting pathfinding. Defaults to 200.
+The maximum open set iterations before aborting pathfinding.
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>
@@ -179,7 +189,9 @@ number
 
 </td><td>
 
-The speed of the entity.
+The speed used for path movement.
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>
@@ -200,7 +212,9 @@ The speed of the entity.
 
 </td><td>
 
-The target coordinate to pathfind to.
+The target coordinate being pathfound to.
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>
@@ -221,7 +235,9 @@ number
 
 </td><td>
 
-The vertical penalty for the pathfinding algorithm. A higher value will prefer paths with less vertical movement.
+The vertical penalty used during pathfinding.
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>
@@ -242,7 +258,9 @@ number
 
 </td><td>
 
-The index representing the next waypoint moving towards of the current set of waypoints being followed.
+The index of the next waypoint being approached.
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>
@@ -265,6 +283,8 @@ The index representing the next waypoint moving towards of the current set of wa
 
 The current waypoints being followed.
 
+\*\*Category:\*\* Controllers
+
 
 </td></tr>
 <tr><td>
@@ -284,7 +304,9 @@ number
 
 </td><td>
 
-The timeout in milliseconds for a waypoint to be considered reached. Defaults to 2000ms divided by the speed of the entity.
+The timeout in milliseconds for a waypoint to be considered reached.
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>
@@ -318,7 +340,9 @@ Description
 
 </td><td>
 
-Calculate a path and move to the target if a path is found. Returns true if a path is found, false if no path is found.
+Calculates a path and moves to the target if a path is found.
+
+Use for: one-shot navigation to a destination. Do NOT use for: high-frequency replanning; it is synchronous.
 
 
 </td></tr>

@@ -4,7 +4,7 @@
 
 ## ChunkLattice.getChunk() method
 
-Get the chunk that contains the given global coordinate.
+Gets the chunk that contains the given global coordinate.
 
 **Signature:**
 
@@ -52,4 +52,6 @@ The global coordinate to get the chunk for.
 [Chunk](./server.chunk.md) \| undefined
 
 The chunk that contains the given global coordinate or undefined if not found.
+
+\*\*Category:\*\* Blocks
 

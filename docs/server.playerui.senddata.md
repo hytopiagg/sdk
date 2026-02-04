@@ -6,6 +6,8 @@
 
 Sends data to the player's client UI.
 
+Use for: pushing state updates to your UI scripts.
+
 **Signature:**
 
 ```typescript
@@ -43,6 +45,12 @@ object
 </td><td>
 
 The data to send to the client UI.
+
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerUIEvent.SEND_DATA`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>

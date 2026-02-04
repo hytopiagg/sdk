@@ -6,6 +6,10 @@
 
 The base options for a collider.
 
+Use for: configuring colliders when creating entities or rigid bodies. Do NOT use for: runtime changes; use `Collider` methods instead.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript
@@ -52,6 +56,8 @@ number
 
 _(Optional)_ The bounciness of the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -70,6 +76,8 @@ _(Optional)_ The bounciness of the collider.
 </td><td>
 
 _(Optional)_ The bounciness combine rule of the collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -90,6 +98,8 @@ _(Optional)_ The bounciness combine rule of the collider.
 
 _(Optional)_ The collision groups the collider belongs to.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -108,6 +118,8 @@ boolean
 </td><td>
 
 _(Optional)_ Whether the collider is enabled.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -128,6 +140,8 @@ number
 
 _(Optional)_ The flags of the collider if the shape is a trimesh
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -146,6 +160,8 @@ number
 </td><td>
 
 _(Optional)_ The friction of the collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -166,6 +182,8 @@ _(Optional)_ The friction of the collider.
 
 _(Optional)_ The friction combine rule of the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -184,6 +202,8 @@ boolean
 </td><td>
 
 _(Optional)_ Whether the collider is a sensor.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -204,6 +224,8 @@ number
 
 _(Optional)_ The mass of the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -222,6 +244,8 @@ _(Optional)_ The mass of the collider.
 </td><td>
 
 _(Optional)_ The on collision callback for the collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -242,6 +266,8 @@ _(Optional)_ The on collision callback for the collider.
 
 _(Optional)_ The parent rigid body of the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -260,6 +286,8 @@ _(Optional)_ The parent rigid body of the collider.
 </td><td>
 
 _(Optional)_ The relative position of the collider. Relative to parent rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -280,6 +308,8 @@ _(Optional)_ The relative position of the collider. Relative to parent rigid bod
 
 _(Optional)_ The relative rotation of the collider. Relative to parent rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -298,6 +328,8 @@ _(Optional)_ The relative rotation of the collider. Relative to parent rigid bod
 </td><td>
 
 The shape of the collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -318,6 +350,8 @@ The shape of the collider.
 
 _(Optional)_ The simulation the collider is in, if provided the collider will automatically be added to the simulation.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -336,6 +370,8 @@ string
 </td><td>
 
 _(Optional)_ An arbitrary identifier tag of the collider. Useful for your own logic.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

@@ -53,3 +53,7 @@ boolean
 
 Whether the texture is registered.
 
+\*\*Requires:\*\* Atlas must be preloaded (server startup).
+
+\*\*Category:\*\* Textures
+

@@ -69,3 +69,7 @@ boolean
 
 Whether the model has a node with the given name.
 
+\*\*Requires:\*\* Model data must be loaded (server startup).
+
+\*\*Category:\*\* Models
+

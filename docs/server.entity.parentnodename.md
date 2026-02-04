@@ -4,7 +4,9 @@
 
 ## Entity.parentNodeName property
 
-The name of the parent's node (if parent is a model entity) this entity is attached to when spawned.
+The parent model node name, if attached.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

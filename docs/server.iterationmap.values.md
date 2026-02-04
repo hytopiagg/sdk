@@ -17,3 +17,5 @@ IterableIterator&lt;V&gt;
 
 An iterator for the values.
 
+\*\*Category:\*\* Utilities
+

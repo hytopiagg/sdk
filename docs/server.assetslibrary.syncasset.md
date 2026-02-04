@@ -44,6 +44,12 @@ string
 
 The path of the asset to copy to local assets.
 
+\*\*Requires:\*\* Assets library must be available (development only).
+
+\*\*Side effects:\*\* Writes files into the local `assets/` directory.
+
+\*\*Category:\*\* Assets
+
 
 </td></tr>
 </tbody></table>

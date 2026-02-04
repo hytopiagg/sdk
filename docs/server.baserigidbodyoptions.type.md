@@ -4,7 +4,9 @@
 
 ## BaseRigidBodyOptions.type property
 
-The type of the rigid body, defaults to [RigidBodyType.DYNAMIC](./server.rigidbodytype.md)<!-- -->.
+The type of the rigid body, defaults to `RigidBodyType.DYNAMIC`<!-- -->.
+
+\*\*Category:\*\* Physics
 
 **Signature:**
 

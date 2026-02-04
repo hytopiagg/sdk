@@ -6,6 +6,8 @@
 
 Represents a block in a world.
 
+When to use: reading block data from queries like raycasts or chunk lookups. Do NOT use for: creating or placing blocks directly; use `ChunkLattice.setBlock`<!-- -->.
+
 **Signature:**
 
 ```typescript
@@ -14,7 +16,9 @@ export default class Block
 
 ## Remarks
 
-Instances of this class are created internally but made publicly available through various public facing API methods.
+Instances are created internally and surfaced by API methods. Block coordinates are \*\*world coordinates\*\* (global block grid), not local chunk coordinates.
+
+\*\*Category:\*\* Blocks
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `Block` class.
 
@@ -60,6 +64,8 @@ Description
 
 The block type of the block.
 
+\*\*Category:\*\* Blocks
+
 
 </td></tr>
 <tr><td>
@@ -80,6 +86,8 @@ The block type of the block.
 </td><td>
 
 The global coordinate of the block.
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>
@@ -114,6 +122,8 @@ Description
 </td><td>
 
 Gets the most adjacent neighbor global coordinate of this block based on a relative hit point, typically from a raycast.
+
+Use for: placing a new block on the face that was hit.
 
 
 </td></tr>

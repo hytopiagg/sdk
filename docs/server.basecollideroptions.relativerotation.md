@@ -6,6 +6,8 @@
 
 The relative rotation of the collider. Relative to parent rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

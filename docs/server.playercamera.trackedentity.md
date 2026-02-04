@@ -4,7 +4,9 @@
 
 ## PlayerCamera.trackedEntity property
 
-The entity the camera will constantly look at, even if the camera attached or tracked entity moves.
+The entity the camera will constantly look at, if set.
+
+\*\*Category:\*\* Players
 
 **Signature:**
 

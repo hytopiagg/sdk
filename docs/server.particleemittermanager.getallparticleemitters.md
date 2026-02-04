@@ -17,3 +17,5 @@ getAllParticleEmitters(): ParticleEmitter[];
 
 An array of ParticleEmitter instances.
 
+\*\*Category:\*\* Particles
+

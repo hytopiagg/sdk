@@ -6,6 +6,8 @@
 
 Whether the rigid body is kinematic.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,8 @@
 
 The mass of the collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

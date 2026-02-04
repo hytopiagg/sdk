@@ -4,7 +4,9 @@
 
 ## PathfindingEntityController.waypointTimeoutMs property
 
-The timeout in milliseconds for a waypoint to be considered reached. Defaults to 2000ms divided by the speed of the entity.
+The timeout in milliseconds for a waypoint to be considered reached.
+
+\*\*Category:\*\* Controllers
 
 **Signature:**
 

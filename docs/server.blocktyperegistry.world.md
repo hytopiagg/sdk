@@ -6,6 +6,8 @@
 
 The world the block type registry is for.
 
+\*\*Category:\*\* Blocks
+
 **Signature:**
 
 ```typescript

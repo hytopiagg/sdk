@@ -26,6 +26,8 @@ Description
 
 Manages the assets library and synchronization of assets to the local assets directory in development.
 
+When to use: pulling assets from the shared library during local development. Do NOT use for: production asset loading; the library is disabled in production.
+
 
 </td></tr>
 <tr><td>
@@ -48,6 +50,8 @@ Represents a audio playback in a world.
 
 Manages audio instances in a world.
 
+When to use: querying or bulk-controlling audio in a specific world. Do NOT use for: individual playback configuration; use `Audio` instances.
+
 
 </td></tr>
 <tr><td>
@@ -58,6 +62,8 @@ Manages audio instances in a world.
 </td><td>
 
 Represents a block in a world.
+
+When to use: reading block data from queries like raycasts or chunk lookups. Do NOT use for: creating or placing blocks directly; use `ChunkLattice.setBlock`<!-- -->.
 
 
 </td></tr>
@@ -70,6 +76,8 @@ Represents a block in a world.
 
 Manages block textures and block texture atlas generation of the game.
 
+When to use: querying texture atlas UVs and transparency hints for blocks. Do NOT use for: runtime texture modifications; regenerate atlas offline in dev.
+
 
 </td></tr>
 <tr><td>
@@ -79,7 +87,9 @@ Manages block textures and block texture atlas generation of the game.
 
 </td><td>
 
-Represents a block type.
+Represents a block type definition.
+
+When to use: defining new block types (textures, colliders, liquid behavior). Do NOT use for: placing blocks directly; use `ChunkLattice.setBlock`<!-- -->.
 
 
 </td></tr>
@@ -92,6 +102,8 @@ Represents a block type.
 
 Manages known block types in a world.
 
+When to use: registering and retrieving block types for a specific world. Do NOT use for: placing blocks; use `ChunkLattice.setBlock`<!-- -->.
+
 
 </td></tr>
 <tr><td>
@@ -103,6 +115,8 @@ Manages known block types in a world.
 
 Manages chat and commands in a world.
 
+When to use: broadcasting chat, sending system messages, or registering chat commands. Do NOT use for: player HUD/menus; use `PlayerUI` for rich UI.
+
 
 </td></tr>
 <tr><td>
@@ -112,7 +126,9 @@ Manages chat and commands in a world.
 
 </td><td>
 
-A 16^3 chunk of blocks. Used to represent a world's terrain.
+A 16^3 chunk of blocks representing a slice of world terrain.
+
+When to use: reading chunk data or working with bulk block operations. Do NOT use for: creating terrain directly; prefer `ChunkLattice`<!-- -->.
 
 
 </td></tr>
@@ -125,6 +141,8 @@ A 16^3 chunk of blocks. Used to represent a world's terrain.
 
 A lattice of chunks that represent a world's terrain.
 
+When to use: reading or mutating blocks in world space. Do NOT use for: per-entity placement logic; prefer higher-level game systems.
+
 
 </td></tr>
 <tr><td>
@@ -135,6 +153,8 @@ A lattice of chunks that represent a world's terrain.
 </td><td>
 
 Represents a collider in a world's physics simulation.
+
+When to use: defining collision shapes for rigid bodies or entities. Do NOT use for: gameplay queries; use `Simulation.raycast` or intersection APIs instead.
 
 
 </td></tr>
@@ -147,6 +167,8 @@ Represents a collider in a world's physics simulation.
 
 A helper class for building and decoding collision groups.
 
+When to use: creating custom collision filters for colliders and rigid bodies. Do NOT use for: per-frame changes; collision group changes are usually infrequent.
+
 
 </td></tr>
 <tr><td>
@@ -158,6 +180,8 @@ A helper class for building and decoding collision groups.
 
 Represents the default player model entity.
 
+When to use: standard player avatars with built-in cosmetics and default controls. Do NOT use for: fully custom player rigs that don't match the default model's anchors/animations.
+
 
 </td></tr>
 <tr><td>
@@ -167,7 +191,9 @@ Represents the default player model entity.
 
 </td><td>
 
-The player entity controller implementation.
+The default player entity controller implementation.
+
+When to use: player-controlled avatars using `DefaultPlayerEntity`<!-- -->. Do NOT use for: NPCs or non-player entities; use `SimpleEntityController` or `PathfindingEntityController` instead.
 
 
 </td></tr>
@@ -178,7 +204,9 @@ The player entity controller implementation.
 
 </td><td>
 
-Represents an entity in a world.
+Represents a dynamic or static object in a world.
+
+When to use: any non-player object that needs physics, visuals, or interactions. Do NOT use for: player-controlled avatars (use `PlayerEntity` / `DefaultPlayerEntity`<!-- -->). Do NOT use for: voxel blocks (use block APIs on `ChunkLattice`<!-- -->).
 
 
 </td></tr>
@@ -191,6 +219,8 @@ Represents an entity in a world.
 
 Manages entities in a world.
 
+When to use: querying and filtering entities within a specific world. Do NOT use for: cross-world queries; access each world's manager separately.
+
 
 </td></tr>
 <tr><td>
@@ -202,6 +232,8 @@ Manages entities in a world.
 
 Manages error and warning logging.
 
+When to use: reporting recoverable issues or fatal errors with consistent formatting. Do NOT use for: normal control flow; prefer explicit return values or exceptions.
+
 
 </td></tr>
 <tr><td>
@@ -211,7 +243,9 @@ Manages error and warning logging.
 
 </td><td>
 
-Manages event emission and assigned listener callbacks.
+Routes events to listeners in local, world, or global scope.
+
+When to use: event-driven hooks within server subsystems. Do NOT use for: high-frequency per-entity updates; prefer direct method calls for hot paths.
 
 
 </td></tr>
@@ -222,7 +256,9 @@ Manages event emission and assigned listener callbacks.
 
 </td><td>
 
-Manages the game and associated worlds and systems.
+Global entry point for server systems (players, worlds, assets).
+
+When to use: accessing global managers and registries after startup. Do NOT use for: constructing your own server instance.
 
 
 </td></tr>
@@ -235,6 +271,8 @@ Manages the game and associated worlds and systems.
 
 A high-performance Map-like data structure optimized for frequent iteration.
 
+When to use: per-tick collections that are built, iterated, and cleared each frame. Do NOT use for: long-lived maps with rare iteration; a standard Map is simpler.
+
 
 </td></tr>
 <tr><td>
@@ -245,6 +283,8 @@ A high-performance Map-like data structure optimized for frequent iteration.
 </td><td>
 
 Represents a 2x2 matrix.
+
+When to use: 2D transforms or linear algebra utilities. Do NOT use for: immutable math; most methods mutate the instance.
 
 
 </td></tr>
@@ -257,6 +297,8 @@ Represents a 2x2 matrix.
 
 Represents a 3x3 matrix.
 
+When to use: 2D homogeneous transforms or normal matrix math. Do NOT use for: immutable math; most methods mutate the instance.
+
 
 </td></tr>
 <tr><td>
@@ -268,6 +310,8 @@ Represents a 3x3 matrix.
 
 Represents a 4x4 matrix.
 
+When to use: 3D transforms (translation, rotation, scale) and camera math. Do NOT use for: immutable math; most methods mutate the instance.
+
 
 </td></tr>
 <tr><td>
@@ -278,6 +322,8 @@ Represents a 4x4 matrix.
 </td><td>
 
 Manages model data for all known models of the game.
+
+When to use: querying model metadata (bounds, node names, animations, trimesh). Do NOT use for: runtime mesh editing; use dedicated tooling or physics colliders.
 
 
 </td></tr>
@@ -301,6 +347,8 @@ Represents a particle emitter in the world. Emit 2D particles that always face t
 
 Manages ParticleEmitter instances in a world.
 
+When to use: querying or bulk-cleaning particle emitters for a world. Do NOT use for: configuring emitters; use `ParticleEmitter` instances directly.
+
 
 </td></tr>
 <tr><td>
@@ -310,7 +358,9 @@ Manages ParticleEmitter instances in a world.
 
 </td><td>
 
-A pathfinding entity controller built on top of [SimpleEntityController](./server.simpleentitycontroller.md)<!-- -->.
+A pathfinding entity controller built on top of `SimpleEntityController`<!-- -->.
+
+When to use: obstacle-aware movement to a target coordinate. Do NOT use for: per-tick recalculation; pathfinding is synchronous and can be expensive.
 
 
 </td></tr>
@@ -323,6 +373,8 @@ A pathfinding entity controller built on top of [SimpleEntityController](./serve
 
 Manages persistence of player and global data.
 
+When to use: reading or writing persisted data shared across lobbies or per player. Do NOT use for: per-tick state; cache data in memory and write back periodically.
+
 
 </td></tr>
 <tr><td>
@@ -332,7 +384,9 @@ Manages persistence of player and global data.
 
 </td><td>
 
-A player in the game.
+A connected player in the game.
+
+When to use: interacting with a connected player's state, UI, and world membership. Do NOT use for: constructing players or representing offline users.
 
 
 </td></tr>
@@ -345,6 +399,8 @@ A player in the game.
 
 The camera for a Player.
 
+When to use: controlling a player's view, mode, and camera offsets. Do NOT use for: moving the player or entities; use entity movement APIs.
+
 
 </td></tr>
 <tr><td>
@@ -355,6 +411,8 @@ The camera for a Player.
 </td><td>
 
 Represents an entity controlled by a player in a world.
+
+When to use: custom player avatars that respond to player input. Do NOT use for: non-player NPCs; use `Entity` with a controller instead.
 
 
 </td></tr>
@@ -367,6 +425,8 @@ Represents an entity controlled by a player in a world.
 
 Manages all connected players in a game server.
 
+When to use: accessing online players, reacting to connection lifecycle events, or routing players to worlds. Do NOT use for: constructing or persisting players yourself; players are created automatically on connection.
+
 
 </td></tr>
 <tr><td>
@@ -377,6 +437,8 @@ Manages all connected players in a game server.
 </td><td>
 
 The UI for a player.
+
+When to use: showing overlays, HUDs, menus, and custom UI for a specific player. Do NOT use for: world-level UI shared by all players; use scene UI systems instead.
 
 
 </td></tr>
@@ -389,6 +451,8 @@ The UI for a player.
 
 Represents a quaternion.
 
+When to use: rotation math for entities, cameras, or transforms. Do NOT use for: immutable math; most methods mutate the instance.
+
 
 </td></tr>
 <tr><td>
@@ -399,6 +463,8 @@ Represents a quaternion.
 </td><td>
 
 Represents a rigid body in a world's physics simulation.
+
+When to use: physics-simulated or kinematic objects that need forces, collisions, or velocity. Do NOT use for: purely visual transforms; use entity transforms without physics when possible.
 
 
 </td></tr>
@@ -422,6 +488,8 @@ UI rendered within the 3D space of a world's game scene.
 
 Manages SceneUI instances in a world.
 
+When to use: querying or bulk-unloading scene UI elements in a world. Do NOT use for: player HUD/menus; use `PlayerUI` for per-player UI.
+
 
 </td></tr>
 <tr><td>
@@ -432,6 +500,8 @@ Manages SceneUI instances in a world.
 </td><td>
 
 A simple entity controller with basic movement functions.
+
+When to use: straightforward movement and facing without pathfinding. Do NOT use for: obstacle-aware movement; use `PathfindingEntityController`<!-- -->.
 
 
 </td></tr>
@@ -444,6 +514,8 @@ A simple entity controller with basic movement functions.
 
 Represents the physics simulation for a world.
 
+When to use: advanced physics queries, custom gravity, or debug rendering. Do NOT use for: typical movement; use entity/rigid body APIs instead.
+
 
 </td></tr>
 <tr><td>
@@ -453,7 +525,9 @@ Represents the physics simulation for a world.
 
 </td><td>
 
-Manages performance telemetry and error tracking through your Sentry.io account.
+Manages performance telemetry and error tracking through your Sentry account.
+
+When to use: profiling and diagnosing slow ticks or runtime errors in production. Do NOT use for: high-volume custom metrics; use a dedicated metrics pipeline instead.
 
 
 </td></tr>
@@ -466,6 +540,8 @@ Manages performance telemetry and error tracking through your Sentry.io account.
 
 Represents a 2D vector.
 
+When to use: performance-sensitive math in game loops or geometry utilities. Do NOT use for: immutable math; most methods mutate the instance.
+
 
 </td></tr>
 <tr><td>
@@ -477,6 +553,8 @@ Represents a 2D vector.
 
 Represents a 3-dimensional vector.
 
+When to use: performance-sensitive 3D math and transforms. Do NOT use for: immutable math; most methods mutate the instance.
+
 
 </td></tr>
 <tr><td>
@@ -486,7 +564,9 @@ Represents a 3-dimensional vector.
 
 </td><td>
 
-Represents a world in the game server.
+Represents an isolated simulation space (a world) on the server.
+
+When to use: your primary container for game objects, physics, and players. Use multiple worlds to run separate rooms, arenas, or instances. Do NOT use for: cross-world global state; keep that in your own services or `GameServer`<!-- -->.
 
 
 </td></tr>
@@ -499,6 +579,8 @@ Represents a world in the game server.
 
 Manages the tick loop for a world.
 
+When to use: advanced scheduling or instrumentation of a world's tick cycle. Do NOT use for: normal lifecycle control—use `World.start` and `World.stop`<!-- -->.
+
 
 </td></tr>
 <tr><td>
@@ -509,6 +591,8 @@ Manages the tick loop for a world.
 </td><td>
 
 Manages all worlds in a game server.
+
+When to use: creating additional worlds, routing players, or querying the active world set. Do NOT use for: instantiating `World` directly for gameplay; use `WorldManager.createWorld` to ensure IDs and lifecycle are managed consistently.
 
 
 </td></tr>
@@ -536,6 +620,8 @@ Description
 
 A base class for entity controller implementations.
 
+When to use: implementing custom entity behavior and movement logic. Do NOT use for: one-off entity changes; prefer direct entity APIs.
+
 
 </td></tr>
 </tbody></table>
@@ -560,7 +646,11 @@ Description
 
 </td><td>
 
-Event types an Audio instance can emit. See [AudioEventPayloads](./server.audioeventpayloads.md) for the payloads.
+Event types an Audio instance can emit.
+
+See `AudioEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -571,7 +661,11 @@ Event types an Audio instance can emit. See [AudioEventPayloads](./server.audioe
 
 </td><td>
 
-Event types a BaseEntityController instance can emit. See [BaseEntityControllerEventPayloads](./server.baseentitycontrollereventpayloads.md) for the payloads.
+Event types a BaseEntityController instance can emit.
+
+See `BaseEntityControllerEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -582,7 +676,11 @@ Event types a BaseEntityController instance can emit. See [BaseEntityControllerE
 
 </td><td>
 
-Event types a BlockType instance can emit. See [BlockTypeEventPayloads](./server.blocktypeeventpayloads.md) for the payloads.
+Event types a BlockType instance can emit.
+
+See `BlockTypeEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -593,7 +691,11 @@ Event types a BlockType instance can emit. See [BlockTypeEventPayloads](./server
 
 </td><td>
 
-Event types a BlockTypeRegistry instance can emit. See [BlockTypeRegistryEventPayloads](./server.blocktyperegistryeventpayloads.md) for the payloads.
+Event types a BlockTypeRegistry instance can emit.
+
+See `BlockTypeRegistryEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -604,7 +706,11 @@ Event types a BlockTypeRegistry instance can emit. See [BlockTypeRegistryEventPa
 
 </td><td>
 
-Event types a ChatManager instance can emit. See [ChatEventPayloads](./server.chateventpayloads.md) for the payloads.
+Event types a ChatManager instance can emit.
+
+See `ChatEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -615,7 +721,11 @@ Event types a ChatManager instance can emit. See [ChatEventPayloads](./server.ch
 
 </td><td>
 
-Event types a ChunkLattice instance can emit. See [ChunkLatticeEventPayloads](./server.chunklatticeeventpayloads.md) for the payloads.
+Event types a ChunkLattice instance can emit.
+
+See `ChunkLatticeEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -628,6 +738,8 @@ Event types a ChunkLattice instance can emit. See [ChunkLatticeEventPayloads](./
 
 The coefficient for friction or bounciness combine rule.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -638,6 +750,8 @@ The coefficient for friction or bounciness combine rule.
 </td><td>
 
 The shapes a collider can be.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -659,7 +773,11 @@ The default collision groups.
 
 </td><td>
 
-Event types an Entity instance can emit. See [EntityEventPayloads](./server.entityeventpayloads.md) for the payloads.
+Event types an Entity instance can emit.
+
+See `EntityEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -670,7 +788,11 @@ Event types an Entity instance can emit. See [EntityEventPayloads](./server.enti
 
 </td><td>
 
-Event types a GameServer instance can emit to the global event router. See [GameServerEventPayloads](./server.gameservereventpayloads.md) for the payloads.
+Event types a GameServer instance can emit to the global event router.
+
+See `GameServerEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -681,7 +803,11 @@ Event types a GameServer instance can emit to the global event router. See [Game
 
 </td><td>
 
-Event types a ParticleEmitter instance can emit. See [ParticleEmitterEventPayloads](./server.particleemittereventpayloads.md)
+Event types a ParticleEmitter instance can emit.
+
+See `ParticleEmitterEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -692,7 +818,11 @@ Event types a ParticleEmitter instance can emit. See [ParticleEmitterEventPayloa
 
 </td><td>
 
-Event types a PlayerCamera can emit. See [PlayerCameraEventPayloads](./server.playercameraeventpayloads.md) for the payloads.
+Event types a PlayerCamera can emit.
+
+See `PlayerCameraEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -705,6 +835,8 @@ Event types a PlayerCamera can emit. See [PlayerCameraEventPayloads](./server.pl
 
 The mode of the camera.
 
+\*\*Category:\*\* Players
+
 
 </td></tr>
 <tr><td>
@@ -714,7 +846,11 @@ The mode of the camera.
 
 </td><td>
 
-Event types a Player can emit. See [PlayerEventPayloads](./server.playereventpayloads.md) for the payloads.
+Event types a Player can emit.
+
+See `PlayerEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -725,7 +861,11 @@ Event types a Player can emit. See [PlayerEventPayloads](./server.playereventpay
 
 </td><td>
 
-Event types a PlayerManager can emit. See [PlayerManagerEventPayloads](./server.playermanagereventpayloads.md) for the payloads.
+Event types a PlayerManager can emit.
+
+See `PlayerManagerEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -736,7 +876,11 @@ Event types a PlayerManager can emit. See [PlayerManagerEventPayloads](./server.
 
 </td><td>
 
-Event types a PlayerUI can emit. See [PlayerUIEventPayloads](./server.playeruieventpayloads.md) for the payloads.
+Event types a PlayerUI can emit.
+
+See `PlayerUIEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -749,6 +893,8 @@ Event types a PlayerUI can emit. See [PlayerUIEventPayloads](./server.playeruiev
 
 The types a RigidBody can be.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -758,7 +904,11 @@ The types a RigidBody can be.
 
 </td><td>
 
-Event types a SceneUI instance can emit. See [SceneUIEventPayloads](./server.sceneuieventpayloads.md) for the payloads.
+Event types a SceneUI instance can emit.
+
+See `SceneUIEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -769,7 +919,11 @@ Event types a SceneUI instance can emit. See [SceneUIEventPayloads](./server.sce
 
 </td><td>
 
-Event types a Simulation instance can emit. See [SimulationEventPayloads](./server.simulationeventpayloads.md) for the payloads.
+Event types a Simulation instance can emit.
+
+See `SimulationEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -782,6 +936,8 @@ Event types a Simulation instance can emit. See [SimulationEventPayloads](./serv
 
 Performance telemetry span operation types.
 
+\*\*Category:\*\* Telemetry
+
 
 </td></tr>
 <tr><td>
@@ -791,7 +947,11 @@ Performance telemetry span operation types.
 
 </td><td>
 
-Event types a World instance can emit. See [WorldEventPayloads](./server.worldeventpayloads.md) for the payloads.
+Event types a World instance can emit.
+
+See `WorldEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -802,7 +962,11 @@ Event types a World instance can emit. See [WorldEventPayloads](./server.worldev
 
 </td><td>
 
-Event types a WorldLoop instance can emit. See [WorldLoopEventPayloads](./server.worldloopeventpayloads.md) for the payloads.
+Event types a WorldLoop instance can emit.
+
+See `WorldLoopEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -813,7 +977,11 @@ Event types a WorldLoop instance can emit. See [WorldLoopEventPayloads](./server
 
 </td><td>
 
-Event types a WorldManager instance can emit to the global event router. See [WorldManagerEventPayloads](./server.worldmanagereventpayloads.md) for the payloads.
+Event types a WorldManager instance can emit to the global event router.
+
+See `WorldManagerEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -839,7 +1007,9 @@ Description
 
 </td><td>
 
-The entry point for running game setup and starting the game server.
+Boots the server runtime, runs your init callback, and starts accepting connections.
+
+Use for: normal server startup in your entry file. Do NOT use for: restarting an already running server within the same process.
 
 
 </td></tr>
@@ -867,6 +1037,8 @@ Description
 
 Event payloads for Audio emitted events.
 
+\*\*Category:\*\* Events
+
 
 </td></tr>
 <tr><td>
@@ -877,6 +1049,12 @@ Event payloads for Audio emitted events.
 </td><td>
 
 Options for creating an Audio instance.
+
+Positional audio can be configured via `AudioOptions.attachedToEntity` or `AudioOptions.position`<!-- -->.
+
+Use for: configuring audio before calling `Audio.play`<!-- -->. Do NOT use for: runtime updates after playback starts; use `Audio.set*` methods.
+
+\*\*Category:\*\* Audio
 
 
 </td></tr>
@@ -889,6 +1067,10 @@ Options for creating an Audio instance.
 
 The options for a ball collider.
 
+Use for: sphere-shaped colliders. Do NOT use for: other shapes; use the matching collider option type.
+
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -899,6 +1081,10 @@ The options for a ball collider.
 </td><td>
 
 The base options for a collider.
+
+Use for: configuring colliders when creating entities or rigid bodies. Do NOT use for: runtime changes; use `Collider` methods instead.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -911,6 +1097,8 @@ The base options for a collider.
 
 Event payloads for BaseEntityController emitted events.
 
+\*\*Category:\*\* Events
+
 
 </td></tr>
 <tr><td>
@@ -921,6 +1109,10 @@ Event payloads for BaseEntityController emitted events.
 </td><td>
 
 The base options for an entity.
+
+Use for: common entity configuration shared by block and model entities. Do NOT use for: runtime changes after spawn; use `Entity` setters instead.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -933,6 +1125,10 @@ The base options for an entity.
 
 The base options for a rigid body.
 
+Use for: initial rigid body configuration when creating entities or bodies. Do NOT use for: runtime changes; use `RigidBody` setter methods instead.
+
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -943,6 +1139,10 @@ The base options for a rigid body.
 </td><td>
 
 The options for a block collider.
+
+Use for: axis-aligned box colliders. Do NOT use for: other shapes; use the matching collider option type.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -955,6 +1155,10 @@ The options for a block collider.
 
 The options for creating a block entity.
 
+Use for: entities rendered as blocks with a `BlockType` texture. Do NOT use for: model entities; use `ModelEntityOptions`<!-- -->.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -964,7 +1168,9 @@ The options for creating a block entity.
 
 </td><td>
 
-A block placement in a world.
+A block placement in world coordinates.
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>
@@ -977,6 +1183,8 @@ A block placement in a world.
 
 Event payloads for BlockType emitted events.
 
+\*\*Category:\*\* Events
+
 
 </td></tr>
 <tr><td>
@@ -987,6 +1195,10 @@ Event payloads for BlockType emitted events.
 </td><td>
 
 Options for creating a block type instance.
+
+Use for: defining new block types to register in a `BlockTypeRegistry`<!-- -->. Do NOT use for: placing blocks; use `ChunkLattice.setBlock`<!-- -->.
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>
@@ -999,6 +1211,8 @@ Options for creating a block type instance.
 
 Event payloads for BlockTypeRegistry emitted events.
 
+\*\*Category:\*\* Events
+
 
 </td></tr>
 <tr><td>
@@ -1009,6 +1223,10 @@ Event payloads for BlockTypeRegistry emitted events.
 </td><td>
 
 The options for a capsule collider.
+
+Use for: capsule-shaped colliders. Do NOT use for: other shapes; use the matching collider option type.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1021,6 +1239,8 @@ The options for a capsule collider.
 
 Event payloads for ChatManager emitted events.
 
+\*\*Category:\*\* Events
+
 
 </td></tr>
 <tr><td>
@@ -1031,6 +1251,8 @@ Event payloads for ChatManager emitted events.
 </td><td>
 
 Event payloads for ChunkLattice emitted events.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -1043,6 +1265,10 @@ Event payloads for ChunkLattice emitted events.
 
 The options for a cone collider.
 
+Use for: cone-shaped colliders. Do NOT use for: other shapes; use the matching collider option type.
+
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1053,6 +1279,10 @@ The options for a cone collider.
 </td><td>
 
 The options for a cylinder collider.
+
+Use for: cylinder-shaped colliders. Do NOT use for: other shapes; use the matching collider option type.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1065,6 +1295,10 @@ The options for a cylinder collider.
 
 Options for creating a DefaultPlayerEntityController instance.
 
+Use for: configuring default player movement and animation behavior at construction time. Do NOT use for: per-frame changes; override methods or adjust controller state instead.
+
+\*\*Category:\*\* Controllers
+
 
 </td></tr>
 <tr><td>
@@ -1075,6 +1309,10 @@ Options for creating a DefaultPlayerEntityController instance.
 </td><td>
 
 The options for a dynamic rigid body, also the default type.
+
+Use for: physics-driven bodies affected by forces and collisions. Do NOT use for: kinematic bodies; use the kinematic option types instead.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1087,6 +1325,8 @@ The options for a dynamic rigid body, also the default type.
 
 Event payloads for Entity emitted events.
 
+\*\*Category:\*\* Events
+
 
 </td></tr>
 <tr><td>
@@ -1097,6 +1337,8 @@ Event payloads for Entity emitted events.
 </td><td>
 
 The payloads for all events in the game server.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -1109,6 +1351,10 @@ The payloads for all events in the game server.
 
 The options for a fixed rigid body.
 
+Use for: immovable bodies (world geometry, static platforms). Do NOT use for: moving objects; use dynamic or kinematic options.
+
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1119,6 +1365,8 @@ The options for a fixed rigid body.
 </td><td>
 
 Event payloads for GameServer emitted events.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -1131,6 +1379,10 @@ Event payloads for GameServer emitted events.
 
 The options for a kinematic position rigid body.
 
+Use for: moving bodies by setting target positions each tick. Do NOT use for: physics-driven motion; use dynamic bodies instead.
+
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1141,6 +1393,10 @@ The options for a kinematic position rigid body.
 </td><td>
 
 The options for a kinematic velocity rigid body.
+
+Use for: moving bodies by setting velocities each tick. Do NOT use for: physics-driven motion; use dynamic bodies instead.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1153,6 +1409,10 @@ The options for a kinematic velocity rigid body.
 
 The options for creating a model entity.
 
+Use for: entities rendered from a glTF model. Do NOT use for: block entities; use `BlockEntityOptions`<!-- -->.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -1163,6 +1423,10 @@ The options for creating a model entity.
 </td><td>
 
 The options for an error type "none" collider.
+
+Use for: explicitly disabling collider creation. Do NOT use for: physical interactions; no collider will be created.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1175,6 +1439,8 @@ The options for an error type "none" collider.
 
 The options for rendering an outline.
 
+\*\*Category:\*\* Types
+
 
 </td></tr>
 <tr><td>
@@ -1185,6 +1451,8 @@ The options for rendering an outline.
 </td><td>
 
 Event payloads for ParticleEmitter emitted events.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -1197,6 +1465,10 @@ Event payloads for ParticleEmitter emitted events.
 
 Options for creating a ParticleEmitter instance.
 
+Use for: configuring an emitter before calling `ParticleEmitter.spawn`<!-- -->. Do NOT use for: runtime updates after spawn; use `ParticleEmitter.set*` methods.
+
+\*\*Category:\*\* Particles
+
 
 </td></tr>
 <tr><td>
@@ -1207,6 +1479,8 @@ Options for creating a ParticleEmitter instance.
 </td><td>
 
 Event payloads for PlayerCamera emitted events.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -1219,6 +1493,8 @@ Event payloads for PlayerCamera emitted events.
 
 Event payloads for Player emitted events.
 
+\*\*Category:\*\* Events
+
 
 </td></tr>
 <tr><td>
@@ -1229,6 +1505,8 @@ Event payloads for Player emitted events.
 </td><td>
 
 Event payloads for PlayerManager emitted events.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -1241,6 +1519,8 @@ Event payloads for PlayerManager emitted events.
 
 Event payloads for PlayerUI emitted events.
 
+\*\*Category:\*\* Events
+
 
 </td></tr>
 <tr><td>
@@ -1252,6 +1532,8 @@ Event payloads for PlayerUI emitted events.
 
 A quaternion.
 
+\*\*Category:\*\* Math
+
 
 </td></tr>
 <tr><td>
@@ -1261,7 +1543,9 @@ A quaternion.
 
 </td><td>
 
-A RGB color. r, g and b expect a value between 0 and 255.
+An RGB color. `r`<!-- -->, `g`<!-- -->, and `b` expect a value between 0 and 255.
+
+\*\*Category:\*\* Types
 
 
 </td></tr>
@@ -1274,6 +1558,10 @@ A RGB color. r, g and b expect a value between 0 and 255.
 
 The options for a round cylinder collider.
 
+Use for: rounded cylinder colliders. Do NOT use for: other shapes; use the matching collider option type.
+
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1284,6 +1572,8 @@ The options for a round cylinder collider.
 </td><td>
 
 Event payloads for SceneUI emitted events.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -1296,6 +1586,10 @@ Event payloads for SceneUI emitted events.
 
 Options for creating a SceneUI instance.
 
+Use for: configuring scene UI before `SceneUI.load`<!-- -->. Do NOT use for: runtime updates after load; use `SceneUI.set*` methods.
+
+\*\*Category:\*\* UI
+
 
 </td></tr>
 <tr><td>
@@ -1306,6 +1600,8 @@ Options for creating a SceneUI instance.
 </td><td>
 
 Event payloads for Simulation emitted events.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -1318,6 +1614,8 @@ Event payloads for Simulation emitted events.
 
 A 3x3 symmetric positive-definite matrix for spatial dynamics.
 
+\*\*Category:\*\* Math
+
 
 </td></tr>
 <tr><td>
@@ -1328,6 +1626,10 @@ A 3x3 symmetric positive-definite matrix for spatial dynamics.
 </td><td>
 
 The options for a trimesh collider.
+
+Use for: mesh-based colliders from model data. Do NOT use for: simple primitives; prefer analytic shapes when possible.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1340,6 +1642,8 @@ The options for a trimesh collider.
 
 A 2-dimensional vector of boolean values.
 
+\*\*Category:\*\* Math
+
 
 </td></tr>
 <tr><td>
@@ -1350,6 +1654,8 @@ A 2-dimensional vector of boolean values.
 </td><td>
 
 A 2-dimensional vector.
+
+\*\*Category:\*\* Math
 
 
 </td></tr>
@@ -1362,6 +1668,8 @@ A 2-dimensional vector.
 
 A 3-dimensional vector of boolean values.
 
+\*\*Category:\*\* Math
+
 
 </td></tr>
 <tr><td>
@@ -1372,6 +1680,8 @@ A 3-dimensional vector of boolean values.
 </td><td>
 
 A 3-dimensional vector.
+
+\*\*Category:\*\* Math
 
 
 </td></tr>
@@ -1384,6 +1694,10 @@ A 3-dimensional vector.
 
 The options for a voxels collider.
 
+Use for: voxel-based colliders (block volumes). Do NOT use for: simple primitives; prefer analytic shapes when possible.
+
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1394,6 +1708,10 @@ The options for a voxels collider.
 </td><td>
 
 The options for a wedge collider.
+
+Use for: wedge-shaped colliders (inclined planes). Do NOT use for: other shapes; use the matching collider option type.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1406,6 +1724,8 @@ The options for a wedge collider.
 
 Event payloads for World emitted events.
 
+\*\*Category:\*\* Events
+
 
 </td></tr>
 <tr><td>
@@ -1416,6 +1736,8 @@ Event payloads for World emitted events.
 </td><td>
 
 Event payloads for WorldLoop emitted events.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>
@@ -1428,6 +1750,8 @@ Event payloads for WorldLoop emitted events.
 
 Event payloads for WorldManager emitted events.
 
+\*\*Category:\*\* Events
+
 
 </td></tr>
 <tr><td>
@@ -1437,7 +1761,9 @@ Event payloads for WorldManager emitted events.
 
 </td><td>
 
-A map representation for a world.
+A map representation for initializing a world.
+
+Use for: importing static maps or tooling exports via `World.loadMap`<!-- -->. Do NOT use for: incremental edits while a world is live; use chunk/block APIs instead.
 
 
 </td></tr>
@@ -1449,6 +1775,8 @@ A map representation for a world.
 </td><td>
 
 Options for creating a World instance.
+
+Use for: initializing a world and its environment at construction time. Do NOT use for: runtime changes; use the corresponding `set*` methods on `World`<!-- -->.
 
 
 </td></tr>
@@ -1474,7 +1802,11 @@ Description
 
 </td><td>
 
-All valid block rotations. Named as `{face pointing up}_{Y rotation degrees}`<!-- -->. N prefix = negative axis (e.g. NZ\_90 = -Z face up, rotated 90° around global Y).
+All valid block rotations, named as `{face pointing up}_{Y rotation degrees}`<!-- -->.
+
+N prefix = negative axis (e.g. `NZ_90` = -Z face up, rotated 90° around global Y).
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>
@@ -1485,7 +1817,9 @@ All valid block rotations. Named as `{face pointing up}_{Y rotation degrees}`<!-
 
 </td><td>
 
-The default rigid body options for a model entity when EntityOptions.rigidBodyOptions is not provided.
+The default rigid body options for a model entity when `EntityOptions.rigidBodyOptions` is not provided.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -1496,7 +1830,9 @@ The default rigid body options for a model entity when EntityOptions.rigidBodyOp
 
 </td><td>
 
-The inputs that are included in the PlayerInput.
+The inputs that are included in `PlayerInput`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -1522,7 +1858,9 @@ Description
 
 </td><td>
 
-A block rotation from [BLOCK\_ROTATIONS](./server.block_rotations.md)<!-- -->.
+A block rotation from `BLOCK_ROTATIONS`<!-- -->.
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>
@@ -1535,6 +1873,8 @@ A block rotation from [BLOCK\_ROTATIONS](./server.block_rotations.md)<!-- -->.
 
 Block texture metadata including UVs and rendering hints.
 
+\*\*Category:\*\* Textures
+
 
 </td></tr>
 <tr><td>
@@ -1545,6 +1885,10 @@ Block texture metadata including UVs and rendering hints.
 </td><td>
 
 The options for a collider.
+
+Use for: providing collider definitions when creating rigid bodies or entities. Do NOT use for: runtime changes; use `Collider` APIs instead.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1568,6 +1912,8 @@ A callback function that is called when a collision occurs.
 
 A set of collision groups.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1590,6 +1936,8 @@ A callback function for a chat command.
 
 Data for contact forces.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1600,6 +1948,8 @@ Data for contact forces.
 </td><td>
 
 A contact manifold.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1612,6 +1962,8 @@ A contact manifold.
 
 A decoded set of collision groups represented as their string equivalents.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1623,6 +1975,10 @@ A decoded set of collision groups represented as their string equivalents.
 
 Options for creating a DefaultPlayerEntity instance.
 
+Use for: customizing the default player avatar (for example cosmetic visibility). Do NOT use for: changing movement behavior; use `DefaultPlayerEntityControllerOptions`<!-- -->.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -1632,7 +1988,11 @@ Options for creating a DefaultPlayerEntity instance.
 
 </td><td>
 
-The options for creating an Entity instance.
+The options for creating an `Entity` instance.
+
+Use for: constructing an entity; choose `BlockEntityOptions` or `ModelEntityOptions`<!-- -->. Do NOT use for: mutating entity state after spawn; use entity setters and methods.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -1643,7 +2003,7 @@ The options for creating an Entity instance.
 
 </td><td>
 
-A callback function called when the entity associated with the SimpleEntityController updates its rotation as it is attempting to face a target coordinate.
+Callback invoked as the entity rotates toward a target.
 
 
 </td></tr>
@@ -1654,7 +2014,7 @@ A callback function called when the entity associated with the SimpleEntityContr
 
 </td><td>
 
-A callback function called when the entity associated with the SimpleEntityController finishes rotating and is now facing a target coordinate.
+Callback invoked when the entity finishes rotating to face a target.
 
 
 </td></tr>
@@ -1665,7 +2025,11 @@ A callback function called when the entity associated with the SimpleEntityContr
 
 </td><td>
 
-Options for the [SimpleEntityController.face()](./server.simpleentitycontroller.face.md) method.
+Options for `SimpleEntityController.face`<!-- -->.
+
+Use for: customizing a single `face()` call (callbacks, completion). Do NOT use for: persistent defaults; use `SimpleEntityControllerOptions`<!-- -->.
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>
@@ -1676,7 +2040,11 @@ Options for the [SimpleEntityController.face()](./server.simpleentitycontroller.
 
 </td><td>
 
-Filter options for various operations like raycasting and intersections.
+Filter options for raycasting and intersection queries.
+
+Use for: scoping physics queries to specific colliders or groups. Do NOT use for: persistent collision configuration; use `CollisionGroupsBuilder`<!-- -->.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1687,7 +2055,9 @@ Filter options for various operations like raycasting and intersections.
 
 </td><td>
 
-A intersection result.
+An intersection result.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1700,6 +2070,8 @@ A intersection result.
 
 A bounding box for a model.
 
+\*\*Category:\*\* Models
+
 
 </td></tr>
 <tr><td>
@@ -1708,6 +2080,10 @@ A bounding box for a model.
 
 
 </td><td>
+
+A per-node visual override for a model entity.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -1720,6 +2096,8 @@ A bounding box for a model.
 
 A trimesh for a model.
 
+\*\*Category:\*\* Models
+
 
 </td></tr>
 <tr><td>
@@ -1729,7 +2107,7 @@ A trimesh for a model.
 
 </td><td>
 
-A callback function called when the entity associated with the SimpleEntityController updates its position as it is attempting to move to a target coordinate.
+Callback invoked as the entity moves toward a target coordinate.
 
 
 </td></tr>
@@ -1740,7 +2118,7 @@ A callback function called when the entity associated with the SimpleEntityContr
 
 </td><td>
 
-A callback function called when the entity associated with the SimpleEntityController reaches the target coordinate. An entity must reach the x,y,z coordinate for the callback to be called.
+Callback invoked when the entity reaches the target coordinate.
 
 
 </td></tr>
@@ -1751,7 +2129,11 @@ A callback function called when the entity associated with the SimpleEntityContr
 
 </td><td>
 
-Options for the [SimpleEntityController.move()](./server.simpleentitycontroller.move.md) method.
+Options for `SimpleEntityController.move`<!-- -->.
+
+Use for: customizing a single `move()` call. Do NOT use for: persistent defaults; use `SimpleEntityControllerOptions`<!-- -->.
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>
@@ -1764,6 +2146,8 @@ Options for the [SimpleEntityController.move()](./server.simpleentitycontroller.
 
 The orientation mode for particles.
 
+\*\*Category:\*\* Particles
+
 
 </td></tr>
 <tr><td>
@@ -1773,7 +2157,9 @@ The orientation mode for particles.
 
 </td><td>
 
-A callback function called when the pathfinding algorithm aborts.
+Callback invoked when pathfinding aborts.
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>
@@ -1784,7 +2170,9 @@ A callback function called when the pathfinding algorithm aborts.
 
 </td><td>
 
-A callback function called when the entity associated with the PathfindingEntityController finishes pathfinding and is now at the target coordinate.
+Callback invoked when pathfinding completes and the entity reaches the target.
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>
@@ -1795,7 +2183,11 @@ A callback function called when the entity associated with the PathfindingEntity
 
 </td><td>
 
-Options for the [PathfindingEntityController.pathfind()](./server.pathfindingentitycontroller.pathfind.md) method.
+Options for `PathfindingEntityController.pathfind`<!-- -->.
+
+Use for: configuring a single pathfinding request. Do NOT use for: per-tick recalculation; call `pathfind` sparingly.
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>
@@ -1808,6 +2200,8 @@ Options for the [PathfindingEntityController.pathfind()](./server.pathfindingent
 
 The camera orientation state of a Player.
 
+\*\*Category:\*\* Players
+
 
 </td></tr>
 <tr><td>
@@ -1818,6 +2212,8 @@ The camera orientation state of a Player.
 </td><td>
 
 The cosmetics of a player.
+
+\*\*Category:\*\* Networking
 
 
 </td></tr>
@@ -1830,6 +2226,8 @@ The cosmetics of a player.
 
 An equipped item of a player's cosmetics.
 
+\*\*Category:\*\* Networking
+
 
 </td></tr>
 <tr><td>
@@ -1840,6 +2238,8 @@ An equipped item of a player's cosmetics.
 </td><td>
 
 The slots used for player cosmetics.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -1852,6 +2252,10 @@ The slots used for player cosmetics.
 
 Options for creating a PlayerEntity instance.
 
+Use for: creating a player-bound entity (requires `player`<!-- -->). Do NOT use for: non-player entities; use `EntityOptions`<!-- -->.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 <tr><td>
@@ -1861,7 +2265,9 @@ Options for creating a PlayerEntity instance.
 
 </td><td>
 
-The input state of a Player.
+The input state of a `Player`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -1874,6 +2280,8 @@ The input state of a Player.
 
 A raw collider object from the Rapier physics engine.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1884,6 +2292,8 @@ A raw collider object from the Rapier physics engine.
 </td><td>
 
 A raw set of collision groups represented as a 32-bit number.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1896,6 +2306,8 @@ A raw set of collision groups represented as a 32-bit number.
 
 A raw shape object from the Rapier physics engine.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1906,6 +2318,8 @@ A raw shape object from the Rapier physics engine.
 </td><td>
 
 A hit result from a raycast.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1918,6 +2332,10 @@ A hit result from a raycast.
 
 Options for raycasting.
 
+Use for: configuring `Simulation.raycast` calls. Do NOT use for: caching long-term query state; build per query.
+
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1928,6 +2346,8 @@ Options for raycasting.
 </td><td>
 
 Additional mass properties for a RigidBody.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1940,6 +2360,10 @@ Additional mass properties for a RigidBody.
 
 The options for a rigid body.
 
+Use for: constructing rigid bodies; choose an option type matching `RigidBodyType`<!-- -->. Do NOT use for: runtime changes; use `RigidBody` methods instead.
+
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1951,6 +2375,10 @@ The options for a rigid body.
 
 Options for creating a telemetry span.
 
+Use for: configuring `Telemetry.startSpan` calls. Do NOT use for: long-lived spans; keep spans short and scoped to a task.
+
+\*\*Category:\*\* Telemetry
+
 
 </td></tr>
 <tr><td>
@@ -1960,7 +2388,7 @@ Options for creating a telemetry span.
 
 </td><td>
 
-A callback function called when the entity associated with the PathfindingEntityController finishes moving to a calculate waypoint of its current path.
+Callback invoked when the entity finishes moving to a waypoint.
 
 
 </td></tr>
@@ -1971,7 +2399,7 @@ A callback function called when the entity associated with the PathfindingEntity
 
 </td><td>
 
-A callback function called when the entity associated with the PathfindingEntityController skips a waypoint because it took too long to reach.
+Callback invoked when a waypoint is skipped due to timeout.
 
 
 </td></tr>

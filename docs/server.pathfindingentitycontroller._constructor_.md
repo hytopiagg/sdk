@@ -44,6 +44,8 @@ PathfindingEntityControllerOptions
 
 _(Optional)_ Options for the controller.
 
+\*\*Category:\*\* Controllers
+
 
 </td></tr>
 </tbody></table>

@@ -4,7 +4,7 @@
 
 ## EntityManager.getEntity() method
 
-Gets a spawned entity in the world by its id.
+Gets a spawned entity in the world by its ID.
 
 **Signature:**
 
@@ -42,7 +42,7 @@ number
 
 </td><td>
 
-The id of the entity to get.
+The ID of the entity to get.
 
 
 </td></tr>
@@ -51,5 +51,7 @@ The id of the entity to get.
 
 T \| undefined
 
-The spawned entity with the provided id, or undefined if no entity is found.
+The spawned entity with the provided ID, or undefined if no entity is found.
+
+\*\*Category:\*\* Entities
 

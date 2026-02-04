@@ -6,6 +6,8 @@
 
 Event payloads for Player emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

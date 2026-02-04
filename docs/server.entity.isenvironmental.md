@@ -4,10 +4,17 @@
 
 ## Entity.isEnvironmental property
 
-Whether the entity is environmental, if true it will not invoke its tick function or change position. It also cannot be animated or removed after spawning.
+Whether the entity is environmental.
 
 **Signature:**
 
 ```typescript
 get isEnvironmental(): boolean;
 ```
+
+## Remarks
+
+Environmental entities are excluded from per-tick controller updates and update emission.
+
+\*\*Category:\*\* Entities
+

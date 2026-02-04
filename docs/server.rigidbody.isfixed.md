@@ -6,6 +6,8 @@
 
 Whether the rigid body is fixed.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

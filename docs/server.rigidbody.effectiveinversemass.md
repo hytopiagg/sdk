@@ -6,6 +6,8 @@
 
 The effective inverse mass of the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

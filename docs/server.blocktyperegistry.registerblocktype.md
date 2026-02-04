@@ -44,6 +44,10 @@ blockType
 
 The block type to register.
 
+\*\*Side effects:\*\* Emits `BlockTypeRegistryEvent.REGISTER_BLOCK_TYPE`<!-- -->.
+
+\*\*Category:\*\* Blocks
+
 
 </td></tr>
 </tbody></table>

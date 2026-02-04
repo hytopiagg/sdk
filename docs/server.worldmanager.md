@@ -6,6 +6,8 @@
 
 Manages all worlds in a game server.
 
+When to use: creating additional worlds, routing players, or querying the active world set. Do NOT use for: instantiating `World` directly for gameplay; use `WorldManager.createWorld` to ensure IDs and lifecycle are managed consistently.
+
 **Signature:**
 
 ```typescript
@@ -14,11 +16,11 @@ export default class WorldManager
 
 ## Remarks
 
-The WorldManager is created internally as a global singleton accessible with the static property `WorldManager.instance`<!-- -->.
+Access via `WorldManager.instance` — do not construct directly.
 
 <h2>Events</h2>
 
-This class emits global events with payloads listed under [WorldManagerEventPayloads](./server.worldmanagereventpayloads.md)
+This class emits global events with payloads listed under `WorldManagerEventPayloads`<!-- -->.
 
 ## Example
 
@@ -32,6 +34,7 @@ const newWorld = worldManager.createWorld({
   skyboxUri: 'skyboxes/partly-cloudy',
 });
 ```
+\*\*Category:\*\* Core
 
 ## Properties
 
@@ -75,7 +78,9 @@ Description
 
 </td><td>
 
-The global WorldManager instance as a singleton.
+The global WorldManager instance (singleton).
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -109,7 +114,9 @@ Description
 
 </td><td>
 
-Creates a new world.
+Creates and starts a new world with a unique ID.
+
+Use for: additional game rooms, arenas, or isolated simulations. Do NOT use for: deferred world creation without starting; this always starts.
 
 
 </td></tr>
@@ -123,7 +130,7 @@ Creates a new world.
 
 </td><td>
 
-Gets all worlds.
+Gets all worlds currently managed by the server.
 
 
 </td></tr>
@@ -137,7 +144,9 @@ Gets all worlds.
 
 </td><td>
 
-Gets the default world.
+Gets the default world, creating it if it does not exist.
+
+Use for: a single-world game or as a safe fallback when routing players. Do NOT use for: creating specialized worlds with unique options.
 
 
 </td></tr>
@@ -151,7 +160,7 @@ Gets the default world.
 
 </td><td>
 
-Gets a world by its id.
+Gets a world by its ID.
 
 
 </td></tr>
@@ -179,7 +188,9 @@ Gets all worlds with a specific tag.
 
 </td><td>
 
-Sets the default world. This is the world players automatically join when they connect to the game.
+Sets the default world players join on connect.
+
+Use for: changing the lobby or main world at runtime. Do NOT use for: moving already connected players; use `Player.joinWorld`<!-- -->.
 
 
 </td></tr>

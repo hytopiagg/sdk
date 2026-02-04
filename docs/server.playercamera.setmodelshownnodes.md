@@ -4,7 +4,7 @@
 
 ## PlayerCamera.setModelShownNodes() method
 
-Sets the nodes of the model the camera is attached to that will be rendered for the player, overriding hidden nodes. Uses case insensitive substring matching.
+Sets model nodes that will be rendered for this player, overriding hidden nodes.
 
 **Signature:**
 
@@ -42,7 +42,13 @@ string\[\]
 
 </td><td>
 
-Determines nodes to show that match these case insensitive substrings.
+Substrings of node names to show.
+
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerCameraEvent.SET_MODEL_SHOWN_NODES`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -53,5 +59,5 @@ void
 
 ## Remarks
 
-\*\*Replaces:\*\* Replaces the current shown nodes set (not a merge).
+Uses case-insensitive substring matching and replaces the current shown set.
 

@@ -6,6 +6,8 @@
 
 The path to the assets library package. Null if assets library is not available.
 
+\*\*Category:\*\* Assets
+
 **Signature:**
 
 ```typescript

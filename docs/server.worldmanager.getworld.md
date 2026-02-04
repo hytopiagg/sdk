@@ -4,7 +4,7 @@
 
 ## WorldManager.getWorld() method
 
-Gets a world by its id.
+Gets a world by its ID.
 
 **Signature:**
 
@@ -42,7 +42,7 @@ number
 
 </td><td>
 
-The id of the world to get.
+The ID of the world to get.
 
 
 </td></tr>
@@ -51,5 +51,7 @@ The id of the world to get.
 
 [World](./server.world.md) \| undefined
 
-The world with the provided id, or undefined if no world is found.
+The world with the provided ID, or undefined if no world is found.
+
+\*\*Category:\*\* Core
 

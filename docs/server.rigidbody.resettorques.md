@@ -6,6 +6,8 @@
 
 Resets the torques acting on the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

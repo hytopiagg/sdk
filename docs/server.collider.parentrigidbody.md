@@ -6,6 +6,8 @@
 
 The parent rigid body of the collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

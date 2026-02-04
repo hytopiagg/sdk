@@ -4,7 +4,7 @@
 
 ## PlayerCamera.setShoulderAngle() method
 
-Only used in third-person mode. Sets the shoulder angle of the camera in degrees. A positive value shifts the camera to the right, a negative value shifts it to the left.
+Sets the shoulder angle of the camera in degrees (third-person mode only).
 
 **Signature:**
 
@@ -44,10 +44,20 @@ number
 
 The shoulder angle to set in degrees.
 
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerCameraEvent.SET_SHOULDER_ANGLE`<!-- -->.
+
+\*\*Category:\*\* Players
+
 
 </td></tr>
 </tbody></table>
 **Returns:**
 
 void
+
+## Remarks
+
+Positive shifts right, negative shifts left.
 

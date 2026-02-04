@@ -53,3 +53,5 @@ boolean
 
 Whether the collision groups are the default collision groups.
 
+\*\*Category:\*\* Physics
+

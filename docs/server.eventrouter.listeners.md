@@ -53,3 +53,5 @@ EventEmitter.EventListener&lt;any, string&gt;\[\]
 
 All listeners for the event type.
 
+\*\*Category:\*\* Events
+

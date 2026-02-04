@@ -4,7 +4,7 @@
 
 ## WaypointMoveSkippedCallback type
 
-A callback function called when the entity associated with the PathfindingEntityController skips a waypoint because it took too long to reach.
+Callback invoked when a waypoint is skipped due to timeout.
 
 **Signature:**
 

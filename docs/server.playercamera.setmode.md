@@ -44,6 +44,12 @@ mode
 
 The mode to set.
 
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerCameraEvent.SET_MODE`<!-- -->.
+
+\*\*Category:\*\* Players
+
 
 </td></tr>
 </tbody></table>

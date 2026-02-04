@@ -44,6 +44,8 @@ boolean
 
 Whether the rigid body is enabled.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

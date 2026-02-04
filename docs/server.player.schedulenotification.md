@@ -4,7 +4,9 @@
 
 ## Player.scheduleNotification() method
 
-Schedule a notification the player at a point in time in the future. This will automatically handle prompting a player (if necessary) for notification permissions in-game.
+Schedules a notification for the player at a future time.
+
+Use for: re-engagement or timed reminders. Do NOT use for: immediate in-game messaging; use chat or UI instead.
 
 **Signature:**
 
@@ -67,5 +69,15 @@ A future timestamp in milliseconds to schedule the notification for.
 
 Promise&lt;string \| void&gt;
 
-The id of the notification if it was scheduled successfully, undefined otherwise.
+The ID of the notification if scheduled successfully, undefined otherwise.
+
+\*\*Requires:\*\* Player must be in a world to request permission.
+
+\*\*Side effects:\*\* Emits `PlayerEvent.REQUEST_NOTIFICATION_PERMISSION`<!-- -->.
+
+\*\*Category:\*\* Players
+
+## Remarks
+
+Automatically prompts for notification permission in-game if needed.
 

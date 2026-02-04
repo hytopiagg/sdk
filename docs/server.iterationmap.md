@@ -6,6 +6,8 @@
 
 A high-performance Map-like data structure optimized for frequent iteration.
 
+When to use: per-tick collections that are built, iterated, and cleared each frame. Do NOT use for: long-lived maps with rare iteration; a standard Map is simpler.
+
 **Signature:**
 
 ```typescript
@@ -15,6 +17,8 @@ export default class IterationMap<K, V>
 ## Remarks
 
 IterationMap maintains both a Map for O(1) lookups and an Array for fast iteration, eliminating the need for Array.from() calls and providing \~2x faster iteration than Map.values(). Optimized for "build up, iterate, clear" usage patterns common in game loops.
+
+Pattern: update via `IterationMap.set`<!-- -->, iterate with `IterationMap.valuesArray`<!-- -->, then `IterationMap.clear`<!-- -->. Anti-pattern: mutating the map during `IterationMap.valuesArray` iteration.
 
 ## Example
 
@@ -35,6 +39,7 @@ for (const item of iterationMap.valuesArray) {
 // Efficient bulk clear
 iterationMap.clear();
 ```
+\*\*Category:\*\* Utilities
 
 ## Properties
 
@@ -78,6 +83,8 @@ number
 
 Returns the number of key-value pairs in the IterationMap.
 
+\*\*Category:\*\* Utilities
+
 
 </td></tr>
 <tr><td>
@@ -98,6 +105,10 @@ readonly V\[\]
 </td><td>
 
 Returns a readonly array of all values for fast iteration. This is the key performance feature - use this instead of .values() for iteration.
+
+\*\*Side effects:\*\* Rebuilds the backing array when the map has changed.
+
+\*\*Category:\*\* Utilities
 
 
 </td></tr>
@@ -146,6 +157,10 @@ Returns an iterator for the key-value pairs in the IterationMap.
 </td><td>
 
 Removes all key-value pairs from the IterationMap. Highly optimized for the common "build up, iterate, clear" pattern.
+
+\*\*Side effects:\*\* Clears the backing map and value array.
+
+\*\*Category:\*\* Utilities
 
 
 </td></tr>

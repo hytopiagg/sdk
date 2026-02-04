@@ -4,7 +4,9 @@
 
 ## BlockPlacement interface
 
-A block placement in a world.
+A block placement in world coordinates.
+
+\*\*Category:\*\* Blocks
 
 **Signature:**
 

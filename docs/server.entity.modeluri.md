@@ -4,7 +4,9 @@
 
 ## Entity.modelUri property
 
-The URI or path to the .gltf model asset to be used for the entity.
+The URI or path to the `.gltf` model asset.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

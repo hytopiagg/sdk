@@ -6,6 +6,8 @@
 
 A hit result from a raycast.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

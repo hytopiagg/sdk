@@ -6,6 +6,8 @@
 
 An arbitrary identifier tag of the collider. Useful for your own logic.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

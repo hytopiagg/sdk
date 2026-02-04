@@ -6,6 +6,8 @@
 
 The types a RigidBody can be.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

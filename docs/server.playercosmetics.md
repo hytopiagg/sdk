@@ -6,6 +6,8 @@
 
 The cosmetics of a player.
 
+\*\*Category:\*\* Networking
+
 **Signature:**
 
 ```typescript

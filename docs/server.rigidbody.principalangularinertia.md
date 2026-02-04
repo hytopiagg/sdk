@@ -6,6 +6,8 @@
 
 The principal angular inertia of the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

@@ -4,7 +4,9 @@
 
 ## Entity.parent property
 
-The parent entity of the entity.
+The parent entity, if attached.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

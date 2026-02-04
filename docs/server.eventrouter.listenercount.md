@@ -53,3 +53,5 @@ number
 
 The number of listeners for the event type.
 
+\*\*Category:\*\* Events
+

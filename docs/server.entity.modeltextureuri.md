@@ -4,7 +4,9 @@
 
 ## Entity.modelTextureUri property
 
-The URI or path to the texture that overrides the model entity's default texture.
+The texture URI that overrides the model entity's default texture.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

@@ -4,7 +4,9 @@
 
 ## PlayerInput type
 
-The input state of a Player.
+The input state of a `Player`<!-- -->.
+
+\*\*Category:\*\* Players
 
 **Signature:**
 

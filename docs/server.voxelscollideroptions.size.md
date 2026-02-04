@@ -6,6 +6,8 @@
 
 The size of each voxel in the collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

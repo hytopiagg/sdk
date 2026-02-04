@@ -6,6 +6,10 @@
 
 The options for a voxels collider.
 
+Use for: voxel-based colliders (block volumes). Do NOT use for: simple primitives; prefer analytic shapes when possible.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript
@@ -53,6 +57,8 @@ Description
 
 _(Optional)_ The coordinate of each voxel in the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -88,6 +94,8 @@ _(Optional)_ The coordinate of each voxel in the collider.
 </td><td>
 
 _(Optional)_ The size of each voxel in the collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

@@ -4,7 +4,11 @@
 
 ## WorldManagerEvent enum
 
-Event types a WorldManager instance can emit to the global event router. See [WorldManagerEventPayloads](./server.worldmanagereventpayloads.md) for the payloads.
+Event types a WorldManager instance can emit to the global event router.
+
+See `WorldManagerEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 **Signature:**
 

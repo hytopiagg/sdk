@@ -6,6 +6,8 @@
 
 The rotations of the blocks in the chunk as a map of block index to rotation.
 
+\*\*Category:\*\* Blocks
+
 **Signature:**
 
 ```typescript

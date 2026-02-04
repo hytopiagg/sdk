@@ -4,7 +4,9 @@
 
 ## PlayerUI.freezePointerLock() method
 
-Freezes or unfreezes the player's pointer lock state. Preventing player inputs from automatically locking or unlocking the pointer relative to its current state.
+Freezes or unfreezes the player's pointer lock state.
+
+Use for: menus or cutscenes that should not alter pointer lock.
 
 **Signature:**
 
@@ -42,7 +44,13 @@ boolean
 
 </td><td>
 
-Set true to freeze the pointer lock state, false to unfreeze it.
+True to freeze pointer lock, false to unfreeze it.
+
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerUIEvent.FREEZE_POINTER_LOCK`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>

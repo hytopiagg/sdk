@@ -4,7 +4,9 @@
 
 ## Chunk.blocks property
 
-The blocks in the chunk as a flat Uint8Array\[4096\], each index as 0 or a block type id.
+The blocks in the chunk as a flat Uint8Array\[4096\], each index as 0 or a block type ID.
+
+\*\*Category:\*\* Blocks
 
 **Signature:**
 

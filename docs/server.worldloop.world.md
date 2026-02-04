@@ -4,7 +4,9 @@
 
 ## WorldLoop.world property
 
-The world that the loop manages.
+The world this loop manages.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

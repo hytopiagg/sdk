@@ -44,6 +44,8 @@ bouncinessCombineRule
 
 The bounciness combine rule of the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

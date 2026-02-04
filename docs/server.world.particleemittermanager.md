@@ -4,7 +4,9 @@
 
 ## World.particleEmitterManager property
 
-The particle emitter manager for the world.
+The particle emitter manager for this world.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

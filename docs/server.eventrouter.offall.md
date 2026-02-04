@@ -44,6 +44,10 @@ TEventType
 
 _(Optional)_ The type of event to remove all listeners from.
 
+\*\*Side effects:\*\* Clears listeners and final listeners for the event type.
+
+\*\*Category:\*\* Events
+
 
 </td></tr>
 </tbody></table>

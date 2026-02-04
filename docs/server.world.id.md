@@ -6,6 +6,8 @@
 
 The unique ID of the world.
 
+\*\*Category:\*\* Core
+
 **Signature:**
 
 ```typescript

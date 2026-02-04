@@ -6,6 +6,8 @@
 
 Moves the entity at a given speed in a straight line to a target coordinate.
 
+Use for: simple straight-line movement. Do NOT use for: obstacle avoidance; use `PathfindingEntityController`<!-- -->.
+
 **Signature:**
 
 ```typescript
@@ -75,6 +77,8 @@ options
 </td><td>
 
 _(Optional)_ Additional options for the move operation, such as callbacks.
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>

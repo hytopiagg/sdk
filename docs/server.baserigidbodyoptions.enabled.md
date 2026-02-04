@@ -6,6 +6,8 @@
 
 Whether the rigid body is enabled.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

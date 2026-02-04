@@ -4,7 +4,9 @@
 
 ## DefaultPlayerEntityController class
 
-The player entity controller implementation.
+The default player entity controller implementation.
+
+When to use: player-controlled avatars using `DefaultPlayerEntity`<!-- -->. Do NOT use for: NPCs or non-player entities; use `SimpleEntityController` or `PathfindingEntityController` instead.
 
 **Signature:**
 
@@ -15,7 +17,7 @@ export default class DefaultPlayerEntityController extends BaseEntityController
 
 ## Remarks
 
-This class extends [BaseEntityController](./server.baseentitycontroller.md) and implements the default movement, platforming, jump, swimming, and other basic logic for the default player entity. We recommend you extend this class if you'd like to implement additional logic on top of the DefaultPlayerEntityController implementation.
+Extends `BaseEntityController` and implements default movement, platforming, jumping, and swimming. You can extend this class to add custom logic.
 
 <h2>Coordinate System &amp; Model Orientation</h2>
 
@@ -35,6 +37,7 @@ myEntity.setController(new DefaultPlayerEntityController({
 // Spawn the entity in the world.
 myEntity.spawn(world, { x: 53, y: 10, z: 23 });
 ```
+\*\*Category:\*\* Controllers
 
 ## Constructors
 
@@ -283,6 +286,8 @@ boolean
 
 Whether the entity is moving from player inputs.
 
+\*\*Category:\*\* Controllers
+
 
 </td></tr>
 <tr><td>
@@ -304,6 +309,8 @@ boolean
 
 Whether the entity is grounded.
 
+\*\*Category:\*\* Controllers
+
 
 </td></tr>
 <tr><td>
@@ -323,7 +330,7 @@ boolean
 
 </td><td>
 
-Whether the entity is on a platform, a platform is any entity with a kinematic rigid body.
+Whether the entity is on a platform.
 
 
 </td></tr>
@@ -344,7 +351,7 @@ boolean
 
 </td><td>
 
-Whether the entity is swimming, this is determined by if the entity is in a liquid block.
+Whether the entity is swimming.
 
 
 </td></tr>
@@ -442,6 +449,8 @@ The upward velocity applied to the entity when it jumps.
 </td><td>
 
 The platform the entity is on, if any.
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>

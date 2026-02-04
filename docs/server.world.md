@@ -4,7 +4,9 @@
 
 ## World class
 
-Represents a world in the game server.
+Represents an isolated simulation space (a world) on the server.
+
+When to use: your primary container for game objects, physics, and players. Use multiple worlds to run separate rooms, arenas, or instances. Do NOT use for: cross-world global state; keep that in your own services or `GameServer`<!-- -->.
 
 **Signature:**
 
@@ -17,22 +19,24 @@ export default class World extends EventRouter implements protocol.Serializable
 
 ## Remarks
 
-Worlds are the primary container for game objects and interactions. A game can have multiple worlds running simultaneously, each uniquely isolated from each other. Players who have joined your server can be assigned to a world programmatically by your game logic if desired. This is useful for things like mini-games, or complex dungeons with multiple floors that can be optimized by splitting them into seperate world or "room" simulations, etc. In most cases, the single automatically created default world is all you need, but this flexibility is available for more complex games.
+Prefer creating worlds via `WorldManager.createWorld` or `WorldManager.getDefaultWorld` so IDs and lifecycle are managed consistently.
+
+Initialization: - Call `World.start` to begin ticking (auto-started when created by `WorldManager`<!-- -->). - Use `set*` methods for runtime lighting or skybox changes.
 
 <h2>Events</h2>
 
-This class is an EventRouter, and instances of it emit events with payloads listed under [WorldEventPayloads](./server.worldeventpayloads.md)
+This class is an EventRouter, and instances of it emit events with payloads listed under `WorldEventPayloads`<!-- -->.
 
 ## Example
 
 
 ```typescript
-const world = new World({
-  id: 1,
+const world = WorldManager.instance.createWorld({
   name: 'My World',
   skyboxUri: 'skyboxes/partly-cloudy',
 });
 ```
+\*\*Category:\*\* Core
 
 ## Constructors
 
@@ -62,7 +66,9 @@ Description
 
 </td><td>
 
-Constructs a new instance of the `World` class
+Creates a world instance with the provided options.
+
+Use for: direct construction only when you need custom lifecycle control. Do NOT use for: routine world creation; prefer `WorldManager.createWorld`<!-- -->.
 
 
 </td></tr>
@@ -110,6 +116,8 @@ Description
 
 The color of the ambient light.
 
+\*\*Category:\*\* Core
+
 
 </td></tr>
 <tr><td>
@@ -131,6 +139,8 @@ number
 
 The intensity of the ambient light.
 
+\*\*Category:\*\* Core
+
 
 </td></tr>
 <tr><td>
@@ -150,7 +160,9 @@ The intensity of the ambient light.
 
 </td><td>
 
-The audio manager for the world.
+The audio manager for this world.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -171,7 +183,9 @@ The audio manager for the world.
 
 </td><td>
 
-The block type registry for the world.
+The block type registry for this world.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -192,7 +206,9 @@ The block type registry for the world.
 
 </td><td>
 
-The chat manager for the world.
+The chat manager for this world.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -213,7 +229,9 @@ The chat manager for the world.
 
 </td><td>
 
-The chunk lattice for the world.
+The chunk lattice for this world.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -236,6 +254,8 @@ The chunk lattice for the world.
 
 The color of the directional light.
 
+\*\*Category:\*\* Core
+
 
 </td></tr>
 <tr><td>
@@ -257,6 +277,8 @@ number
 
 The intensity of the directional light.
 
+\*\*Category:\*\* Core
+
 
 </td></tr>
 <tr><td>
@@ -276,7 +298,9 @@ The intensity of the directional light.
 
 </td><td>
 
-The position the directional light originates from.
+The position the directional light originates from (relative to the camera).
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -297,7 +321,9 @@ The position the directional light originates from.
 
 </td><td>
 
-The entity manager for the world.
+The entity manager for this world.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -318,7 +344,9 @@ The entity manager for the world.
 
 </td><td>
 
-The color of the fog, if not explicitly set, defaults to ambient light color.
+The fog color, or undefined to use ambient light color.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -341,6 +369,8 @@ number
 
 The maximum distance from the camera at which fog stops being applied.
 
+\*\*Category:\*\* Core
+
 
 </td></tr>
 <tr><td>
@@ -361,6 +391,8 @@ number
 </td><td>
 
 The minimum distance from the camera to start applying fog.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -383,6 +415,8 @@ number
 
 The unique ID of the world.
 
+\*\*Category:\*\* Core
+
 
 </td></tr>
 <tr><td>
@@ -402,7 +436,7 @@ The unique ID of the world.
 
 </td><td>
 
-The world loop for the world.
+The world loop that drives ticking for this world.
 
 
 </td></tr>
@@ -425,6 +459,8 @@ string
 
 The name of the world.
 
+\*\*Category:\*\* Core
+
 
 </td></tr>
 <tr><td>
@@ -444,7 +480,9 @@ The name of the world.
 
 </td><td>
 
-The particle emitter manager for the world.
+The particle emitter manager for this world.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -465,7 +503,9 @@ The particle emitter manager for the world.
 
 </td><td>
 
-The scene UI manager for the world.
+The scene UI manager for this world.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -486,7 +526,9 @@ The scene UI manager for the world.
 
 </td><td>
 
-The simulation for the world.
+The physics simulation for this world.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -509,6 +551,8 @@ number
 
 The intensity of the world's skybox brightness.
 
+\*\*Category:\*\* Core
+
 
 </td></tr>
 <tr><td>
@@ -528,7 +572,9 @@ string
 
 </td><td>
 
-The URI of the skybox cubemap for the world.
+The URI of the skybox cubemap for this world.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -549,7 +595,9 @@ string \| undefined
 
 </td><td>
 
-An arbitrary identifier tag of the world. Useful for your own logic.
+An arbitrary identifier tag for your own logic.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -583,7 +631,9 @@ Description
 
 </td><td>
 
-Loads a map into the world, clearing any prior map.
+Loads a map into the world, replacing any prior map contents.
+
+Use for: initializing or fully resetting a world from serialized map data. Do NOT use for: incremental edits while players are actively interacting with the world.
 
 
 </td></tr>
@@ -653,7 +703,7 @@ Sets the intensity of the world's directional light.
 
 </td><td>
 
-Sets the position the world's directional light originates from relative to a player's camera position.
+Sets the position the world's directional light originates from relative to a player's camera.
 
 
 </td></tr>
@@ -737,7 +787,13 @@ Sets the cubemap URI of the world's skybox.
 
 </td><td>
 
-Starts the world loop, which begins ticking physics, entities, etc.
+Starts the world loop, which begins ticking physics, entities, and networking.
+
+Use for: resuming a previously stopped world. Do NOT use for: standard world creation when using `WorldManager.createWorld` (it auto-starts).
+
+\*\*Side effects:\*\* Emits `WorldEvent.START`<!-- -->.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -751,7 +807,13 @@ Starts the world loop, which begins ticking physics, entities, etc.
 
 </td><td>
 
-Stops the world loop, which stops ticking physics, entities, etc.
+Stops the world loop, pausing physics, entities, and networking ticks.
+
+Use for: pausing a world or preparing for a full map reset. Do NOT use for: disconnecting players; they remain assigned to this world.
+
+\*\*Side effects:\*\* Emits `WorldEvent.STOP`<!-- -->.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>

@@ -6,6 +6,8 @@
 
 The shoulder angle of the camera in degrees.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

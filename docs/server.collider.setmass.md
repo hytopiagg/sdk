@@ -44,6 +44,8 @@ number
 
 The mass of the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

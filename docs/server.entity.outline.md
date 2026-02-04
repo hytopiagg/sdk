@@ -6,6 +6,8 @@
 
 The outline rendering options for the entity.
 
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

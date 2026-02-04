@@ -6,6 +6,8 @@
 
 Retrieves all loaded audio instances attached to a specific entity.
 
+Use for: cleanup when despawning an entity with positional audio.
+
 **Signature:**
 
 ```typescript
@@ -52,4 +54,6 @@ The entity to get attached audio instances for.
 [Audio](./server.audio.md)<!-- -->\[\]
 
 An array of audio instances.
+
+\*\*Requires:\*\* Entity should belong to this world for meaningful results.
 

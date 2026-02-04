@@ -17,3 +17,5 @@ getConnectedPlayers(): Player[];
 
 An array of all connected players.
 
+\*\*Category:\*\* Players
+

@@ -44,6 +44,10 @@ number
 
 The intensity.
 
+\*\*Side effects:\*\* Emits `WorldEvent.SET_SKYBOX_INTENSITY`<!-- -->.
+
+\*\*Category:\*\* Core
+
 
 </td></tr>
 </tbody></table>

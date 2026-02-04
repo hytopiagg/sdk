@@ -6,6 +6,10 @@
 
 The options for a trimesh collider.
 
+Use for: mesh-based colliders from model data. Do NOT use for: simple primitives; prefer analytic shapes when possible.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript
@@ -53,6 +57,8 @@ Uint32Array
 
 _(Optional)_ The indices of the trimesh collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -88,6 +94,8 @@ Float32Array
 </td><td>
 
 _(Optional)_ The vertices of the trimesh collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

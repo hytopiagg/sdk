@@ -17,3 +17,5 @@ getAllEntities(): Entity[];
 
 All spawned entities in the world.
 
+\*\*Category:\*\* Entities
+

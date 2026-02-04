@@ -6,6 +6,8 @@
 
 The simulation the rigid body is in. If provided, the rigid body will be automatically added to the simulation.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

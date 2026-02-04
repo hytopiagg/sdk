@@ -4,7 +4,9 @@
 
 ## Player.world property
 
-The current [World](./server.world.md) the player is in.
+The current `World` the player is in, or undefined if not yet joined.
+
+\*\*Category:\*\* Players
 
 **Signature:**
 

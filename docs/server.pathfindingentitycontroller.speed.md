@@ -4,7 +4,9 @@
 
 ## PathfindingEntityController.speed property
 
-The speed of the entity.
+The speed used for path movement.
+
+\*\*Category:\*\* Controllers
 
 **Signature:**
 

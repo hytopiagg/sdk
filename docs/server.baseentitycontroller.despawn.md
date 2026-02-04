@@ -44,6 +44,8 @@ entity
 
 The entity being despawned.
 
+\*\*Category:\*\* Controllers
+
 
 </td></tr>
 </tbody></table>

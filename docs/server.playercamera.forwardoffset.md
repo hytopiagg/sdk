@@ -4,10 +4,17 @@
 
 ## PlayerCamera.forwardOffset property
 
-Only used in first-person mode. The forward offset of the camera. A positive number shifts the camera forward, a negative number shifts it backward.
+The forward offset of the camera (first-person mode only).
 
 **Signature:**
 
 ```typescript
 get forwardOffset(): number;
 ```
+
+## Remarks
+
+Positive shifts forward, negative shifts backward.
+
+\*\*Category:\*\* Players
+

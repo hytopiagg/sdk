@@ -4,7 +4,9 @@
 
 ## WorldLoop.currentTick property
 
-The current tick of the world loop.
+The current tick count of the world loop.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

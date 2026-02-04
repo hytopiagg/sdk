@@ -6,6 +6,10 @@
 
 Options for creating a PlayerEntity instance.
 
+Use for: creating a player-bound entity (requires `player`<!-- -->). Do NOT use for: non-player entities; use `EntityOptions`<!-- -->.
+
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

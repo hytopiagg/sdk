@@ -4,7 +4,9 @@
 
 ## Chunk class
 
-A 16^3 chunk of blocks. Used to represent a world's terrain.
+A 16^3 chunk of blocks representing a slice of world terrain.
+
+When to use: reading chunk data or working with bulk block operations. Do NOT use for: creating terrain directly; prefer `ChunkLattice`<!-- -->.
 
 **Signature:**
 
@@ -15,7 +17,13 @@ export default class Chunk implements protocol.Serializable
 
 ## Remarks
 
-Chunks make up the bulk of the terrain in a world. Chunks are fixed size, each containing 16^3 possible blocks as a 16x16x16 cube. Chunks are primarily a data structure used by [ChunkLattice](./server.chunklattice.md) to represent a world's terrain. Chunks store their internal block coordinates in local space, meaning local coordinates x: 0...15, y: 0...15, z: 0...15.
+Chunks are fixed-size (16×16×16) and store block IDs by local coordinates.
+
+<h2>Coordinate System</h2>
+
+- \*\*Global (world) coordinates:\*\* integer block positions in world space. - \*\*Chunk origin:\*\* the world coordinate at the chunk's minimum corner (multiples of 16). - \*\*Local coordinates:\*\* 0..15 per axis within the chunk.
+
+\*\*Category:\*\* Blocks
 
 ## Constructors
 
@@ -93,6 +101,8 @@ Readonly&lt;Map&lt;number, [BlockRotation](./server.blockrotation.md)<!-- -->&gt
 
 The rotations of the blocks in the chunk as a map of block index to rotation.
 
+\*\*Category:\*\* Blocks
+
 
 </td></tr>
 <tr><td>
@@ -112,7 +122,9 @@ Readonly&lt;Uint8Array&gt;
 
 </td><td>
 
-The blocks in the chunk as a flat Uint8Array\[4096\], each index as 0 or a block type id.
+The blocks in the chunk as a flat Uint8Array\[4096\], each index as 0 or a block type ID.
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>
@@ -133,7 +145,9 @@ The blocks in the chunk as a flat Uint8Array\[4096\], each index as 0 or a block
 
 </td><td>
 
-The origin coordinate of the chunk.
+The origin coordinate of the chunk (world-space, multiples of 16).
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>
@@ -169,7 +183,7 @@ Description
 
 </td><td>
 
-Convert a block index to a local coordinate.
+Converts a block index to a local coordinate.
 
 
 </td></tr>
@@ -183,7 +197,7 @@ Convert a block index to a local coordinate.
 
 </td><td>
 
-Get the block type id at a specific local coordinate.
+Gets the block type ID at a specific local coordinate.
 
 
 </td></tr>
@@ -197,7 +211,7 @@ Get the block type id at a specific local coordinate.
 
 </td><td>
 
-Get the rotation of a block at a specific local coordinate.
+Gets the rotation of a block at a specific local coordinate.
 
 
 </td></tr>
@@ -213,7 +227,7 @@ Get the rotation of a block at a specific local coordinate.
 
 </td><td>
 
-Convert a global coordinate to a local coordinate.
+Converts a global coordinate to a local coordinate.
 
 
 </td></tr>
@@ -229,7 +243,7 @@ Convert a global coordinate to a local coordinate.
 
 </td><td>
 
-Convert a global coordinate to an origin coordinate.
+Converts a global coordinate to a chunk origin coordinate.
 
 
 </td></tr>
@@ -243,7 +257,7 @@ Convert a global coordinate to an origin coordinate.
 
 </td><td>
 
-Check if a block exists at a specific local coordinate.
+Checks if a block exists at a specific local coordinate.
 
 
 </td></tr>

@@ -11,3 +11,10 @@ The unique identifier for the entity.
 ```typescript
 get id(): number | undefined;
 ```
+
+## Remarks
+
+Assigned when the entity is spawned.
+
+\*\*Category:\*\* Entities
+

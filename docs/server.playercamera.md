@@ -6,6 +6,8 @@
 
 The camera for a Player.
 
+When to use: controlling a player's view, mode, and camera offsets. Do NOT use for: moving the player or entities; use entity movement APIs.
+
 **Signature:**
 
 ```typescript
@@ -17,11 +19,11 @@ export default class PlayerCamera extends EventRouter implements protocol.Serial
 
 ## Remarks
 
-The camera is used to render the player's view of the world. The player's camera exposes functionality to control the camera of a player. All player objects have a camera, accessible via [Player.camera](./server.player.camera.md)<!-- -->.
+Access via `Player.camera`<!-- -->. Most operations require the player to be in a world.
 
 <h2>Events</h2>
 
-This class is an EventRouter, and instances of it emit events with payloads listed under [PlayerCameraEventPayloads](./server.playercameraeventpayloads.md)
+This class is an EventRouter, and instances of it emit events with payloads listed under `PlayerCameraEventPayloads`<!-- -->.
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `PlayerCamera` class.
 
@@ -31,6 +33,7 @@ The constructor for this class is marked as internal. Third-party code should no
 ```typescript
 player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
 ```
+\*\*Category:\*\* Players
 
 ## Properties
 
@@ -74,6 +77,8 @@ Description
 
 The entity the camera is attached to.
 
+\*\*Category:\*\* Players
+
 
 </td></tr>
 <tr><td>
@@ -94,6 +99,8 @@ The entity the camera is attached to.
 </td><td>
 
 The position the camera is attached to.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -116,6 +123,8 @@ The position the camera is attached to.
 
 The facing direction vector of the camera based on its current orientation.
 
+\*\*Category:\*\* Players
+
 
 </td></tr>
 <tr><td>
@@ -137,6 +146,8 @@ The facing direction vector of the camera based on its current orientation.
 
 The quaternion representing the camera's facing direction.
 
+\*\*Category:\*\* Players
+
 
 </td></tr>
 <tr><td>
@@ -156,7 +167,7 @@ number
 
 </td><td>
 
-The film offset of the camera. A positive value shifts the camera right, a negative value shifts it left.
+The film offset of the camera.
 
 
 </td></tr>
@@ -177,7 +188,7 @@ number
 
 </td><td>
 
-Only used in first-person mode. The forward offset of the camera. A positive number shifts the camera forward, a negative number shifts it backward.
+The forward offset of the camera (first-person mode only).
 
 
 </td></tr>
@@ -200,6 +211,8 @@ number
 
 The field of view of the camera.
 
+\*\*Category:\*\* Players
+
 
 </td></tr>
 <tr><td>
@@ -221,6 +234,8 @@ The field of view of the camera.
 
 The mode of the camera.
 
+\*\*Category:\*\* Players
+
 
 </td></tr>
 <tr><td>
@@ -240,7 +255,7 @@ Set&lt;string&gt;
 
 </td><td>
 
-The nodes of the model the camera is attached to that will not be rendered for the player. Uses case insensitive substring matching.
+Model nodes that will not be rendered for this player.
 
 
 </td></tr>
@@ -261,7 +276,7 @@ Set&lt;string&gt;
 
 </td><td>
 
-The nodes of the model the camera is attached to that will be rendered for the player, overriding hidden nodes. Uses case insensitive substring matching.
+Model nodes that will be rendered for this player, overriding hidden nodes.
 
 
 </td></tr>
@@ -282,7 +297,9 @@ The nodes of the model the camera is attached to that will be rendered for the p
 
 </td><td>
 
-The relative offset of the camera from the entity or position it is attached to.
+The relative offset of the camera from its attachment target.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -326,6 +343,8 @@ The current orientation of the camera.
 
 The player that the camera belongs to.
 
+\*\*Category:\*\* Players
+
 
 </td></tr>
 <tr><td>
@@ -347,6 +366,8 @@ number
 
 The shoulder angle of the camera in degrees.
 
+\*\*Category:\*\* Players
+
 
 </td></tr>
 <tr><td>
@@ -366,7 +387,9 @@ The shoulder angle of the camera in degrees.
 
 </td><td>
 
-The entity the camera will constantly look at, even if the camera attached or tracked entity moves.
+The entity the camera will constantly look at, if set.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -387,7 +410,9 @@ The entity the camera will constantly look at, even if the camera attached or tr
 
 </td><td>
 
-The position the camera will constantly look at, even if the camera attached entity moves.
+The position the camera will constantly look at, if set.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -409,6 +434,8 @@ number
 </td><td>
 
 The zoom of the camera.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -442,7 +469,9 @@ Description
 
 </td><td>
 
-Makes the camera look at an entity. If the camera was previously tracking an entity or position, it will stop tracking.
+Makes the camera look at an entity once.
+
+Use for: one-off focus moments (e.g., cutscene beats). Do NOT use for: continuous tracking; use `PlayerCamera.setTrackedEntity`<!-- -->.
 
 
 </td></tr>
@@ -456,7 +485,9 @@ Makes the camera look at an entity. If the camera was previously tracking an ent
 
 </td><td>
 
-Makes the camera look at a position. If the camera was previously tracking an entity or position, it will stop tracking.
+Makes the camera look at a position once.
+
+Use for: one-off focus moments (e.g., points of interest). Do NOT use for: continuous tracking; use `PlayerCamera.setTrackedPosition`<!-- -->.
 
 
 </td></tr>
@@ -470,7 +501,9 @@ Makes the camera look at a position. If the camera was previously tracking an en
 
 </td><td>
 
-Resets the camera to its default, unattached, spectator mode state.
+Resets the camera state on the server.
+
+Use for: clearing camera state on disconnect or reconnect.
 
 
 </td></tr>
@@ -484,7 +517,9 @@ Resets the camera to its default, unattached, spectator mode state.
 
 </td><td>
 
-Sets the entity the camera is attached to.
+Attaches the camera to an entity.
+
+Use for: third-person follow cameras or entity-bound views. Do NOT use for: tracking an entity without attachment; use `PlayerCamera.setTrackedEntity`<!-- -->.
 
 
 </td></tr>
@@ -498,7 +533,9 @@ Sets the entity the camera is attached to.
 
 </td><td>
 
-Sets the position the camera is attached to.
+Attaches the camera to a world position.
+
+Use for: fixed cameras or cinematic shots. Do NOT use for: tracking a moving target; use `PlayerCamera.setTrackedPosition`<!-- -->.
 
 
 </td></tr>
@@ -512,7 +549,7 @@ Sets the position the camera is attached to.
 
 </td><td>
 
-Sets the film offset of the camera. A positive value shifts the camera right, a negative value shifts it left.
+Sets the film offset of the camera.
 
 
 </td></tr>
@@ -526,7 +563,7 @@ Sets the film offset of the camera. A positive value shifts the camera right, a 
 
 </td><td>
 
-Only used in first-person mode. Sets the forward offset of the camera. A positive value shifts the camera forward, a negative value shifts it backward.
+Sets the forward offset of the camera (first-person mode only).
 
 
 </td></tr>
@@ -568,7 +605,7 @@ Sets the mode of the camera.
 
 </td><td>
 
-Sets the nodes of the model the camera is attached to that will not be rendered for the player. Uses case insensitive substring matching.
+Sets model nodes that will not be rendered for this player.
 
 
 </td></tr>
@@ -582,7 +619,7 @@ Sets the nodes of the model the camera is attached to that will not be rendered 
 
 </td><td>
 
-Sets the nodes of the model the camera is attached to that will be rendered for the player, overriding hidden nodes. Uses case insensitive substring matching.
+Sets model nodes that will be rendered for this player, overriding hidden nodes.
 
 
 </td></tr>
@@ -596,7 +633,7 @@ Sets the nodes of the model the camera is attached to that will be rendered for 
 
 </td><td>
 
-Sets the relative offset of the camera from the entity or position it is attached to.
+Sets the relative offset of the camera from its attachment target.
 
 
 </td></tr>
@@ -610,7 +647,7 @@ Sets the relative offset of the camera from the entity or position it is attache
 
 </td><td>
 
-Only used in third-person mode. Sets the shoulder angle of the camera in degrees. A positive value shifts the camera to the right, a negative value shifts it to the left.
+Sets the shoulder angle of the camera in degrees (third-person mode only).
 
 
 </td></tr>
@@ -624,7 +661,9 @@ Only used in third-person mode. Sets the shoulder angle of the camera in degrees
 
 </td><td>
 
-Sets the entity the camera will constantly look at, even if the camera attached or tracked entity moves.
+Sets the entity the camera will continuously look at.
+
+Use for: keeping the camera focused on a moving entity.
 
 
 </td></tr>
@@ -638,7 +677,9 @@ Sets the entity the camera will constantly look at, even if the camera attached 
 
 </td><td>
 
-Sets the position the camera will constantly look at, even if the camera attached entity moves.
+Sets the position the camera will continuously look at.
+
+Use for: fixed focal points in the scene.
 
 
 </td></tr>

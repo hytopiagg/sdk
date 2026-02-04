@@ -4,7 +4,11 @@
 
 ## FaceOptions type
 
-Options for the [SimpleEntityController.face()](./server.simpleentitycontroller.face.md) method.
+Options for `SimpleEntityController.face`<!-- -->.
+
+Use for: customizing a single `face()` call (callbacks, completion). Do NOT use for: persistent defaults; use `SimpleEntityControllerOptions`<!-- -->.
+
+\*\*Category:\*\* Controllers
 
 **Signature:**
 

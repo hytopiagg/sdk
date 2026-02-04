@@ -53,3 +53,5 @@ The world to get connected players for.
 
 An array of all connected players in the world.
 
+\*\*Category:\*\* Players
+

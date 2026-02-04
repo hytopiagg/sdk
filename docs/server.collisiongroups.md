@@ -6,6 +6,8 @@
 
 A set of collision groups.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

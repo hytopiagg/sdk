@@ -44,6 +44,8 @@ string
 
 The tag of the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

@@ -6,6 +6,8 @@
 
 A raw collider object from the Rapier physics engine.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

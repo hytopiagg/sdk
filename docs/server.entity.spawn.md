@@ -6,6 +6,8 @@
 
 Spawns the entity in the world.
 
+Use for: placing the entity into a world so it simulates and syncs to clients. Do NOT use for: reusing a single entity instance across multiple worlds.
+
 **Signature:**
 
 ```typescript
@@ -75,6 +77,12 @@ rotation
 </td><td>
 
 _(Optional)_ The optional rotation to spawn the entity with.
+
+\*\*Requires:\*\* Entity must not already be spawned.
+
+\*\*Side effects:\*\* Registers the entity, adds it to the simulation, and emits `EntityEvent.SPAWN`<!-- -->.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>

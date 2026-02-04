@@ -53,6 +53,8 @@ The options for the child colliders to add to the rigid body.
 
 The child colliders that were added to the rigid body.
 
+\*\*Category:\*\* Physics
+
 ## Remarks
 
 If the rigid body is not simulated, the colliders will be added to the rigid body as pending child colliders and also simulated when the rigid body is simulated.

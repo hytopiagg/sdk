@@ -4,7 +4,11 @@
 
 ## ModelRegistry.optimize property
 
-Whether to generate optimized models if needed. Defaults to `true` in development, `false` in production.
+Whether to generate optimized models if needed.
+
+Defaults to `true` in development, `false` in production.
+
+\*\*Category:\*\* Models
 
 **Signature:**
 

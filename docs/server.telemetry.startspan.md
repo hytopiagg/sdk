@@ -87,4 +87,5 @@ const result = Telemetry.startSpan({
   return processEntities(entities);
 });
 ```
+\*\*Category:\*\* Telemetry
 

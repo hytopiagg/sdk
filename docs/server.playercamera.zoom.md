@@ -6,6 +6,8 @@
 
 The zoom of the camera.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

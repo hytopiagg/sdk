@@ -4,7 +4,9 @@
 
 ## World.chatManager property
 
-The chat manager for the world.
+The chat manager for this world.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

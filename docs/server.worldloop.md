@@ -6,6 +6,8 @@
 
 Manages the tick loop for a world.
 
+When to use: advanced scheduling or instrumentation of a world's tick cycle. Do NOT use for: normal lifecycle control—use `World.start` and `World.stop`<!-- -->.
+
 **Signature:**
 
 ```typescript
@@ -17,21 +19,13 @@ export default class WorldLoop extends EventRouter
 
 The world loop automatically handles ticking physics, entities, and other world logic.
 
-The internal order of tick operations is as follows:
-
-1. Update chunks and meshing
-
-2. Tick entity logic
-
-3. Step physics
-
-4. Check and emit entity updates
-
-5. Synchronize network packets with player clients
+The internal order of tick operations is: 1) Tick entity logic 2) Step physics 3) Check and emit entity updates 4) Synchronize network packets with player clients
 
 <h2>Events</h2>
 
-This class is an EventRouter, and instances of it emit events with payloads listed under [WorldLoopEventPayloads](./server.worldloopeventpayloads.md)
+This class is an EventRouter, and instances of it emit events with payloads listed under `WorldLoopEventPayloads`<!-- -->.
+
+\*\*Category:\*\* Core
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `WorldLoop` class.
 
@@ -75,7 +69,9 @@ number
 
 </td><td>
 
-The current tick of the world loop.
+The current tick count of the world loop.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -98,6 +94,8 @@ boolean
 
 Whether the world loop is started.
 
+\*\*Category:\*\* Core
+
 
 </td></tr>
 <tr><td>
@@ -117,7 +115,9 @@ number
 
 </td><td>
 
-The next tick time in milliseconds.
+The next scheduled tick time in milliseconds.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -140,6 +140,8 @@ number
 
 The fixed timestep of the world loop in seconds.
 
+\*\*Category:\*\* Core
+
 
 </td></tr>
 <tr><td>
@@ -159,7 +161,9 @@ The fixed timestep of the world loop in seconds.
 
 </td><td>
 
-The world that the loop manages.
+The world this loop manages.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>

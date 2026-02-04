@@ -6,6 +6,8 @@
 
 Event payloads for BlockTypeRegistry emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

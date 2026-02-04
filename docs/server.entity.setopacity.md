@@ -44,6 +44,10 @@ number
 
 The opacity of the entity between 0 and 1. 0 is fully transparent, 1 is fully opaque.
 
+\*\*Side effects:\*\* Emits `EntityEvent.SET_OPACITY` when spawned.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>

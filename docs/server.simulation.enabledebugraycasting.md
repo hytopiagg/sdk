@@ -4,7 +4,7 @@
 
 ## Simulation.enableDebugRaycasting() method
 
-Enables or disables debug raycasting for the simulation. This will render lines for the raycast that disappear after a few seconds.
+Enables or disables debug raycasting for the simulation.
 
 **Signature:**
 
@@ -44,10 +44,18 @@ boolean
 
 Whether to enable debug raycasting.
 
+\*\*Side effects:\*\* Emits debug raycast events when `Simulation.raycast` is called.
+
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>
 **Returns:**
 
 void
+
+## Remarks
+
+When enabled, raycasts emit `SimulationEvent.DEBUG_RAYCAST` for visualization.
 

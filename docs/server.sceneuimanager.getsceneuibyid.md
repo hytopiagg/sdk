@@ -53,3 +53,5 @@ The unique identifier (id) of the SceneUI to retrieve.
 
 The SceneUI instance if found, otherwise undefined.
 
+\*\*Category:\*\* UI
+

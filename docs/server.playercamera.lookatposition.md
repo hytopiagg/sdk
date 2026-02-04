@@ -4,7 +4,9 @@
 
 ## PlayerCamera.lookAtPosition() method
 
-Makes the camera look at a position. If the camera was previously tracking an entity or position, it will stop tracking.
+Makes the camera look at a position once.
+
+Use for: one-off focus moments (e.g., points of interest). Do NOT use for: continuous tracking; use `PlayerCamera.setTrackedPosition`<!-- -->.
 
 **Signature:**
 
@@ -43,6 +45,12 @@ position
 </td><td>
 
 The position to look at.
+
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerCameraEvent.LOOK_AT_POSITION`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>

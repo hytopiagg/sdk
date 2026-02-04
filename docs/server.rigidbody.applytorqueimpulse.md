@@ -44,10 +44,16 @@ impulse
 
 The torque impulse to apply to the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>
 **Returns:**
 
 void
+
+## Remarks
+
+Dynamic bodies only; has no effect on fixed or kinematic bodies.
 

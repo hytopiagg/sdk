@@ -4,7 +4,7 @@
 
 ## CollisionGroupsBuilder.buildRawCollisionGroups() method
 
-Builds a raw set of collision groups from a set of collision groups.
+Builds a raw collision group mask from a set of collision groups.
 
 **Signature:**
 
@@ -52,4 +52,6 @@ The set of collision groups to build.
 [RawCollisionGroups](./server.rawcollisiongroups.md)
 
 A raw set of collision groups represented as a 32-bit number.
+
+\*\*Category:\*\* Physics
 

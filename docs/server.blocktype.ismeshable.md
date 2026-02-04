@@ -4,7 +4,9 @@
 
 ## BlockType.isMeshable property
 
-Whether the block type is meshable.
+Whether the block type is meshable (voxel-based).
+
+\*\*Category:\*\* Blocks
 
 **Signature:**
 

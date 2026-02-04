@@ -6,6 +6,8 @@
 
 The payloads for all events in the game server.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,8 @@
 
 Manages audio instances in a world.
 
+When to use: querying or bulk-controlling audio in a specific world. Do NOT use for: individual playback configuration; use `Audio` instances.
+
 **Signature:**
 
 ```typescript
@@ -14,7 +16,7 @@ export default class AudioManager
 
 ## Remarks
 
-The AudioManager is created internally as a singleton for each [World](./server.world.md) instance in a game server. It allows retrieval of all loaded audio, entity attached audio, looped audio, and more.
+The AudioManager is created internally per `World` instance. Audio is loaded on first `Audio.play`<!-- -->; this manager tracks loaded instances. Pattern: call `AudioManager.unregisterEntityAttachedAudios` when despawning entities with positional audio.
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `AudioManager` class.
 
@@ -24,8 +26,9 @@ The constructor for this class is marked as internal. Third-party code should no
 ```typescript
 // Stop all audio in the world
 const audioManager = world.audioManager;
-audioManager.getAllAudios().map(audio => audio.pause());
+audioManager.getAllAudios().forEach(audio => audio.pause());
 ```
+\*\*Category:\*\* Audio
 
 ## Properties
 
@@ -68,6 +71,8 @@ Description
 </td><td>
 
 The world the audio manager is for.
+
+\*\*Category:\*\* Audio
 
 
 </td></tr>
@@ -117,6 +122,8 @@ Retrieves all loaded audio instances for the world.
 
 Retrieves all loaded audio instances attached to a specific entity.
 
+Use for: cleanup when despawning an entity with positional audio.
+
 
 </td></tr>
 <tr><td>
@@ -159,6 +166,8 @@ Retrieves all oneshot (non-looped) audio instances for the world.
 
 Unregisters and stops an audio instance from the audio manager.
 
+Use for: explicit cleanup of one-shot or temporary sounds. Do NOT use for: pausing/resuming; use `Audio.pause` or `Audio.play` instead.
+
 
 </td></tr>
 <tr><td>
@@ -172,6 +181,8 @@ Unregisters and stops an audio instance from the audio manager.
 </td><td>
 
 Unregisters and stops all audio instances attached to a specific entity.
+
+Use for: entity despawn or cleanup scenarios.
 
 
 </td></tr>

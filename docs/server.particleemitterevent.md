@@ -4,7 +4,11 @@
 
 ## ParticleEmitterEvent enum
 
-Event types a ParticleEmitter instance can emit. See [ParticleEmitterEventPayloads](./server.particleemittereventpayloads.md)
+Event types a ParticleEmitter instance can emit.
+
+See `ParticleEmitterEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 **Signature:**
 

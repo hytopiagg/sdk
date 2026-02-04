@@ -4,7 +4,7 @@
 
 ## ChunkLattice.getOrCreateChunk() method
 
-Get the chunk for a given global coordinate, creating it if it doesn't exist.
+Gets the chunk for a given global coordinate, creating it if it doesn't exist.
 
 **Signature:**
 
@@ -53,7 +53,11 @@ The global coordinate of the chunk to get.
 
 The chunk at the given global coordinate (created if needed).
 
+\*\*Side effects:\*\* May create and register a new chunk.
+
+\*\*Category:\*\* Blocks
+
 ## Remarks
 
-\*\*Creates chunk:\*\* If the chunk doesn't exist, creates a new one and emits `ADD_CHUNK`<!-- -->.
+Creates a new chunk and emits `ChunkLatticeEvent.ADD_CHUNK` if needed.
 

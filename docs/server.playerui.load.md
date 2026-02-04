@@ -6,6 +6,8 @@
 
 Loads client UI for the player, replacing any existing UI.
 
+Use for: switching to a new UI screen or resetting the UI. Do NOT use for: incremental overlays; use `PlayerUI.append`<!-- -->.
+
 **Signature:**
 
 ```typescript
@@ -42,7 +44,13 @@ string
 
 </td><td>
 
-The UI HTML uri to load.
+The UI HTML URI to load.
+
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerUIEvent.LOAD`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -53,5 +61,5 @@ void
 
 ## Remarks
 
-If used with `.append()` in the same tick, the load occurs first.
+If used with `PlayerUI.append` in the same tick, the load occurs first.
 

@@ -6,6 +6,8 @@
 
 The orientation mode for particles.
 
+\*\*Category:\*\* Particles
+
 **Signature:**
 
 ```typescript

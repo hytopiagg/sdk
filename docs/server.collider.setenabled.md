@@ -44,6 +44,8 @@ boolean
 
 Whether the collider is enabled.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

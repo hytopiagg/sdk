@@ -6,6 +6,8 @@
 
 Rotates the entity at a given speed to face a target coordinate.
 
+Use for: turning an entity to look at a target without moving it. Do NOT use for: pitch/roll orientation; this rotates yaw only.
+
 **Signature:**
 
 ```typescript
@@ -75,6 +77,8 @@ options
 </td><td>
 
 _(Optional)_ Additional options for the face operation, such as callbacks.
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>

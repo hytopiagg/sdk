@@ -6,6 +6,8 @@
 
 The options for rendering an outline.
 
+\*\*Category:\*\* Types
+
 **Signature:**
 
 ```typescript

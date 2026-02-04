@@ -6,6 +6,8 @@
 
 The gravity scale of the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

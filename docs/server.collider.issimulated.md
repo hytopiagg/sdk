@@ -6,6 +6,8 @@
 
 Whether the collider is simulated.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

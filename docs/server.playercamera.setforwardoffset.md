@@ -4,7 +4,7 @@
 
 ## PlayerCamera.setForwardOffset() method
 
-Only used in first-person mode. Sets the forward offset of the camera. A positive value shifts the camera forward, a negative value shifts it backward.
+Sets the forward offset of the camera (first-person mode only).
 
 **Signature:**
 
@@ -44,10 +44,20 @@ number
 
 The forward offset to set.
 
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerCameraEvent.SET_FORWARD_OFFSET`<!-- -->.
+
+\*\*Category:\*\* Players
+
 
 </td></tr>
 </tbody></table>
 **Returns:**
 
 void
+
+## Remarks
+
+Positive shifts forward, negative shifts backward.
 

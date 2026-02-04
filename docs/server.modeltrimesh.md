@@ -6,6 +6,8 @@
 
 A trimesh for a model.
 
+\*\*Category:\*\* Models
+
 **Signature:**
 
 ```typescript

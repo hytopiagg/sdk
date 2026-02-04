@@ -6,6 +6,8 @@
 
 The playback rate of the entity's model animations.
 
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

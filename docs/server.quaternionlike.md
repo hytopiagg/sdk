@@ -6,6 +6,8 @@
 
 A quaternion.
 
+\*\*Category:\*\* Math
+
 **Signature:**
 
 ```typescript

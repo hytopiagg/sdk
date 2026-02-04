@@ -17,3 +17,5 @@ getAllSceneUIs(): SceneUI[];
 
 An array of SceneUI instances.
 
+\*\*Category:\*\* UI
+

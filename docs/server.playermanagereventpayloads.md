@@ -6,6 +6,8 @@
 
 Event payloads for PlayerManager emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

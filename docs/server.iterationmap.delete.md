@@ -53,3 +53,7 @@ boolean
 
 True if the key existed and was deleted, false otherwise.
 
+\*\*Side effects:\*\* Marks the internal array as dirty.
+
+\*\*Category:\*\* Utilities
+

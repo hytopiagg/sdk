@@ -44,6 +44,10 @@ entity
 
 The entity to unload and unregister SceneUI instances for.
 
+\*\*Requires:\*\* Entity should belong to this world for meaningful results.
+
+\*\*Side effects:\*\* Unloads any attached scene UI and removes it from manager tracking.
+
 
 </td></tr>
 </tbody></table>
@@ -53,5 +57,5 @@ void
 
 ## Remarks
 
-\*\*Cleanup:\*\* Calls `unload()` on each attached SceneUI.
+\*\*Cleanup:\*\* Calls `SceneUI.unload` on each attached SceneUI.
 

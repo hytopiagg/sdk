@@ -6,6 +6,8 @@
 
 The nodes to show on the entity's model, overriding hidden nodes.
 
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

@@ -4,7 +4,9 @@
 
 ## PlayerEntity.isTickWithPlayerInputEnabled property
 
-Whether tickWithPlayerInput() is called during the entity's tick.
+Whether `tickWithPlayerInput()` is called during the entity's tick.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

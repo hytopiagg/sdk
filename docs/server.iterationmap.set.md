@@ -69,3 +69,7 @@ this
 
 The IterationMap instance for chaining.
 
+\*\*Side effects:\*\* May mark the internal array as dirty.
+
+\*\*Category:\*\* Utilities
+

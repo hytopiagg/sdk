@@ -4,10 +4,17 @@
 
 ## PathfindingEntityController.debug property
 
-Whether to enable debug mode or not. When debug mode is enabled, the pathfinding algorithm will log debug information to the console. Defaults to false.
+Whether to enable debug mode.
 
 **Signature:**
 
 ```typescript
 get debug(): boolean;
 ```
+
+## Remarks
+
+When enabled, pathfinding logs debug information to the console.
+
+\*\*Category:\*\* Controllers
+

@@ -4,7 +4,11 @@
 
 ## AudioEvent enum
 
-Event types an Audio instance can emit. See [AudioEventPayloads](./server.audioeventpayloads.md) for the payloads.
+Event types an Audio instance can emit.
+
+See `AudioEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 **Signature:**
 

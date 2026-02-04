@@ -6,6 +6,12 @@
 
 Disconnects the player from the game server.
 
+Use for: kicking a player or enforcing a logout. Do NOT use for: switching worlds; use `Player.joinWorld` instead.
+
+\*\*Side effects:\*\* Emits `PlayerEvent.LEFT_WORLD` if the player is in a world and closes the connection.
+
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript
@@ -14,8 +20,4 @@ disconnect(): void;
 **Returns:**
 
 void
-
-## Remarks
-
-\*\*Event:\*\* Emits `LEFT_WORLD` event before disconnecting if in a world.
 

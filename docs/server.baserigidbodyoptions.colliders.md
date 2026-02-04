@@ -4,7 +4,9 @@
 
 ## BaseRigidBodyOptions.colliders property
 
-The colliders of the rigid body, provided as [ColliderOptions](./server.collideroptions.md)<!-- -->.
+The colliders of the rigid body, provided as `ColliderOptions`<!-- -->.
+
+\*\*Category:\*\* Physics
 
 **Signature:**
 

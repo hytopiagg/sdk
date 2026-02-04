@@ -6,6 +6,8 @@
 
 The global BlockTextureRegistry instance as a singleton.
 
+\*\*Category:\*\* Textures
+
 **Signature:**
 
 ```typescript

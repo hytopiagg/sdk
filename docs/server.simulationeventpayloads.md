@@ -6,6 +6,8 @@
 
 Event payloads for Simulation emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

@@ -4,7 +4,9 @@
 
 ## Entity.width property
 
-The width (x-axis) of the entity's model with scale consideration or block entity's x\*2 half extents.
+The width (X-axis) of the entity's model or block size.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

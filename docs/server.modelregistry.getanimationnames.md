@@ -53,3 +53,7 @@ string\[\]
 
 An array of all known animation names for the model.
 
+\*\*Requires:\*\* Model data must be loaded (server startup).
+
+\*\*Category:\*\* Models
+

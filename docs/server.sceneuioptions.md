@@ -6,6 +6,10 @@
 
 Options for creating a SceneUI instance.
 
+Use for: configuring scene UI before `SceneUI.load`<!-- -->. Do NOT use for: runtime updates after load; use `SceneUI.set*` methods.
+
+\*\*Category:\*\* UI
+
 **Signature:**
 
 ```typescript

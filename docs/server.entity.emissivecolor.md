@@ -6,6 +6,8 @@
 
 The emissive color of the entity.
 
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

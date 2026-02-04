@@ -4,7 +4,9 @@
 
 ## Simulation.isDebugRenderingEnabled property
 
-Whether the simulation has debug rendering enabled.
+Whether debug rendering is enabled.
+
+\*\*Category:\*\* Physics
 
 **Signature:**
 

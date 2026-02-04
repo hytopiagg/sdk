@@ -92,6 +92,8 @@ number
 
 The delta time in milliseconds since the last tick.
 
+\*\*Category:\*\* Controllers
+
 
 </td></tr>
 </tbody></table>

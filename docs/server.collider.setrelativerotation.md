@@ -44,6 +44,8 @@ rotation
 
 The relative rotation of the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

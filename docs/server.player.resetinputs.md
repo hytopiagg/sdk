@@ -4,7 +4,13 @@
 
 ## Player.resetInputs() method
 
-Resets all inputs keys
+Resets all cached input keys for the player.
+
+Use for: clearing stuck input states (e.g., after disconnect or pause).
+
+\*\*Side effects:\*\* Clears the current `PlayerInput` state.
+
+\*\*Category:\*\* Players
 
 **Signature:**
 

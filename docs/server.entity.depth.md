@@ -4,7 +4,9 @@
 
 ## Entity.depth property
 
-The depth (z-axis) of the entity's model with scale consideration or block entity's y\*2 half extents.
+The depth (Z-axis) of the entity's model or block size.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

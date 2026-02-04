@@ -60,6 +60,8 @@ payload
 
 The payload to emit.
 
+\*\*Side effects:\*\* Invokes local listeners and `EventRouter.globalInstance` listeners.
+
 
 </td></tr>
 </tbody></table>

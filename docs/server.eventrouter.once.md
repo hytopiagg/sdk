@@ -60,6 +60,8 @@ listener
 
 The listener function to invoke when the event is emitted.
 
+\*\*Category:\*\* Events
+
 
 </td></tr>
 </tbody></table>

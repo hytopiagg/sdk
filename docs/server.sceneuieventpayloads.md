@@ -6,6 +6,8 @@
 
 Event payloads for SceneUI emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

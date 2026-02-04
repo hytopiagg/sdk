@@ -6,6 +6,8 @@
 
 Whether the rigid body is moving.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

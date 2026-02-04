@@ -53,3 +53,5 @@ boolean
 
 `true` if listeners are found, `false` otherwise.
 
+\*\*Category:\*\* Events
+

@@ -53,6 +53,8 @@ The options for the child collider to add.
 
 The child collider that was added to the rigid body, or null if failed.
 
+\*\*Category:\*\* Physics
+
 ## Remarks
 
 If the rigid body is not simulated, the collider will be added to the rigid body as a pending child collider and also simulated when the rigid body is simulated.

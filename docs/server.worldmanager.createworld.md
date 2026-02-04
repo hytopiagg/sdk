@@ -4,7 +4,9 @@
 
 ## WorldManager.createWorld() method
 
-Creates a new world.
+Creates and starts a new world with a unique ID.
+
+Use for: additional game rooms, arenas, or isolated simulations. Do NOT use for: deferred world creation without starting; this always starts.
 
 **Signature:**
 
@@ -42,7 +44,7 @@ Omit&lt;[WorldOptions](./server.worldoptions.md)<!-- -->, 'id'&gt;
 
 </td><td>
 
-The options for the world.
+The options for the world (ID is assigned automatically).
 
 
 </td></tr>
@@ -53,7 +55,9 @@ The options for the world.
 
 The created world.
 
+\*\*Side effects:\*\* Starts the world's tick loop and emits `WorldManagerEvent.WORLD_CREATED`<!-- -->.
+
 ## Remarks
 
-\*\*Auto-starts:\*\* Automatically starts the world after creation.
+Auto-starts the world after creation.
 

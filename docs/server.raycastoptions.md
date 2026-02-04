@@ -6,6 +6,10 @@
 
 Options for raycasting.
 
+Use for: configuring `Simulation.raycast` calls. Do NOT use for: caching long-term query state; build per query.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

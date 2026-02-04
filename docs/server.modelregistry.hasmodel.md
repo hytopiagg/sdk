@@ -53,3 +53,5 @@ boolean
 
 Whether the model is registered.
 
+\*\*Category:\*\* Models
+

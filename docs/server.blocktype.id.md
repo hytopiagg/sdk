@@ -6,6 +6,8 @@
 
 The unique identifier for the block type.
 
+\*\*Category:\*\* Blocks
+
 **Signature:**
 
 ```typescript

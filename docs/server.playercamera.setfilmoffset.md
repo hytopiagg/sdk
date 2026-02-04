@@ -4,7 +4,7 @@
 
 ## PlayerCamera.setFilmOffset() method
 
-Sets the film offset of the camera. A positive value shifts the camera right, a negative value shifts it left.
+Sets the film offset of the camera.
 
 **Signature:**
 
@@ -44,10 +44,20 @@ number
 
 The film offset to set.
 
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerCameraEvent.SET_FILM_OFFSET`<!-- -->.
+
+\*\*Category:\*\* Players
+
 
 </td></tr>
 </tbody></table>
 **Returns:**
 
 void
+
+## Remarks
+
+Positive shifts right, negative shifts left.
 

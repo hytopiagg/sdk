@@ -44,6 +44,8 @@ entity
 
 The entity being spawned.
 
+\*\*Category:\*\* Controllers
+
 
 </td></tr>
 </tbody></table>

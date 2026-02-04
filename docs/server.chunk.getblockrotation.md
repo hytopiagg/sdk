@@ -4,7 +4,7 @@
 
 ## Chunk.getBlockRotation() method
 
-Get the rotation of a block at a specific local coordinate.
+Gets the rotation of a block at a specific local coordinate.
 
 **Signature:**
 
@@ -51,5 +51,7 @@ The local coordinate of the block to get the rotation of.
 
 [BlockRotation](./server.blockrotation.md)
 
-The rotation of the block, defaults to identity rotation.
+The rotation of the block (defaults to identity rotation).
+
+\*\*Category:\*\* Blocks
 

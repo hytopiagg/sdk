@@ -6,6 +6,8 @@
 
 The camera for the player.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,8 @@
 
 An equipped item of a player's cosmetics.
 
+\*\*Category:\*\* Networking
+
 **Signature:**
 
 ```typescript

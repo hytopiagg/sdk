@@ -60,10 +60,18 @@ emissiveColor
 
 The emissive color of the node.
 
+\*\*Side effects:\*\* Emits `EntityEvent.SET_MODEL_NODE_OVERRIDE` when spawned.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>
 **Returns:**
 
 void
+
+## Remarks
+
+Model entities only; no effect for block entities.
 

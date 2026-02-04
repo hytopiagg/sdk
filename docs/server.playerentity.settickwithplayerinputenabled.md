@@ -4,7 +4,9 @@
 
 ## PlayerEntity.setTickWithPlayerInputEnabled() method
 
-Sets whether tickWithPlayerInput() is called during the entity's tick. Disabling this effectively disables player control of the entity.
+Enables or disables `tickWithPlayerInput()` during the entity's tick.
+
+Use for: temporarily disabling player control (cutscenes, menus, stuns).
 
 **Signature:**
 
@@ -42,7 +44,9 @@ boolean
 
 </td><td>
 
-Whether tickWithPlayerInput() should be called.
+Whether `tickWithPlayerInput()` should be called.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>

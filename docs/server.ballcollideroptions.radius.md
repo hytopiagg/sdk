@@ -6,6 +6,8 @@
 
 The radius of the ball collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

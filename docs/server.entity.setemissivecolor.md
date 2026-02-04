@@ -6,6 +6,8 @@
 
 Sets the emissive color of the entity.
 
+Use for: glow effects or highlighted states.
+
 **Signature:**
 
 ```typescript
@@ -43,6 +45,10 @@ emissiveColor
 </td><td>
 
 The emissive color of the entity.
+
+\*\*Side effects:\*\* Emits `EntityEvent.SET_EMISSIVE_COLOR` when spawned.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>

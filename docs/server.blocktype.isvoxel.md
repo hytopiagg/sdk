@@ -4,7 +4,9 @@
 
 ## BlockType.isVoxel property
 
-Whether the block type is a voxel block.
+Whether the block type uses a voxel collider.
+
+\*\*Category:\*\* Blocks
 
 **Signature:**
 

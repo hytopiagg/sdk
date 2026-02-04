@@ -6,6 +6,8 @@
 
 The emissive intensity of the entity.
 
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,8 @@
 
 Appends UI HTML to the player's existing client UI.
 
+Use for: incremental overlays (notifications, tooltips, modal layers). Do NOT use for: replacing the entire UI; use `PlayerUI.load`<!-- -->.
+
 **Signature:**
 
 ```typescript
@@ -42,7 +44,13 @@ string
 
 </td><td>
 
-The UI HTML uri to append.
+The UI HTML URI to append.
+
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerUIEvent.APPEND`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -53,5 +61,5 @@ void
 
 ## Remarks
 
-Multiple calls in the same tick will append in call order. If used with `.load()` in the same tick, appends occur after the load.
+Multiple calls in the same tick append in call order. If used with `PlayerUI.load` in the same tick, appends occur after the load.
 

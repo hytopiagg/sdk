@@ -6,6 +6,8 @@
 
 The extents of the wedge collider, defining full width (x), height (y), and length (z).
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

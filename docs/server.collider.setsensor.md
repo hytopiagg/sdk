@@ -44,6 +44,8 @@ boolean
 
 Whether the collider is a sensor.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

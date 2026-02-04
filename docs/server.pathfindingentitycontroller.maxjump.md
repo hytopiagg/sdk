@@ -6,6 +6,8 @@
 
 The maximum jump distance the entity can jump.
 
+\*\*Category:\*\* Controllers
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,8 @@
 
 Event payloads for WorldManager emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

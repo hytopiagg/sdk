@@ -6,6 +6,8 @@
 
 The global AssetsLibrary instance as a singleton.
 
+\*\*Category:\*\* Assets
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,8 @@
 
 The player that the UI belongs to.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

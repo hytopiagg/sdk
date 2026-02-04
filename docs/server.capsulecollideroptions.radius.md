@@ -6,6 +6,8 @@
 
 The radius of the capsule collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

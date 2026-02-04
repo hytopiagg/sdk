@@ -6,6 +6,8 @@
 
 The quaternion representing the camera's facing direction.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

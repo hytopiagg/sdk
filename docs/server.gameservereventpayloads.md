@@ -6,6 +6,8 @@
 
 Event payloads for GameServer emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

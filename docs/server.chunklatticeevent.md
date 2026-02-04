@@ -4,7 +4,11 @@
 
 ## ChunkLatticeEvent enum
 
-Event types a ChunkLattice instance can emit. See [ChunkLatticeEventPayloads](./server.chunklatticeeventpayloads.md) for the payloads.
+Event types a ChunkLattice instance can emit.
+
+See `ChunkLatticeEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 **Signature:**
 

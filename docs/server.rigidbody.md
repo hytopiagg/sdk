@@ -6,6 +6,8 @@
 
 Represents a rigid body in a world's physics simulation.
 
+When to use: physics-simulated or kinematic objects that need forces, collisions, or velocity. Do NOT use for: purely visual transforms; use entity transforms without physics when possible.
+
 **Signature:**
 
 ```typescript
@@ -15,7 +17,9 @@ export default class RigidBody extends EventRouter
 
 ## Remarks
 
-Rigid bodies are the core of the physics simulation. They are used to represent physical objects (IE: entities) that can interact with each other.
+Provide `simulation` in `RigidBodyOptions` or call `RigidBody.addToSimulation` to create the underlying physics body. Many methods are type-specific (dynamic vs kinematic); see `RigidBody.setType`<!-- -->.
+
+\*\*Category:\*\* Physics
 
 ## Constructors
 
@@ -45,7 +49,9 @@ Description
 
 </td><td>
 
-Constructs a new instance of the `RigidBody` class
+Creates a rigid body with the provided options.
+
+Use for: configuring physics behavior before adding to a simulation. Do NOT use for: immediate physics queries; the rigid body must be simulated first.
 
 
 </td></tr>
@@ -93,6 +99,8 @@ number
 
 The additional mass of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -113,6 +121,8 @@ number
 </td><td>
 
 The additional solver iterations of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -135,6 +145,8 @@ number
 
 The angular damping of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -155,6 +167,8 @@ The angular damping of the rigid body.
 </td><td>
 
 The angular velocity of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -177,6 +191,8 @@ Set&lt;[Collider](./server.collider.md)<!-- -->&gt;
 
 The colliders of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -197,6 +213,8 @@ The colliders of the rigid body.
 </td><td>
 
 The direction from the rotation of the rigid body. (-Z identity)
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -219,6 +237,8 @@ number
 
 The dominance group of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -239,6 +259,8 @@ The dominance group of the rigid body.
 </td><td>
 
 The effective angular inertia of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -261,6 +283,8 @@ The effective angular inertia of the rigid body.
 
 The effective inverse mass of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -281,6 +305,8 @@ The effective inverse mass of the rigid body.
 </td><td>
 
 The enabled axes of positional movement of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -303,6 +329,8 @@ The enabled axes of positional movement of the rigid body.
 
 The enabled axes of rotational movement of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -323,6 +351,8 @@ number
 </td><td>
 
 The gravity scale of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -345,6 +375,8 @@ number \| undefined
 
 The inverse mass of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -365,6 +397,8 @@ boolean
 </td><td>
 
 Whether the rigid body has continuous collision detection enabled.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -387,6 +421,8 @@ boolean
 
 Whether the rigid body is dynamic.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -407,6 +443,8 @@ boolean
 </td><td>
 
 Whether the rigid body is enabled.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -429,6 +467,8 @@ boolean
 
 Whether the rigid body is fixed.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -449,6 +489,8 @@ boolean
 </td><td>
 
 Whether the rigid body is kinematic.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -471,6 +513,8 @@ boolean
 
 Whether the rigid body is kinematic position based.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -491,6 +535,8 @@ boolean
 </td><td>
 
 Whether the rigid body is kinematic velocity based.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -513,6 +559,8 @@ boolean
 
 Whether the rigid body is moving.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -533,6 +581,8 @@ boolean
 </td><td>
 
 Whether the rigid body has been removed from the simulation.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -555,6 +605,8 @@ boolean
 
 Whether the rigid body is simulated.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -575,6 +627,8 @@ boolean
 </td><td>
 
 Whether the rigid body is sleeping.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -597,6 +651,8 @@ number
 
 The linear damping of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -617,6 +673,8 @@ The linear damping of the rigid body.
 </td><td>
 
 The linear velocity of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -639,6 +697,8 @@ The linear velocity of the rigid body.
 
 The local center of mass of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -659,6 +719,8 @@ number
 </td><td>
 
 The mass of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -681,6 +743,8 @@ The mass of the rigid body.
 
 The next kinematic position of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -701,6 +765,8 @@ The next kinematic position of the rigid body.
 </td><td>
 
 The next kinematic rotation of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -723,6 +789,8 @@ number
 
 The number of colliders in the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -743,6 +811,8 @@ The number of colliders in the rigid body.
 </td><td>
 
 The position of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -765,6 +835,8 @@ The position of the rigid body.
 
 The principal angular inertia of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -785,6 +857,8 @@ The principal angular inertia of the rigid body.
 </td><td>
 
 The principal angular inertia local frame of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -807,6 +881,8 @@ RAPIER.RigidBody \| undefined
 
 The raw RAPIER rigid body instance.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -827,6 +903,8 @@ The raw RAPIER rigid body instance.
 </td><td>
 
 The rotation of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -849,6 +927,8 @@ number
 
 The soft continuous collision detection prediction of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -870,6 +950,8 @@ The soft continuous collision detection prediction of the rigid body.
 
 The type of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -890,6 +972,8 @@ The type of the rigid body.
 </td><td>
 
 The world center of mass of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1065,6 +1149,8 @@ Gets the colliders of the rigid body by tag.
 
 Locks all positional movement of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1078,6 +1164,8 @@ Locks all positional movement of the rigid body.
 </td><td>
 
 Locks all rotations of the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1107,6 +1195,8 @@ Removes the rigid body from the simulation it belongs to.
 
 Resets the angular velocity of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1120,6 +1210,8 @@ Resets the angular velocity of the rigid body.
 </td><td>
 
 Resets the forces actiong on the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1135,6 +1227,8 @@ Resets the forces actiong on the rigid body.
 
 Resets the linear velocity of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1148,6 +1242,8 @@ Resets the linear velocity of the rigid body.
 </td><td>
 
 Resets the torques acting on the rigid body.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -1373,6 +1469,8 @@ Sets the linear velocity of the rigid body.
 
 Sets the next kinematic position of the rigid body.
 
+Use for: kinematic bodies driven by explicit position each tick. Do NOT use for: dynamic bodies; use forces or velocity instead.
+
 
 </td></tr>
 <tr><td>
@@ -1386,6 +1484,8 @@ Sets the next kinematic position of the rigid body.
 </td><td>
 
 Sets the next kinematic rotation of the rigid body.
+
+Use for: kinematic bodies driven by explicit rotation each tick. Do NOT use for: dynamic bodies; use torque or angular velocity instead.
 
 
 </td></tr>
@@ -1457,6 +1557,8 @@ Sets the soft ccd prediction of the rigid body.
 
 Sets the type of the rigid body.
 
+Use for: switching between dynamic, fixed, and kinematic behavior. Do NOT use for: per-tick motion changes; prefer velocity or forces.
+
 
 </td></tr>
 <tr><td>
@@ -1471,6 +1573,8 @@ Sets the type of the rigid body.
 
 Explicitly puts the rigid body to sleep. Physics otherwise optimizes sleeping.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -1484,6 +1588,8 @@ Explicitly puts the rigid body to sleep. Physics otherwise optimizes sleeping.
 </td><td>
 
 Wakes up the rigid body. Physics otherwise optimizes waking it when necessary.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

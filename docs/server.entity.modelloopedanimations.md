@@ -6,6 +6,8 @@
 
 The looped animations to start when the entity is spawned.
 
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

@@ -60,10 +60,16 @@ point
 
 The point at which to apply the impulse.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>
 **Returns:**
 
 void
+
+## Remarks
+
+Dynamic bodies only; has no effect on fixed or kinematic bodies.
 

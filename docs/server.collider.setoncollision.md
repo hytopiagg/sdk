@@ -44,6 +44,8 @@ callback
 
 The on collision callback for the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

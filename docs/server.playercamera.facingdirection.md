@@ -6,6 +6,8 @@
 
 The facing direction vector of the camera based on its current orientation.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

@@ -44,6 +44,8 @@ collider
 
 The child collider to add to the rigid body for the simulation it belongs to.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

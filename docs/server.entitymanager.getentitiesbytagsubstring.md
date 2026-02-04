@@ -53,3 +53,5 @@ The tag substring to get the entities for.
 
 All spawned entities in the world with a tag that includes the provided substring.
 
+\*\*Category:\*\* Entities
+

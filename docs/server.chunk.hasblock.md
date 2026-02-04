@@ -4,7 +4,7 @@
 
 ## Chunk.hasBlock() method
 
-Check if a block exists at a specific local coordinate.
+Checks if a block exists at a specific local coordinate.
 
 **Signature:**
 
@@ -52,4 +52,6 @@ The local coordinate of the block to check.
 boolean
 
 Whether a block exists.
+
+\*\*Category:\*\* Blocks
 

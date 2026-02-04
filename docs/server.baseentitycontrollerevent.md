@@ -4,7 +4,11 @@
 
 ## BaseEntityControllerEvent enum
 
-Event types a BaseEntityController instance can emit. See [BaseEntityControllerEventPayloads](./server.baseentitycontrollereventpayloads.md) for the payloads.
+Event types a BaseEntityController instance can emit.
+
+See `BaseEntityControllerEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 **Signature:**
 

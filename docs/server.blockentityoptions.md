@@ -6,6 +6,10 @@
 
 The options for creating a block entity.
 
+Use for: entities rendered as blocks with a `BlockType` texture. Do NOT use for: model entities; use `ModelEntityOptions`<!-- -->.
+
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

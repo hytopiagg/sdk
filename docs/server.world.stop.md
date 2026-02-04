@@ -4,7 +4,13 @@
 
 ## World.stop() method
 
-Stops the world loop, which stops ticking physics, entities, etc.
+Stops the world loop, pausing physics, entities, and networking ticks.
+
+Use for: pausing a world or preparing for a full map reset. Do NOT use for: disconnecting players; they remain assigned to this world.
+
+\*\*Side effects:\*\* Emits `WorldEvent.STOP`<!-- -->.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

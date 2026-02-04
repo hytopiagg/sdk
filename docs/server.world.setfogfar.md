@@ -44,6 +44,10 @@ number
 
 The far distance.
 
+\*\*Side effects:\*\* Emits `WorldEvent.SET_FOG_FAR`<!-- -->.
+
+\*\*Category:\*\* Core
+
 
 </td></tr>
 </tbody></table>

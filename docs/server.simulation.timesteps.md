@@ -6,6 +6,8 @@
 
 The fixed timestep for the simulation.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

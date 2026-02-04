@@ -6,6 +6,8 @@
 
 The maximum distance from the camera at which fog stops being applied.
 
+\*\*Category:\*\* Core
+
 **Signature:**
 
 ```typescript

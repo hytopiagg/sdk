@@ -6,6 +6,8 @@
 
 Whether the rigid body is simulated.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

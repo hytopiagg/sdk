@@ -44,6 +44,10 @@ string
 
 The cubemap URI of the skybox.
 
+\*\*Side effects:\*\* Emits `WorldEvent.SET_SKYBOX_URI`<!-- -->.
+
+\*\*Category:\*\* Core
+
 
 </td></tr>
 </tbody></table>

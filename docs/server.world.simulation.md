@@ -4,7 +4,9 @@
 
 ## World.simulation property
 
-The simulation for the world.
+The physics simulation for this world.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

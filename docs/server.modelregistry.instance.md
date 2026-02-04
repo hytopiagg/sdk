@@ -6,6 +6,8 @@
 
 The global ModelRegistry instance as a singleton.
 
+\*\*Category:\*\* Models
+
 **Signature:**
 
 ```typescript

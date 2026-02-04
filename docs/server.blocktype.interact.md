@@ -6,6 +6,8 @@
 
 Triggers an interaction on the block type from a player.
 
+Use for: programmatic interactions that should mimic player clicks.
+
 **Signature:**
 
 ```typescript
@@ -60,6 +62,10 @@ raycastHit
 
 _(Optional)_ The raycast hit result, if the interaction was triggered by a client-side click/tap.
 
+\*\*Side effects:\*\* Emits `BlockTypeEvent.INTERACT`<!-- -->.
+
+\*\*Category:\*\* Blocks
+
 
 </td></tr>
 </tbody></table>
@@ -69,5 +75,5 @@ void
 
 ## Remarks
 
-This is automatically called when a player clicks or taps a block of this block type, but can also be called directly for programmatic interactions. Emits [BlockTypeEvent.INTERACT](./server.blocktypeevent.md)<!-- -->.
+This is automatically called when a player clicks or taps a block of this block type, but can also be called directly for programmatic interactions. Emits `BlockTypeEvent.INTERACT`<!-- -->.
 

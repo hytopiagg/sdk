@@ -4,7 +4,9 @@
 
 ## ChunkLattice.initializeBlocks() method
 
-Initialize all blocks in the lattice in bulk, removing all previously existing blocks. This is much more efficient than setting each block individually.
+Initializes all blocks in the lattice in bulk, replacing existing blocks.
+
+Use for: loading maps or generating terrain in one pass. Do NOT use for: incremental edits; use `ChunkLattice.setBlock`<!-- -->.
 
 **Signature:**
 
@@ -44,7 +46,11 @@ blocks
 
 </td><td>
 
-The blocks to initialize, keyed by block type id.
+The blocks to initialize, keyed by block type ID.
+
+\*\*Side effects:\*\* Clears existing data, creates colliders, and emits `ChunkLatticeEvent.SET_BLOCK` per block.
+
+\*\*Category:\*\* Blocks
 
 
 </td></tr>
@@ -55,7 +61,7 @@ void
 
 ## Remarks
 
-\*\*Clears first:\*\* Calls `clear()` before initializing, removing all existing blocks and colliders.
+\*\*Clears first:\*\* Calls `ChunkLattice.clear` before initializing, removing all existing blocks and colliders.
 
 \*\*Collider optimization:\*\* Creates one collider per block type with all placements combined. Voxel colliders have their states combined for efficient neighbor collision detection.
 

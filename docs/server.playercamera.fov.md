@@ -6,6 +6,8 @@
 
 The field of view of the camera.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

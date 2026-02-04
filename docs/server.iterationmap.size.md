@@ -6,6 +6,8 @@
 
 Returns the number of key-value pairs in the IterationMap.
 
+\*\*Category:\*\* Utilities
+
 **Signature:**
 
 ```typescript

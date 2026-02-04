@@ -6,6 +6,8 @@
 
 Whether the collider is a capsule collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

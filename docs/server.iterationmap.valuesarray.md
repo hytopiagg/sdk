@@ -6,6 +6,10 @@
 
 Returns a readonly array of all values for fast iteration. This is the key performance feature - use this instead of .values() for iteration.
 
+\*\*Side effects:\*\* Rebuilds the backing array when the map has changed.
+
+\*\*Category:\*\* Utilities
+
 **Signature:**
 
 ```typescript

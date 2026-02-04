@@ -6,6 +6,8 @@
 
 The additional solver iterations of the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

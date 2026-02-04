@@ -6,6 +6,8 @@
 
 The intensity of the directional light.
 
+\*\*Category:\*\* Core
+
 **Signature:**
 
 ```typescript

@@ -4,7 +4,9 @@
 
 ## World.(constructor)
 
-Constructs a new instance of the `World` class
+Creates a world instance with the provided options.
+
+Use for: direct construction only when you need custom lifecycle control. Do NOT use for: routine world creation; prefer `WorldManager.createWorld`<!-- -->.
 
 **Signature:**
 
@@ -42,7 +44,7 @@ options
 
 </td><td>
 
-The options for the world.
+Initial world configuration. Options are applied once at construction.
 
 
 </td></tr>

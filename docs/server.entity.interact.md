@@ -6,6 +6,8 @@
 
 Triggers an interaction on the entity from a player.
 
+Use for: programmatic interactions that should mimic a player click/tap. Do NOT use for: server-only effects without player context.
+
 **Signature:**
 
 ```typescript
@@ -60,6 +62,12 @@ raycastHit
 
 _(Optional)_ The raycast hit result, if the interaction was triggered by a client-side click/tap.
 
+\*\*Requires:\*\* Entity must be spawned.
+
+\*\*Side effects:\*\* Emits `EntityEvent.INTERACT`<!-- -->.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>
@@ -69,5 +77,5 @@ void
 
 ## Remarks
 
-This is automatically called when a player clicks or taps the entity, but can also be called directly for programmatic interactions. Emits [EntityEvent.INTERACT](./server.entityevent.md)<!-- -->.
+This is automatically called when a player clicks or taps the entity, but can also be called directly for programmatic interactions. Emits `EntityEvent.INTERACT`<!-- -->.
 

@@ -4,7 +4,7 @@
 
 ## ChunkLattice.getBlockId() method
 
-Get the block type id at a specific global coordinate.
+Gets the block type ID at a specific global coordinate.
 
 **Signature:**
 
@@ -51,5 +51,7 @@ The global coordinate of the block to get.
 
 number
 
-The block type id, 0 if no block is set.
+The block type ID, or 0 if no block is set.
+
+\*\*Category:\*\* Blocks
 

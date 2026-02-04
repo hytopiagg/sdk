@@ -6,6 +6,10 @@
 
 Options for creating a DefaultPlayerEntityController instance.
 
+Use for: configuring default player movement and animation behavior at construction time. Do NOT use for: per-frame changes; override methods or adjust controller state instead.
+
+\*\*Category:\*\* Controllers
+
 **Signature:**
 
 ```typescript

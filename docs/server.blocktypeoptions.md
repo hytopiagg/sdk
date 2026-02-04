@@ -6,6 +6,10 @@
 
 Options for creating a block type instance.
 
+Use for: defining new block types to register in a `BlockTypeRegistry`<!-- -->. Do NOT use for: placing blocks; use `ChunkLattice.setBlock`<!-- -->.
+
+\*\*Category:\*\* Blocks
+
 **Signature:**
 
 ```typescript

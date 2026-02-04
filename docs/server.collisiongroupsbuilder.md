@@ -6,6 +6,8 @@
 
 A helper class for building and decoding collision groups.
 
+When to use: creating custom collision filters for colliders and rigid bodies. Do NOT use for: per-frame changes; collision group changes are usually infrequent.
+
 **Signature:**
 
 ```typescript
@@ -14,7 +16,9 @@ export default class CollisionGroupsBuilder
 
 ## Remarks
 
-This class should be used directly with its static methods. You can assign collision groups to colliders of entities and blocks to control optimized collision interactions and filterings between blocks and entities, and entities and other entities.
+Use the static methods directly to encode or decode collision group masks.
+
+\*\*Category:\*\* Physics
 
 ## Methods
 
@@ -46,7 +50,7 @@ Description
 
 </td><td>
 
-Builds a raw set of collision groups from a set of collision groups.
+Builds a raw collision group mask from a set of collision groups.
 
 
 </td></tr>
@@ -62,7 +66,7 @@ Builds a raw set of collision groups from a set of collision groups.
 
 </td><td>
 
-Decodes a set of collision groups into a set of their string equivalents.
+Decodes collision groups into their string equivalents.
 
 
 </td></tr>
@@ -78,7 +82,7 @@ Decodes a set of collision groups into a set of their string equivalents.
 
 </td><td>
 
-Decodes a raw set of collision groups into a set of collision groups.
+Decodes a raw collision group mask into a set of collision groups.
 
 
 </td></tr>

@@ -44,6 +44,10 @@ modelScale
 
 The scale of the entity's model. Can be a vector or a number for uniform scaling.
 
+\*\*Side effects:\*\* Scales existing colliders and emits `EntityEvent.SET_MODEL_SCALE` when spawned.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>
@@ -52,6 +56,8 @@ The scale of the entity's model. Can be a vector or a number for uniform scaling
 void
 
 ## Remarks
+
+Model entities only; no effect for block entities.
 
 \*\*Collider scaling is relative:\*\* Colliders are scaled by the ratio of new/old scale, not set to absolute values. Example: scaling from 1 to 2 doubles collider size; scaling from 2 to 4 also doubles it.
 

@@ -4,7 +4,7 @@
 
 ## Chunk.blockIndexToLocalCoordinate() method
 
-Convert a block index to a local coordinate.
+Converts a block index to a local coordinate.
 
 **Signature:**
 
@@ -52,4 +52,6 @@ The index of the block to convert.
 [Vector3Like](./server.vector3like.md)
 
 The local coordinate of the block.
+
+\*\*Category:\*\* Blocks
 

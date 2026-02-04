@@ -53,3 +53,9 @@ The id of the block type to get.
 
 The block type with the given id.
 
+\*\*Category:\*\* Blocks
+
+## Remarks
+
+Throws a fatal error if the block type is not registered.
+

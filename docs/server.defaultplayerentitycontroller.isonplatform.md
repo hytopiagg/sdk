@@ -4,10 +4,17 @@
 
 ## DefaultPlayerEntityController.isOnPlatform property
 
-Whether the entity is on a platform, a platform is any entity with a kinematic rigid body.
+Whether the entity is on a platform.
 
 **Signature:**
 
 ```typescript
 get isOnPlatform(): boolean;
 ```
+
+## Remarks
+
+A platform is any entity with a kinematic rigid body.
+
+\*\*Category:\*\* Controllers
+

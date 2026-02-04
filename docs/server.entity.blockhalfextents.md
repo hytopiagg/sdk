@@ -4,10 +4,17 @@
 
 ## Entity.blockHalfExtents property
 
-The half extends of the visual size of the block entity when blockTextureUri is set.
+The half extents of the block entity's visual size.
 
 **Signature:**
 
 ```typescript
 get blockHalfExtents(): Vector3Like | undefined;
 ```
+
+## Remarks
+
+Only set for block entities.
+
+\*\*Category:\*\* Entities
+

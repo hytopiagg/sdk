@@ -4,7 +4,7 @@
 
 ## ChunkLattice.getAllChunks() method
 
-Get all chunks in the lattice.
+Gets all chunks in the lattice.
 
 **Signature:**
 
@@ -16,4 +16,6 @@ getAllChunks(): Chunk[];
 [Chunk](./server.chunk.md)<!-- -->\[\]
 
 An array of all chunks in the lattice.
+
+\*\*Category:\*\* Blocks
 

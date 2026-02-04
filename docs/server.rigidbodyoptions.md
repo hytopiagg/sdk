@@ -6,6 +6,10 @@
 
 The options for a rigid body.
 
+Use for: constructing rigid bodies; choose an option type matching `RigidBodyType`<!-- -->. Do NOT use for: runtime changes; use `RigidBody` methods instead.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

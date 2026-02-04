@@ -4,13 +4,21 @@
 
 ## EventRouter class
 
-Manages event emission and assigned listener callbacks.
+Routes events to listeners in local, world, or global scope.
+
+When to use: event-driven hooks within server subsystems. Do NOT use for: high-frequency per-entity updates; prefer direct method calls for hot paths.
 
 **Signature:**
 
 ```typescript
 export default class EventRouter 
 ```
+
+## Remarks
+
+Provides local emission, world-scoped emission, and a shared global instance. Pattern: use `EventRouter.emitWithWorld()` for world-scoped events and `final()` to install a single terminal listener. Anti-pattern: installing multiple final listeners for the same event type; only one is supported.
+
+\*\*Category:\*\* Events
 
 ## Properties
 
@@ -55,6 +63,8 @@ Description
 </td><td>
 
 The global event router instance.
+
+\*\*Category:\*\* Events
 
 
 </td></tr>

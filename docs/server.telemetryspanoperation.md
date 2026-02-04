@@ -6,6 +6,8 @@
 
 Performance telemetry span operation types.
 
+\*\*Category:\*\* Telemetry
+
 **Signature:**
 
 ```typescript

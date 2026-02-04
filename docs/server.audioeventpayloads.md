@@ -6,6 +6,8 @@
 
 Event payloads for Audio emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

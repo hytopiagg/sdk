@@ -44,6 +44,10 @@ RAPIER.Vector3
 
 The gravity vector.
 
+\*\*Side effects:\*\* Changes gravity for all simulated rigid bodies.
+
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

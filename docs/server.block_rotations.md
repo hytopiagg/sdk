@@ -4,7 +4,11 @@
 
 ## BLOCK\_ROTATIONS variable
 
-All valid block rotations. Named as `{face pointing up}_{Y rotation degrees}`<!-- -->. N prefix = negative axis (e.g. NZ\_90 = -Z face up, rotated 90° around global Y).
+All valid block rotations, named as `{face pointing up}_{Y rotation degrees}`<!-- -->.
+
+N prefix = negative axis (e.g. `NZ_90` = -Z face up, rotated 90° around global Y).
+
+\*\*Category:\*\* Blocks
 
 **Signature:**
 

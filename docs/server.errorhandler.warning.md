@@ -60,6 +60,10 @@ string
 
 _(Optional)_ Optional context information about the warning
 
+\*\*Side effects:\*\* Writes to stderr and increments the warning count.
+
+\*\*Category:\*\* Utilities
+
 
 </td></tr>
 </tbody></table>

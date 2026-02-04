@@ -4,7 +4,7 @@
 
 ## FaceCallback type
 
-A callback function called when the entity associated with the SimpleEntityController updates its rotation as it is attempting to face a target coordinate.
+Callback invoked as the entity rotates toward a target.
 
 **Signature:**
 

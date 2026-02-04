@@ -6,6 +6,8 @@
 
 The scale of the entity's model.
 
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

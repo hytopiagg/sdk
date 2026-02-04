@@ -4,13 +4,21 @@
 
 ## WorldMap interface
 
-A map representation for a world.
+A map representation for initializing a world.
+
+Use for: importing static maps or tooling exports via `World.loadMap`<!-- -->. Do NOT use for: incremental edits while a world is live; use chunk/block APIs instead.
 
 **Signature:**
 
 ```typescript
 export interface WorldMap 
 ```
+
+## Remarks
+
+`blocks` uses `"x,y,z"` world block coordinates as string keys.
+
+\*\*Category:\*\* Core
 
 ## Properties
 

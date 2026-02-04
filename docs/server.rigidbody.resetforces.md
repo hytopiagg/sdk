@@ -6,6 +6,8 @@
 
 Resets the forces actiong on the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,10 @@
 
 Options for creating a ParticleEmitter instance.
 
+Use for: configuring an emitter before calling `ParticleEmitter.spawn`<!-- -->. Do NOT use for: runtime updates after spawn; use `ParticleEmitter.set*` methods.
+
+\*\*Category:\*\* Particles
+
 **Signature:**
 
 ```typescript

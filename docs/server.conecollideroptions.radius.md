@@ -6,6 +6,8 @@
 
 The radius of the cone collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

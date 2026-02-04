@@ -6,6 +6,8 @@
 
 Whether the collider is enabled.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,8 @@
 
 The raw RAPIER rigid body instance.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

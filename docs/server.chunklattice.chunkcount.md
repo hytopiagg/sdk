@@ -6,6 +6,8 @@
 
 The number of chunks in the lattice.
 
+\*\*Category:\*\* Blocks
+
 **Signature:**
 
 ```typescript

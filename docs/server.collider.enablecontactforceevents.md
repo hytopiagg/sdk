@@ -44,6 +44,8 @@ boolean
 
 Whether contact force events are enabled.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

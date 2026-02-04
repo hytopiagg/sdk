@@ -4,7 +4,9 @@
 
 ## PlayerCamera.lookAtEntity() method
 
-Makes the camera look at an entity. If the camera was previously tracking an entity or position, it will stop tracking.
+Makes the camera look at an entity once.
+
+Use for: one-off focus moments (e.g., cutscene beats). Do NOT use for: continuous tracking; use `PlayerCamera.setTrackedEntity`<!-- -->.
 
 **Signature:**
 
@@ -43,6 +45,12 @@ entity
 </td><td>
 
 The entity to look at.
+
+\*\*Requires:\*\* Player must be in a world.
+
+\*\*Side effects:\*\* Emits `PlayerCameraEvent.LOOK_AT_ENTITY`<!-- -->.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>

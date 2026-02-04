@@ -11,3 +11,10 @@ The singleton instance of the game server.
 ```typescript
 static get instance(): GameServer;
 ```
+
+## Remarks
+
+Access this after calling `startServer`<!-- -->.
+
+\*\*Category:\*\* Core
+

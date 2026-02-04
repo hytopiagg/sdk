@@ -44,6 +44,12 @@ string\[\]
 
 The animations to stop.
 
+\*\*Requires:\*\* Entity must be spawned.
+
+\*\*Side effects:\*\* Emits `EntityEvent.STOP_MODEL_ANIMATIONS`<!-- -->.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>
@@ -52,6 +58,8 @@ The animations to stop.
 void
 
 ## Remarks
+
+Model entities only; no effect for block entities.
 
 \*\*Removes from both sets:\*\* Stops animations from both looped and oneshot tracking sets.
 

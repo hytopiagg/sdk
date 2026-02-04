@@ -17,11 +17,11 @@ export default class SceneUI extends EventRouter implements protocol.Serializabl
 
 ## Remarks
 
-SceneUI instances are created directly as instances. They support a variety of configuration options through the [SceneUIOptions](./server.sceneuioptions.md) constructor argument.
+SceneUI instances are created directly as instances. They support a variety of configuration options through the `SceneUIOptions` constructor argument.
 
 <h2>Events</h2>
 
-This class is an EventRouter, and instances of it emit events with payloads listed under [SceneUIEventPayloads](./server.sceneuieventpayloads.md)
+This class is an EventRouter, and instances of it emit events with payloads listed under `SceneUIEventPayloads`
 
 ## Example
 
@@ -33,6 +33,7 @@ const sceneUI = new SceneUI({
   offset: { x: 0, y: 1, z: 0 },
 });
 ```
+\*\*Category:\*\* UI
 
 ## Constructors
 

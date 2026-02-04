@@ -17,3 +17,5 @@ getAllBlockTypes(): BlockType[];
 
 An array of all registered block types.
 
+\*\*Category:\*\* Blocks
+

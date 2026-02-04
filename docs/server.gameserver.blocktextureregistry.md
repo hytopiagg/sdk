@@ -6,6 +6,8 @@
 
 The block texture registry for the game server.
 
+\*\*Category:\*\* Core
+
 **Signature:**
 
 ```typescript

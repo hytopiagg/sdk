@@ -4,7 +4,9 @@
 
 ## PlayerManager.instance property
 
-The global PlayerManager instance as a singleton.
+The global PlayerManager instance (singleton).
+
+\*\*Category:\*\* Players
 
 **Signature:**
 

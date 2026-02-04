@@ -6,6 +6,8 @@
 
 The UI for a player.
 
+When to use: showing overlays, HUDs, menus, and custom UI for a specific player. Do NOT use for: world-level UI shared by all players; use scene UI systems instead.
+
 **Signature:**
 
 ```typescript
@@ -15,11 +17,13 @@ export default class PlayerUI extends EventRouter
 
 ## Remarks
 
-UI allows control of all in-game overlays a player sees. UI is controlled by HTML, CSS and JavaScript files you provide in your `assets` folder.
+UI is driven by HTML, CSS, and JavaScript files in your `assets` folder.
 
 <h2>Events</h2>
 
-This class is an EventRouter, and instances of it emit events with payloads listed under [PlayerUIEventPayloads](./server.playeruieventpayloads.md)
+This class is an EventRouter, and instances of it emit events with payloads listed under `PlayerUIEventPayloads`<!-- -->.
+
+\*\*Category:\*\* Players
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `PlayerUI` class.
 
@@ -65,6 +69,8 @@ Description
 
 The player that the UI belongs to.
 
+\*\*Category:\*\* Players
+
 
 </td></tr>
 </tbody></table>
@@ -99,6 +105,8 @@ Description
 
 Appends UI HTML to the player's existing client UI.
 
+Use for: incremental overlays (notifications, tooltips, modal layers). Do NOT use for: replacing the entire UI; use `PlayerUI.load`<!-- -->.
+
 
 </td></tr>
 <tr><td>
@@ -111,7 +119,9 @@ Appends UI HTML to the player's existing client UI.
 
 </td><td>
 
-Freezes or unfreezes the player's pointer lock state. Preventing player inputs from automatically locking or unlocking the pointer relative to its current state.
+Freezes or unfreezes the player's pointer lock state.
+
+Use for: menus or cutscenes that should not alter pointer lock.
 
 
 </td></tr>
@@ -127,6 +137,8 @@ Freezes or unfreezes the player's pointer lock state. Preventing player inputs f
 
 Loads client UI for the player, replacing any existing UI.
 
+Use for: switching to a new UI screen or resetting the UI. Do NOT use for: incremental overlays; use `PlayerUI.append`<!-- -->.
+
 
 </td></tr>
 <tr><td>
@@ -139,7 +151,9 @@ Loads client UI for the player, replacing any existing UI.
 
 </td><td>
 
-Locks or unlocks the player's mouse pointer on Desktop. If the pointer is unlocked with `lockPointer(false)`<!-- -->, the player will not be able to use in-game inputs or camera controls from the mouse pointer until `player.ui.lockPointer(true)`<!-- -->, or in your game's client UI html with `hytopia.lockPointer(true)`<!-- -->.
+Locks or unlocks the player's mouse pointer on desktop.
+
+Use for: controlling when mouse input is captured. Do NOT use for: mobile devices (pointer lock has no effect).
 
 
 </td></tr>
@@ -154,6 +168,8 @@ Locks or unlocks the player's mouse pointer on Desktop. If the pointer is unlock
 </td><td>
 
 Sends data to the player's client UI.
+
+Use for: pushing state updates to your UI scripts.
 
 
 </td></tr>

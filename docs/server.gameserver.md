@@ -4,7 +4,9 @@
 
 ## GameServer class
 
-Manages the game and associated worlds and systems.
+Global entry point for server systems (players, worlds, assets).
+
+When to use: accessing global managers and registries after startup. Do NOT use for: constructing your own server instance.
 
 **Signature:**
 
@@ -14,7 +16,9 @@ export default class GameServer
 
 ## Remarks
 
-This class is used as a singleton and should be accessed via the `instance` property
+Access via `GameServer.instance` — do not construct directly. Initialize with `startServer` to ensure physics and assets are ready.
+
+\*\*Category:\*\* Core
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `GameServer` class.
 
@@ -60,6 +64,8 @@ Description
 
 The block texture registry for the game server.
 
+\*\*Category:\*\* Core
+
 
 </td></tr>
 <tr><td>
@@ -102,7 +108,9 @@ The singleton instance of the game server.
 
 </td><td>
 
-The model manager for the game server.
+The model registry for the game server.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>
@@ -125,6 +133,8 @@ The model manager for the game server.
 
 The player manager for the game server.
 
+\*\*Category:\*\* Core
+
 
 </td></tr>
 <tr><td>
@@ -146,6 +156,8 @@ WebServer
 
 The web server for the game server.
 
+\*\*Category:\*\* Core
+
 
 </td></tr>
 <tr><td>
@@ -165,7 +177,9 @@ The web server for the game server.
 
 </td><td>
 
-The world manager for the game server
+The world manager for the game server.
+
+\*\*Category:\*\* Core
 
 
 </td></tr>

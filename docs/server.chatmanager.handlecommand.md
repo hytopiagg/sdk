@@ -69,3 +69,9 @@ boolean
 
 True if a command was handled, false otherwise.
 
+## Remarks
+
+The command is parsed as the first space-delimited token in the message.
+
+\*\*Category:\*\* Chat
+

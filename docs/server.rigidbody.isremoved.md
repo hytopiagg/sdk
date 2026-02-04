@@ -6,6 +6,8 @@
 
 Whether the rigid body has been removed from the simulation.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

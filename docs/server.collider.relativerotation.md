@@ -6,6 +6,8 @@
 
 The relative rotation of the collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

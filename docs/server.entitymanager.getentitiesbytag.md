@@ -53,3 +53,5 @@ The tag to get the entities for.
 
 All spawned entities in the world with the provided tag.
 
+\*\*Category:\*\* Entities
+

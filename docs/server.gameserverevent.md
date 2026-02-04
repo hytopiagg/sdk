@@ -4,7 +4,11 @@
 
 ## GameServerEvent enum
 
-Event types a GameServer instance can emit to the global event router. See [GameServerEventPayloads](./server.gameservereventpayloads.md) for the payloads.
+Event types a GameServer instance can emit to the global event router.
+
+See `GameServerEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 **Signature:**
 

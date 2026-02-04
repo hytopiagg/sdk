@@ -4,7 +4,9 @@
 
 ## PlayerEntity.player property
 
-The player the player entity is assigned to and controlled by.
+The player this entity is assigned to and controlled by.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

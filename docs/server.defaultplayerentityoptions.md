@@ -6,6 +6,10 @@
 
 Options for creating a DefaultPlayerEntity instance.
 
+Use for: customizing the default player avatar (for example cosmetic visibility). Do NOT use for: changing movement behavior; use `DefaultPlayerEntityControllerOptions`<!-- -->.
+
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

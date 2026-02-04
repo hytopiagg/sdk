@@ -4,7 +4,9 @@
 
 ## Player class
 
-A player in the game.
+A connected player in the game.
+
+When to use: interacting with a connected player's state, UI, and world membership. Do NOT use for: constructing players or representing offline users.
 
 **Signature:**
 
@@ -17,11 +19,13 @@ export default class Player extends EventRouter implements protocol.Serializable
 
 ## Remarks
 
-Players are automatically created when they connect and authenticate with the game server. This is all handled internally.
+Players are created automatically on connection by `PlayerManager`<!-- -->.
 
 <h2>Events</h2>
 
-This class is an EventRouter, and instances of it emit events with payloads listed under [PlayerEventPayloads](./server.playereventpayloads.md)
+This class is an EventRouter, and instances of it emit events with payloads listed under `PlayerEventPayloads`<!-- -->.
+
+\*\*Category:\*\* Players
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `Player` class.
 
@@ -67,6 +71,8 @@ Description
 
 The camera for the player.
 
+\*\*Category:\*\* Players
+
 
 </td></tr>
 <tr><td>
@@ -86,7 +92,7 @@ Promise&lt;[PlayerCosmetics](./server.playercosmetics.md) \| void&gt;
 
 </td><td>
 
-The cosmetics for the player
+The cosmetics for the player.
 
 
 </td></tr>
@@ -109,6 +115,8 @@ string
 
 The unique HYTOPIA UUID for the player.
 
+\*\*Category:\*\* Players
+
 
 </td></tr>
 <tr><td>
@@ -128,7 +136,9 @@ The unique HYTOPIA UUID for the player.
 
 </td><td>
 
-The current [PlayerInput](./server.playerinput.md) of the player.
+The current `PlayerInput` of the player.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -149,7 +159,7 @@ boolean
 
 </td><td>
 
-Whether the players click/taps will cause interacts with blocks or entities. Defaults to true.
+Whether player click/tap input triggers interactions.
 
 
 </td></tr>
@@ -170,7 +180,7 @@ number
 
 </td><td>
 
-The maximum distance a player can interact with entities or blocks. The raycast distance in blocks for interactions. Defaults to 20.
+The maximum distance a player can interact with entities or blocks.
 
 
 </td></tr>
@@ -193,6 +203,8 @@ string \| undefined
 
 The profile picture URL for the player.
 
+\*\*Category:\*\* Players
+
 
 </td></tr>
 <tr><td>
@@ -213,6 +225,8 @@ The profile picture URL for the player.
 </td><td>
 
 The UI for the player.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -235,6 +249,8 @@ string
 
 The unique HYTOPIA username for the player.
 
+\*\*Category:\*\* Players
+
 
 </td></tr>
 <tr><td>
@@ -254,7 +270,9 @@ The unique HYTOPIA username for the player.
 
 </td><td>
 
-The current [World](./server.world.md) the player is in.
+The current `World` the player is in, or undefined if not yet joined.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -290,6 +308,12 @@ Description
 
 Disconnects the player from the game server.
 
+Use for: kicking a player or enforcing a logout. Do NOT use for: switching worlds; use `Player.joinWorld` instead.
+
+\*\*Side effects:\*\* Emits `PlayerEvent.LEFT_WORLD` if the player is in a world and closes the connection.
+
+\*\*Category:\*\* Players
+
 
 </td></tr>
 <tr><td>
@@ -302,7 +326,9 @@ Disconnects the player from the game server.
 
 </td><td>
 
-Get the persisted data for the player.
+Gets the persisted data for the player, if available.
+
+Use for: reading saved progress after the player connects.
 
 
 </td></tr>
@@ -316,7 +342,9 @@ Get the persisted data for the player.
 
 </td><td>
 
-Joins a player to a world.
+Assigns the player to a world.
+
+Use for: initial placement or moving a player between worlds. Do NOT use for: respawning or teleporting within the same world.
 
 
 </td></tr>
@@ -330,7 +358,13 @@ Joins a player to a world.
 
 </td><td>
 
-Resets all inputs keys
+Resets all cached input keys for the player.
+
+Use for: clearing stuck input states (e.g., after disconnect or pause).
+
+\*\*Side effects:\*\* Clears the current `PlayerInput` state.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>
@@ -344,7 +378,9 @@ Resets all inputs keys
 
 </td><td>
 
-Schedule a notification the player at a point in time in the future. This will automatically handle prompting a player (if necessary) for notification permissions in-game.
+Schedules a notification for the player at a future time.
+
+Use for: re-engagement or timed reminders. Do NOT use for: immediate in-game messaging; use chat or UI instead.
 
 
 </td></tr>
@@ -358,7 +394,9 @@ Schedule a notification the player at a point in time in the future. This will a
 
 </td><td>
 
-Sets whether the players click/taps will cause interacts with blocks or entities.
+Enables or disables interaction clicks/taps for this player.
+
+Use for: cutscenes, menus, or temporary input blocking.
 
 
 </td></tr>
@@ -386,7 +424,9 @@ Sets the maximum distance a player can interact with entities or blocks.
 
 </td><td>
 
-Set the persisted data for the player. This data can later be retrieved using [Player.getPersistedData()](./server.player.getpersisteddata.md)<!-- -->, even if a player disconnects and rejoin a game in the future, or joins a different HYTOPIA managed lobby of your game.
+Merges data into the player's persisted data cache.
+
+Use for: saving progress, inventory, or other player-specific state. Do NOT use for: large binary data or per-tick updates.
 
 
 </td></tr>

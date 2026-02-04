@@ -4,7 +4,7 @@
 
 ## Collider.optionsFromBlockHalfExtents() method
 
-Creates a collider options object from a block's half extents.
+Creates collider options from a block's half extents.
 
 **Signature:**
 
@@ -52,4 +52,6 @@ The half extents of the block.
 [ColliderOptions](./server.collideroptions.md)
 
 The collider options object.
+
+\*\*Category:\*\* Physics
 

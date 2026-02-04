@@ -6,6 +6,8 @@
 
 The indices of the trimesh collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

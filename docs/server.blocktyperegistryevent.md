@@ -4,7 +4,11 @@
 
 ## BlockTypeRegistryEvent enum
 
-Event types a BlockTypeRegistry instance can emit. See [BlockTypeRegistryEventPayloads](./server.blocktyperegistryeventpayloads.md) for the payloads.
+Event types a BlockTypeRegistry instance can emit.
+
+See `BlockTypeRegistryEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 **Signature:**
 

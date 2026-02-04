@@ -44,6 +44,12 @@ string\[\]
 
 The animations to start.
 
+\*\*Requires:\*\* Entity must be spawned.
+
+\*\*Side effects:\*\* Emits `EntityEvent.START_MODEL_ONESHOT_ANIMATIONS`<!-- -->.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>
@@ -52,6 +58,8 @@ The animations to start.
 void
 
 ## Remarks
+
+Model entities only; no effect for block entities.
 
 \*\*No deduplication:\*\* Unlike `startModelLoopedAnimations`<!-- -->, this always emits the event even if the animation is already playing. This allows restarting oneshot animations.
 

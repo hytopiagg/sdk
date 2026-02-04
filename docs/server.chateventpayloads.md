@@ -6,6 +6,8 @@
 
 Event payloads for ChatManager emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

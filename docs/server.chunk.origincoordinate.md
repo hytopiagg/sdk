@@ -4,7 +4,9 @@
 
 ## Chunk.originCoordinate property
 
-The origin coordinate of the chunk.
+The origin coordinate of the chunk (world-space, multiples of 16).
+
+\*\*Category:\*\* Blocks
 
 **Signature:**
 

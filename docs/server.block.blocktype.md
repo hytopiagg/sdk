@@ -6,6 +6,8 @@
 
 The block type of the block.
 
+\*\*Category:\*\* Blocks
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,8 @@
 
 The half extents of the block collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

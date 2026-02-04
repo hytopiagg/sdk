@@ -4,7 +4,9 @@
 
 ## World.tag property
 
-An arbitrary identifier tag of the world. Useful for your own logic.
+An arbitrary identifier tag for your own logic.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

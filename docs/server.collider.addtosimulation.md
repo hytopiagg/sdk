@@ -60,6 +60,8 @@ parentRigidBody
 
 _(Optional)_ The parent rigid body of the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

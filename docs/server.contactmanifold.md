@@ -6,6 +6,8 @@
 
 A contact manifold.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

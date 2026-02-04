@@ -6,6 +6,8 @@
 
 The world the ParticleEmitterManager is for.
 
+\*\*Category:\*\* Particles
+
 **Signature:**
 
 ```typescript

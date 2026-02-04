@@ -6,6 +6,8 @@
 
 Event payloads for ParticleEmitter emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

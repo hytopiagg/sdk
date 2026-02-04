@@ -60,6 +60,8 @@ any
 
 _(Optional)_ Value to use as this when executing callback.
 
+\*\*Category:\*\* Utilities
+
 
 </td></tr>
 </tbody></table>

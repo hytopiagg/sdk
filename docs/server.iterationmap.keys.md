@@ -17,3 +17,5 @@ IterableIterator&lt;K&gt;
 
 An iterator for the keys.
 
+\*\*Category:\*\* Utilities
+

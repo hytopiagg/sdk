@@ -4,7 +4,9 @@
 
 ## World.sceneUIManager property
 
-The scene UI manager for the world.
+The scene UI manager for this world.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

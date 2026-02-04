@@ -44,6 +44,10 @@ number
 
 The intensity.
 
+\*\*Side effects:\*\* Emits `WorldEvent.SET_AMBIENT_LIGHT_INTENSITY`<!-- -->.
+
+\*\*Category:\*\* Core
+
 
 </td></tr>
 </tbody></table>

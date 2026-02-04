@@ -6,6 +6,8 @@
 
 The color of the ambient light.
 
+\*\*Category:\*\* Core
+
 **Signature:**
 
 ```typescript

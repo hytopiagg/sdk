@@ -4,7 +4,9 @@
 
 ## RigidBody.(constructor)
 
-Constructs a new instance of the `RigidBody` class
+Creates a rigid body with the provided options.
+
+Use for: configuring physics behavior before adding to a simulation. Do NOT use for: immediate physics queries; the rigid body must be simulated first.
 
 **Signature:**
 
@@ -43,6 +45,8 @@ options
 </td><td>
 
 The options for the rigid body instance.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

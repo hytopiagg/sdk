@@ -4,7 +4,11 @@
 
 ## SceneUIEvent enum
 
-Event types a SceneUI instance can emit. See [SceneUIEventPayloads](./server.sceneuieventpayloads.md) for the payloads.
+Event types a SceneUI instance can emit.
+
+See `SceneUIEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 **Signature:**
 

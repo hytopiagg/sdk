@@ -6,6 +6,8 @@
 
 Unregisters and stops all audio instances attached to a specific entity.
 
+Use for: entity despawn or cleanup scenarios.
+
 **Signature:**
 
 ```typescript
@@ -44,6 +46,10 @@ entity
 
 The entity to pause and unregister audio instances for.
 
+\*\*Requires:\*\* Entity should belong to this world for meaningful results.
+
+\*\*Side effects:\*\* Pauses and unregisters any attached audio instances.
+
 
 </td></tr>
 </tbody></table>
@@ -53,5 +59,5 @@ void
 
 ## Remarks
 
-\*\*Pauses all:\*\* Calls `unregisterAudio()` for each attached audio, which pauses them.
+\*\*Pauses all:\*\* Calls `AudioManager.unregisterAudio` for each attached audio, which pauses them.
 

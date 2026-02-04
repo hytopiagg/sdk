@@ -53,3 +53,7 @@ The URI of the model to retrieve the bounding box for.
 
 The bounding box of the model.
 
+\*\*Requires:\*\* Model data must be loaded (server startup).
+
+\*\*Category:\*\* Models
+

@@ -6,6 +6,10 @@
 
 The options for a round cylinder collider.
 
+Use for: rounded cylinder colliders. Do NOT use for: other shapes; use the matching collider option type.
+
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript
@@ -53,6 +57,8 @@ number
 
 _(Optional)_ The border radius of the round cylinder collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -72,6 +78,8 @@ number
 
 _(Optional)_ The half height of the round cylinder collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -90,6 +98,8 @@ number
 </td><td>
 
 _(Optional)_ The radius of the round cylinder collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

@@ -6,6 +6,8 @@
 
 The flags of the collider if the shape is a trimesh
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

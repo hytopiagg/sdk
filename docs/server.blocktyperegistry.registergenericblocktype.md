@@ -53,6 +53,10 @@ The options for the block type.
 
 The registered block type.
 
+\*\*Side effects:\*\* Emits `BlockTypeRegistryEvent.REGISTER_BLOCK_TYPE`<!-- -->.
+
+\*\*Category:\*\* Blocks
+
 ## Remarks
 
 \*\*Creates anonymous class:\*\* Internally creates an anonymous class extending `BlockType` with the provided options, then calls `registerBlockType()`<!-- -->.

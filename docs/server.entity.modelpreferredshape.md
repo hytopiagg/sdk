@@ -4,7 +4,9 @@
 
 ## Entity.modelPreferredShape property
 
-The preferred shape of the entity's model when automatically generating its collider when no explicit colliders are provided.
+The preferred collider shape when auto-generating colliders from the model.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

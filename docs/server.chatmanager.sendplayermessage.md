@@ -89,4 +89,5 @@ void
 ```typescript
 chatManager.sendPlayerMessage(player, 'Hello, player!', 'FF00AA');
 ```
+\*\*Side effects:\*\* Emits `ChatEvent.PLAYER_MESSAGE` for network sync.
 

@@ -6,6 +6,8 @@
 
 The player manager for the game server.
 
+\*\*Category:\*\* Core
+
 **Signature:**
 
 ```typescript

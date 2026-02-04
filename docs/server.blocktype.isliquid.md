@@ -6,6 +6,8 @@
 
 Whether the block type is a liquid.
 
+\*\*Category:\*\* Blocks
+
 **Signature:**
 
 ```typescript

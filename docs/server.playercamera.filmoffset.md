@@ -4,10 +4,17 @@
 
 ## PlayerCamera.filmOffset property
 
-The film offset of the camera. A positive value shifts the camera right, a negative value shifts it left.
+The film offset of the camera.
 
 **Signature:**
 
 ```typescript
 get filmOffset(): number;
 ```
+
+## Remarks
+
+Positive shifts right, negative shifts left.
+
+\*\*Category:\*\* Players
+

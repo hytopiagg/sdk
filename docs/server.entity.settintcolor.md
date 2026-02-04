@@ -44,6 +44,10 @@ tintColor
 
 The tint color of the entity.
 
+\*\*Side effects:\*\* Emits `EntityEvent.SET_TINT_COLOR` when spawned.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>

@@ -6,6 +6,8 @@
 
 The relative position of the collider to its parent rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

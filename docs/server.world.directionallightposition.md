@@ -4,7 +4,9 @@
 
 ## World.directionalLightPosition property
 
-The position the directional light originates from.
+The position the directional light originates from (relative to the camera).
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

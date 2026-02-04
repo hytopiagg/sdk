@@ -4,7 +4,9 @@
 
 ## Entity.isSpawned property
 
-Whether the entity is spawned.
+Whether the entity is spawned in a world.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

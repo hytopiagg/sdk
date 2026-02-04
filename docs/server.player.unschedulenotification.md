@@ -42,7 +42,7 @@ string
 
 </td><td>
 
-The id of the notification returned from [Player.scheduleNotification()](./server.player.schedulenotification.md)<!-- -->.
+The ID returned from `Player.scheduleNotification`<!-- -->.
 
 
 </td></tr>
@@ -51,5 +51,7 @@ The id of the notification returned from [Player.scheduleNotification()](./serve
 
 Promise&lt;boolean&gt;
 
-boolean - True if the notification was unscheduled, false otherwise.
+True if the notification was unscheduled, false otherwise.
+
+\*\*Category:\*\* Players
 

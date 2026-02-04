@@ -53,3 +53,5 @@ V \| undefined
 
 The value associated with the key, or undefined.
 
+\*\*Category:\*\* Utilities
+

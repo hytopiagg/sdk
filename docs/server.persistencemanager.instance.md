@@ -4,6 +4,10 @@
 
 ## PersistenceManager.instance property
 
+Singleton instance.
+
+\*\*Category:\*\* Persistence
+
 **Signature:**
 
 ```typescript

@@ -4,7 +4,7 @@
 
 ## PlayerManager.getConnectedPlayerByUsername() method
 
-Get a connected player by their username (case insensitive).
+Get a connected player by their username (case-insensitive).
 
 **Signature:**
 
@@ -52,4 +52,6 @@ The username of the player to get.
 [Player](./server.player.md) \| undefined
 
 The connected player with the given username or undefined if not found.
+
+\*\*Category:\*\* Players
 

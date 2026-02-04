@@ -6,6 +6,10 @@
 
 The base options for an entity.
 
+Use for: common entity configuration shared by block and model entities. Do NOT use for: runtime changes after spawn; use `Entity` setters instead.
+
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

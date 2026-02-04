@@ -6,6 +6,10 @@
 
 The options for creating a model entity.
 
+Use for: entities rendered from a glTF model. Do NOT use for: block entities; use `BlockEntityOptions`<!-- -->.
+
+\*\*Category:\*\* Entities
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,8 @@
 
 Whether the rigid body is dynamic.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

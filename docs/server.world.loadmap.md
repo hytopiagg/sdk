@@ -4,7 +4,9 @@
 
 ## World.loadMap() method
 
-Loads a map into the world, clearing any prior map.
+Loads a map into the world, replacing any prior map contents.
+
+Use for: initializing or fully resetting a world from serialized map data. Do NOT use for: incremental edits while players are actively interacting with the world.
 
 **Signature:**
 
@@ -44,6 +46,10 @@ map
 
 The map to load.
 
+\*\*Side effects:\*\* Clears the chunk lattice, registers block types, and spawns entities.
+
+\*\*Category:\*\* Core
+
 
 </td></tr>
 </tbody></table>
@@ -53,9 +59,5 @@ void
 
 ## Remarks
 
-\*\*Clears existing:\*\* Calls `chunkLattice.clear()` before loading, removing all blocks and colliders.
-
-\*\*Block types:\*\* Registers block types from the map into the world's `blockTypeRegistry`<!-- -->.
-
-\*\*Entities:\*\* Spawns map entities with `isEnvironmental: true` by default.
+- Clears existing blocks and colliders via `ChunkLattice.clear`<!-- -->. - Registers block types from the map into `World.blockTypeRegistry`<!-- -->. - Spawns map entities as `isEnvironmental: true` by default.
 

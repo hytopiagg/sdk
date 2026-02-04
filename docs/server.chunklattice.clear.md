@@ -6,6 +6,8 @@
 
 Removes and clears all chunks and their blocks from the lattice.
 
+Use for: full world resets or map reloads. Do NOT use for: incremental changes; use `ChunkLattice.setBlock`<!-- -->.
+
 **Signature:**
 
 ```typescript
@@ -20,4 +22,8 @@ void
 \*\*Removes colliders:\*\* All block type colliders are removed from the physics simulation.
 
 \*\*Emits events:\*\* Emits `REMOVE_CHUNK` for each chunk before clearing.
+
+\*\*Side effects:\*\* Clears all chunks, placements, and block colliders.
+
+\*\*Category:\*\* Blocks
 

@@ -42,7 +42,7 @@ string
 
 </td><td>
 
-The tag to get the worlds for.
+The tag to filter worlds by.
 
 
 </td></tr>
@@ -52,4 +52,6 @@ The tag to get the worlds for.
 [World](./server.world.md)<!-- -->\[\]
 
 All worlds with the provided tag.
+
+\*\*Category:\*\* Core
 

@@ -6,6 +6,8 @@
 
 Whether the collider is a trimesh collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

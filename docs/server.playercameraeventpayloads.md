@@ -6,6 +6,8 @@
 
 Event payloads for PlayerCamera emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

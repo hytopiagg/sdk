@@ -6,6 +6,8 @@
 
 The entity the camera is attached to.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

@@ -6,6 +6,8 @@
 
 Applies an upwards impulse to the entity to simulate a jump, only supported for entities with dynamic rigid body types.
 
+Use for: a single jump impulse for dynamic entities. Do NOT use for: kinematic entities; this has no effect.
+
 **Signature:**
 
 ```typescript
@@ -43,6 +45,8 @@ number
 </td><td>
 
 The height to jump to (in blocks).
+
+\*\*Category:\*\* Controllers
 
 
 </td></tr>

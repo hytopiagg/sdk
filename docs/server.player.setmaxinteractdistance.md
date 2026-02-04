@@ -42,7 +42,9 @@ number
 
 </td><td>
 
-The maximum distance in blocks used for the interact raycast. Default is 20.
+The maximum distance in blocks used for the interact raycast.
+
+\*\*Category:\*\* Players
 
 
 </td></tr>

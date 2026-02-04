@@ -69,6 +69,8 @@ Promise&lt;Record&lt;string, unknown&gt; \| undefined&gt;
 
 The data from the persistence layer.
 
+\*\*Side effects:\*\* May perform network I/O and retries.
+
 ## Remarks
 
 \*\*Empty data:\*\* Returns `{}` if key exists but has no data.

@@ -6,6 +6,8 @@
 
 The coefficient for friction or bounciness combine rule.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

@@ -4,7 +4,11 @@
 
 ## PlayerUIEvent enum
 
-Event types a PlayerUI can emit. See [PlayerUIEventPayloads](./server.playeruieventpayloads.md) for the payloads.
+Event types a PlayerUI can emit.
+
+See `PlayerUIEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 **Signature:**
 

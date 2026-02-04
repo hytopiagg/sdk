@@ -53,3 +53,7 @@ string\[\]
 
 The names of all nodes in the model.
 
+\*\*Requires:\*\* Model data must be loaded (server startup).
+
+\*\*Category:\*\* Models
+

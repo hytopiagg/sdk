@@ -6,6 +6,8 @@
 
 Represents a quaternion.
 
+When to use: rotation math for entities, cameras, or transforms. Do NOT use for: immutable math; most methods mutate the instance.
+
 **Signature:**
 
 ```typescript
@@ -17,7 +19,11 @@ export default class Quaternion extends Float32Array implements QuaternionLike
 
 ## Remarks
 
-All quaternion methods result in mutation of the quaternion instance. This class extends `Float32Array` to provide an efficient way to create and manipulate a quaternion. Various convenience methods are provided for common quaternion operations.
+All quaternion methods result in mutation of the quaternion instance. This class extends `Float32Array` to provide an efficient way to create and manipulate a quaternion.
+
+Pattern: reuse instances to avoid allocations in tight loops. Anti-pattern: assuming methods return new instances; most mutate in place.
+
+\*\*Category:\*\* Math
 
 ## Constructors
 

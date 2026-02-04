@@ -4,7 +4,9 @@
 
 ## WorldLoop.nextTickMs property
 
-The next tick time in milliseconds.
+The next scheduled tick time in milliseconds.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

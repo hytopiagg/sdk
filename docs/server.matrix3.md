@@ -6,6 +6,8 @@
 
 Represents a 3x3 matrix.
 
+When to use: 2D homogeneous transforms or normal matrix math. Do NOT use for: immutable math; most methods mutate the instance.
+
 **Signature:**
 
 ```typescript
@@ -15,7 +17,11 @@ export default class Matrix3 extends Float32Array
 
 ## Remarks
 
-All matrix methods result in mutation of the matrix instance. This class extends `Float32Array` to provide an efficient way to create and manipulate a 3x3 matrix. Various convenience methods are provided for common matrix operations.
+All matrix methods result in mutation of the matrix instance. This class extends `Float32Array` to provide an efficient way to create and manipulate a 3x3 matrix.
+
+Pattern: reuse instances to reduce allocations. Anti-pattern: treating matrices as immutable values.
+
+\*\*Category:\*\* Math
 
 ## Constructors
 

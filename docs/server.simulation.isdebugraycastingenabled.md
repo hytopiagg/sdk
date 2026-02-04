@@ -4,7 +4,9 @@
 
 ## Simulation.isDebugRaycastingEnabled property
 
-Whether the simulation has debug raycasting enabled
+Whether debug raycasting is enabled.
+
+\*\*Category:\*\* Physics
 
 **Signature:**
 

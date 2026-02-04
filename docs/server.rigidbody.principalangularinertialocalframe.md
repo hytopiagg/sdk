@@ -6,6 +6,8 @@
 
 The principal angular inertia local frame of the rigid body.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

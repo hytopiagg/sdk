@@ -6,6 +6,8 @@
 
 The gravity vector for the simulation.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

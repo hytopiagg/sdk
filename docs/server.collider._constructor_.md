@@ -4,7 +4,9 @@
 
 ## Collider.(constructor)
 
-Constructs a new instance of the `Collider` class
+Creates a collider with the provided options.
+
+Use for: configuring a collider before adding it to a simulation or rigid body.
 
 **Signature:**
 
@@ -43,6 +45,8 @@ colliderOptions
 </td><td>
 
 The options for the collider instance.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>

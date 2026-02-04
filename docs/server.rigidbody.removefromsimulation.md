@@ -19,3 +19,7 @@ void
 
 \*\*Child colliders:\*\* Also removes all child colliders from the simulation.
 
+\*\*Side effects:\*\* Unregisters the rigid body and all attached colliders.
+
+\*\*Category:\*\* Physics
+

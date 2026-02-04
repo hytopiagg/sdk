@@ -6,6 +6,8 @@
 
 Creates a new Entity instance.
 
+Use for: defining a new entity before spawning it into a world. Do NOT use for: player-controlled avatars (use `PlayerEntity` or `DefaultPlayerEntity`<!-- -->).
+
 **Signature:**
 
 ```typescript
@@ -44,11 +46,17 @@ options
 
 The options for the entity.
 
+\*\*Requires:\*\* If `parent` is provided, it must already be spawned.
+
+\*\*Side effects:\*\* May attach the provided controller.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>
 
 ## Remarks
 
-\*\*Controller attachment:\*\* If `controller` is provided, `controller.attach(this)` is called during construction (before spawn).
+Exactly one of `blockTextureUri` or `modelUri` must be provided. If `controller` is provided, `controller.attach(this)` is called during construction (before spawn).
 

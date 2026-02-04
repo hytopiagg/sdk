@@ -6,6 +6,8 @@
 
 The shape of the collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

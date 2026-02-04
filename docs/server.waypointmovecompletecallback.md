@@ -4,7 +4,7 @@
 
 ## WaypointMoveCompleteCallback type
 
-A callback function called when the entity associated with the PathfindingEntityController finishes moving to a calculate waypoint of its current path.
+Callback invoked when the entity finishes moving to a waypoint.
 
 **Signature:**
 

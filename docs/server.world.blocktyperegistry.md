@@ -4,7 +4,9 @@
 
 ## World.blockTypeRegistry property
 
-The block type registry for the world.
+The block type registry for this world.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

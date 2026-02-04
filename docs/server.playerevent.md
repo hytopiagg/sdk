@@ -4,7 +4,11 @@
 
 ## PlayerEvent enum
 
-Event types a Player can emit. See [PlayerEventPayloads](./server.playereventpayloads.md) for the payloads.
+Event types a Player can emit.
+
+See `PlayerEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 **Signature:**
 

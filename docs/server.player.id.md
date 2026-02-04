@@ -6,6 +6,8 @@
 
 The unique HYTOPIA UUID for the player.
 
+\*\*Category:\*\* Players
+
 **Signature:**
 
 ```typescript

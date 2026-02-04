@@ -6,6 +6,8 @@
 
 A simple entity controller with basic movement functions.
 
+When to use: straightforward movement and facing without pathfinding. Do NOT use for: obstacle-aware movement; use `PathfindingEntityController`<!-- -->.
+
 **Signature:**
 
 ```typescript
@@ -15,11 +17,11 @@ export default class SimpleEntityController extends BaseEntityController
 
 ## Remarks
 
-This class implements simple movement methods that serve as a way to add realistic movement and rotational facing functionality to an entity. This is also a great base to extend for your own more complex entity controller that implements things like pathfinding. Compatible with entities that have kinematic or dynamic rigid body types.
+This class provides straight-line movement and yaw-only facing. It is compatible with kinematic or dynamic rigid bodies.
 
 <h2>Coordinate System &amp; Model Orientation</h2>
 
-HYTOPIA uses \*\*-Z as forward\*\*. Models must be authored with their front facing -Z. When `face()` rotates an entity to look at a target, it orients the entity's -Z axis toward that target. A yaw of 0 means facing -Z (into the screen in default camera view).
+HYTOPIA uses \*\*-Z as forward\*\*. Models must be authored with their front facing -Z. When `face()` rotates an entity to look at a target, it orients the entity's -Z axis toward that target. A yaw of 0 means facing -Z.
 
 ## Example
 
@@ -40,6 +42,7 @@ myEntity.controller.move({ x: 10, y: 1, z: 10 }, 4, {
   },
 });
 ```
+\*\*Category:\*\* Controllers
 
 ## Constructors
 
@@ -244,6 +247,8 @@ Description
 
 Rotates the entity at a given speed to face a target coordinate.
 
+Use for: turning an entity to look at a target without moving it. Do NOT use for: pitch/roll orientation; this rotates yaw only.
+
 
 </td></tr>
 <tr><td>
@@ -257,6 +262,8 @@ Rotates the entity at a given speed to face a target coordinate.
 </td><td>
 
 Applies an upwards impulse to the entity to simulate a jump, only supported for entities with dynamic rigid body types.
+
+Use for: a single jump impulse for dynamic entities. Do NOT use for: kinematic entities; this has no effect.
 
 
 </td></tr>
@@ -272,6 +279,8 @@ Applies an upwards impulse to the entity to simulate a jump, only supported for 
 
 Moves the entity at a given speed in a straight line to a target coordinate.
 
+Use for: simple straight-line movement. Do NOT use for: obstacle avoidance; use `PathfindingEntityController`<!-- -->.
+
 
 </td></tr>
 <tr><td>
@@ -284,7 +293,7 @@ Moves the entity at a given speed in a straight line to a target coordinate.
 
 </td><td>
 
-Override of the [BaseEntityController.spawn()](./server.baseentitycontroller.spawn.md) method. Starts the set idle animations (if any) when the entity is spawned.
+Override of the `BaseEntityController.spawn` method. Starts the set idle animations (if any) when the entity is spawned.
 
 
 </td></tr>

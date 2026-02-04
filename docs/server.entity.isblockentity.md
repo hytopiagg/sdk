@@ -4,7 +4,9 @@
 
 ## Entity.isBlockEntity property
 
-Whether the entity is a block entity.
+Whether this entity is a block entity.
+
+\*\*Category:\*\* Entities
 
 **Signature:**
 

@@ -4,7 +4,11 @@
 
 ## WorldLoopEvent enum
 
-Event types a WorldLoop instance can emit. See [WorldLoopEventPayloads](./server.worldloopeventpayloads.md) for the payloads.
+Event types a WorldLoop instance can emit.
+
+See `WorldLoopEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 **Signature:**
 

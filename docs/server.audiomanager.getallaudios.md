@@ -17,3 +17,5 @@ getAllAudios(): Audio[];
 
 An array of audio instances.
 
+\*\*Category:\*\* Audio
+

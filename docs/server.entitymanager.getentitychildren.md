@@ -53,7 +53,9 @@ The entity to get the children for.
 
 All direct child entities of the entity.
 
+\*\*Category:\*\* Entities
+
 ## Remarks
 
-\*\*Direct children only:\*\* Returns only immediate children, not recursive descendants.
+Direct children only; does not include recursive descendants.
 

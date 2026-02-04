@@ -4,7 +4,9 @@
 
 ## World.audioManager property
 
-The audio manager for the world.
+The audio manager for this world.
+
+\*\*Category:\*\* Core
 
 **Signature:**
 

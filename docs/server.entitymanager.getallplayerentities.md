@@ -17,3 +17,5 @@ getAllPlayerEntities(): PlayerEntity[];
 
 All spawned player entities in the world.
 
+\*\*Category:\*\* Entities
+

@@ -44,6 +44,8 @@ number
 
 The half height of the capsule, cone, cylinder, or round cylinder collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

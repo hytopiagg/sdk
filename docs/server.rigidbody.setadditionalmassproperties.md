@@ -44,6 +44,8 @@ additionalMassProperties
 
 The additional mass properties of the rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

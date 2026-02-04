@@ -44,6 +44,10 @@ color
 
 The color of the light.
 
+\*\*Side effects:\*\* Emits `WorldEvent.SET_AMBIENT_LIGHT_COLOR`<!-- -->.
+
+\*\*Category:\*\* Core
+
 
 </td></tr>
 </tbody></table>

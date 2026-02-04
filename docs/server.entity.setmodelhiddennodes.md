@@ -44,6 +44,10 @@ string\[\]
 
 The nodes to hide on the entity's model.
 
+\*\*Side effects:\*\* Emits `EntityEvent.SET_MODEL_HIDDEN_NODES` when spawned.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>
@@ -52,6 +56,8 @@ The nodes to hide on the entity's model.
 void
 
 ## Remarks
+
+Model entities only; no effect for block entities.
 
 \*\*Replaces, not merges:\*\* This replaces all hidden nodes, not adds to them. To add nodes, include existing hidden nodes in the array.
 

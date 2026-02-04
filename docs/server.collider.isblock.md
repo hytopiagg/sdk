@@ -6,6 +6,8 @@
 
 Whether the collider is a block collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

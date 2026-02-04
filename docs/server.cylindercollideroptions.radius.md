@@ -6,6 +6,8 @@
 
 The radius of the cylinder collider.
 
+\*\*Category:\*\* Physics
+
 **Signature:**
 
 ```typescript

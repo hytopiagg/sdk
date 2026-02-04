@@ -101,7 +101,9 @@ _(Optional)_ The options for the intersections.
 
 The intersections.
 
+\*\*Category:\*\* Physics
+
 ## Remarks
 
-rawShape can be retrieved from a simulated or unsimulated collider using [Collider.rawShape](./server.collider.rawshape.md)<!-- -->.
+`rawShape` can be retrieved from a simulated or unsimulated collider using `Collider.rawShape`<!-- -->.
 

@@ -6,6 +6,8 @@
 
 Manages ParticleEmitter instances in a world.
 
+When to use: querying or bulk-cleaning particle emitters for a world. Do NOT use for: configuring emitters; use `ParticleEmitter` instances directly.
+
 **Signature:**
 
 ```typescript
@@ -14,7 +16,9 @@ export default class ParticleEmitterManager
 
 ## Remarks
 
-The ParticleEmitterManager is created internally as a singleton for each [World](./server.world.md) instance in a game server. It allows retrieval of all loaded ParticleEmitter instances, entity attached ParticleEmitter instances, and more.
+The ParticleEmitterManager is created internally per `World` instance. Pattern: spawn emitters during gameplay and use this manager for cleanup on entity despawn.
+
+\*\*Category:\*\* Particles
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `ParticleEmitterManager` class.
 
@@ -60,6 +64,8 @@ Description
 
 The world the ParticleEmitterManager is for.
 
+\*\*Category:\*\* Particles
+
 
 </td></tr>
 </tbody></table>
@@ -93,6 +99,8 @@ Description
 </td><td>
 
 Retrieves all spawned ParticleEmitter instances attached to a specific entity.
+
+Use for: cleanup or inspection of entity-bound emitters.
 
 
 </td></tr>

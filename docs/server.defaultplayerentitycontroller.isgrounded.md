@@ -6,6 +6,8 @@
 
 Whether the entity is grounded.
 
+\*\*Category:\*\* Controllers
+
 **Signature:**
 
 ```typescript

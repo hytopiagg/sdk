@@ -4,7 +4,9 @@
 
 ## Simulation.world property
 
-The world the simulation is for.
+The world this simulation belongs to.
+
+\*\*Category:\*\* Physics
 
 **Signature:**
 

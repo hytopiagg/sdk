@@ -4,7 +4,7 @@
 
 ## ChunkLattice.hasBlock() method
 
-Check if a block exists at a specific global coordinate.
+Checks if a block exists at a specific global coordinate.
 
 **Signature:**
 
@@ -52,4 +52,6 @@ The global coordinate of the block to check.
 boolean
 
 Whether a block exists.
+
+\*\*Category:\*\* Blocks
 

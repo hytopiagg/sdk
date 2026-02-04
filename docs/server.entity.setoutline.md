@@ -60,6 +60,10 @@ forPlayer
 
 _(Optional)_ The player to set the outline for, if undefined the outline will be set for all players.
 
+\*\*Side effects:\*\* Emits `EntityEvent.SET_OUTLINE` when spawned.
+
+\*\*Category:\*\* Entities
+
 
 </td></tr>
 </tbody></table>

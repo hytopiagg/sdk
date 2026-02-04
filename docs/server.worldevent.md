@@ -4,7 +4,11 @@
 
 ## WorldEvent enum
 
-Event types a World instance can emit. See [WorldEventPayloads](./server.worldeventpayloads.md) for the payloads.
+Event types a World instance can emit.
+
+See `WorldEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 **Signature:**
 

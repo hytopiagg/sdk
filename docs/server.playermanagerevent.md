@@ -4,7 +4,11 @@
 
 ## PlayerManagerEvent enum
 
-Event types a PlayerManager can emit. See [PlayerManagerEventPayloads](./server.playermanagereventpayloads.md) for the payloads.
+Event types a PlayerManager can emit.
+
+See `PlayerManagerEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
 
 **Signature:**
 

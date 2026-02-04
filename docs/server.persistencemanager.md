@@ -6,6 +6,8 @@
 
 Manages persistence of player and global data.
 
+When to use: reading or writing persisted data shared across lobbies or per player. Do NOT use for: per-tick state; cache data in memory and write back periodically.
+
 **Signature:**
 
 ```typescript
@@ -14,7 +16,11 @@ export default class PersistenceManager
 
 ## Remarks
 
-This class is a singleton accessible with the static property `PersistenceManager.instance`<!-- -->. Convenience methods are also available on the `Player` and `GameServer` classes.
+This class is a singleton accessible with `PersistenceManager.instance`<!-- -->. Convenience methods are also available on `Player` and `GameServer`<!-- -->.
+
+Pattern: load data on join, update in memory, and save on significant events. Anti-pattern: calling persistence APIs every frame.
+
+\*\*Category:\*\* Persistence
 
 The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `PersistenceManager` class.
 
@@ -59,6 +65,10 @@ Description
 
 
 </td><td>
+
+Singleton instance.
+
+\*\*Category:\*\* Persistence
 
 
 </td></tr>

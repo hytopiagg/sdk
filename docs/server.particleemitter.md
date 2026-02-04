@@ -17,11 +17,11 @@ export default class ParticleEmitter extends EventRouter implements protocol.Ser
 
 ## Remarks
 
-Particle emitters are created directly as instances. They support a variety of configuration options through the [ParticleEmitterOptions](./server.particleemitteroptions.md) constructor argument.
+Particle emitters are created directly as instances. They support a variety of configuration options through the `ParticleEmitterOptions` constructor argument.
 
 <h2>Events</h2>
 
-This class is an EventRouter, and instance of it emit events with payloads listed under [ParticleEmitterEventPayloads](./server.particleemittereventpayloads.md)<!-- -->.
+This class is an EventRouter, and instance of it emit events with payloads listed under `ParticleEmitterEventPayloads`<!-- -->.
 
 ## Example
 
@@ -33,6 +33,7 @@ const particleEmitter = new ParticleEmitter({
 
 particleEmitter.spawn(world);
 ```
+\*\*Category:\*\* Particles
 
 ## Constructors
 

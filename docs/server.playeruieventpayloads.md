@@ -6,6 +6,8 @@
 
 Event payloads for PlayerUI emitted events.
 
+\*\*Category:\*\* Events
+
 **Signature:**
 
 ```typescript

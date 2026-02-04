@@ -6,6 +6,8 @@
 
 Unregisters and stops an audio instance from the audio manager.
 
+Use for: explicit cleanup of one-shot or temporary sounds. Do NOT use for: pausing/resuming; use `Audio.pause` or `Audio.play` instead.
+
 **Signature:**
 
 ```typescript
@@ -43,6 +45,10 @@ audio
 </td><td>
 
 The audio instance to pause and unregister.
+
+\*\*Requires:\*\* Audio must be loaded (have an id) or an error is logged.
+
+\*\*Side effects:\*\* Pauses the audio and removes it from manager tracking.
 
 
 </td></tr>

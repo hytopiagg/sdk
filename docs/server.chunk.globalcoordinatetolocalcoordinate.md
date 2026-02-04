@@ -4,7 +4,7 @@
 
 ## Chunk.globalCoordinateToLocalCoordinate() method
 
-Convert a global coordinate to a local coordinate.
+Converts a global coordinate to a local coordinate.
 
 **Signature:**
 
@@ -52,4 +52,6 @@ The global coordinate to convert.
 [Vector3Like](./server.vector3like.md)
 
 The local coordinate.
+
+\*\*Category:\*\* Blocks
 

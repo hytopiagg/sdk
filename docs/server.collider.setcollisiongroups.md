@@ -44,6 +44,8 @@ collisionGroups
 
 The collision groups of the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

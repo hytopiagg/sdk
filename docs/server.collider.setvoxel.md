@@ -60,6 +60,8 @@ boolean
 
 True if the voxel at the coordinate should be filled, false if it should be removed.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 </tbody></table>

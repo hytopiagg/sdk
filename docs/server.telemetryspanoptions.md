@@ -6,6 +6,10 @@
 
 Options for creating a telemetry span.
 
+Use for: configuring `Telemetry.startSpan` calls. Do NOT use for: long-lived spans; keep spans short and scoped to a task.
+
+\*\*Category:\*\* Telemetry
+
 **Signature:**
 
 ```typescript

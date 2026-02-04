@@ -6,6 +6,8 @@
 
 Represents a collider in a world's physics simulation.
 
+When to use: defining collision shapes for rigid bodies or entities. Do NOT use for: gameplay queries; use `Simulation.raycast` or intersection APIs instead.
+
 **Signature:**
 
 ```typescript
@@ -15,7 +17,9 @@ export default class Collider extends EventRouter
 
 ## Remarks
 
-Colliders make up the foundation of the physical interactions in a world. They are highly configurable and have many aspects that can be adjusted both before simulation and while simulated. Colliders will most often be used through passing [ColliderOptions](./server.collideroptions.md) to a [RigidBody](./server.rigidbody.md) or an entity's [EntityOptions](./server.entityoptions.md)<!-- -->.
+Colliders are usually created via `RigidBody` or `Entity` options. You can also create and manage them directly for advanced use cases.
+
+\*\*Category:\*\* Physics
 
 ## Constructors
 
@@ -45,7 +49,9 @@ Description
 
 </td><td>
 
-Constructs a new instance of the `Collider` class
+Creates a collider with the provided options.
+
+Use for: configuring a collider before adding it to a simulation or rigid body.
 
 
 </td></tr>
@@ -93,6 +99,8 @@ number
 
 The bounciness of the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -113,6 +121,8 @@ The bounciness of the collider.
 </td><td>
 
 The bounciness combine rule of the collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -135,6 +145,8 @@ The bounciness combine rule of the collider.
 
 The collision groups the collider belongs to.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -155,6 +167,8 @@ number
 </td><td>
 
 The friction of the collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -177,6 +191,8 @@ The friction of the collider.
 
 The friction combine rule of the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -197,6 +213,8 @@ boolean
 </td><td>
 
 Whether the collider is a ball collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -219,6 +237,8 @@ boolean
 
 Whether the collider is a block collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -239,6 +259,8 @@ boolean
 </td><td>
 
 Whether the collider is a capsule collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -261,6 +283,8 @@ boolean
 
 Whether the collider is a cone collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -281,6 +305,8 @@ boolean
 </td><td>
 
 Whether the collider is a cylinder collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -303,6 +329,8 @@ boolean
 
 Whether the collider is enabled.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -323,6 +351,8 @@ boolean
 </td><td>
 
 Whether the collider is a none collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -345,6 +375,8 @@ boolean
 
 Whether the collider has been removed from the simulation.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -365,6 +397,8 @@ boolean
 </td><td>
 
 Whether the collider is a round cylinder collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -387,6 +421,8 @@ boolean
 
 Whether the collider is a sensor.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -407,6 +443,8 @@ boolean
 </td><td>
 
 Whether the collider is simulated.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -429,6 +467,8 @@ boolean
 
 Whether the collider is a trimesh collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -449,6 +489,8 @@ boolean
 </td><td>
 
 Whether the collider is a voxel collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -471,6 +513,8 @@ boolean
 
 Whether the collider is a wedge collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -491,6 +535,8 @@ Whether the collider is a wedge collider.
 </td><td>
 
 The parent rigid body of the collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -513,6 +559,8 @@ The parent rigid body of the collider.
 
 The raw collider object from the Rapier physics engine.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -533,6 +581,8 @@ The raw collider object from the Rapier physics engine.
 </td><td>
 
 The raw shape object from the Rapier physics engine.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -555,6 +605,8 @@ The raw shape object from the Rapier physics engine.
 
 The relative position of the collider to its parent rigid body.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -575,6 +627,8 @@ The relative position of the collider to its parent rigid body.
 </td><td>
 
 The relative rotation of the collider.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -597,6 +651,8 @@ The relative rotation of the collider.
 
 The scale of the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -618,6 +674,8 @@ The scale of the collider.
 
 The shape of the collider.
 
+\*\*Category:\*\* Physics
+
 
 </td></tr>
 <tr><td>
@@ -638,6 +696,8 @@ string \| undefined
 </td><td>
 
 An arbitrary identifier tag of the collider. Useful for your own logic.
+
+\*\*Category:\*\* Physics
 
 
 </td></tr>
@@ -715,7 +775,7 @@ Enables or disables contact force events for the collider. This is automatically
 
 </td><td>
 
-Creates a collider options object from a block's half extents.
+Creates collider options from a block's half extents.
 
 
 </td></tr>
@@ -731,7 +791,7 @@ Creates a collider options object from a block's half extents.
 
 </td><td>
 
-Creates a collider options object from a modelUri with best approximate shape and size.
+Creates collider options from a model URI using an approximate shape and size.
 
 
 </td></tr>

@@ -4,7 +4,11 @@
 
 ## PathfindingOptions type
 
-Options for the [PathfindingEntityController.pathfind()](./server.pathfindingentitycontroller.pathfind.md) method.
+Options for `PathfindingEntityController.pathfind`<!-- -->.
+
+Use for: configuring a single pathfinding request. Do NOT use for: per-tick recalculation; call `pathfind` sparingly.
+
+\*\*Category:\*\* Controllers
 
 **Signature:**
 

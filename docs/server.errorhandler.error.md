@@ -60,6 +60,10 @@ string
 
 _(Optional)_ Optional context information about the error
 
+\*\*Side effects:\*\* Writes to stderr and increments the error count.
+
+\*\*Category:\*\* Utilities
+
 
 </td></tr>
 </tbody></table>

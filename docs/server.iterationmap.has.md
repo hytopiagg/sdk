@@ -53,3 +53,5 @@ boolean
 
 True if the key exists, false otherwise.
 
+\*\*Category:\*\* Utilities
+

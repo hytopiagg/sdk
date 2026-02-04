@@ -4,7 +4,11 @@
 
 ## BlockTextureRegistry.generate property
 
-Whether to generate the atlas if needed. Defaults to `true` in development, `false` in production.
+Whether to generate the atlas if needed.
+
+Defaults to `true` in development, `false` in production.
+
+\*\*Category:\*\* Textures
 
 **Signature:**
 
