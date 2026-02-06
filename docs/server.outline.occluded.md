@@ -4,7 +4,7 @@
 
 ## Outline.occluded property
 
-Whether the outline should be visible when the entity is occluded by other objects. Defaults to true.
+Whether the outline should be hidden when the entity is occluded by other objects. If false, the outline is always visible (shows through walls). Defaults to true.
 
 **Signature:**
 

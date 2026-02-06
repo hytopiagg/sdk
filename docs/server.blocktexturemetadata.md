@@ -19,5 +19,6 @@ export type BlockTextureMetadata = {
     averageRGB: [number, number, number];
     isTransparent: boolean;
     needsAlphaTest: boolean;
+    transparencyRatio: number;
 };
 ```

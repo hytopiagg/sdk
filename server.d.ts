@@ -1074,6 +1074,7 @@ export declare type BlockTextureMetadata = {
     averageRGB: [number, number, number];
     isTransparent: boolean;
     needsAlphaTest: boolean;
+    transparencyRatio: number;
 };
 
 /**
@@ -2794,8 +2795,8 @@ export declare class DefaultPlayerEntityController extends BaseEntityController 
      * @returns Whether the entity of the entity controller can walk.
      */
     canWalk: (controller: DefaultPlayerEntityController) => boolean;
-    /** Whether to face forward when the entity stops moving. */
-    faceForwardOnStop: boolean;
+    /** Whether the entity rotates to face the camera direction when idle. When `true`, the entity always faces the camera direction. When `false`, the entity only rotates while actively moving. */
+    facesCameraWhenIdle: boolean;
     /** The looped animation(s) that will play when the entity is idle. */
     idleLoopedAnimations: string[];
     /** The oneshot animation(s) that will play when the entity interacts (left click) */
@@ -2978,8 +2979,8 @@ export declare interface DefaultPlayerEntityControllerOptions {
     canSwim?: () => boolean;
     /** A function allowing custom logic to determine if the entity can walk. */
     canWalk?: () => boolean;
-    /** Whether to face forward when the entity stops moving. */
-    faceForwardOnStop?: boolean;
+    /** Whether the entity rotates to face the camera direction when idle. */
+    facesCameraWhenIdle?: boolean;
     /** Overrides the animation(s) that will play when the entity is idle. */
     idleLoopedAnimations?: string[];
     /** Overrides the animation(s) that will play when the entity interacts (left click) */
@@ -5580,11 +5581,11 @@ export declare interface Outline {
     color?: RgbColor;
     /** The intensity multiplier for the outline color. Use values over 1 for brighter/glowing outlines. Defaults to 1.0. */
     colorIntensity?: number;
-    /** The thickness of the outline in world units. Defaults to 0.05. */
+    /** The thickness of the outline in world units. Defaults to 0.03. */
     thickness?: number;
     /** The opacity of the outline between 0 and 1. Defaults to 1.0. */
     opacity?: number;
-    /** Whether the outline should be visible when the entity is occluded by other objects. Defaults to true. */
+    /** Whether the outline should be hidden when the entity is occluded by other objects. If false, the outline is always visible (shows through walls). Defaults to true. */
     occluded?: boolean;
 }
 
@@ -6358,7 +6359,7 @@ export declare interface ParticleEmitterOptions {
  * **Category:** Particles
  * @public
  */
-export declare type ParticleEmitterOrientation = 'billboard' | 'billboardY' | 'fixed';
+export declare type ParticleEmitterOrientation = 'billboard' | 'billboardY' | 'fixed' | 'velocity';
 
 /**
  * Callback invoked when pathfinding aborts.
@@ -6879,7 +6880,16 @@ export declare class Player extends EventRouter implements protocol.Serializable
  *
  * @example
  * ```typescript
- * player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
+ * // Camera follows player, continuously looks at enemy
+ * player.camera.setAttachedToEntity(playerEntity);
+ * player.camera.setTargetEntity(enemyEntity);
+ *
+ * // Camera at fixed position, continuously looks at player
+ * player.camera.setAttachedToPosition({ x: 0, y: 10, z: 0 });
+ * player.camera.setTargetEntity(playerEntity);
+ *
+ * // Stop targeting, restore manual camera control
+ * player.camera.setTargetEntity(undefined);
  * ```
  *
  * **Category:** Players
@@ -6907,6 +6917,10 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
 
 
 
+
+
+
+
     /**
      * The entity the camera is attached to.
      *
@@ -6919,6 +6933,12 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
      * **Category:** Players
      */
     get attachedToPosition(): Vector3Like | undefined;
+    /**
+     * Whether the camera collides with blocks instead of clipping through them.
+     *
+     * **Category:** Players
+     */
+    get collidesWithBlocks(): boolean;
     /**
      * The facing direction vector of the camera based on its current orientation.
      *
@@ -7001,17 +7021,51 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
      */
     get shoulderAngle(): number;
     /**
-     * The entity the camera will constantly look at, if set.
+     * The entity the camera continuously rotates to face.
      *
      * **Category:** Players
      */
-    get trackedEntity(): Entity | undefined;
+    get targetEntity(): Entity | undefined;
     /**
-     * The position the camera will constantly look at, if set.
+     * The position the camera continuously rotates to face.
      *
      * **Category:** Players
      */
-    get trackedPosition(): Vector3Like | undefined;
+    get targetPosition(): Vector3Like | undefined;
+    /**
+     * The URI of the view model.
+     *
+     * @remarks
+     * If not set, defaults to using attached entity's model uri.
+     * If no entity is attached, returns `undefined`.
+     *
+     * **Category:** Players
+     */
+    get viewModelUri(): string | undefined;
+    /**
+     * Node substrings to hide on the view model (or attached entity's model).
+     *
+     * **Category:** Players
+     */
+    get viewModelHiddenNodes(): Set<string>;
+    /**
+     * Whether the view model pitches up/down with the camera orientation.
+     *
+     * **Category:** Players
+     */
+    get viewModelPitchesWithCamera(): boolean;
+    /**
+     * Node substrings to show on the view model (or attached entity's model).
+     *
+     * **Category:** Players
+     */
+    get viewModelShownNodes(): Set<string>;
+    /**
+     * Whether the view model yaws left/right with the camera orientation.
+     *
+     * **Category:** Players
+     */
+    get viewModelYawsWithCamera(): boolean;
     /**
      * The zoom of the camera.
      *
@@ -7032,7 +7086,7 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
      *
      * **Category:** Players
      */
-    lookAtEntity(entity: Entity): void;
+    faceEntity(entity: Entity): void;
     /**
      * Makes the camera look at a position once.
      *
@@ -7047,7 +7101,7 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
      *
      * **Category:** Players
      */
-    lookAtPosition(position: Vector3Like): void;
+    facePosition(position: Vector3Like): void;
     /**
      * Resets the camera state on the server.
      *
@@ -7091,11 +7145,16 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
      */
     setAttachedToPosition(position: Vector3Like): void;
     /**
-     * Sets the film offset of the camera.
+     * Sets whether the camera collides with blocks instead of clipping through them.
      *
-     * @remarks
-     * Positive shifts right, negative shifts left.
+     * @param collidesWithBlocks - Whether the camera should collide with blocks.
      *
+     * **Category:** Players
+     */
+    setCollidesWithBlocks(collidesWithBlocks: boolean): void;
+    /**
+     * Sets the film offset of the camera. A positive value
+     * shifts the camera right, a negative value shifts it left.
      * @param filmOffset - The film offset to set.
      *
      * **Requires:** Player must be in a world.
@@ -7132,36 +7191,6 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
      * **Category:** Players
      */
     setFov(fov: number): void;
-    /**
-     * Sets model nodes that will not be rendered for this player.
-     *
-     * @remarks
-     * Uses case-insensitive substring matching and replaces the current hidden set.
-     *
-     * @param modelHiddenNodes - Substrings of node names to hide.
-     *
-     * **Requires:** Player must be in a world.
-     *
-     * **Side effects:** Emits `PlayerCameraEvent.SET_MODEL_HIDDEN_NODES`.
-     *
-     * **Category:** Players
-     */
-    setModelHiddenNodes(modelHiddenNodes: string[]): void;
-    /**
-     * Sets model nodes that will be rendered for this player, overriding hidden nodes.
-     *
-     * @remarks
-     * Uses case-insensitive substring matching and replaces the current shown set.
-     *
-     * @param modelShownNodes - Substrings of node names to show.
-     *
-     * **Requires:** Player must be in a world.
-     *
-     * **Side effects:** Emits `PlayerCameraEvent.SET_MODEL_SHOWN_NODES`.
-     *
-     * **Category:** Players
-     */
-    setModelShownNodes(modelShownNodes: string[]): void;
     /**
      * Sets the mode of the camera.
      *
@@ -7216,7 +7245,7 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
      *
      * **Category:** Players
      */
-    setTrackedEntity(entity: Entity | undefined): void;
+    setTargetEntity(entity: Entity | undefined): void;
     /**
      * Sets the position the camera will continuously look at.
      *
@@ -7230,7 +7259,68 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
      *
      * **Category:** Players
      */
-    setTrackedPosition(position: Vector3Like | undefined): void;
+    setTargetPosition(position: Vector3Like | undefined): void;
+    /**
+     * Sets a view model for first-person rendering.
+     *
+     * @remarks
+     * The view model is only visible to this camera's player and renders in place of
+     * the attached entity's model (e.g., first-person arms/weapon).
+     * Animations played on the attached entity automatically sync to
+     * this model if animation names match.
+     *
+     * @param viewModelUri - The model URI, or `undefined` to clear.
+     *
+     * **Category:** Players
+     */
+    setViewModel(viewModelUri: string | undefined): void;
+    /**
+     * Hides nodes on the view model (or attached entity's model if no view model is set).
+     *
+     * @remarks
+     * Only affects this camera's player. Uses case-insensitive substring matching.
+     * Replaces the current set (not a merge).
+     *
+     * @param viewModelHiddenNodes - Node name substrings to hide.
+     *
+     * **Category:** Players
+     */
+    setViewModelHiddenNodes(viewModelHiddenNodes: string[]): void;
+    /**
+     * Sets whether the view model pitches up/down with the camera orientation.
+     *
+     * @remarks
+     * Useful for first-person view models to tilt when looking up/down.
+     *
+     * @param viewModelPitchesWithCamera - Whether the view model should pitch with the camera.
+     *
+     * **Category:** Players
+     */
+    setViewModelPitchesWithCamera(viewModelPitchesWithCamera: boolean): void;
+    /**
+     * Shows nodes on the view model (or attached entity's model if no view model is set),
+     * overriding hidden nodes.
+     *
+     * @remarks
+     * Only affects this camera's player. Uses case-insensitive substring matching.
+     * Replaces the current set (not a merge).
+     *
+     * @param viewModelShownNodes - Node name substrings to show.
+     *
+     * **Category:** Players
+     */
+    setViewModelShownNodes(viewModelShownNodes: string[]): void;
+    /**
+     * Sets whether the view model yaws left/right with the camera orientation.
+     *
+     * @remarks
+     * Useful for first-person view models to rotate when looking left/right.
+     *
+     * @param viewModelYawsWithCamera - Whether the view model should yaw with the camera.
+     *
+     * **Category:** Players
+     */
+    setViewModelYawsWithCamera(viewModelYawsWithCamera: boolean): void;
     /**
      * Sets the zoom of the camera.
      *
@@ -7256,20 +7346,24 @@ export declare class PlayerCamera extends EventRouter implements protocol.Serial
  * @public
  */
 export declare enum PlayerCameraEvent {
-    LOOK_AT_ENTITY = "PLAYER_CAMERA.LOOK_AT_ENTITY",
-    LOOK_AT_POSITION = "PLAYER_CAMERA.LOOK_AT_POSITION",
+    FACE_ENTITY = "PLAYER_CAMERA.FACE_ENTITY",
+    FACE_POSITION = "PLAYER_CAMERA.FACE_POSITION",
     SET_ATTACHED_TO_ENTITY = "PLAYER_CAMERA.SET_ATTACHED_TO_ENTITY",
     SET_ATTACHED_TO_POSITION = "PLAYER_CAMERA.SET_ATTACHED_TO_POSITION",
+    SET_COLLIDES_WITH_BLOCKS = "PLAYER_CAMERA.SET_COLLIDES_WITH_BLOCKS",
     SET_FILM_OFFSET = "PLAYER_CAMERA.SET_FILM_OFFSET",
     SET_FORWARD_OFFSET = "PLAYER_CAMERA.SET_FORWARD_OFFSET",
     SET_FOV = "PLAYER_CAMERA.SET_FOV",
-    SET_MODEL_HIDDEN_NODES = "PLAYER_CAMERA.SET_MODEL_HIDDEN_NODES",
-    SET_MODEL_SHOWN_NODES = "PLAYER_CAMERA.SET_MODEL_SHOWN_NODES",
     SET_MODE = "PLAYER_CAMERA.SET_MODE",
     SET_OFFSET = "PLAYER_CAMERA.SET_OFFSET",
     SET_SHOULDER_ANGLE = "PLAYER_CAMERA.SET_SHOULDER_ANGLE",
-    SET_TRACKED_ENTITY = "PLAYER_CAMERA.SET_TRACKED_ENTITY",
-    SET_TRACKED_POSITION = "PLAYER_CAMERA.SET_TRACKED_POSITION",
+    SET_TARGET_ENTITY = "PLAYER_CAMERA.SET_TARGET_ENTITY",
+    SET_TARGET_POSITION = "PLAYER_CAMERA.SET_TARGET_POSITION",
+    SET_VIEW_MODEL = "PLAYER_CAMERA.SET_VIEW_MODEL",
+    SET_VIEW_MODEL_HIDDEN_NODES = "PLAYER_CAMERA.SET_VIEW_MODEL_HIDDEN_NODES",
+    SET_VIEW_MODEL_PITCHES_WITH_CAMERA = "PLAYER_CAMERA.SET_VIEW_MODEL_PITCHES_WITH_CAMERA",
+    SET_VIEW_MODEL_SHOWN_NODES = "PLAYER_CAMERA.SET_VIEW_MODEL_SHOWN_NODES",
+    SET_VIEW_MODEL_YAWS_WITH_CAMERA = "PLAYER_CAMERA.SET_VIEW_MODEL_YAWS_WITH_CAMERA",
     SET_ZOOM = "PLAYER_CAMERA.SET_ZOOM"
 }
 
@@ -7280,25 +7374,30 @@ export declare enum PlayerCameraEvent {
  * @public
  */
 export declare interface PlayerCameraEventPayloads {
-    /** Emitted when the camera looks at an entity. */
-    [PlayerCameraEvent.LOOK_AT_ENTITY]: {
+    /** Emitted when the camera faces an entity (one-time rotation). */
+    [PlayerCameraEvent.FACE_ENTITY]: {
         playerCamera: PlayerCamera;
         entity: Entity;
     };
-    /** Emitted when the camera looks at a position. */
-    [PlayerCameraEvent.LOOK_AT_POSITION]: {
+    /** Emitted when the camera faces a position (one-time rotation). */
+    [PlayerCameraEvent.FACE_POSITION]: {
         playerCamera: PlayerCamera;
         position: Vector3Like;
     };
-    /** Emitted when the camera is attached to an entity. */
+    /** Emitted when the camera attachment entity is set. */
     [PlayerCameraEvent.SET_ATTACHED_TO_ENTITY]: {
         playerCamera: PlayerCamera;
         entity: Entity;
     };
-    /** Emitted when the camera is attached to a position. */
+    /** Emitted when the camera attachment position is set. */
     [PlayerCameraEvent.SET_ATTACHED_TO_POSITION]: {
         playerCamera: PlayerCamera;
         position: Vector3Like;
+    };
+    /** Emitted when collides with blocks is set. */
+    [PlayerCameraEvent.SET_COLLIDES_WITH_BLOCKS]: {
+        playerCamera: PlayerCamera;
+        collidesWithBlocks: boolean;
     };
     /** Emitted when the film offset of the camera is set. */
     [PlayerCameraEvent.SET_FILM_OFFSET]: {
@@ -7315,16 +7414,6 @@ export declare interface PlayerCameraEventPayloads {
         playerCamera: PlayerCamera;
         fov: number;
     };
-    /** Emitted when the nodes of the model the camera is attached to are set to be hidden. */
-    [PlayerCameraEvent.SET_MODEL_HIDDEN_NODES]: {
-        playerCamera: PlayerCamera;
-        modelHiddenNodes: Set<string>;
-    };
-    /** Emitted when the nodes of the model the camera is attached to are set to be shown. */
-    [PlayerCameraEvent.SET_MODEL_SHOWN_NODES]: {
-        playerCamera: PlayerCamera;
-        modelShownNodes: Set<string>;
-    };
     /** Emitted when the mode of the camera is set. */
     [PlayerCameraEvent.SET_MODE]: {
         playerCamera: PlayerCamera;
@@ -7340,15 +7429,40 @@ export declare interface PlayerCameraEventPayloads {
         playerCamera: PlayerCamera;
         shoulderAngle: number;
     };
-    /** Emitted when the tracked entity of the camera is set. */
-    [PlayerCameraEvent.SET_TRACKED_ENTITY]: {
+    /** Emitted when the target entity of the camera is set. */
+    [PlayerCameraEvent.SET_TARGET_ENTITY]: {
         playerCamera: PlayerCamera;
         entity: Entity | undefined;
     };
-    /** Emitted when the tracked position of the camera is set. */
-    [PlayerCameraEvent.SET_TRACKED_POSITION]: {
+    /** Emitted when the target position of the camera is set. */
+    [PlayerCameraEvent.SET_TARGET_POSITION]: {
         playerCamera: PlayerCamera;
         position: Vector3Like | undefined;
+    };
+    /** Emitted when the view model is set. */
+    [PlayerCameraEvent.SET_VIEW_MODEL]: {
+        playerCamera: PlayerCamera;
+        viewModelUri: string | undefined;
+    };
+    /** Emitted when the nodes of the view model are set to be hidden. */
+    [PlayerCameraEvent.SET_VIEW_MODEL_HIDDEN_NODES]: {
+        playerCamera: PlayerCamera;
+        viewModelHiddenNodes: Set<string>;
+    };
+    /** Emitted when view model pitches with camera is set. */
+    [PlayerCameraEvent.SET_VIEW_MODEL_PITCHES_WITH_CAMERA]: {
+        playerCamera: PlayerCamera;
+        viewModelPitchesWithCamera: boolean;
+    };
+    /** Emitted when the nodes of the view model are set to be shown. */
+    [PlayerCameraEvent.SET_VIEW_MODEL_SHOWN_NODES]: {
+        playerCamera: PlayerCamera;
+        viewModelShownNodes: Set<string>;
+    };
+    /** Emitted when view model yaws with camera is set. */
+    [PlayerCameraEvent.SET_VIEW_MODEL_YAWS_WITH_CAMERA]: {
+        playerCamera: PlayerCamera;
+        viewModelYawsWithCamera: boolean;
     };
     /** Emitted when the zoom of the camera is set. */
     [PlayerCameraEvent.SET_ZOOM]: {

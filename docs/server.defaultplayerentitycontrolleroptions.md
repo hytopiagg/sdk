@@ -155,7 +155,7 @@ _(Optional)_ A function allowing custom logic to determine if the entity can wal
 </td></tr>
 <tr><td>
 
-[faceForwardOnStop?](./server.defaultplayerentitycontrolleroptions.faceforwardonstop.md)
+[facesCameraWhenIdle?](./server.defaultplayerentitycontrolleroptions.facescamerawhenidle.md)
 
 
 </td><td>
@@ -168,7 +168,7 @@ boolean
 
 </td><td>
 
-_(Optional)_ Whether to face forward when the entity stops moving.
+_(Optional)_ Whether the entity rotates to face the camera direction when idle.
 
 
 </td></tr>

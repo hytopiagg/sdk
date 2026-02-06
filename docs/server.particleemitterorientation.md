@@ -11,5 +11,5 @@ The orientation mode for particles.
 **Signature:**
 
 ```typescript
-export type ParticleEmitterOrientation = 'billboard' | 'billboardY' | 'fixed';
+export type ParticleEmitterOrientation = 'billboard' | 'billboardY' | 'fixed' | 'velocity';
 ```

@@ -4,7 +4,7 @@
 
 ## PlayerCameraEventPayloads."PLAYER\_CAMERA.SET\_ATTACHED\_TO\_POSITION" property
 
-Emitted when the camera is attached to a position.
+Emitted when the camera attachment position is set.
 
 **Signature:**
 

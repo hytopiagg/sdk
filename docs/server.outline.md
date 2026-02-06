@@ -90,7 +90,7 @@ boolean
 
 </td><td>
 
-_(Optional)_ Whether the outline should be visible when the entity is occluded by other objects. Defaults to true.
+_(Optional)_ Whether the outline should be hidden when the entity is occluded by other objects. If false, the outline is always visible (shows through walls). Defaults to true.
 
 
 </td></tr>
@@ -128,7 +128,7 @@ number
 
 </td><td>
 
-_(Optional)_ The thickness of the outline in world units. Defaults to 0.05.
+_(Optional)_ The thickness of the outline in world units. Defaults to 0.03.
 
 
 </td></tr>

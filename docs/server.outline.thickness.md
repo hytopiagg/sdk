@@ -4,7 +4,7 @@
 
 ## Outline.thickness property
 
-The thickness of the outline in world units. Defaults to 0.05.
+The thickness of the outline in world units. Defaults to 0.03.
 
 **Signature:**
 

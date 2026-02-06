@@ -212,7 +212,7 @@ A function allowing custom logic to determine if the entity can walk.
 </td></tr>
 <tr><td>
 
-[faceForwardOnStop](./server.defaultplayerentitycontroller.faceforwardonstop.md)
+[facesCameraWhenIdle](./server.defaultplayerentitycontroller.facescamerawhenidle.md)
 
 
 </td><td>
@@ -225,7 +225,7 @@ boolean
 
 </td><td>
 
-Whether to face forward when the entity stops moving.
+Whether the entity rotates to face the camera direction when idle. When `true`<!-- -->, the entity always faces the camera direction. When `false`<!-- -->, the entity only rotates while actively moving.
 
 
 </td></tr>

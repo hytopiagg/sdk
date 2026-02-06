@@ -31,7 +31,16 @@ The constructor for this class is marked as internal. Third-party code should no
 
 
 ```typescript
-player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
+// Camera follows player, continuously looks at enemy
+player.camera.setAttachedToEntity(playerEntity);
+player.camera.setTargetEntity(enemyEntity);
+
+// Camera at fixed position, continuously looks at player
+player.camera.setAttachedToPosition({ x: 0, y: 10, z: 0 });
+player.camera.setTargetEntity(playerEntity);
+
+// Stop targeting, restore manual camera control
+player.camera.setTargetEntity(undefined);
 ```
 \*\*Category:\*\* Players
 
@@ -99,6 +108,29 @@ The entity the camera is attached to.
 </td><td>
 
 The position the camera is attached to.
+
+\*\*Category:\*\* Players
+
+
+</td></tr>
+<tr><td>
+
+[collidesWithBlocks](./server.playercamera.collideswithblocks.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the camera collides with blocks instead of clipping through them.
 
 \*\*Category:\*\* Players
 
@@ -372,7 +404,7 @@ The shoulder angle of the camera in degrees.
 </td></tr>
 <tr><td>
 
-[trackedEntity](./server.playercamera.trackedentity.md)
+[targetEntity](./server.playercamera.targetentity.md)
 
 
 </td><td>
@@ -387,7 +419,7 @@ The shoulder angle of the camera in degrees.
 
 </td><td>
 
-The entity the camera will constantly look at, if set.
+The entity the camera continuously rotates to face.
 
 \*\*Category:\*\* Players
 
@@ -395,7 +427,7 @@ The entity the camera will constantly look at, if set.
 </td></tr>
 <tr><td>
 
-[trackedPosition](./server.playercamera.trackedposition.md)
+[targetPosition](./server.playercamera.targetposition.md)
 
 
 </td><td>
@@ -410,7 +442,120 @@ The entity the camera will constantly look at, if set.
 
 </td><td>
 
-The position the camera will constantly look at, if set.
+The position the camera continuously rotates to face.
+
+\*\*Category:\*\* Players
+
+
+</td></tr>
+<tr><td>
+
+[viewModelHiddenNodes](./server.playercamera.viewmodelhiddennodes.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+Set&lt;string&gt;
+
+
+</td><td>
+
+Node substrings to hide on the view model (or attached entity's model).
+
+\*\*Category:\*\* Players
+
+
+</td></tr>
+<tr><td>
+
+[viewModelPitchesWithCamera](./server.playercamera.viewmodelpitcheswithcamera.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the view model pitches up/down with the camera orientation.
+
+\*\*Category:\*\* Players
+
+
+</td></tr>
+<tr><td>
+
+[viewModelShownNodes](./server.playercamera.viewmodelshownnodes.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+Set&lt;string&gt;
+
+
+</td><td>
+
+Node substrings to show on the view model (or attached entity's model).
+
+\*\*Category:\*\* Players
+
+
+</td></tr>
+<tr><td>
+
+[viewModelUri](./server.playercamera.viewmodeluri.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+The URI of the view model.
+
+
+</td></tr>
+<tr><td>
+
+[viewModelYawsWithCamera](./server.playercamera.viewmodelyawswithcamera.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+Whether the view model yaws left/right with the camera orientation.
 
 \*\*Category:\*\* Players
 
@@ -461,7 +606,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[lookAtEntity(entity)](./server.playercamera.lookatentity.md)
+[faceEntity(entity)](./server.playercamera.faceentity.md)
 
 
 </td><td>
@@ -477,7 +622,7 @@ Use for: one-off focus moments (e.g., cutscene beats). Do NOT use for: continuou
 </td></tr>
 <tr><td>
 
-[lookAtPosition(position)](./server.playercamera.lookatposition.md)
+[facePosition(position)](./server.playercamera.faceposition.md)
 
 
 </td><td>
@@ -541,6 +686,20 @@ Use for: fixed cameras or cinematic shots. Do NOT use for: tracking a moving tar
 </td></tr>
 <tr><td>
 
+[setCollidesWithBlocks(collidesWithBlocks)](./server.playercamera.setcollideswithblocks.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets whether the camera collides with blocks instead of clipping through them.
+
+
+</td></tr>
+<tr><td>
+
 [setFilmOffset(filmOffset)](./server.playercamera.setfilmoffset.md)
 
 
@@ -549,7 +708,7 @@ Use for: fixed cameras or cinematic shots. Do NOT use for: tracking a moving tar
 
 </td><td>
 
-Sets the film offset of the camera.
+Sets the film offset of the camera. A positive value shifts the camera right, a negative value shifts it left.
 
 
 </td></tr>
@@ -597,34 +756,6 @@ Sets the mode of the camera.
 </td></tr>
 <tr><td>
 
-[setModelHiddenNodes(modelHiddenNodes)](./server.playercamera.setmodelhiddennodes.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Sets model nodes that will not be rendered for this player.
-
-
-</td></tr>
-<tr><td>
-
-[setModelShownNodes(modelShownNodes)](./server.playercamera.setmodelshownnodes.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Sets model nodes that will be rendered for this player, overriding hidden nodes.
-
-
-</td></tr>
-<tr><td>
-
 [setOffset(offset)](./server.playercamera.setoffset.md)
 
 
@@ -653,7 +784,7 @@ Sets the shoulder angle of the camera in degrees (third-person mode only).
 </td></tr>
 <tr><td>
 
-[setTrackedEntity(entity)](./server.playercamera.settrackedentity.md)
+[setTargetEntity(entity)](./server.playercamera.settargetentity.md)
 
 
 </td><td>
@@ -669,7 +800,7 @@ Use for: keeping the camera focused on a moving entity.
 </td></tr>
 <tr><td>
 
-[setTrackedPosition(position)](./server.playercamera.settrackedposition.md)
+[setTargetPosition(position)](./server.playercamera.settargetposition.md)
 
 
 </td><td>
@@ -680,6 +811,76 @@ Use for: keeping the camera focused on a moving entity.
 Sets the position the camera will continuously look at.
 
 Use for: fixed focal points in the scene.
+
+
+</td></tr>
+<tr><td>
+
+[setViewModel(viewModelUri)](./server.playercamera.setviewmodel.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets a view model for first-person rendering.
+
+
+</td></tr>
+<tr><td>
+
+[setViewModelHiddenNodes(viewModelHiddenNodes)](./server.playercamera.setviewmodelhiddennodes.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Hides nodes on the view model (or attached entity's model if no view model is set).
+
+
+</td></tr>
+<tr><td>
+
+[setViewModelPitchesWithCamera(viewModelPitchesWithCamera)](./server.playercamera.setviewmodelpitcheswithcamera.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets whether the view model pitches up/down with the camera orientation.
+
+
+</td></tr>
+<tr><td>
+
+[setViewModelShownNodes(viewModelShownNodes)](./server.playercamera.setviewmodelshownnodes.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Shows nodes on the view model (or attached entity's model if no view model is set), overriding hidden nodes.
+
+
+</td></tr>
+<tr><td>
+
+[setViewModelYawsWithCamera(viewModelYawsWithCamera)](./server.playercamera.setviewmodelyawswithcamera.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets whether the view model yaws left/right with the camera orientation.
 
 
 </td></tr>

@@ -36,12 +36,12 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-LOOK\_AT\_ENTITY
+FACE\_ENTITY
 
 
 </td><td>
 
-`"PLAYER_CAMERA.LOOK_AT_ENTITY"`
+`"PLAYER_CAMERA.FACE_ENTITY"`
 
 
 </td><td>
@@ -50,12 +50,12 @@ LOOK\_AT\_ENTITY
 </td></tr>
 <tr><td>
 
-LOOK\_AT\_POSITION
+FACE\_POSITION
 
 
 </td><td>
 
-`"PLAYER_CAMERA.LOOK_AT_POSITION"`
+`"PLAYER_CAMERA.FACE_POSITION"`
 
 
 </td><td>
@@ -84,6 +84,20 @@ SET\_ATTACHED\_TO\_POSITION
 </td><td>
 
 `"PLAYER_CAMERA.SET_ATTACHED_TO_POSITION"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+SET\_COLLIDES\_WITH\_BLOCKS
+
+
+</td><td>
+
+`"PLAYER_CAMERA.SET_COLLIDES_WITH_BLOCKS"`
 
 
 </td><td>
@@ -148,34 +162,6 @@ SET\_MODE
 </td></tr>
 <tr><td>
 
-SET\_MODEL\_HIDDEN\_NODES
-
-
-</td><td>
-
-`"PLAYER_CAMERA.SET_MODEL_HIDDEN_NODES"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-SET\_MODEL\_SHOWN\_NODES
-
-
-</td><td>
-
-`"PLAYER_CAMERA.SET_MODEL_SHOWN_NODES"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
 SET\_OFFSET
 
 
@@ -204,12 +190,12 @@ SET\_SHOULDER\_ANGLE
 </td></tr>
 <tr><td>
 
-SET\_TRACKED\_ENTITY
+SET\_TARGET\_ENTITY
 
 
 </td><td>
 
-`"PLAYER_CAMERA.SET_TRACKED_ENTITY"`
+`"PLAYER_CAMERA.SET_TARGET_ENTITY"`
 
 
 </td><td>
@@ -218,12 +204,82 @@ SET\_TRACKED\_ENTITY
 </td></tr>
 <tr><td>
 
-SET\_TRACKED\_POSITION
+SET\_TARGET\_POSITION
 
 
 </td><td>
 
-`"PLAYER_CAMERA.SET_TRACKED_POSITION"`
+`"PLAYER_CAMERA.SET_TARGET_POSITION"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+SET\_VIEW\_MODEL
+
+
+</td><td>
+
+`"PLAYER_CAMERA.SET_VIEW_MODEL"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+SET\_VIEW\_MODEL\_HIDDEN\_NODES
+
+
+</td><td>
+
+`"PLAYER_CAMERA.SET_VIEW_MODEL_HIDDEN_NODES"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+SET\_VIEW\_MODEL\_PITCHES\_WITH\_CAMERA
+
+
+</td><td>
+
+`"PLAYER_CAMERA.SET_VIEW_MODEL_PITCHES_WITH_CAMERA"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+SET\_VIEW\_MODEL\_SHOWN\_NODES
+
+
+</td><td>
+
+`"PLAYER_CAMERA.SET_VIEW_MODEL_SHOWN_NODES"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+SET\_VIEW\_MODEL\_YAWS\_WITH\_CAMERA
+
+
+</td><td>
+
+`"PLAYER_CAMERA.SET_VIEW_MODEL_YAWS_WITH_CAMERA"`
 
 
 </td><td>

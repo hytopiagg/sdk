@@ -39,7 +39,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-["PLAYER\_CAMERA.LOOK\_AT\_ENTITY"](./server.playercameraeventpayloads._player_camera.look_at_entity_.md)
+["PLAYER\_CAMERA.FACE\_ENTITY"](./server.playercameraeventpayloads._player_camera.face_entity_.md)
 
 
 </td><td>
@@ -52,13 +52,13 @@ Description
 
 </td><td>
 
-Emitted when the camera looks at an entity.
+Emitted when the camera faces an entity (one-time rotation).
 
 
 </td></tr>
 <tr><td>
 
-["PLAYER\_CAMERA.LOOK\_AT\_POSITION"](./server.playercameraeventpayloads._player_camera.look_at_position_.md)
+["PLAYER\_CAMERA.FACE\_POSITION"](./server.playercameraeventpayloads._player_camera.face_position_.md)
 
 
 </td><td>
@@ -71,7 +71,7 @@ Emitted when the camera looks at an entity.
 
 </td><td>
 
-Emitted when the camera looks at a position.
+Emitted when the camera faces a position (one-time rotation).
 
 
 </td></tr>
@@ -90,7 +90,7 @@ Emitted when the camera looks at a position.
 
 </td><td>
 
-Emitted when the camera is attached to an entity.
+Emitted when the camera attachment entity is set.
 
 
 </td></tr>
@@ -109,7 +109,26 @@ Emitted when the camera is attached to an entity.
 
 </td><td>
 
-Emitted when the camera is attached to a position.
+Emitted when the camera attachment position is set.
+
+
+</td></tr>
+<tr><td>
+
+["PLAYER\_CAMERA.SET\_COLLIDES\_WITH\_BLOCKS"](./server.playercameraeventpayloads._player_camera.set_collides_with_blocks_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ playerCamera: [PlayerCamera](./server.playercamera.md)<!-- -->; collidesWithBlocks: boolean; }
+
+
+</td><td>
+
+Emitted when collides with blocks is set.
 
 
 </td></tr>
@@ -191,44 +210,6 @@ Emitted when the mode of the camera is set.
 </td></tr>
 <tr><td>
 
-["PLAYER\_CAMERA.SET\_MODEL\_HIDDEN\_NODES"](./server.playercameraeventpayloads._player_camera.set_model_hidden_nodes_.md)
-
-
-</td><td>
-
-
-</td><td>
-
-{ playerCamera: [PlayerCamera](./server.playercamera.md)<!-- -->; modelHiddenNodes: Set&lt;string&gt;; }
-
-
-</td><td>
-
-Emitted when the nodes of the model the camera is attached to are set to be hidden.
-
-
-</td></tr>
-<tr><td>
-
-["PLAYER\_CAMERA.SET\_MODEL\_SHOWN\_NODES"](./server.playercameraeventpayloads._player_camera.set_model_shown_nodes_.md)
-
-
-</td><td>
-
-
-</td><td>
-
-{ playerCamera: [PlayerCamera](./server.playercamera.md)<!-- -->; modelShownNodes: Set&lt;string&gt;; }
-
-
-</td><td>
-
-Emitted when the nodes of the model the camera is attached to are set to be shown.
-
-
-</td></tr>
-<tr><td>
-
 ["PLAYER\_CAMERA.SET\_OFFSET"](./server.playercameraeventpayloads._player_camera.set_offset_.md)
 
 
@@ -267,7 +248,7 @@ Emitted when the shoulder angle of the camera is set.
 </td></tr>
 <tr><td>
 
-["PLAYER\_CAMERA.SET\_TRACKED\_ENTITY"](./server.playercameraeventpayloads._player_camera.set_tracked_entity_.md)
+["PLAYER\_CAMERA.SET\_TARGET\_ENTITY"](./server.playercameraeventpayloads._player_camera.set_target_entity_.md)
 
 
 </td><td>
@@ -280,13 +261,13 @@ Emitted when the shoulder angle of the camera is set.
 
 </td><td>
 
-Emitted when the tracked entity of the camera is set.
+Emitted when the target entity of the camera is set.
 
 
 </td></tr>
 <tr><td>
 
-["PLAYER\_CAMERA.SET\_TRACKED\_POSITION"](./server.playercameraeventpayloads._player_camera.set_tracked_position_.md)
+["PLAYER\_CAMERA.SET\_TARGET\_POSITION"](./server.playercameraeventpayloads._player_camera.set_target_position_.md)
 
 
 </td><td>
@@ -299,7 +280,102 @@ Emitted when the tracked entity of the camera is set.
 
 </td><td>
 
-Emitted when the tracked position of the camera is set.
+Emitted when the target position of the camera is set.
+
+
+</td></tr>
+<tr><td>
+
+["PLAYER\_CAMERA.SET\_VIEW\_MODEL\_HIDDEN\_NODES"](./server.playercameraeventpayloads._player_camera.set_view_model_hidden_nodes_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ playerCamera: [PlayerCamera](./server.playercamera.md)<!-- -->; viewModelHiddenNodes: Set&lt;string&gt;; }
+
+
+</td><td>
+
+Emitted when the nodes of the view model are set to be hidden.
+
+
+</td></tr>
+<tr><td>
+
+["PLAYER\_CAMERA.SET\_VIEW\_MODEL\_PITCHES\_WITH\_CAMERA"](./server.playercameraeventpayloads._player_camera.set_view_model_pitches_with_camera_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ playerCamera: [PlayerCamera](./server.playercamera.md)<!-- -->; viewModelPitchesWithCamera: boolean; }
+
+
+</td><td>
+
+Emitted when view model pitches with camera is set.
+
+
+</td></tr>
+<tr><td>
+
+["PLAYER\_CAMERA.SET\_VIEW\_MODEL\_SHOWN\_NODES"](./server.playercameraeventpayloads._player_camera.set_view_model_shown_nodes_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ playerCamera: [PlayerCamera](./server.playercamera.md)<!-- -->; viewModelShownNodes: Set&lt;string&gt;; }
+
+
+</td><td>
+
+Emitted when the nodes of the view model are set to be shown.
+
+
+</td></tr>
+<tr><td>
+
+["PLAYER\_CAMERA.SET\_VIEW\_MODEL\_YAWS\_WITH\_CAMERA"](./server.playercameraeventpayloads._player_camera.set_view_model_yaws_with_camera_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ playerCamera: [PlayerCamera](./server.playercamera.md)<!-- -->; viewModelYawsWithCamera: boolean; }
+
+
+</td><td>
+
+Emitted when view model yaws with camera is set.
+
+
+</td></tr>
+<tr><td>
+
+["PLAYER\_CAMERA.SET\_VIEW\_MODEL"](./server.playercameraeventpayloads._player_camera.set_view_model_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ playerCamera: [PlayerCamera](./server.playercamera.md)<!-- -->; viewModelUri: string \| undefined; }
+
+
+</td><td>
+
+Emitted when the view model is set.
 
 
 </td></tr>
