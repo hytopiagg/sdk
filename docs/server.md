@@ -225,6 +225,32 @@ When to use: querying and filtering entities within a specific world. Do NOT use
 </td></tr>
 <tr><td>
 
+[EntityModelAnimation](./server.entitymodelanimation.md)
+
+
+</td><td>
+
+Represents a single animation of the model used for an Entity.
+
+When to use: controlling individual animation playback, blending, and looping on model entities. Do NOT use for: block entities (they have no model animations).
+
+
+</td></tr>
+<tr><td>
+
+[EntityModelNodeOverride](./server.entitymodelnodeoverride.md)
+
+
+</td><td>
+
+Represents a name-match model node override rule for an Entity.
+
+When to use: configuring visual and transform overrides for one or more model nodes selected by name match.
+
+
+</td></tr>
+<tr><td>
+
 [ErrorHandler](./server.errorhandler.md)
 
 
@@ -783,6 +809,75 @@ See `EntityEventPayloads` for the payloads.
 </td></tr>
 <tr><td>
 
+[EntityModelAnimationBlendMode](./server.entitymodelanimationblendmode.md)
+
+
+</td><td>
+
+The blend mode of an entity model animation.
+
+\*\*Category:\*\* Entities
+
+
+</td></tr>
+<tr><td>
+
+[EntityModelAnimationEvent](./server.entitymodelanimationevent.md)
+
+
+</td><td>
+
+Event types an EntityModelAnimation instance can emit.
+
+See `EntityModelAnimationEventPayloads` for the payloads.
+
+\*\*Category:\*\* Events
+
+
+</td></tr>
+<tr><td>
+
+[EntityModelAnimationLoopMode](./server.entitymodelanimationloopmode.md)
+
+
+</td><td>
+
+The loop mode of an entity model animation.
+
+\*\*Category:\*\* Entities
+
+
+</td></tr>
+<tr><td>
+
+[EntityModelAnimationState](./server.entitymodelanimationstate.md)
+
+
+</td><td>
+
+The state of an entity model animation.
+
+\*\*Category:\*\* Entities
+
+
+</td></tr>
+<tr><td>
+
+[EntityModelNodeOverrideEvent](./server.entitymodelnodeoverrideevent.md)
+
+
+</td><td>
+
+Event types an EntityModelNodeOverride instance can emit.
+
+See `EntityModelNodeOverrideEventPayloads` for payloads.
+
+\*\*Category:\*\* Events
+
+
+</td></tr>
+<tr><td>
+
 [GameServerEvent](./server.gameserverevent.md)
 
 
@@ -1326,6 +1421,58 @@ Use for: physics-driven bodies affected by forces and collisions. Do NOT use for
 Event payloads for Entity emitted events.
 
 \*\*Category:\*\* Events
+
+
+</td></tr>
+<tr><td>
+
+[EntityModelAnimationEventPayloads](./server.entitymodelanimationeventpayloads.md)
+
+
+</td><td>
+
+Event payloads for EntityModelAnimation emitted events.
+
+\*\*Category:\*\* Events
+
+
+</td></tr>
+<tr><td>
+
+[EntityModelAnimationOptions](./server.entitymodelanimationoptions.md)
+
+
+</td><td>
+
+The options for creating an EntityModelAnimation instance.
+
+\*\*Category:\*\* Entities
+
+
+</td></tr>
+<tr><td>
+
+[EntityModelNodeOverrideEventPayloads](./server.entitymodelnodeoverrideeventpayloads.md)
+
+
+</td><td>
+
+Event payloads for EntityModelNodeOverride emitted events.
+
+\*\*Category:\*\* Events
+
+
+</td></tr>
+<tr><td>
+
+[EntityModelNodeOverrideOptions](./server.entitymodelnodeoverrideoptions.md)
+
+
+</td><td>
+
+The options for creating an EntityModelNodeOverride instance.
+
+\*\*Category:\*\* Entities
 
 
 </td></tr>
@@ -2071,19 +2218,6 @@ An intersection result.
 A bounding box for a model.
 
 \*\*Category:\*\* Models
-
-
-</td></tr>
-<tr><td>
-
-[ModelNodeOverride](./server.modelnodeoverride.md)
-
-
-</td><td>
-
-A per-node visual override for a model entity.
-
-\*\*Category:\*\* Entities
 
 
 </td></tr>

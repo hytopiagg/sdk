@@ -9,7 +9,7 @@ Stops the provided model animations for the entity.
 **Signature:**
 
 ```typescript
-stopModelAnimations(animations: string[]): void;
+stopModelAnimations(modelAnimationNames: readonly string[]): void;
 ```
 
 ## Parameters
@@ -32,21 +32,19 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-animations
+modelAnimationNames
 
 
 </td><td>
 
-string\[\]
+readonly string\[\]
 
 
 </td><td>
 
-The animations to stop.
+The model animation names to stop.
 
-\*\*Requires:\*\* Entity must be spawned.
-
-\*\*Side effects:\*\* Emits `EntityEvent.STOP_MODEL_ANIMATIONS`<!-- -->.
+\*\*Side effects:\*\* May emit `EntityModelAnimationEvent.STOP` for each stopped animation.
 
 \*\*Category:\*\* Entities
 
@@ -56,10 +54,4 @@ The animations to stop.
 **Returns:**
 
 void
-
-## Remarks
-
-Model entities only; no effect for block entities.
-
-\*\*Removes from both sets:\*\* Stops animations from both looped and oneshot tracking sets.
 

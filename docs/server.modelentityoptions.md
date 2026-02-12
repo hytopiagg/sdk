@@ -42,7 +42,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[modelAnimationsPlaybackRate?](./server.modelentityoptions.modelanimationsplaybackrate.md)
+[modelAnimations?](./server.modelentityoptions.modelanimations.md)
 
 
 </td><td>
@@ -50,50 +50,12 @@ Description
 
 </td><td>
 
-number
+Omit&lt;[EntityModelAnimationOptions](./server.entitymodelanimationoptions.md)<!-- -->, 'entity'&gt;\[\]
 
 
 </td><td>
 
-_(Optional)_ The playback rate of the entity's model animations.
-
-
-</td></tr>
-<tr><td>
-
-[modelHiddenNodes?](./server.modelentityoptions.modelhiddennodes.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string\[\]
-
-
-</td><td>
-
-_(Optional)_ The nodes to hide on the entity's model.
-
-
-</td></tr>
-<tr><td>
-
-[modelLoopedAnimations?](./server.modelentityoptions.modelloopedanimations.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string\[\]
-
-
-</td><td>
-
-_(Optional)_ The looped animations to start when the entity is spawned.
+_(Optional)_ The model animation options for animations to configure immediately.
 
 
 </td></tr>
@@ -107,12 +69,12 @@ _(Optional)_ The looped animations to start when the entity is spawned.
 
 </td><td>
 
-[ModelNodeOverride](./server.modelnodeoverride.md)<!-- -->\[\]
+Omit&lt;[EntityModelNodeOverrideOptions](./server.entitymodelnodeoverrideoptions.md)<!-- -->, 'entity'&gt;\[\]
 
 
 </td><td>
 
-_(Optional)_ The node overrides for the entity's model.
+_(Optional)_ The node overrides for the entity's model. `nameMatch` is exact by default, with optional edge wildcard (`head*`<!-- -->, `*head`<!-- -->, `*head*`<!-- -->).
 
 
 </td></tr>
@@ -156,7 +118,7 @@ _(Optional)_ The scale of the entity's model. Can be a vector3 for per-axis scal
 </td></tr>
 <tr><td>
 
-[modelShownNodes?](./server.modelentityoptions.modelshownnodes.md)
+[modelScaleInterpolationMs?](./server.modelentityoptions.modelscaleinterpolationms.md)
 
 
 </td><td>
@@ -164,12 +126,12 @@ _(Optional)_ The scale of the entity's model. Can be a vector3 for per-axis scal
 
 </td><td>
 
-string\[\]
+number
 
 
 </td><td>
 
-_(Optional)_ The nodes to show on the entity's model, overriding hidden nodes.
+_(Optional)_ The interpolation time in milliseconds applied to model scale changes.
 
 
 </td></tr>

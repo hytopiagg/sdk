@@ -52,7 +52,7 @@ The options for the default player entity.
 
 ## Remarks
 
-\*\*Auto-assigned defaults:\*\* A `DefaultPlayerEntityController` is automatically created and assigned. Default `modelLoopedAnimations` are `['idle_lower', 'idle_upper']`<!-- -->. All defaults can be overridden via options.
+\*\*Auto-assigned defaults:\*\* A `DefaultPlayerEntityController` is automatically created and assigned. Default idle animations are initialized as looped and playing.
 
 \*\*Cosmetics on spawn:\*\* When spawned, player cosmetics (hair, skin, equipped items) are fetched asynchronously and applied. Child entities are created for hair and equipped cosmetic items.
 

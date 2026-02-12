@@ -801,8 +801,12 @@ export declare interface BaseEntityOptions {
     parent?: Entity;
     /** The name of the parent's node (if parent is a model entity) to attach the entity to. */
     parentNodeName?: string;
+    /** The interpolation time in milliseconds applied to position changes. */
+    positionInterpolationMs?: number;
     /** The rigid body options for the entity. */
     rigidBodyOptions?: RigidBodyOptions;
+    /** The interpolation time in milliseconds applied to rotation changes. */
+    rotationInterpolationMs?: number;
     /** An arbitrary identifier tag of the entity. Useful for your own logic. */
     tag?: string;
     /** The tint color of the entity as a hex code. */
@@ -1051,6 +1055,12 @@ export declare interface BlockPlacement {
     globalCoordinate: Vector3Like;
     blockRotation?: BlockRotation;
 }
+
+declare type BlockPlacementEntry = {
+    globalCoordinate: Vector3Like;
+    blockTypeId: number;
+    blockRotation?: BlockRotation;
+};
 
 /**
  * A block rotation from `BLOCK_ROTATIONS`.
@@ -1686,6 +1696,7 @@ export declare class Chunk implements protocol.Serializable {
      * **Category:** Blocks
      */
     static blockIndexToLocalCoordinate(index: number): Vector3Like;
+
     /**
      * Converts a global coordinate to a local coordinate.
      *
@@ -1761,6 +1772,7 @@ export declare class Chunk implements protocol.Serializable {
  * @public
  */
 export declare class ChunkLattice extends EventRouter {
+
 
 
 
@@ -1892,6 +1904,7 @@ export declare class ChunkLattice extends EventRouter {
     initializeBlocks(blocks: {
         [blockTypeId: number]: BlockPlacement[];
     }): void;
+
     /**
      * Sets the block at a global coordinate by block type ID.
      *
@@ -1916,6 +1929,10 @@ export declare class ChunkLattice extends EventRouter {
      * **Category:** Blocks
      */
     setBlock(globalCoordinate: Vector3Like, blockTypeId: number, blockRotation?: BlockRotation): void;
+
+
+
+
 
 
 
@@ -2701,7 +2718,7 @@ export declare class DefaultPlayerEntity extends PlayerEntity {
      *
      * @remarks
      * **Auto-assigned defaults:** A `DefaultPlayerEntityController` is automatically created and assigned.
-     * Default `modelLoopedAnimations` are `['idle_lower', 'idle_upper']`. All defaults can be overridden via options.
+     * Default idle animations are initialized as looped and playing.
      *
      * **Cosmetics on spawn:** When spawned, player cosmetics (hair, skin, equipped items) are fetched asynchronously
      * and applied. Child entities are created for hair and equipped cosmetic items.
@@ -3160,7 +3177,6 @@ export declare interface DynamicRigidBodyOptions extends BaseRigidBodyOptions {
  * const spider = new Entity({
  *   name: 'Spider',
  *   modelUri: 'models/spider.gltf',
- *   modelLoopedAnimations: [ 'walk' ],
  *   rigidBodyOptions: {
  *     type: RigidBodyType.DYNAMIC,
  *     enabledRotations: { x: false, y: true, z: false },
@@ -3183,7 +3199,6 @@ export declare interface DynamicRigidBodyOptions extends BaseRigidBodyOptions {
  * @public
  */
 export declare class Entity extends RigidBody implements protocol.Serializable {
-
 
 
 
@@ -3242,6 +3257,18 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      */
     get id(): number | undefined;
     /**
+     * The names of the animations available in the entity's model.
+     *
+     * **Category:** Entities
+     */
+    get availableModelAnimationNames(): Readonly<string[]>;
+    /**
+     * The names of the nodes available in the entity's model.
+     *
+     * **Category:** Entities
+     */
+    get availableModelNodeNames(): Readonly<string[]>;
+    /**
      * The half extents of the block entity's visual size.
      *
      * @remarks
@@ -3290,29 +3317,26 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      */
     get height(): number;
     /**
-     * The playback rate of the entity's model animations.
+     * The animations of the entity's model that have been accessed or configured.
+     *
+     * @remarks
+     * Animations are lazily created on first access via `getModelAnimation()`.
+     * This array only contains animations that have been explicitly used, not every
+     * clip in the model.
      *
      * **Category:** Entities
      */
-    get modelAnimationsPlaybackRate(): number;
+    get modelAnimations(): Readonly<EntityModelAnimation[]>;
     /**
-     * The nodes to hide on the entity's model.
+     * The node overrides of the entity's model that have been accessed or configured.
+     *
+     * @remarks
+     * Node overrides are lazily created on first access via `getModelNodeOverride()`.
+     * This array only contains overrides that have been explicitly used.
      *
      * **Category:** Entities
      */
-    get modelHiddenNodes(): ReadonlySet<string>;
-    /**
-     * The looped animations to start when the entity is spawned.
-     *
-     * **Category:** Entities
-     */
-    get modelLoopedAnimations(): ReadonlySet<string>;
-    /**
-     * The node overrides of the entity's model, mapped by name.
-     *
-     * **Category:** Entities
-     */
-    get modelNodeOverrides(): ReadonlyMap<string, Readonly<ModelNodeOverride>>;
+    get modelNodeOverrides(): Readonly<EntityModelNodeOverride[]>;
     /**
      * The preferred collider shape when auto-generating colliders from the model.
      *
@@ -3326,11 +3350,11 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      */
     get modelScale(): Vector3Like;
     /**
-     * The nodes to show on the entity's model, overriding hidden nodes.
+     * The interpolation time in milliseconds applied to model scale changes.
      *
      * **Category:** Entities
      */
-    get modelShownNodes(): ReadonlySet<string>;
+    get modelScaleInterpolationMs(): number | undefined;
     /**
      * The texture URI that overrides the model entity's default texture.
      *
@@ -3373,6 +3397,18 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * **Category:** Entities
      */
     get parentNodeName(): string | undefined;
+    /**
+     * The interpolation time in milliseconds applied to position changes.
+     *
+     * **Category:** Entities
+     */
+    get positionInterpolationMs(): number | undefined;
+    /**
+     * The interpolation time in milliseconds applied to rotation changes.
+     *
+     * **Category:** Entities
+     */
+    get rotationInterpolationMs(): number | undefined;
     /**
      * An arbitrary identifier tag for your own logic.
      *
@@ -3425,39 +3461,11 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      */
     get world(): World | undefined;
     /**
-     * Spawns the entity in the world.
-     *
-     * Use for: placing the entity into a world so it simulates and syncs to clients.
-     * Do NOT use for: reusing a single entity instance across multiple worlds.
-     *
-     * @remarks
-     * **Rotation default:** If no rotation is provided, entity spawns with identity rotation facing -Z.
-     * For Y-axis rotation (yaw): `{ x: 0, y: sin(yaw/2), z: 0, w: cos(yaw/2) }`. Yaw 0 = facing -Z.
-     *
-     * **Auto-collider creation:** If no colliders are provided, a default collider is auto-generated
-     * from the model bounds (or block half extents). Set `modelPreferredShape` to `ColliderShape.NONE` to disable.
-     *
-     * **Collision groups:** Colliders with default collision groups are auto-assigned based on `isEnvironmental`
-     * and `isSensor` flags. Environmental entities don't collide with blocks or other environmental entities.
-     *
-     * **Event enabling:** Collision/contact force events are auto-enabled on colliders if listeners
-     * are registered for `BLOCK_COLLISION`, `ENTITY_COLLISION`, `BLOCK_CONTACT_FORCE`, or `ENTITY_CONTACT_FORCE` prior to spawning.
-     *
-     * **Controller:** If a controller is attached, `controller.spawn()` is called after the entity is added to the physics simulation.
-     *
-     * **Parent handling:** If `parent` was set in options, `setParent()` is called after spawn with the provided position/rotation.
-     *
-     * @param world - The world to spawn the entity in.
-     * @param position - The position to spawn the entity at.
-     * @param rotation - The optional rotation to spawn the entity with.
-     *
-     * **Requires:** Entity must not already be spawned.
-     *
-     * **Side effects:** Registers the entity, adds it to the simulation, and emits `EntityEvent.SPAWN`.
+     * Clears all model node overrides from the entity's model.
      *
      * **Category:** Entities
      */
-    spawn(world: World, position: Vector3Like, rotation?: QuaternionLike): void;
+    clearModelNodeOverrides(): void;
     /**
      * Despawns the entity and all children from the world.
      *
@@ -3480,6 +3488,38 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      */
     despawn(): void;
     /**
+     * Gets or lazily creates a model animation for the entity's model by name.
+     *
+     * @remarks
+     * Model entities only; returns `undefined` for block entities.
+     * If the animation does not yet exist, a new instance with default settings is created
+     * and added to `modelAnimations`. Use `availableModelAnimationNames` to discover
+     * which animation names exist in the model.
+     *
+     * @param name - The name of the animation to get or create.
+     * @returns The model animation instance, or `undefined` for block entities.
+     *
+     * **Category:** Entities
+     */
+    getModelAnimation(name: string): EntityModelAnimation | undefined;
+    /**
+     * Gets or lazily creates a model node override for the entity's model.
+     *
+     * @remarks
+     * Model entities only; returns `undefined` for block entities.
+     * If the override does not yet exist, a new instance with default settings is created
+     * and added to `modelNodeOverrides`. Use `availableModelNodeNames` to discover
+     * which node names exist in the model.
+     *
+     * @param nameMatch - The node selector for the model node override to get or create.
+     * Case-insensitive exact match by default, with optional edge wildcard (`head*`, `*head`, `*head*`).
+     *
+     * @returns The model node override instance, or `undefined` for block entities.
+     *
+     * **Category:** Entities
+     */
+    getModelNodeOverride(nameMatch: string): EntityModelNodeOverride | undefined;
+    /**
      * Triggers an interaction on the entity from a player.
      *
      * Use for: programmatic interactions that should mimic a player click/tap.
@@ -3499,6 +3539,23 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      * **Category:** Entities
      */
     interact(player: Player, raycastHit?: RaycastHit): void;
+    setBlockTextureUri(blockTextureUri: string | undefined): void;
+    /**
+     * Removes a model node override from the entity's model.
+     *
+     * @param nameMatch - The name match of the model node override to remove.
+     *
+     * **Category:** Entities
+     */
+    removeModelNodeOverride(nameMatch: string): void;
+    /**
+     * Removes multiple model node overrides from the entity's model.
+     *
+     * @param nameMatches - The name matches of the model node overrides to remove.
+     *
+     * **Category:** Entities
+     */
+    removeModelNodeOverrides(nameMatches: string[]): void;
     /**
      * Sets the emissive color of the entity.
      *
@@ -3522,82 +3579,6 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      */
     setEmissiveIntensity(emissiveIntensity: number | undefined): void;
     /**
-     * Sets the playback rate of all animations on the entity's model.
-     *
-     * @remarks
-     * Model entities only; no effect for block entities.
-     *
-     * Defaults to 1. A positive value will play the animation forward,
-     * a negative value will play the animation in reverse. Any value may be used.
-     * You can make animations play faster by using larger values.
-     *
-     * @param playbackRate - The playback rate of the entity's model animations.
-     *
-     * **Side effects:** Emits `EntityEvent.SET_MODEL_ANIMATIONS_PLAYBACK_RATE` when spawned.
-     *
-     * **Category:** Entities
-     */
-    setModelAnimationsPlaybackRate(playbackRate: number): void;
-    /**
-     * Sets the nodes to hide on the entity's model. Matched nodes
-     * will be hidden for all players. Uses case insensitive
-     * substring matching.
-     *
-     * @remarks
-     * Model entities only; no effect for block entities.
-     *
-     * **Replaces, not merges:** This replaces all hidden nodes, not adds to them.
-     * To add nodes, include existing hidden nodes in the array.
-     *
-     * @param modelHiddenNodes - The nodes to hide on the entity's model.
-     *
-     * **Side effects:** Emits `EntityEvent.SET_MODEL_HIDDEN_NODES` when spawned.
-     *
-     * **Category:** Entities
-     */
-    setModelHiddenNodes(modelHiddenNodes: string[]): void;
-    /**
-     * Sets a node override for the entity's model.
-     *
-     * @remarks
-     * Model entities only; no effect for block entities.
-     *
-     * @param modelNodeOverride - The model node override to set.
-     *
-     * **Side effects:** Emits `EntityEvent.SET_MODEL_NODE_OVERRIDE` when spawned.
-     *
-     * **Category:** Entities
-     */
-    setModelNodeOverride(modelNodeOverride: ModelNodeOverride): void;
-    /**
-     * Sets the emissive color of a node on the entity's model.
-     *
-     * @remarks
-     * Model entities only; no effect for block entities.
-     *
-     * @param name - The name of the node to override. Matching is case insensitive, prioritizing exact match then falling back to substring match.
-     * @param emissiveColor - The emissive color of the node.
-     *
-     * **Side effects:** Emits `EntityEvent.SET_MODEL_NODE_OVERRIDE` when spawned.
-     *
-     * **Category:** Entities
-     */
-    setModelNodeEmissiveColor(name: string, emissiveColor: RgbColor | undefined): void;
-    /**
-     * Sets the emissive intensity of a node on the entity's model.
-     *
-     * @remarks
-     * Model entities only; no effect for block entities.
-     *
-     * @param name - The name of the node to override. Matching is case insensitive, prioritizing exact match then falling back to substring match.
-     * @param emissiveIntensity - The emissive intensity of the node. Use a value over 1 for brighter emissive effects.
-     *
-     * **Side effects:** Emits `EntityEvent.SET_MODEL_NODE_OVERRIDE` when spawned.
-     *
-     * **Category:** Entities
-     */
-    setModelNodeEmissiveIntensity(name: string, emissiveIntensity: number | undefined): void;
-    /**
      * Sets the scale of the entity's model and proportionally
      * scales its colliders.
      *
@@ -3618,23 +3599,15 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      */
     setModelScale(modelScale: Vector3Like | number): void;
     /**
-     * Sets the nodes to show on the entity's model, overriding hidden nodes.
-     * Matched nodes will be shown for all players. Uses case insensitive
-     * substring matching.
+     * Sets the interpolation time in milliseconds applied to model scale changes.
      *
-     * @remarks
-     * Model entities only; no effect for block entities.
+     * @param interpolationMs - The interpolation time in milliseconds to set.
      *
-     * **Replaces, not merges:** This replaces all shown nodes, not adds to them.
-     * To add nodes, include existing shown nodes in the array.
-     *
-     * @param modelShownNodes - The nodes to show on the entity's model.
-     *
-     * **Side effects:** Emits `EntityEvent.SET_MODEL_SHOWN_NODES` when spawned.
+     * **Side effects:** Emits `EntityEvent.SET_MODEL_SCALE_INTERPOLATION_MS` when spawned.
      *
      * **Category:** Entities
      */
-    setModelShownNodes(modelShownNodes: string[]): void;
+    setModelScaleInterpolationMs(interpolationMs: number | undefined): void;
     /**
      * Sets the texture uri of the entity's model. Setting
      * this overrides the model's default texture.
@@ -3692,6 +3665,26 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      */
     setParent(parent: Entity | undefined, parentNodeName?: string, position?: Vector3Like, rotation?: QuaternionLike): void;
     /**
+     * Sets the interpolation time in milliseconds applied to position changes.
+     *
+     * @param interpolationMs - The interpolation time in milliseconds to set.
+     *
+     * **Side effects:** Emits `EntityEvent.SET_POSITION_INTERPOLATION_MS` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setPositionInterpolationMs(interpolationMs: number | undefined): void;
+    /**
+     * Sets the interpolation time in milliseconds applied to rotation changes.
+     *
+     * @param interpolationMs - The interpolation time in milliseconds to set.
+     *
+     * **Side effects:** Emits `EntityEvent.SET_ROTATION_INTERPOLATION_MS` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setRotationInterpolationMs(interpolationMs: number | undefined): void;
+    /**
      * Sets the tint color of the entity.
      * @param tintColor - The tint color of the entity.
      *
@@ -3701,110 +3694,59 @@ export declare class Entity extends RigidBody implements protocol.Serializable {
      */
     setTintColor(tintColor: RgbColor | undefined): void;
     /**
-     * Starts looped animations for the entity, blending with
-     * other animations currently playing.
+     * Spawns the entity in the world.
+     *
+     * Use for: placing the entity into a world so it simulates and syncs to clients.
+     * Do NOT use for: reusing a single entity instance across multiple worlds.
      *
      * @remarks
-     * Model entities only; no effect for block entities.
+     * **Rotation default:** If no rotation is provided, entity spawns with identity rotation facing -Z.
+     * For Y-axis rotation (yaw): `{ x: 0, y: sin(yaw/2), z: 0, w: cos(yaw/2) }`. Yaw 0 = facing -Z.
      *
-     * **Deduplication:** If an animation is already in the looped set, it won't be re-added or restarted.
-     * The event only emits if at least one new animation is added.
+     * **Auto-collider creation:** If no colliders are provided, a default collider is auto-generated
+     * from the model bounds (or block half extents). Set `modelPreferredShape` to `ColliderShape.NONE` to disable.
      *
-     * @param animations - The animations to start.
+     * **Collision groups:** Colliders with default collision groups are auto-assigned based on `isEnvironmental`
+     * and `isSensor` flags. Environmental entities don't collide with blocks or other environmental entities.
      *
-     * **Requires:** Entity must be spawned.
+     * **Event enabling:** Collision/contact force events are auto-enabled on colliders if listeners
+     * are registered for `BLOCK_COLLISION`, `ENTITY_COLLISION`, `BLOCK_CONTACT_FORCE`, or `ENTITY_CONTACT_FORCE` prior to spawning.
      *
-     * **Side effects:** Emits `EntityEvent.START_MODEL_LOOPED_ANIMATIONS`.
+     * **Controller:** If a controller is attached, `controller.spawn()` is called after the entity is added to the physics simulation.
+     *
+     * **Parent handling:** If `parent` was set in options, `setParent()` is called after spawn with the provided position/rotation.
+     *
+     * @param world - The world to spawn the entity in.
+     * @param position - The position to spawn the entity at.
+     * @param rotation - The optional rotation to spawn the entity with.
+     *
+     * **Requires:** Entity must not already be spawned.
+     *
+     * **Side effects:** Registers the entity, adds it to the simulation, and emits `EntityEvent.SPAWN`.
      *
      * **Category:** Entities
      */
-    startModelLoopedAnimations(animations: string[]): void;
+    spawn(world: World, position: Vector3Like, rotation?: QuaternionLike): void;
     /**
-     * Starts a oneshot animation for the entity, blending with
-     * other animations currently playing.
+     * Stops all model animations for the entity, optionally excluding the provided animations from stopping.
      *
-     * @remarks
-     * Model entities only; no effect for block entities.
+     * @param exclusionFilter - The filter to determine if a model animation should be excluded from being stopped.
      *
-     * **No deduplication:** Unlike `startModelLoopedAnimations`, this always emits the event
-     * even if the animation is already playing. This allows restarting oneshot animations.
-     *
-     * **Tracking:** Oneshot animations are tracked internally to prevent packet spam from `stopModelAnimations()`
-     * but are not serialized for new player joins (they're transient).
-     *
-     * @param animations - The animations to start.
-     *
-     * **Requires:** Entity must be spawned.
-     *
-     * **Side effects:** Emits `EntityEvent.START_MODEL_ONESHOT_ANIMATIONS`.
+     * **Side effects:** May emit `EntityModelAnimationEvent.STOP` for each stopped animation.
      *
      * **Category:** Entities
      */
-    startModelOneshotAnimations(animations: string[]): void;
-    /**
-     * Stops all looped and oneshot animations for the entity,
-     * optionally excluding the provided animations from stopping.
-     *
-     * @remarks
-     * Model entities only; no effect for block entities.
-     *
-     * **Delegates to `stopModelAnimations`:** Collects animations from both looped and oneshot sets
-     * (minus exclusions), then calls `stopModelAnimations()` once.
-     *
-     * @param excludedAnimations - The animations to exclude from being stopped.
-     *
-     * **Requires:** Entity must be spawned.
-     *
-     * **Category:** Entities
-     */
-    stopAllModelAnimations(excludedAnimations?: string[]): void;
-    /**
-     * Stops all looped animations for the entity, optionally
-     * excluded the provided animations from stopping.
-     *
-     * @remarks
-     * Model entities only; no effect for block entities.
-     *
-     * @param excludedAnimations - The animations to exclude from being stopped.
-     *
-     * **Requires:** Entity must be spawned.
-     *
-     * **Category:** Entities
-     */
-    stopAllModelLoopedAnimations(excludedAnimations?: string[]): void;
-    /**
-     * Stops all oneshot animations for the entity, optionally
-     * excluded the provided animations from stopping.
-     *
-     * @remarks
-     * Model entities only; no effect for block entities.
-     *
-     * @param excludedAnimations - The animations to exclude from being stopped.
-     *
-     * **Requires:** Entity must be spawned.
-     *
-     * **Category:** Entities
-     */
-    stopAllModelOneshotAnimations(excludedAnimations?: string[]): void;
+    stopAllModelAnimations(exclusionFilter?: (modelAnimation: Readonly<EntityModelAnimation>) => boolean): void;
     /**
      * Stops the provided model animations for the entity.
      *
-     * @remarks
-     * Model entities only; no effect for block entities.
+     * @param modelAnimationNames - The model animation names to stop.
      *
-     * **Removes from both sets:** Stops animations from both looped and oneshot tracking sets.
-     *
-     * @param animations - The animations to stop.
-     *
-     * **Requires:** Entity must be spawned.
-     *
-     * **Side effects:** Emits `EntityEvent.STOP_MODEL_ANIMATIONS`.
+     * **Side effects:** May emit `EntityModelAnimationEvent.STOP` for each stopped animation.
      *
      * **Category:** Entities
      */
-    stopModelAnimations(animations: string[]): void;
-
-
+    stopModelAnimations(modelAnimationNames: readonly string[]): void;
 
 
 
@@ -3828,22 +3770,20 @@ export declare enum EntityEvent {
     ENTITY_COLLISION = "ENTITY.ENTITY_COLLISION",
     ENTITY_CONTACT_FORCE = "ENTITY.ENTITY_CONTACT_FORCE",
     INTERACT = "ENTITY.INTERACT",
+    REMOVE_MODEL_NODE_OVERRIDE = "ENTITY.REMOVE_MODEL_NODE_OVERRIDE",
+    SET_BLOCK_TEXTURE_URI = "ENTITY.SET_BLOCK_TEXTURE_URI",
     SET_EMISSIVE_COLOR = "ENTITY.SET_EMISSIVE_COLOR",
     SET_EMISSIVE_INTENSITY = "ENTITY.SET_EMISSIVE_INTENSITY",
-    SET_MODEL_ANIMATIONS_PLAYBACK_RATE = "ENTITY.SET_MODEL_ANIMATIONS_PLAYBACK_RATE",
-    SET_MODEL_HIDDEN_NODES = "ENTITY.SET_MODEL_HIDDEN_NODES",
-    SET_MODEL_NODE_OVERRIDE = "ENTITY.SET_MODEL_NODE_OVERRIDE",
     SET_MODEL_SCALE = "ENTITY.SET_MODEL_SCALE",
-    SET_MODEL_SHOWN_NODES = "ENTITY.SET_MODEL_SHOWN_NODES",
+    SET_MODEL_SCALE_INTERPOLATION_MS = "ENTITY.SET_MODEL_SCALE_INTERPOLATION_MS",
     SET_MODEL_TEXTURE_URI = "ENTITY.SET_MODEL_TEXTURE_URI",
     SET_OPACITY = "ENTITY.SET_OPACITY",
     SET_OUTLINE = "ENTITY.SET_OUTLINE",
     SET_PARENT = "ENTITY.SET_PARENT",
+    SET_POSITION_INTERPOLATION_MS = "ENTITY.SET_POSITION_INTERPOLATION_MS",
+    SET_ROTATION_INTERPOLATION_MS = "ENTITY.SET_ROTATION_INTERPOLATION_MS",
     SET_TINT_COLOR = "ENTITY.SET_TINT_COLOR",
     SPAWN = "ENTITY.SPAWN",
-    START_MODEL_LOOPED_ANIMATIONS = "ENTITY.START_MODEL_LOOPED_ANIMATIONS",
-    START_MODEL_ONESHOT_ANIMATIONS = "ENTITY.START_MODEL_ONESHOT_ANIMATIONS",
-    STOP_MODEL_ANIMATIONS = "ENTITY.STOP_MODEL_ANIMATIONS",
     TICK = "ENTITY.TICK",
     UPDATE_POSITION = "ENTITY.UPDATE_POSITION",
     UPDATE_ROTATION = "ENTITY.UPDATE_ROTATION"
@@ -3894,6 +3834,16 @@ export declare interface EntityEventPayloads {
         player: Player;
         raycastHit?: RaycastHit;
     };
+    /** Emitted when a model node override is removed from the entity's model. */
+    [EntityEvent.REMOVE_MODEL_NODE_OVERRIDE]: {
+        entity: Entity;
+        entityModelNodeOverride: EntityModelNodeOverride;
+    };
+    /** Emitted when the texture uri of a block entity is set. */
+    [EntityEvent.SET_BLOCK_TEXTURE_URI]: {
+        entity: Entity;
+        blockTextureUri: string | undefined;
+    };
     /** Emitted when the emissive color is set. */
     [EntityEvent.SET_EMISSIVE_COLOR]: {
         entity: Entity;
@@ -3904,30 +3854,15 @@ export declare interface EntityEventPayloads {
         entity: Entity;
         emissiveIntensity: number | undefined;
     };
-    /** Emitted when the playback rate of the entity's model animations is set. */
-    [EntityEvent.SET_MODEL_ANIMATIONS_PLAYBACK_RATE]: {
-        entity: Entity;
-        playbackRate: number;
-    };
-    /** Emitted when nodes of the entity's model are set to be hidden. */
-    [EntityEvent.SET_MODEL_HIDDEN_NODES]: {
-        entity: Entity;
-        modelHiddenNodes: Set<string>;
-    };
-    /** Emitted when a node override of the entity's model is set or updated. */
-    [EntityEvent.SET_MODEL_NODE_OVERRIDE]: {
-        entity: Entity;
-        modelNodeOverride: ModelNodeOverride;
-    };
     /** Emitted when the scale of the entity's model is set. */
     [EntityEvent.SET_MODEL_SCALE]: {
         entity: Entity;
         modelScale: Vector3Like;
     };
-    /** Emitted when nodes of the entity's model are set to be shown. */
-    [EntityEvent.SET_MODEL_SHOWN_NODES]: {
+    /** Emitted when the interpolation time in milliseconds applied to model scale changes is set. */
+    [EntityEvent.SET_MODEL_SCALE_INTERPOLATION_MS]: {
         entity: Entity;
-        modelShownNodes: Set<string>;
+        interpolationMs: number | undefined;
     };
     /** Emitted when the texture uri of the entity's model is set. */
     [EntityEvent.SET_MODEL_TEXTURE_URI]: {
@@ -3951,6 +3886,16 @@ export declare interface EntityEventPayloads {
         parent: Entity | undefined;
         parentNodeName: string | undefined;
     };
+    /** Emitted when the interpolation time in milliseconds applied to position changes is set. */
+    [EntityEvent.SET_POSITION_INTERPOLATION_MS]: {
+        entity: Entity;
+        interpolationMs: number | undefined;
+    };
+    /** Emitted when the interpolation time in milliseconds applied to rotation changes is set. */
+    [EntityEvent.SET_ROTATION_INTERPOLATION_MS]: {
+        entity: Entity;
+        interpolationMs: number | undefined;
+    };
     /** Emitted when the tint color of the entity is set. */
     [EntityEvent.SET_TINT_COLOR]: {
         entity: Entity;
@@ -3959,21 +3904,6 @@ export declare interface EntityEventPayloads {
     /** Emitted when the entity is spawned. */
     [EntityEvent.SPAWN]: {
         entity: Entity;
-    };
-    /** Emitted when the looped animations of the entity's model are started. */
-    [EntityEvent.START_MODEL_LOOPED_ANIMATIONS]: {
-        entity: Entity;
-        animations: Set<string>;
-    };
-    /** Emitted when the oneshot animations of the entity's model are started. */
-    [EntityEvent.START_MODEL_ONESHOT_ANIMATIONS]: {
-        entity: Entity;
-        animations: Set<string>;
-    };
-    /** Emitted when the model animations of the entity are stopped. */
-    [EntityEvent.STOP_MODEL_ANIMATIONS]: {
-        entity: Entity;
-        animations: Set<string>;
     };
     /** Emitted when the entity is ticked. */
     [EntityEvent.TICK]: {
@@ -4100,6 +4030,707 @@ export declare class EntityManager {
 }
 
 /**
+ * Represents a single animation of the model used for an Entity.
+ *
+ * When to use: controlling individual animation playback, blending, and looping on model entities.
+ * Do NOT use for: block entities (they have no model animations).
+ *
+ * @remarks
+ * EntityModelAnimation instances are composed by an Entity and represent a single
+ * animation clip from the entity's model. Events are emitted through the parent
+ * Entity's event router and its world.
+ *
+ * <h2>Events</h2>
+ *
+ * Events emitted by this class are listed under `EntityModelAnimationEventPayloads`.
+ * They are emitted via the parent entity's event router.
+ *
+ * @example
+ * ```typescript
+ * const walkAnimation = entity.getModelAnimation('walk');
+ * walkAnimation.setLoopMode(EntityModelAnimationLoopMode.LOOP);
+ * walkAnimation.play();
+ * walkAnimation.setPlaybackRate(2);
+ * ```
+ *
+ * **Category:** Entities
+ * @public
+ */
+export declare class EntityModelAnimation implements protocol.Serializable {
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Creates a new EntityModelAnimation instance.
+     *
+     * @param options - The options for the entity model animation.
+     *
+     * **Category:** Entities
+     */
+    constructor(options: EntityModelAnimationOptions);
+    /**
+     * The name of the entity model animation.
+     *
+     * @remarks
+     * This is the name of the animation as defined in the model.
+     *
+     * **Category:** Entities
+     */
+    get name(): string;
+    /**
+     * The blend mode of the entity model animation.
+     *
+     * **Category:** Entities
+     */
+    get blendMode(): EntityModelAnimationBlendMode;
+    /**
+     * Whether the animation should clamp when finished, holding the last frame.
+     *
+     * **Category:** Entities
+     */
+    get clampWhenFinished(): boolean;
+    /**
+     * The entity that the entity model animation belongs to.
+     *
+     * **Category:** Entities
+     */
+    get entity(): Entity;
+    /**
+     * Whether the animation fades in when played or restarted.
+     *
+     * **Category:** Entities
+     */
+    get fadesIn(): boolean;
+    /**
+     * Whether the animation fades out when paused or stopped.
+     *
+     * **Category:** Entities
+     */
+    get fadesOut(): boolean;
+    /**
+     * Whether the animation is currently playing.
+     *
+     * **Category:** Entities
+     */
+    get isPlaying(): boolean;
+    /**
+     * Whether the animation is currently paused.
+     *
+     * **Category:** Entities
+     */
+    get isPaused(): boolean;
+    /**
+     * Whether the animation is currently stopped.
+     *
+     * **Category:** Entities
+     */
+    get isStopped(): boolean;
+    /**
+     * The loop mode of the entity model animation.
+     *
+     * **Category:** Entities
+     */
+    get loopMode(): EntityModelAnimationLoopMode;
+    /**
+     * The playback rate of the entity model animation.
+     *
+     * **Category:** Entities
+     */
+    get playbackRate(): number;
+    /**
+     * The weight of the entity model animation.
+     *
+     * **Category:** Entities
+     */
+    get weight(): number;
+    /**
+     * Pauses the entity model animation, does nothing if already paused.
+     *
+     * **Side effects:** Emits `EntityModelAnimationEvent.PAUSE` when spawned.
+     *
+     * **Category:** Entities
+     */
+    pause(): void;
+    /**
+     * Plays the entity model animation, does nothing if already playing.
+     *
+     * **Side effects:** Emits `EntityModelAnimationEvent.PLAY` when spawned.
+     *
+     * **Category:** Entities
+     */
+    play(): void;
+    /**
+     * Restarts the entity model animation from the beginning.
+     *
+     * @remarks
+     * Unlike `play()`, this always emits even if the animation is already playing,
+     * allowing the animation to restart from the beginning.
+     *
+     * **Side effects:** Emits `EntityModelAnimationEvent.RESTART` when spawned.
+     *
+     * **Category:** Entities
+     */
+    restart(): void;
+    /**
+     * Sets the blend mode of the entity model animation.
+     *
+     * @param blendMode - The blend mode of the entity model animation.
+     *
+     * **Side effects:** Emits `EntityModelAnimationEvent.SET_BLEND_MODE` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setBlendMode(blendMode: EntityModelAnimationBlendMode): void;
+    /**
+     * Sets whether the animation should clamp when finished, holding the last frame.
+     *
+     * @param clampWhenFinished - Whether to clamp when finished.
+     *
+     * **Side effects:** Emits `EntityModelAnimationEvent.SET_CLAMP_WHEN_FINISHED` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setClampWhenFinished(clampWhenFinished: boolean): void;
+    /**
+     * Sets whether the animation fades in when played or restarted.
+     *
+     * @param fadesIn - Whether the animation should fade in when played or restarted.
+     *
+     * **Side effects:** Emits `EntityModelAnimationEvent.SET_FADES_IN` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setFadesIn(fadesIn: boolean): void;
+    /**
+     * Sets whether the animation fades out when paused or stopped.
+     *
+     * @param fadesOut - Whether the animation should fade out when paused or stopped.
+     *
+     * **Side effects:** Emits `EntityModelAnimationEvent.SET_FADES_OUT` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setFadesOut(fadesOut: boolean): void;
+    /**
+     * Sets the loop mode of the entity model animation.
+     *
+     * @param loopMode - The loop mode of the entity model animation.
+     *
+     * **Side effects:** Emits `EntityModelAnimationEvent.SET_LOOP_MODE` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setLoopMode(loopMode: EntityModelAnimationLoopMode): void;
+    /**
+     * Sets the playback rate of the entity model animation.
+     *
+     * @remarks
+     * A positive value plays the animation forward, a negative value plays it in reverse.
+     * Defaults to 1.
+     *
+     * @param playbackRate - The playback rate of the entity model animation.
+     *
+     * **Side effects:** Emits `EntityModelAnimationEvent.SET_PLAYBACK_RATE` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setPlaybackRate(playbackRate: number): void;
+    /**
+     * Sets the weight of the entity model animation for blending
+     * with other playing animations.
+     *
+     * @param weight - The weight of the entity model animation.
+     *
+     * **Side effects:** Emits `EntityModelAnimationEvent.SET_WEIGHT` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setWeight(weight: number): void;
+    /**
+     * Stops the entity model animation, does nothing if already stopped.
+     *
+     * **Side effects:** Emits `EntityModelAnimationEvent.STOP` when spawned.
+     *
+     * **Category:** Entities
+     */
+    stop(): void;
+
+}
+
+/**
+ * The blend mode of an entity model animation.
+ *
+ * **Category:** Entities
+ * @public
+ */
+export declare enum EntityModelAnimationBlendMode {
+    ADDITIVE = 0,
+    NORMAL = 1
+}
+
+/**
+ * Event types an EntityModelAnimation instance can emit.
+ *
+ * See `EntityModelAnimationEventPayloads` for the payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
+export declare enum EntityModelAnimationEvent {
+    PAUSE = "ENTITY_MODEL_ANIMATION.PAUSE",
+    PLAY = "ENTITY_MODEL_ANIMATION.PLAY",
+    RESTART = "ENTITY_MODEL_ANIMATION.RESTART",
+    SET_BLEND_MODE = "ENTITY_MODEL_ANIMATION.SET_BLEND_MODE",
+    SET_CLAMP_WHEN_FINISHED = "ENTITY_MODEL_ANIMATION.SET_CLAMP_WHEN_FINISHED",
+    SET_FADES_IN = "ENTITY_MODEL_ANIMATION.SET_FADES_IN",
+    SET_FADES_OUT = "ENTITY_MODEL_ANIMATION.SET_FADES_OUT",
+    SET_LOOP_MODE = "ENTITY_MODEL_ANIMATION.SET_LOOP_MODE",
+    SET_PLAYBACK_RATE = "ENTITY_MODEL_ANIMATION.SET_PLAYBACK_RATE",
+    SET_WEIGHT = "ENTITY_MODEL_ANIMATION.SET_WEIGHT",
+    STOP = "ENTITY_MODEL_ANIMATION.STOP"
+}
+
+/**
+ * Event payloads for EntityModelAnimation emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
+export declare interface EntityModelAnimationEventPayloads {
+    /** Emitted when an entity model animation is paused. */
+    [EntityModelAnimationEvent.PAUSE]: {
+        entityModelAnimation: EntityModelAnimation;
+    };
+    /** Emitted when an entity model animation is played. */
+    [EntityModelAnimationEvent.PLAY]: {
+        entityModelAnimation: EntityModelAnimation;
+    };
+    /** Emitted when an entity model animation is restarted. */
+    [EntityModelAnimationEvent.RESTART]: {
+        entityModelAnimation: EntityModelAnimation;
+    };
+    /** Emitted when the blend mode of an entity model animation is set. */
+    [EntityModelAnimationEvent.SET_BLEND_MODE]: {
+        entityModelAnimation: EntityModelAnimation;
+        blendMode: EntityModelAnimationBlendMode;
+    };
+    /** Emitted when the clamp when finished setting of an entity model animation is set. */
+    [EntityModelAnimationEvent.SET_CLAMP_WHEN_FINISHED]: {
+        entityModelAnimation: EntityModelAnimation;
+        clampWhenFinished: boolean;
+    };
+    /** Emitted when the fade in behavior of an entity model animation is set. */
+    [EntityModelAnimationEvent.SET_FADES_IN]: {
+        entityModelAnimation: EntityModelAnimation;
+        fadesIn: boolean;
+    };
+    /** Emitted when the fade out behavior of an entity model animation is set. */
+    [EntityModelAnimationEvent.SET_FADES_OUT]: {
+        entityModelAnimation: EntityModelAnimation;
+        fadesOut: boolean;
+    };
+    /** Emitted when the loop mode of an entity model animation is set. */
+    [EntityModelAnimationEvent.SET_LOOP_MODE]: {
+        entityModelAnimation: EntityModelAnimation;
+        loopMode: EntityModelAnimationLoopMode;
+    };
+    /** Emitted when the playback rate of an entity model animation is set. */
+    [EntityModelAnimationEvent.SET_PLAYBACK_RATE]: {
+        entityModelAnimation: EntityModelAnimation;
+        playbackRate: number;
+    };
+    /** Emitted when the weight of an entity model animation is set. */
+    [EntityModelAnimationEvent.SET_WEIGHT]: {
+        entityModelAnimation: EntityModelAnimation;
+        weight: number;
+    };
+    /** Emitted when an entity model animation is stopped. */
+    [EntityModelAnimationEvent.STOP]: {
+        entityModelAnimation: EntityModelAnimation;
+    };
+}
+
+/**
+ * The loop mode of an entity model animation.
+ *
+ * **Category:** Entities
+ * @public
+ */
+export declare enum EntityModelAnimationLoopMode {
+    ONCE = 0,
+    LOOP = 1,
+    PING_PONG = 2
+}
+
+/**
+ * The options for creating an EntityModelAnimation instance.
+ *
+ * **Category:** Entities
+ * @public
+ */
+export declare interface EntityModelAnimationOptions {
+    /** The name of the entity model animation. */
+    name: string;
+    /** The entity that the entity model animation belongs to. */
+    entity: Entity;
+    /** The initial blend mode of the entity model animation. */
+    blendMode?: EntityModelAnimationBlendMode;
+    /** Whether the animation should clamp when finished, holding the last frame. */
+    clampWhenFinished?: boolean;
+    /** Whether the animation fades in when played or restarted. */
+    fadesIn?: boolean;
+    /** Whether the animation fades out when paused or stopped. */
+    fadesOut?: boolean;
+    /** The initial loop mode of the entity model animation. */
+    loopMode?: EntityModelAnimationLoopMode;
+    /** Whether the animation should start playing on construction. */
+    play?: boolean;
+    /** The initial playback rate of the entity model animation. */
+    playbackRate?: number;
+    /** The initial blend weight of the entity model animation. */
+    weight?: number;
+}
+
+/**
+ * The state of an entity model animation.
+ *
+ * **Category:** Entities
+ * @public
+ */
+export declare enum EntityModelAnimationState {
+    PLAYING = 0,
+    PAUSED = 1,
+    STOPPED = 2
+}
+
+/**
+ * Represents a name-match model node override rule for an Entity.
+ *
+ * When to use: configuring visual and transform overrides for one or more
+ * model nodes selected by name match.
+ *
+ * @remarks
+ * Node overrides are match-rule based and may target multiple nodes.
+ * Matching is case-insensitive. Exact match is used by default; wildcard
+ * matching is only enabled when `*` is used at the start and/or end of
+ * `nameMatch` (`head*`, `*head`, `*head*`).
+ * Supported override settings include emissive color/intensity, hidden state,
+ * and local position/rotation/scale.
+ *
+ * **Category:** Entities
+ * @public
+ */
+export declare class EntityModelNodeOverride implements protocol.Serializable {
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Creates a new EntityModelNodeOverride instance.
+     *
+     * @param options - The options for the model node override.
+     *
+     * **Category:** Entities
+     */
+    constructor(options: EntityModelNodeOverrideOptions);
+    /**
+     * The node name match selector for this override.
+     * Exact match by default, with optional edge wildcard (`head*`, `*head`, `*head*`).
+     *
+     * **Category:** Entities
+     */
+    get nameMatch(): string;
+    /**
+     * Alias used by networking serializer and protocol schema (`n`).
+     *
+     * **Category:** Entities
+     */
+    get name(): string;
+    /**
+     * The entity that the model node override belongs to.
+     *
+     * **Category:** Entities
+     */
+    get entity(): Entity;
+    /**
+     * The emissive color for matching nodes.
+     *
+     * **Category:** Entities
+     */
+    get emissiveColor(): RgbColor | undefined;
+    /**
+     * The emissive intensity for matching nodes.
+     *
+     * **Category:** Entities
+     */
+    get emissiveIntensity(): number | undefined;
+    /**
+     * Whether the matched node(s) are hidden.
+     *
+     * **Category:** Entities
+     */
+    get isHidden(): boolean;
+    /**
+     * The local position set for matching nodes.
+     *
+     * **Category:** Entities
+     */
+    get localPosition(): Vector3Like | undefined;
+    /**
+     * The interpolation time in milliseconds applied to local position changes.
+     *
+     * **Category:** Entities
+     */
+    get localPositionInterpolationMs(): number | undefined;
+    /**
+     * The local rotation set for matching nodes.
+     *
+     * **Category:** Entities
+     */
+    get localRotation(): QuaternionLike | undefined;
+    /**
+     * The interpolation time in milliseconds applied to local rotation changes.
+     *
+     * **Category:** Entities
+     */
+    get localRotationInterpolationMs(): number | undefined;
+    /**
+     * The local scale set for matching nodes.
+     *
+     * **Category:** Entities
+     */
+    get localScale(): Vector3Like | undefined;
+    /**
+     * The interpolation time in milliseconds applied to local scale changes.
+     *
+     * **Category:** Entities
+     */
+    get localScaleInterpolationMs(): number | undefined;
+    /**
+     * Removes this model node override from its parent entity.
+     *
+     * @remarks
+     * This delegates to `Entity.removeModelNodeOverride()` so that map mutation
+     * and related event emission remain centralized on the entity.
+     *
+     * **Category:** Entities
+     */
+    remove(): void;
+    /**
+     * Sets the emissive color for matching nodes.
+     *
+     * @param emissiveColor - The emissive color to set.
+     *
+     * **Side effects:** Emits `EntityModelNodeOverrideEvent.SET_EMISSIVE_COLOR` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setEmissiveColor(emissiveColor: RgbColor | undefined): void;
+    /**
+     * Sets the emissive intensity for matching nodes.
+     *
+     * @param emissiveIntensity - The emissive intensity to set.
+     *
+     * **Side effects:** Emits `EntityModelNodeOverrideEvent.SET_EMISSIVE_INTENSITY` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setEmissiveIntensity(emissiveIntensity: number | undefined): void;
+    /**
+     * Sets the hidden state for matching nodes.
+     *
+     * @param hidden - The hidden state to set.
+     *
+     * **Side effects:** Emits `EntityModelNodeOverrideEvent.SET_HIDDEN` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setHidden(hidden: boolean): void;
+    /**
+     * Sets the local position for matching nodes.
+     *
+     * @param localPosition - The local position to set.
+     *
+     * **Side effects:** Emits `EntityModelNodeOverrideEvent.SET_LOCAL_POSITION` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setLocalPosition(localPosition: Vector3Like | undefined): void;
+    /**
+     * Sets the interpolation time in milliseconds applied to local position changes.
+     *
+     * @param interpolationMs - The interpolation time in milliseconds to set.
+     *
+     * **Side effects:** Emits `EntityModelNodeOverrideEvent.SET_LOCAL_POSITION_INTERPOLATION_MS` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setLocalPositionInterpolationMs(interpolationMs: number | undefined): void;
+    /**
+     * Sets the local rotation for matching nodes.
+     *
+     * @param localRotation - The local rotation to set.
+     *
+     * **Side effects:** Emits `EntityModelNodeOverrideEvent.SET_LOCAL_ROTATION` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setLocalRotation(localRotation: QuaternionLike | undefined): void;
+    /**
+     * Sets the interpolation time in milliseconds applied to local rotation changes.
+     *
+     * @param interpolationMs - The interpolation time in milliseconds to set.
+     *
+     * **Side effects:** Emits `EntityModelNodeOverrideEvent.SET_LOCAL_ROTATION_INTERPOLATION_MS` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setLocalRotationInterpolationMs(interpolationMs: number | undefined): void;
+    /**
+     * Sets the local scale for matching nodes.
+     *
+     * @param localScale - The local scale to set.
+     *
+     * **Side effects:** Emits `EntityModelNodeOverrideEvent.SET_LOCAL_SCALE` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setLocalScale(localScale: Vector3Like | number | undefined): void;
+    /**
+     * Sets the interpolation time in milliseconds applied to local scale changes.
+     *
+     * @param interpolationMs - The interpolation time in milliseconds to set.
+     *
+     * **Side effects:** Emits `EntityModelNodeOverrideEvent.SET_LOCAL_SCALE_INTERPOLATION_MS` when spawned.
+     *
+     * **Category:** Entities
+     */
+    setLocalScaleInterpolationMs(interpolationMs: number | undefined): void;
+
+
+}
+
+/**
+ * Event types an EntityModelNodeOverride instance can emit.
+ *
+ * See `EntityModelNodeOverrideEventPayloads` for payloads.
+ *
+ * **Category:** Events
+ * @public
+ */
+export declare enum EntityModelNodeOverrideEvent {
+    SET_EMISSIVE_COLOR = "ENTITY_MODEL_NODE_OVERRIDE.SET_EMISSIVE_COLOR",
+    SET_EMISSIVE_INTENSITY = "ENTITY_MODEL_NODE_OVERRIDE.SET_EMISSIVE_INTENSITY",
+    SET_HIDDEN = "ENTITY_MODEL_NODE_OVERRIDE.SET_HIDDEN",
+    SET_LOCAL_POSITION = "ENTITY_MODEL_NODE_OVERRIDE.SET_LOCAL_POSITION",
+    SET_LOCAL_POSITION_INTERPOLATION_MS = "ENTITY_MODEL_NODE_OVERRIDE.SET_LOCAL_POSITION_INTERPOLATION_MS",
+    SET_LOCAL_ROTATION = "ENTITY_MODEL_NODE_OVERRIDE.SET_LOCAL_ROTATION",
+    SET_LOCAL_ROTATION_INTERPOLATION_MS = "ENTITY_MODEL_NODE_OVERRIDE.SET_LOCAL_ROTATION_INTERPOLATION_MS",
+    SET_LOCAL_SCALE = "ENTITY_MODEL_NODE_OVERRIDE.SET_LOCAL_SCALE",
+    SET_LOCAL_SCALE_INTERPOLATION_MS = "ENTITY_MODEL_NODE_OVERRIDE.SET_LOCAL_SCALE_INTERPOLATION_MS"
+}
+
+/**
+ * Event payloads for EntityModelNodeOverride emitted events.
+ *
+ * **Category:** Events
+ * @public
+ */
+export declare interface EntityModelNodeOverrideEventPayloads {
+    /** Emitted when the emissive color for matching nodes is set. */
+    [EntityModelNodeOverrideEvent.SET_EMISSIVE_COLOR]: {
+        entityModelNodeOverride: EntityModelNodeOverride;
+        emissiveColor: RgbColor | undefined;
+    };
+    /** Emitted when the emissive intensity for matching nodes is set. */
+    [EntityModelNodeOverrideEvent.SET_EMISSIVE_INTENSITY]: {
+        entityModelNodeOverride: EntityModelNodeOverride;
+        emissiveIntensity: number | undefined;
+    };
+    /** Emitted when the hidden state for matching nodes is set. */
+    [EntityModelNodeOverrideEvent.SET_HIDDEN]: {
+        entityModelNodeOverride: EntityModelNodeOverride;
+        hidden: boolean;
+    };
+    /** Emitted when the position for matching nodes is set. */
+    [EntityModelNodeOverrideEvent.SET_LOCAL_POSITION]: {
+        entityModelNodeOverride: EntityModelNodeOverride;
+        localPosition: Vector3Like | undefined;
+    };
+    /** Emitted when the interpolation time in milliseconds applied to local position changes is set. */
+    [EntityModelNodeOverrideEvent.SET_LOCAL_POSITION_INTERPOLATION_MS]: {
+        entityModelNodeOverride: EntityModelNodeOverride;
+        interpolationMs: number | undefined;
+    };
+    /** Emitted when the rotation for matching nodes is set. */
+    [EntityModelNodeOverrideEvent.SET_LOCAL_ROTATION]: {
+        entityModelNodeOverride: EntityModelNodeOverride;
+        localRotation: QuaternionLike | undefined;
+    };
+    /** Emitted when the interpolation time in milliseconds applied to local rotation changes is set. */
+    [EntityModelNodeOverrideEvent.SET_LOCAL_ROTATION_INTERPOLATION_MS]: {
+        entityModelNodeOverride: EntityModelNodeOverride;
+        interpolationMs: number | undefined;
+    };
+    /** Emitted when the scale for matching nodes is set. */
+    [EntityModelNodeOverrideEvent.SET_LOCAL_SCALE]: {
+        entityModelNodeOverride: EntityModelNodeOverride;
+        localScale: Vector3Like | undefined;
+    };
+    /** Emitted when the interpolation time in milliseconds applied to local scale changes is set. */
+    [EntityModelNodeOverrideEvent.SET_LOCAL_SCALE_INTERPOLATION_MS]: {
+        entityModelNodeOverride: EntityModelNodeOverride;
+        interpolationMs: number | undefined;
+    };
+}
+
+/**
+ * The options for creating an EntityModelNodeOverride instance.
+ *
+ * **Category:** Entities
+ * @public
+ */
+export declare interface EntityModelNodeOverrideOptions {
+    /** The node name match selector. Case-insensitive exact match by default, with optional edge wildcard (`head*`, `*head`, `*head*`). */
+    nameMatch: string;
+    /** The entity that the model node override belongs to. */
+    entity: Entity;
+    /** The emissive color for matching nodes. */
+    emissiveColor?: RgbColor;
+    /** The emissive intensity for matching nodes. */
+    emissiveIntensity?: number;
+    /** The hidden state for matching nodes. */
+    hidden?: boolean;
+    /** The local position for matching nodes. */
+    localPosition?: Vector3Like;
+    /** The interpolation time in milliseconds applied to local position changes. */
+    localPositionInterpolationMs?: number;
+    /** The local rotation for matching nodes. */
+    localRotation?: QuaternionLike;
+    /** The interpolation time in milliseconds applied to local rotation changes. */
+    localRotationInterpolationMs?: number;
+    /** The local scale for matching nodes. */
+    localScale?: Vector3Like | number;
+    /** The interpolation time in milliseconds applied to local scale changes. */
+    localScaleInterpolationMs?: number;
+}
+
+/**
  * The options for creating an `Entity` instance.
  *
  * Use for: constructing an entity; choose `BlockEntityOptions` or `ModelEntityOptions`.
@@ -4168,7 +4799,7 @@ export declare class ErrorHandler {
  * **Category:** Events
  * @public
  */
-export declare interface EventPayloads extends AudioEventPayloads, BaseEntityControllerEventPayloads, BlockTypeEventPayloads, BlockTypeRegistryEventPayloads, ChatEventPayloads, ChunkLatticeEventPayloads, ConnectionEventPayloads, EntityEventPayloads, GameServerEventPayloads, ParticleEmitterEventPayloads, PlayerCameraEventPayloads, PlayerEventPayloads, PlayerManagerEventPayloads, PlayerUIEventPayloads, SceneUIEventPayloads, SimulationEventPayloads, WebServerEventPayloads, WorldEventPayloads, WorldLoopEventPayloads, WorldManagerEventPayloads {
+export declare interface EventPayloads extends AudioEventPayloads, BaseEntityControllerEventPayloads, BlockTypeEventPayloads, BlockTypeRegistryEventPayloads, ChatEventPayloads, ChunkLatticeEventPayloads, ConnectionEventPayloads, EntityEventPayloads, EntityModelAnimationEventPayloads, EntityModelNodeOverrideEventPayloads, GameServerEventPayloads, ParticleEmitterEventPayloads, PlayerCameraEventPayloads, PlayerEventPayloads, PlayerManagerEventPayloads, PlayerUIEventPayloads, SceneUIEventPayloads, SimulationEventPayloads, WebServerEventPayloads, WorldEventPayloads, WorldLoopEventPayloads, WorldManagerEventPayloads {
 }
 
 /**
@@ -5296,40 +5927,21 @@ export declare type ModelBoundingBox = {
  * @public
  */
 export declare interface ModelEntityOptions extends BaseEntityOptions {
-    /** The playback rate of the entity's model animations. */
-    modelAnimationsPlaybackRate?: number;
-    /** The nodes to hide on the entity's model. */
-    modelHiddenNodes?: string[];
-    /** The looped animations to start when the entity is spawned. */
-    modelLoopedAnimations?: string[];
-    /** The node overrides for the entity's model. */
-    modelNodeOverrides?: ModelNodeOverride[];
+    /** The model animation options for animations to configure immediately. */
+    modelAnimations?: Omit<EntityModelAnimationOptions, 'entity'>[];
+    /** The node overrides for the entity's model. `nameMatch` is exact by default, with optional edge wildcard (`head*`, `*head`, `*head*`). */
+    modelNodeOverrides?: Omit<EntityModelNodeOverrideOptions, 'entity'>[];
     /** The preferred shape of the entity's model when automatically generating its collider when no explicit colliders are provided. */
     modelPreferredShape?: ColliderShape;
     /** The scale of the entity's model. Can be a vector3 for per-axis scaling, or a number for uniform scaling. */
     modelScale?: Vector3Like | number;
-    /** The nodes to show on the entity's model, overriding hidden nodes. */
-    modelShownNodes?: string[];
+    /** The interpolation time in milliseconds applied to model scale changes. */
+    modelScaleInterpolationMs?: number;
     /** The texture uri of the entity's model. Setting this overrides the model's default texture. */
     modelTextureUri?: string;
     /** The URI or path to the .gltf model asset to be used for the entity. */
     modelUri?: string;
 }
-
-/**
- * A per-node visual override for a model entity.
- *
- * **Category:** Entities
- * @public
- */
-export declare type ModelNodeOverride = {
-    /** The name of the node to override. Matching is case insensitive, prioritizing exact match then falling back to substring match. */
-    name: string;
-    /** The emissive color of the node. */
-    emissiveColor?: RgbColor;
-    /** The emissive intensity of the node. */
-    emissiveIntensity?: number;
-};
 
 /**
  * Manages model data for all known models of the game.
@@ -5395,7 +6007,7 @@ export declare class ModelRegistry {
      *
      * **Category:** Models
      */
-    getAnimationNames(modelUri: string): string[];
+    getAnimationNames(modelUri: string): Readonly<string[]>;
     /**
      * Retrieves the bounding box of a model.
      *
@@ -7548,7 +8160,10 @@ export declare type PlayerCosmeticSlot = 'ALL' | 'BACK' | 'HEAD' | 'LEFT_ARM' | 
  *     player,
  *     name: 'Player',
  *     modelUri: 'models/players/player.gltf',
- *     modelLoopedAnimations: [ 'idle_lower', 'idle_upper' ],
+ *     modelAnimations: [
+ *       { name: 'idle-lower', loopMode: EntityModelAnimationLoopMode.LOOP, play: true },
+ *       { name: 'idle-upper', loopMode: EntityModelAnimationLoopMode.LOOP, play: true },
+ *     ],
  *     modelScale: 0.5,
  *   });
  *

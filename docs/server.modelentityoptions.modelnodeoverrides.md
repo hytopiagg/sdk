@@ -4,10 +4,10 @@
 
 ## ModelEntityOptions.modelNodeOverrides property
 
-The node overrides for the entity's model.
+The node overrides for the entity's model. `nameMatch` is exact by default, with optional edge wildcard (`head*`<!-- -->, `*head`<!-- -->, `*head*`<!-- -->).
 
 **Signature:**
 
 ```typescript
-modelNodeOverrides?: ModelNodeOverride[];
+modelNodeOverrides?: Omit<EntityModelNodeOverrideOptions, 'entity'>[];
 ```

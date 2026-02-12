@@ -120,6 +120,34 @@ INTERACT
 </td></tr>
 <tr><td>
 
+REMOVE\_MODEL\_NODE\_OVERRIDE
+
+
+</td><td>
+
+`"ENTITY.REMOVE_MODEL_NODE_OVERRIDE"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+SET\_BLOCK\_TEXTURE\_URI
+
+
+</td><td>
+
+`"ENTITY.SET_BLOCK_TEXTURE_URI"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 SET\_EMISSIVE\_COLOR
 
 
@@ -148,48 +176,6 @@ SET\_EMISSIVE\_INTENSITY
 </td></tr>
 <tr><td>
 
-SET\_MODEL\_ANIMATIONS\_PLAYBACK\_RATE
-
-
-</td><td>
-
-`"ENTITY.SET_MODEL_ANIMATIONS_PLAYBACK_RATE"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-SET\_MODEL\_HIDDEN\_NODES
-
-
-</td><td>
-
-`"ENTITY.SET_MODEL_HIDDEN_NODES"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-SET\_MODEL\_NODE\_OVERRIDE
-
-
-</td><td>
-
-`"ENTITY.SET_MODEL_NODE_OVERRIDE"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
 SET\_MODEL\_SCALE
 
 
@@ -204,12 +190,12 @@ SET\_MODEL\_SCALE
 </td></tr>
 <tr><td>
 
-SET\_MODEL\_SHOWN\_NODES
+SET\_MODEL\_SCALE\_INTERPOLATION\_MS
 
 
 </td><td>
 
-`"ENTITY.SET_MODEL_SHOWN_NODES"`
+`"ENTITY.SET_MODEL_SCALE_INTERPOLATION_MS"`
 
 
 </td><td>
@@ -274,6 +260,34 @@ SET\_PARENT
 </td></tr>
 <tr><td>
 
+SET\_POSITION\_INTERPOLATION\_MS
+
+
+</td><td>
+
+`"ENTITY.SET_POSITION_INTERPOLATION_MS"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+SET\_ROTATION\_INTERPOLATION\_MS
+
+
+</td><td>
+
+`"ENTITY.SET_ROTATION_INTERPOLATION_MS"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 SET\_TINT\_COLOR
 
 
@@ -294,48 +308,6 @@ SPAWN
 </td><td>
 
 `"ENTITY.SPAWN"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-START\_MODEL\_LOOPED\_ANIMATIONS
-
-
-</td><td>
-
-`"ENTITY.START_MODEL_LOOPED_ANIMATIONS"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-START\_MODEL\_ONESHOT\_ANIMATIONS
-
-
-</td><td>
-
-`"ENTITY.START_MODEL_ONESHOT_ANIMATIONS"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-STOP\_MODEL\_ANIMATIONS
-
-
-</td><td>
-
-`"ENTITY.STOP_MODEL_ANIMATIONS"`
 
 
 </td><td>

@@ -212,6 +212,25 @@ _(Optional)_ The name of the parent's node (if parent is a model entity) to atta
 </td></tr>
 <tr><td>
 
+[positionInterpolationMs?](./server.baseentityoptions.positioninterpolationms.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The interpolation time in milliseconds applied to position changes.
+
+
+</td></tr>
+<tr><td>
+
 [rigidBodyOptions?](./server.baseentityoptions.rigidbodyoptions.md)
 
 
@@ -226,6 +245,25 @@ _(Optional)_ The name of the parent's node (if parent is a model entity) to atta
 </td><td>
 
 _(Optional)_ The rigid body options for the entity.
+
+
+</td></tr>
+<tr><td>
+
+[rotationInterpolationMs?](./server.baseentityoptions.rotationinterpolationms.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The interpolation time in milliseconds applied to rotation changes.
 
 
 </td></tr>

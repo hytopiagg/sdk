@@ -4,12 +4,17 @@
 
 ## Entity.modelNodeOverrides property
 
-The node overrides of the entity's model, mapped by name.
-
-\*\*Category:\*\* Entities
+The node overrides of the entity's model that have been accessed or configured.
 
 **Signature:**
 
 ```typescript
-get modelNodeOverrides(): ReadonlyMap<string, Readonly<ModelNodeOverride>>;
+get modelNodeOverrides(): Readonly<EntityModelNodeOverride[]>;
 ```
+
+## Remarks
+
+Node overrides are lazily created on first access via `getModelNodeOverride()`<!-- -->. This array only contains overrides that have been explicitly used.
+
+\*\*Category:\*\* Entities
+

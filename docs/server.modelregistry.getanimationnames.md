@@ -9,7 +9,7 @@ Retrieves an array of all known animation names for a model.
 **Signature:**
 
 ```typescript
-getAnimationNames(modelUri: string): string[];
+getAnimationNames(modelUri: string): Readonly<string[]>;
 ```
 
 ## Parameters
@@ -49,7 +49,7 @@ The URI of the model to retrieve the animation names for.
 </tbody></table>
 **Returns:**
 
-string\[\]
+Readonly&lt;string\[\]&gt;
 
 An array of all known animation names for the model.
 

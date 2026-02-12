@@ -28,7 +28,10 @@ world.onPlayerJoin = player => {
     player,
     name: 'Player',
     modelUri: 'models/players/player.gltf',
-    modelLoopedAnimations: [ 'idle_lower', 'idle_upper' ],
+    modelAnimations: [
+      { name: 'idle-lower', loopMode: EntityModelAnimationLoopMode.LOOP, play: true },
+      { name: 'idle-upper', loopMode: EntityModelAnimationLoopMode.LOOP, play: true },
+    ],
     modelScale: 0.5,
   });
 

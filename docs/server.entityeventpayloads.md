@@ -153,6 +153,44 @@ Emitted when a player interacts with the entity by clicking or tapping it.
 </td></tr>
 <tr><td>
 
+["ENTITY.REMOVE\_MODEL\_NODE\_OVERRIDE"](./server.entityeventpayloads._entity.remove_model_node_override_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ entity: [Entity](./server.entity.md)<!-- -->; entityModelNodeOverride: [EntityModelNodeOverride](./server.entitymodelnodeoverride.md)<!-- -->; }
+
+
+</td><td>
+
+Emitted when a model node override is removed from the entity's model.
+
+
+</td></tr>
+<tr><td>
+
+["ENTITY.SET\_BLOCK\_TEXTURE\_URI"](./server.entityeventpayloads._entity.set_block_texture_uri_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ entity: [Entity](./server.entity.md)<!-- -->; blockTextureUri: string \| undefined; }
+
+
+</td><td>
+
+Emitted when the texture uri of a block entity is set.
+
+
+</td></tr>
+<tr><td>
+
 ["ENTITY.SET\_EMISSIVE\_COLOR"](./server.entityeventpayloads._entity.set_emissive_color_.md)
 
 
@@ -191,7 +229,7 @@ Emitted when the emissive intensity is set.
 </td></tr>
 <tr><td>
 
-["ENTITY.SET\_MODEL\_ANIMATIONS\_PLAYBACK\_RATE"](./server.entityeventpayloads._entity.set_model_animations_playback_rate_.md)
+["ENTITY.SET\_MODEL\_SCALE\_INTERPOLATION\_MS"](./server.entityeventpayloads._entity.set_model_scale_interpolation_ms_.md)
 
 
 </td><td>
@@ -199,50 +237,12 @@ Emitted when the emissive intensity is set.
 
 </td><td>
 
-{ entity: [Entity](./server.entity.md)<!-- -->; playbackRate: number; }
+{ entity: [Entity](./server.entity.md)<!-- -->; interpolationMs: number \| undefined; }
 
 
 </td><td>
 
-Emitted when the playback rate of the entity's model animations is set.
-
-
-</td></tr>
-<tr><td>
-
-["ENTITY.SET\_MODEL\_HIDDEN\_NODES"](./server.entityeventpayloads._entity.set_model_hidden_nodes_.md)
-
-
-</td><td>
-
-
-</td><td>
-
-{ entity: [Entity](./server.entity.md)<!-- -->; modelHiddenNodes: Set&lt;string&gt;; }
-
-
-</td><td>
-
-Emitted when nodes of the entity's model are set to be hidden.
-
-
-</td></tr>
-<tr><td>
-
-["ENTITY.SET\_MODEL\_NODE\_OVERRIDE"](./server.entityeventpayloads._entity.set_model_node_override_.md)
-
-
-</td><td>
-
-
-</td><td>
-
-{ entity: [Entity](./server.entity.md)<!-- -->; modelNodeOverride: [ModelNodeOverride](./server.modelnodeoverride.md)<!-- -->; }
-
-
-</td><td>
-
-Emitted when a node override of the entity's model is set or updated.
+Emitted when the interpolation time in milliseconds applied to model scale changes is set.
 
 
 </td></tr>
@@ -262,25 +262,6 @@ Emitted when a node override of the entity's model is set or updated.
 </td><td>
 
 Emitted when the scale of the entity's model is set.
-
-
-</td></tr>
-<tr><td>
-
-["ENTITY.SET\_MODEL\_SHOWN\_NODES"](./server.entityeventpayloads._entity.set_model_shown_nodes_.md)
-
-
-</td><td>
-
-
-</td><td>
-
-{ entity: [Entity](./server.entity.md)<!-- -->; modelShownNodes: Set&lt;string&gt;; }
-
-
-</td><td>
-
-Emitted when nodes of the entity's model are set to be shown.
 
 
 </td></tr>
@@ -362,6 +343,44 @@ Emitted when the parent of the entity is set.
 </td></tr>
 <tr><td>
 
+["ENTITY.SET\_POSITION\_INTERPOLATION\_MS"](./server.entityeventpayloads._entity.set_position_interpolation_ms_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ entity: [Entity](./server.entity.md)<!-- -->; interpolationMs: number \| undefined; }
+
+
+</td><td>
+
+Emitted when the interpolation time in milliseconds applied to position changes is set.
+
+
+</td></tr>
+<tr><td>
+
+["ENTITY.SET\_ROTATION\_INTERPOLATION\_MS"](./server.entityeventpayloads._entity.set_rotation_interpolation_ms_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ entity: [Entity](./server.entity.md)<!-- -->; interpolationMs: number \| undefined; }
+
+
+</td><td>
+
+Emitted when the interpolation time in milliseconds applied to rotation changes is set.
+
+
+</td></tr>
+<tr><td>
+
 ["ENTITY.SET\_TINT\_COLOR"](./server.entityeventpayloads._entity.set_tint_color_.md)
 
 
@@ -395,63 +414,6 @@ Emitted when the tint color of the entity is set.
 </td><td>
 
 Emitted when the entity is spawned.
-
-
-</td></tr>
-<tr><td>
-
-["ENTITY.START\_MODEL\_LOOPED\_ANIMATIONS"](./server.entityeventpayloads._entity.start_model_looped_animations_.md)
-
-
-</td><td>
-
-
-</td><td>
-
-{ entity: [Entity](./server.entity.md)<!-- -->; animations: Set&lt;string&gt;; }
-
-
-</td><td>
-
-Emitted when the looped animations of the entity's model are started.
-
-
-</td></tr>
-<tr><td>
-
-["ENTITY.START\_MODEL\_ONESHOT\_ANIMATIONS"](./server.entityeventpayloads._entity.start_model_oneshot_animations_.md)
-
-
-</td><td>
-
-
-</td><td>
-
-{ entity: [Entity](./server.entity.md)<!-- -->; animations: Set&lt;string&gt;; }
-
-
-</td><td>
-
-Emitted when the oneshot animations of the entity's model are started.
-
-
-</td></tr>
-<tr><td>
-
-["ENTITY.STOP\_MODEL\_ANIMATIONS"](./server.entityeventpayloads._entity.stop_model_animations_.md)
-
-
-</td><td>
-
-
-</td><td>
-
-{ entity: [Entity](./server.entity.md)<!-- -->; animations: Set&lt;string&gt;; }
-
-
-</td><td>
-
-Emitted when the model animations of the entity are stopped.
 
 
 </td></tr>

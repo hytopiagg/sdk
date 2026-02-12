@@ -38,7 +38,6 @@ This class is an EventRouter, and instances of it emit events with payloads list
 const spider = new Entity({
   name: 'Spider',
   modelUri: 'models/spider.gltf',
-  modelLoopedAnimations: [ 'walk' ],
   rigidBodyOptions: {
     type: RigidBodyType.DYNAMIC,
     enabledRotations: { x: false, y: true, z: false },
@@ -118,6 +117,52 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
+
+[availableModelAnimationNames](./server.entity.availablemodelanimationnames.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+Readonly&lt;string\[\]&gt;
+
+
+</td><td>
+
+The names of the animations available in the entity's model.
+
+\*\*Category:\*\* Entities
+
+
+</td></tr>
+<tr><td>
+
+[availableModelNodeNames](./server.entity.availablemodelnodenames.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+Readonly&lt;string\[\]&gt;
+
+
+</td><td>
+
+The names of the nodes available in the entity's model.
+
+\*\*Category:\*\* Entities
+
+
+</td></tr>
+<tr><td>
 
 [blockHalfExtents](./server.entity.blockhalfextents.md)
 
@@ -387,7 +432,7 @@ Whether the entity is spawned in a world.
 </td></tr>
 <tr><td>
 
-[modelAnimationsPlaybackRate](./server.entity.modelanimationsplaybackrate.md)
+[modelAnimations](./server.entity.modelanimations.md)
 
 
 </td><td>
@@ -397,60 +442,12 @@ Whether the entity is spawned in a world.
 
 </td><td>
 
-number
+Readonly&lt;[EntityModelAnimation](./server.entitymodelanimation.md)<!-- -->\[\]&gt;
 
 
 </td><td>
 
-The playback rate of the entity's model animations.
-
-\*\*Category:\*\* Entities
-
-
-</td></tr>
-<tr><td>
-
-[modelHiddenNodes](./server.entity.modelhiddennodes.md)
-
-
-</td><td>
-
-`readonly`
-
-
-</td><td>
-
-ReadonlySet&lt;string&gt;
-
-
-</td><td>
-
-The nodes to hide on the entity's model.
-
-\*\*Category:\*\* Entities
-
-
-</td></tr>
-<tr><td>
-
-[modelLoopedAnimations](./server.entity.modelloopedanimations.md)
-
-
-</td><td>
-
-`readonly`
-
-
-</td><td>
-
-ReadonlySet&lt;string&gt;
-
-
-</td><td>
-
-The looped animations to start when the entity is spawned.
-
-\*\*Category:\*\* Entities
+The animations of the entity's model that have been accessed or configured.
 
 
 </td></tr>
@@ -466,14 +463,12 @@ The looped animations to start when the entity is spawned.
 
 </td><td>
 
-ReadonlyMap&lt;string, Readonly&lt;[ModelNodeOverride](./server.modelnodeoverride.md)<!-- -->&gt;&gt;
+Readonly&lt;[EntityModelNodeOverride](./server.entitymodelnodeoverride.md)<!-- -->\[\]&gt;
 
 
 </td><td>
 
-The node overrides of the entity's model, mapped by name.
-
-\*\*Category:\*\* Entities
+The node overrides of the entity's model that have been accessed or configured.
 
 
 </td></tr>
@@ -525,7 +520,7 @@ The scale of the entity's model.
 </td></tr>
 <tr><td>
 
-[modelShownNodes](./server.entity.modelshownnodes.md)
+[modelScaleInterpolationMs](./server.entity.modelscaleinterpolationms.md)
 
 
 </td><td>
@@ -535,12 +530,12 @@ The scale of the entity's model.
 
 </td><td>
 
-ReadonlySet&lt;string&gt;
+number \| undefined
 
 
 </td><td>
 
-The nodes to show on the entity's model, overriding hidden nodes.
+The interpolation time in milliseconds applied to model scale changes.
 
 \*\*Category:\*\* Entities
 
@@ -709,6 +704,52 @@ The parent model node name, if attached.
 </td></tr>
 <tr><td>
 
+[positionInterpolationMs](./server.entity.positioninterpolationms.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number \| undefined
+
+
+</td><td>
+
+The interpolation time in milliseconds applied to position changes.
+
+\*\*Category:\*\* Entities
+
+
+</td></tr>
+<tr><td>
+
+[rotationInterpolationMs](./server.entity.rotationinterpolationms.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number \| undefined
+
+
+</td><td>
+
+The interpolation time in milliseconds applied to rotation changes.
+
+\*\*Category:\*\* Entities
+
+
+</td></tr>
+<tr><td>
+
 [tag](./server.entity.tag.md)
 
 
@@ -821,6 +862,22 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[clearModelNodeOverrides()](./server.entity.clearmodelnodeoverrides.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Clears all model node overrides from the entity's model.
+
+\*\*Category:\*\* Entities
+
+
+</td></tr>
+<tr><td>
+
 [despawn()](./server.entity.despawn.md)
 
 
@@ -837,6 +894,34 @@ Use for: removing entities from the world. Do NOT use for: temporary hiding; con
 </td></tr>
 <tr><td>
 
+[getModelAnimation(name)](./server.entity.getmodelanimation.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Gets or lazily creates a model animation for the entity's model by name.
+
+
+</td></tr>
+<tr><td>
+
+[getModelNodeOverride(nameMatch)](./server.entity.getmodelnodeoverride.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Gets or lazily creates a model node override for the entity's model.
+
+
+</td></tr>
+<tr><td>
+
 [interact(player, raycastHit)](./server.entity.interact.md)
 
 
@@ -848,6 +933,46 @@ Use for: removing entities from the world. Do NOT use for: temporary hiding; con
 Triggers an interaction on the entity from a player.
 
 Use for: programmatic interactions that should mimic a player click/tap. Do NOT use for: server-only effects without player context.
+
+
+</td></tr>
+<tr><td>
+
+[removeModelNodeOverride(nameMatch)](./server.entity.removemodelnodeoverride.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Removes a model node override from the entity's model.
+
+
+</td></tr>
+<tr><td>
+
+[removeModelNodeOverrides(nameMatches)](./server.entity.removemodelnodeoverrides.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Removes multiple model node overrides from the entity's model.
+
+
+</td></tr>
+<tr><td>
+
+[setBlockTextureUri(blockTextureUri)](./server.entity.setblocktextureuri.md)
+
+
+</td><td>
+
+
+</td><td>
 
 
 </td></tr>
@@ -883,76 +1008,6 @@ Sets the emissive intensity of the entity.
 </td></tr>
 <tr><td>
 
-[setModelAnimationsPlaybackRate(playbackRate)](./server.entity.setmodelanimationsplaybackrate.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Sets the playback rate of all animations on the entity's model.
-
-
-</td></tr>
-<tr><td>
-
-[setModelHiddenNodes(modelHiddenNodes)](./server.entity.setmodelhiddennodes.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Sets the nodes to hide on the entity's model. Matched nodes will be hidden for all players. Uses case insensitive substring matching.
-
-
-</td></tr>
-<tr><td>
-
-[setModelNodeEmissiveColor(name, emissiveColor)](./server.entity.setmodelnodeemissivecolor.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Sets the emissive color of a node on the entity's model.
-
-
-</td></tr>
-<tr><td>
-
-[setModelNodeEmissiveIntensity(name, emissiveIntensity)](./server.entity.setmodelnodeemissiveintensity.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Sets the emissive intensity of a node on the entity's model.
-
-
-</td></tr>
-<tr><td>
-
-[setModelNodeOverride(modelNodeOverride)](./server.entity.setmodelnodeoverride.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Sets a node override for the entity's model.
-
-
-</td></tr>
-<tr><td>
-
 [setModelScale(modelScale)](./server.entity.setmodelscale.md)
 
 
@@ -967,7 +1022,7 @@ Sets the scale of the entity's model and proportionally scales its colliders.
 </td></tr>
 <tr><td>
 
-[setModelShownNodes(modelShownNodes)](./server.entity.setmodelshownnodes.md)
+[setModelScaleInterpolationMs(interpolationMs)](./server.entity.setmodelscaleinterpolationms.md)
 
 
 </td><td>
@@ -975,7 +1030,7 @@ Sets the scale of the entity's model and proportionally scales its colliders.
 
 </td><td>
 
-Sets the nodes to show on the entity's model, overriding hidden nodes. Matched nodes will be shown for all players. Uses case insensitive substring matching.
+Sets the interpolation time in milliseconds applied to model scale changes.
 
 
 </td></tr>
@@ -1037,6 +1092,34 @@ Sets the parent of the entity and resets this entity's position and rotation.
 </td></tr>
 <tr><td>
 
+[setPositionInterpolationMs(interpolationMs)](./server.entity.setpositioninterpolationms.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the interpolation time in milliseconds applied to position changes.
+
+
+</td></tr>
+<tr><td>
+
+[setRotationInterpolationMs(interpolationMs)](./server.entity.setrotationinterpolationms.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sets the interpolation time in milliseconds applied to rotation changes.
+
+
+</td></tr>
+<tr><td>
+
 [setTintColor(tintColor)](./server.entity.settintcolor.md)
 
 
@@ -1067,7 +1150,7 @@ Use for: placing the entity into a world so it simulates and syncs to clients. D
 </td></tr>
 <tr><td>
 
-[startModelLoopedAnimations(animations)](./server.entity.startmodelloopedanimations.md)
+[stopAllModelAnimations(exclusionFilter)](./server.entity.stopallmodelanimations.md)
 
 
 </td><td>
@@ -1075,69 +1158,13 @@ Use for: placing the entity into a world so it simulates and syncs to clients. D
 
 </td><td>
 
-Starts looped animations for the entity, blending with other animations currently playing.
+Stops all model animations for the entity, optionally excluding the provided animations from stopping.
 
 
 </td></tr>
 <tr><td>
 
-[startModelOneshotAnimations(animations)](./server.entity.startmodeloneshotanimations.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Starts a oneshot animation for the entity, blending with other animations currently playing.
-
-
-</td></tr>
-<tr><td>
-
-[stopAllModelAnimations(excludedAnimations)](./server.entity.stopallmodelanimations.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Stops all looped and oneshot animations for the entity, optionally excluding the provided animations from stopping.
-
-
-</td></tr>
-<tr><td>
-
-[stopAllModelLoopedAnimations(excludedAnimations)](./server.entity.stopallmodelloopedanimations.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Stops all looped animations for the entity, optionally excluded the provided animations from stopping.
-
-
-</td></tr>
-<tr><td>
-
-[stopAllModelOneshotAnimations(excludedAnimations)](./server.entity.stopallmodeloneshotanimations.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Stops all oneshot animations for the entity, optionally excluded the provided animations from stopping.
-
-
-</td></tr>
-<tr><td>
-
-[stopModelAnimations(animations)](./server.entity.stopmodelanimations.md)
+[stopModelAnimations(modelAnimationNames)](./server.entity.stopmodelanimations.md)
 
 
 </td><td>
