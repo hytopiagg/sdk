@@ -1,5 +1,7 @@
 # HYTOPIA SDK
 
+The HYTOPIA game engine is open source under an MIT License and available here: https://github.com/hytopiagg/hytopia-source
+
 ## Quick Links
 [Quickstart (Start Here)](#quickstart-start-here) • [Developer Docs](https://dev.hytopia.com/) • [SDK API Reference](./docs/server.md) • [Client HytopiaUI API Reference](./client-docs/client.hytopiaui.md) • [Examples](https://github.com/hytopiagg/sdk-examples) • [Join Our Developer Discord](https://discord.gg/hytopia-developers) • [Report Bugs or Request Features](https://github.com/hytopiagg/sdk/issues)
 
